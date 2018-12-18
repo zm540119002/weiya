@@ -5,7 +5,6 @@ class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
-        echo 123;exit;
         //获取商品的分类
         $modelGoodsCategory = new \app\index\model\GoodsCategory();
         $config =[
@@ -20,7 +19,6 @@ class Index extends \common\controller\Base{
         ];
         $categoryList  = $modelGoodsCategory->getList($config);
         $this ->assign('categoryList',$categoryList);
-
         //获取精选的6个 场景
         $modelScene = new \app\index\model\Scene();
         $config =[
@@ -48,7 +46,6 @@ class Index extends \common\controller\Base{
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'6'
-
         ];
         $projectList  = $modelProject->getList($config);
         $this ->assign('projectList',$projectList);
@@ -70,6 +67,4 @@ class Index extends \common\controller\Base{
         $this ->assign('goodsList',$goodsList);
         return $this->fetch();
     }
-
-
 }

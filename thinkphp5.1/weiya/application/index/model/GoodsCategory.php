@@ -10,6 +10,4 @@ class GoodsCategory extends\common\model\Base {
 	protected $connection = 'db_config_weiya';
 	// 别名
 	protected $alias = 'gc';
-
-	
 }
