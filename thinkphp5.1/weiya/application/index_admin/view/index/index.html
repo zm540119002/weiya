@@ -1,0 +1,25 @@
+{extend name="template/base_admin.html" /}
+{block name="menu"}
+{notempty name='allDisplayMenu'}
+<aside class="Hui-aside">
+    <div class="menu_dropdown bk_2">
+        {foreach $allDisplayMenu as $key=>$vo}
+        {notempty name="vo.sub_menu"}
+        <dl id="menu-article">
+            <dt><i class="Hui-iconfont">&#xe616;</i> {$vo.name}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    {foreach $vo.sub_menu as $kk=>$vv }
+                    <li>
+                        <a data-href="{:url($vv.controller.'/'.$vv.action)}" data-title="{$vv.name}" href="javascript:void(0)">{$vv.name}</a>
+                    </li>
+                    {/foreach}
+                </ul>
+            </dd>
+        </dl>
+        {/notempty}
+        {/foreach}
+    </div>
+</aside>
+{/notempty}
+{/block}

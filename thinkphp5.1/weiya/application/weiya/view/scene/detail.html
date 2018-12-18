@@ -1,0 +1,191 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="content"}
+<!--底部弹窗-->
+<section id="goodsInfoLayer" style="display:none;">
+	<div>
+		<img src="" alt="" class="left">
+		<div>
+			<p>台湾原装进口 真世酵素纤丽果冻</p>
+		</div>
+	</div>
+	<div>
+		<div class="columns_flex l-r-sides">
+			<div >
+				<span class="red">￥<price>198.00</price></span>
+				<span>300ml/瓶</span>
+			</div>
+			<div>样品购买限额：<span>10</span></div>
+		</div>
+	</div>
+	<ul class="bottom-layer-info goods_list">
+        <li>
+            <div class="columns_flex l-r-sides">
+                <span>采购数量(单位：瓶)</span>
+                <div class="quantity_wrapper selected-number">
+                    <a href="javascript:void(0);" class="greduce">-</a>
+                    <input type="text" value="1" class="f24 gshopping_count">
+					<input type="hidden" class="minimum_order_quantity" value="1">
+					<input type="hidden" class="increase_quantity" value="1">
+                    <a href="javascript:void(0);" class="gplus">+</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+	{include file="template/footer_menu.html" /}
+    <!--<div class="columns_flex l-r-sides bottom-layer-last">
+        <span class="pink">￥<price>0.00</price></span>
+        <a href="javascript:void(0);" class="bff6482 group_btn50 add-shopping-cart">加入采购车</a>
+    </div>-->
+</section>
+<article class="f24">
+	<section class="slider_banner">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				{notempty name="info.goods_video"}
+				<div class="swiper-slide swiper-slide-active">
+					<video  src="public_uploads/{$info.goods_video}" autoplay="autoplay"></video>
+				</div>
+				{/notempty}
+				{volist name="info.main_img" id="main_img"}
+				<div class="swiper-slide swiper-slide-active">
+					<img src="public_uploads/{$main_img}" alt="" class="common_default_img">
+				</div>
+				{/volist}
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>
+	</section>
+	<section class="module-navigation ">
+		<div >
+			<ul>
+				<li>
+					<div class="top_radius f20 top_module">
+						<div>
+							<span class="hot left">热</span>
+							<p class="f28">{$info.name}</p>
+						</div>
+						<p class="product_intro">{$info.intro}</p>
+						<div class="tags_item columns_flex l-r-sides">
+							<div>
+								{volist name="$info.tag" id="tag"}
+								<span>{$tag}</span>
+								{/volist}
+							</div>
+							<div class="tags_item_r">
+								<a class="collection" href=""><span></span>收藏</a>
+								<a class="share" href=""><span></span>分享</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="content-padding">
+						<p class="top_b_text wk_notice separation">[品牌定制须知] 品牌定制利润为王！维雅生物药妆精选优质项目产品任你选，帮助用户开启自主品牌可持续发展经营！用户在线选购产品并支付品牌定制单，其他全部交给维雅品牌定制服务团队。</p>
+						<div class="columns_flex l-r-sides separation">
+							<div class="mid_module_left">
+								<img src="public_img/wy_dz.png" alt="">
+								<div>
+									<span class="left count-down-icons"></span>
+									<div class="d-r">
+										<p class=" pink">品牌定制.周五截止</p>
+										<div id="countDownBox" class="count_down_box">
+											<span class="day"></span>天
+											<span class="hour"></span>小时
+											<span class="minute"></span>分
+											<span class="second"></span>秒
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="mid_module_right">
+								<span><span class="item end_time"></span>周五结单</span>
+								<span><span class="item factory"></span>品质工厂</span>
+							</div>
+						</div>
+						<div class="columns_flex l-r-sides">
+							<div>
+								我的品牌定制<span>xxxxx</span>
+							</div>
+							<div>
+								<a>设定></a>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section class="content-padding content_main wy_list">
+		<ul class="goods_list list">
+			{notempty name="goodsList"}
+			{volist name="goodsList" id="info"}
+			<li data-id="{$info.id}">
+				<a href="{:url('Goods/detail',['id'=>$info.id])}">
+					{empty name="info.thumb_img"}
+					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+					{else /}
+					<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
+					{/empty}
+				</a>
+				<div class="list_r">
+					<p>{$info.headline}</p>
+					<div>单品规格<span>{$info.specification}</span></div>
+					<div>
+						<span>￥<price>{$info.bulk_price}</price></span>
+					</div>
+					<div class="columns_flex l-r-sides">
+						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
+						</div>
+						<a href="javascript:void(0);" class="sample_purchase">样品购买
+							<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
+						</a>
+					</div>
+					<div class="quantity_wrapper selected-number">
+						<a href="javascript:void(0);" class="greduce">-</a>
+						<input type="text" value="{$info.minimum_order_quantity}" class="f24 gshopping_count" >
+						<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
+						<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
+						<a href="javascript:void(0);" class="gplus">+</a>
+					</div>
+				</div>
+			</li>
+			{/volist}
+			{/notempty}
+		</ul>
+	</section>
+</article>
+
+{/block}
+
+{block name="footer"}
+	{include file="template/footer_menu.html" /}
+{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript" src="weiya_js/footerCart.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var id = {$info.id};
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		var date=getWeek(5);
+		countDown(date,$('#countDownBox'));
+	});
+</script>
+{/block}

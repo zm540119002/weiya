@@ -1,0 +1,222 @@
+{extend name="template/admin_pc/page_base_admin.html" /}
+{block name="css-customize"}
+<link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
+<link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
+{/block}
+{block name="content"}
+    <div class="page">
+        <div class="fixed-bar">
+            <div class="item-title">
+                <ul class="tab-base">
+                    <li><a href="{:url('manage')}" class="current"><span>管理</span></a></li>
+                    <li><a href="{:url('edit')}"><span>编辑</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content" id="mainContent">
+            <form id="form1">
+                <input type="hidden" name="pageType" value="manage">
+                <table class="search-form search_product_type">
+                    <tbody>
+                        <tr>
+                            <td class=dotted_bottom_gray height=40 width="11%" align=right>所属分类：</td>
+                            <td class=dotted_bottom_gray width="58%" align=left>
+                                {include file="goods_category/linkage_tpl" /}
+                            </td>
+                            <th>项目名称</th>
+                            <td class="w160">
+                                <input class="text product_management_name" type="text" name="keyword" value="">
+                            </td>
+                            <td class="w70 tc">
+                                <label class="submit-border">
+                                    <input type="button" id="searchProject" class="submit product_search_btn" value="搜索">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div class="content" id="list"></div>
+        </div>
+    </div>
+
+    <!-- 隐藏区 -->
+    <div style="display:none">
+        <div id="loading">
+            <div class='loading'><img src='public_admin_common_img/default/loading.gif' alt='loading'></div>
+        </div>
+    </div>
+{/block}
+{block name="script"}
+    <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
+    <script type="text/javascript" src="public_admin_pc/common/js/paging.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //加载第一页
+            var config = {
+                url:controller+'getList',
+            };
+            var getData = $('#form1').serializeObject();
+            getPagingList(config,getData);
+            //分类筛选
+            $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
+                var getData = $('#form1').serializeObject();
+                getPagingList(config,getData);
+            });
+            //翻页
+            $('body').on('click','.pager2',function(){
+                var curIndex= $(this).parents('ul.pagination').find('li.active span').text();
+                var selectedPage=$(this).data('page');
+                if(selectedPage=='»'){
+                    curIndex++;
+                    selectedPage=curIndex;
+                }
+                if(selectedPage=='«'){
+                    curIndex--;
+                    selectedPage=curIndex;
+                }
+                config.currentPage = selectedPage;
+                getPagingList(config,getData);
+            });
+            //搜索
+            $('#searchGoods').click(function(){
+                config.currentPage = 0;
+                var getData = $('#form1').serializeObject();
+                getPagingList(config,getData);
+            });
+
+            //编辑
+            $('body').on('click','.edit',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  controller + 'edit/id/' + _thisTr.data('id');
+                location.href = url;
+            });
+
+            //删除
+            $('body').on('click','.del',function(){
+                var _thisTr = $(this).parents('tr');
+                var postData = {};
+                postData.id = _thisTr.data('id');
+                var url =  controller + 'del';
+                parent.layer.open({
+                    btn: ['确定','取消'],//按钮
+                    content:'删除你选中的商品吗？',
+                    yes:function (index) {
+                        $.post(url,postData,function(msg){
+                            dialog.msg(msg,'',function(){
+                                _thisTr.remove();
+                            });
+                        });
+                        parent.layer.close(index);
+                    }
+                });
+            });
+            //批量删除数据
+            $('body').on('click','.batchDel',function(){
+                var postData = {};
+                ids = [];
+                $("input[name='checkbox']").each(function(){
+                    var _thisTr = $(this).parents('tr');
+                    if($(this).is(':checked')){
+                        ids.push(_thisTr.data('id'));
+                    }
+                });
+                postData.ids= ids;
+                var url =  controller + '/del';
+                if(ids.length==0){
+                    parent.layer.tips('你还没有选择任何内容！','.btn',{
+                        tips:[4,'#0d7eff'],
+                        time:1500
+                    });
+                    return false;
+                }else{
+                    parent.layer.confirm('删除你选中的商品吗？', {
+                        btn: ['确定','取消'],//按钮
+                        yes:function (index) {
+                            $.post(url,postData,function(msg){
+                                dialog.msg(msg,'',function () {
+                                    $("input[name='checkbox']").each(function(){
+                                        if($(this).is(':checked')){
+                                            $(this).parents('.edit').remove();
+                                        }
+                                    })
+                                });
+                            });
+                            parent.layer.close(index);
+                        }
+                    })
+                }
+            })
+            //上下架
+            $('body').on('click','.set-shelf-status',function(){
+                var _this = $(this);
+                var text = _this.text();
+                var shelf_status = _this.data('shelf-status');
+                var _thisTr = $(this).parents('tr');
+                var postData ={};
+                postData.id = _thisTr.data('id');
+                postData.shelf_status = shelf_status;
+                var url =  controller + 'setShelfStatus';
+                parent.layer.open({
+                    btn: ['确定','取消'],//按钮
+                    content:"是否"+text+'?',
+                    yes:function (index) {
+                        $.post(url,postData,function(msg){
+                            dialog.msg(msg,'',function(){
+                                _thisTr.find('.shelf-status').text(text);
+                                if(shelf_status == 3){
+                                    _this.text('下架');
+                                    _this.data('shelf-status',1);
+                                }else{
+                                    _this.text('上架');
+                                    _this.data('shelf-status',3);
+                                }
+                            });
+                        });
+                        parent.layer.close(index);
+                    }
+                });
+            });
+            ////设置为精选
+            $('body').on('click','.set_selection',function(){
+                var _this = $(this);
+                var text = _this.text();
+                var is_selection = _this.data('is-selection');
+                var _thisTr = $(this).parents('tr');
+                var postData ={};
+                postData.id = _thisTr.data('id');
+                postData.is_selection = is_selection;
+                var url =  controller + 'setSelection';
+                _this.addClass("nodisabled");//防止重复提交
+                layer.open({
+                    btn: ['确定','取消'],//按钮
+                    content:"是否"+text+'?',
+                    yes:function (index) {
+                        $.post(url,postData,function(msg){
+                            _this.removeClass("nodisabled");
+                            dialog.msg(msg,'',function(){
+                                if(is_selection == 1){
+                                    _thisTr.find('.is-selection').text('精选');
+                                    _this.text('取消为精选');
+                                    _this.data('is-selection',0);
+                                }else{
+                                    _thisTr.find('.is-selection').text('不为精选');
+                                    _this.text('设置为精选');
+                                    _this.data('is-selection',1);
+                                }
+                            });
+                        });
+                        layer.close(index);
+                    }
+                });
+            });
+
+            //去设置项目商品
+            $('body').on('click','.addProjectGoods',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  controller + 'addSceneGoods/id/' + _thisTr.data('id');
+                location.href = url;
+            });
+        });
+    </script>
+{/block}

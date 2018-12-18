@@ -1,0 +1,19 @@
+{notempty name="list"}
+{volist name="list" id="info"}
+<li data-id="{$info.id}">
+    <a href="{:url('Goods/detail',['id'=>$info.id])}">
+        {empty name="info.thumb_img"}
+        <img src="public_img/default/no_pic_100.jpg" alt="">
+        {else /}
+        <img src="public_uploads/{$info.thumb_img}" alt="">
+        {/empty}
+    </a>
+    <div class="p_bottom">
+        <p class="text-intro title_name">{$info.headline}</p>
+        <div class="columns_flex l-r-sides">
+            <span class="pink">￥<price>{$info.bulk_price}</price></span>
+        </div>
+    </div>
+</li>
+{/volist}
+{/notempty}

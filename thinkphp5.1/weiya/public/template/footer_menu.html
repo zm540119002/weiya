@@ -1,0 +1,33 @@
+
+<footer class="f24 group_cart_nav">
+    {volist name="unlockingFooterCart.menu" id="vo"}
+        {if $unlockingFooterCart.count == 1 }
+            <div class="group_btn100 bottom_item">
+                {if $vo.class=='amount'}
+                <span>￥<price>500</price></span>
+                {else /}
+                <a href="javascript:void(0);" class=" {$vo.class}"><span class="s_i"></span>{$vo.name}</a>
+                {/if}
+            </div>
+        {elseif $unlockingFooterCart.count == 2 /}
+            <div class="group_btn50 bottom_item">
+                <a href="javascript:void(0);" class=" {$vo.class}"><span class="s_i"></span>{$vo.name}</a>
+            </div>
+        {elseif $unlockingFooterCart.count == 3 /}
+            <div class="group_btn30 bottom_item">
+                {if $vo.class=='amount'}
+                <span class="amount">￥<price>0.00</price></span>
+                {elseif $vo.class=='add_cart_icon'}
+                <a href="javascript:void(0);" class=" {$vo.class}"><span class="cart_num">0</span>{$vo.name}</a>
+                {else /}
+                <a href="javascript:void(0);" class=" {$vo.class}"><span class="s_i"></span>{$vo.name}</a>
+                {/if}
+            </div>
+        {elseif $unlockingFooterCart.count == 4 /}
+        <div class="group_btn25 bottom_item">
+            <a href="javascript:void(0);" class=" {$vo.class}"><span class="s_i"></span>{$vo.name}</a>
+        </div>
+        {else /}
+        {/if}
+    {/volist}
+</footer>

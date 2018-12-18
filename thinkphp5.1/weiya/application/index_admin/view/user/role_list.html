@@ -1,0 +1,25 @@
+<div class="search-result">
+    {notempty name='roleList'}
+    <table class="table tb-type2">
+        <tbody>
+        {volist name="roleList" id="vo"}
+        <tr class="hover" data-role_id="{$vo.id}">
+            <td class="w48"><input type="checkbox" class="checkitem">
+            <td class="w50pre"><span title="" class="editable ">{$vo.name}</span></td>
+        </tr>
+        {/volist}
+        </tbody>
+        <tfoot>
+        <tr class="tfoot">
+            <td><input type="checkbox" class="checkall" id="checkall_2"></td>
+            <td id="batchAction" colspan="15">
+                <span class="all_checkbox"><label for="checkall_2">全选</label></span>&nbsp;&nbsp;
+                <a href="JavaScript:void(0);" class="batchDel" ><span>批量删除</span></a>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+    {else/}
+    <div class='loading'>没有符合条件的记录！</div>
+    {/notempty}
+</div>

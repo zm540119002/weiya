@@ -1,0 +1,182 @@
+{extend name="template/base_pc.html" /}
+{block name="css-customize"}
+    <link rel="stylesheet" type="text/css" href="public_hui_admin/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="public_hui_admin/static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="public_hui_admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="public_hui_admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="public_hui_admin/static/h-ui.admin/css/style.css" />
+{/block}
+{block name="content"}
+<div id="maxImg" style="display: none;">
+	<img class="max-img" src="" alt="">
+</div>
+<div>
+	<select name="" id="" class="select">
+		<option value="" name="auth_status">请选择</option>
+		<option value="0" name="auth_status">待审核</option>
+		<option value="1" name="auth_status">通过</option>
+		<option value="2" name="auth_status">未通过</option>
+	</select>
+</div>
+<form name="form1" id="form1">
+	<div class="columns_flex search-row-flex">
+		<input type="text" class="input-filed keyword" name="keyword" placeholder="按产商名搜索"/>
+		<input type="button" value="搜索" class="layer-search-btn search"/>
+	</div>
+</form>
+<div class="mt-20" id="list"></div>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+
+<script type="text/javascript">
+  $(function () {
+	  // 选择状态
+	  $('body').on('change','.select',function(){
+		  getPage();
+
+	  })
+	  //获取列表
+	  getPage();
+	  //搜索
+	  $('body').on('click','.search',function(){
+		  getPage();
+	  })
+	  //审核商标申请资料
+	  $('body').on('click','.entry-audit',function(){
+		  _this = $(this);
+          var id = _this.parents('tr').data('id');
+		  $.ajax({
+			  url: module + 'Factory/getInfo',
+			  data: {id:id},
+			  type: 'get',
+			  beforeSend: function(){
+				  //$('.loading').show();
+			  },
+			  success: function(data){
+				  if(data.status == 0){
+					  dialog.error(data.msg);
+					  return false;
+				  }
+				  layer.open({
+					  type:1,
+					  area: ['1500px','auto'],
+					  fix: true, //不固定
+					  maxmin: true,
+					  shade:0.4,
+					  tipsMore:true,
+					  title: '查看申请人资料',
+					  content: data,
+					  btn:['不通过','通过'],
+					  btn1:function(index){
+						  //不通过
+						  var postData = {};
+						  postData.auth_status = 2;
+						  postData.id  = id;
+						  $.post(module + 'Factory/audit', postData , function(data){
+							  if(!data.status){
+								  dialog.error(data.info);
+								  return false;
+							  }
+							  _this.parents('tr').find('.auth-status').text('不通过');
+							  _this.removeClass('entry-audit').addClass('view').text('查看');
+							  dialog.success(data.info);
+						  });
+					  },
+					  btn2:function(index){
+						  //通过
+						  var postData ={};
+						  postData.auth_status = 1;
+						  postData.id = id;
+						  $.post(module + 'Factory/audit', postData , function(data){
+							  if(!data.status){
+								  dialog.error(data.info);
+								  return false;
+							  }
+							  _this.parents('tr').find('.auth-status').text('不通过');
+							  _this.removeClass('entry-audit').addClass('view').text('查看');
+							  dialog.success(data.info);
+						  });
+					  }
+				  });
+			  },
+			  complete:function(){
+
+			  },
+			  error:function (xhr) {
+				  dialog.error('AJAX错误'+xhr);
+			  }
+		  });
+	  });
+	  //查看商标申请资料
+	  $('body').on('click','.view',function(){
+		  var id = $(this).parents('tr').data('id');
+		  $.ajax({
+			  url: module + 'Factory/getInfo',
+			  data: {id:id},
+			  type: 'get',
+			  beforeSend: function(){
+				  //$('.loading').show();
+			  },
+			  success: function(data){
+				  if(data.status == 0){
+					  dialog.error(data.msg);
+					  return false;
+				  }
+				  layer.open({
+					  type:1,
+					  area: ['1500px','auto'],
+					  fix: true, //不固定
+					  maxmin: true,
+					  shade:0.4,
+					  tipsMore:true,
+					  title: '查看申请人资料',
+					  content: data,
+					  btn:['关闭'],
+					  btn1:function(index){
+
+					  },
+				  });
+
+			  },
+			  complete:function(){
+
+			  },
+			  error:function (xhr) {
+				  dialog.error('AJAX错误'+xhr);
+			  }
+		  });
+	  });
+	  var maxImg = $('#maxImg').html();
+	  $('body').on('click','.audit-img',function(){
+		  var imgSrc=$(this).attr('src');
+		  layer.open({
+			  // type:1,
+			  title: '图片信息',
+			  fix:false,
+			  moveOut:true,
+			  content:maxImg,
+			  success:function(){
+				  $('.max-img').attr('src',imgSrc);
+			  }
+		  })
+	  })
+  })
+  //获取商品列表
+  function getPage(currentPage) {
+	  $("#list").html($('#loading').html());
+	  var url = module+'Factory/getList';
+	  var postData = $('#form1').serializeObject();
+	  postData.page = currentPage ? currentPage : 1;
+	  var options=$(".select option:selected"); //获取选中的项
+	  var auth_status =  options.val();
+	  if(auth_status){
+		  postData.auth_status = options.val(); //拿到选中项的值
+	  }
+	  postData.pageSize = 20;
+	  $.get(url, postData , function(data){
+		  $('#list').html(data);
+	  });
+  }
+</script>
+{/block}

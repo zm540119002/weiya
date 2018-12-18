@@ -1,0 +1,25 @@
+
+<div id="auditInfoLayer" >
+    <input type="hidden" class="id" value="{$info.id|default=''}"/>
+    <div class="audit-item">
+        <span class="field">厂商全称：</span>
+        <span>{$info.name|default=''}</span>
+    </div>
+    <div class="audit-item">
+        <span class="field">代办人：</span>
+        <span>{$info.id|default=''}</span>
+    </div>
+    {notempty name="info.business_license"}
+    <div class="friend-tips">温馨提示：点击下面图片可以放大(拖拽)预览</div>
+    <div class="audit-item">
+        <span class="field">企业营业执照：</span>
+        <img class="audit-img" src="public_uploads/{$info.business_license|default=''}" alt="">
+    </div>
+    {/notempty}
+    {notempty name="info.auth_letter"}
+    <div class="audit-item">
+        <span class="field">代办人企业授权信：</span>
+        <img class="audit-img" src="public_uploads/{$info.auth_letter|default=''}" alt="">
+    </div>
+    {/notempty}
+</div>

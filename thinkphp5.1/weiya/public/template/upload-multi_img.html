@@ -1,0 +1,57 @@
+<!--编辑商品详情-->
+<section id="editDetail" style="display: none;">
+    <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+    <form class="">
+        <ul class="upload-picture-module multi-picture-module f24"></ul>
+    </form>
+    <div class="error_tipc"></div>
+    <div class="upload-picture-module f24">
+        <div>
+            <div class="picture-module">
+                <input type="file" class="uploadMultiImg" id="file" name="" accept="image/*" multiple="" data-num="">
+                <img class="upload_img" src="" alt="">
+                <input type="hidden" class="business-license img"  value=""/>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="img_list" style="display: none;">
+    <li>
+        <div class="picture-module active">
+            <input type="file" class="uploadImg uploadSingleEditImg" name="">
+            <span class="delete-picture">X</span>
+            <img src="" class="upload_img">
+            <input type="hidden" class="single_img" value="">
+        </div>
+    </li>
+</section>
+<section id="video_list" style="display: none;">
+    <li>
+        <div class="picture-module active">
+            <input type="file" class="uploadImg uploadSingleVideo" name="">
+            <span class="delete-picture">X</span>
+            <video src="" class="upload_img" accept="video/*" autoplay="autoplay"></video>
+        </div>
+    </li>
+</section>
+<!--商品视频-->
+<section id="goodsVideoList" style="display: none;">
+    <p class="f20 upload_st_logo"><span class="friend-tipc">*注意</span>：必须上传视频(格式为)</p>
+    <form class="">
+        <ul class="upload-picture-module multi-picture-module f24"></ul>
+    </form>
+    <form>
+        <div class="upload-picture-module f24">
+            <div>
+                <div class="picture-module">
+                    <input type="file" id="video" class="uploadImg " name="" accept="video/*" multiple="" >
+                    <img class="upload_img" src="" alt="">
+                    <input type="hidden" class="layer-thumbnail-picture" value=""/>
+                </div>
+                <!--<p>企业营业执照</p>-->
+            </div>
+        </div>
+    </form>
+</section>
+<!--编辑分类标签-->
+<script type="text/javascript" src="public_js/uploadMultiImg.js"></script>

@@ -1,0 +1,18 @@
+<select name="category_id_1" class="selectbox">
+    <option value="">一级分类</option>
+</select>
+<select name="category_id_2" class="selectbox">
+    <option value="">二级分类</option>
+</select>
+<select name="category_id_3" class="selectbox">
+    <option value="">三级分类</option>
+</select>
+<!-- 隐藏区 -->
+<div style="display:none">
+    <select id="allCategoryListTemp">
+        {volist name="allCategoryList" id="vo"}
+            <option value="{$vo.id}" level="{$vo.level}" parent_id_1="{$vo.parent_id_1}"
+                    parent_id_2="{$vo.parent_id_2}">{$vo.name}</option>
+        {/volist}
+    </select>
+</div>

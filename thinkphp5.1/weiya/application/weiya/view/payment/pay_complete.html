@@ -1,0 +1,27 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24">
+    <section class="purchase_order_success">
+        <div>
+            <span></span>
+            <p>已经成功下单</p>
+            <p>可在个人中心订单中查看</p>
+        </div>
+        <a href="" class="order_cofirm_btn">确定</a>
+    </section>
+</article>
+{/block}
+{block name="common"}
+{include file="public/footer_menu" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+    $(function(){
+
+    });
+</script>
+{/block}

@@ -1,0 +1,32 @@
+
+<div id="auditInfoLayer" >
+    <input type="hidden" class="id" value="{$info.id|default=''}"/>
+    <div class="audit-item">
+        <span class="field">商标：</span>
+        <span>{$info.name|default=''}</span>
+    </div>
+    <div class="audit-item">
+        <span class="field">代办人：</span>
+        <span>{$info.id|default=''}</span>
+    </div>
+    {notempty name="info.brand_img"}
+    <div class="friend-tips">温馨提示：点击下面图片可以放大(拖拽)预览</div>
+    <div class="audit-item">
+        <span class="field">商标Logo：</span>
+        <img class="audit-img" src="public_uploads/{$info.brand_img|default=''}" alt="">
+    </div>
+    {/notempty}
+    {notempty name="info.certificate"}
+    <div class="friend-tips">温馨提示：点击下面图片可以放大(拖拽)预览</div>
+    <div class="audit-item">
+        <span class="field">商标证书：</span>
+        <img class="audit-img" src="public_uploads/{$info.certificate|default=''}" alt="">
+    </div>
+    {/notempty}
+    {notempty name="info.authorization"}
+    <div class="audit-item">
+        <span class="field">商标授权书：</span>
+        <img class="audit-img" src="public_uploads/{$info.authorization|default=''}" alt="">
+    </div>
+    {/notempty}
+</div>

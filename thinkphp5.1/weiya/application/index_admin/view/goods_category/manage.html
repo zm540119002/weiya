@@ -1,0 +1,60 @@
+{extend name="template/base_pc.html" /}
+{block name="css-customize"}
+<link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
+<link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
+{/block}
+{block name="content"}
+    <div class="page">
+        <div class="fixed-bar">
+            <div class="item-title">
+                <ul class="tab-base">
+                    <li><a href="{:url('GoodsCategory/manage')}" class="current"><span>管理</span></a></li>
+                    <li><a href="{:url('GoodsCategory/edit')}" ><span>编辑</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="fixed-empty"></div>
+        <table class="table tb-type2" id="prompt">
+            <tbody>
+                <tr><td><ul><li class="friendly_tipc">
+                    <span>*</span>请注意：删除分类时，（1）如果分类存在子分类，也会把子分类删除，（2）如果分类存在商品，删除分类会有可能导致商品无法正常显示
+                </li></ul></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="content">
+        <div class="search-result">
+            <table class="table tb-type2">
+                <thead>
+                    <tr class="thead">
+                        <th></th>
+                        <th width="10%">排序</th>
+                        <th width="20%">名称</th>
+                        <th width="40%">备注</th>
+                        <th width="20%">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="list"></tbody>
+                <tfoot>
+                    <tr class="tfoot">
+                        <td><input type="checkbox" class="check_all_2" id="check_all_2"></td>
+                        <td id="batchAction" colspan="15">
+                            <span class="all_checkbox"><label for="check_all_2">全选</label></span>&nbsp;&nbsp;
+                            <a href="JavaScript:void(0);" class="batchDel" ><span>批量删除</span></a>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+    <script type="text/javascript" src="public_admin_common_js/goodsCategoryManage.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //加载第一页
+            getPage();
+        });
+    </script>
+{/block}

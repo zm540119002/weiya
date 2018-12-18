@@ -1,0 +1,81 @@
+{extend name="template/base_pc.html" /}
+{block name="css-customize"}
+    <link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
+    <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
+{/block}
+{block name="content"}
+    <div class="page">
+        <div class="fixed-bar">
+            <div class="item-title">
+                <ul class="tab-base">
+                    <li><a href="{:url('User/info')}"  class="current"><span>个人信息</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top:15px;">
+            <form id="form1">
+                <table id=table18 class="add_new_merchandise" width="100%">
+                    <tbody>
+                        <tr class="tr-margin-item">
+                            <td class=dotted_bottom_gray width="12%" align="right">名称：</td>
+                            <td class=dotted_bottom_gray width="88%" align=left>
+                                <span>{$info.name|default=''}</span>
+                                <!--<input style="width: 200px; " class="inputboxadmin" name="name" value="{$info.name|default=''}">-->
+                                <input type="hidden" name="id" value="{$info.id|default=0}">
+                            </td>
+                        </tr>
+                        <tr class="tr-margin-item">
+                            <td class=dotted_bottom_gray width="12%" align="right">昵称：</td>
+                            <td class=dotted_bottom_gray width="88%" align=left>
+                                <span>{$info.name|default=''}</span>
+                                <!--<input style="width: 200px; " class="inputboxadmin" name="nickname" value="{$info.nickname|default=''}">-->
+                            </td>
+                        </tr>
+                        <tr class="tr-margin-item">
+                            <td class=dotted_bottom_gray width="12%" align="right">性别：</td>
+                            <td class=dotted_bottom_gray width="88%" align=left>
+                                <span>{$info.sex|default=''}</span>
+                                <!--<input style="width: 200px; " class="inputboxadmin" name="nickname" value="{$info.nickname|default=''}">-->
+                            </td>
+                        </tr>
+                        <tr class="tr-margin-item">
+                            <td class=dotted_bottom_gray width="12%" align="right">手机号码：</td>
+                            <td class=dotted_bottom_gray width="88%" align=left>
+                                <span>{$info.mobile_phone|default=''}</span>
+                                <!--<input style="width: 200px; " class="inputboxadmin" name="mobile_phone" value="{$info.mobile_phone|default=''}">-->
+                            </td>
+                        </tr>
+                        <tr class="tr-margin-item">
+                            <td class=dotted_bottom_gray width="12%" align="right">注册时间：</td>
+                            <td class=dotted_bottom_gray width="88%" align=left>
+                                <span>{$info.create_time|date='Y-m-d H:i'|default=''}</span>
+                                <!--<input style="width: 200px; " class="inputboxadmin" name="mobile_phone" value="{$info.mobile_phone|default=''}">-->
+                            </td>
+                        </tr>
+                        <tr class="tr-margin-item">
+                            <td class=dotted_bottom_gray width="12%" align="right">最后登录时间：</td>
+                            <td class=dotted_bottom_gray width="88%" align=left>
+                                <span>{$info.last_login_time|date='Y-m-d H:i'|default=''}</span>
+                                <!--<input style="width: 200px; " class="inputboxadmin" name="mobile_phone" value="{$info.mobile_phone|default=''}">-->
+                            </td>
+                        </tr>
+                        <tr class="tr-margin-item">
+                            <td class=dotted_bottom_gray width="12%" align="right">备注：</td>
+                            <td class=dotted_bottom_gray width="88%" align=left>
+                                <span>{$info.remark|default=''}</span>
+                                <!--<textarea class="textareaadmin textarea_text remark-text" name="remark">{$info.remark|default=''}</textarea>-->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+    <script type="text/javascript">
+        $(function(){
+        });
+    </script>
+{/block}

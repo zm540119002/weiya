@@ -1,0 +1,119 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+    <link rel="stylesheet" type="text/css" href="factory_css/main.css">
+{/block}
+{block name="nav">提交订单{/block}
+{block name="content"}
+    <article class="f24 fill_order_wrapper">
+        {notempty name="address"}
+            <section class="order_address">
+                <div class="m step1-in ">
+                    <a href="javascript:void(0);" class="s-href changeAddress">
+                        <div class="mt_new">
+                            <div class="s1-name">
+                                <span id="address-name">{$address.consignee}</span>
+                            </div>
+                            <div class="s1-phone">
+                                <span id="address-mobile">{$address.mobile}</span>
+                            </div>
+                        </div>
+                        <div class="mc step1-in-con">
+                            <i class="location-pic"></i>
+                            <span id="address-where" class="address-where">{$address.district}{$address.address}</span>
+                        </div>
+                        <input type="hidden" class="addressid" value="{$address.id}">
+                    </a>
+                </div>
+            </section>
+            {else /}
+            <section class="section-address bg-eae pt-5">
+                <form action='#' method="post" class="bg-fff address_form">
+                    <div class="form-group box-flex clearfixed">
+                        <label class="form-label">收件人：</label>
+                        <input type="text" name="consignee" class="input-flex recipient_name " placeholder="请输入姓名" value="">
+                    </div>
+                    <div class="form-group box-flex clearfixed">
+                        <label class="form-label">联系电话：</label>
+                        <input type="text" name="mobile" class="input-flex recipient_mobile" placeholder="请输入收件人电话" value="">
+                    </div>
+                    <div class="express-area ">
+                        <a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+                            <label class="form-label">选择地区：</label>
+                            {empty name="address"}
+                                <div class="area_address">省 &gt; 市 &gt; 区/县</div>
+                                {else /}
+                                <div class="area_address"></div>
+                            {/empty}
+                            <input type="hidden" class="district_address" value="">
+                        </a>
+                    </div>
+                    <div class="form-group box-flex">
+                        <label class="form-label">详细地址：</label>
+                        <input type="text" name="address" class="input-flex recipient_detail_address" placeholder="请填写详细地址" value="">
+                    </div>
+                </form>
+            </section>
+        {/notempty}
+          <!--发票抬头-->
+        <section class="goods_order_form">
+            <!--结算显示商品页面-->
+            {notempty name="info"}
+            <ul class="goods_order_item">
+                {volist name="info" id="vo"}
+                    {$vo.mian_img}
+                    <li>
+                        {notempty name="vo.main_img"}
+                            <img data-img="" data-isloaded="" src="__ROOT__/Uploads/{$vo.main_img}" alt="" class="c_img" />
+                            {else /}
+                            <img data-img="" data-isloaded="" src="PUBLIC_IMG/home/default/goods_default.png" alt="" class="c_img" />
+                        {/notempty}
+                        <div class="g_order_r">
+                            <p>{$vo.name}</p>
+                            <div class="cost_price"><span>￥</span>{$vo.sale_price}</div>
+                            <div class="shopping_count order_count">数量：<span>{$vo.num} </span></div>
+                        </div>
+                    </li>
+                {/volist}
+            </ul>
+            {/notempty}
+        </section>
+    </article>
+     <!--选择地区弹层-->
+    <section id="areaLayer" class="express-area-box" style="display:none;">
+        <header>
+            <h3>选择地区</h3>
+            <a id="backUp" class="back" href="javascript:void(0)" title="返回" style="display: none;"></a>
+            <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+        </header>
+        <article id="areaBox">
+            <ul id="areaList" class="area-list"></ul>
+        </article>
+    </section>
+    <!--遮罩层-->
+    <div id="areaMask" class="address_mask"></div>
+{/block}
+{block name="footer"}
+{include file="template/footer_menu.html" /}
+{/block}
+
+{block name="script"}
+    <script src="public_js/jquery.area.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //跳转到地址列表，更换地址
+            $('body').on('click','.changeAddress',function () {
+                var orderId = {$info.id};
+                var url = module + '/Address/list';
+                if(orderId){
+                    url += '/orderId/'+orderId;
+                }
+                location.href = url;
+            });
+            //总价：
+            $('.goods_total_price price').text("{$info.amount}");
+
+
+        })
+
+    </script>
+{/block}

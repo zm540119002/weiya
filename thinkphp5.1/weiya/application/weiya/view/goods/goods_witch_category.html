@@ -1,0 +1,240 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="slider_banner">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					{empty name="info.img"}
+					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+					{else /}
+					<img src="public_uploads/{$info.img}" alt="" class="common_default_img">
+					{/empty}
+
+				</div>
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>
+	</section>
+	<section class="module-navigation ">
+		<div >
+			<ul>
+				<li>
+					<div class="top_radius f20 top_module">
+						<div>
+							<span class="hot left">热</span>
+						</div>
+						<p>{$info.remark}</p>
+						<p>{$info.intro}</p>
+						<div class="tags_item columns_flex l-r-sides">
+							<div>
+								{volist name="$info.tag" id="tag"}
+								<span>{$tag}</span>
+								{/volist}
+							</div>
+							<div class="tags_item_r">
+								<a class="collection" href=""><span></span>收藏</a>
+								<a class="share" href=""><span></span>分享</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="content-padding">
+						<p class="top_b_text wk_notice separation">[每周采购须知] 美尚精选优质货源任你选！随时参团，享受超级划算的采购结算价格，周五统计订单后送达工厂按订单备货发货；VIP采购商会员额外享受5%返点福利。</p>
+						<div class="columns_flex l-r-sides separation">
+							<div class="mid_module_left">
+								<img src="public_img/wy_dz.png" alt="">
+								<div>
+									<span class="left count-down-icons"></span>
+									<div class="d-r">
+										<p class=" pink">品牌定制.周五截止</p>
+										<div class="end-text">168:00:00</div>
+									</div>
+								</div>
+							</div>
+							<div class="mid_module_right">
+								<span><span class="item end_time"></span>周五结单</span>
+								<span><span class="item factory"></span>品质工厂</span>
+							</div>
+						</div>
+						<div class="columns_flex l-r-sides">
+							<div>
+								我的品牌定制<span>xxxxx</span>
+							</div>
+							<div>
+								<a>设定></a>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section class="content-padding content_main wy_list">
+		<ul class="goods_list list">
+			{notempty name="goodsList"}
+			{volist name="goodsList" id="info"}
+			<li data-id="{$info.id}">
+				{empty name="info.thumb_img"}
+				<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+				{else /}
+				<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
+				{/empty}
+				<div class="list_r">
+					<p>{$info.headline}</p>
+					<div>单品规格<span>{$info.specification}</span></div>
+					<div>
+						<span>￥<price>{$info.bulk_price}</price></span>
+					</div>
+					<div class="columns_flex l-r-sides">
+						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span></div>
+						<a href="javascript:void(0);">样品购买</a>
+					</div>
+					<div class="quantity_wrapper selected-number">
+						<a href="javascript:void(0);" class="greduce">-</a>
+						<input type="text" value="1" class="f24 gshopping_count" data-sign="one">
+						<a href="javascript:void(0);" class="gplus">+</a>
+					</div>
+				</div>
+			</li>
+			{/volist}
+			{/notempty}
+		</ul>
+	</section>
+</article>
+
+{/block}
+
+{block name="footer"}
+	{include file="template/footer_menu.html" /}
+{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript" src="weiya_js/footerCart.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var id = {$info.id};
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+		$(window).on('scroll',function(){
+			var scrollHeight=$(document).scrollTop();
+
+			if(scrollHeight>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+		});
+		$('.five_star').setStar(2.9);
+		// $('.scrollwrapper').scrollFloor();
+		//楼层
+		var menu = $('#menu');						
+		var items = $('#content').find('.floor');	
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+				console.log(height);
+		$(window).scroll(function() {
+			//滚动
+			var top = $(document).scrollTop();			
+			var currentId = '';
+			var top=$(document).scrollTop();
+			if(top>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+			items.each(function(){
+				var m = $(this);
+				var itemTop = m.offset().top;			
+				if(top + 43>= itemTop ){
+					//currentId = '#' + m.attr('id');
+					currentId = m.attr('id');
+				} else {
+					return false;
+				}
+			});
+
+			// 给相应楼层的a 设置 current, 取消其他链接的current
+			var currentLink = menu.find('.active');
+			if(currentId && currentLink.data('item') != currentId) {
+				currentLink.removeClass('active');
+				menu.find("[data-item='"+ currentId +"']").addClass('active').siblings().removeClass('active');
+			}
+		});
+		$('#menu li').on('click',function(){
+			var _this=$(this);
+			var id=_this.data('item');
+			items.each(function(){
+				var m = $(this);
+				if(m.attr('id')==id){
+					var itemTop = m.offset().top;
+					_this.addClass('active').siblings().removeClass('active');
+				var scrollY=itemTop-40;	
+					$('html, body').animate({
+						scrollTop: scrollY
+					},500);
+				}else{
+					_this.removeClass('active');
+				} 
+			});
+		});
+
+		//获取评论
+		var config = {
+			url:module+'Comment/getList',
+			currentPage:1,
+			container:$('#commentList'),
+			type:'click'
+		};
+		var getData = {
+			pageSize:6,
+			id:id
+		};
+		getPagingListByClick(config,getData);
+		//加载更多评论
+		$('body').on('click','.comment-next-page',function (){
+			var page = $(this).data('page');
+			config.currentPage = page;
+			getPagingListByClick(config,getData);
+		});
+
+//		//获取推荐商品
+//		var url = module + 'Goods/getRecommendGoods';
+//		$.ajax({
+//			url: url,
+//			data: {goods_id:id},
+//			type: 'get',
+//			beforeSend: function(){
+//				$('.loading').show();
+//			},
+//			error:function(){
+//				$('.loading').hide();
+//				dialog.error('AJAX错误');
+//			},
+//			success: function(data){
+//				$('#recommendGoodsList').html(data);
+//			}
+//		});
+
+	});
+</script>
+{/block}

@@ -1,0 +1,18 @@
+{volist name="list" id="vo"}
+<li data-id="{$vo.id}" class="">
+    <div class="list_item">
+        <div >
+            <img src="public_uploads/{$vo.thumb_img}" alt="" class="left">
+            <p class="goods_name">{$vo.name}</p>
+        </div>
+    </div>
+    <div class="list_item">
+        <a href="javascript:void(0);" class="add_goods">添加</a>
+    </div>
+</li>
+{/volist}
+{$list|raw}
+
+
+
+

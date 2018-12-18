@@ -1,0 +1,74 @@
+<!--商标截图-->
+<section class="htmleaf-container" style="display: none;">
+    <div id="clipArea">
+        <div class="photo-clip-view" >
+            <div class="photo-clip-moveLayer" >
+                <div class="photo-clip-rotateLayer"></div>
+            </div>
+        </div>
+        <div class="photo-clip-mask">
+            <div class="photo-clip-mask-left"></div>
+            <div class="photo-clip-mask-right" ></div>
+            <div class="photo-clip-mask-top" ></div>
+            <div class="photo-clip-mask-bottom" ></div>
+            <div class="photo-clip-area" ></div>
+        </div>
+        <a href="javascript:void(0);" class="photoClip-close ">X</a>
+    </div>
+    <p class="f24" style="width:100%;position:absolute;top:12px;left:-60px;color:#fff;">温馨提示：先打开图片上传,再裁剪哦！</p>
+    <div class="foot-use f28">
+        <div class="uploader1 blue">
+            <input type="button" name="file" class="button" value="打开图片">
+            <input id="file" type="file" onchange="javascript:void(0);" accept="image/*" multiple="" />
+        </div>
+        <button id="clipBtn">截取</button>
+    </div>
+    <div id="view" class="photoview" ></div>
+</section>
+<script type="text/javascript">
+    var uploadsClipImgFlag = true;
+    $(function(){
+        //编辑品牌logo
+        var clipImg = '';
+        $("#clipArea").photoClip({
+            width: 199,
+            height: 166,
+            file: "#file",
+            view: "#view",
+            ok: "#clipBtn",
+            clipFinish: function(img) {
+                uploadsClipImgFlag = false;
+                clipImg = img;
+                var postData ={};
+                postData.fileBase64 = clipImg;
+                postData.fileType = 'image';
+                $.post(controller + "uploadFileToTemp", postData,function(msg){
+                    if(msg.status == 0){
+                        dialog.error(msg.info);
+                        return false;
+                    }
+                    if(msg.status == 1){
+                        uploadsClipImgFlag = true;
+                        $('.logo-src').val(msg.info)
+                    }
+                    $('html,body').removeClass('scrollStyle');
+                },'json');
+            }
+        });
+        $(".logo").click(function(){
+            $(".htmleaf-container").show();
+            $('html,body').addClass('scrollStyle');
+            $('.htmleaf-container .photoview').get(0).style.backgroundImage="url("+$('.logo img').attr('src')+")";
+        });
+        $("#clipBtn").click(function(){
+            $('.logo img').attr('src',clipImg).addClass('active');
+//            $('.logo-src').val(clipImg);
+            $(".htmleaf-container").hide();
+        });
+        $('.photoClip-close').click(function(){
+            $(".htmleaf-container").hide();
+            $('html,body').removeClass('scrollStyle');
+        });
+    })
+
+</script>

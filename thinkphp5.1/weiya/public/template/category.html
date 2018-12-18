@@ -1,0 +1,16 @@
+<!--设置商品的检索品类-->
+<section id="categoryContent" style="display:none;">
+    <div class="category-wrapper">
+        <div class="category-left-menu">
+            <ul class="category-tab">
+                {volist name="platformCategory" id="vo"}
+                    <li class="">
+                        <a data-id="{$vo.id}" class="first_category" href="javascript:void(0);">{$vo.name}</a>
+                    </li>
+                {/volist}
+            </ul>
+        </div>
+        <div class="category-content-wrapper">
+        </div>
+    </div>
+</section>

@@ -1,0 +1,22 @@
+{include file="template/forget_password_dialog.html" /}
+<section id="dialLogin" style="display:none;">
+    {include file="template/login_tpl.html" /}
+</section>
+<script type="text/javascript">
+    //登录触发
+    function loginDialog(){
+        var content=$('#dialLogin').html();
+        window.scrollTo(0,0);
+        layer.open({
+            className:'loginLayer',
+            content:content,
+			title:['登录','border-bottom:1px solid #d9d9d9;'],
+            success:function(){
+                tab_down('.loginNav li','.loginTab .login_wrap','click');
+                $('.layui-m-layershade').on('touchmove',function(e){
+                    event.preventDefault(); 
+                });
+            }
+        });
+    }
+</script>

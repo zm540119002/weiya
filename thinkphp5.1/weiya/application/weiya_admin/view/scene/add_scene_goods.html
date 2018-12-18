@@ -1,0 +1,183 @@
+{extend name="template/admin_pc/page_base_admin.html" /}
+{block name="css-customize"}
+    <link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
+    <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
+{/block}
+{block name="content"}
+    <section style="display: none" class="tpl_list">
+        <li data-goods-id="">
+            <a href="javascript:void(0);" class="close-btn">X</a>           
+            <!--<div>
+                <img src="" alt="" class="left">
+                <p class="goods_name">aaabbb</p>
+            </div>-->
+        </li>
+    </section>
+    <section class="recommendGoods_content">
+        <!--推荐产品容器-->
+        <div id="recommendGoods">
+            <span class="content-label">已推荐产品</span>
+            <a href="javascript:void(0);" class="confirm_add">确定添加</a>
+            <ul class="columns_flex selected_goods_list" id="selected_list">
+
+            </ul>
+            <div class="error_tipc"></div>
+            <form name="form" id="form1">
+                <input type="hidden" name="pageType" value="layer"/>
+                <div class="search_bar">
+                    <span class="left">产品分类:</span>
+                    {include file="goods_category/linkage_tpl" /}
+                    <input type="text" class="search-goods keyword" name="keyword"  placeholder="搜索产品">
+                    <input type="button" value="搜索" class="layer-search-btn search" id="searchGoods">
+                </div>
+            </form>
+            <span class="content-label">所有产品(可以从下面商品中点击添加产品到已推荐产品)</span>
+            <div class="add_layer_content">
+                <div class="thead_title">
+                    <span class="list_item">产品名称</span>
+                    <span class="list_item">所属分类</span>
+                    <span class="list_item">操作</span>
+                </div>
+                <ul class="scroller-container list" id="list">
+
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 隐藏区 -->
+    <div style="display:none">
+        <div id="loading">
+            <div class='loading'><img src='public_admin_common_img/default/loading.gif' alt='loading'></div>
+        </div>
+    </div>
+{/block}
+
+{block name="script"}
+    <script type="text/javascript" src="public_admin_pc/common/js/categoryLinkage.js"></script>
+    <script type="text/javascript" src="public_admin_pc/common/js/paging.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var id = {$id};
+            //加载第一页
+            var config = {
+                url:module+'goods/getList',
+            };
+            var getData = $('#form1').serializeObject();
+            getPagingList(config,getData);
+            //分类筛选
+            $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
+                var getData = $('#form1').serializeObject();
+                getPagingList(config,getData);
+            });
+            //翻页
+            $('body').on('click','.pager2',function(){
+                var getData = $('#form1').serializeObject();
+                config.currentPage = $(this).data('page');
+                getPagingList(config,getData);
+            });
+            //搜索
+            $('#searchGoods').click(function(){
+                var getData = $('#form1').serializeObject();
+                getPagingList(config,getData);
+            });
+
+            //选择产品回显
+            if(id){
+                $.ajax({
+                    url: module+'Goods/getSceneGoods',
+                    data: {sceneId:id},
+                    type: 'get',
+                    beforeSend: function(){
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        $('#selected_list').html(data)
+                    }
+                });
+            }
+            //添加商品
+            $('body').on('click','.add_goods',function(){
+                var selectedGoodsIds = [];
+                $('.selected_goods_list li').each(function(){
+                    var selectedGoodsId = $(this).data('goods-id');
+                    selectedGoodsIds.push(selectedGoodsId);
+                });
+                var _this=$(this);
+                var goodsId=_this.parents('li').data('id');
+                if($.inArray(goodsId, selectedGoodsIds) !== -1){
+                    layer.tips('此商品已选择过!','.add_goods',{
+                        tips:[3,'#ff0000'],
+                        time:2000
+                    });
+                    return false;
+                }
+                var goodsImgSrc=_this.find('img').attr('src');
+                var selectedLen=$('.selected_goods_list li').length;
+                var listDiv = _this.parents('li').find('.list_item:eq(0)').html();
+                var liTpl=$('.tpl_list').html();
+                if(!selectedLen){
+                    $('.selected_goods_list').append(liTpl);
+                    $('.selected_goods_list li').append(listDiv);
+                }else{
+                    $('.selected_goods_list li:last').after(liTpl);
+                    $('.selected_goods_list li:last').append(listDiv);
+                }
+                $('.selected_goods_list li:last').attr('data-goods-id',goodsId);
+            });
+            //移除商品
+            $('body').on('click','.close-btn',function(){
+                var _this=$(this);
+                var id=_this.parents('li').data('goods-id');
+                $.each($('.list li'),function(){
+                    var _This=$(this);
+                    if(_This.data('id')==id){
+                        _This.removeClass('current');
+                    }
+                })
+                _this.parent().remove();
+            });
+            //添加
+            $('body').on('click','.confirm_add',function(){
+                var selectedIds=[];
+                var postData ={};
+                var _this=$(this);
+                $('.selected_goods_list li').each(function () {
+                    var selectedGoods={};
+                    var goodsSelectedId=$(this).data('goods-id');
+                    selectedGoods.scene_id=id;
+                    selectedGoods.goods_id=goodsSelectedId;
+                    selectedIds.push(selectedGoods);
+                });
+                if($.isEmptyArray(selectedIds)){
+                    dialog.error('未选择商品');
+                    return false;
+                }
+                postData.selectedIds = selectedIds;
+                var url = module+'Scene/addSceneGoods';
+                _this.addClass("nodisabled");//防止重复提交
+                $.ajax({
+                    url: url,
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        _this.removeClass("nodisabled");
+                        dialog.msg(data,'',function () {
+                            var url =  module + 'Scene/manage';
+                            location.href = url;
+                        })
+                    }
+                });
+
+            })
+            
+        });
+    </script>
+{/block}

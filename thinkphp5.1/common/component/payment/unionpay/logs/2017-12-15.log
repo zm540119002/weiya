@@ -1,0 +1,132 @@
+2017-12-15 9:38:03, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[71]------ =====签名报文开始====== 
+2017-12-15 9:38:03, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/cert_util.php ], Line[39]------ 读取签名证书…… 
+2017-12-15 9:38:03, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/cert_util.php ], Line[71]------ 签名证书读取成功，序列号：73925732709 
+2017-12-15 9:38:03, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[84]------ 签名key=val&...串 >accessType=0&backUrl=http://msy.meishangyun.com/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay&bizType=000201&certId=73925732709&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://msy.meishangyun.com/index.php/Purchase/Payment/returnUrl/pay_code/unionpay&merId=802440072770520&orderId=20171215093803085535579667293015&payTimeout=20171215095303&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20171215093803&txnType=01&version=5.1.0 
+2017-12-15 9:38:03, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[101]------ 摘要sha256x16 >26e8df9e94c3c8d7f779ea5d83f10cbc1749ad377ee3553e536056b5633ee5e8 
+2017-12-15 9:38:03, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[106]------ 签名串为 >Z5k7UPSzq6rIY4moYthhtNP4VFaAhxtz+b+4IMJ7ha7NIoMFqIC4PqIQMWuxmC5rnfr7jwtJTIEAkxxorBX+Fpw7DIIXdMfWQaDCvCj1MziI5JpnhBdizaZjAxXGbg41b8v+6AZig4GZbR7TI+ukCtodkLCNcJNy6//IhlQOlVM8Gy6mufTr6pcKdn0E3oZDl5MZR3YJ+0sNCSF3Ktte4+qgD4l8352z6V3l0gB2nBxR2wOaA1qstbjTk2LeqoHmjQ5Y6/fc6TbhXLgc33JyXDJBzMBek/TwgtEIKmNtf/ZMiio3B6VrKuOJPiWBY4DVBOiht9/QD1lWIvwuoJHSnA== 
+2017-12-15 9:38:03, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[119]------ =====签名报文结束====== 
+2017-12-15 9:38:03, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[364]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://gateway.95516.com/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.1.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://msy.meishangyun.com/index.php/Purchase/Payment/returnUrl/pay_code/unionpay" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://msy.meishangyun.com/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="802440072770520" />
+    <input type="hidden" name="orderId" id="orderId" value="20171215093803085535579667293015" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20171215093803" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="1" />
+    <input type="hidden" name="payTimeout" id="payTimeout" value="20171215095303" />
+    <input type="hidden" name="certId" id="certId" value="73925732709" />
+    <input type="hidden" name="signature" id="signature" value="Z5k7UPSzq6rIY4moYthhtNP4VFaAhxtz+b+4IMJ7ha7NIoMFqIC4PqIQMWuxmC5rnfr7jwtJTIEAkxxorBX+Fpw7DIIXdMfWQaDCvCj1MziI5JpnhBdizaZjAxXGbg41b8v+6AZig4GZbR7TI+ukCtodkLCNcJNy6//IhlQOlVM8Gy6mufTr6pcKdn0E3oZDl5MZR3YJ+0sNCSF3Ktte4+qgD4l8352z6V3l0gB2nBxR2wOaA1qstbjTk2LeqoHmjQ5Y6/fc6TbhXLgc33JyXDJBzMBek/TwgtEIKmNtf/ZMiio3B6VrKuOJPiWBY4DVBOiht9/QD1lWIvwuoJHSnA==" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[71]------ =====签名报文开始====== 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/cert_util.php ], Line[39]------ 读取签名证书…… 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/cert_util.php ], Line[71]------ 签名证书读取成功，序列号：73925732709 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[84]------ 签名key=val&...串 >accessType=0&backUrl=http://msy.meishangyun.com/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay&bizType=000201&certId=73925732709&channelType=07&encoding=utf-8&merId=802440072770520&orderId=20171212135434572991016642830329 &origQryId=631712121354340543158&signMethod=01&txnAmt=2017121509384000&txnSubType=00&txnTime=20171215093840&txnType=04&version=5.1.0 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[101]------ 摘要sha256x16 >beb738af68763ed97c7294eeec4c757ef1e99e2697c7b44652c9808e561794be 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[106]------ 签名串为 >DBPB98Pa07zst9dO/BH4Y1Zwbpv59rAxC797DlR18E2VbEXArLNKUgMMZ3tJTdYaWg1Wg/Xn2Bs29M8x6qZZ47M6Y4IuRDnirsjBxRHtnHij0mzjCp7QgWXh4iVFGc5ulmueVvwTWp0ELZq/1uM8Kbh0ZsqdRq86UYOWtMHyDcbwX942MH6WQbGQOK7JANnqa9ylZwTmF3zPSKhElUlVayDzopYti3EiDNH13npHnovruFX5U+Lx2GRuw3+8lp1TZ4Ngeqa2L9FBMoZFGf87GHOsvzdG4tN/dt/9wkToPr8JVvJY34TdLJ8u3fqkqGWN0vjdtGoR5oQkEVGdr74wVA== 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[119]------ =====签名报文结束====== 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[265]------ 后台请求地址为>https://gateway.95516.com/gateway/api/backTransReq.do 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[266]------ 后台请求报文为>version=5.1.0&encoding=utf-8&signMethod=01&txnType=04&txnSubType=00&bizType=000201&accessType=0&channelType=07&backUrl=http%3A%2F%2Fmsy.meishangyun.com%2Findex.php%2FPurchase%2FPayment%2FnotifyUrl%2Fpay_code%2Funionpay&orderId=20171212135434572991016642830329+&merId=802440072770520&origQryId=631712121354340543158&txnTime=20171215093840&txnAmt=2017121509384000&certId=73925732709&signature=DBPB98Pa07zst9dO%2FBH4Y1Zwbpv59rAxC797DlR18E2VbEXArLNKUgMMZ3tJTdYaWg1Wg%2FXn2Bs29M8x6qZZ47M6Y4IuRDnirsjBxRHtnHij0mzjCp7QgWXh4iVFGc5ulmueVvwTWp0ELZq%2F1uM8Kbh0ZsqdRq86UYOWtMHyDcbwX942MH6WQbGQOK7JANnqa9ylZwTmF3zPSKhElUlVayDzopYti3EiDNH13npHnovruFX5U%2BLx2GRuw3%2B8lp1TZ4Ngeqa2L9FBMoZFGf87GHOsvzdG4tN%2Fdt%2F9wkToPr8JVvJY34TdLJ8u3fqkqGWN0vjdtGoR5oQkEVGdr74wVA%3D%3D 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[280]------ 后台返回结果为>txnType=04&respCode=10&channelType=07&merId=802440072770520&txnSubType=00&txnAmt=2017121509384000&version=5.1.0&signPubKeyCert=-----BEGIN CERTIFICATE-----
+MIIEIDCCAwigAwIBAgIFEDRVM3AwDQYJKoZIhvcNAQEFBQAwITELMAkGA1UEBhMC
+Q04xEjAQBgNVBAoTCUNGQ0EgT0NBMTAeFw0xNTEwMjcwOTA2MjlaFw0yMDEwMjIw
+OTU4MjJaMIGWMQswCQYDVQQGEwJjbjESMBAGA1UEChMJQ0ZDQSBPQ0ExMRYwFAYD
+VQQLEw1Mb2NhbCBSQSBPQ0ExMRQwEgYDVQQLEwtFbnRlcnByaXNlczFFMEMGA1UE
+Aww8MDQxQDgzMTAwMDAwMDAwODMwNDBA5Lit5Zu96ZO26IGU6IKh5Lu95pyJ6ZmQ
+5YWs5Y+4QDAwMDE2NDkzMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+tXclo3H4pB+Wi4wSd0DGwnyZWni7+22Tkk6lbXQErMNHPk84c8DnjT8CW8jIfv3z
+d5NBpvG3O3jQ/YHFlad39DdgUvqDd0WY8/C4Lf2xyo0+gQRZckMKEAId8Fl6/rPN
+HsbPRGNIZgE6AByvCRbriiFNFtuXzP4ogG7vilqBckGWfAYaJ5zJpaGlMBOW1Ti3
+MVjKg5x8t1/oFBkpFVsBnAeSGPJYrBn0irfnXDhOz7hcIWPbNDoq2bJ9VwbkKhJq
+Vz7j7116pziUcLSFJasnWMnp8CrISj52cXzS/Y1kuaIMPP/1B0pcjVqMNJjowooD
+OxID3TZGfk5V7S++4FowVwIDAQABo4HoMIHlMB8GA1UdIwQYMBaAFNHb6YiC5d0a
+j0yqAIy+fPKrG/bZMEgGA1UdIARBMD8wPQYIYIEchu8qAQEwMTAvBggrBgEFBQcC
+ARYjaHR0cDovL3d3dy5jZmNhLmNvbS5jbi91cy91cy0xNC5odG0wNwYDVR0fBDAw
+LjAsoCqgKIYmaHR0cDovL2NybC5jZmNhLmNvbS5jbi9SU0EvY3JsMjI3Mi5jcmww
+CwYDVR0PBAQDAgPoMB0GA1UdDgQWBBTEIzenf3VR6CZRS61ARrWMto0GODATBgNV
+HSUEDDAKBggrBgEFBQcDAjANBgkqhkiG9w0BAQUFAAOCAQEAHMgTi+4Y9g0yvsUA
+p7MkdnPtWLS6XwL3IQuXoPInmBSbg2NP8jNhlq8tGL/WJXjycme/8BKu+Hht6lgN
+Zhv9STnA59UFo9vxwSQy88bbyui5fKXVliZEiTUhjKM6SOod2Pnp5oWMVjLxujkk
+WKjSakPvV6N6H66xhJSCk+Ref59HuFZY4/LqyZysiMua4qyYfEfdKk5h27+z1MWy
+nadnxA5QexHHck9Y4ZyisbUubW7wTaaWFd+cZ3P/zmIUskE/dAG0/HEvmOR6CGlM
+55BFCVmJEufHtike3shu7lZGVm2adKNFFTqLoEFkfBO6Y/N6ViraBilcXjmWBJNE
+MFF/yA==
+-----END CERTIFICATE-----&signMethod=01&backUrl=http://msy.meishangyun.com/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay&certId=229137&origQryId=631712121354340543158&encoding=utf-8&respMsg=[9100003]Invalid field[orderId]&bizType=000201&signature=NBYUidnM5X8bGXYjJuEAYvvjwe30EeXdeg4khK77GYDsmSfGPAnms7/7M0OOphRyXJWzkXwnewdW1bQon89TIqufK3nxWTcBPADDZfEGT7I2U4LXoWdj+512ZD8nzxhjeLR06BX1BXMfN1yY1HRcanwIZGeEdKAzXGYtEH1LZuWTarcdvNmK+v4TeQ7hvSSGcFjCQsp25VEVO0VTA0uZZ8HXVDerj0KJZfCCM4Vi6KTyr5DkeVabbs+Rk+1IrU9sk0Ihty3VR4iawTU9aLZayb0a7M1L1GxOlOuk79va5Jx05aJ+deRMkeaPPfBt8Vzql2FOfqrzawDk4v06a5A7Rw==&orderId=20171212135434572991016642830329 &txnTime=20171215093840&accessType=0 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[167]------ 报文去[signature] key=val&串>accessType=0&backUrl=http://msy.meishangyun.com/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay&bizType=000201&certId=229137&channelType=07&encoding=utf-8&merId=802440072770520&orderId=20171212135434572991016642830329 &origQryId=631712121354340543158&respCode=10&respMsg=[9100003]Invalid field[orderId]&signMethod=01&signPubKeyCert=-----BEGIN CERTIFICATE-----
+MIIEIDCCAwigAwIBAgIFEDRVM3AwDQYJKoZIhvcNAQEFBQAwITELMAkGA1UEBhMC
+Q04xEjAQBgNVBAoTCUNGQ0EgT0NBMTAeFw0xNTEwMjcwOTA2MjlaFw0yMDEwMjIw
+OTU4MjJaMIGWMQswCQYDVQQGEwJjbjESMBAGA1UEChMJQ0ZDQSBPQ0ExMRYwFAYD
+VQQLEw1Mb2NhbCBSQSBPQ0ExMRQwEgYDVQQLEwtFbnRlcnByaXNlczFFMEMGA1UE
+Aww8MDQxQDgzMTAwMDAwMDAwODMwNDBA5Lit5Zu96ZO26IGU6IKh5Lu95pyJ6ZmQ
+5YWs5Y+4QDAwMDE2NDkzMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+tXclo3H4pB+Wi4wSd0DGwnyZWni7+22Tkk6lbXQErMNHPk84c8DnjT8CW8jIfv3z
+d5NBpvG3O3jQ/YHFlad39DdgUvqDd0WY8/C4Lf2xyo0+gQRZckMKEAId8Fl6/rPN
+HsbPRGNIZgE6AByvCRbriiFNFtuXzP4ogG7vilqBckGWfAYaJ5zJpaGlMBOW1Ti3
+MVjKg5x8t1/oFBkpFVsBnAeSGPJYrBn0irfnXDhOz7hcIWPbNDoq2bJ9VwbkKhJq
+Vz7j7116pziUcLSFJasnWMnp8CrISj52cXzS/Y1kuaIMPP/1B0pcjVqMNJjowooD
+OxID3TZGfk5V7S++4FowVwIDAQABo4HoMIHlMB8GA1UdIwQYMBaAFNHb6YiC5d0a
+j0yqAIy+fPKrG/bZMEgGA1UdIARBMD8wPQYIYIEchu8qAQEwMTAvBggrBgEFBQcC
+ARYjaHR0cDovL3d3dy5jZmNhLmNvbS5jbi91cy91cy0xNC5odG0wNwYDVR0fBDAw
+LjAsoCqgKIYmaHR0cDovL2NybC5jZmNhLmNvbS5jbi9SU0EvY3JsMjI3Mi5jcmww
+CwYDVR0PBAQDAgPoMB0GA1UdDgQWBBTEIzenf3VR6CZRS61ARrWMto0GODATBgNV
+HSUEDDAKBggrBgEFBQcDAjANBgkqhkiG9w0BAQUFAAOCAQEAHMgTi+4Y9g0yvsUA
+p7MkdnPtWLS6XwL3IQuXoPInmBSbg2NP8jNhlq8tGL/WJXjycme/8BKu+Hht6lgN
+Zhv9STnA59UFo9vxwSQy88bbyui5fKXVliZEiTUhjKM6SOod2Pnp5oWMVjLxujkk
+WKjSakPvV6N6H66xhJSCk+Ref59HuFZY4/LqyZysiMua4qyYfEfdKk5h27+z1MWy
+nadnxA5QexHHck9Y4ZyisbUubW7wTaaWFd+cZ3P/zmIUskE/dAG0/HEvmOR6CGlM
+55BFCVmJEufHtike3shu7lZGVm2adKNFFTqLoEFkfBO6Y/N6ViraBilcXjmWBJNE
+MFF/yA==
+-----END CERTIFICATE-----&txnAmt=2017121509384000&txnSubType=00&txnTime=20171215093840&txnType=04&version=5.1.0 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[168]------ 签名原文>NBYUidnM5X8bGXYjJuEAYvvjwe30EeXdeg4khK77GYDsmSfGPAnms7/7M0OOphRyXJWzkXwnewdW1bQon89TIqufK3nxWTcBPADDZfEGT7I2U4LXoWdj+512ZD8nzxhjeLR06BX1BXMfN1yY1HRcanwIZGeEdKAzXGYtEH1LZuWTarcdvNmK+v4TeQ7hvSSGcFjCQsp25VEVO0VTA0uZZ8HXVDerj0KJZfCCM4Vi6KTyr5DkeVabbs+Rk+1IrU9sk0Ihty3VR4iawTU9aLZayb0a7M1L1GxOlOuk79va5Jx05aJ+deRMkeaPPfBt8Vzql2FOfqrzawDk4v06a5A7Rw== 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[188]------ sha256>388c2d18865cd90abd04319130a5615bb5cbf4afc0505e199cea356229b49631 
+2017-12-15 9:38:40, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[191]------ 验签成功 
+2017-12-15 9:42:48, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[71]------ =====签名报文开始====== 
+2017-12-15 9:42:48, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/cert_util.php ], Line[39]------ 读取签名证书…… 
+2017-12-15 9:42:48, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/cert_util.php ], Line[71]------ 签名证书读取成功，序列号：73925732709 
+2017-12-15 9:42:48, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[84]------ 签名key=val&...串 >accessType=0&backUrl=http://msy.meishangyun.com/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay&bizType=000201&certId=73925732709&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://msy.meishangyun.com/index.php/Purchase/Payment/returnUrl/pay_code/unionpay&merId=802440072770520&orderId=20171215094248914695423710614355&payTimeout=20171215095748&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20171215094248&txnType=01&version=5.1.0 
+2017-12-15 9:42:48, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[101]------ 摘要sha256x16 >30d6a57286aa61bfc09e86df52cf03a859b77d7848f2753ccf4858e253e8c56b 
+2017-12-15 9:42:48, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[106]------ 签名串为 >CUjAWpOzNMVlsMYy7C7g3tWKAvaZlpM/XggWMcQGQVa8HG2BKNRxWfEaOpe3WsBPDV3GErbtpHAJYbmiI2FO6eekwtKar0WHEPM1tK32lxeMUJO01eT4BDK1FcKA5ugyUb9B8925Ph5suTa8QlxnAueEdCR/1fFfnXthIvhVqxwhhbosfXP9lZXvo6R8thsa5TN62yLXaeAVAf+mDUel1w8EM5Vrp0zI4V9Nd3T/pb7Y7QYJIwwv4aGWuaOReuyZmVdNhaXiGDXPQ8J8vpuTISYjTEQt8RxgFLxiw9+nT3SEzDrNEXY8lOb9YHHSZ7YbBd01Z8SLWrqm0+zYBVfKhw== 
+2017-12-15 9:42:48, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[119]------ =====签名报文结束====== 
+2017-12-15 9:42:48, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/web/all/Component/payment/unionpay/sdk/acp_service.php ], Line[364]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://gateway.95516.com/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.1.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://msy.meishangyun.com/index.php/Purchase/Payment/returnUrl/pay_code/unionpay" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://msy.meishangyun.com/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="802440072770520" />
+    <input type="hidden" name="orderId" id="orderId" value="20171215094248914695423710614355" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20171215094248" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="1" />
+    <input type="hidden" name="payTimeout" id="payTimeout" value="20171215095748" />
+    <input type="hidden" name="certId" id="certId" value="73925732709" />
+    <input type="hidden" name="signature" id="signature" value="CUjAWpOzNMVlsMYy7C7g3tWKAvaZlpM/XggWMcQGQVa8HG2BKNRxWfEaOpe3WsBPDV3GErbtpHAJYbmiI2FO6eekwtKar0WHEPM1tK32lxeMUJO01eT4BDK1FcKA5ugyUb9B8925Ph5suTa8QlxnAueEdCR/1fFfnXthIvhVqxwhhbosfXP9lZXvo6R8thsa5TN62yLXaeAVAf+mDUel1w8EM5Vrp0zI4V9Nd3T/pb7Y7QYJIwwv4aGWuaOReuyZmVdNhaXiGDXPQ8J8vpuTISYjTEQt8RxgFLxiw9+nT3SEzDrNEXY8lOb9YHHSZ7YbBd01Z8SLWrqm0+zYBVfKhw==" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
