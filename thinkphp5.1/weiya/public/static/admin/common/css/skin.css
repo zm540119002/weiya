@@ -1377,3 +1377,88 @@ filter:alpha(opacity:0);
     display:flex;
     display:-webkit-flex;
 }
+/*视频*/
+/*图片上传2018-3-11*/
+.upload-picture-module{
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    /*margin:0.20rem 0 0;*/
+    margin:0.20rem;
+    overflow: hidden;
+}
+.upload-picture-module.apply-data-picture{
+    margin:.20rem 0 0;
+}
+
+.upload-picture-module li{
+    position:relative;
+    margin:0 2.5% 0;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+.brand-store-module li{
+    width:50%;
+    margin:0.15rem 0;
+}
+.upload-picture-module li p{
+    text-align: center;
+}
+.upload-picture-module .picture-module{
+    position:relative;
+    width:140px;
+    height:140px;
+    background: #e5e5e5;
+    overflow: hidden;
+}
+.upload-company-map .picture-module{
+    position:relative;
+    height:4rem;
+    background: #ccc;
+}
+.upload-picture-module .uploadImg,
+.upload-picture-module .uploadMultiImg ,
+.upload-company-map .uploadImg,
+.upload-picture-module .uploadImgDescribe{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.upload-picture-module .picture-module:after,
+.upload-picture-module .picture-module:before,
+.logo-license .logo:after,
+.logo-license .logo:before,
+.upload-company-map .picture-module:after,
+.upload-company-map .picture-module:before{
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    background-color: #999;
+    z-index:2;
+}
+.upload-picture-module .picture-module.active:before,
+.upload-picture-module .picture-module.active:after{
+    width:auto;
+}
+.upload-picture-module .pg_f_focus{height:4.5rem;}
+.upload-picture-module .picture-module:before,
+.upload-company-map .picture-module:before  {
+    width: 2px;
+    height: 27.5px;
+    top:38%;
+}
+.upload-picture-module .picture-module:after,
+.upload-company-map .picture-module:after{
+    width: 27.5px;
+    height: 2px;
+    top:38%;
+}
