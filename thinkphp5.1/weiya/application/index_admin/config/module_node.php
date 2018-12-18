@@ -4,36 +4,26 @@
  */
 return [
     'menu' => [
-        'goods_category'=>[
-            'id'=>100,'name'=>'商品分类','type'=>2,
+        'goods'=>[
+            'id'=>100,'name'=>'商品','type'=>2,
             'sub_menu' => [
                 ['id'=>101,'name'=>'商品分类管理','display'=>1,'controller'=>'GoodsCategory','action'=>'manage',],
+                ['id'=>102,'name'=>'商品管理','display'=>1,'controller'=>'Goods','action'=>'manage',],
             ],
         ],
-        'factory'=>[
-            'id'=>200,'name'=>'入驻审核','type'=>2,
+        'scene'=>[
+            'id'=>200,'name'=>'场景','type'=>2,
             'sub_menu' => [
-                ['id'=>201,'name'=>'厂商入驻审核','display'=>1,'controller'=>'Factory','action'=>'auditManage',],
+//                ['id'=>201,'name'=>'项目分类管理','display'=>1,'controller'=>'ProjectCategory','action'=>'manage',],
+                ['id'=>202,'name'=>'场景管理','display'=>1,'controller'=>'Scene','action'=>'manage',],
             ],
         ],
-        'brand'=>[
-            'id'=>300,'name'=>'品牌审核','type'=>2,
+        'project'=>[
+            'id'=>300,'name'=>'项目','type'=>2,
             'sub_menu' => [
-                ['id'=>301,'name'=>'厂商品牌审核','display'=>1,'controller'=>'Brand','action'=>'auditManage',],
+//                ['id'=>201,'name'=>'项目分类管理','display'=>1,'controller'=>'ProjectCategory','action'=>'manage',],
+                ['id'=>301,'name'=>'项目管理','display'=>1,'controller'=>'Project','action'=>'manage',],
             ],
         ],
-        'store'=>[
-            'id'=>400,'name'=>'店铺审核','type'=>2,
-            'sub_menu' => [
-                ['id'=>401,'name'=>'厂商店铺审核','display'=>1,'controller'=>'Store','action'=>'auditManage',],
-            ],
-        ],
-        'goods'=>[
-            'id'=>400,'name'=>'商品审核','type'=>2,
-            'sub_menu' => [
-                ['id'=>401,'name'=>'厂商店铺商品审核','display'=>1,'controller'=>'Goods','action'=>'auditManage',],
-            ],
-        ],
-
     ],
 ];

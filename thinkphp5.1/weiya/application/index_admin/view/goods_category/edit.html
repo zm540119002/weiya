@@ -1,4 +1,4 @@
-{extend name="template/base_pc.html" /}
+{extend name="template/admin_pc/page_base_admin.html" /}
 {block name="css-customize"}
 <link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
 <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
@@ -8,8 +8,8 @@
         <div class="fixed-bar">
             <div class="item-title">
                 <ul class="tab-base">
-                    <li><a href="{:url('GoodsCategory/manage')}"><span>管理</span></a></li>
-                    <li><a href="{:url('GoodsCategory/edit')}" class="current"><span>编辑</span></a></li>
+                    <li><a href="{:url('manage')}"><span>管理</span></a></li>
+                    <li><a href="{:url('edit')}" class="current"><span>编辑</span></a></li>
                 </ul>
             </div>
         </div>
@@ -105,6 +105,20 @@
                                                 <textarea class="project_description" name="remark" ></textarea>
                                             </div>
                                         </div>
+                                    <div class="goods_c_item">
+                                        <span class='goods_label_title' height=40 width="11%" align=right>分类简介：</span>
+                                        <div class= width="89%" align=left>
+                                            <textarea class="project_description" name="intro" ></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="goods_c_item">
+                                        <span class='goods_label_title' height=40 width="11%" align=right>分类标签：</span>
+                                        <div class= width="89%" align=left>
+                                            <textarea class="project_description" name="tag" >{$info.tag}</textarea>
+                                        </div>
+                                        多个标签请用逗号分隔，例如：正品保障,纳晶水光
+                                    </div>
                                         <div class="goods_c_item">
                                             <span class='goods_label_title' height=40 width="11%" align=right>分类图片：</span>
                                             <div class="type_img_box" width="89%" >
@@ -172,6 +186,20 @@
                                                 <textarea class="project_description" name="remark" >{$info.remark}</textarea>
                                             </div>
                                         </div>
+                                    <div class="goods_c_item">
+                                        <span class='goods_label_title' height=40 width="11%" align=right>分类简介：</span>
+                                        <div class= width="89%" align=left>
+                                            <textarea class="project_description" name="intro" >{$info.intro}</textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="goods_c_item">
+                                        <span class='goods_label_title' height=40 width="11%" align=right>分类标签：</span>
+                                        <div class= width="89%" align=left>
+                                            <textarea class="project_description" name="tag" >{$info.tag}</textarea>
+                                        </div>
+                                        多个标签请用逗号分隔，例如：正品保障,纳晶水光
+                                    </div>
                                         <div class="goods_c_item">
                                             <span class='goods_label_title' height=40 width="11%" align=right>分类图片：</span>
                                             <div class="type_img_box" width="89%" >
@@ -240,7 +268,7 @@
                     dialog.msg(msg,'',function () {
                         location.href= window.history.go(-1);
                     });
-                },'json');
+                });
             });
 
             //一级、二级-联动
@@ -271,17 +299,13 @@
                 reader.readAsDataURL(img);
                 reader.onload = function(e){
                     $(".img").attr("src",e.target.result);
-                    var postData = {img: e.target.result};
-                    postData.imgWidth = 190;
-                    var url = controller + 'uploadImgToTemp';
+                    var postData = {fileBase64: e.target.result};
+                    var url = controller + 'uploadFileToTemp';
                     //提交
                     $.post(url,postData,function(msg){
-                        if(msg.status == 1){
-                            $(".img").attr("src",UPLOAD + msg.info);
-                            $("[name=img]").val(msg.info);
-                        }
-                        dialog.msgLocal(msg);
-                    },'json');
+                        $(".img").attr("src",'/uploads/' + msg.info);
+                        $("[name=img]").val(msg.info);
+                    });
                 }
             });
         });

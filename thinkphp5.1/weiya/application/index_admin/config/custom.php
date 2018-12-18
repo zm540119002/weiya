@@ -15,4 +15,11 @@
 
 return [
     'title' => '公共管理后台',
+    'on_off_line' =>[
+        '1','2'
+    ],
+    'default_page_size'=>10,
+
+    
 ];
+

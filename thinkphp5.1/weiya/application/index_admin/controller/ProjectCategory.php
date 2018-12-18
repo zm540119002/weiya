@@ -1,13 +1,13 @@
 <?php
 namespace app\index_admin\controller;
 
-class GoodsCategory extends Base
+class ProjectCategory extends Base
 {
     /**商品分类-管理
      */
     public function manage(){
         if(request()->isAjax()){
-            $model = new \app\index_admin\model\GoodsCategory();
+            $model = new \app\index_admin\model\ProjectCategory();
             $where = [
                 'status' => 0,
             ];
@@ -35,7 +35,7 @@ class GoodsCategory extends Base
     /**商品分类-编辑
      */
     public function edit(){
-        $model = new \app\index_admin\model\GoodsCategory();
+        $model = new \app\index_admin\model\ProjectCategory();
         if(request()->isPost()){
             return $model->edit();
         }else{
@@ -61,7 +61,7 @@ class GoodsCategory extends Base
         if(!request()->isGet()){
             return config('custom.not_get');
         }
-        $model = new \app\index_admin\model\GoodsCategory();
+        $model = new \app\index_admin\model\ProjectCategory();
         $where = [
 			['status', '=', 0],
 			['level', '=', 1],
@@ -88,7 +88,7 @@ class GoodsCategory extends Base
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index_admin\model\GoodsCategory();
+        $model = new \app\index_admin\model\ProjectCategory();
         $id = input('post.id',0,'int');
         $level = input('post.level',0,'int');
         if($level == 1){
@@ -123,7 +123,7 @@ class GoodsCategory extends Base
             ];
         }elseif($level == 3){
             $condition = [
-                ['id', '=',$id]
+               ['id', '=',$id]
             ];
         }else{
             return errorMsg('失败');
