@@ -123,6 +123,7 @@ class Goods extends \common\controller\Base{
                 ['goods_id','=',$id],
             ];
             $averageScore = $modelComment -> where($where)->avg('score');
+            $averageScore = round($averageScore,2);
             $this ->assign('averageScore',$averageScore);
             $total = $modelComment -> where($where)->count('user_id');
             $this ->assign('total',$total);
