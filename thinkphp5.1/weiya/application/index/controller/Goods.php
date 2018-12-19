@@ -124,7 +124,7 @@ class Goods extends \common\controller\Base{
             ];
             $averageScore = $modelComment -> where($where)->avg('score');
             $this ->assign('averageScore',$averageScore);
-            $total = $model -> where($where)->count('user_id');
+            $total = $modelComment -> where($where)->count('user_id');
             $this ->assign('total',$total);
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
