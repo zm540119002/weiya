@@ -1338,6 +1338,10 @@ filter:alpha(opacity:0);
 .selected_goods_list img{
 	max-width:50px;
 }
+.confirm_add{
+	background: #4898d5;
+	color:#fff;
+}
 .scroller-container li{
 	padding:15px 0;
 }
@@ -1367,6 +1371,7 @@ filter:alpha(opacity:0);
 .selected_goods_list{
 	overflow:hidden;
 	border-bottom:1px solid #d9d9d9;
+	padding-bottom:20px;
 }
 .selected_goods_list li{
 	width:160px;
