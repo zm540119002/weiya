@@ -3437,12 +3437,12 @@ input[type=text]::-webkit-focus-inner {
     margin-top:3rem;
 }
 .content_main .list img{
-    width: 1.5rem;
+    /*width: 1.5rem;*/
     /*height: 1.5rem;*/
     /*margin:0 0 0 0.14rem;*/
 }
 .list_r{
-    margin:0 0 0 2.8rem;
+    margin:0.08rem 0 0 2.8rem;
     color:#575757 ;
 }
 .content_main .list .info_r{
@@ -3854,7 +3854,7 @@ select[name="nodeIds"]{
 .news_list_wrapper{
     height:.6rem;
     overflow:hidden;
-    padding:0 .4rem 0 1.8rem;
+    padding:0 .55rem 0 1.8rem;
 }
 .scroll_news .news_item{
     height:.5rem;
@@ -3863,7 +3863,7 @@ select[name="nodeIds"]{
 }
 .scroll_news .news_item a{
     display:block;
-    width:210px;
+    /*width:210px;*/
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
@@ -3874,9 +3874,9 @@ select[name="nodeIds"]{
 .scroll_news .news_more{
     position:absolute;
     top:.14rem;
-    right:0;
+    right:0.10rem;
     display:block;
-    padding:0 0 0 0;
+    padding:0 0 0 0.10rem;
     border-left:1px solid #d9d9d9;
 }
 .new_share_wrap{
@@ -4150,6 +4150,7 @@ select[name="nodeIds"]{
     position:fixed;
     left:0;
     top:0;
+    box-sizing: border-box;
 }
 /*.nav_menu li{
     display: inline-block;
@@ -4557,6 +4558,7 @@ select[name="nodeIds"]{
     margin:0.12rem 0 0.15rem 0;
 }
 .weiya_map{
+    width:100%;
     height:4.5rem;
     margin:0.15rem 0 0;
 }
