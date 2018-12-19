@@ -1317,7 +1317,7 @@ filter:alpha(opacity:0);
 }
 /*添加产品弹窗*/
 .recommendGoods_content{
-	padding:0 0 0 50px;
+	padding:0 0 0 20px;
 }
 .thead_title{
 	border-bottom:1px solid #d9d9d9;
@@ -1366,17 +1366,19 @@ filter:alpha(opacity:0);
 }
 .selected_goods_list{
 	overflow:hidden;
+	border-bottom:1px solid #d9d9d9;
 }
 .selected_goods_list li{
+	width:160px;
 	position:relative;
 	margin:40px 20px 0 0;
 	float:left;
 	border:1px solid #d9d9d9;
 }
-.selected_goods_list li a{
-	position:absolute;
-	top:-22px;
-	right:0px;
+.selected_goods_list li a {
+    position: absolute;
+    top: -13px;
+    right: -8px;
 }
 .selected_goods_list .goods_name{
 	max-width:150px;
