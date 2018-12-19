@@ -1317,7 +1317,7 @@ filter:alpha(opacity:0);
 }
 /*添加产品弹窗*/
 .recommendGoods_content{
-	padding:0 0 0 50px;
+	padding:0 0 0 20px;
 }
 .thead_title{
 	border-bottom:1px solid #d9d9d9;
@@ -1368,6 +1368,7 @@ filter:alpha(opacity:0);
 	overflow:hidden;
 }
 .selected_goods_list li{
+	width:160px;
 	position:relative;
 	margin:40px 20px 0 0;
 	float:left;
