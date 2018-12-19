@@ -493,7 +493,7 @@ abstract class Connection
 
         // 记录当前字段属性大小写设置
         $this->attrCase = $params[PDO::ATTR_CASE];
-
+print_r($config);exit;
         try {
             if (empty($config['dsn'])) {
                 $config['dsn'] = $this->parseDsn($config);
