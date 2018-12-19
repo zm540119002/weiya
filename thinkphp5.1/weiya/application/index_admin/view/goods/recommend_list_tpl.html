@@ -1,0 +1,27 @@
+{notempty name="list"}
+<div class="mod-part-title">
+    <div class="mod-part-title-wrap">
+        <span class="icon-title left"></span>
+        <span class="title">推荐商品</span>
+        <span class="icon-title right"></span>
+    </div>
+</div>
+<ul class="columns_flex flex-both-side goods-content-list">
+    {volist name="list" id="info"}
+    <li data-id="{$info.goods_id}">
+        <a class="" href="{:url('detail',['goods_id'=>$info.goods_id])}">
+            {empty name="info.thumb_img"}
+            <img src="public_img/default/no_pic_100.jpg" alt="">
+            {else /}
+            <img src="public_uploads/{$info.thumb_img}" alt="">
+            {/empty}
+        </a>
+        <p class="text-intro">{$info.headline}</p>
+        <div class="columns_flex l-r-sides">
+            <span class="pink">￥<price>{$info.bulk_price}</price></span>
+            <a href="javascript:void(0);" class="shopping-cart">购物车</a>
+        </div>
+    </li>
+    {/volist}
+</ul>
+{/notempty}
