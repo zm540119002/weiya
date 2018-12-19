@@ -472,6 +472,32 @@ class Goods extends Base {
         return view('goods/selected_list');
     }
 
+    /**获取推荐商品
+     * @return array|\think\response\View
+     */
+    public function getRecommendGoods1(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $goodsId = input('get.goods_id/d');
+        //相关推荐商品
+        $modelRecommendGoods = new \app\index\model\RecommendGoods();
+        $config =[
+            'where' => [
+                ['rg.status', '=', 0],
+                ['rg.goods_id', '=', $goodsId],
+            ],'field'=>[
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+            ],'join'=>[
+                ['goods g','g.id = rg.recommend_goods_id','left']
+            ]
+        ];
+        $list= $modelRecommendGoods->getList($config);
+        $this->assign('list',$list);
+        return view('goods/recommend_list_tpl');
+    }
+
     /**
      * @return mixed
      * 商品预览
@@ -489,7 +515,7 @@ class Goods extends Base {
             'field'=>[
                 'g.id','g.name','g.headline','g.minimum_order_quantity','g.minimum_sample_quantity','g.bulk_price','g.sample_price',
                 'g.specification','g.specification','g.specification_unit','g.intro','g.parameters','g.main_img','g.thumb_img','g.shelf_status','g.create_time','g.category_id_1',
-                'g.detail_img','g.tag','gc1.name as category_name_1','g.purchase_unit'
+                'g.detail_img','g.tag','gc1.name as category_name_1','g.purchase_unit','g.rq_code_url'
             ],
             'join' => [
                 ['goods_category gc1','gc1.id = g.category_id_1'],
