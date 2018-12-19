@@ -4150,6 +4150,7 @@ select[name="nodeIds"]{
     position:fixed;
     left:0;
     top:0;
+    color:#ff0000;
     box-sizing: border-box;
 }
 /*.nav_menu li{
