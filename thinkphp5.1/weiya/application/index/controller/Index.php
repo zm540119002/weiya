@@ -7,8 +7,6 @@ class Index extends \common\controller\Base{
     public function index(){
         //获取商品的分类
         $modelGoodsCategory = new \app\index\model\GoodsCategory();
-        print_r($modelGoodsCategory);
-        exit;
         $config =[
             'where' => [
                 ['status', '=', 0],
