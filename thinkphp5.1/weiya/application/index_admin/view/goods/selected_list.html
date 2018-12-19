@@ -1,9 +1,9 @@
 
-{volist name="list" id="vo"}
-<li data-goods-id="{$vo.id}">
+{volist name="list" id="info"}
+<li data-goods-id="{$info.id}">
     <a href="javascript:void(0);" class="close-btn">X</a>
     <div>
-        <img src="public_uploads/{thumb_img}" alt="" class="left">
+        <img src="public_uploads/{$info.thumb_img}" alt="" class="left">
         <p class="goods_name">{$vo.name}</p>
     </div>
 </li>
