@@ -1,4 +1,16 @@
-
+{notempty name='list'}
+<div class="search-result">
+    <table class="table tb-type2">
+        <thead>
+        <tr class="thead">
+            <th></th>
+            <th width="10%">排序</th>
+            <th width="20%">名称</th>
+            <th width="40%">说明</th>
+            <th width="20%">操作</th>
+        </tr>
+        </thead>
+        <tbody >
         {notempty name='list'}
         {volist name="list" id="vo"}
         <tr class="hover" data-level="{$vo.level}" data-id="{$vo.id}" data-parent-id-1="{$vo.parent_id_1}">
@@ -22,4 +34,16 @@
         {/volist}
         {else/}
         {/notempty}
-      
+        </tbody>
+        <tfoot>
+        <tr class="tfoot">
+            <td><input type="checkbox" class="check_all_2" id="check_all_2"></td>
+            <td id="batchAction" colspan="15">
+                <span class="all_checkbox"><label for="check_all_2">全选</label></span>&nbsp;&nbsp;
+                <a href="JavaScript:void(0);" class="batchDel" ><span>批量删除</span></a>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+{/notempty}
