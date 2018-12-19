@@ -4150,6 +4150,7 @@ select[name="nodeIds"]{
     position:fixed;
     left:0;
     top:0;
+    box-sizing: border-box;
 }
 /*.nav_menu li{
     display: inline-block;
@@ -4555,4 +4556,8 @@ select[name="nodeIds"]{
 }
 .c_mobile p:first-child{
     margin:0.12rem 0 0.15rem 0;
+}
+.weiya_map{
+    height:4.5rem;
+    margin:0.15rem 0 0;
 }
