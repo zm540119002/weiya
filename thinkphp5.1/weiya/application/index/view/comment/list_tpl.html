@@ -1,52 +1,4 @@
 {notempty name='list'}
-{if $nextPage==2}
-<div class="goods_star_score"  >
-    <div class="five_star">
-        <div class="star_img">
-            <img src="public_img/starred.png" id="0">
-            <img src="public_img/starred.png" id="1">
-            <img src="public_img/starred.png" id="2">
-            <img src="public_img/star.png" id="3">
-            <img src="public_img/star.png" id="4">
-        </div>
-        <span class="fraction" data-score="3.9">{$averageScore}分</span>
-    </div>
-    <a href="javascript:void(0);" class="comment_num">{$total}人评论</a>
-</div>
-<ul class="sales_comment_wrapper">
-    {volist name="list" id="info"}
-    <li>
-        <div class="">
-            <div class="columns_flex l-r-sides">
-                <div>
-                    <img src="" alt="">
-                    <span>{$info.name}</span>
-                </div>
-                <div>
-                    {$info.create_time}
-                </div>
-            </div>
-            <div class="store_score_star five_star">
-                <div class="star_img empty_star">
-                    <span class="real_star"></span>
-                </div>
-            </div>
-            <p>{$info.content}</p>
-            {notempty name="info.img"}
-            <div class="cmt_att">
-                {volist name="info.img" id="img"}
-                <span class="img">
-                    <img src="public_uploads/{$img}" alt="">
-                </span>
-                {/volist}
-            </div>
-            {/notempty}
-        </div>
-    </li>
-    {/volist}
-</ul>
-<div class="page"><a class="comment-next-page" href="javascript:void(0);" data-page="{$nextPage}">加载更多&nbsp;V</a></div>
-{else /}
     {volist name="list" id="info"}
     <li>
         <div>
@@ -78,7 +30,6 @@
     </li>
     {/volist}
     <!--<li class="page"><a class="comment-next-page" href="javascript:void(0);" data-page="{$nextPage}">加载更多&nbsp;V</a></li>-->
-{/if}
 {else /}
 {/notempty}
 <script>
