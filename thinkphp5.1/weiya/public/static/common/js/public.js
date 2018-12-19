@@ -7,7 +7,7 @@
     }
     $.fn.moreText = function(options){
         var defaults = {
-            maxLength:110,
+            maxLength:102,
             mainCell:".branddesc",
             openBtn:'显示全部>',
             closeBtn:'收起'
