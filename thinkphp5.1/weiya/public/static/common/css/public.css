@@ -3442,7 +3442,7 @@ input[type=text]::-webkit-focus-inner {
     /*margin:0 0 0 0.14rem;*/
 }
 .list_r{
-    margin:0 0 0 2.8rem;
+    margin:0.08rem 0 0 2.8rem;
     color:#575757 ;
 }
 .content_main .list .info_r{
@@ -4150,6 +4150,7 @@ select[name="nodeIds"]{
     position:fixed;
     left:0;
     top:0;
+    box-sizing: border-box;
 }
 /*.nav_menu li{
     display: inline-block;
