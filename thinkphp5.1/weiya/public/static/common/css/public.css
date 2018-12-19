@@ -3885,8 +3885,15 @@ select[name="nodeIds"]{
 .new_select_wrap{
     background:#efefef;
 }
+.new_select_wrap .list_wrapper{
+    padding:0 0.15rem;
+}
 .select_more_wrap{
     padding:60px 0 0;
+}
+.recommendGoodsList{
+    padding:0 0.15rem 0.45rem 0.15rem;
+    background: #f2f2f2;
 }
 .mod-part-title {
     position: relative;

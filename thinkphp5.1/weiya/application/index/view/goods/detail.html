@@ -166,12 +166,12 @@
 					<ul class="sales_comment_wrapper" id="commentList">
 
 					</ul>
-					<div class="page"><a class="comment-next-page" href="javascript:void(0);" data-page="{$nextPage}">加载更多&nbsp;V</a></div>
+					<div class="page"><a class="comment-next-page" href="javascript:void(0);" data-page="{$nextPage}">加载更多评论&nbsp;V</a></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div id="recommendGoodsList"></div>
+	<div id="recommendGoodsList" class="recommendGoodsList"></div>
 
 </article>
 <div class="mod_slider_mask" id="blackCover" style="display:none;"></div>
@@ -346,8 +346,10 @@
 		});
 		//活动倒计时
 		var date=getWeek(5);
-		console.log(date);
 		countDown(date,$('#countDownBox'));
+		//设置分数
+		var averageScore = {$averageScore};
+		$('.five_star').setStar(parseFloat(averageScore));
 
 	// 	var endYear=new Date().getFullYear();
     // var endMonth=new Date().getMonth();
