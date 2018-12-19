@@ -21,4 +21,6 @@ $(document).ready(function(){
             $('[name=category_id_3]').append(childMenu.clone());
         }
     });
+    var h = document.documentElement.clientHeight || document.body.clientHeight;
+    $('.Hui-article-box').css('height',(h-50)+'px').addClass('scrollContainer');
 });
