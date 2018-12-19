@@ -348,6 +348,9 @@
 		var date=getWeek(5);
 		console.log(date);
 		countDown(date,$('#countDownBox'));
+		//设置分数
+		var averageScore = {$averageScore};
+		$('.five_star').setStar(parseFloat(averageScore));
 
 	// 	var endYear=new Date().getFullYear();
     // var endMonth=new Date().getMonth();
