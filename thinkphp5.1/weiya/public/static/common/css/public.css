@@ -3893,6 +3893,7 @@ select[name="nodeIds"]{
 }
 .recommendGoodsList{
     padding:0 0.15rem 0.45rem 0.15rem;
+    background: #f2f2f2;
 }
 .mod-part-title {
     position: relative;
