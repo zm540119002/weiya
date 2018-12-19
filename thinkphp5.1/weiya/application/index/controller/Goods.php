@@ -116,12 +116,13 @@ class Goods extends \common\controller\Base{
             $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
             $this->assign('info',$info);
-            
+
+            $modelComment = new \app\index\model\Comment();
             $where = [
                 ['status','=',0],
                 ['goods_id','=',$id],
             ];
-            $averageScore = $model -> where($where)->avg('score');
+            $averageScore = $modelComment -> where($where)->avg('score');
             $this ->assign('averageScore',$averageScore);
             $total = $model -> where($where)->count('user_id');
             $this ->assign('total',$total);
