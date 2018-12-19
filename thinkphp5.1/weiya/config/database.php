@@ -15,7 +15,7 @@ return [
     // 服务器地址
     'hostname'        => '127.0.0.1',
     // 数据库名
-    'database'        => 'msy',
+    'database'        => 'weiya',
     // 用户名
     'username'        => 'root',
     // 密码
@@ -57,42 +57,6 @@ return [
         'type'        => 'mysql',// 数据库类型
         'hostname'    => '127.0.0.1',// 服务器地址
         'database'    => 'common',// 数据库名
-        'username'    => 'root',// 数据库用户名
-        'password'    => 'msy',// 数据库密码
-        'charset'     => 'utf8',// 数据库编码默认采用utf8
-    ],
-    //数据库配置-供应商
-    'db_config_factory' => [
-        'type'        => 'mysql',// 数据库类型
-        'hostname'    => '127.0.0.1',// 服务器地址
-        'database'    => 'msy_factory',// 数据库名
-        'username'    => 'root',// 数据库用户名
-        'password'    => 'msy',// 数据库密码
-        'charset'     => 'utf8',// 数据库编码默认采用utf8
-    ],
-    //数据库配置-美容店家
-    'db_config_store' => [
-        'type'        => 'mysql',// 数据库类型
-        'hostname'    => '127.0.0.1',// 服务器地址
-        'database'    => 'msy_store',// 数据库名
-        'username'    => 'root',// 数据库用户名
-        'password'    => 'msy',// 数据库密码
-        'charset'     => 'utf8',// 数据库编码默认采用utf8
-    ],
-    //数据库配置-云推客
-    'db_config_twitter' => [
-        'type'        => 'mysql',// 数据库类型
-        'hostname'    => '127.0.0.1',// 服务器地址
-        'database'    => 'twitter',// 数据库名
-        'username'    => 'root',// 数据库用户名
-        'password'    => 'msy',// 数据库密码
-        'charset'     => 'utf8',// 数据库编码默认采用utf8
-    ],
-    //数据库配置-商城
-    'db_config_mall' => [
-        'type'        => 'mysql',// 数据库类型
-        'hostname'    => '127.0.0.1',// 服务器地址
-        'database'    => 'mall',// 数据库名
         'username'    => 'root',// 数据库用户名
         'password'    => 'msy',// 数据库密码
         'charset'     => 'utf8',// 数据库编码默认采用utf8
