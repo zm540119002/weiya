@@ -3884,6 +3884,7 @@ select[name="nodeIds"]{
 }
 .new_select_wrap{
     background:#efefef;
+    padding:0 0.15rem;
 }
 .select_more_wrap{
     padding:60px 0 0;

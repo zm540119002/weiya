@@ -28,65 +28,67 @@
 		</div>
 	</section>
 
-	<section class="content_main content-padding">
-		<div>
-			<div class="scroll_news">
-				<a class="news_tit">
-					<img src="public_img/wy_logo.png" alt="">
-				</a>
-				<div class="news_list_wrapper">
-					<ul class="news_list j_scroll_news">
-						<li class="news_item">
-							<a>
-								<span class="red">最新</span>维雅品牌定制平台正式上线啦！
-							</a>
-						</li>
-						<li class="news_item">
-							<a>
-								<span class="red">hot</span>利润为王,品牌定制是捷径！
-							</a>
-						</li>
-					</ul>
-				</div>
-				<a class="news_more">更多</a>
-			</div>
-		</div>
-		<div class="scene_wrapper">
-			{volist name="sceneList" id="info" }
-			<div class="graphic_item graphic_item_65 img{$key}" >
-				<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
-					<div class="show-img">
-						{empty name="info.thumb_img"}
-						<img src="public_img/default/no_pic_100.jpg" alt="">
-						{else /}
-						<img src="public_uploads/{$info.thumb_img}" alt="">
-						{/empty}
-					</div>
-				</a>
-			</div>
-			{/volist}
-		</div>
-		<div class="project_wrapper">
-			<div class="mod-part-title">
-				<div class="mod-part-title-wrap">
-					<span class="icon-title left"></span>
-					<span class="title">精选项目</span>
-					<span class="icon-title right"></span>
-				</div>
-			</div>
-			<ul>
-				{volist name="projectList" id="info" }
-				<li data-id="{$info.id}">
-					<a href="{:url('Project/detail',['id'=>$info.id])}">
-						{empty name="info.thumb_img"}
-						<img src="public_img/default/no_pic_1000.jpg" alt="">
-						{else /}
-						<img src="public_uploads/{$info.thumb_img}" alt="">
-						{/empty}
+	<section class="content_main">
+		<div class="content-padding">
+			<div>
+				<div class="scroll_news">
+					<a class="news_tit">
+						<img src="public_img/wy_logo.png" alt="">
 					</a>
-				</li>
+					<div class="news_list_wrapper">
+						<ul class="news_list j_scroll_news">
+							<li class="news_item">
+								<a>
+									<span class="red">最新</span>维雅品牌定制平台正式上线啦！
+								</a>
+							</li>
+							<li class="news_item">
+								<a>
+									<span class="red">hot</span>利润为王,品牌定制是捷径！
+								</a>
+							</li>
+						</ul>
+					</div>
+					<a class="news_more">更多</a>
+				</div>
+			</div>
+			<div class="scene_wrapper">
+				{volist name="sceneList" id="info" }
+				<div class="graphic_item graphic_item_65 img{$key}" >
+					<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
+						<div class="show-img">
+							{empty name="info.thumb_img"}
+							<img src="public_img/default/no_pic_100.jpg" alt="">
+							{else /}
+							<img src="public_uploads/{$info.thumb_img}" alt="">
+							{/empty}
+						</div>
+					</a>
+				</div>
 				{/volist}
-			</ul>
+			</div>
+			<div class="project_wrapper">
+				<div class="mod-part-title">
+					<div class="mod-part-title-wrap">
+						<span class="icon-title left"></span>
+						<span class="title">精选项目</span>
+						<span class="icon-title right"></span>
+					</div>
+				</div>
+				<ul>
+					{volist name="projectList" id="info" }
+					<li data-id="{$info.id}">
+						<a href="{:url('Project/detail',['id'=>$info.id])}">
+							{empty name="info.thumb_img"}
+							<img src="public_img/default/no_pic_1000.jpg" alt="">
+							{else /}
+							<img src="public_uploads/{$info.thumb_img}" alt="">
+							{/empty}
+						</a>
+					</li>
+					{/volist}
+				</ul>
+			</div>
 		</div>
 		<div class="new_select_wrap">
 			<section class="">
