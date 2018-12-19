@@ -432,6 +432,7 @@ function calculateTotalPrice(obj){
         });
         $('.goodsInfoLayer footer').find('price').html(amount.toFixed(2));
     }else{
+        console.log(1);
         var _thisLis = $('ul.goods_list').find('li');
         $.each(_thisLis,function(index,val){
             var _thisLi = $(this);
