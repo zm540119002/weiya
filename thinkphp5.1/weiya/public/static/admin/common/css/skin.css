@@ -1390,7 +1390,9 @@ filter:alpha(opacity:0);
 .upload-picture-module.apply-data-picture{
     margin:.20rem 0 0;
 }
-
+.scrollContainer {
+    overflow-y: auto;
+}
 .upload-picture-module li{
     position:relative;
     margin:0 2.5% 0;
