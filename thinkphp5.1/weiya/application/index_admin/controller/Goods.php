@@ -515,7 +515,7 @@ class Goods extends Base {
             'field'=>[
                 'g.id','g.name','g.headline','g.minimum_order_quantity','g.minimum_sample_quantity','g.bulk_price','g.sample_price',
                 'g.specification','g.specification','g.specification_unit','g.intro','g.parameters','g.main_img','g.thumb_img','g.shelf_status','g.create_time','g.category_id_1',
-                'g.detail_img','g.tag','gc1.name as category_name_1','g.purchase_unit'
+                'g.detail_img','g.tag','gc1.name as category_name_1','g.purchase_unit','g.rq_code_url'
             ],
             'join' => [
                 ['goods_category gc1','gc1.id = g.category_id_1'],
