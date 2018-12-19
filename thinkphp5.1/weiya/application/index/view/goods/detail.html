@@ -150,13 +150,29 @@
 			<div id="item3" class="floor">
 				<div class="floor_item" >
 					<p>评分评价</p>
-					<div id="commentList">
-
+					<div class="goods_star_score"  >
+						<div class="five_star">
+							<div class="star_img">
+								<img src="public_img/starred.png" id="0">
+								<img src="public_img/starred.png" id="1">
+								<img src="public_img/starred.png" id="2">
+								<img src="public_img/star.png" id="3">
+								<img src="public_img/star.png" id="4">
+							</div>
+							<span class="fraction" data-score="3.9">{$averageScore}分</span>
+						</div>
+						<a href="javascript:void(0);" class="comment_num">{$total}人评论</a>
 					</div>
+					<ul class="sales_comment_wrapper" id="commentList">
+
+					</ul>
+					<div class="page"><a class="comment-next-page" href="javascript:void(0);" data-page="{$nextPage}">加载更多&nbsp;V</a></div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div id="recommendGoodsList"></div>
+
 </article>
 <div class="mod_slider_mask" id="blackCover" style="display:none;"></div>
 <div class="mod_slider mod_slider_s1 mod_slider_viewer" id="evalLoopImg" style="display:none;height: 375px;">
