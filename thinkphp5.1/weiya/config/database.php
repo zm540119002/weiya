@@ -69,8 +69,5 @@ return [
         'username'    => 'root',// 数据库用户名
         'password'    => 'msy',// 数据库密码
         'charset'     => 'utf8',// 数据库编码默认采用utf8
-        'break_match_str' => [
-            'error with',
-        ],
     ],
 ];
