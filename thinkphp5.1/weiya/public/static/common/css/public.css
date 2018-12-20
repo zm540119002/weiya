@@ -2931,6 +2931,10 @@ input[type=text]::-webkit-focus-inner {
     background-repeat: no-repeat;
     background-position:center;
 }
+.flexd{
+	position: fixed;
+	width: 100%;
+}
 .add_num{
     position: absolute;
     padding: 2px 3px;
