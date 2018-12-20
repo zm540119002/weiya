@@ -306,7 +306,7 @@
         var id = {$info.id};
         $.ajax({
             url: url,
-            data: {goods_id:id},
+            data: {goods_id:id,type:'preview'},
             type: 'get',
             beforeSend: function(){
                 $('.loading').show();

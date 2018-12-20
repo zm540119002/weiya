@@ -448,17 +448,18 @@ class Goods extends Base {
      * 获取 商品相关推荐商品
      * @return array|\think\response\View
      */
-    public function getRecommendGoods(){
+    public function getRecommendGood22s(){
         if(!request()->get()){
             return errorMsg('参数有误');
         }
-        if(!input('?get.goodsId') || !input('get.goodsId/d')){
+        if(!input('?get.goods_id') || !input('get.goods_id/d')){
             $this ->error('参数有误');
         }
-        $goodsId = input('get.goodsId/d');
+        $goodsId = input('get.goods_id/d');
         $model = new \app\index_admin\model\RecommendGoods();
         $config = [
             'where' => [
+                ['rg.status', '=', 0],
                 ['rg.goods_id','=',$goodsId],
             ],'join' => [
                 ['goods g','g.id = rg.recommend_goods_id','left'],
@@ -475,9 +476,12 @@ class Goods extends Base {
     /**获取推荐商品
      * @return array|\think\response\View
      */
-    public function getRecommendGoods1(){
+    public function getRecommendGoods(){
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
+        }
+        if(!input('?get.goods_id') || !input('get.goods_id/d')){
+            $this ->error('参数有误');
         }
         $goodsId = input('get.goods_id/d');
         //相关推荐商品
@@ -495,7 +499,14 @@ class Goods extends Base {
         ];
         $list= $modelRecommendGoods->getList($config);
         $this->assign('list',$list);
-        return view('goods/recommend_list_tpl');
+        $type = input('get.type');
+        if($type == 'add'){
+            return view('goods/selected_list');
+        }
+        if($type == 'preview'){
+            return view('goods/recommend_list_tpl');
+        }
+
     }
 
     /**
