@@ -338,10 +338,10 @@
 					skin:'shareqrCodeLayer',
 					content:'<img src='+imgSrc+' />',
 					btn:['X'],
-					end:function(){
+					yes:function(index){
 						$("body").removeClass("flexd");//取消绝对定位
 						$("body").scrollTop(scrollTop);//滚动条回到停留位置
-
+						layer.close(index);
 					}
 				})
 			}
