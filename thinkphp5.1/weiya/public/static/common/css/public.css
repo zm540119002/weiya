@@ -2943,6 +2943,17 @@ input[type=text]::-webkit-focus-inner {
     pointer-events: none;
     z-index: 30;
 }
+@keyframes de_add_num
+{
+	from {top:-22px;}
+	to {top:-26px;}
+}
+
+@-webkit-keyframes de_add_num /*Safari and Chrome*/
+{
+	from {top:-22px;}
+	to {top:-26px;}
+}
 .friday_end{
     text-align:center;
 }

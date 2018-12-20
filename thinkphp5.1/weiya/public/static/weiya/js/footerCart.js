@@ -75,9 +75,11 @@ $(function () {
                 $('.loading').hide();
                 if(data.status==0){
                     dialog.error(data.info);
-                }else if(data.code==1 && data.data=='no_login'){
-					loginDialog();
-				}else{
+                }
+                // else if(data.code==1 && data.data=='no_login'){
+				// 	loginDialog();
+				// }
+                else{
                      dialog.success(data.info);
                     var num = 0;
                     $.each(lis,function(){
@@ -85,7 +87,11 @@ $(function () {
                     });
                     //parseInt($('footer').find('num').text())+parseInt(num)
                     $('footer').find('.cart_num').text(num);
-                    $('footer').find('.add_num').show().css('opacity','0');
+                    $('footer').find('.add_num').css({
+                        'display':'block',
+                        'opacity':0,
+                        'webkitAnimation':de_add_num 2s,
+                    });
                     
                 }
             }
