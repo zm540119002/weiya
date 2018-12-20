@@ -87,7 +87,7 @@ $(function () {
                     });
                     //parseInt($('footer').find('num').text())+parseInt(num)
                     $('footer').find('.cart_num').text(num);
-                    $('footer').find('.add_num').text(num).addClass('current');
+                    $('footer').find('.add_num').text('+'+num).addClass('current');
                     setTimeout(function(){
                         $('.add_num').removeClass('current');
                     },2000)

@@ -2955,13 +2955,13 @@ input[type=text]::-webkit-focus-inner {
 @keyframes de_add_num
 {
 	from {top:-22px;}
-	to {top:-35px;}
+	to {top:-40px;}
 }
 
 @-webkit-keyframes de_add_num /*Safari and Chrome*/
 {
 	from {top:-22px;}
-	to {top:-35px;}
+	to {top:-40px;}
 }
 .friday_end{
     text-align:center;
