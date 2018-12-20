@@ -442,7 +442,7 @@ class Goods extends Base {
         $this->assign('list',$list);
         return view('goods/selected_list');
     }
-    
+
     /**获取推荐商品
      * @return array|\think\response\View
      */
