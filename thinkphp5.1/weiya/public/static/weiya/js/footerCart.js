@@ -77,7 +77,8 @@ $(function () {
                     dialog.error(data.info);
                 }else if(data.code==1 && data.data=='no_login'){
 					loginDialog();
-				}else{
+				}
+                else{
                      dialog.success(data.info);
                     var num = 0;
                     $.each(lis,function(){
@@ -85,6 +86,11 @@ $(function () {
                     });
                     //parseInt($('footer').find('num').text())+parseInt(num)
                     $('footer').find('.cart_num').text(num);
+                    $('footer').find('.add_num').text(num).addClass('current');
+                    setTimeout(function(){
+                        $('.add_num').removeClass('current');
+                    },2000)
+                    
                 }
             }
         });

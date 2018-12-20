@@ -71,7 +71,7 @@
 								<div>
 									<span class="left count-down-icons"></span>
 									<div class="d-r">
-										<p class="">品牌定制.周五截止</p>
+										<p class="friday_end">品牌定制.周五截止</p>
 										<div id="countDownBox" class="count_down_box">
 											<span class="day"></span>天
 											<span class="hour"></span>小时
@@ -333,6 +333,17 @@
 				layer.open({
 					skin:'shareqrCodeLayer',
 					content:'<img src='+imgSrc+' />',
+					btn:['X'],
+					success:function(){
+						var scrollTop = $(document).scrollTop();//获取当前滚动条位置
+						$("body").addClass("flexd");//设置绝对定位，此时不操作的话底层页面回到最初位置
+						$("body").css("top",-scrollTop);//设置top属性确保屏幕显示滚动条的当前位置
+					},
+					yes:function(index){
+						$("body").removeClass("flexd");//取消绝对定位
+						$("body").scrollTop(scrollTop);//滚动条回到停留位置
+						layer.close(index);
+					}
 				})
 			}
 		});
@@ -342,12 +353,6 @@
 		//设置分数
 		var averageScore = {$averageScore};
 		$('.five_star').setStar(parseFloat(averageScore));
-
-	// 	var endYear=new Date().getFullYear();
-    // var endMonth=new Date().getMonth();
-    // var endDay=new Date().getDate();
-    // var endTime2=new Date(endYear,endMonth,endDay);
-	// console.log(endTime2);
 	});
 </script>
 {/block}

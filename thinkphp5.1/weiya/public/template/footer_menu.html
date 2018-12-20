@@ -18,7 +18,7 @@
                 {if $vo.class=='amount'}
                 <span class="amount">￥<price>0.00</price></span>
                 {elseif $vo.class=='add_cart_icon'}
-                <a href="javascript:void(0);" class=" {$vo.class}"><span class="cart_num">0</span>{$vo.name}</a>
+                <a href="javascript:void(0);" class=" {$vo.class}"><span class="add_num"></span><span class="cart_num">0</span>{$vo.name}</a>
                 {else /}
                 <a href="javascript:void(0);" class=" {$vo.class}"><span class="s_i"></span>{$vo.name}</a>
                 {/if}

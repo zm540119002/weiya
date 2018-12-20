@@ -2931,6 +2931,41 @@ input[type=text]::-webkit-focus-inner {
     background-repeat: no-repeat;
     background-position:center;
 }
+.flexd{
+	position: fixed;
+	width: 100%;
+}
+.add_num{
+    position: absolute;
+    padding: 2px 3px;
+    color: #e4393c;
+    font-weight: 700;
+    top: -22px;
+    left: 60px;
+     display: none; 
+    font-size: 18px;
+    pointer-events: none;
+    z-index: 30;
+}
+.add_num.current{
+    display:block;
+    opacity:1;
+    -webkit-animation:de_add_num 2s ease-in-out ;
+}
+@keyframes de_add_num
+{
+	from {top:-22px;}
+	to {top:-35px;}
+}
+
+@-webkit-keyframes de_add_num /*Safari and Chrome*/
+{
+	from {top:-22px;}
+	to {top:-35px;}
+}
+.friday_end{
+    text-align:center;
+}
 /*商品促销活动*/
 .upload-company-map .picture-module{
    /*width:2.6rem;*/
@@ -3779,11 +3814,25 @@ select[name="nodeIds"]{
     height: 100%; 
     right: 0;*/
 }
-.goodsInfoLayer .layui-m-layerbtn{
+.layui-m-layer-shareqrCodeLayer .layui-m-layercont{
+    padding:10px;
+}
+.goodsInfoLayer .layui-m-layerbtn,
+.layui-m-layer-shareqrCodeLayer .layui-m-layerbtn{
     position:absolute;
     top:-25px;
     right:0;
     width:40px;
+}
+.layui-m-layer-shareqrCodeLayer .layui-m-layerbtn{
+    border-radius: 100%;
+    height: 40px;
+    line-height: 40px;
+    right: -10px;
+    top:-14px;
+}
+.layui-m-layer-shareqrCodeLayer .layui-m-layerbtn span{
+    color:#575757;
 }
 .goodsInfoLayer .bottom-layer-last{
     height:40px;
