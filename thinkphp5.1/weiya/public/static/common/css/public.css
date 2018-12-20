@@ -1151,7 +1151,7 @@ background-position: 0 -27px;
 .forgetPasswd_item{
     position: relative;
     width: 100%;
-    margin:0 0 .30rem 0;
+    margin:0.25rem 0 .30rem 0;
     /*height: .8rem;
     line-height: .8rem;*/
     overflow: hidden;
