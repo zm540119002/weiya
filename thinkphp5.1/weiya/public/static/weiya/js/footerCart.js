@@ -75,10 +75,9 @@ $(function () {
                 $('.loading').hide();
                 if(data.status==0){
                     dialog.error(data.info);
-                }
-                // else if(data.code==1 && data.data=='no_login'){
-				// 	loginDialog();
-				// }
+                }else if(data.code==1 && data.data=='no_login'){
+					loginDialog();
+				}
                 else{
                      dialog.success(data.info);
                     var num = 0;
