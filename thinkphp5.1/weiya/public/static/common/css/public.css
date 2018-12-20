@@ -1044,7 +1044,11 @@ background-position: 0 -27px;
 }
 .foot_nav_bar a span.cart{
     /*background-position:0 -54px;*/
-    background-position:0 -0.92rem;
+    background-position:0 -3rem;
+}
+.foot_nav_bar a span.my{
+    /*background-position:0 -54px;*/
+    background-position:0 -3.65rem;
 }
 .foot_nav_bar .current a{
     color:#ff7aab;
