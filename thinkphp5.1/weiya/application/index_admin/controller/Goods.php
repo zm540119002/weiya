@@ -442,37 +442,7 @@ class Goods extends Base {
         $this->assign('list',$list);
         return view('goods/selected_list');
     }
-
-
-    /**
-     * 获取 商品相关推荐商品
-     * @return array|\think\response\View
-     */
-    public function getRecommendGood22s(){
-        if(!request()->get()){
-            return errorMsg('参数有误');
-        }
-        if(!input('?get.goods_id') || !input('get.goods_id/d')){
-            $this ->error('参数有误');
-        }
-        $goodsId = input('get.goods_id/d');
-        $model = new \app\index_admin\model\RecommendGoods();
-        $config = [
-            'where' => [
-                ['rg.status', '=', 0],
-                ['rg.goods_id','=',$goodsId],
-            ],'join' => [
-                ['goods g','g.id = rg.recommend_goods_id','left'],
-            ],'field' => [
-                'g.id','g.thumb_img','g.name',
-            ],
-
-        ];
-        $list = $model -> getList($config);
-        $this->assign('list',$list);
-        return view('goods/selected_list');
-    }
-
+    
     /**获取推荐商品
      * @return array|\think\response\View
      */
