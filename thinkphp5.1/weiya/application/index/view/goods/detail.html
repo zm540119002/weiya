@@ -331,7 +331,7 @@
 			if(rq_code_url){
 				var imgSrc=uploads+rq_code_url;
 				layer.open({
-					skin:'shareqrCodeLayer',
+					className:'shareqrCodeLayer',
 					content:'<img src='+imgSrc+' />',
 					btn:['确定']
 				})
@@ -343,12 +343,6 @@
 		//设置分数
 		var averageScore = {$averageScore};
 		$('.five_star').setStar(parseFloat(averageScore));
-
-	// 	var endYear=new Date().getFullYear();
-    // var endMonth=new Date().getMonth();
-    // var endDay=new Date().getDate();
-    // var endTime2=new Date(endYear,endMonth,endDay);
-	// console.log(endTime2);
 	});
 </script>
 {/block}
