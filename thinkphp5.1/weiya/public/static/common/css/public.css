@@ -4170,6 +4170,7 @@ select[name="nodeIds"]{
 .nav_menu a{
     position:relative;
     color:#fff;
+    font-size: 0.18rem;
 }
 .nav_menu li.current a:before {
     position: absolute;
