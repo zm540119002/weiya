@@ -468,6 +468,7 @@ class Goods extends Base {
 
         ];
         $list = $model -> getList($config);
+        print_r($list);exit;
         $this->assign('list',$list);
         return view('goods/selected_list');
     }
