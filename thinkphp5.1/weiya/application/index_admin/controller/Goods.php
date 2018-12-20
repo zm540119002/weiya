@@ -461,14 +461,13 @@ class Goods extends Base {
             'where' => [
                 ['rg.goods_id','=',$goodsId],
             ],'join' => [
-                ['goods g','g.id = rg.goods_id','left'],
+                ['goods g','g.id = rg.recommend_goods_id','left'],
             ],'field' => [
                 'g.id','g.thumb_img','g.name',
             ],
 
         ];
         $list = $model -> getList($config);
-        return $model->getLastSql();
         $this->assign('list',$list);
         return view('goods/selected_list');
     }
