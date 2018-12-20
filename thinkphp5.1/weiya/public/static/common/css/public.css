@@ -2931,6 +2931,9 @@ input[type=text]::-webkit-focus-inner {
     background-repeat: no-repeat;
     background-position:center;
 }
+.friday_end{
+    text-align:center;
+}
 /*商品促销活动*/
 .upload-company-map .picture-module{
    /*width:2.6rem;*/
