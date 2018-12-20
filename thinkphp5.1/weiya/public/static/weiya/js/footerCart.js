@@ -90,7 +90,7 @@ $(function () {
                     $('footer').find('.add_num').css({
                         'display':'block',
                         'opacity':0,
-                        'webkitAnimation':de_add_num 2s,
+                        'webkitAnimation':'de_add_num 2s',
                     });
                     
                 }
