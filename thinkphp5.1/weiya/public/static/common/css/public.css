@@ -2936,9 +2936,9 @@ input[type=text]::-webkit-focus-inner {
     padding: 2px 3px;
     color: #e4393c;
     font-weight: 700;
-    top: -10px;
-    left: 15px;
-    /* display: none; */
+    top: -22px;
+    left: 60px;
+     display: none; 
     font-size: 18px;
     pointer-events: none;
     z-index: 30;
