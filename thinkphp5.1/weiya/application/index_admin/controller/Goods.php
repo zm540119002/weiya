@@ -442,43 +442,16 @@ class Goods extends Base {
         $this->assign('list',$list);
         return view('goods/selected_list');
     }
-
-
-    /**
-     * 获取 商品相关推荐商品
-     * @return array|\think\response\View
-     */
-    public function getRecommendGoods(){
-        if(!request()->get()){
-            return errorMsg('参数有误');
-        }
-        if(!input('?get.goodsId') || !input('get.goodsId/d')){
-            $this ->error('参数有误');
-        }
-        $goodsId = input('get.goodsId/d');
-        $model = new \app\index_admin\model\RecommendGoods();
-        $config = [
-            'where' => [
-                ['rg.goods_id','=',$goodsId],
-            ],'join' => [
-                ['goods g','g.id = rg.goods_id','left'],
-            ],'field' => [
-                'g.id','g.thumb_img','g.name',
-            ],
-
-        ];
-        $list = $model -> getList($config);
-        return $model->getLastSql();
-        $this->assign('list',$list);
-        return view('goods/selected_list');
-    }
-
+    
     /**获取推荐商品
      * @return array|\think\response\View
      */
-    public function getRecommendGoods1(){
+    public function getRecommendGoods(){
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
+        }
+        if(!input('?get.goods_id') || !input('get.goods_id/d')){
+            $this ->error('参数有误');
         }
         $goodsId = input('get.goods_id/d');
         //相关推荐商品
@@ -489,14 +462,21 @@ class Goods extends Base {
                 ['rg.goods_id', '=', $goodsId],
             ],'field'=>[
                 'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.name'
             ],'join'=>[
                 ['goods g','g.id = rg.recommend_goods_id','left']
             ]
         ];
         $list= $modelRecommendGoods->getList($config);
         $this->assign('list',$list);
-        return view('goods/recommend_list_tpl');
+        $type = input('get.type');
+        if($type == 'add'){
+            return view('goods/selected_list');
+        }
+        if($type == 'preview'){
+            return view('goods/recommend_list_tpl');
+        }
+
     }
 
     /**
