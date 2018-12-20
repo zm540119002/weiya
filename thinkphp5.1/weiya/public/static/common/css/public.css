@@ -3779,6 +3779,9 @@ select[name="nodeIds"]{
     height: 100%; 
     right: 0;*/
 }
+.layui-m-layer-shareqrCodeLayer .layui-m-layercont{
+    padding:10px;
+}
 .goodsInfoLayer .layui-m-layerbtn,
 .layui-m-layer-shareqrCodeLayer .layui-m-layerbtn{
     position:absolute;
