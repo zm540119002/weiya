@@ -3794,6 +3794,10 @@ select[name="nodeIds"]{
     height: 40px;
     line-height: 40px;
     right: -10px;
+    top:-14px;
+}
+.layui-m-layer-shareqrCodeLayer .layui-m-layerbtn span{
+    color:#575757;
 }
 .goodsInfoLayer .bottom-layer-last{
     height:40px;
