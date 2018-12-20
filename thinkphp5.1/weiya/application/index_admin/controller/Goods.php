@@ -468,7 +468,7 @@ class Goods extends Base {
 
         ];
         $list = $model -> getList($config);
-        print_r($model->getLastSql());exit;
+        return $model->getLastSql();
         $this->assign('list',$list);
         return view('goods/selected_list');
     }
