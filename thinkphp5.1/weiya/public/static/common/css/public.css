@@ -1042,9 +1042,17 @@ background-position: 0 -27px;
     /*background-position:0 -28px;*/
     background-position:0 -0.47rem;
 }
-.foot_nav_bar a span.manufacturer{
+.foot_nav_bar a span.business{
     /*background-position:0 -54px;*/
-    background-position:0 -0.92rem;
+    background-position:0 -0.945rem;
+}
+.foot_nav_bar a span.cart{
+    /*background-position:0 -54px;*/
+    background-position:-0.028rem -3rem;
+}
+.foot_nav_bar a span.my{
+    /*background-position:0 -54px;*/
+    background-position:0 -3.65rem;
 }
 .foot_nav_bar .current a{
     color:#ff7aab;
@@ -2895,6 +2903,7 @@ input[type=text]::-webkit-focus-inner {
     text-align: center;
     float:left;
     height:0.48rem;
+    line-height:0.48rem;
     border-left:0;
     border-right:0;
     border-radius:0;
@@ -2911,6 +2920,7 @@ input[type=text]::-webkit-focus-inner {
     font-size:0.30rem;
     float:left;
     height:0.48rem;
+    line-height:0.48rem;
     color:#333;
 }
 .count-down-icons{
@@ -3726,8 +3736,8 @@ select[name="nodeIds"]{
     width:100%;
 }
 .goods-content-list li p{
-    height:42px;
-    margin:.25rem 0 .10rem;
+    /*height:38px;*/
+    margin:.20rem 0 .10rem;
 }
 .p_bottom{
     padding:0 0.10rem;
@@ -3886,7 +3896,7 @@ select[name="nodeIds"]{
     background:#efefef;
 }
 .new_select_wrap .list_wrapper{
-    padding:0 0.15rem;
+    padding:0.12rem 0.15rem 0;
 }
 .select_more_wrap{
     padding:60px 0 0;
@@ -4170,6 +4180,7 @@ select[name="nodeIds"]{
 .nav_menu a{
     position:relative;
     color:#fff;
+    font-size: 0.20rem;
 }
 .nav_menu li.current a:before {
     position: absolute;
