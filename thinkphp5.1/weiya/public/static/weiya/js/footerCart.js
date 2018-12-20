@@ -85,6 +85,8 @@ $(function () {
                     });
                     //parseInt($('footer').find('num').text())+parseInt(num)
                     $('footer').find('.cart_num').text(num);
+                    $('footer').find('.add_num').text(num);
+                    
                 }
             }
         });

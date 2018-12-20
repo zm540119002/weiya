@@ -2931,6 +2931,18 @@ input[type=text]::-webkit-focus-inner {
     background-repeat: no-repeat;
     background-position:center;
 }
+.add_num{
+    position: absolute;
+    padding: 2px 3px;
+    color: #e4393c;
+    font-weight: 700;
+    top: -10px;
+    left: 15px;
+    /* display: none; */
+    font-size: 18px;
+    pointer-events: none;
+    z-index: 30;
+}
 .friday_end{
     text-align:center;
 }
