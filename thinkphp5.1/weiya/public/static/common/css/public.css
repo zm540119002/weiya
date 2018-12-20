@@ -1044,7 +1044,7 @@ background-position: 0 -27px;
 }
 .foot_nav_bar a span.cart{
     /*background-position:0 -54px;*/
-    background-position:0 -3rem;
+    background-position:-0.028rem -3rem;
 }
 .foot_nav_bar a span.my{
     /*background-position:0 -54px;*/
@@ -4174,7 +4174,7 @@ select[name="nodeIds"]{
 .nav_menu a{
     position:relative;
     color:#fff;
-    font-size: 0.18rem;
+    font-size: 0.20rem;
 }
 .nav_menu li.current a:before {
     position: absolute;
