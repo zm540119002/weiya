@@ -537,7 +537,7 @@ class Goods extends Base {
         imagettftext($im, 20, 0, 20, 670, $red_color, $init['font'], $init['money']); //金额
         imagettftext($im, 12, 0, 20, 700, $text_color, $init['font'], $init['name1']); //说明
         imagettftext($im, 12, 0, 20, 720, $text_color, $init['font'], $init['name2']); //说明
-        imagettftext($im, 11, 0, 20,745, $text_color1, $init['font'], $init['specification']); //规格
+        imagettftext($im, 12, 0, 20,745, $text_color1, $init['font'], $init['specification']); //规格
         imagecopyresized($im, $logoImg['obj'], 10, 10, 0, 0, 90, 60, $logoImg['width'], $logoImg['height'] );  //平台logo
         imagecopyresized($im, $goodsImg['obj'], 10, 106, 0, 0, 460, 534, $goodsImg['width'], $goodsImg['height']);  //商品
         imagecopyresized($im, $qrcode['obj'], 350, 650, 0, 0, 120, 120, $qrcode['width'], $qrcode['height'] );  //二维
