@@ -2955,13 +2955,13 @@ input[type=text]::-webkit-focus-inner {
 @keyframes de_add_num
 {
 	from {top:-22px;}
-	to {top:-35px;}
+	to {top:-40px;}
 }
 
 @-webkit-keyframes de_add_num /*Safari and Chrome*/
 {
 	from {top:-22px;}
-	to {top:-35px;}
+	to {top:-40px;}
 }
 .friday_end{
     text-align:center;
@@ -3894,7 +3894,7 @@ select[name="nodeIds"]{
 .scroll_news{
     position:relative;
     padding:0 0.12rem;
-    margin:0.15rem 0;
+    /*margin:0.15rem 0;*/
     border:1px solid #d9d9d9;
     border-radius:5px;
     background: #fff;
@@ -4545,7 +4545,7 @@ select[name="nodeIds"]{
     margin:0 0 0.08rem 0;
 }
 .cpy_text_item dt{
-    padding:0.10rem 0;
+    padding:0.10rem 0 0.10rem 0.10rem;
     background: #E0E0E0;
 }
 .cpy_text_item dt span,
@@ -4557,7 +4557,7 @@ select[name="nodeIds"]{
     margin:0 0 0.12rem 0;
 }
 .cpy_text_item dd{
-    padding:0.10rem 0;
+    padding:0.10rem 0 0.10rem 0.10rem;
     background: #ECECEC;
 }
 .cpy_mid_intro{
@@ -4621,6 +4621,9 @@ select[name="nodeIds"]{
 .c_top p:first-child{
     margin:0 0 0.15rem 0;
 }
+.c_mobile p{
+    margin-bottom:0.15rem;
+}
 .c_mobile p:first-child{
     margin:0.12rem 0 0.15rem 0;
 }
@@ -4628,4 +4631,7 @@ select[name="nodeIds"]{
     width:100%;
     height:4.5rem;
     margin:0.15rem 0 0;
+}
+.c_mobile p a{
+    color:#06c;
 }
