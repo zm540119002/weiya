@@ -44,8 +44,6 @@
 	};
 	$(function(){
 		//初始化分类商品页面
-		$('.nav_menu li:eq(0)').addClass('current');
-		postData.category_id = $('.nav_menu li.current').data('category-id');
 		getPagingList(config,postData);
 
 		$('body').on('click','.nav_menu li',function(){
@@ -62,21 +60,11 @@
 		})
 
 		//下拉加载
-		var offsetHeight=$('.nav_menu').offset().top;
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
 				config.loadTrigger = false;
 				postData.category_id = $('.nav_menu li.current').data('category-id');
 				getPagingList(config,postData);
-			}
-			//滚动
-			var top = $(document).scrollTop();
-			var currentId = '';
-			var top=$(document).scrollTop();
-			if(top>offsetHeight){
-				$('.nav_menu').addClass('top-fixed');
-			}else {
-				$('.nav_menu').removeClass('top-fixed');
 			}
 		});
 	});

@@ -101,7 +101,7 @@ $(function () {
      $('body').on('click','.add_cart_icon',function(){
         var url = module + 'Cart/index';
         console.log(url);
-        window.href=url;
+        location.href=url;
      })
     //确认订单
     $('body').on('click','.determine_order',function(){
