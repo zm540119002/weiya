@@ -313,7 +313,7 @@
 				var lngCurrent = r.point.lng; 
 				alert('我的位置：'+ latCurrent + ',' + lngCurrent);
 	
-				location.href="http://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination=39.89778,116.709684&mode=driving&region=北京&output=html"; 
+				location.href="http://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination=39.89778,116.709684&mode=driving&region=深圳&output=html"; 
 	
 			} 
 			else { 
@@ -321,19 +321,19 @@
 			}         
 		},{enableHighAccuracy: true}) 
 
-		 map.addOverlay(marker);   
-		var licontent="<b>健龙森羽毛球馆</b><br>";   
-			licontent+="<span><strong>地址：</strong>北京市通州区滨河中路108号</span><br>";   
-			licontent+="<span><strong>电话：</strong>(010)81556565 / 6969</span><br>";           
-		var opts = {  
-			width : 200, 
-			height: 80, 
-		};          
-		var  infoWindow = new BMap.InfoWindow(licontent, opts);   
-		marker.openInfoWindow(infoWindow);   
-		marker.addEventListener('click',function(){ 
-			marker.openInfoWindow(infoWindow); 
-		});
+		// map.addOverlay(marker);   
+		// var licontent="<b>健龙森羽毛球馆</b><br>";   
+		// 	licontent+="<span><strong>地址：</strong>北京市通州区滨河中路108号</span><br>";   
+		// 	licontent+="<span><strong>电话：</strong>(010)81556565 / 6969</span><br>";           
+		// var opts = {  
+		// 	width : 200, 
+		// 	height: 80, 
+		// };          
+		// var  infoWindow = new BMap.InfoWindow(licontent, opts);   
+		// marker.openInfoWindow(infoWindow);   
+		// marker.addEventListener('click',function(){ 
+		// 	marker.openInfoWindow(infoWindow); 
+		// });
 
 		var local = new BMap.LocalSearch(map, { //智能搜索
 		onSearchComplete: myFun
