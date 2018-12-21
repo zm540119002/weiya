@@ -2964,7 +2964,7 @@ input[type=text]::-webkit-focus-inner {
 	to {top:-40px;}
 }
 .friday_end{
-    text-align:center;
+    font-size:0.28rem;
 }
 /*商品促销活动*/
 .upload-company-map .picture-module{
@@ -4147,11 +4147,12 @@ select[name="nodeIds"]{
     display:-webkit-flex;
 }
 .count_down_box{
-    padding:0.05rem 0.18rem 0.05rem 0.12rem;
-    background: #000;
-    color:#fff;
-    border-radius:0.5rem;
-    font-size:0.20rem;
+    padding: 0.05rem 0.18rem 0.05rem 0.12rem;
+    background: #575757;
+    color: #fff;
+    border-radius: 0.5rem;
+    font-size: 0.20rem;
+    width: 2.048rem;
 }
 .mid_module_left .d-r{
     margin:0 0 0 0.8rem;
