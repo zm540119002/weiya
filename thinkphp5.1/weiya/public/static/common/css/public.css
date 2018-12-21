@@ -4153,6 +4153,7 @@ select[name="nodeIds"]{
     border-radius: 0.5rem;
     font-size: 0.20rem;
     width: 2.048rem;
+    margin-top: 0.05rem;
 }
 .mid_module_left .d-r{
     margin:0 0 0 0.8rem;
