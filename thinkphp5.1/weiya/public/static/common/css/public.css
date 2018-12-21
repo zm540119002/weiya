@@ -2967,6 +2967,11 @@ input[type=text]::-webkit-focus-inner {
 .friday_end{
     font-size:0.28rem;
 }
+.friday_end span{
+    height:14px;
+    line-height:14px;
+    vertical-align:top;
+}
 /*商品促销活动*/
 .upload-company-map .picture-module{
    /*width:2.6rem;*/
