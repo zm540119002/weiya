@@ -2929,7 +2929,7 @@ input[type=text]::-webkit-focus-inner {
     height:0.80rem;
     background-image:url(../../common/img/icons/pay_time.png);
     background-repeat: no-repeat;
-    background-position:center;
+    background-position:0 0;
     background-size:auto;
 }
 .flexd{
