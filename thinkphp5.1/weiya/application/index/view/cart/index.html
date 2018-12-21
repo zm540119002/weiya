@@ -2,8 +2,26 @@
 {block name="css-customize"}
 {/block}
 {block name="content"}
-11111111111111
-
+<article class="msh_product_picture f24">
+	<section class="shopping_header_signs">
+		<span></span>
+	</section>
+	<div class="purchase_package_list">
+		<ul class="goods_list" id="list"></ul>
+		<div class="select_checkbox_box">
+        <input type="checkbox" name="" value="" id="" class="sigle_checkbox checkall ">
+        <label for="">全选</label>
+        <a href="javascript:void(0);" class="detele_order goodsDel detele_carts">删除</a>
+    </div>
+	</div>
+	<section id="no_data">
+		<div class="order_data_null">
+			<p>暂无数据</p>
+			<p>注：采购车里超过7天未结算的商品会被系统自动清理</p>
+		</div>
+	</section>
+	
+</article>
 {/block}
 {block name="common"}
 {/block}
@@ -13,7 +31,7 @@
 
 <script type="text/javascript">
 	var config = {
-		url:module+'Goods/getList',
+		url:module+'Cart/getList',
 		requestEnd:false,
 		loadTrigger:false,
 		currentPage:1,
@@ -24,33 +42,6 @@
 		pageType:'index'
 	};
 	$(function(){
-		//轮播
-		var swiper = new Swiper('.swiper-container', {
-			spaceBetween: 30,
-			autoplay:true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		});
-		//新闻滚动
-		var len=$('.news_list li').length;
-		var timer=setInterval(function(){
-			var i=0;
-			i++;
-			move(i);
-		},2200);
-		function move(i){
-			var h=$('.news_item').height();
-			var offsetY=h*i;
-			$('.news_list').get(0).style.transform="translate3d(0,-"+offsetY+"px,0)";
-			$('.news_list').get(0).style.transition="transform 500ms ease-in-out 0s";
-			setTimeout(function(){
-				$('.news_list').get(0).style.transform="translate3d(0,0,0)";
-				$('.news_list').get(0).style.transition="none 0s ease 0s";
-				$('.news_list li').eq(len-1).after($('.news_list li').eq(0));
-			},500);
-		}
 		//初始化分类商品页面
 		$('.nav_menu li:eq(0)').addClass('current');
 		postData.category_id = $('.nav_menu li.current').data('category-id');

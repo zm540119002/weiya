@@ -96,7 +96,13 @@ $(function () {
             }
         });
     });
-
+    //购物车列表页
+    
+     $('body').on('click','.add_cart_icon',function(){
+        var url = module + 'Cart/index';
+        console.log(url);
+        window.href=url;
+     })
     //确认订单
     $('body').on('click','.determine_order',function(){
         var consigneeName=$('.consignee_name').text();
