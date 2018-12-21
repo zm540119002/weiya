@@ -259,7 +259,7 @@ class Goods extends Base {
             'slogan'=>'领先的品牌定制平台',
             'name1'=> $name1,
             'name2'=> $name2,
-            'specification'=> $info['specification'],
+            'specification'=> '规格：'.$info['specification'],
             'money'=>'￥'.$info['bulk_price'].' 元',
             'logo_img'=> request()->domain().'/static/weiya/img/logo.png', // 460*534
             'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
@@ -317,7 +317,7 @@ class Goods extends Base {
                 'slogan'=>'领先的品牌定制平台',
                 'name1'=> $name1,
                 'name2'=> $name2,
-                'specification'=> $info['specification'],
+                'specification'=> '规格：'.$info['specification'],
                 'money'=>'￥'.$info['bulk_price'].' 元',
                 'logo_img'=> request()->domain().'/static/weiya/img/logo.png', // 460*534
                 'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
@@ -534,10 +534,10 @@ class Goods extends Base {
         imagefill($im, 0, 0, $color);
         imagettftext($im, 20, 0, 100, 35, $text_color, $init['font'], $init['title']); //XX官方旗舰店
         imagettftext($im, 16, 0, 100, 60, $text_color1, $init['font'], $init['slogan']);   //标语
-        imagettftext($im, 15, 0, 20, 670, $red_color, $init['font'], $init['money']); //金额
-        imagettftext($im, 11, 0, 160, 670, $text_color, $init['font'], $init['specification']); //规格
+        imagettftext($im, 17, 0, 20, 670, $red_color, $init['font'], $init['money']); //金额
         imagettftext($im, 12, 0, 20, 700, $text_color, $init['font'], $init['name1']); //说明
-        imagettftext($im, 12, 0, 20, 730, $text_color, $init['font'], $init['name2']); //说明
+        imagettftext($im, 12, 0, 20, 720, $text_color, $init['font'], $init['name2']); //说明
+        imagettftext($im, 11, 0, 20,745, $text_color1, $init['font'], $init['specification']); //规格
         imagecopyresized($im, $logoImg['obj'], 10, 10, 0, 0, 90, 60, $logoImg['width'], $logoImg['height'] );  //平台logo
         imagecopyresized($im, $goodsImg['obj'], 10, 106, 0, 0, 460, 534, $goodsImg['width'], $goodsImg['height']);  //商品
         imagecopyresized($im, $qrcode['obj'], 350, 650, 0, 0, 120, 120, $qrcode['width'], $qrcode['height'] );  //二维
