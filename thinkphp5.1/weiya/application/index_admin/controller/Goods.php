@@ -527,7 +527,7 @@ class Goods extends Base {
             return errorMsg('提供的图片问题');
         }
         $im = imagecreatetruecolor(480, 780);  //图片大小
-        $color = imagecolorallocate($im, 240, 255, 255);
+        $color = imagecolorallocate($im, 0xFF,0xFF,0xFF);
         $text_color = imagecolorallocate($im, 87, 87, 87);
         $text_color1 = imagecolorallocate($im, 137, 137, 137);
         $red_color = imagecolorallocate($im, 230, 0, 18);
