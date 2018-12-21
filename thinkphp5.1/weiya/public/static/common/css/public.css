@@ -4621,6 +4621,9 @@ select[name="nodeIds"]{
 .c_top p:first-child{
     margin:0 0 0.15rem 0;
 }
+.c_mobile p{
+    margin-bottom:0.15rem;
+}
 .c_mobile p:first-child{
     margin:0.12rem 0 0.15rem 0;
 }
