@@ -2929,7 +2929,8 @@ input[type=text]::-webkit-focus-inner {
     height:0.80rem;
     background-image:url(../../common/img/icons/pay_time.png);
     background-repeat: no-repeat;
-    background-position:center;
+    background-position:0 0;
+    background-size:0.75rem 0.75rem;
 }
 .flexd{
 	position: fixed;
@@ -2964,7 +2965,12 @@ input[type=text]::-webkit-focus-inner {
 	to {top:-40px;}
 }
 .friday_end{
-    text-align:center;
+    font-size:0.28rem;
+}
+.friday_end span{
+    height:14px;
+    line-height:12px;
+    vertical-align:top;
 }
 /*商品促销活动*/
 .upload-company-map .picture-module{
@@ -4147,11 +4153,13 @@ select[name="nodeIds"]{
     display:-webkit-flex;
 }
 .count_down_box{
-    padding:0.05rem 0.18rem 0.05rem 0.12rem;
-    background: #000;
-    color:#fff;
-    border-radius:0.5rem;
-    font-size:0.20rem;
+    padding: 0.05rem 0.18rem 0.05rem 0.12rem;
+    background: #575757;
+    color: #fff;
+    border-radius: 0.5rem;
+    font-size: 0.20rem;
+    width: 2.05rem;
+    margin-top: 0.05rem;
 }
 .mid_module_left .d-r{
     margin:0 0 0 0.8rem;
