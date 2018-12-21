@@ -4545,7 +4545,7 @@ select[name="nodeIds"]{
     margin:0 0 0.08rem 0;
 }
 .cpy_text_item dt{
-    padding:0.10rem 0;
+    padding:0.10rem 0 0.10rem 0.10rem;
     background: #E0E0E0;
 }
 .cpy_text_item dt span,
@@ -4557,7 +4557,7 @@ select[name="nodeIds"]{
     margin:0 0 0.12rem 0;
 }
 .cpy_text_item dd{
-    padding:0.10rem 0;
+    padding:0.10rem 0 0.10rem 0.10rem;
     background: #ECECEC;
 }
 .cpy_mid_intro{
