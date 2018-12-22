@@ -367,7 +367,7 @@ function getWeek(i) {
     var day=now.getDay();
     var oneDayTime=24*60*60*1000;
     //显示周一
-    var firstDay=new Date(nowTime- (day- 1 )* oneDayTime);
+    var firstDay=new Date(nowTime- (day- 4 )* oneDayTime);
     console.log(firstDay);
     //显示周日
     //var SundayTime =new Date(nowTime + (day+1)*oneDayTime); 
