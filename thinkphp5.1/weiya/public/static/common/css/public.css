@@ -4575,7 +4575,9 @@ select[name="nodeIds"]{
 .cart_data_empty{
     padding:0.20rem 0 0 0.15rem;
 }
-.purchase_package_list.hide{display: none;}
+.cart_goods_list{
+    padding:0 0 0.8rem 0;
+}
 .cart_goods_list li{
     padding:0.25rem 0.15rem 0.25rem 0.15rem;
     border-bottom:1px solid #d9d9d9;
