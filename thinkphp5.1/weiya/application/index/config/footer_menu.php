@@ -25,7 +25,8 @@ return [
         ['name'   => '增加地址','class'=>'address_save'],//6
         ['name'   => '修改地址','class'=>'address_save'],//7
         ['name'   => '新建地址','class'=>'address_create'],//8
-        ['name'   => 'ddd','class'=>'nc'],//9
+        ['name'   => '去结算','class'=>'settlement'],//9
+        ['name'   => '全选','class'=>'checked_all'],//10
 
         
     ],

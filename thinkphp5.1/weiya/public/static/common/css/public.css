@@ -1425,7 +1425,7 @@ background-position: 0 -27px;
     float:left;
 }
 .select_checkbox_box{
-    padding:0.20rem 0 0 0.15rem;
+    padding:0 0 0 0.15rem;
 }
 .clear_cart{
     text-align: right;
@@ -4576,7 +4576,7 @@ select[name="nodeIds"]{
     padding:0.20rem 0 0 0.15rem;
 }
 .cart_goods_list{
-    padding:0 0 0.8rem 0;
+    padding:0 0 0.5rem 0;
 }
 .cart_goods_list li{
     padding:0.25rem 0.15rem 0.25rem 0.15rem;
@@ -4607,6 +4607,13 @@ select[name="nodeIds"]{
 }
 .cart_goods_operate .goodsDel{
     margin-left:0.85rem;
+}
+.group_cart_nav a.goodsDel{
+    display:inline;
+}
+.group_cart_nav .checkall{
+    margin:0.24rem 0 0;
+    padding-left:0.12rem;
 }
 .commodity_purchaser del{margin:0 0 0 0.12rem;}
 .purchase_goods_info .purchase_price{color:#ff6482}

@@ -7,8 +7,7 @@ class Cart extends \common\controller\Base{
     public function index(){
         if(request()->isAjax()){
         }else{
-
-            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
+            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
         }

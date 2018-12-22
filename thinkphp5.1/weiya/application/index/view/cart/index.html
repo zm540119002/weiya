@@ -9,11 +9,11 @@
 	</section>
 	<div class="cart_goods_list">
 		<ul class="goods_list" id="list"></ul>
-		<div class="select_checkbox_box">
-        <input type="checkbox" name="" value="" id="" class="item_checkbox checkall ">
-        <label for="">全选</label>
-        <a href="javascript:void(0);" class="goodsDel detele_carts">删除</a>
-    </div>
+		<!--<div class="select_checkbox_box">
+			<input type="checkbox" name="" value="" id="" class="item_checkbox checkall ">
+			<label for="">全选</label>
+			<a href="javascript:void(0);" class="goodsDel detele_carts">删除</a>
+		</div>-->
 	</div>
 	<section id="no_data">
 		<div class="cart_data_empty">
@@ -30,7 +30,7 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/paging.js"></script>
-
+<script type="text/javascript" src="weiya_js/footerCart.js"></script>
 <script type="text/javascript">
 	var config = {
 		url:module+'Cart/getList',
