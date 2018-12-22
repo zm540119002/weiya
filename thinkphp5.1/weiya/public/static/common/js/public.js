@@ -355,7 +355,7 @@ function countDown(time,id){
             $(second_elem).text(second<10?"0"+second:second);//计算秒
         } else {
             clearInterval(timer);
-            countDown(getWeek(6),$('#countDownBox'));
+            countDown(getWeek(5),$('#countDownBox'));
             // $('.count_down_box').html('<span>本次活动已结束</span>');
         }
     }, 1000);
