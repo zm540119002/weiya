@@ -4548,6 +4548,68 @@ select[name="nodeIds"]{
 .end_more{
     text-align:center;
 }
+/*购物车*/
+.shopping_header_title{
+    position:relative;
+    padding:0.12rem 0;
+}
+.shopping_header_title h2{
+    text-align:center;
+    font-size:0.24rem;
+}
+.head_shop{
+    margin:0 0 .25rem 0;
+}
+.head_shop span{
+    margin:0 0 0 0.20rem;
+}
+.cart_goods_img{
+    max-width:1rem;
+    max-height:1rem;
+    float:left;
+    margin:0 0 0 0.20rem;
+}
+.cart_goods_img .c_img{
+    width:100%;
+}
+.cart_data_empty{
+    padding:0 0 0 0.15rem;
+}
+.purchase_package_list.hide{display: none;}
+.cart_goods_list li{
+    padding:0.25rem 0.15rem 0.25rem 0.15rem;
+    border-bottom:1px solid #d9d9d9;
+    overflow: hidden;
+}
+.cart_goods_list li .item{
+    margin:0 0 0.18rem 0;
+}
+.purchase_goods_info{margin:0 0 0 2rem;position:relative;}
+.quantity_wrapper{margin:0 0 0 0.35rem;}
+.purchase_goods_num{
+    display:flex;
+    display:-webkit-flex;
+  
+}
+.purchase_cart_list{
+    clear:both;
+    padding:0.15rem 0 0;
+}
+.detele_order{
+    background:#ff0000;
+    color:#fff;
+    border-radius:0.05rem;
+    height:24px;
+    padding:0 0.12rem;
+}
+.purchase_cart_list .detele_order{
+    margin-left:0.85rem;
+}
+.commodity_purchaser del{margin:0 0 0 0.12rem;}
+.purchase_goods_info .purchase_price{color:#ff6482}
+.purchase_goods_info del{color:#999;margin:0 0 0 0.15rem;}
+.orderDetail_list .orderDetail_r,
+.cart_list_r{margin:0 0 0 1.8rem;}
 /*走进维雅介绍*/
 .cpy_text_item{
     margin:0 0 0.08rem 0;
