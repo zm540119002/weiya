@@ -334,13 +334,14 @@ function swiper(elemObj){
 }
 //活动倒计时
 function countDown(time,id){
+    console.log(time);
     var day_elem = id.find('.day');
     var hour_elem = id.find('.hour');
     var minute_elem = id.find('.minute');
     var second_elem = id.find('.second');
     var end_time = new Date(time).getTime(),//月份是实际月份-1
         sys_second = (end_time-new Date().getTime())/1000;
-        console.log(sys_second);
+        //console.log(sys_second);
     var timer = setInterval(function(){
         if (sys_second > 1) {
             sys_second -= 1;
@@ -354,7 +355,7 @@ function countDown(time,id){
             $(second_elem).text(second<10?"0"+second:second);//计算秒
         } else {
             clearInterval(timer);
-            //countDown(getWeek(5),$('#countDownBox'));
+            countDown(getWeek(6),$('#countDownBox'));
             // $('.count_down_box').html('<span>本次活动已结束</span>');
         }
     }, 1000);
@@ -362,14 +363,26 @@ function countDown(time,id){
 //获取每周五日期和时分秒
 function getWeek(i) {
     var now = new Date();
-    var firstDay=new Date(now - (now .getDay() - 1 )* 24*3600*1000);
+    var nowTime=now.getTime();
+    var day=now.getDay();
+    var oneDayTime=24*60*60*1000;
+    //显示周一
+    var firstDay=new Date(nowTime- (day- 1 )* oneDayTime);
+    console.log(firstDay);
+    //显示周日
+    //var SundayTime =new Date(nowTime + (day+1)*oneDayTime); 
+    
     firstDay.setDate(firstDay.getDate() + i);
+    
+    console.log(firstDay.setDate(firstDay.getDate() + i));
     //日期
     //mon = Number(firstDay.getMonth())+1;
     //准确年月日
     mon = Number(firstDay.getMonth());
     //return now.getFullYear() + "/" + mon + "/" + firstDay.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
+    
     return new Date(now.getFullYear(),mon,firstDay.getDate());
+    
     //当天00：00：00
     // var endYear=new Date().getFullYear();
     // var endMonth=new Date().getMonth();
