@@ -673,6 +673,27 @@ $(function(){
             dialog.error('功能正在开发中,暂未上线,敬请期待');
         }
     });
+    $('body').on('click','.cpy_checkitem',function () {
+        var _thisChecked = $(this).prop("checked");
+        var oItem =$(this).parent().siblings('.item');
+        $.each(oItem,function () {
+            var _this=$(this);
+            _this.find('.checkitem').prop('checked',_thisChecked);
+        });
+    });
+    //根据公司反选
+    $('body').on('click','.sign_checkitem',function () {
+        var sign = true;
+        var _this=$(this);
+        var oItem =$(this).parents('li').find('.sign_checkitem');
+        //一票否决
+        $.each(oItem,function () {
+            if(!$(this).prop('checked')){
+                sign = false;
+            }
+        });
+        _this.parents('li').find('.cpy_checkitem').prop('checked',sign);
+    });
     //全选
     $('body').on('click','.checkall,.check_all_2',function () {
         var _thisChecked = $(this).prop("checked");
