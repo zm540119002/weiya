@@ -334,14 +334,14 @@ function swiper(elemObj){
 }
 //活动倒计时
 function countDown(time,id){
-    console.log(time);
+    //console.log(time);
     var day_elem = id.find('.day');
     var hour_elem = id.find('.hour');
     var minute_elem = id.find('.minute');
     var second_elem = id.find('.second');
     var end_time = new Date(time).getTime(),//月份是实际月份-1
         sys_second = (end_time-new Date().getTime())/1000;
-        //console.log(sys_second);
+        console.log(sys_second);
     var timer = setInterval(function(){
         if (sys_second > 1) {
             sys_second -= 1;
@@ -355,7 +355,7 @@ function countDown(time,id){
             $(second_elem).text(second<10?"0"+second:second);//计算秒
         } else {
             clearInterval(timer);
-            countDown(getWeek(4),$('#countDownBox'));
+            countDown(getWeek(),$('#countDownBox'));
             // $('.count_down_box').html('<span>本次活动已结束</span>');
         }
     }, 1000);
@@ -371,23 +371,30 @@ function getWeek(i) {
     //console.log(firstDay);
     //显示周日
     // var SundayTime =new Date(nowTime); 
-    // console.log(SundayTime);
+    console.log(day);
 
     //显示周五
-    var SundayTime =new Date((5-day)*oneDayTime+now.getTime()); 
-    console.log(SundayTime);
-
+    var Friday =new Date((5-day)*oneDayTime+now.getTime()); 
+    
+    //获取某天日期
+    console.log(new Date().toLocaleDateString());
+    //获取某天00:00:00
+    console.log(new Date(Friday.toLocaleDateString()));
+    //获取当天23:59:59
+    console.log(new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1));
 
     //firstDay.setDate(firstDay.getDate() + i);
     
-    //console.log(firstDay.setDate(firstDay.getDate() + i));
+   // console.log(firstDay.setDate(firstDay.getDate() + i));
     //日期
     //mon = Number(firstDay.getMonth())+1;
     //准确年月日
     //mon = Number(firstDay.getMonth());
     //return now.getFullYear() + "/" + mon + "/" + firstDay.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
     
-    return SundayTime;
+    // return new Date(now.getFullYear(),mon,firstDay.getDate());
+    
+    return new Date(Friday.toLocaleDateString());
     
     //当天00：00：00
     // var endYear=new Date().getFullYear();
