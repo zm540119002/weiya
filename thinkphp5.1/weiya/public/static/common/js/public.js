@@ -384,7 +384,7 @@ function getWeek(i) {
     //日期
     //mon = Number(firstDay.getMonth())+1;
     //准确年月日
-    mon = Number(firstDay.getMonth());
+    //mon = Number(firstDay.getMonth());
     //return now.getFullYear() + "/" + mon + "/" + firstDay.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
     
     return SundayTime;
