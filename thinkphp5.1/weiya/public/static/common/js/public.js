@@ -367,11 +367,17 @@ function getWeek(i) {
     var day=now.getDay();
     var oneDayTime=24*60*60*1000;
     //显示周一
-    var firstDay=new Date(nowTime- (day- 4 )* oneDayTime);
-    console.log(firstDay);
+    //var firstDay=new Date(nowTime- (day- 4 )* oneDayTime);
+    //console.log(firstDay);
     //显示周日
-    //var SundayTime =new Date(nowTime + (day+1)*oneDayTime); 
-    
+    // var SundayTime =new Date(nowTime); 
+    // console.log(SundayTime);
+
+    //显示周五
+    var SundayTime =new Date((5-day)*oneDayTime+now.getTime()); 
+    console.log(SundayTime);
+
+
     firstDay.setDate(firstDay.getDate() + i);
     
     console.log(firstDay.setDate(firstDay.getDate() + i));
@@ -381,7 +387,7 @@ function getWeek(i) {
     mon = Number(firstDay.getMonth());
     //return now.getFullYear() + "/" + mon + "/" + firstDay.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
     
-    return new Date(now.getFullYear(),mon,firstDay.getDate());
+    return SundayTime;
     
     //当天00：00：00
     // var endYear=new Date().getFullYear();
