@@ -378,9 +378,9 @@ function getWeek(i) {
     console.log(SundayTime);
 
 
-    firstDay.setDate(firstDay.getDate() + i);
+    //firstDay.setDate(firstDay.getDate() + i);
     
-    console.log(firstDay.setDate(firstDay.getDate() + i));
+    //console.log(firstDay.setDate(firstDay.getDate() + i));
     //日期
     //mon = Number(firstDay.getMonth())+1;
     //准确年月日
