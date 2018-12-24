@@ -377,11 +377,11 @@ function getWeek(i) {
     var Friday =new Date((5-day)*oneDayTime+now.getTime()); 
     
     //获取某天日期
-    console.log(new Date().toLocaleDateString());
+    //console.log(new Date().toLocaleDateString());
     //获取某天00:00:00
-    console.log(new Date(Friday.toLocaleDateString()));
+    //console.log(new Date(Friday.toLocaleDateString()));
     //获取当天23:59:59
-    console.log(new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1));
+    //console.log(new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1));
 
     //firstDay.setDate(firstDay.getDate() + i);
     
