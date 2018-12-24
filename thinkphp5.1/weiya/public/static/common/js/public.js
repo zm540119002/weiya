@@ -373,9 +373,17 @@ function getWeek(i) {
     // var SundayTime =new Date(nowTime); 
     console.log(day);
 
-    //显示周五
-    var Friday =new Date((5-day)*oneDayTime+now.getTime()); 
+   
     
+    if(day!=6){
+         //显示周五
+        var Friday =new Date((5-day)*oneDayTime+now.getTime()); 
+        return new Date(Friday.toLocaleDateString());
+    }else{
+        var Friday =new Date((5+day)*oneDayTime+now.getTime()); 
+        return new Date(Friday.toLocaleDateString());
+    }
+    console.log(new Date(Friday.toLocaleDateString()));
     //获取某天日期
     //console.log(new Date().toLocaleDateString());
     //获取某天00:00:00
@@ -394,7 +402,7 @@ function getWeek(i) {
     
     // return new Date(now.getFullYear(),mon,firstDay.getDate());
     
-    return new Date(Friday.toLocaleDateString());
+   // return new Date(Friday.toLocaleDateString());
     
     //当天00：00：00
     // var endYear=new Date().getFullYear();
