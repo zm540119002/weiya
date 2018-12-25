@@ -21,7 +21,7 @@ $(function () {
     $('body').on('click','.detele_carts',function(){
         var postData = {};
         var foreign_ids = [];
-        $.each($('.purchase_package_list li'),function(){
+        $.each($('.goods_list li'),function(){
             var _this=$(this);
             if(_this.find('.sigle_checkbox').is(':checked')){
                 var foreign_id = _this.data('id');
@@ -30,7 +30,7 @@ $(function () {
         });
         postData.foreign_ids = foreign_ids;
         var type = 'more';
-        delCart(postData,type,$('.purchase_package_list li'));
+        delCart(postData,type,$('.goods_list li'));
     });
 });
 //从购物车里替换单个商品信息
@@ -96,7 +96,7 @@ function delCart(postData,type,obj) {
                                 }
                             });
                         }
-                        if( $('.purchase_package_list li').length == 0){
+                        if( $('.goods_list li').length == 0){
                             $('.select_checkbox_box').hide();
                             $('#no_data').show();
                         }else{
