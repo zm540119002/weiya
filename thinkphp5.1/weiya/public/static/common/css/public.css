@@ -4597,6 +4597,9 @@ select[name="nodeIds"]{
     clear:both;
     padding:0.15rem 0 0;
 }
+.cart_goods_operate .quantity_wrapper {
+    margin-left:0;
+}
 .goodsDel{
     background:#ff0000;
     color:#fff;

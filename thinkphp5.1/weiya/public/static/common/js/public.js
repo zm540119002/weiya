@@ -683,7 +683,25 @@ function dialogFormDelDefaultCallBack(config,data) {
         layer.close(config.index);
     }
 }
-
+//购物车加减数量勾选复选框
+function cartCheckedBox(obj){
+    var sign = true;
+    var _this=obj;
+    var oItem =_this.parents('li').find('.sign_checkitem');
+    //一票否决
+    $.each(oItem,function () {
+        if(!$(this).prop('checked')){
+            sign = false;
+        }
+    });
+    _this.parents('li').find('.cpy_checkitem').prop('checked',sign);
+    $.each($('.cpy_checkitem'),function () {
+        if(!$(this).prop('checked')){
+            sign = false;
+        }
+    });
+    $('footer .checkall').prop('checked',sign);
+}
 //文档就绪
 $(function(){
     //返回顶部

@@ -11,7 +11,6 @@ $(function () {
         //计算商品列表总价
         calculateTotalPrice($(this));
     });
-
     //减
     $('body').on('click','.greduce',function(){
         var incrementObj={};
@@ -22,7 +21,6 @@ $(function () {
         //计算商品列表总价
         calculateTotalPrice($(this));
     });
-
     //购买数量.失去焦点
     $('body').on('blur','.gshopping_count',function(){
         var buyNum=parseInt($(this).val());
@@ -35,7 +33,43 @@ $(function () {
         //计算商品列表总价
         calculateTotalPrice($(this));
     });
-
+    //购物车加
+    $('body').on('click','.cart_gplus',function(){
+        //购物车单个商品数量自加
+        cartGoodsNumPlus($(this));
+        //购物车复选框勾选
+        cartCheckedBox($(this));
+        //计算商品列表总价
+        calculateCartTotalPrice($(this));
+    });
+    //购物车减
+    $('body').on('click','.cart_greduce',function(){
+        //购物车单个商品数量自减
+        cartGoodsNumReduce($(this));
+        //购物车复选框勾选
+        cartCheckedBox($(this));
+        //计算购物车商品列表总价
+        calculateCartTotalPrice($(this));
+    });
+    //购买数量.失去焦点
+    $('body').on('blur','.cart_gshopping_count',function(){
+        var buyNum=parseInt($(this).val());
+        if(buyNum<1){
+             //dialog.error('起订数量不能少于'+orderNum);
+             $(this).val(1);
+             return false;
+        }
+        $(this).parents('.item').find('.sign_checkitem').prop("checked",true);
+        //购物车复选框勾选
+        cartCheckedBox($(this));
+        //计算购物车商品列表总价
+        calculateCartTotalPrice($(this));
+    });
+    //购物车全选总价
+    $('body').on('click','footer .checkall,.cpy_checkitem,.sign_checkitem',function(){
+        //计算购物车商品列表总价
+        calculateCartTotalPrice();
+    });
     //立即结算/立即购买
     $('body').on('click','.buy_now,.clearing_now',function(){
         var postData = assemblyData($('ul.goods_list').find('li'));
@@ -97,12 +131,11 @@ $(function () {
         });
     });
     //购物车列表页
-    
-     $('body').on('click','.add_cart_icon',function(){
-        var url = module + 'Cart/index';
-        console.log(url);
-        location.href=url;
-     })
+    $('body').on('click','.add_cart_icon',function(){
+    var url = module + 'Cart/index';
+    console.log(url);
+    location.href=url;
+    })
     //确认订单
     $('body').on('click','.determine_order',function(){
         var consigneeName=$('.consignee_name').text();
@@ -464,7 +497,28 @@ function calculateTotalPrice(obj){
     }
    
 }
-
+//计算购物车商品列表总价
+function calculateCartTotalPrice(obj){
+    console.log(obj);
+    if(!$('footer').find('price').length){
+        return false;
+    }
+    var isInt = true;
+    var amount = 0;
+    var _thisLis = $('.list.goods_list').find('li .item');
+    $.each(_thisLis,function(index,val){
+        var _thisLi = $(this);
+        if(_thisLi.find('.sign_checkitem').is(':checked')){
+            var num = _thisLi.find('.cart_gshopping_count').val();
+            amount += _thisLi.find('price').text() * num;
+            if(!isPosIntNumberOrZero(num)){
+                isInt = false;
+                return false;
+            }
+        }
+    });
+    $('footer').find('price').html(amount.toFixed(2));
+}
 //单个商品数量自减
 function goodsNumReduce(obj,opt) {
     var _li = obj.parents('li');
@@ -487,4 +541,28 @@ function goodsNumPlus(obj,opt) {
     num=num+parseInt(opt.increase_quantity);
     _li.find('.gshopping_count').val(num);
 
+}
+//购物车中单个商品数量自减
+function cartGoodsNumReduce(obj) {
+    var _item = obj.parents('.item');
+    var num = _item.find('.cart_gshopping_count').val();
+    num=parseInt(num);
+    // var orderQuantity=parseInt(opt.order_quantity);
+    if(num<2){
+        // _item.find('.sign_checkitem').prop("checked",false);
+        return false;
+    }
+    //num=num-parseInt(opt.increase_quantity);
+    _item.find('.cart_gshopping_count').val(--num);
+    _item.find('.sign_checkitem').prop("checked",true);
+}
+
+//购物车中单个商品数量自加
+function cartGoodsNumPlus(obj) {
+    var _item = obj.parents('.item');
+        _item.find('.sign_checkitem').prop("checked",true);
+    var num = _item.find('.cart_gshopping_count').val();
+    num=parseInt(num);
+    //num=num+parseInt(opt.increase_quantity);
+    _item.find('.cart_gshopping_count').val(++num);
 }
