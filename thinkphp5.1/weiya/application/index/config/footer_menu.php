@@ -26,8 +26,6 @@ return [
         ['name'   => '修改地址','class'=>'address_save'],//7
         ['name'   => '新建地址','class'=>'address_create'],//8
         ['name'   => 'ddd','class'=>'nc'],//9
-
-        
     ],
 
 ];
