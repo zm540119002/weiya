@@ -2,8 +2,27 @@
 {block name="css-customize"}
 {/block}
 {block name="content"}
-11111111111111
-
+<article class="f24">
+	<section class="shopping_header_title separation-line">
+		<span></span>
+		<h2>购物车</h2>
+	</section>
+	<div class="cart_goods_list">
+		<ul class="goods_list list" id="list"></ul>
+		<!--<div class="select_checkbox_box">
+			<input type="checkbox" name="" value="" id="" class="item_checkbox checkall ">
+			<label for="">全选</label>
+			<a href="javascript:void(0);" class="goodsDel detele_carts">删除</a>
+		</div>-->
+	</div>
+	<section id="no_data">
+		<div class="cart_data_empty">
+			<p>暂无数据</p>
+			<p>注：采购车里超过7天未结算的商品会被系统自动清理</p>
+		</div>
+	</section>
+	
+</article>
 {/block}
 {block name="common"}
 {include file="template/footer_menu.html" /}
@@ -11,10 +30,12 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript" src="weiya_js/footerCart.js"></script>
+<script type="text/javascript" src="public_js/cart.js"></script>
 
 <script type="text/javascript">
 	var config = {
-		url:module+'Goods/getList',
+		url:module+'Cart/getList',
 		requestEnd:false,
 		loadTrigger:false,
 		currentPage:1,
@@ -25,36 +46,7 @@
 		pageType:'index'
 	};
 	$(function(){
-		//轮播
-		var swiper = new Swiper('.swiper-container', {
-			spaceBetween: 30,
-			autoplay:true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		});
-		//新闻滚动
-		var len=$('.news_list li').length;
-		var timer=setInterval(function(){
-			var i=0;
-			i++;
-			move(i);
-		},2200);
-		function move(i){
-			var h=$('.news_item').height();
-			var offsetY=h*i;
-			$('.news_list').get(0).style.transform="translate3d(0,-"+offsetY+"px,0)";
-			$('.news_list').get(0).style.transition="transform 500ms ease-in-out 0s";
-			setTimeout(function(){
-				$('.news_list').get(0).style.transform="translate3d(0,0,0)";
-				$('.news_list').get(0).style.transition="none 0s ease 0s";
-				$('.news_list li').eq(len-1).after($('.news_list li').eq(0));
-			},500);
-		}
 		//初始化分类商品页面
-		$('.nav_menu li:eq(0)').addClass('current');
-		postData.category_id = $('.nav_menu li.current').data('category-id');
 		getPagingList(config,postData);
 
 		$('body').on('click','.nav_menu li',function(){
@@ -71,21 +63,11 @@
 		})
 
 		//下拉加载
-		var offsetHeight=$('.nav_menu').offset().top;
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
 				config.loadTrigger = false;
 				postData.category_id = $('.nav_menu li.current').data('category-id');
 				getPagingList(config,postData);
-			}
-			//滚动
-			var top = $(document).scrollTop();
-			var currentId = '';
-			var top=$(document).scrollTop();
-			if(top>offsetHeight){
-				$('.nav_menu').addClass('top-fixed');
-			}else {
-				$('.nav_menu').removeClass('top-fixed');
 			}
 		});
 	});

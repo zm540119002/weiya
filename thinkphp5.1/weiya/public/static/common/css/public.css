@@ -1417,7 +1417,7 @@ background-position: 0 -27px;
 .invite_group_buy.group_buy_end{
     background: #727272;
 }
-.sigle_checkbox{
+.item_checkbox{
     border:1px solid #d9d9d9;
     -webkit-appearance:checkbox;
     width:18px;
@@ -1425,7 +1425,7 @@ background-position: 0 -27px;
     float:left;
 }
 .select_checkbox_box{
-    padding:0.20rem 0 0 0.15rem;
+    padding:0 0 0 0.15rem;
 }
 .clear_cart{
     text-align: right;
@@ -4548,7 +4548,85 @@ select[name="nodeIds"]{
 .end_more{
     text-align:center;
 }
+/*购物车*/
+.shopping_header_title{
+    position:relative;
+    padding:0.12rem 0;
+}
+.shopping_header_title h2{
+    text-align:center;
+    font-size:0.24rem;
+}
+.head_shop{
+    margin:0 0 .25rem 0;
+}
+.head_shop span{
+    margin:0 0 0 0.20rem;
+}
+.cart_goods_img{
+    max-width:1rem;
+    max-height:1rem;
+    float:left;
+    margin:0 0 0 0.20rem;
+}
+.cart_goods_img .c_img{
+    width:100%;
+}
+.cart_data_empty{
+    padding:0.20rem 0 0 0.15rem;
+}
+.cart_goods_list{
+    padding:0 0 0.5rem 0;
+}
+.cart_goods_list li{
+    padding:0.25rem 0.15rem 0.25rem 0.15rem;
+    border-bottom:1px solid #d9d9d9;
+    overflow: hidden;
+}
+.cart_goods_list li .item{
+    margin:0 0 0.18rem 0;
+}
+.purchase_goods_info{margin:0 0 0 2rem;position:relative;}
+.quantity_wrapper{margin:0 0 0 0.35rem;}
+.purchase_goods_num{
+    display:flex;
+    display:-webkit-flex;
+  
+}
+.cart_goods_operate{
+    clear:both;
+    padding:0.15rem 0 0;
+}
+.cart_goods_operate .quantity_wrapper {
+    margin-left:0;
+}
+.goodsDel{
+    background:#ff0000;
+    color:#fff;
+    border-radius:0.05rem;
+    height:24px;
+    line-height:24px;
+    padding:0 0.12rem;
+}
+.cart_goods_operate .goodsDel{
+    margin-left:0.85rem;
+}
+.group_cart_nav a.goodsDel{
+    display:inline;
+}
+.group_cart_nav .checkall{
+    margin:0.24rem 0 0;
+    padding-left:0.12rem;
+}
+.commodity_purchaser del{margin:0 0 0 0.12rem;}
+.purchase_goods_info .purchase_price{color:#ff6482}
+.purchase_goods_info del{color:#999;margin:0 0 0 0.15rem;}
+.orderDetail_list .orderDetail_r,
+.cart_list_r{margin:0 0 0 1.8rem;}
 /*走进维雅介绍*/
+.process p{
+    line-height: 24px;
+}
 .cpy_text_item{
     margin:0 0 0.08rem 0;
 }
@@ -4576,6 +4654,9 @@ select[name="nodeIds"]{
     margin: 0.14rem 0 0.10rem;
     color:#0071BA;
     font-size:0.27rem;
+}
+.important_heading.bold{
+    font-weight: bold;
 }
 .important_first_heading{
     margin-top:0.12rem;
