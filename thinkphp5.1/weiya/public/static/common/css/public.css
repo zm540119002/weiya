@@ -4624,6 +4624,9 @@ select[name="nodeIds"]{
 .orderDetail_list .orderDetail_r,
 .cart_list_r{margin:0 0 0 1.8rem;}
 /*走进维雅介绍*/
+.process p{
+    line-height: 24px;
+}
 .cpy_text_item{
     margin:0 0 0.08rem 0;
 }
@@ -4651,6 +4654,9 @@ select[name="nodeIds"]{
     margin: 0.14rem 0 0.10rem;
     color:#0071BA;
     font-size:0.27rem;
+}
+.important_heading.bold{
+    font-weight: bold;
 }
 .important_first_heading{
     margin-top:0.12rem;
