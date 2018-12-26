@@ -30,6 +30,7 @@ class Cart extends \common\controller\UserBase{
         ];
         $cartList = $model->getList($config);
         foreach ($goodsList as $goods){
+            echo 1;
             //假定没找到
             $find = false;
             foreach ($cartList as $cart){
@@ -54,7 +55,7 @@ class Cart extends \common\controller\UserBase{
                 $data['buy_type'] = $goods['buy_type'];
                 $data['create_time'] = time();
                 $res = $model->allowField(true)->save($data);
-                
+
             }
         }
         return successMsg('成功');
