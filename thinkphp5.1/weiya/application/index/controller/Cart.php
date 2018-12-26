@@ -67,7 +67,7 @@ class Cart extends \common\controller\Base{
          if($keyword) {
              $config['where'][] = ['g.name', 'like', '%' . trim($keyword) . '%'];
          }
-         $list = $model -> pageQuery($config);
+         $list = $model -> pageQuery($config)->toArray();
          print_r($list);exit;
          $this->assign('list',$list);
          if(isset($_GET['pageType'])){
