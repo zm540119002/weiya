@@ -1,6 +1,6 @@
 {notempty name="list"}
 {volist name="list" id="info"}
-<li data-id="{$info.id}">
+<li data-id="{$info.id}" data-cart_id="{$info.cart_id}">
     <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
     <a  href="" class="cart_goods_img">
         {empty name="info.thumb_img"}
