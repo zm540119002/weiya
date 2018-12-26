@@ -44,6 +44,7 @@ class Cart extends \common\controller\UserBase{
                     ];
                     $data['num'] = $goods['num'] + $cart['num'];
                     $res = $model->allowField(true)->save($data,$where);
+                    echo $model->getLastSql();
 
                 }
             }
@@ -55,6 +56,7 @@ class Cart extends \common\controller\UserBase{
                 $data['buy_type'] = $goods['buy_type'];
                 $data['create_time'] = time();
                 $res = $model->allowField(true)->save($data);
+                echo $model->getLastSql();
 
             }
         }
