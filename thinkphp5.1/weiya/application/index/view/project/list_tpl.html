@@ -1,17 +1,17 @@
 {notempty name='list'}
-{volist name="list" id="vo"}
+{volist name="list" id="info"}
 <li data-id="{$vo.id}">
-    <a class="product-square-box" href="{:url('detail',['goods_id'=>$vo.id])}">
-        {notempty name='vo.thumb_img'}
-        <img src="public_uploads/{$vo.thumb_img}" alt="" class="product-square-img">
+    <a class="product-square-box" href="{:url('detail',['goods_id'=>$info.id])}">
+        {notempty name='info.thumb_img'}
+        <img src="public_uploads/{$info.thumb_img}" alt="" class="product-square-img">
         {else /}
         <img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
         {/notempty}
     </a>
-    <p class="product-title">{$vo.name}</p>
+    <p class="product-title">{$info.name}</p>
     <div class="columns_flex two-flex">
         <div class="pink">
-            ￥<price>{$vo.sale_price}</price>
+            ￥<price>{$info.sale_price}</price>
         </div>
     </div>
 </li>
