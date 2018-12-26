@@ -21,7 +21,8 @@ class Cart extends \common\controller\Base{
         if(empty($data)){
             return errorMsg('没有数据');
         }
-        $userId = $this->user['id'];
+//        $userId = $this->user['id'];
+        $userId = 24;
         $arr = [
             'user_id' => $userId,
         ];
@@ -44,35 +45,35 @@ class Cart extends \common\controller\Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        //$model = new \app\index\model\Cart();
-        // $config=[
-        //     'where'=>[
-        //     ],
-        //     'field'=>[
-        //         'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
-        //         g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
-        //         g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort,g.trait'
-        //     ],
-        //     'order'=>[
-        //         'sort'=>'desc',
-        //         'line_num'=>'asc',
-        //         'id'=>'desc'
-        //     ],
-        // ];
-        // if(input('?get.storeId') && (int)input('?get.storeId')){
-        //     $config['where'][] = ['g.store_id', '=', input('get.storeId')];
-        // }
-        // $keyword = input('get.keyword','');
-        // if($keyword) {
-        //     $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
-        // }
-        // $list = $model -> pageQuery($config);
-        // $this->assign('list',$list);
-        // if(isset($_GET['pageType'])){
-        //     if($_GET['pageType'] == 'store' ){//店铺产品列表
-        //         return $this->fetch('list_tpl');
-        //     }
-        // }
+
+        $model = new \app\index\model\Cart();
+         $config=[
+             'where'=>[
+                 ['c.user_id','=',7],
+                 ['c.status','=',0],
+             ],'join' => [
+                 ['goods g','g.id = c.foreign_id','left']
+             ],'field'=>[
+                 'c.id as cart_id','c.foreign_id','c.num','c.goods_type','c.buy_type','c.create_time',
+                 'g.id as goods_id ','g.headline','g.name','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+             ],'order'=>[
+                 'c.id'=>'desc'
+             ],
+         ];
+
+         $keyword = input('get.keyword','');
+         if($keyword) {
+             $config['where'][] = ['g.name', 'like', '%' . trim($keyword) . '%'];
+         }
+         $list = $model -> pageQuery($config);
+         print_r($model->getLastSql());exit;
+         $this->assign('list',$list);
+         if(isset($_GET['pageType'])){
+             if($_GET['pageType'] == 'index' ){//店铺产品列表
+                 return $this->fetch('list_tpl');
+             }
+         }
         return $this->fetch('list_tpl');
     }
 

@@ -48,20 +48,6 @@
 	$(function(){
 		//初始化分类商品页面
 		getPagingList(config,postData);
-
-		$('body').on('click','.nav_menu li',function(){
-			var _this = $(this);
-			$(this).addClass('current').siblings().removeClass('current');
-			config = {
-				url:module+'Goods/getList',
-				requestEnd:false,
-				loadTrigger:false,
-				currentPage:1,
-			};
-			postData.category_id = _this.data('category-id');
-			getPagingList(config,postData);
-		})
-
 		//下拉加载
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
