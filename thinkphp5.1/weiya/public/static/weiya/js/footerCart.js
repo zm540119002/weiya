@@ -172,8 +172,8 @@ $(function () {
                         num += parseInt($(this).find('.gshopping_count').val());
                     });
                     //parseInt($('footer').find('num').text())+parseInt(num)
-                    $('footer').find('.cart_num').text(num);
-                    $('footer').find('.add_num').text('+'+num).addClass('current');
+                    $('.goodsInfoLayer').find('.cart_num').text(num);
+                    $('.goodsInfoLayer').find('.add_num').text('+'+num).addClass('current');
                     setTimeout(function(){
                         $('.add_num').removeClass('current');
                     },2000)
