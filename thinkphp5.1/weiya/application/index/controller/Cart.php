@@ -29,7 +29,6 @@ class Cart extends \common\controller\UserBase{
           ]
         ];
         $cartList = $model->getList($config);
-        print_r($goodsList);exit;
         foreach ($goodsList as $goods){
             //假定没找到
             $find = false;
@@ -40,6 +39,7 @@ class Cart extends \common\controller\UserBase{
                         'user_id' => $this->user['id'],
                         'id' => $cart['id'],
                         'foreign_id' => $cart['foreign_id'],
+                        'buy_type' => $cart['buy_type'],
                     ];
                     $data['num'] = $goods['num'] + $cart['num'];
                     $res = $model->allowField(true)->save($data,$where);
