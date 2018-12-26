@@ -29,48 +29,43 @@ class Cart extends \common\controller\UserBase{
           ]
         ];
         $cartList = $model->getList($config);
+        $addData = [];
+        $updateData =[];
         foreach ($goodsList as $goods){
-            $data = [];
-            $data['user_id'] = $this->user['id'];
-            $data['foreign_id'] = $goods['foreign_id'];
-            $data['num'] = $goods['num'];
-            $data['buy_type'] = $goods['buy_type'];
-            $data['create_time'] = time();
-            $res = $model->save($data);
-            echo $model->getLastSql();
             //假定没找到
             $find = false;
             foreach ($cartList as $cart){
-                if($goods['foreign_id'] == $cart['foreign_id'] ){//找到了，则更新记录
+                if($goods['foreign_id'] == $cart['foreign_id'] && $goods['buy_type'] == $cart['buy_type'] ){//找到了，则更新记录
                     $find = true;
-//                    $where = [
-//                        'user_id' => $this->user['id'],
-//                        'id' => $cart['id'],
-//                        'foreign_id' => $cart['foreign_id'],
-//                        'buy_type' => $cart['buy_type'],
-//                    ];
-//                    $data['num'] = $goods['num'] + $cart['num'];
-//                    $res = $model->isUpdate(true)->save($data,$where);
-//                    if(false === $res){
-//                        break 2;
-//                    }
+                    $data = [
+                        'user_id' => $this->user['id'],
+                        'id' => $cart['id'],
+                        'foreign_id' => $cart['foreign_id'],
+                        'buy_type' => $cart['buy_type'],
+                        'num' => $goods['num'] + $cart['num']
+                    ];
+                    $updateData[] = $data;
                 }
             }
-//            if(!$find){//如果没找到，则新增
-//                $data = [];
-//                $data['user_id'] = $this->user['id'];
-//                $data['foreign_id'] = $goods['foreign_id'];
-//                $data['num'] = $goods['num'];
-//                $data['buy_type'] = $goods['buy_type'];
-//                $data['create_time'] = time();
-//                print_r($data);
-//                $res = $model->save($data);
-//                echo $model->getLastSql();
-//                if(!$res){
-//                    break;
-//                }
-//            }
+            if(!$find){//如果没找到，则新增
+                $data = [];
+                $data['user_id'] = $this->user['id'];
+                $data['foreign_id'] = $goods['foreign_id'];
+                $data['num'] = $goods['num'];
+                $data['buy_type'] = $goods['buy_type'];
+                $data['create_time'] = time();
+                $addData[] = $data;
+            }
         }
+        print_r($addData);
+        print_r($updateData);
+        if(!empty($addData)){
+            $model->saveAll($addData);
+        }
+        if(!empty($updateData)){
+            $model->saveAll($updateData);
+        }
+
 //        return successMsg('成功');
     }
 
