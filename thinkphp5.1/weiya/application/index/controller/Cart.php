@@ -57,16 +57,23 @@ class Cart extends \common\controller\UserBase{
                 $addData[] = $data;
             }
         }
-        print_r($addData);
-        print_r($updateData);
+        $model->startTrans();
         if(!empty($addData)){
-            $model->saveAll($addData);
+            $res =  $model->saveAll($addData);
+            if (!count($res)) {
+                $model->rollback();
+                return errorMsg('失败');
+            }
         }
         if(!empty($updateData)){
-            $model->saveAll($updateData);
+            $res =  $model->saveAll($updateData);
+            if (!count($res)) {
+                $model->rollback();
+                return errorMsg('失败');
+            }
         }
-
-//        return successMsg('成功');
+        $model -> commit();
+        return successMsg('成功');
     }
 
     /**
