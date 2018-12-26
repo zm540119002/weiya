@@ -7,14 +7,13 @@
 		<span></span>
 		<h2>购物车</h2>
 	</section>
-	<div class="cart_goods_list" id="list">
-	</div>
 	<section id="no_data">
 		<div class="cart_data_empty">
 			<p>注：采购车里超过7天未结算的商品会被系统自动清理</p>
 		</div>
 	</section>
-	
+	<ul class="cart_goods_list" id="list">
+	</ul>
 </article>
 {/block}
 {block name="common"}
@@ -35,7 +34,7 @@
 
 	};
 	var postData = {
-		pageSize:10,
+		pageSize:20,
 		pageType:'index'
 	};
 	$(function(){
@@ -45,7 +44,6 @@
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
 				config.loadTrigger = false;
-				postData.category_id = $('.nav_menu li.current').data('category-id');
 				getPagingList(config,postData);
 			}
 		});
