@@ -17,25 +17,50 @@ class Cart extends \common\controller\UserBase{
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
-        $data = input('post.goodsList/a');
-        if(empty($data)){
+        $goodsList = input('post.goodsList/a');
+        if(empty($goodsList)){
             return errorMsg('没有数据');
         }
         $userId = $this->user['id'];
-        $arr = [
-            'user_id' => $userId,
-            'create_time' => time(),
-        ];
-        array_walk($data, function (&$value, $key, $arr) {
-            $value = array_merge($value, $arr);
-        }, $arr);
         $model = new \app\index\model\Cart();
-        $res = $model->allowField(true)->saveAll($data)->toArray();
-        if (!count($res)) {
-            return errorMsg('失败');
+        $config = [
+          'where' => [
+              ['c.user_id','=',$userId]
+          ]
+        ];
+        $cartList = $model->getList($config);
+        foreach ($goodsList as $goods){
+            //假定没找到
+            $find = false;
+            foreach ($cartList as $cart){
+                if($goods['foreign_id'] == $cart['foreign_id'] && $goods['buy_type'] == $cart['buy_type']){//找到了，则更新记录
+                    $find = true;
+                    $where = [
+                        'user_id' => $this->user['id'],
+                        'id' => $cart['id'],
+                        'foreign_id' => $cart['foreign_id'],
+                    ];
+                    $data['num'] = $goods['num'] + $cart['num'];
+                    $res = $model->allowField(true)->save($data,$where);
+                    if(false === $res){
+                        break 2;
+                    }
+                }
+            }
+            if(!$find){//如果没找到，则新增
+                $data = [];
+                $data['user_id'] = $this->user['id'];
+                $data['foreign_id'] = $goods['foreign_id'];
+                $data['num'] = $goods['num'];
+                $data['buy_type'] = $goods['buy_type'];
+                $data['create_time'] = time();
+                $res = $model->allowField(true)->save($data);
+                if(!$res){
+                    break;
+                }
+            }
         }
         return successMsg('成功');
-
     }
 
     /**
