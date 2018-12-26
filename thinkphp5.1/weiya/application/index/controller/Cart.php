@@ -40,7 +40,7 @@ class Cart extends \common\controller\UserBase{
             //假定没找到
             $find = false;
             foreach ($cartList as $cart){
-                if($goods['foreign_id'] == $cart['foreign_id'] && $goods['buy_type'] == $cart['buy_type']){//找到了，则更新记录
+                if($goods['foreign_id'] == $cart['foreign_id'] ){//找到了，则更新记录
                     echo 1;
                     $find = true;
 //                    $where = [
