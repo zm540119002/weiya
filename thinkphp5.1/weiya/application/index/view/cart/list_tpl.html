@@ -11,15 +11,15 @@
     </a>
     <div class="cart_list_r">
         <p>美肤面膜美肤面膜美肤面膜美肤面膜美肤面膜</p>
-        <div>商品规格：<span>111/ 222</span></div>
+        <div>商品规格：<span>{$info.specification}</span></div>
         <div class="commodity_purchaser f24">
-            <span class="pink">￥<price>10</price></span><del>￥20</del>
+            <span class="pink">￥<price>{$info.bulk_price}</price></span>
         </div>
         <div class="purchase_goods_num cart_goods_operate">
             <!--<span>购买数量(5)</span>-->
             <div class="quantity_wrapper">
                 <a href="javascript:void(0);" class="cart_greduce">-</a>
-                <input type="text" value="1" class="f24 cart_gshopping_count">
+                <input type="text" value="{$info.num}" class="f24 cart_gshopping_count">
                 <a href="javascript:void(0);" class="cart_gplus">+</a>
             </div>
             <a href="javascript:void(0);" class="detele_order goodsDel detele_cart">删除</a>
