@@ -57,7 +57,7 @@ class Cart extends \common\controller\UserBase{
                 $data['num'] = $goods['num'];
                 $data['buy_type'] = $goods['buy_type'];
                 $data['create_time'] = time();
-                $res = $model->allowField(true)->save($data);
+                $res = $model->save($data);
                 if(!$res){
                     break;
                 }
