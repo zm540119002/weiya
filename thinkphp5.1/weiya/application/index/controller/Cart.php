@@ -43,9 +43,7 @@ class Cart extends \common\controller\UserBase{
                     ];
                     $data['num'] = $goods['num'] + $cart['num'];
                     $res = $model->allowField(true)->save($data,$where);
-                    if(false === $res){
-                        break 2;
-                    }
+
                 }
             }
             if(!$find){//如果没找到，则新增
@@ -56,9 +54,7 @@ class Cart extends \common\controller\UserBase{
                 $data['buy_type'] = $goods['buy_type'];
                 $data['create_time'] = time();
                 $res = $model->allowField(true)->save($data);
-                if(!$res){
-                    break;
-                }
+                
             }
         }
         return successMsg('成功');
