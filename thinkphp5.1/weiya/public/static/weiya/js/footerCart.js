@@ -130,6 +130,56 @@ $(function () {
             }
         });
     });
+    //样品弹窗加入购物车
+    $('body').on('click','.goodsInfoLayer .add_cart',function(){
+        var lis = null;
+        if($($(this).context).hasClass('add_purchase_cart')){
+            lis = $(this).parents('li');
+        }else{
+            lis = $('ul.goods_list').find('li');
+        }
+        var postData = assemblyData(lis);
+        if(!postData){
+            return false;
+        }
+        console.log(postData);
+        var url = module + 'Cart/addCart';
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'post',
+            beforeSend: function(){
+                $('.loading').show();
+            },
+            error:function(){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+                if(data.status==0){
+                    dialog.error(data.info);
+                }
+                // else if(data.code==1 && data.data=='no_login'){
+				// 	loginDialog();
+				// }
+                else{
+                     dialog.success(data.info);
+                    var num = 0;
+                    $.each(lis,function(){
+                        num += parseInt($(this).find('.gshopping_count').val());
+                    });
+                    //parseInt($('footer').find('num').text())+parseInt(num)
+                    $('footer').find('.cart_num').text(num);
+                    $('footer').find('.add_num').text('+'+num).addClass('current');
+                    setTimeout(function(){
+                        $('.add_num').removeClass('current');
+                    },2000)
+                    
+                }
+            }
+        });
+    });
     //购物车列表页
     $('body').on('click','.add_cart_icon',function(){
     var url = module + 'Cart/index';
