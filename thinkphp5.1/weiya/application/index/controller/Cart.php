@@ -56,7 +56,7 @@ class Cart extends \common\controller\Base{
                  ['goods g','g.id = c.foreign_id','left']
              ],'field'=>[
                  'c.id as cart_id','c.foreign_id','c.num','c.goods_type','c.buy_type','c.create_time',
-                 'g.id as goods_id ','g.headline','g.name','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                 'g.id as goods_id ','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
                  'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
              ],'order'=>[
                  'c.id'=>'desc'
@@ -68,14 +68,12 @@ class Cart extends \common\controller\Base{
              $config['where'][] = ['g.name', 'like', '%' . trim($keyword) . '%'];
          }
          $list = $model -> pageQuery($config)->toArray();
-         print_r($list);exit;
          $this->assign('list',$list);
          if(isset($_GET['pageType'])){
              if($_GET['pageType'] == 'index' ){//店铺产品列表
                  return $this->fetch('list_tpl');
              }
          }
-        return $this->fetch('list_tpl');
     }
 
     /**详情页

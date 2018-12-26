@@ -1,18 +1,24 @@
-<li data-id="1">
+{notempty name='list'}
+<li >
     <div class="head_shop">
         <input type="checkbox" class="item_checkbox checkitem cpy_checkitem"/>
         <span class="">维雅生物科技有限公司</span>
     </div>
+    {volist name='list' id='info'}
     <div class="item">
         <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
-        <a  href="" class="cart_goods_img">
-            <img src="public_img/default/no_pic_100.jpg" alt="" class="c_img">
+        <a  href="{:url('goods/detail',['id'=>$info.id])}" class="cart_goods_img">
+            {notempty name='info.thumb_img'}
+            <img src="public_uploads/{$info.thumb_img}" alt="" class="product-square-img">
+            {else /}
+            <img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
+            {/notempty}
         </a>
         <div class="cart_list_r">
-            <p>美肤面膜美肤面膜美肤面膜美肤面膜美肤面膜</p>
-            <div>商品规格：<span>111/ 222</span></div>
+            <p>{$info.headline}</p>
+            <div>商品规格：<span>{$info.specification}</span></div>
             <div class="commodity_purchaser f24">
-                <span class="pink">￥<price>10</price></span><del>￥20</del>
+                <span class="pink">￥<price>{$info.bulk_price}</price></span>
             </div>
             <div class="purchase_goods_num cart_goods_operate">
                 <!--<span>购买数量(5)</span>-->
@@ -25,78 +31,10 @@
             </div>
         </div>
     </div>
-    <div class="item">
-        <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
-        <a  href="" class="cart_goods_img">
-            <img src="public_img/default/no_pic_100.jpg" alt="" class="c_img">
-        </a>
-        <div class="cart_list_r">
-            <p>美肤面膜美肤面膜美肤面膜美肤面膜美肤面膜</p>
-            <div>商品规格：<span>111/ 222</span></div>
-            <div class="commodity_purchaser f24">
-                <span class="pink">￥<price>10</price></span><del>￥20</del>
-            </div>
-            <div class="purchase_goods_num cart_goods_operate">
-                <!--<span>购买数量(5)</span>-->
-                <div class="quantity_wrapper">
-                    <a href="javascript:void(0);" class="cart_greduce">-</a>
-                    <input type="text" value="1" class="f24 cart_gshopping_count">
-                    <a href="javascript:void(0);" class="cart_gplus">+</a>
-                </div>
-                <a href="javascript:void(0);" class="detele_order goodsDel detele_cart">删除</a>
-            </div>
-        </div>
-    </div>
-    <div class="item">
-        <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
-        <a  href="" class="cart_goods_img">
-            <img src="public_img/default/no_pic_100.jpg" alt="" class="c_img">
-        </a>
-        <div class="cart_list_r">
-            <p>美肤面膜美肤面膜美肤面膜美肤面膜美肤面膜</p>
-            <div>商品规格：<span>111/ 222</span></div>
-            <div class="commodity_purchaser f24">
-                <span class="pink">￥<price>10</price></span><del>￥20</del>
-            </div>
-            <div class="purchase_goods_num cart_goods_operate">
-                <!--<span>购买数量(5)</span>-->
-                <div class="quantity_wrapper">
-                    <a href="javascript:void(0);" class="cart_greduce">-</a>
-                    <input type="text" value="1" class="f24 cart_gshopping_count">
-                    <a href="javascript:void(0);" class="cart_gplus">+</a>
-                </div>
-                <a href="javascript:void(0);" class="detele_order goodsDel detele_cart">删除</a>
-            </div>
-        </div>
-    </div>
+    {/volist}
+
 </li>
-<li data-id="2">
-    <div class="head_shop">
-        <input type="checkbox" class="item_checkbox checkitem cpy_checkitem"/>
-        <span class="">维雅生物科技有限公司111</span>
-    </div>
-    <div class="item">
-        <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
-        <a  href="" class="cart_goods_img">
-            <img src="public_img/default/no_pic_100.jpg" alt="" class="c_img">
-        </a>
-        <div class="cart_list_r">
-            <p>保湿套装超爽保湿套装超爽保湿套装超爽保湿套装超爽</p>
-            <div>商品规格：<span>111/ 222</span></div>
-            <div class="commodity_purchaser f24">
-                <span class="pink">￥<price>10</price></span><del>￥20</del>
-            </div>
-            <div class="purchase_goods_num cart_goods_operate">
-                <!--<span>购买数量(5)</span>-->
-                <div class="quantity_wrapper">
-                    <a href="javascript:void(0);" class="cart_greduce">-</a>
-                    <input type="text" value="1" class="f24 cart_gshopping_count">
-                    <a href="javascript:void(0);" class="cart_gplus">+</a>
-                </div>
-                <a href="javascript:void(0);" class="detele_order goodsDel detele_cart">删除</a>
-            </div>
-        </div>
-    </div>
-</li>
+{/notempty}
+
 
   
