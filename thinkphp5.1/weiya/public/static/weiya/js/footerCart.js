@@ -136,13 +136,12 @@ $(function () {
         if($($(this).context).hasClass('add_purchase_cart')){
             lis = $(this).parents('li');
         }else{
-            lis = $('ul.goods_list').find('li');
+            lis = $('.goodsInfoLayer ul.goods_list').find('li');
         }
         var postData = assemblyData(lis);
         if(!postData){
             return false;
         }
-        console.log(postData);
         var url = module + 'Cart/addCart';
         $.ajax({
             url: url,
@@ -315,7 +314,9 @@ $(function () {
                 $('.group_cart_nav').hide();
                 $('.goodsInfoLayer .group_cart_nav').show();
                 var goodsTitle=_this.parents('li').find('.goods_title').text();
+                var id=_this.parents('li').data('id');
                 $('.goodsInfoLayer .goods_title').text(goodsTitle);
+                $('.goodsInfoLayer li').data('id',id);
                 // $('.twitter-release-content').css('height',winHeight-120+'px');
                 // $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
             },
@@ -390,18 +391,23 @@ function assemblyData(lis) {
     var postData = {};
     postData.goodsList = [];
     var isInt = true;
+    //console.log(lis);
     $.each(lis,function(){
         var _this = $(this);
         var num = _this.find('.gshopping_count').val();
+        var buy_type=_this.data('buy_type');
+        //alert(num);
         if(!isPosIntNumberOrZero(num)){
             isInt = false;
             return false;
         }
         var goodsId = _this.data('id');
+        //alert(goodsId);
         if(parseInt(num) && goodsId){
             var tmp = {};
             tmp.foreign_id = goodsId;
             tmp.num = num;
+            tmp.buy_type=buy_type;
             postData.goodsList.push(tmp);
         }
     });
