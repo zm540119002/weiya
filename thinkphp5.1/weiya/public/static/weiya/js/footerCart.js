@@ -262,6 +262,7 @@ $(function () {
             // fixed:false,
             success:function(){
                 var winHeight=$(window).height();
+                $('.group_cart_nav').hide();
                 var goodsTitle=_this.parents('li').find('.goods_title').text();
                 $('.goodsInfoLayer .goods_title').text(goodsTitle);
                 // $('.twitter-release-content').css('height',winHeight-120+'px');
