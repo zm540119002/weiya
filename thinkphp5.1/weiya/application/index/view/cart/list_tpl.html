@@ -1,18 +1,18 @@
-{notempty name='list'}
+{notempty name="list"}
+{volist name="list" id="info"}
 <li >
     <div class="head_shop">
         <input type="checkbox" class="item_checkbox checkitem cpy_checkitem"/>
         <span class="">维雅生物科技有限公司</span>
     </div>
-    {volist name='list' id='info'}
     <div class="item">
         <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
-        <a  href="{:url('goods/detail',['id'=>$info.id])}" class="cart_goods_img">
-            {notempty name='info.thumb_img'}
-            <img src="public_uploads/{$info.thumb_img}" alt="" class="product-square-img">
-            {else /}
+        <a href="{:url('Goods/detail',['id'=>$info.id])}" class="cart_goods_img" >
+            {empty name="info.thumb_img"}
             <img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
-            {/notempty}
+            {else /}
+            <img src="public_uploads/{$info.thumb_img}" alt=""  class="product-square-img">
+            {/empty}
         </a>
         <div class="cart_list_r">
             <p>{$info.headline}</p>
@@ -31,9 +31,8 @@
             </div>
         </div>
     </div>
-    {/volist}
-
 </li>
+{/volist}
 {/notempty}
 
 
