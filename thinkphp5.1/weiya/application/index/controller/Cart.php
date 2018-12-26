@@ -29,6 +29,7 @@ class Cart extends \common\controller\UserBase{
           ]
         ];
         $cartList = $model->getList($config);
+        print_r($cartList);
         foreach ($goodsList as $goods){
             echo 1;
             //假定没找到
