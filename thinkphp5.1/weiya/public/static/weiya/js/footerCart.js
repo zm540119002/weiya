@@ -51,7 +51,7 @@ $(function () {
         //计算购物车商品列表总价
         calculateCartTotalPrice($(this));
     });
-    //购买数量.失去焦点
+    //购物车购买数量.失去焦点
     $('body').on('blur','.cart_gshopping_count',function(){
         var buyNum=parseInt($(this).val());
         if(buyNum<1){
@@ -447,10 +447,15 @@ function goodsNumReduce(obj,opt) {
 function goodsNumPlus(obj,opt) {
     var _li = obj.parents('li');
     var num = _li.find('.gshopping_count').val();
-    num=parseInt(num);
-    num=num+parseInt(opt.increase_quantity);
-    _li.find('.gshopping_count').val(num);
-
+    if(num==0){
+        alert(0);
+        _li.find('.gshopping_count').val(opt.order_quantity);
+    }else{
+        alert(1);
+        num=parseInt(num);
+        num=num+parseInt(opt.increase_quantity);
+        _li.find('.gshopping_count').val(num);
+    }
 }
 //购物车中单个商品数量自减
 function cartGoodsNumReduce(obj) {
