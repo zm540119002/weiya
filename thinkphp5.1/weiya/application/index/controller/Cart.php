@@ -64,7 +64,7 @@ class Cart extends \common\controller\UserBase{
                 $data['buy_type'] = $goods['buy_type'];
                 $data['create_time'] = time();
                 print_r($data);
-                $res = $model->save($data);
+                $res = $model->isUpdate(false)->save($data);
                 echo $model->getLastSql();
                 if(!$res){
                     break;
