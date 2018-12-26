@@ -59,7 +59,12 @@ class Cart extends \common\controller\UserBase{
         }
         print_r($addData);
         print_r($updateData);
-
+        if(!empty($addData)){
+            $model->saveAll($addData);
+        }
+        if(!empty($updateData)){
+            $model->saveAll($updateData);
+        }
 
 //        return successMsg('成功');
     }
