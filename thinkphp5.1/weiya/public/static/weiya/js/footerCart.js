@@ -110,9 +110,10 @@ $(function () {
                 if(data.status==0){
                     dialog.error(data.info);
                 }
-                // else if(data.code==1 && data.data=='no_login'){
-				// 	loginDialog();
-				// }
+                else if(data.code==1 && data.data=='no_login'){
+					loginDialog();
+                    return false;
+				}
                 else{
                      dialog.success(data.info);
                     var num = 0;
@@ -160,9 +161,11 @@ $(function () {
                 if(data.status==0){
                     dialog.error(data.info);
                 }
-                // else if(data.code==1 && data.data=='no_login'){
-				// 	loginDialog();
-				// }
+                else if(data.code==1 && data.data=='no_login'){
+
+					loginDialog();
+                    return false
+				}
                 else{
                      dialog.success(data.info);
                     var num = 0;
