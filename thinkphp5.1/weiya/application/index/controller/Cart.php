@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Cart extends \common\controller\Base{
+class Cart extends \common\controller\UserBase{
     /**首页
      */
     public function index(){
@@ -21,8 +21,7 @@ class Cart extends \common\controller\Base{
         if(empty($data)){
             return errorMsg('没有数据');
         }
-//        $userId = $this->user['id'];
-        $userId = 24;
+        $userId = $this->user['id'];
         $arr = [
             'user_id' => $userId,
             'create_time' => time(),
@@ -46,11 +45,11 @@ class Cart extends \common\controller\Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-
+        $userId = $this->user['id'];
         $model = new \app\index\model\Cart();
          $config=[
              'where'=>[
-                 ['c.user_id','=',24],
+                 ['c.user_id','=',$userId],
                  ['c.status','=',0],
              ],'join' => [
                  ['goods g','g.id = c.foreign_id','left']
@@ -69,7 +68,7 @@ class Cart extends \common\controller\Base{
          $list = $model -> pageQuery($config);
          $this->assign('list',$list);
          if(isset($_GET['pageType'])){
-             if($_GET['pageType'] == 'index' ){//店铺产品列表
+             if($_GET['pageType'] == 'index' ){
                  return $this->fetch('list_tpl');
              }
          }

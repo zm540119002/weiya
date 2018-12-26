@@ -110,9 +110,10 @@ $(function () {
                 if(data.status==0){
                     dialog.error(data.info);
                 }
-                // else if(data.code==1 && data.data=='no_login'){
-				// 	loginDialog();
-				// }
+                else if(data.code==1 && data.data=='no_login'){
+					loginDialog();
+                    return false;
+				}
                 else{
                      dialog.success(data.info);
                     var num = 0;
@@ -159,9 +160,11 @@ $(function () {
                 if(data.status==0){
                     dialog.error(data.info);
                 }
-                // else if(data.code==1 && data.data=='no_login'){
-				// 	loginDialog();
-				// }
+                else if(data.code==1 && data.data=='no_login'){
+
+					loginDialog();
+                    return false
+				}
                 else{
                      dialog.success(data.info);
                     var num = 0;
@@ -226,78 +229,8 @@ $(function () {
             }
         });
     });
-    //开通推客分享功能
-    $('body').on('click','.open_referrer',function(){
-        var url = MODULE + '/Referrer/openReferrer';
-        layer.open({
-            content:'是否开通？<br/>一键免费开通推客分享功能',
-            btn:['确定','取消'],
-            yes:function(index){
-                $.ajax({
-                    url: url,
-                    type: 'post',
-                    beforeSend: function(){
-                        $('.loading').show();
-                    },
-                    error:function(){
-                        $('.loading').hide();
-                        dialog.error('AJAX错误');
-                    },
-                    success: function(data){
-                        $('.loading').hide();
-                        if(data.status == 0){
-                            if(data.url){
-                                location.href = data.url;
-                            }else{
-                                dialog.error(data.info);
-                            }
-                        }else if(data.status == 1){
-                            if(data.info=='isAjax'){
-                                loginDialog();
-                            }else{
-                                layer.open({
-                                    content : '已免费开通！<br/>推客分享功能',
-                                    btn:['确定'],
-                                    end : function(){
 
-                                    },
-                                    yes:function(index){
-                                        $('.open_referrer').hide();
-                                        layer.close(index)
-                                    }
-                                })
-                            }
-                        }
-                    }
-                });
-                layer.close(index);
-            }
-        })
-    });
 
-    //关闭微信分享提示图
-    $('body').on('click','.weixinShare_btn',function(){
-        $('.mcover').hide();
-    });
-    
-    var group_buy_end = $('.groupBuyEnd').val();
-    if(group_buy_end){ //重新开团
-       dialog.confirm('此团购已结束，是否重新开团')
-    }
-    //发起微团购并支付
-    $('body').on('click','.initiate_group_buy',function(){
-        var postData = assemblyData($('ul.goods_list').find('li'));
-        if(!postData){
-            return false;
-        }
-        postData.returnUrl = location.href;
-        postData.orderType = 1;
-        postData.groupBuyId = $('.groupBuyId').val();
-        if(group_buy_end){ //重新开团
-            delete(postData["groupBuyId"]);
-        }
-        generateOrder(postData,groupBuyCallBack);
-    });
     //购物车弹窗
     var goodsInfoLayer=$('#goodsInfoLayer').html();
     var pageii;
@@ -368,19 +301,6 @@ function generateOrder(postData,callBack) {
             }
         }
     });
-}
-//立即购买回调
-function buyNowCallBack() {
-    $('.buy_now,.clearing_now').click();
-}
-//团购回调
-function groupBuyCallBack() {
-    $('.initiate_group_buy').click();
-}
-
-//关闭二维码
-function clockArea() {
-    $("#areaMask,.express-code-box").fadeOut();
 }
 
 //组装数据
