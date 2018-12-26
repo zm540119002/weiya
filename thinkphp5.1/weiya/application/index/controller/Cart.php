@@ -30,18 +30,18 @@ class Cart extends \common\controller\UserBase{
         ];
         $cartList = $model->getList($config);
         foreach ($goodsList as $goods){
-//            $data = [];
-//            $data['user_id'] = $this->user['id'];
-//            $data['foreign_id'] = $goods['foreign_id'];
-//            $data['num'] = $goods['num'];
-//            $data['buy_type'] = $goods['buy_type'];
-//            $data['create_time'] = time();
-//            $res = $model->save($data);
+            $data = [];
+            $data['user_id'] = $this->user['id'];
+            $data['foreign_id'] = $goods['foreign_id'];
+            $data['num'] = $goods['num'];
+            $data['buy_type'] = $goods['buy_type'];
+            $data['create_time'] = time();
+            $res = $model->save($data);
+            echo $model->getLastSql();
             //假定没找到
             $find = false;
             foreach ($cartList as $cart){
                 if($goods['foreign_id'] == $cart['foreign_id'] ){//找到了，则更新记录
-                    echo 1;
                     $find = true;
 //                    $where = [
 //                        'user_id' => $this->user['id'],
@@ -56,20 +56,20 @@ class Cart extends \common\controller\UserBase{
 //                    }
                 }
             }
-            if(!$find){//如果没找到，则新增
-                $data = [];
-                $data['user_id'] = $this->user['id'];
-                $data['foreign_id'] = $goods['foreign_id'];
-                $data['num'] = $goods['num'];
-                $data['buy_type'] = $goods['buy_type'];
-                $data['create_time'] = time();
-                print_r($data);
-                $res = $model->save($data);
-                echo $model->getLastSql();
-                if(!$res){
-                    break;
-                }
-            }
+//            if(!$find){//如果没找到，则新增
+//                $data = [];
+//                $data['user_id'] = $this->user['id'];
+//                $data['foreign_id'] = $goods['foreign_id'];
+//                $data['num'] = $goods['num'];
+//                $data['buy_type'] = $goods['buy_type'];
+//                $data['create_time'] = time();
+//                print_r($data);
+//                $res = $model->save($data);
+//                echo $model->getLastSql();
+//                if(!$res){
+//                    break;
+//                }
+//            }
         }
 //        return successMsg('成功');
     }
