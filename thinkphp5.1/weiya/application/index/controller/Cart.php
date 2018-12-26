@@ -43,17 +43,17 @@ class Cart extends \common\controller\UserBase{
                 if($goods['foreign_id'] == $cart['foreign_id'] && $goods['buy_type'] == $cart['buy_type']){//找到了，则更新记录
                     echo 1;
                     $find = true;
-                    $where = [
-                        'user_id' => $this->user['id'],
-                        'id' => $cart['id'],
-                        'foreign_id' => $cart['foreign_id'],
-                        'buy_type' => $cart['buy_type'],
-                    ];
-                    $data['num'] = $goods['num'] + $cart['num'];
-                    $res = $model->isUpdate(true)->save($data,$where);
-                    if(false === $res){
-                        break 2;
-                    }
+//                    $where = [
+//                        'user_id' => $this->user['id'],
+//                        'id' => $cart['id'],
+//                        'foreign_id' => $cart['foreign_id'],
+//                        'buy_type' => $cart['buy_type'],
+//                    ];
+//                    $data['num'] = $goods['num'] + $cart['num'];
+//                    $res = $model->isUpdate(true)->save($data,$where);
+//                    if(false === $res){
+//                        break 2;
+//                    }
                 }
             }
             if(!$find){//如果没找到，则新增
