@@ -499,17 +499,18 @@ function calculateTotalPrice(obj){
 }
 //计算购物车商品列表总价
 function calculateCartTotalPrice(obj){
-    console.log(obj);
     if(!$('footer').find('price').length){
         return false;
     }
     var isInt = true;
+    var totalNum=0;
     var amount = 0;
     var _thisLis = $('.list.goods_list').find('li .item');
     $.each(_thisLis,function(index,val){
         var _thisLi = $(this);
         if(_thisLi.find('.sign_checkitem').is(':checked')){
             var num = _thisLi.find('.cart_gshopping_count').val();
+            totalNum+=parseInt(num);
             amount += _thisLi.find('price').text() * num;
             if(!isPosIntNumberOrZero(num)){
                 isInt = false;
@@ -518,6 +519,7 @@ function calculateCartTotalPrice(obj){
         }
     });
     $('footer').find('price').html(amount.toFixed(2));
+    $('footer').find('.total_num').text('('+totalNum+')'+'件');
 }
 //单个商品数量自减
 function goodsNumReduce(obj,opt) {

@@ -16,7 +16,7 @@
         {elseif $unlockingFooterCart.count == 3 /}
             <div class="group_btn30 bottom_item">
                 {if $vo.class=='amount'}
-                <span class="amount">￥<price>0.00</price></span>
+                总计:<span class="amount">￥<price>0.00</price></span>
                 {elseif $vo.class=='add_cart_icon'}
                 <a href="javascript:void(0);" class=" {$vo.class}"><span class="add_num"></span><span class="cart_num">0</span>{$vo.name}</a>
                 {elseif $vo.class=='checked_all'}
@@ -26,7 +26,7 @@
                     <a href="javascript:void(0);" class="goodsDel detele_carts">删除</a>
                 </div>
                 {else /}
-                <a href="javascript:void(0);" class=" {$vo.class}"><span class="s_i"></span>{$vo.name}</a>
+                <a href="javascript:void(0);" class=" {$vo.class}">{$vo.name}<span class="total_num"></span></a>
                 {/if}
             </div>
         {elseif $unlockingFooterCart.count == 4 /}
