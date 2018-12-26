@@ -10,7 +10,7 @@
 		<p class="goods_title">台湾原装进口 真世酵素纤丽果冻</p>
 	</div>
 	<ul class="bottom-layer-info goods_list">
-        <li>
+        <li data-id="" data-buy_type="2">
 			<div class="columns_flex l-r-sides">
 				<div >
 					<span class="red">￥<price>100.00</price></span>
@@ -123,7 +123,7 @@
 		<ul class="goods_list list">
 			{notempty name="goodsList"}
 			{volist name="goodsList" id="info"}
-			<li data-id="{$info.id}">
+			<li data-id="{$info.id}" data-buy_type="1">
 				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
 					{empty name="info.thumb_img"}
 					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
