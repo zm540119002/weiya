@@ -166,8 +166,7 @@ $(function () {
                     return false
 				}
                 else{
-                    dialog.success(data.info);
-                    
+                    //dialog.success(data.info);
                     var num = 0;
                     $.each(lis,function(){
                         num += parseInt($(this).find('.gshopping_count').val());
