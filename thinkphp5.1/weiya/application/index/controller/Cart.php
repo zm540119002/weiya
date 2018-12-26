@@ -59,9 +59,9 @@ class Cart extends \common\controller\UserBase{
                 $data['create_time'] = time();
                 $res = $model->isUpdate(false)->save($data);
                 echo $model->getLastSql();
-//                if(!$res){
-//                    break;
-//                }
+                if(!$res){
+                    break;
+                }
             }
         }
 //        return successMsg('成功');
