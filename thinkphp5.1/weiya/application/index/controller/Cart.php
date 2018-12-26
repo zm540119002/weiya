@@ -36,7 +36,7 @@ class Cart extends \common\controller\UserBase{
             $data['num'] = $goods['num'];
             $data['buy_type'] = $goods['buy_type'];
             $data['create_time'] = time();
-            $res = $model->isUpdate(false)->save($data);
+            $res = $model->save($data);
 //            //假定没找到
 //            $find = false;
 //            foreach ($cartList as $cart){
