@@ -448,10 +448,8 @@ function goodsNumPlus(obj,opt) {
     var _li = obj.parents('li');
     var num = _li.find('.gshopping_count').val();
     if(num==0){
-        alert(0);
         _li.find('.gshopping_count').val(opt.order_quantity);
     }else{
-        alert(1);
         num=parseInt(num);
         num=num+parseInt(opt.increase_quantity);
         _li.find('.gshopping_count').val(num);
