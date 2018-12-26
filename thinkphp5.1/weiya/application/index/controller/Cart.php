@@ -50,7 +50,7 @@ class Cart extends \common\controller\Base{
         $model = new \app\index\model\Cart();
          $config=[
              'where'=>[
-                 ['c.user_id','=',7],
+                 ['c.user_id','=',24],
                  ['c.status','=',0],
              ],'join' => [
                  ['goods g','g.id = c.foreign_id','left']
