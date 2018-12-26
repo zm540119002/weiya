@@ -132,7 +132,7 @@ $(function () {
         });
     });
     //样品弹窗加入购物车
-    $('body').on('click','.goodsInfoLayer .add_cart',function(){
+    $('body').on('click','.goodsInfoLayer .add_cart_layer',function(){
         var lis = null;
         if($($(this).context).hasClass('add_purchase_cart')){
             lis = $(this).parents('li');
@@ -143,6 +143,7 @@ $(function () {
         if(!postData){
             return false;
         }
+        console.log(postData);
         var url = module + 'Cart/addCart';
         $.ajax({
             url: url,
@@ -165,7 +166,8 @@ $(function () {
                     return false
 				}
                 else{
-                     dialog.success(data.info);
+                    dialog.success(data.info);
+                    
                     var num = 0;
                     $.each(lis,function(){
                         num += parseInt($(this).find('.gshopping_count').val());
@@ -240,19 +242,22 @@ $(function () {
             content: goodsInfoLayer,
             closeBtn:2,
             shadeClose:false,
+            btn:['取消'],
             // fixed:false,
             success:function(){
                 var winHeight=$(window).height();
-                $('.group_cart_nav').hide();
-                $('.goodsInfoLayer .group_cart_nav').show();
                 var goodsTitle=_this.parents('li').find('.goods_title').text();
                 var id=_this.parents('li').data('id');
+                var price=_this.parents('li').find('price').text();
+                var specification=_this.parents('li').find('.specification_text').text();
                 $('.goodsInfoLayer .goods_title').text(goodsTitle);
                 $('.goodsInfoLayer li').data('id',id);
-                // $('.twitter-release-content').css('height',winHeight-120+'px');
-                // $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+                $('.goodsInfoLayer price').text(price);
+                $('.goodsInfoLayer .specification').text(specification);
             },
-            btn:['取消']
+            no:function(){
+            }
+            
         });
     });
 });

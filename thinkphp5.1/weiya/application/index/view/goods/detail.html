@@ -35,7 +35,7 @@
 	<section class="module-navigation ">
 		<div >
 			<ul class="goods_list">
-				<li data-id='{$info.id}'>
+				<li data-id='{$info.id}' data-buy_type="1">
 					<div class="top_radius f20 top_module">
 						<div class="columns_flex l-r-sides">
 							<div>
@@ -109,7 +109,7 @@
 							<a href="javascript:void(0);" class="gplus">+</a>
 						</div>
 						<div>
-							<a class="" href="javascript:void(0);">样品购买</a>
+							<a href="javascript:void(0);" class="sample_purchase" >样品购买</a>
 						</div>
 					</div>
 				</li>
@@ -199,7 +199,9 @@
 	</div>
 </div>
 {/block}
-
+{block name="common"}
+	{include file="public/sample_layer" /}
+{/block}
 {block name="footer"}
 	{include file="template/footer_menu.html" /}
 {/block}
