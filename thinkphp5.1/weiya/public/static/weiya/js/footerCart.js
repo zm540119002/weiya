@@ -397,7 +397,7 @@ function calculateCartTotalPrice(obj){
     var isInt = true;
     var totalNum=0;
     var amount = 0;
-    var _thisLis = $('.list.goods_list').find('li .item');
+    var _thisLis = $('.cart_goods_list').find('li');
     $.each(_thisLis,function(index,val){
         var _thisLi = $(this);
         if(_thisLi.find('.sign_checkitem').is(':checked')){
