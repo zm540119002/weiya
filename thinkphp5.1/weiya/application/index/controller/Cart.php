@@ -58,12 +58,13 @@ class Cart extends \common\controller\UserBase{
                 $data['buy_type'] = $goods['buy_type'];
                 $data['create_time'] = time();
                 $res = $model->save($data);
+                echo $model->getLastSql();
                 if(!$res){
                     break;
                 }
             }
         }
-        return successMsg('成功');
+//        return successMsg('成功');
     }
 
     /**
