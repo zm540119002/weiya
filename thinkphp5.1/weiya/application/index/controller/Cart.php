@@ -50,7 +50,7 @@ class Cart extends \common\controller\Base{
         $model = new \app\index\model\Cart();
          $config=[
              'where'=>[
-                 ['c.user_id','=',7],
+                 ['c.user_id','=',24],
                  ['c.status','=',0],
              ],'join' => [
                  ['goods g','g.id = c.foreign_id','left']
@@ -67,8 +67,8 @@ class Cart extends \common\controller\Base{
          if($keyword) {
              $config['where'][] = ['g.name', 'like', '%' . trim($keyword) . '%'];
          }
-         $list = $model -> pageQuery($config);
-         print_r($model->getLastSql());exit;
+         $list = $model -> pageQuery($config)->toArray();
+         print_r($list);exit;
          $this->assign('list',$list);
          if(isset($_GET['pageType'])){
              if($_GET['pageType'] == 'index' ){//店铺产品列表
