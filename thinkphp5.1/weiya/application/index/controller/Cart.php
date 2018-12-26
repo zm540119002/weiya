@@ -25,6 +25,7 @@ class Cart extends \common\controller\Base{
         $userId = 24;
         $arr = [
             'user_id' => $userId,
+            'create_time' => time(),
         ];
         array_walk($data, function (&$value, $key, $arr) {
             $value = array_merge($value, $arr);
