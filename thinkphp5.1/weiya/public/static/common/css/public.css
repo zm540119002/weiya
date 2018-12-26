@@ -4197,6 +4197,95 @@ select[name="nodeIds"]{
 .tags_item_r .share span{
     background-position:0 -0.44rem;
 }
+/*个人中心*/
+.person-center-wrapper .flex_item{
+    padding:.35rem .15rem;
+    overflow:hidden;
+}
+.person-center-wrapper .flex_item .person-td{
+    float:left;
+    width:25%;
+    text-align:center;
+}
+.person-center-wrapper .separation-line{
+    border-bottom:18px solid #f2f2f2;
+}
+.flex_item a span{
+    position:relative;
+    /*width: 30px; */
+    width: 0.6rem;
+    /* height: 25px; */
+    height: 0.66rem;
+    margin: 0 auto;
+    background-image: url(../../common/img/icons/my_center_icons.png);
+    background-repeat: no-repeat;
+    /* background-size: 30px 345px; */
+    background-size: 0.58rem 9rem;
+    display: block;
+}
+.flex_item .num{
+    width:0.5rem;
+    position:absolute;
+    right:-0.35rem;
+    top:0;
+    font-style: normal;
+    background: #ff0000;
+    color:#fff;
+    border-radius:0.12rem;
+}
+.flex_item a span.my-msg{
+    background-position:0 6px;
+}
+.flex_item a span.notice{
+    background-position:0 -0.55rem;
+}
+.flex_item a span.collec{
+    background-position:0 -1.3rem;
+}
+.flex_item a span.share{
+    background-position:0 -1.95rem;
+}
+.flex_item a span.cart{
+    background-position:0 -2.5rem;
+}
+.flex_item a span.addr{
+    background-position:0 -3.1rem;
+}
+.flex_item a span.charge{
+    background-position:0 -3.75rem;
+}
+.flex_item a span.wait_pay{
+    background-position:0 -4.38rem;
+}
+.flex_item a span.wait_recevie{
+    background-position:0 -5rem;
+}
+.flex_item a span.commit{
+    background-position:0 -5.6rem;
+}
+.flex_item a span.after_s{
+    background-position:0 -6.18rem;
+}
+.flex_item a span.complete{
+    background-position:0 -6.75rem;
+}
+.flex_item a span.brand{
+    background-position:0 -7.3rem;
+}
+.flex_item a span.presentation{
+    background-position:0 -7.9rem;
+}
+.list li.current {
+    border: 1px solid #0066cc;
+}
+.top_header{
+    position: fixed;
+    height:128px;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index:99;
+}
 /*维雅药妆定制*/
 .weiya_content{
     background: #fff;
