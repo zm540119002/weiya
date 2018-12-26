@@ -69,6 +69,7 @@ class Cart extends \common\controller\Base{
          }
          $list = $model -> pageQuery($config);
          $this->assign('list',$list);
+        print_r($list);exit;
          if(isset($_GET['pageType'])){
              if($_GET['pageType'] == 'index' ){//店铺产品列表
                  return $this->fetch('list_tpl');
