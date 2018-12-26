@@ -43,7 +43,7 @@ class Cart extends \common\controller\UserBase{
                         'buy_type' => $cart['buy_type'],
                     ];
                     $data['num'] = $goods['num'] + $cart['num'];
-                    $res = $model->allowField(true)->save($data,$where);
+                    $res = $model->isUpdate(false)->save($data,$where);
                     if(false === $res){
                         break 2;
                     }
@@ -57,7 +57,7 @@ class Cart extends \common\controller\UserBase{
                 $data['num'] = $goods['num'];
                 $data['buy_type'] = $goods['buy_type'];
                 $data['create_time'] = time();
-                $res = $model->save($data);
+                $res = $model->isUpdate(true)->save($data);
                 echo $model->getLastSql();
 //                if(!$res){
 //                    break;
