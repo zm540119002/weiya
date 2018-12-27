@@ -59,7 +59,7 @@ $(function () {
              $(this).val(1);
              return false;
         }
-        $(this).parents('.item').find('.sign_checkitem').prop("checked",true);
+        $(this).parents('li').find('.sign_checkitem').prop("checked",true);
         //购物车复选框勾选
         cartCheckedBox($(this));
         //计算购物车商品列表总价
@@ -189,7 +189,32 @@ $(function () {
     });
     //去结算
     $('body').on('click','.settlement',function(){
-
+        var postData = [];
+        var oLis=$('.cart_goods_list li');
+        $.each(oLis,function () {
+            var signcheck=$(this).find('.sign_checkitem');
+            if(signcheck.prop('checked')){
+                var cart_id=$(this).data('cart_id');
+                postData.push(cart_id);
+            }
+        });
+        console.log(postData);
+        //var url = MODULE + '/Order/confirmOrder';
+        // $.ajax({
+        //     url: url,
+        //     data: postData,
+        //     type: 'post',
+        //     beforeSend: function(){
+        //         $('.loading').show();
+        //     },
+        //     error:function(){
+        //         $('.loading').hide();
+        //         dialog.error('AJAX错误');
+        //     },
+        //     success: function(data){
+                
+        //     }
+        // })
     });
     //确认订单
     $('body').on('click','.determine_order',function(){
@@ -441,7 +466,7 @@ function goodsNumPlus(obj,opt) {
 }
 //购物车中单个商品数量自减
 function cartGoodsNumReduce(obj) {
-    var _item = obj.parents('.item');
+    var _item = obj.parents('li');
     var num = _item.find('.cart_gshopping_count').val();
     num=parseInt(num);
     // var orderQuantity=parseInt(opt.order_quantity);
@@ -456,10 +481,18 @@ function cartGoodsNumReduce(obj) {
 
 //购物车中单个商品数量自加
 function cartGoodsNumPlus(obj) {
-    var _item = obj.parents('.item');
+    var _item = obj.parents('li');
         _item.find('.sign_checkitem').prop("checked",true);
     var num = _item.find('.cart_gshopping_count').val();
     num=parseInt(num);
     //num=num+parseInt(opt.increase_quantity);
     _item.find('.cart_gshopping_count').val(++num);
 }
+// function cartGoodsNumPlus(obj) {
+//     var _item = obj.parents('.item');
+//         _item.find('.sign_checkitem').prop("checked",true);
+//     var num = _item.find('.cart_gshopping_count').val();
+//     num=parseInt(num);
+//     //num=num+parseInt(opt.increase_quantity);
+//     _item.find('.cart_gshopping_count').val(++num);
+// }
