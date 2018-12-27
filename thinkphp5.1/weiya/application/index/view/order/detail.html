@@ -5,55 +5,55 @@
 {block name="nav">提交订单{/block}
 {block name="content"}
     <article class="f24 fill_order_wrapper">
-        <!--{notempty name="address"}-->
-            <!--<section class="order_address">-->
-                <!--<div class="m step1-in ">-->
-                    <!--<a href="javascript:void(0);" class="s-href changeAddress">-->
-                        <!--<div class="mt_new">-->
-                            <!--<div class="s1-name">-->
-                                <!--<span id="address-name">{$address.consignee}</span>-->
-                            <!--</div>-->
-                            <!--<div class="s1-phone">-->
-                                <!--<span id="address-mobile">{$address.mobile}</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="mc step1-in-con">-->
-                            <!--<i class="location-pic"></i>-->
-                            <!--<span id="address-where" class="address-where">{$address.district}{$address.address}</span>-->
-                        <!--</div>-->
-                        <!--<input type="hidden" class="addressid" value="{$address.id}">-->
-                    <!--</a>-->
-                <!--</div>-->
-            <!--</section>-->
-            <!--{else /}-->
-            <!--<section class="section-address bg-eae pt-5">-->
-                <!--<form action='#' method="post" class="bg-fff address_form">-->
-                    <!--<div class="form-group box-flex clearfixed">-->
-                        <!--<label class="form-label">收件人：</label>-->
-                        <!--<input type="text" name="consignee" class="input-flex recipient_name " placeholder="请输入姓名" value="">-->
-                    <!--</div>-->
-                    <!--<div class="form-group box-flex clearfixed">-->
-                        <!--<label class="form-label">联系电话：</label>-->
-                        <!--<input type="text" name="mobile" class="input-flex recipient_mobile" placeholder="请输入收件人电话" value="">-->
-                    <!--</div>-->
-                    <!--<div class="express-area ">-->
-                        <!--<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">-->
-                            <!--<label class="form-label">选择地区：</label>-->
-                            <!--{empty name="address"}-->
-                                <!--<div class="area_address">省 &gt; 市 &gt; 区/县</div>-->
-                                <!--{else /}-->
-                                <!--<div class="area_address"></div>-->
-                            <!--{/empty}-->
-                            <!--<input type="hidden" class="district_address" value="">-->
-                        <!--</a>-->
-                    <!--</div>-->
-                    <!--<div class="form-group box-flex">-->
-                        <!--<label class="form-label">详细地址：</label>-->
-                        <!--<input type="text" name="address" class="input-flex recipient_detail_address" placeholder="请填写详细地址" value="">-->
-                    <!--</div>-->
-                <!--</form>-->
-            <!--</section>-->
-        <!--{/notempty}-->
+        {notempty name="address"}
+            <section class="order_address">
+                <div class="m step1-in ">
+                    <a href="javascript:void(0);" class="s-href changeAddress">
+                        <div class="mt_new">
+                            <div class="s1-name">
+                                <span id="address-name">{$address.consignee}</span>
+                            </div>
+                            <div class="s1-phone">
+                                <span id="address-mobile">{$address.mobile}</span>
+                            </div>
+                        </div>
+                        <div class="mc step1-in-con">
+                            <i class="location-pic"></i>
+                            <span id="address-where" class="address-where">{$address.district}{$address.address}</span>
+                        </div>
+                        <input type="hidden" class="addressid" value="{$address.id}">
+                    </a>
+                </div>
+            </section>
+            {else /}
+            <section class="section-address bg-eae pt-5">
+                <form action='#' method="post" class="bg-fff address_form">
+                    <div class="form-group box-flex clearfixed">
+                        <label class="form-label">收件人：</label>
+                        <input type="text" name="consignee" class="input-flex recipient_name " placeholder="请输入姓名" value="">
+                    </div>
+                    <div class="form-group box-flex clearfixed">
+                        <label class="form-label">联系电话：</label>
+                        <input type="text" name="mobile" class="input-flex recipient_mobile" placeholder="请输入收件人电话" value="">
+                    </div>
+                    <div class="express-area ">
+                        <a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+                            <label class="form-label">选择地区：</label>
+                            {empty name="address"}
+                                <div class="area_address">省 &gt; 市 &gt; 区/县</div>
+                                {else /}
+                                <div class="area_address"></div>
+                            {/empty}
+                            <input type="hidden" class="district_address" value="">
+                        </a>
+                    </div>
+                    <div class="form-group box-flex">
+                        <label class="form-label">详细地址：</label>
+                        <input type="text" name="address" class="input-flex recipient_detail_address" placeholder="请填写详细地址" value="">
+                    </div>
+                </form>
+            </section>
+        {/notempty}
 
 
         {notempty name="addressList"}
