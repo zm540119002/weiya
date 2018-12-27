@@ -8,8 +8,8 @@ class Order extends \common\controller\UserBase
         if (!request()->isPost()) {
             return errorMsg('请求方式错误');
         }
-        $modelOrder = new \app\purchase\model\Order();
-        $modelOrderDetail = new \app\purchase\model\OrderDetail();
+        $modelOrder = new \app\index\model\Order();
+        $modelOrderDetail = new \app\index\model\OrderDetail();
         $goodsList = $_POST['goodsList'];
         if (empty($goodsList)) {
             return errorMsg('请求数据不能为空');
@@ -22,7 +22,7 @@ class Order extends \common\controller\UserBase
 //            ['goods_id'=>17,'num'=>1],
 //        ];
         //计算订单总价
-        $modelGoods = new \app\purchase\model\Goods();
+        $modelGoods = new \app\index\model\Goods();
         $amount = 0;
         foreach ($goodsList as $k => &$v) {
             $config = [
@@ -83,7 +83,7 @@ class Order extends \common\controller\UserBase
    //订单-结算页
     public function settlement()
     {
-        $modelOrder = new \app\purchase\model\Order();
+        $modelOrder = new \app\index\model\Order();
         $orderSn = input('order_sn');
         $config = [
             'where' => [
@@ -112,7 +112,7 @@ class Order extends \common\controller\UserBase
             return errorMsg('请求方式错误');
         }
         $fatherOrderId = input('post.father_order_id',0,'int');
-        $modelOrder = new \app\purchase\model\Order();
+        $modelOrder = new \app\index\model\Order();
 
         $data = [
             'order_status' => 1,
@@ -147,11 +147,18 @@ class Order extends \common\controller\UserBase
         $orderSn = input('post.order_sn','','string');
         return successMsg('成功',array('order_sn'=>$orderSn));
     }
+    //订单-详情页
+    public function detail()
+    {
+        $unlockingFooterCart = unlockingFooterCartConfig([0,1,2]);
+        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+        return $this->fetch();
 
+    }
     //支付
     public function pay()
     {
-        $modelOrder = new \app\purchase\model\Order();
+        $modelOrder = new \app\index\model\Order();
         $orderSn = input('order_sn');
         $config = [
             'where' => [
@@ -170,12 +177,5 @@ class Order extends \common\controller\UserBase
         return $this->fetch();
     }
 
-    //订单-详情页
-    public function detail()
-    {
-        $unlockingFooterCart = unlockingFooterCartConfig([0,1,2]);
-        $this->assign('unlockingFooterCart', $unlockingFooterCart);
-        return $this->fetch();
 
-    }
 }
