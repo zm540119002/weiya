@@ -6,14 +6,45 @@
 {block name="content"}
     <article class="f24 fill_order_wrapper">
         {notempty name="addressList"}
-            地址显示
             {notempty name="defaultAddress"}
-            {$defaultAddress.id}  {$defaultAddress.province} {$defaultAddress.city}  {$defaultAddress.city} {$defaultAddress.detail_address}
-            {$defaultAddress.mobile}
-               {else /}
-                {$addressList[0]['id']}  {$addressList[0]['province']} {$addressList[0]['city']}  {$addressList[0]['city']} {$addressList[0]['detail_address']}
+            <div class="item_addr">
+				<div class="ia-l"></div>
+				<div class="item_info">
+					<input type="hidden" value=" {$defaultAddress.id}" class="address_id"> 
+					<div class="mt_new">
+						<span>{$defaultAddress.consignee}</span>
+						<span>{$defaultAddress.mobile}</span>
+						{if $vo.is_default eq 1 }
+						<i class="default_tipc">默认</i>
+						{/if}
+					</div>
+					<p class=""><span class="list_area_address"></span>{$defaultAddress.detail_address}</p>
+					<input type="hidden" class="area-address-name" value="" data-province=" {$defaultAddress.province}" data-city="{$defaultAddress.city}" data-area="{$defaultAddress.area}">
+				</div>
+                <a href="javascript:void(0);" class="select_address">选择地址</a>
+			</div>
+                
+            
+            {else /}
+             <div class="item_addr">
+				<div class="ia-l"></div>
+				<div class="item_info">
+					<input type="hidden" value=" {$addressList[0]['id']}" class="address_id"> 
+					<div class="mt_new">
+						<span>{$addressList[0]['consignee']}</span>
+						<span>{$addressList[0]['mobile']}</span>
+						{if $vo.is_default eq 1 }
+						<i class="default_tipc">默认</i>
+						{/if}
+					</div>
+					<p class=""><span class="list_area_address"></span>{$addressList[0]['detail_address']}</p>
+					<input type="hidden" class="area-address-name" value="" data-province="{$addressList[0]['province']}" data-city="{$addressList[0]['city']}" data-area="{$addressList[0]['area']}">
+				</div>
+                <a href="javascript:void(0);" class="select_address">选择地址</a>
+			</div>
+                      
             {/notempty}
-             选择地址
+             
             {else /}
             <a href="javascript:void(0);" class="add_address">添加收货地址</a>
         {/notempty}
@@ -86,6 +117,30 @@
 			</div>
         </form>
     </section>
+    <!--地址列表-->
+    <section class="delivery_address" style="display:none;">
+		{volist name="addressList" id="vo"}
+			<div class="item_addr">
+				<div class="ia-l"></div>
+				<div class="item_info">
+					<input type="hidden" value="{$vo.id}" class="address_id"> 
+					<div class="mt_new">
+						<span>{$vo.consignee}</span>
+						<span>{$vo.mobile}</span>
+						{if $vo.is_default eq 1 }
+						<i class="default_tipc">默认</i>
+						{/if}
+					</div>
+					<p class=""><span class="area_address" id="{$vo.id}"></span>{$vo.detail_address}</p>
+					<input type="hidden" class="area-address-name" value="" data-province="{$vo.province}" data-city="{$vo.city}" data-area="{$vo.area}">
+				</div>
+				<a href="javascript:void(0)" class="address_delete">删除</a>
+				<a href="javascript:void(0);" class="ia-r address_edit">
+					<span class="iar-icon"></span>
+				</a>
+			</div>
+		{/volist}
+	</section> 
      <!--选择地区弹层-->
     <section id="areaLayer" class="express-area-box" style="display:none;">
         <header>
@@ -108,66 +163,36 @@
     <script src="public_js/jquery.area.js"></script>
     <script type="text/javascript">
         $(function(){
+            var province=parseInt($('.area-address-name').data('province'));
+			var city=parseInt($('.area-address-name').data('city'));
+			var area=parseInt($('.area-address-name').data('area'));
+            console.log(typeof province);
+			var region = [];
+				region.push(province);
+				region.push(city);
+				region.push(area);
+				$('.list_area_address').setArea(region);
+			
             //添加收货人地址
-            var addressInfo=$('.section-address').html();
             $('body').on('click','.add_address',function () {
+                addressLayer();
+            });
+            var delivery_address=$('.delivery_address').html();
+            $('body').on('click','.select_address',function () {
                 layer.open({
-                    title:['添加新的收货地址','border-bottom:1px solid #d9d9d9;'],
+                    title:['选择收货地址','border-bottom:1px solid #d9d9d9;'],
                     type:1,
                     anim:'up',
                     className:'addressLayer',
-                    content:addressInfo,
-                    btn:['保存','关闭'],
+                    content:delivery_address,
+                    btn:['新增收货地址'],
                     yes:function(index){
-                        var area_address =$('.addressLayer .area-address-name').getArea();
-                        var postData  = $(".addressLayer .address_form").serializeObject();
-                        var content='';
-                        if(!postData.consignee){
-                            content='请填写收货人姓名';
-                        }else if(!register.phoneCheck(postData.mobile)){
-                            content='请填写正确的手机号码';
-                        }else if(!area_address){
-                            content='请选择地区';
-                        }else if(!postData.detail_address){
-                            content='请填写详细地址';
-                        }
-                        if(content){
-                            dialog.error(content);
-                            return false;
-                        }
-                        postData.is_default = $('.myswitch').attr('data-off');
-                        postData.province = area_address[0];
-                        postData.city = area_address[1];
-                        postData.area = area_address[2];
-                        console.log(postData);
-                        //添加或修改地址
-                        var _this = $(this);
-                        _this.addClass("nodisabled");//防止重复提交
-                        var url = module + '/Address/edit';
-                        $.ajax({
-                            url: url,
-                            data: postData,
-                            type: 'post',
-                            beforeSend: function(){
-                                $('.loading').show();
-                            },
-                            error:function(){
-                                $('.loading').hide();
-                                dialog.error('AJAX错误');
-                            },
-                            success: function(data){
-                                _this.removeClass("nodisabled");//删除防止重复提交
-                                $('.loading').hide();
-                                if(data.status == 0){
-
-                                }else if(data.status == 1){
-                                    console.log(data);
-                                }
-                            }
-                        });
+                        addressLayer();
+                        layer.close(index);
                     }
                 })
             });
+            
             //设定默认地址
 			$('body').on('click','.myswitch',function(){
 				if($(this).hasClass('myswitched')){
@@ -179,6 +204,65 @@
 				}
 			});
         })
+        //新增地址弹窗
+        var addressInfo=$('.section-address').html();
+        function addressLayer(){
+            layer.open({
+                title:['添加新的收货地址','border-bottom:1px solid #d9d9d9;'],
+                type:1,
+                anim:'up',
+                className:'addressLayer',
+                content:addressInfo,
+                btn:['保存','关闭'],
+                yes:function(index){
+                    var area_address =$('.addressLayer .area-address-name').getArea();
+                    var postData  = $(".addressLayer .address_form").serializeObject();
+                    var content='';
+                    if(!postData.consignee){
+                        content='请填写收货人姓名';
+                    }else if(!register.phoneCheck(postData.mobile)){
+                        content='请填写正确的手机号码';
+                    }else if(!area_address){
+                        content='请选择地区';
+                    }else if(!postData.detail_address){
+                        content='请填写详细地址';
+                    }
+                    if(content){
+                        dialog.error(content);
+                        return false;
+                    }
+                    postData.is_default = $('.myswitch').attr('data-off');
+                    postData.province = area_address[0];
+                    postData.city = area_address[1];
+                    postData.area = area_address[2];
+                    console.log(postData);
+                    //添加或修改地址
+                    var _this = $(this);
+                    _this.addClass("nodisabled");//防止重复提交
+                    var url = module + '/Address/edit';
+                    $.ajax({
+                        url: url,
+                        data: postData,
+                        type: 'post',
+                        beforeSend: function(){
+                            $('.loading').show();
+                        },
+                        error:function(){
+                            $('.loading').hide();
+                            dialog.error('AJAX错误');
+                        },
+                        success: function(data){
+                            _this.removeClass("nodisabled");//删除防止重复提交
+                            $('.loading').hide();
+                            if(data.status == 0){
 
+                            }else if(data.status == 1){
+                                console.log(data);
+                            }
+                        }
+                    });
+                }
+            })
+        }
     </script>
 {/block}
