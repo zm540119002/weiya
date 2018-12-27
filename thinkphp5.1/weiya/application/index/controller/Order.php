@@ -125,7 +125,7 @@ class Order extends \common\controller\UserBase
             ],'field' => [
                 'o.id', 'o.sn', 'o.amount',
                 'o.user_id', 'od.goods_id','od.num','od.price',
-                'g.name','g.thumb_img',
+                'g.name','g.thumb_img','g.specification', 'g.purchase_unit'
             ],
         ];
         $orderInfo = $modelOrder->getList($config);
