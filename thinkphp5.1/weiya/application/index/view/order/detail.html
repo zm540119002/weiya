@@ -61,22 +61,31 @@
             <ul class="goods_order_item">
                 {volist name="info" id="vo"}
                     <li>
-                        {notempty name="vo.thumb_img"}
-                            <img data-img="" data-isloaded="" src="public_uploads/{$vo.thumb_img}" alt="" class="c_img left" />
-                            {else /}
-                            <img data-img="" data-isloaded="" src="PUBLIC_IMG/home/default/goods_default.png" alt="" class="c_img" />
-                        {/notempty}
+                        <a href="{:url('Goods/detail',['id'=>$vo.goods_id])}">
+                            {notempty name="vo.thumb_img"}
+                                <img data-img="" data-isloaded="" src="public_uploads/{$vo.thumb_img}" alt="" class="c_img left" />
+                                {else /}
+                                <img data-img="" data-isloaded="" src="PUBLIC_IMG/home/default/goods_default.png" alt="" class="c_img" />
+                            {/notempty}
+                        </a>
                         <div class="g_order_r">
-                            <p>{$vo.name}</p>
+                            <p class="headline">{$vo.headline}</p>
                             <p>{$vo.specification}</p>
-                            <div class="cost_price"><span>￥</span>{$vo.price}</div>
-                            <div class="shopping_count order_count">数量：<span>{$vo.num} </span></div>
+                            <div class="cost_price columns_flex l-r-sides">
+                                <span class="red">￥<price>{$vo.price}</price></span>
+                                <span>X{$vo.num} </span>
+                            </div>
+                            <div class="">购买类型：<span>批量采购</span></div>
                         </div>
                     </li>
                 {/volist}
             </ul>
             {/notempty}
         </section>
+        <div class="columns_flex l-r-sides content-padding">
+            <span>商品金额</span>
+            <span class="red">￥<price>{$info[0]['amount']}</price></span>
+        </div>
     </article>
      <!--选择地区弹层-->
     <section id="areaLayer" class="express-area-box" style="display:none;">
