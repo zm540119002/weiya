@@ -60,16 +60,15 @@
             {notempty name="info"}
             <ul class="goods_order_item">
                 {volist name="info" id="vo"}
-                    {$vo.mian_img}
                     <li>
-                        {notempty name="vo.main_img"}
-                            <img data-img="" data-isloaded="" src="__ROOT__/Uploads/{$vo.main_img}" alt="" class="c_img" />
+                        {notempty name="vo.thumb_img"}
+                            <img data-img="" data-isloaded="" src="public_uploads/{$vo.main_img}" alt="" class="c_img" />
                             {else /}
                             <img data-img="" data-isloaded="" src="PUBLIC_IMG/home/default/goods_default.png" alt="" class="c_img" />
                         {/notempty}
                         <div class="g_order_r">
                             <p>{$vo.name}</p>
-                            <div class="cost_price"><span>￥</span>{$vo.sale_price}</div>
+                            <div class="cost_price"><span>￥</span>{$vo.price}</div>
                             <div class="shopping_count order_count">数量：<span>{$vo.num} </span></div>
                         </div>
                     </li>
@@ -103,14 +102,15 @@
             //跳转到地址列表，更换地址
             $('body').on('click','.changeAddress',function () {
                 var orderId = {$info.id};
-                var url = module + '/Address/list';
+                var url = module + 'Address/list';
                 if(orderId){
-                    url += '/orderId/'+orderId;
+                    url += 'orderId/'+orderId;
                 }
                 location.href = url;
             });
             //总价：
             $('.goods_total_price price').text("{$info.amount}");
+
 
 
         })

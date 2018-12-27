@@ -92,7 +92,6 @@ $(function () {
         if(!postData){
             return false;
         }
-        console.log(postData);
         var url = module + 'Cart/addCart';
         $.ajax({
             url: url,
@@ -189,53 +188,70 @@ $(function () {
     });
     //去结算
     $('body').on('click','.settlement',function(){
-        var postData = [];
+        var postData = {};
+        var cartIds = [];
         var oLis=$('.cart_goods_list li');
         $.each(oLis,function () {
             var signcheck=$(this).find('.sign_checkitem');
             if(signcheck.prop('checked')){
                 var cart_id=$(this).data('cart_id');
-                postData.push(cart_id);
+                cartIds.push(cart_id);
             }
         });
-        console.log(postData);
-        //var url = MODULE + '/Order/confirmOrder';
-        // $.ajax({
-        //     url: url,
-        //     data: postData,
-        //     type: 'post',
-        //     beforeSend: function(){
-        //         $('.loading').show();
-        //     },
-        //     error:function(){
-        //         $('.loading').hide();
-        //         dialog.error('AJAX错误');
-        //     },
-        //     success: function(data){
-                
-        //     }
-        // })
+        postData.cartIds = cartIds;
+        generateOrder(postData)
     });
     //确认订单
-    $('body').on('click','.determine_order',function(){
-        var consigneeName=$('.consignee_name').text();
-        var consigneePhone=$('.consignee_phone').text();
-        var consigneeAddress=$('.consignee_address').text();
-        var content='';
-        if(!consigneeName || !isMobilePhone(consigneePhone) ||!consigneeAddress){
-            content="请选择收货人地址";
-        }
-        var orderId = $('section.orderInfo').data('id');
-        if(!orderId){
-            content="请确定订单是否正确";
-        }
-        if(content){
-            dialog.error(content);
-            return false;
-        }
+    // $('body').on('click','.determine_order',function(){
+    //     var consigneeName=$('.consignee_name').text();
+    //     var consigneePhone=$('.consignee_phone').text();
+    //     var consigneeAddress=$('.consignee_address').text();
+    //     var content='';
+    //     if(!consigneeName || !isMobilePhone(consigneePhone) ||!consigneeAddress){
+    //         content="请选择收货人地址";
+    //     }
+    //     var orderId = $('section.orderInfo').data('id');
+    //     if(!orderId){
+    //         content="请确定订单是否正确";
+    //     }
+    //     if(content){
+    //         dialog.error(content);
+    //         return false;
+    //     }
+    //     var postData = {};
+    //     postData.orderId = orderId;
+    //     var url = MODULE + '/Order/confirmOrder';
+    //     $.ajax({
+    //         url: url,
+    //         data: postData,
+    //         type: 'post',
+    //         beforeSend: function(){
+    //             $('.loading').show();
+    //         },
+    //         error:function(){
+    //             $('.loading').hide();
+    //             dialog.error('AJAX错误');
+    //         },
+    //         success: function(data){
+    //             $('.loading').hide();
+    //             if(data.status==0){
+    //                 dialog.error(data.info);
+    //             }else {
+    //                 location.href = MODULE + '/Order/settlement/orderId/' + data.id;
+    //             }
+    //         }
+    //     });
+    // });
+    //确认订单
+    $('body').on('click','.confirm_order',function () {
+        _this = $(this);
+        var orderId = "{$info[0]['id']}";
+        var orderSn = "{$info[0]['sn']}";
         var postData = {};
-        postData.orderId = orderId;
-        var url = MODULE + '/Order/confirmOrder';
+        postData.father_order_id = orderId;
+        postData.order_sn = orderSn;
+        _this.addClass("nodisabled");//防止重复提交
+        var url = module + 'Order/confirmOrder';
         $.ajax({
             url: url,
             data: postData,
@@ -248,17 +264,16 @@ $(function () {
                 dialog.error('AJAX错误');
             },
             success: function(data){
+                _this.removeClass("nodisabled");//删除防止重复提交
                 $('.loading').hide();
-                if(data.status==0){
-                    dialog.error(data.info);
-                }else {
-                    location.href = MODULE + '/Order/settlement/orderId/' + data.id;
+                if(data.status == 0){
+
+                }else if(data.status == 1){
+                    location.href = module + 'Order/pay/order_sn/' + data.order_sn;
                 }
             }
         });
     });
-
-
     //购物车弹窗
     var goodsInfoLayer=$('#goodsInfoLayer').html();
     var pageii;
@@ -290,10 +305,10 @@ $(function () {
 });
 
 //生成订单
-function generateOrder(postData,callBack) {
-    postData.url = postData.url?postData.url:MODULE + '/Order/generate';
+function generateOrder(postData) {
+    var url = module + 'Order/generate';
     $.ajax({
-        url: postData.url,
+        url: url,
         data: postData,
         type: 'post',
         beforeSend: function(){
@@ -305,31 +320,7 @@ function generateOrder(postData,callBack) {
         },
         success: function(data){
             $('.loading').hide();
-            if(data.status == 0){
-                if(data.joined){
-                    layer.open({
-                        content : data.info?data.info:'成功',
-                        btn:['确定','取消'],
-                        end : function(){
-
-                        },
-                        yes:function(index){
-                            delete(postData["groupBuyId"]);
-                            generateOrder(postData,groupBuyCallBack);
-                            layer.close(index)
-                        }
-                    });
-                    //dialog.confirm(data.info,data.url);
-                }else{
-                    dialog.error(data.info);
-                }
-            }else if(data.status == 1){
-                if(data.info=='isAjax'){
-                    loginDialog(callBack);
-                }else{
-                    location.href = MODULE + '/Order/orderDetail/orderId/' + data.orderId;
-                }
-            }
+            location.href = module + 'Order/detail/order_sn/' + data.order_sn;
         }
     });
 }

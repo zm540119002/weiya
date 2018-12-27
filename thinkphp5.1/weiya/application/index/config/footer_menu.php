@@ -27,7 +27,8 @@ return [
         ['name'   => '新建地址','class'=>'address_create'],//8
         ['name'   => '去结算','class'=>'settlement'],//9
         ['name'   => '全选','class'=>'checked_all'],//10
-        
+        ['name'   => '提交订单','class'=>'confirm_order'],//11
+
     ],
 
 ];
