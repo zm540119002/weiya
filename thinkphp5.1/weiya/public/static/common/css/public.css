@@ -1487,7 +1487,8 @@ background-position: 0 -27px;
 .layui-m-layerchild.categoryContentLayer,
 .layui-m-layerchild.addsalesgoodsLayer,
 .layui-m-layerchild.storeListLayer,
-.layui-m-layerchild.chatLayer{
+.layui-m-layerchild.chatLayer,
+.layui-m-layerchild.addressLayer{
     position:fixed; 
     left:0; 
     top:0; 
@@ -4822,7 +4823,7 @@ select[name="nodeIds"]{
 .goods_order_item li{
     padding:0 0.15rem 0.15rem;
     border-bottom:1px solid #d9d9d9;
-    margin:0 0 0.15rem 0;
+    margin:0 0 0.20rem 0;
 }
 .goods_order_item li img{
     max-width:100px;
