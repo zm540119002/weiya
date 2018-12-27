@@ -4,32 +4,6 @@
 {/block}
 {block name="nav">提交订单{/block}
 {block name="content"}
-    <article class="f24 fill_order_wrapper">
-        {notempty name="address"}
-            <section class="order_address">
-                <div class="m step1-in ">
-                    <a href="javascript:void(0);" class="s-href changeAddress">
-                        <div class="mt_new">
-                            <div class="s1-name">
-                                <span id="address-name">{$address.consignee}</span>
-                            </div>
-                            <div class="s1-phone">
-                                <span id="address-mobile">{$address.mobile}</span>
-                            </div>
-                        </div>
-                        <div class="mc step1-in-con">
-                            <i class="location-pic"></i>
-                            <span id="address-where" class="address-where">{$address.district}{$address.address}</span>
-                        </div>
-                        <input type="hidden" class="addressid" value="{$address.id}">
-                    </a>
-                </div>
-            </section>
-            {else /}
-            
-        {/notempty}
-
-
         {notempty name="addressList"}
             {volist name="addressList" id="info"}
                 {if $info.is_default == 1}
