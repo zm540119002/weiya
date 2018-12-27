@@ -128,8 +128,9 @@ class Order extends \common\controller\UserBase
                 'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
             ],
         ];
-        $orderInfo = $modelOrder->getList($config);
-        $this ->assign('info',$orderInfo);
+        $orderGoodsList = $modelOrder->getList($config);
+        $this ->assign('orderGoodsList',$orderGoodsList);
+      
         //地址
         $modelAddress =  new \common\model\Address();
         $config = [

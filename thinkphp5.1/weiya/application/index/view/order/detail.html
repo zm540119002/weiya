@@ -4,6 +4,7 @@
 {/block}
 {block name="nav">提交订单{/block}
 {block name="content"}
+    <article class="f24 fill_order_wrapper">
         {notempty name="addressList"}
             {volist name="addressList" id="info"}
                 {if $info.is_default == 1}
@@ -14,37 +15,37 @@
             {else /}
             <a href="javascript:void(0);" class="add_address">添加收货地址</a>
         {/notempty}
-          <!--发票抬头-->
+        <!--发票抬头-->
         <section class="goods_order_form">
             <!--结算显示商品页面-->
-            {notempty name="info"}
+            {notempty name="orderGoodsList"}
             <ul class="goods_order_item">
-                {volist name="info" id="vo"}
-                    <li>
-                        <a href="{:url('Goods/detail',['id'=>$vo.goods_id])}">
-                            {notempty name="vo.thumb_img"}
-                                <img data-img="" data-isloaded="" src="public_uploads/{$vo.thumb_img}" alt="" class="c_img left" />
-                                {else /}
-                                <img data-img="" data-isloaded="" src="PUBLIC_IMG/home/default/goods_default.png" alt="" class="c_img" />
-                            {/notempty}
-                        </a>
-                        <div class="g_order_r">
-                            <p class="headline">{$vo.headline}</p>
-                            <p>{$vo.specification}</p>
-                            <div class="cost_price columns_flex l-r-sides">
-                                <span class="red">￥<price>{$vo.price}</price></span>
-                                <span>X{$vo.num} </span>
-                            </div>
-                            <div class="">购买类型：<span>批量采购</span></div>
+                {volist name="orderGoodsList" id="info"}
+                <li>
+                    <a href="{:url('Goods/detail',['id'=>$info.goods_id])}">
+                        {notempty name="info.thumb_img"}
+                        <img data-img="" data-isloaded="" src="public_uploads/{$info.thumb_img}" alt="" class="c_img left" />
+                        {else /}
+
+                        {/notempty}
+                    </a>
+                    <div class="g_order_r">
+                        <p class="headline">{$info.headline}</p>
+                        <p>{$info.specification}</p>
+                        <div class="cost_price columns_flex l-r-sides">
+                            <span class="red">￥<price>{$info.price}</price></span>
+                            <span>X{$info.num} </span>
                         </div>
-                    </li>
+                        <div class="">购买类型：<span>批量采购</span></div>
+                    </div>
+                </li>
                 {/volist}
             </ul>
             {/notempty}
         </section>
         <div class="columns_flex l-r-sides content-padding">
             <span>商品金额</span>
-            <span class="red">￥<price>{$info[0]['amount']}</price></span>
+            <span class="red">￥<price>{$orderGoodsList[0]['amount']}</price></span>
         </div>
     </article>
     <!--添加收货人信息-->
