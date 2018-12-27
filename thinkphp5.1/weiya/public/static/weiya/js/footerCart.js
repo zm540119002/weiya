@@ -86,7 +86,7 @@ $(function () {
         if($($(this).context).hasClass('add_purchase_cart')){
             lis = $(this).parents('li');
         }else{
-            lis = $('ul.goods_list').find('li');
+            lis = $('ul.goods_list').find('li[data-buy_type="1"]');
         }
         var postData = assemblyData(lis);
         if(!postData){
@@ -114,12 +114,14 @@ $(function () {
                     return false;
 				}
                 else{
-                     dialog.success(data.info);
+                    dialog.success(data.info);
                     var num = 0;
-                    $.each(lis,function(){
-                        num += parseInt($(this).find('.gshopping_count').val());
+                    $.each(lis,function(index,val){
+                        var buyType=$(this).data('buy_type');
+                        if(buyType==1){
+                            num += parseInt($(this).find('.gshopping_count').val());
+                        }
                     });
-                    //parseInt($('footer').find('num').text())+parseInt(num)
                     $('footer').find('.cart_num').text(num);
                     $('footer').find('.add_num').text('+'+num).addClass('current');
                     setTimeout(function(){
