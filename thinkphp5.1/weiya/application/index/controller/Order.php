@@ -130,6 +130,16 @@ class Order extends \common\controller\UserBase
         ];
         $orderInfo = $modelOrder->getList($config);
         $this ->assign('info',$orderInfo);
+        //地址
+        $modelAddress =  new \common\model\Address();
+        $config = [
+            'where' => [
+                ['a.status', '=', 0],
+                ['a.user_id', '=', $this->user['id']],
+            ],
+        ];
+        $addressList = $modelAddress ->getList($config);
+        $this->assign('addressList', $addressList);
         $unlockingFooterCart = unlockingFooterCartConfig([11]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
