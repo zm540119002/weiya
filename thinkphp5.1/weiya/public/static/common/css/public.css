@@ -275,7 +275,7 @@ i{
 .cart_num {
     position: absolute;
     top: 0;
-    right: 35px;
+    right:0.75rem;
     border: 1px solid #ff0000;
     height: 18px;
     line-height:18px;
