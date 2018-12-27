@@ -4815,3 +4815,7 @@ select[name="nodeIds"]{
 .c_mobile p a{
     color:#06c;
 }
+/*订单*/
+.goods_order_item li img{
+    max-width:100px;
+}

@@ -62,12 +62,13 @@
                 {volist name="info" id="vo"}
                     <li>
                         {notempty name="vo.thumb_img"}
-                            <img data-img="" data-isloaded="" src="public_uploads/{$vo.thumb_img}" alt="" class="c_img" />
+                            <img data-img="" data-isloaded="" src="public_uploads/{$vo.thumb_img}" alt="" class="c_img left" />
                             {else /}
                             <img data-img="" data-isloaded="" src="PUBLIC_IMG/home/default/goods_default.png" alt="" class="c_img" />
                         {/notempty}
                         <div class="g_order_r">
                             <p>{$vo.name}</p>
+                            <p>{$vo.specification}</p>
                             <div class="cost_price"><span>￥</span>{$vo.price}</div>
                             <div class="shopping_count order_count">数量：<span>{$vo.num} </span></div>
                         </div>
