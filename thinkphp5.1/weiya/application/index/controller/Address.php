@@ -36,7 +36,7 @@ class Address extends \common\controller\UserBase {
                     }
                 }
                 $model->commit();
-                return successMsg('成功', array('addressId' => $addressId));
+                return successMsg('成功', array('address_info' => $data));
             }else{
                 //增加
                 $config = [
@@ -71,7 +71,8 @@ class Address extends \common\controller\UserBase {
                     }
                 }
                 $model->commit();
-                return successMsg('成功', array('addressId' => $addressId));
+                $data['id'] = $addressId;
+                return successMsg('成功', array('address_info' => $data));
             }
         }
 
