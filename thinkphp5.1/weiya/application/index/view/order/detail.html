@@ -6,15 +6,18 @@
 {block name="content"}
     <article class="f24 fill_order_wrapper">
         {notempty name="addressList"}
-            {volist name="addressList" id="info"}
-                {if $info.is_default == 1}
-                  {$info.id}  {$info.province} {$info.city}  {$info.city} {$info.detail_address}
-                  {$info.mobile}
-                 {/if}
-            {/volist}
+            地址显示
+            {notempty name="defaultAddress"}
+            {$defaultAddress.id}  {$defaultAddress.province} {$defaultAddress.city}  {$defaultAddress.city} {$defaultAddress.detail_address}
+            {$defaultAddress.mobile}
+               {else /}
+                {$addressList[0]['id']}  {$addressList[0]['province']} {$addressList[0]['city']}  {$addressList[0]['city']} {$addressList[0]['detail_address']}
+            {/notempty}
+             选择地址
             {else /}
             <a href="javascript:void(0);" class="add_address">添加收货地址</a>
         {/notempty}
+
         <!--发票抬头-->
         <section class="goods_order_form">
             <!--结算显示商品页面-->

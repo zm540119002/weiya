@@ -140,6 +140,14 @@ class Order extends \common\controller\UserBase
             ],
         ];
         $addressList = $modelAddress ->getList($config);
+        $defaultAddress = [];
+        foreach ($addressList as &$addressInfo){
+            if($addressInfo['is_default'] == 1){
+                $defaultAddress = $addressInfo;
+                break;
+            }
+        }
+        $this->assign('defaultAddress', $defaultAddress);
         $this->assign('addressList', $addressList);
         $unlockingFooterCart = unlockingFooterCartConfig([11]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
