@@ -59,7 +59,7 @@ $(function () {
              $(this).val(1);
              return false;
         }
-        $(this).parents('.item').find('.sign_checkitem').prop("checked",true);
+        $(this).parents('li').find('.sign_checkitem').prop("checked",true);
         //购物车复选框勾选
         cartCheckedBox($(this));
         //计算购物车商品列表总价
@@ -192,7 +192,6 @@ $(function () {
         var postData = [];
         var oLis=$('.cart_goods_list li');
         $.each(oLis,function () {
-            console.log(oLis);
             var signcheck=$(this).find('.sign_checkitem');
             if(signcheck.prop('checked')){
                 var cart_id=$(this).data('cart_id');
@@ -201,21 +200,21 @@ $(function () {
         });
         console.log(postData);
         //var url = MODULE + '/Order/confirmOrder';
-        $.ajax({
-            url: url,
-            data: postData,
-            type: 'post',
-            beforeSend: function(){
-                $('.loading').show();
-            },
-            error:function(){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
+        // $.ajax({
+        //     url: url,
+        //     data: postData,
+        //     type: 'post',
+        //     beforeSend: function(){
+        //         $('.loading').show();
+        //     },
+        //     error:function(){
+        //         $('.loading').hide();
+        //         dialog.error('AJAX错误');
+        //     },
+        //     success: function(data){
                 
-            }
-        })
+        //     }
+        // })
     });
     //确认订单
     $('body').on('click','.determine_order',function(){
