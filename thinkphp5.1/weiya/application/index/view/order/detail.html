@@ -132,7 +132,16 @@
 						{/if}
 					</div>
 					<p class=""><span class="area_address" id="{$vo.id}"></span>{$vo.detail_address}</p>
-					<input type="hidden" class="area-address-name" value="" data-province="{$vo.province}" data-city="{$vo.city}" data-area="{$vo.area}">
+                    <form style="display:none;" class="consigneeInfo">
+                        <input type="hidden" class="" name="province" value="{$vo.province}" />
+                        <input type="hidden" class="" name="city" value="{$vo.city}" />
+                        <input type="hidden" class="" name="area" value="{$vo.area}" />
+                        <input type="hidden" class="" name="id" value="{$vo.id}" />
+                        <input type="hidden" class="" name="consignee" value="{$vo.consignee}" />
+                        <input type="hidden" class="" name="mobile" value="{$vo.mobile}" />
+                        <input type="hidden" class="" name="detail_address" value="{$vo.detail_address}" />
+                        <input type="hidden" class="" name="is_default" value="{$vo.is_default}" />
+                    </form>
 				</div>
 				<a href="javascript:void(0)" class="address_delete">删除</a>
 				<a href="javascript:void(0);" class="ia-r address_edit">
@@ -175,8 +184,10 @@
 			
             //添加收货人地址
             $('body').on('click','.add_address',function () {
+                var title='添加新的收货地址';
                 addressLayer();
             });
+            //选择地址
             var delivery_address=$('.delivery_address').html();
             $('body').on('click','.select_address',function () {
                 layer.open({
@@ -192,7 +203,15 @@
                     }
                 })
             });
-            
+            //修改地址
+            var data;
+            $('body').on('click','.address_edit',function () {
+                var title='修改地址';
+                data={};
+                data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
+                console.log(data);
+                addressLayer(title,data);
+            });
             //设定默认地址
 			$('body').on('click','.myswitch',function(){
 				if($(this).hasClass('myswitched')){
@@ -206,14 +225,20 @@
         })
         //新增地址弹窗
         var addressInfo=$('.section-address').html();
-        function addressLayer(){
+        function addressLayer(title,data){
             layer.open({
-                title:['添加新的收货地址','border-bottom:1px solid #d9d9d9;'],
+                title:[title,'border-bottom:1px solid #d9d9d9;'],
                 type:1,
                 anim:'up',
                 className:'addressLayer',
                 content:addressInfo,
                 btn:['保存','关闭'],
+                success:function(){
+                    if(data){
+                        $('.addressLayer').find('input[name="consignee"]').val(data.consignee);
+                    }
+                    
+                },
                 yes:function(index){
                     var area_address =$('.addressLayer .area-address-name').getArea();
                     var postData  = $(".addressLayer .address_form").serializeObject();
