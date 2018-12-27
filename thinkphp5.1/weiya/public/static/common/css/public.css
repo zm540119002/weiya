@@ -4676,7 +4676,9 @@ select[name="nodeIds"]{
     margin:0 0 0.18rem 0;
 }
 .purchase_goods_info{margin:0 0 0 2rem;position:relative;}
-.quantity_wrapper{margin:0 0 0 0.35rem;}
+.quantity_wrapper{
+    /*margin:0 0 0 0.35rem;*/
+}
 .purchase_goods_num{
     display:flex;
     display:-webkit-flex;
