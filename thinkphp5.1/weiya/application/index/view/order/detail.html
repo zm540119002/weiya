@@ -59,7 +59,7 @@
         {notempty name="addressList"}
             {volist name="addressList" id="info"}
                 {if $info.is_default == 1}
-                  {$info.id}  {$info.province} {$info.city}  {$info.area} {$info.detail_address}
+                  {$info.id}  {$info.province} {$info.city}  {$info.city} {$info.detail_address}
                   {$info.mobile}
                  {/if}
             {/volist}
