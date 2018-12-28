@@ -1,6 +1,6 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="store_css/main.css">
+
 {/block}
 {block name="content"}
 <section class="f20">
@@ -55,10 +55,6 @@
 				_this.find('.area_address').setArea(region);
 			}
 
-			_this.on('click',function(){
-				_this.parents('.item_addr').addClass('active').siblings().removeClass('active');
-				return false;
-			})
 		});
 
 		//新建地址

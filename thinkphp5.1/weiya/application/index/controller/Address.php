@@ -79,7 +79,7 @@ class Address extends \common\controller\UserBase {
             }
         }
 
-        $footerCartConfig = [5];
+        $footerCartConfig = [6];
         if(input('?address_id') && !empty(input('address_id'))){
             $id = input('address_id');
             $config = [
@@ -91,7 +91,7 @@ class Address extends \common\controller\UserBase {
             ];
             $address = $model -> getInfo($config);
             $this->assign('address',$address);
-            $footerCartConfig = [6];
+            $footerCartConfig = [7];
         }
         $unlockingFooterCart = unlockingFooterCartConfig($footerCartConfig);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
@@ -110,7 +110,7 @@ class Address extends \common\controller\UserBase {
         ];
         $addressList = $model -> getList($config);
         $this->assign('addressList',$addressList);
-        $unlockingFooterCart = unlockingFooterCartConfig([7]);
+        $unlockingFooterCart = unlockingFooterCartConfig([8]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this -> fetch();
     }
