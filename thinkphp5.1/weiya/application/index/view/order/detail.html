@@ -137,7 +137,7 @@
                         <input type="hidden" class="" name="city" value="{$vo.city}" />
                         <input type="hidden" class="" name="area" value="{$vo.area}" />
                         <input type="hidden" class="" name="id" value="{$vo.id}" />
-                        <input type="hidden" class="" name="consignee" value="{$vo.consignee}" />
+                        <input type="hidden" class="" name="consignee_name" value="{$vo.consignee}" />
                         <input type="hidden" class="" name="mobile" value="{$vo.mobile}" />
                         <input type="hidden" class="" name="detail_address" value="{$vo.detail_address}" />
                         <input type="hidden" class="" name="is_default" value="{$vo.is_default}" />
@@ -185,7 +185,7 @@
             //添加收货人地址
             $('body').on('click','.add_address',function () {
                 var title='添加新的收货地址';
-                addressLayer();
+                addressLayer(title);
             });
             //选择地址
             var delivery_address=$('.delivery_address').html();
@@ -197,18 +197,34 @@
                     className:'addressLayer',
                     content:delivery_address,
                     btn:['新增收货地址'],
+                    success:function(){
+                        $('.addressLayer .item_info').each(function(index,val){
+                            //省市区初始化
+                            var _this=$(this);
+                            var data=_this.find('.consigneeInfo').serializeObject();
+                            var region = [];
+                                region.push(data.province);
+                                region.push(data.city);
+                                region.push(data.area);
+                                _this.find('.area_address').setArea(region);
+
+                            _this.on('click',function(){
+                                _this.parents('.item_addr').addClass('active').siblings().removeClass('active');
+                                return false;
+                            })
+                        });
+
+                    },
                     yes:function(index){
-                        addressLayer();
+                        addressLayer('添加新的收货地址');
                         layer.close(index);
                     }
                 })
             });
             //修改地址
-            var data;
             $('body').on('click','.address_edit',function () {
                 var title='修改地址';
-                data={};
-                data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
+                var data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
                 console.log(data);
                 addressLayer(title,data);
             });
@@ -235,7 +251,18 @@
                 btn:['保存','关闭'],
                 success:function(){
                     if(data){
-                        $('.addressLayer').find('input[name="consignee"]').val(data.consignee);
+                        $('.addressLayer').find('input[name="consignee"]').val(data.consignee_name);
+                        $('.addressLayer').find('input[name="mobile"]').val(data.mobile);
+                        $('.addressLayer').find('input[name="detail_address"]').val(data.detail_address);
+                        var region = [];
+                        region.push(data.province);
+                        region.push(data.city);
+                        region.push(data.area);
+                        $('.addressLayer .area_address').setArea(region);
+                        if(data.is_default==1){
+                            $('.addressLayer .myswitch').addClass('myswitched');
+					        $('.addressLayer .myswitch').attr('data-off',1);
+                        }
                     }
                     
                 },
