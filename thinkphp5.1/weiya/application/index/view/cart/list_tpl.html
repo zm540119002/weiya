@@ -1,0 +1,33 @@
+{notempty name="list"}
+{volist name="list" id="info"}
+<li data-id="{$info.id}" data-cart_id="{$info.cart_id}">
+    <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
+    <a  href="" class="cart_goods_img">
+        {empty name="info.thumb_img"}
+        <img src="public_img/default/no_pic_100.jpg" alt="" class="c_img">
+        {else /}
+        <img src="public_uploads/{$info.thumb_img}" alt="" class="c_img">
+        {/empty}
+    </a>
+    <div class="cart_list_r">
+        <p>{$info.name}</p>
+        <div>商品规格：<span>{$info.specification}</span></div>
+        <div class="commodity_purchaser f24">
+            <span class="pink">￥<price>{$info.bulk_price}</price></span>
+        </div>
+        <div class="purchase_goods_num cart_goods_operate">
+            <!--<span>购买数量(5)</span>-->
+            <div class="quantity_wrapper">
+                <a href="javascript:void(0);" class="cart_greduce">-</a>
+                <input type="text" value="{$info.num}" class="f24 cart_gshopping_count">
+                <a href="javascript:void(0);" class="cart_gplus">+</a>
+            </div>
+            <a href="javascript:void(0);" class="detele_order goodsDel detele_cart">删除</a>
+        </div>
+    </div>
+</li>
+{/volist}
+{/notempty}
+
+
+  

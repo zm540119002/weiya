@@ -11,6 +11,7 @@ class OrderChild extends \common\model\Base {
 	//表的别名
 	protected $alias = 'oc';
 
+    //生成子订单
 	public function createOrderChild($orderDetailList,$userId = 0)
 	{
 		$this->startTrans();

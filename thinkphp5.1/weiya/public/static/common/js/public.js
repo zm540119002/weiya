@@ -334,13 +334,14 @@ function swiper(elemObj){
 }
 //活动倒计时
 function countDown(time,id){
+    //console.log(time);
     var day_elem = id.find('.day');
     var hour_elem = id.find('.hour');
     var minute_elem = id.find('.minute');
     var second_elem = id.find('.second');
     var end_time = new Date(time).getTime(),//月份是实际月份-1
         sys_second = (end_time-new Date().getTime())/1000;
-        console.log(sys_second);
+        //console.log(sys_second);
     var timer = setInterval(function(){
         if (sys_second > 1) {
             sys_second -= 1;
@@ -354,7 +355,7 @@ function countDown(time,id){
             $(second_elem).text(second<10?"0"+second:second);//计算秒
         } else {
             clearInterval(timer);
-            countDown(getWeek(5),$('#countDownBox'));
+            countDown(getWeek(),$('#countDownBox'));
             // $('.count_down_box').html('<span>本次活动已结束</span>');
         }
     }, 1000);
@@ -362,14 +363,50 @@ function countDown(time,id){
 //获取每周五日期和时分秒
 function getWeek(i) {
     var now = new Date();
-    var firstDay=new Date(now - (now .getDay() - 1 )* 24*3600*1000);
-    firstDay.setDate(firstDay.getDate() + i);
+    var nowTime=now.getTime();
+    var day=now.getDay();
+    var oneDayTime=24*60*60*1000;
+    //显示周一
+    //var firstDay=new Date(nowTime- (day- 4 )* oneDayTime);
+    //console.log(firstDay);
+    //显示周日
+    // var SundayTime =new Date(nowTime); 
+    console.log(day);
+
+   
+    
+    if(day==5){
+         //显示周五
+        var Friday =new Date(7*oneDayTime+now.getTime()); 
+        return new Date(Friday.toLocaleDateString());
+    }else if(day==6){
+        var Friday =new Date((day+1)*oneDayTime+now.getTime()); 
+        return new Date(Friday.toLocaleDateString());
+    }else{
+        var Friday =new Date((5-day)*oneDayTime+now.getTime()); 
+        return new Date(Friday.toLocaleDateString());
+    }
+    console.log(new Date(Friday.toLocaleDateString()));
+    //获取某天日期
+    //console.log(new Date().toLocaleDateString());
+    //获取某天00:00:00
+    //console.log(new Date(Friday.toLocaleDateString()));
+    //获取当天23:59:59
+    //console.log(new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1));
+
+    //firstDay.setDate(firstDay.getDate() + i);
+    
+   // console.log(firstDay.setDate(firstDay.getDate() + i));
     //日期
     //mon = Number(firstDay.getMonth())+1;
     //准确年月日
-    mon = Number(firstDay.getMonth());
+    //mon = Number(firstDay.getMonth());
     //return now.getFullYear() + "/" + mon + "/" + firstDay.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
-    return new Date(now.getFullYear(),mon,firstDay.getDate());
+    
+    // return new Date(now.getFullYear(),mon,firstDay.getDate());
+    
+   // return new Date(Friday.toLocaleDateString());
+    
     //当天00：00：00
     // var endYear=new Date().getFullYear();
     // var endMonth=new Date().getMonth();
@@ -649,7 +686,25 @@ function dialogFormDelDefaultCallBack(config,data) {
         layer.close(config.index);
     }
 }
-
+//购物车加减数量勾选复选框
+function cartCheckedBox(obj){
+    var sign = true;
+    var _this=obj;
+    var oItem =_this.parents('.cart_goods_list').find('li');
+    //一票否决
+    $.each(oItem,function () {
+        if(!$(this).find('.sign_checkitem').prop('checked')){
+            sign = false;
+        }
+    });
+    //_this.parents('li').find('.cpy_checkitem').prop('checked',sign);
+    // $.each($('.cpy_checkitem'),function () {
+    //     if(!$(this).prop('checked')){
+    //         sign = false;
+    //     }
+    // });
+    $('footer .checkall').prop('checked',sign);
+}
 //文档就绪
 $(function(){
     //返回顶部
@@ -673,6 +728,27 @@ $(function(){
             dialog.error('功能正在开发中,暂未上线,敬请期待');
         }
     });
+    // $('body').on('click','.cpy_checkitem',function () {
+    //     var _thisChecked = $(this).prop("checked");
+    //     var oItem =$(this).parent().siblings('.item');
+    //     $.each(oItem,function () {
+    //         var _this=$(this);
+    //         _this.find('.checkitem').prop('checked',_thisChecked);
+    //     });
+    // });
+    //根据公司反选
+    // $('body').on('click','.sign_checkitem',function () {
+    //     var sign = true;
+    //     var _this=$(this);
+    //     var oItem =$(this).parents('li').find('.sign_checkitem');
+    //     //一票否决
+    //     $.each(oItem,function () {
+    //         if(!$(this).prop('checked')){
+    //             sign = false;
+    //         }
+    //     });
+    //     _this.parents('li').find('.cpy_checkitem').prop('checked',sign);
+    // });
     //全选
     $('body').on('click','.checkall,.check_all_2',function () {
         var _thisChecked = $(this).prop("checked");

@@ -3,43 +3,6 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
-<!--底部弹窗-->
-<section id="goodsInfoLayer" style="display:none;">
-	<div>
-		<img src="" alt="" class="left">
-		<div>
-			<p>台湾原装进口 真世酵素纤丽果冻</p>
-		</div>
-	</div>
-	<div>
-		<div class="columns_flex l-r-sides">
-			<div >
-				<span class="red">￥<price>198.00</price></span>
-				<span>300ml/瓶</span>
-			</div>
-			<div>样品购买限额：<span>10</span></div>
-		</div>
-	</div>
-	<ul class="bottom-layer-info goods_list">
-        <li>
-            <div class="columns_flex l-r-sides">
-                <span>采购数量(单位：瓶)</span>
-                <div class="quantity_wrapper selected-number">
-                    <a href="javascript:void(0);" class="greduce">-</a>
-                    <input type="text" value="1" class="f24 gshopping_count">
-					<input type="hidden" class="minimum_order_quantity" value="1">
-					<input type="hidden" class="increase_quantity" value="1">
-                    <a href="javascript:void(0);" class="gplus">+</a>
-                </div>
-            </div>
-        </li>
-    </ul>
-	{include file="template/footer_menu.html" /}
-    <!--<div class="columns_flex l-r-sides bottom-layer-last">
-        <span class="pink">￥<price>0.00</price></span>
-        <a href="javascript:void(0);" class="bff6482 group_btn50 add-shopping-cart">加入采购车</a>
-    </div>-->
-</section>
 <article class="f24">
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
@@ -95,7 +58,7 @@
 								<div>
 									<span class="left count-down-icons"></span>
 									<div class="d-r">
-										<p class=" pink">品牌定制.周五截止</p>
+										<p class="friday_end">品牌定制<span>.</span>周五截止</p>
 										<div id="countDownBox" class="count_down_box">
 											<span class="day"></span>天
 											<span class="hour"></span>小时
@@ -127,7 +90,7 @@
 		<ul class="goods_list list">
 			{notempty name="goodsList"}
 			{volist name="goodsList" id="info"}
-			<li data-id="{$info.id}">
+			<li data-id="{$info.id}" data-buy_type="1">
 				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
 					{empty name="info.thumb_img"}
 					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
@@ -150,7 +113,7 @@
 					</div>
 					<div class="quantity_wrapper selected-number">
 						<a href="javascript:void(0);" class="greduce">-</a>
-						<input type="text" value="{$info.minimum_order_quantity}" class="f24 gshopping_count" >
+						<input type="text" value="0" class="f24 gshopping_count" >
 						<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
 						<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
 						<a href="javascript:void(0);" class="gplus">+</a>
@@ -164,7 +127,9 @@
 </article>
 
 {/block}
-
+{block name="common"}
+	{include file="public/sample_layer" /}
+{/block}
 {block name="footer"}
 	{include file="template/footer_menu.html" /}
 {/block}
@@ -184,7 +149,7 @@
 				clickable: true
 			}
 		});
-		var date=getWeek(5);
+		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 	});
 </script>

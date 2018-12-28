@@ -30,6 +30,7 @@
                             | <a href="javascript:void(0);" class="addRecommendGoods">添加推荐产品</a>
                             {notempty name="info.rq_code_url"}
                             | <a href="javascript:void(0);" class="ckQRcode" data-img-src="{$info.rq_code_url}">查看二维码图片</a>
+                            | <a href="javascript:void(0);" class="generateQRcode" data-img-src="{$info.rq_code_url}">重新生成二维码图片</a>
                             {else/}
                             | <a href="javascript:void(0);" class="generateQRcode" data-img-src="{$info.rq_code_url}">生成二维码图片</a>
                             {/notempty}

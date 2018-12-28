@@ -259,7 +259,7 @@ class Goods extends Base {
             'slogan'=>'领先的品牌定制平台',
             'name1'=> $name1,
             'name2'=> $name2,
-            'specification'=> $info['specification'],
+            'specification'=> '规格：'.$info['specification'],
             'money'=>'￥'.$info['bulk_price'].' 元',
             'logo_img'=> request()->domain().'/static/weiya/img/logo.png', // 460*534
             'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
@@ -317,7 +317,7 @@ class Goods extends Base {
                 'slogan'=>'领先的品牌定制平台',
                 'name1'=> $name1,
                 'name2'=> $name2,
-                'specification'=> $info['specification'],
+                'specification'=> '规格：'.$info['specification'],
                 'money'=>'￥'.$info['bulk_price'].' 元',
                 'logo_img'=> request()->domain().'/static/weiya/img/logo.png', // 460*534
                 'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
@@ -443,41 +443,15 @@ class Goods extends Base {
         return view('goods/selected_list');
     }
 
-
-    /**
-     * 获取 商品相关推荐商品
-     * @return array|\think\response\View
-     */
-    public function getRecommendGoods(){
-        if(!request()->get()){
-            return errorMsg('参数有误');
-        }
-        if(!input('?get.goodsId') || !input('get.goodsId/d')){
-            $this ->error('参数有误');
-        }
-        $goodsId = input('get.goodsId/d');
-        $model = new \app\index_admin\model\RecommendGoods();
-        $config = [
-            'where' => [
-                ['rg.goods_id','=',$goodsId],
-            ],'join' => [
-                ['goods g','g.id = rg.goods_id','left'],
-            ],'field' => [
-                'g.id','g.thumb_img','g.name',
-            ],
-
-        ];
-        $list = $model -> getList($config);
-        $this->assign('list',$list);
-        return view('goods/selected_list');
-    }
-
     /**获取推荐商品
      * @return array|\think\response\View
      */
-    public function getRecommendGoods1(){
+    public function getRecommendGoods(){
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
+        }
+        if(!input('?get.goods_id') || !input('get.goods_id/d')){
+            $this ->error('参数有误');
         }
         $goodsId = input('get.goods_id/d');
         //相关推荐商品
@@ -488,14 +462,21 @@ class Goods extends Base {
                 ['rg.goods_id', '=', $goodsId],
             ],'field'=>[
                 'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.name'
             ],'join'=>[
                 ['goods g','g.id = rg.recommend_goods_id','left']
             ]
         ];
         $list= $modelRecommendGoods->getList($config);
         $this->assign('list',$list);
-        return view('goods/recommend_list_tpl');
+        $type = input('get.type');
+        if($type == 'add'){
+            return view('goods/selected_list');
+        }
+        if($type == 'preview'){
+            return view('goods/recommend_list_tpl');
+        }
+
     }
 
     /**
@@ -546,17 +527,17 @@ class Goods extends Base {
             return errorMsg('提供的图片问题');
         }
         $im = imagecreatetruecolor(480, 780);  //图片大小
-        $color = imagecolorallocate($im, 240, 255, 255);
+        $color = imagecolorallocate($im, 0xFF,0xFF,0xFF);
         $text_color = imagecolorallocate($im, 87, 87, 87);
         $text_color1 = imagecolorallocate($im, 137, 137, 137);
         $red_color = imagecolorallocate($im, 230, 0, 18);
         imagefill($im, 0, 0, $color);
         imagettftext($im, 20, 0, 100, 35, $text_color, $init['font'], $init['title']); //XX官方旗舰店
         imagettftext($im, 16, 0, 100, 60, $text_color1, $init['font'], $init['slogan']);   //标语
-        imagettftext($im, 15, 0, 20, 670, $red_color, $init['font'], $init['money']); //金额
-        imagettftext($im, 9, 0,  150, 670, $text_color, $init['font'], $init['specification']); //规格
+        imagettftext($im, 20, 0, 20, 670, $red_color, $init['font'], $init['money']); //金额
         imagettftext($im, 12, 0, 20, 700, $text_color, $init['font'], $init['name1']); //说明
-        imagettftext($im, 12, 0, 20, 730, $text_color, $init['font'], $init['name2']); //说明
+        imagettftext($im, 12, 0, 20, 720, $text_color, $init['font'], $init['name2']); //说明
+        imagettftext($im, 12, 0, 20,745, $text_color1, $init['font'], $init['specification']); //规格
         imagecopyresized($im, $logoImg['obj'], 10, 10, 0, 0, 90, 60, $logoImg['width'], $logoImg['height'] );  //平台logo
         imagecopyresized($im, $goodsImg['obj'], 10, 106, 0, 0, 460, 534, $goodsImg['width'], $goodsImg['height']);  //商品
         imagecopyresized($im, $qrcode['obj'], 350, 650, 0, 0, 120, 120, $qrcode['width'], $qrcode['height'] );  //二维

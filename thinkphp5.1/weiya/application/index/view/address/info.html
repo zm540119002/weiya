@@ -1,0 +1,28 @@
+<div class="item_addr">
+    <div class="ia-l"></div>
+    <div class="item_info">
+        <input type="hidden" value="{$data.id}" class="address_id">
+        <div class="mt_new">
+            <span>{$data.consignee}</span>
+            <span>{$data.mobile}</span>
+            {if $data.is_default eq 1 }
+            <i class="default_tipc">默认</i>
+            {/if}
+        </div>
+        <p class=""><span class="area_address" id="{$data.id}"></span>{$data.detail_address}</p>
+        <form style="display:none;" class="consigneeInfo">
+            <input type="hidden" class="" name="province" value="{$data.province}" />
+            <input type="hidden" class="" name="city" value="{$data.city}" />
+            <input type="hidden" class="" name="area" value="{$data.area}" />
+            <input type="hidden" class="" name="layer_id" value="{$data.id}" />
+            <input type="hidden" class="" name="layer_consignee" value="{$data.consignee}" />
+            <input type="hidden" class="" name="layer_mobile" value="{$data.mobile}" />
+            <input type="hidden" class="" name="layer_detail_address" value="{$data.detail_address}" />
+            <input type="hidden" class="" name="is_default" value="{$data.is_default}" />
+        </form>
+    </div>
+    <a href="javascript:void(0)" class="address_delete">删除</a>
+    <a href="javascript:void(0);" class="ia-r address_edit">
+        <span class="iar-icon"></span>
+    </a>
+</div>

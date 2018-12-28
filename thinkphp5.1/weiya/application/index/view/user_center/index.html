@@ -1,0 +1,137 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+{/block}
+{block name="content"}
+<article class="person-center-wrapper f24">
+    <section class="separation-line columns_flex l-r-sides flex_item">
+        <div>
+            <img src="" alt="" class="left">
+            <div>
+                <span>张三</span>
+                <p>13679898358</p>
+            </div>
+        </div>
+        <a href="">
+            <span></span>
+        </a>
+    </section>
+    <section class="separation-line">
+        <div class="flex_item">
+            <a href="" class="person-td">
+                <span class="my-msg">
+                    <i class="num">1</i>
+                </span>
+                消息
+            </a>
+            <a href="" class="person-td">
+                <span class="notice"></span>
+                定制须知
+            </a>
+            <a href="" class="person-td">
+                <span class="collec"></span>
+                我的收藏
+            </a>
+            <a href="" class="person-td">
+                <span class="share"></span>
+                分享收益
+            </a>
+        </div>
+    </section>
+    <section class="separation-line">
+        <div class="flex_item">
+            <a href="{:url('Cart/index')}" class="person-td">
+                <span class="cart"></span>
+                采购车
+            </a>
+            <a href="{:url('Address/manage')}" class="person-td">
+                <span class="addr"></span>
+                收货人地址
+            </a>
+            <a href="" class="person-td">
+                <span class="charge"></span>
+                采购充值
+            </a>
+            <a href="" class="person-td">
+                <span class="wait_pay"></span>
+                待付款
+            </a>
+        </div>
+        <div class="flex_item">
+            <a href="" class="person-td">
+                <span class="wait_recevie"></span>
+                待收货
+            </a>
+            <a href="" class="person-td">
+                <span class="commit"></span>
+                待评价
+            </a>
+            <a href="" class="person-td">
+                <span class="after_s"></span>
+                售后
+            </a>
+            <a href="" class="person-td">
+                <span class="complete"></span>
+                已完成
+            </a>
+        </div>
+    </section>
+    <section class="separation-line">
+        <div class="flex_item">
+            <a href="" class="person-td">
+                <span class="brand"></span>
+                我的品牌
+            </a>
+            <a href="" class="person-td">
+                <span class="presentation"></span>
+                我的报告
+            </a>
+        </div>
+    </section>
+</article>
+<section class="bottom_nav_fixed bottom_white">
+	<nav class=" foot_nav_bar">
+		<ul class="columns_flex">
+			<li class="each_column">
+				<a href="{:url('Index/index')}">
+					<span class="store f_icon"></span>
+					<span class="f_txt">药妆定制</span>
+				</a>
+			</li>
+			<li class="each_column ">
+				<a href="{:url('Company/index')}">
+					<span class="practitioners f_icon"></span>
+					<span class="f_txt">走进维雅</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="">
+					<span class="business f_icon"></span>
+					<span class="f_txt">业务咨询</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="">
+					<span class="cart f_icon"></span>
+					<span class="f_txt">采购车</span>
+				</a>
+			</li>
+			<li class="each_column current">
+				<a href="">
+					<span class="my f_icon"></span>
+					<span class="f_txt">我的</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+
+{/block}
