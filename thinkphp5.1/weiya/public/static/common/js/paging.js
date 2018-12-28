@@ -42,8 +42,8 @@ function getPagingList(config,postData) {
     postData.pageSize = postData.pageSize ? postData.pageSize:4;
     //请求结束标志
     if(config.requestEnd){
-        $('.end_more').remove();
-        config.container.after('<div class="end_more">已到底部，加载完！</div>')
+        $('.ctype-title').remove();
+        config.container.after('<div class="ctype-title"><span class="line"></span><span class="txt f24">已到底部，加载完！</span><span class="line"></span></div>')
         config.loadTrigger = true;
         return false;
     }
@@ -60,7 +60,7 @@ function getPagingList(config,postData) {
         },
         success: function(data){
             $('.loading').hide();
-            $('.end_more').remove();
+            $('.ctype-title').remove();
             config.callBack(config,data);
             if($($.parseHTML(data)).length<postData.pageSize){
                 config.requestEnd = true;
