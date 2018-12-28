@@ -18,7 +18,6 @@ class Index extends \common\controller\Base{
 
         ];
         $categoryList  = $modelGoodsCategory->getList($config);
-        print_r($categoryList);exit;
         $this ->assign('categoryList',$categoryList);
         //获取精选的6个 场景
         $modelScene = new \app\index\model\Scene();
