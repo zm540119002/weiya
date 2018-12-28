@@ -371,16 +371,19 @@ function getWeek(i) {
     //console.log(firstDay);
     //显示周日
     // var SundayTime =new Date(nowTime); 
-    //console.log(day);
+    console.log(day);
 
    
     
-    if(day!=6){
+    if(day==5){
          //显示周五
-        var Friday =new Date((5-day)*oneDayTime+now.getTime()); 
+        var Friday =new Date(7*oneDayTime+now.getTime()); 
+        return new Date(Friday.toLocaleDateString());
+    }else if(day==6){
+        var Friday =new Date((day+1)*oneDayTime+now.getTime()); 
         return new Date(Friday.toLocaleDateString());
     }else{
-        var Friday =new Date((5+day)*oneDayTime+now.getTime()); 
+        var Friday =new Date((5-day)*oneDayTime+now.getTime()); 
         return new Date(Friday.toLocaleDateString());
     }
     console.log(new Date(Friday.toLocaleDateString()));
