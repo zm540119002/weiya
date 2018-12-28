@@ -170,16 +170,21 @@
 {block name="script"}
     <script src="public_js/jquery.area.js"></script>
     <script type="text/javascript">
+        var addressList={:json_encode($addressList)};
         $(function(){
-            var province=parseInt($('.area-address-name').data('province'));
-			var city=parseInt($('.area-address-name').data('city'));
-			var area=parseInt($('.area-address-name').data('area'));
-            console.log(typeof province);
-			var region = [];
-				region.push(province);
-				region.push(city);
-				region.push(area);
-				$('.list_area_address').setArea(region);
+            
+            if(!$.isEmptyObject(addressList)){
+                var province=parseInt($('.area-address-name').data('province'));
+                var city=parseInt($('.area-address-name').data('city'));
+                var area=parseInt($('.area-address-name').data('area'));
+                var region = [];
+                    region.push(province);
+                    region.push(city);
+                    region.push(area);
+                    console.log(region);
+                    $('.list_area_address').setArea(region);
+            }
+            
 			
             //添加收货人地址
             $('body').on('click','.add_address',function () {
@@ -187,8 +192,8 @@
                 addressLayer(title);
             });
             //选择地址
-            var delivery_address=$('.delivery_address').html();
             $('body').on('click','.select_address',function () {
+                var delivery_address=$('.delivery_address').html();
                 layer.open({
                     title:['选择收货地址','border-bottom:1px solid #d9d9d9;'],
                     type:1,
@@ -266,6 +271,12 @@
                                 $('.loading').hide();
                                 if(data.status == 1){
                                     _this.parents('.item_addr').remove();
+                                    $.each($('.delivery_address .item_addr'),function(){
+                                        var _thisId=$(this).find('.address_id').val();
+                                        if(postData.address_id==_thisId){
+                                            $(this).remove();
+                                        }
+                                    })
                                 }
                                 if(data.status == 0){
                                     dialog.error(data.info);
@@ -348,25 +359,28 @@
                             $('.loading').hide();
                             if(data.status == 0){
 
-                            }else if(data.status == 1){
-                                
-                                    $('.address_info').find('span[class="consignee"]').text(postData.consignee);
-                                    $('.address_info').find('span[class="mobile"]').text(postData.mobile);
-                                    $('.address_info').find('span[class="detail_address"]').text(postData.detail_address);
-                                    $('.address_info').find('input[class="address_id"]').val(postData.address_id);
-                                    var region = [];
-                                    region.push(postData.province);
-                                    region.push(postData.city);
-                                    region.push(postData.area);
-                                    $('.address_info .list_area_address').setArea(region);
+                            }else{
+                                    if(!$.isEmptyObject(addressList)){
+                                       
+                                    }else{
+                                        $('.address_info').find('span[class="consignee"]').text(postData.consignee);
+                                        $('.address_info').find('span[class="mobile"]').text(postData.mobile);
+                                        $('.address_info').find('span[class="detail_address"]').text(postData.detail_address);
+                                        $('.address_info').find('input[class="address_id"]').val(postData.address_id);
+                                        var region = [];
+                                        region.push(postData.province);
+                                        region.push(postData.city);
+                                        region.push(postData.area);
+                                        $('.address_info .list_area_address').setArea(region);
+                                    }
                                     // if(data.is_default==1){
                                     //     $('.addressLayer .myswitch').addClass('myswitched');
                                     //     $('.addressLayer .myswitch').attr('data-off',1);
                                     // }
                                     console.log(typeof postData.address_id);
-                                    if(!postData.address_id){
-                                        alert(1);
-                                    }   
+                                   
+                                        $('.delivery_address div:first').before(data);
+                                  
                                     layer.close(index);
                                
                             }
