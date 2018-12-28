@@ -73,4 +73,9 @@ class UserCenter extends \think\Controller{
         session('captcha_'.$mobilePhone,$captcha);
         return successMsg($response->Message);
     }
+
+    //用户中心
+    public function index(){
+        return $this->fetch();
+    }
 }
