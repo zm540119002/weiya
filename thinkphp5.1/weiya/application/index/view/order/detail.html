@@ -101,7 +101,13 @@
                             <span class="red">￥<price>{$info.price}</price></span>
                             <span>X{$info.num} </span>
                         </div>
+                        {if $info.buy_type == 1}
                         <div class="">购买类型：<span>批量采购</span></div>
+                        {elseif $info.buy_type == 2}
+                        <div class="">购买类型：<span>样品购买</span></div>
+                        {else /}
+                        {/if}
+
                     </div>
                 </li>
                 {/volist}
@@ -211,15 +217,12 @@
             $('.edit_operate').find('.address_edit').hide();
             if(!$.isEmptyObject(addressList)){
                 var data=$('.address_info .consigneeInfo').serializeObject();
-                console.log(data);
                 var region = [];
                     region.push(data.province);
                     region.push(data.city);
                     region.push(data.area);
                     $('.list_area_address').setArea(region);
             }
-            
-			
             //添加收货人地址
             $('body').on('click','.add_address',function () {
                 var title='添加新的收货地址';
@@ -272,7 +275,6 @@
             $('body').on('click','.address_edit',function () {
                 var title='修改地址';
                 var data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
-                console.log(data);
                 addressLayer(title,data);
             });
             //设定默认地址
@@ -286,53 +288,56 @@
 				}
 			});
             //删除地址
-            // $('body').on('click','.address_delete',function () {
-            //     var _this = $(this);
-            //     var postData = {};
-            //     postData.address_id = _this.siblings().find('.address_id').val();
-            //     layer.open({
-            //         content : '删除你选中的地址吗',
-            //         time:5,
-            //         btn : ['是','否'],
-            //         title: '提示',
-            //         yes : function(index){
-            //             _this.addClass("nodisabled");//防止重复提交
-            //             var url = module + '/Address/del';
-            //             $.ajax({
-            //                 url: url,
-            //                 data: postData,
-            //                 type: 'post',
-            //                 beforeSend: function(){
-            //                     $('.loading').show();
-            //                 },
-            //                 error:function(){
-            //                     $('.loading').hide();
-            //                     dialog.error('AJAX错误');
-            //                 },
-            //                 success: function(data){
-            //                     _this.removeClass("nodisabled");//删除防止重复提交
-            //                     $('.loading').hide();
-            //                     if(data.status == 1){
-            //                         _this.parents('.item_addr').remove();
-            //                         $.each($('.delivery_address .item_addr'),function(){
-            //                             var _thisId=$(this).find('.address_id').val();
-            //                             if(postData.address_id==_thisId){
-            //                                 $(this).remove();
-            //                             }
-            //                         })
-            //                     }
-            //                     if(data.status == 0){
-            //                         dialog.error(data.info);
-            //                     }
-            //                 }
-            //             });
-            //             layer.close(index);
-            //         }
-            //     });
+//             $('body').on('click','.address_delete',function () {
+//                 var _this = $(this);
+//                 var postData = {};
+//                 postData.address_id = _this.siblings().find('.address_id').val();
+//                 layer.open({
+//                     content : '删除你选中的地址吗',
+//                     time:5,
+//                     btn : ['是','否'],
+//                     title: '提示',
+//                     yes : function(index){
+//                         _this.addClass("nodisabled");//防止重复提交
+//                         var url = module + '/Address/del';
+//                         $.ajax({
+//                             url: url,
+//                             data: postData,
+//                             type: 'post',
+//                             beforeSend: function(){
+//                                 $('.loading').show();
+//                             },
+//                             error:function(){
+//                                 $('.loading').hide();
+//                                 dialog.error('AJAX错误');
+//                             },
+//                             success: function(data){
+//                                 _this.removeClass("nodisabled");//删除防止重复提交
+//                                 $('.loading').hide();
+//                                 if(data.status == 1){
+//                                     _this.parents('.item_addr').remove();
+//                                     $.each($('.delivery_address .item_addr'),function(){
+//                                         var _thisId=$(this).find('.address_id').val();
+//                                         if(postData.address_id==_thisId){
+//                                             $(this).remove();
+//                                         }
+//                                     })
+//                                 }
+//                                 if(data.status == 0){
+//                                     dialog.error(data.info);
+//                                 }
+//                             }
+//                         });
+//                         layer.close(index);
+//                     }
+//                 });
+//
+//		     })
 
-		    // })
+
+
         })
-        //新增地址弹窗
+        //新增和修改地址弹窗
         var addressInfo=$('.section-address').html();
         function addressLayer(title,data){
             layer.open({

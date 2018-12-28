@@ -124,7 +124,7 @@ class Order extends \common\controller\UserBase
                 ['goods g','g.id = od.goods_id','left']
             ],'field' => [
                 'o.id', 'o.sn', 'o.amount',
-                'o.user_id', 'od.goods_id','od.num','od.price',
+                'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type',
                 'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
             ],
         ];

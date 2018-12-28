@@ -144,4 +144,18 @@ class Cart extends \common\controller\UserBase{
         }
     }
 
+    public function editCartNum(){
+        if(!request()->isPost()){
+            return errorMsg('请求方式错误');
+        }
+        $data = input('post.');
+        $data['user_id'] = $this -> user['id'];
+        $model = new \app\index\model\Cart();
+        $res = $model ->isUpdate(true)-> save($data);
+        if(false === $res){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
+    }
+
 }
