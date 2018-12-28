@@ -7,18 +7,18 @@
     <article class="f24 fill_order_wrapper">
         {notempty name="addressList"}
             {notempty name="defaultAddress"}
-            <div class="item_addr">
+            <div class="item_addr address_info">
 				<div class="ia-l"></div>
 				<div class="item_info">
 					<input type="hidden" value=" {$defaultAddress.id}" class="address_id"> 
 					<div class="mt_new">
-						<span>{$defaultAddress.consignee}</span>
-						<span>{$defaultAddress.mobile}</span>
+						<span class="consignee">{$defaultAddress.consignee}</span>
+						<span class="mobile">{$defaultAddress.mobile}</span>
 						{if $vo.is_default eq 1 }
 						<i class="default_tipc">默认</i>
 						{/if}
 					</div>
-					<p class=""><span class="list_area_address"></span>{$defaultAddress.detail_address}</p>
+					<p class=""><span class="list_area_address"></span><span class="detail_address">{$defaultAddress.detail_address}</span></p>
 					<input type="hidden" class="area-address-name" value="" data-province=" {$defaultAddress.province}" data-city="{$defaultAddress.city}" data-area="{$defaultAddress.area}">
 				</div>
                 <a href="javascript:void(0);" class="select_address">选择地址</a>
@@ -26,18 +26,18 @@
                 
             
             {else /}
-             <div class="item_addr">
+            <div class="item_addr address_info">
 				<div class="ia-l"></div>
 				<div class="item_info">
 					<input type="hidden" value=" {$addressList[0]['id']}" class="address_id"> 
 					<div class="mt_new">
-						<span>{$addressList[0]['consignee']}</span>
-						<span>{$addressList[0]['mobile']}</span>
+						<span class="consignee">{$addressList[0]['consignee']}</span>
+						<span class="mobile">{$addressList[0]['mobile']}</span>
 						{if $vo.is_default eq 1 }
 						<i class="default_tipc">默认</i>
 						{/if}
 					</div>
-					<p class=""><span class="list_area_address"></span>{$addressList[0]['detail_address']}</p>
+					<p class=""><span class="list_area_address"></span><span class="detail_address">{$addressList[0]['detail_address']}</span></p>
 					<input type="hidden" class="area-address-name" value="" data-province="{$addressList[0]['province']}" data-city="{$addressList[0]['city']}" data-area="{$addressList[0]['area']}">
 				</div>
                 <a href="javascript:void(0);" class="select_address">选择地址</a>
@@ -85,6 +85,7 @@
     <!--添加收货人信息-->
     <section class="section-address bg-eae pt-5" style="display:none;">
         <form action='#' method="post" class="bg-fff address_form">
+            <input type="hidden" class="" name="address_id" value="" />
             <div class="form-group box-flex clearfixed">
                 <label class="form-label">收件人：</label>
                 <input type="text" name="consignee" class="input-flex recipient_name " placeholder="请输入姓名" value="">
@@ -136,10 +137,10 @@
                         <input type="hidden" class="" name="province" value="{$vo.province}" />
                         <input type="hidden" class="" name="city" value="{$vo.city}" />
                         <input type="hidden" class="" name="area" value="{$vo.area}" />
-                        <input type="hidden" class="" name="id" value="{$vo.id}" />
-                        <input type="hidden" class="" name="consignee_name" value="{$vo.consignee}" />
-                        <input type="hidden" class="" name="mobile" value="{$vo.mobile}" />
-                        <input type="hidden" class="" name="detail_address" value="{$vo.detail_address}" />
+                        <input type="hidden" class="" name="layer_id" value="{$vo.id}" />
+                        <input type="hidden" class="" name="layer_consignee" value="{$vo.consignee}" />
+                        <input type="hidden" class="" name="layer_mobile" value="{$vo.mobile}" />
+                        <input type="hidden" class="" name="layer_detail_address" value="{$vo.detail_address}" />
                         <input type="hidden" class="" name="is_default" value="{$vo.is_default}" />
                     </form>
 				</div>
@@ -238,6 +239,46 @@
 					$(this).attr('data-off',1);
 				}
 			});
+            //删除地址
+            $('body').on('click','.address_delete',function () {
+                var _this = $(this);
+                var postData = {};
+                postData.address_id = _this.siblings().find('.address_id').val();
+                layer.open({
+                    content : '删除你选中的地址吗',
+                    time:5,
+                    btn : ['是','否'],
+                    title: '提示',
+                    yes : function(index){
+                        _this.addClass("nodisabled");//防止重复提交
+                        var url = module + '/Address/del';
+                        $.ajax({
+                            url: url,
+                            data: postData,
+                            type: 'post',
+                            beforeSend: function(){
+                                $('.loading').show();
+                            },
+                            error:function(){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                _this.removeClass("nodisabled");//删除防止重复提交
+                                $('.loading').hide();
+                                if(data.status == 1){
+                                    _this.parents('.item_addr').remove();
+                                }
+                                if(data.status == 0){
+                                    dialog.error(data.info);
+                                }
+                            }
+                        });
+                        layer.close(index);
+                    }
+                });
+
+		    })
         })
         //新增地址弹窗
         var addressInfo=$('.section-address').html();
@@ -251,9 +292,10 @@
                 btn:['保存','关闭'],
                 success:function(){
                     if(data){
-                        $('.addressLayer').find('input[name="consignee"]').val(data.consignee_name);
-                        $('.addressLayer').find('input[name="mobile"]').val(data.mobile);
-                        $('.addressLayer').find('input[name="detail_address"]').val(data.detail_address);
+                        $ ('input[name="consignee"]').val(data.layer_consignee);
+                        $ ('input[name="mobile"]').val(data.layer_mobile);
+                        $ ('input[name="detail_address"]').val(data.layer_detail_address);
+                        $ ('input[name="address_id"]').val(data.layer_id);
                         var region = [];
                         region.push(data.province);
                         region.push(data.city);
@@ -283,7 +325,7 @@
                         dialog.error(content);
                         return false;
                     }
-                    postData.is_default = $('.myswitch').attr('data-off');
+                    postData.is_default = $('.addressLayer .myswitch').attr('data-off');
                     postData.province = area_address[0];
                     postData.city = area_address[1];
                     postData.area = area_address[2];
@@ -309,7 +351,26 @@
                             if(data.status == 0){
 
                             }else if(data.status == 1){
-                                console.log(data);
+                                
+                                    $('.address_info').find('span[class="consignee"]').text(postData.consignee);
+                                    $('.address_info').find('span[class="mobile"]').text(postData.mobile);
+                                    $('.address_info').find('span[class="detail_address"]').text(postData.detail_address);
+                                    $('.address_info').find('input[class="address_id"]').val(postData.address_id);
+                                    var region = [];
+                                    region.push(postData.province);
+                                    region.push(postData.city);
+                                    region.push(postData.area);
+                                    $('.address_info .list_area_address').setArea(region);
+                                    // if(data.is_default==1){
+                                    //     $('.addressLayer .myswitch').addClass('myswitched');
+                                    //     $('.addressLayer .myswitch').attr('data-off',1);
+                                    // }
+                                    console.log(typeof postData.address_id);
+                                    if(!postData.address_id){
+                                        alert(1);
+                                    }   
+                                    layer.close(index);
+                               
                             }
                         }
                     });
