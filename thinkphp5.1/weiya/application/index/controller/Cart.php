@@ -13,6 +13,11 @@ class Cart extends \common\controller\UserBase{
         }
     }
 
+    /**
+     * @return array
+     * @throws \Exception
+     *
+     */
     public function addCart(){
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
@@ -144,6 +149,7 @@ class Cart extends \common\controller\UserBase{
         }
     }
 
+    //修改购物车数量
     public function editCartNum(){
         if(!request()->isPost()){
             return errorMsg('请求方式错误');

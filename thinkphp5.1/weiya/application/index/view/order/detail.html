@@ -82,6 +82,8 @@
         </div>
         <!--发票抬头-->
         <section class="goods_order_form">
+            <input type="hidden" value="{$orderGoodsList[0]['id']}" class="order_id">
+            <input type="hidden" value="{$orderGoodsList[0]['sn']}" class="order_sn">
             <!--结算显示商品页面-->
             {notempty name="orderGoodsList"}
             <ul class="goods_order_item">
@@ -211,6 +213,7 @@
 
 {block name="script"}
     <script src="public_js/jquery.area.js"></script>
+    <script type="text/javascript" src="weiya_js/footerCart.js"></script>
     <script type="text/javascript">
         var addressList={:json_encode($addressList)};
         $(function(){
