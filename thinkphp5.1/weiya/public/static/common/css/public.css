@@ -4867,20 +4867,19 @@ select[name="nodeIds"]{
     display:block;
     padding:0.15rem 0 0 0.15rem;
 }
-.add_address:before{
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    bottom: -20px;
+.add_address::after{
+    content: '';
     display: inline-block;
-    height: 30px;
-    width: 30px;
-    background-color:#FF7BAC;
-    content: "";
-    transform: scale3d(1, 0.05, 1);
-    transform-origin: center;
-    transition: all 0.5s;
-    margin-left: -15px;
+    position: absolute;
+    top: 35%;
+    right: 0.15rem;
+    width: .5em;
+    height: .5em;
+    border-bottom: .12em solid #999;
+    border-left: .12em solid #999;
+    -webkit-transform: translate(-70%) rotateZ(-133deg);
+    -moz-transform: translate(-70%) rotateZ(-45deg);
+    -ms-transform: translate(-70%) rotateZ(-45deg);
 }
 .goods_order_item{
     padding:0.20rem 0 0;
