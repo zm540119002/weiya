@@ -124,7 +124,7 @@ class Order extends \common\controller\UserBase
                 ['goods g','g.id = od.goods_id','left']
             ],'field' => [
                 'o.id', 'o.sn', 'o.amount',
-                'o.user_id', 'od.goods_id','od.num','od.price',
+                'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type',
                 'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
             ],
         ];
@@ -165,6 +165,7 @@ class Order extends \common\controller\UserBase
 
         $data = [
             'order_status' => 1,
+            'address_id' => input('post.address_id',0,'int'),
         ];
         $condition = [
             ['user_id','=',$this->user['id']],
@@ -174,25 +175,24 @@ class Order extends \common\controller\UserBase
         if(false === $res){
             return errorMsg('失败');
         }
-        //根据订单号查询关联的商品
-        $modelOrderDetail = new \app\index\model\OrderDetail();
-        $config = [
-            'where' => [
-                ['od.status', '=', 0],
-                ['od.father_order_id', '=', $fatherOrderId],
-            ], 'field' => [
-                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id',
-            ]
-        ];
-        $orderDetailList = $modelOrderDetail->getList($config);
-        $modelOrderChild = new \app\index\model\OrderChild();
-        //生成子订单
-        $rse = $modelOrderChild -> createOrderChild($orderDetailList,$this->user['id']);
-        if(!$rse['status']){
-            $modelOrder->rollback();
-            return errorMsg($modelOrder->getLastSql());
-        }
-
+//        //根据订单号查询关联的商品
+//        $modelOrderDetail = new \app\index\model\OrderDetail();
+//        $config = [
+//            'where' => [
+//                ['od.status', '=', 0],
+//                ['od.father_order_id', '=', $fatherOrderId],
+//            ], 'field' => [
+//                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id',
+//            ]
+//        ];
+//        $orderDetailList = $modelOrderDetail->getList($config);
+//        $modelOrderChild = new \app\index\model\OrderChild();
+//        //生成子订单
+//        $rse = $modelOrderChild -> createOrderChild($orderDetailList,$this->user['id']);
+//        if(!$rse['status']){
+//            $modelOrder->rollback();
+//            return errorMsg($modelOrder->getLastSql());
+//        }
         $orderSn = input('post.order_sn','','string');
         return successMsg('成功',array('order_sn'=>$orderSn));
     }
