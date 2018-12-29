@@ -126,7 +126,7 @@
 				//添加或修改地址
 				var _this = $(this);
 				_this.addClass("nodisabled");//防止重复提交
-				var url = module + '/Address/edit';
+				var url = module + 'Address/edit';
 				$.ajax({
 					url: url,
 					data: postData,
@@ -143,9 +143,8 @@
 						$('.loading').hide();
 						if(data.status == 0){
 
-						}else if(data.status == 1){
-							location.href = module + 'Address/manage/';
 						}
+						location.href = module + 'Address/manage';
 					}
 				});
 
