@@ -4866,7 +4866,7 @@ select[name="nodeIds"]{
     position:relative;
     display:block;
     padding:0.15rem 0 0.12rem 0.15rem;
-    border-bottom:3px solid #f2f2f2;
+    border-bottom:5px solid #f2f2f2;
 }
 .add_address::after{
     content: '';
