@@ -142,7 +142,7 @@
 						_this.removeClass("nodisabled");//删除防止重复提交
 						$('.loading').hide();
 						if(data.status == 0){
-
+                            dialog.error(data.info);
 						}
 						location.href = module + 'Address/manage';
 					}
