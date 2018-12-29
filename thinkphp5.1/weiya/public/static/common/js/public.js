@@ -380,7 +380,7 @@ function getWeek(i) {
         var Friday =new Date(7*oneDayTime+now.getTime()); 
         return new Date(Friday.toLocaleDateString());
     }else if(day==6){
-        var Friday =new Date((day+1)*oneDayTime+now.getTime()); 
+        var Friday =new Date((day)*oneDayTime+now.getTime()); 
         return new Date(Friday.toLocaleDateString());
     }else{
         var Friday =new Date((5-day)*oneDayTime+now.getTime()); 
