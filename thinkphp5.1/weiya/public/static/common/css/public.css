@@ -4862,6 +4862,9 @@ select[name="nodeIds"]{
     color:#06c;
 }
 /*订单*/
+.address_info{
+    padding:0.15rem 0 0 0.15rem;
+}
 .goods_order_item{
     padding:0.20rem 0 0;
 }
