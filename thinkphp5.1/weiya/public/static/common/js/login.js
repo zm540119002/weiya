@@ -39,7 +39,6 @@ $(function(){
     $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
-        var postData = {};
         var content='';
         var url = domain+'ucenter/UserCenter/'+method;
         var postForm = null;
@@ -70,7 +69,7 @@ $(function(){
             dialog.error('未知操作');
             return false;
         }
-        postData = postForm.serializeObject();
+        var postData = postForm.serializeObject();
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && !register.vfyCheck(postData.captcha)){
@@ -93,8 +92,6 @@ $(function(){
                     if(loginSign=='page'){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
-                        console.log(data);
-                        return;
                         if(typeof(dialogLoginCallBack) == "undefined"){
                             dialogLoginDefaultCallBack(data);
                         }else if($.isFunction(dialogLoginCallBack)){

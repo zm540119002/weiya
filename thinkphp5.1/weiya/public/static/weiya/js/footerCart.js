@@ -94,9 +94,13 @@ $(function () {
 
     //加入购物车
     $('body').on('click','.add_cart,.add_purchase_cart',function(){
+        var _this = $(this);
+        dialogLoginCallBack(_this);
+    });
+    function dialogLoginCallBack(_this) {
         var lis = null;
-        if($($(this).context).hasClass('add_purchase_cart')){
-            lis = $(this).parents('li');
+        if($(_this.context).hasClass('add_purchase_cart')){
+            lis = _this.parents('li');
         }else{
             lis = $('ul.goods_list').find('li[data-buy_type="1"]');
         }
@@ -105,7 +109,6 @@ $(function () {
             return false;
         }
         var url = module + 'Cart/addCart';
-        var _this = $(this);
         _this.addClass("nodisabled");//防止重复提交
         $.ajax({
             url: url,
@@ -125,16 +128,16 @@ $(function () {
                     dialog.error(data.info);
                 }
                 else if(data.code==1 && data.data=='no_login'){
-					loginDialog();
+                    loginDialog();
                     return false;
-				}
+                }
                 else{
                     dialog.success(data.info);
                     var num = 0;
                     $.each(lis,function(index,val){
-                        var buyType=$(this).data('buy_type');
+                        var buyType=_this.data('buy_type');
                         if(buyType==1){
-                            num += parseInt($(this).find('.gshopping_count').val());
+                            num += parseInt(_this.find('.gshopping_count').val());
                         }
                     });
                     $('footer').find('.cart_num').text(num);
@@ -142,11 +145,11 @@ $(function () {
                     setTimeout(function(){
                         $('.add_num').removeClass('current');
                     },2000)
-                    
+
                 }
             }
         });
-    });
+    }
     //样品弹窗加入购物车
     $('body').on('click','.goodsInfoLayer .add_cart_layer',function(){
         var lis = null;
