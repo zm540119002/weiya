@@ -159,7 +159,6 @@ $(function () {
         if(!postData){
             return false;
         }
-        console.log(postData);
         var url = module + 'Cart/addCart';
         $.ajax({
             url: url,
@@ -490,4 +489,8 @@ function editCartNum(postData,obj) {
             
         }
     });
+}
+
+function callBack() {
+    
 }
