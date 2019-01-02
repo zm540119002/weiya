@@ -1,6 +1,4 @@
 function dialogLoginCallBack(_this) {
-    console.log(_this);
-    return;
     var lis = null;
     if($(_this.context).hasClass('add_purchase_cart')){
         lis = _this.parents('li');
@@ -12,7 +10,7 @@ function dialogLoginCallBack(_this) {
         return false;
     }
     var url = module + 'Cart/addCart';
-    _this.addClass("nodisabled");//防止重复提交
+    $(_this).addClass("nodisabled");//防止重复提交
     $.ajax({
         url: url,
         data: postData,
@@ -26,7 +24,7 @@ function dialogLoginCallBack(_this) {
         },
         success: function(data){
             $('.loading').hide();
-            _this.removeClass("nodisabled");//防止重复提交
+            $(_this).removeClass("nodisabled");//防止重复提交
             if(data.status==0){
                 dialog.error(data.info);
             }
