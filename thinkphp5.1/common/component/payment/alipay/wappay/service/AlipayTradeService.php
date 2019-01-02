@@ -1,4 +1,5 @@
 <?php
+//namespace common\component\payment\alipay\wappay\service;
 /* *
  * 功能：支付宝手机网站alipay.trade.close (统一收单交易关闭接口)业务参数封装
  * 版本：2.0

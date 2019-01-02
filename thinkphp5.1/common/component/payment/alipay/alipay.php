@@ -74,4 +74,13 @@ class alipay
     }
 
 
+    /**
+     * 支付回调检查
+     */
+    public function check($data){
+        $alipaySevice = new \AlipayTradeService($this->alipay_config);
+        $result = $alipaySevice->check($data);
+        return $result;
+    }
+
 }
