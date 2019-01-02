@@ -39,7 +39,6 @@ class weixinpay{
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
-        print_r($openId);exit;
         $input->SetBody('美尚云');					//商品名称
         $input->SetAttach($payInfo['attach']);					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
         $input->SetOut_trade_no($payInfo['sn']);			//订单号
@@ -52,7 +51,6 @@ class weixinpay{
         $input->SetOpenid($openId);					//用户openID
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
-        print_r($jsApiParameters);exit;
         $html = <<<EOF
 			<script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
 			<script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
