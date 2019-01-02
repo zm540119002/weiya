@@ -15,7 +15,6 @@ class Index extends \common\controller\Base{
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'7'
-
         ];
         $categoryList  = $modelGoodsCategory->getList($config);
         $this ->assign('categoryList',$categoryList);
