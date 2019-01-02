@@ -36,7 +36,6 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-        print_r($payInfo);exit;
         $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
         //①、获取用户openid
         try{
@@ -111,7 +110,6 @@ EOF;
      */
     public static function pc_pay($payInfo)
     {
-        print_r($payInfo);exit;
         $input = new \WxPayUnifiedOrder();
         $input->SetBody("美尚云"); // 商品描述
         $input->SetAttach("weixin"); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
@@ -205,7 +203,6 @@ EOF;
      * H5 微信支付
      */
     public static function h5_pay($payInfo){
-        print_r($payInfo);exit;
         //统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
         //使用统一支付接口
         $input = new \WxPayUnifiedOrder();
