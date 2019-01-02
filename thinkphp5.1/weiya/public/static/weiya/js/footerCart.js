@@ -24,7 +24,7 @@ function dialogLoginCallBack(_this) {
         },
         success: function(data){
             $('.loading').hide();
-            $(_this).removeClass("nodisabled");//防止重复提交
+            $(_this.context).removeClass("nodisabled");//防止重复提交
             if(data.status==0){
                 dialog.error(data.info);
             }
@@ -36,9 +36,9 @@ function dialogLoginCallBack(_this) {
                 dialog.success(data.info);
                 var num = 0;
                 $.each(lis,function(index,val){
-                    var buyType=_this.data('buy_type');
+                    var buyType=$(_this.context).data('buy_type');
                     if(buyType==1){
-                        num += parseInt(_this.find('.gshopping_count').val());
+                        num += parseInt($(_this.context).find('.gshopping_count').val());
                     }
                 });
                 $('footer').find('.cart_num').text(num);
