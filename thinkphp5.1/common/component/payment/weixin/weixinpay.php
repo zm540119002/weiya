@@ -51,7 +51,6 @@ class weixinpay{
         $input->SetOpenid($openId);					//用户openID
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
-        print_r($jsApiParameters);exit;
         $html = <<<EOF
 			<script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
 			<script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
@@ -200,7 +199,7 @@ EOF;
         $input->SetNotify_url($payInfo['notify_url']);//支付回调验证地址
         $input->SetTrade_type("MWEB");				//支付类型
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
-        print_r($input);exit;
+
         $url = $order2['mweb_url'];
         $url = $url.'&redirect_url='.$payInfo['return_url'];//拼接支付完成后跳转的页面redirect_url
         $html = <<<EOF
