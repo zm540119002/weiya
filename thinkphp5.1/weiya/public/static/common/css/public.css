@@ -4975,6 +4975,11 @@ select[name="nodeIds"]{
     overflow-x:hidden;
     overflow-y:auto;
 }
+.addressLayer .layui-m-layerbtn{
+    position:fixed;
+    left:0;
+    bottom:0;
+}
 /*支付*/
 .pay_wrapper{
     background: #f2f2f2;
