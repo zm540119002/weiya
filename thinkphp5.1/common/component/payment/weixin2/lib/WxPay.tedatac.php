@@ -483,7 +483,6 @@ class WxPayUnifiedOrder extends WxPayDataBase
 	**/
 	public function IsOut_trade_noSet()
 	{
-		print_r($this->values);exit;
 		return array_key_exists('out_trade_no', $this->values);
 	}
 
