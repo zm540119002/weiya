@@ -94,11 +94,11 @@ $(function(){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
                         console.log(typeof dialogLoginCallBack);
-                        if(dialogLoginCallBack=='undefined'){
-                            dialogLoginDefaultCallBack(data);
-                        }else if($.isFunction(dialogLoginCallBack)){
-                            dialogLoginCallBack(data)
-                        }
+                        // if(dialogLoginCallBack=='undefined'){
+                        //     dialogLoginDefaultCallBack(data);
+                        // }else if($.isFunction(dialogLoginCallBack)){
+                        //     dialogLoginCallBack(data)
+                        // }
                     }
                 }
             });
