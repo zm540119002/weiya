@@ -36,6 +36,7 @@ class Address extends \common\controller\UserBase {
                     }
                 }
                 $model->commit();
+                $data['id'] = $addressId;
                 $this->assign('data', $data);
                 return view('address/info');
             }else{

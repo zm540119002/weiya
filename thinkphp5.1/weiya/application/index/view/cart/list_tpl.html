@@ -13,7 +13,15 @@
         <p>{$info.name}</p>
         <div>商品规格：<span>{$info.specification}</span></div>
         <div class="commodity_purchaser f24">
+            {if $info.buy_type == 1}
             <span class="pink">￥<price>{$info.bulk_price}</price></span>
+            <div>购买类型：<span>批量</span></div>
+            {elseif $info.buy_type == 2}
+            <span class="pink">￥<price>{$info.sample_price}</price></span>
+            <div>购买类型：<span>样品</span></div>
+            {else /}
+            {/if}
+
         </div>
         <div class="purchase_goods_num cart_goods_operate">
             <!--<span>购买数量(5)</span>-->

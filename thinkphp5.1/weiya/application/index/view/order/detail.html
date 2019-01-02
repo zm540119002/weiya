@@ -5,50 +5,85 @@
 {block name="nav">提交订单{/block}
 {block name="content"}
     <article class="f24 fill_order_wrapper">
-        {notempty name="addressList"}
-            {notempty name="defaultAddress"}
-            <div class="item_addr address_info">
-				<div class="ia-l"></div>
-				<div class="item_info">
-					<input type="hidden" value=" {$defaultAddress.id}" class="address_id"> 
-					<div class="mt_new">
-						<span class="consignee">{$defaultAddress.consignee}</span>
-						<span class="mobile">{$defaultAddress.mobile}</span>
-						{if $vo.is_default eq 1 }
-						<i class="default_tipc">默认</i>
-						{/if}
-					</div>
-					<p class=""><span class="list_area_address"></span><span class="detail_address">{$defaultAddress.detail_address}</span></p>
-					<input type="hidden" class="area-address-name" value="" data-province=" {$defaultAddress.province}" data-city="{$defaultAddress.city}" data-area="{$defaultAddress.area}">
-				</div>
-                <a href="javascript:void(0);" class="select_address">选择地址</a>
-			</div>
-            {else /}
-            <div class="item_addr address_info">
-				<div class="ia-l"></div>
-				<div class="item_info">
-					<input type="hidden" value=" {$addressList[0]['id']}" class="address_id"> 
-					<div class="mt_new">
-						<span class="consignee">{$addressList[0]['consignee']}</span>
-						<span class="mobile">{$addressList[0]['mobile']}</span>
-						{if $vo.is_default eq 1 }
-						<i class="default_tipc">默认</i>
-						{/if}
-					</div>
-					<p class=""><span class="list_area_address"></span><span class="detail_address">{$addressList[0]['detail_address']}</span></p>
-					<input type="hidden" class="area-address-name" value="" data-province="{$addressList[0]['province']}" data-city="{$addressList[0]['city']}" data-area="{$addressList[0]['area']}">
-				</div>
-                <a href="javascript:void(0);" class="select_address">选择地址</a>
-			</div>
-                      
+        <div id="address_info">
+            {notempty name="addressList"}
+                {notempty name="defaultAddress"}
+                <div class="item_addr address_info" >
+                    <div class="ia-l"></div>
+                    <div class="item_info">
+                        <input type="hidden" value=" {$defaultAddress.id}" class="address_id"> 
+                        <div class="mt_new">
+                            <span class="consignee">{$defaultAddress.consignee}</span>
+                            <span class="mobile">{$defaultAddress.mobile}</span>
+                            {if $vo.is_default eq 1 }
+                            <i class="default_tipc">默认</i>
+                            {/if}
+                        </div>
+                        <p class=""><span class="list_area_address"></span><span class="detail_address">{$defaultAddress.detail_address}</span></p>
+                        <!--<input type="hidden" class="area-address-name" value="" data-province=" {$defaultAddress.province}" data-city="{$defaultAddress.city}" data-area="{$defaultAddress.area}">-->
+                        <form style="display:none;" class="consigneeInfo">
+                            <input type="hidden" class="" name="province" value="{$defaultAddress.province}" />
+                            <input type="hidden" class="" name="city" value="{$defaultAddress.city}" />
+                            <input type="hidden" class="" name="area" value="{$defaultAddress.area}" />
+                            <input type="hidden" class="" name="layer_id" value="{$defaultAddress.id}" />
+                            <input type="hidden" class="" name="layer_consignee" value="{$defaultAddress.consignee}" />
+                            <input type="hidden" class="" name="layer_mobile" value="{$defaultAddress.mobile}" />
+                            <input type="hidden" class="" name="layer_detail_address" value="{$defaultAddress.detail_address}" />
+                            <input type="hidden" class="" name="is_default" value="{$defaultAddress.is_default}" />
+                        </form>    
+                    </div>
+                    <div class="edit_operate">
+                        <!--<a href="javascript:void(0)" class="address_delete">删除</a>-->
+                        <a href="javascript:void(0);" class="select_address">选择地址</a>
+                        <a href="javascript:void(0);" class="ia-r address_edit">
+                            <span class="iar-icon"></span>
+                        </a>
+                    </div>
+                </div>
+                {else /}
+                <div class="item_addr address_info">
+                    <div class="ia-l"></div>
+                    <div class="item_info">
+                        <input type="hidden" value=" {$addressList[0]['id']}" class="address_id"> 
+                        <div class="mt_new">
+                            <span class="consignee">{$addressList[0]['consignee']}</span>
+                            <span class="mobile">{$addressList[0]['mobile']}</span>
+                            {if $vo.is_default eq 1 }
+                            <i class="default_tipc">默认</i>
+                            {/if}
+                        </div>
+                        <p class=""><span class="list_area_address"></span><span class="detail_address">{$addressList[0]['detail_address']}</span></p>
+                        <!--<input type="hidden" class="area-address-name" value="" data-province="{$addressList[0]['province']}" data-city="{$addressList[0]['city']}" data-area="{$addressList[0]['area']}">-->
+                        <form style="display:none;" class="consigneeInfo">
+                            <input type="hidden" class="" name="province" value="{$addressList[0]['province']}" />
+                            <input type="hidden" class="" name="city" value="{$addressList[0]['city']}" />
+                            <input type="hidden" class="" name="area" value="{$addressList[0]['area']}" />
+                            <input type="hidden" class="" name="layer_id" value="{$addressList[0]['id']}" />
+                            <input type="hidden" class="" name="layer_consignee" value="{$addressList[0]['consignee']}" />
+                            <input type="hidden" class="" name="layer_mobile" value="{$addressList[0]['mobile']}" />
+                            <input type="hidden" class="" name="layer_detail_address" value="{$addressList[0]['detail_address']}" />
+                            <input type="hidden" class="" name="is_default" value="{$addressList[0]['is_default']}" />
+                        </form>
+                    </div>
+                    <div class="edit_operate">
+                        <!--<a href="javascript:void(0)" class="address_delete">删除</a>-->
+                        <a href="javascript:void(0);" class="select_address">选择地址</a>
+                        <a href="javascript:void(0);" class="ia-r address_edit">
+                            <span class="iar-icon"></span>
+                        </a>
+                    </div>
+                </div>
+                        
+                {/notempty}
+                
+                {else /}
+                <a href="javascript:void(0);" class="add_address">添加收货地址</a>
             {/notempty}
-             
-            {else /}
-            <a href="javascript:void(0);" class="add_address">添加收货地址</a>
-        {/notempty}
-
+        </div>
         <!--发票抬头-->
         <section class="goods_order_form">
+            <input type="hidden" value="{$orderGoodsList[0]['id']}" class="order_id">
+            <input type="hidden" value="{$orderGoodsList[0]['sn']}" class="order_sn">
             <!--结算显示商品页面-->
             {notempty name="orderGoodsList"}
             <ul class="goods_order_item">
@@ -68,7 +103,13 @@
                             <span class="red">￥<price>{$info.price}</price></span>
                             <span>X{$info.num} </span>
                         </div>
+                        {if $info.buy_type == 1}
                         <div class="">购买类型：<span>批量采购</span></div>
+                        {elseif $info.buy_type == 2}
+                        <div class="">购买类型：<span>样品购买</span></div>
+                        {else /}
+                        {/if}
+
                     </div>
                 </li>
                 {/volist}
@@ -142,10 +183,13 @@
                         <input type="hidden" class="" name="is_default" value="{$vo.is_default}" />
                     </form>
 				</div>
-				<a href="javascript:void(0)" class="address_delete">删除</a>
-				<a href="javascript:void(0);" class="ia-r address_edit">
-					<span class="iar-icon"></span>
-				</a>
+                <div class="edit_operate">
+                    <!--<a href="javascript:void(0)" class="address_delete">删除</a>-->
+                    <a href="javascript:void(0);" class="select_address">选择地址</a>
+                    <a href="javascript:void(0);" class="ia-r address_edit">
+                        <span class="iar-icon"></span>
+                    </a>
+                </div>
 			</div>
 		{/volist}
 	</section> 
@@ -169,23 +213,19 @@
 
 {block name="script"}
     <script src="public_js/jquery.area.js"></script>
+    <script type="text/javascript" src="weiya_js/footerCart.js"></script>
     <script type="text/javascript">
         var addressList={:json_encode($addressList)};
         $(function(){
-            
+            $('.edit_operate').find('.address_edit').hide();
             if(!$.isEmptyObject(addressList)){
-                var province=parseInt($('.area-address-name').data('province'));
-                var city=parseInt($('.area-address-name').data('city'));
-                var area=parseInt($('.area-address-name').data('area'));
+                var data=$('.address_info .consigneeInfo').serializeObject();
                 var region = [];
-                    region.push(province);
-                    region.push(city);
-                    region.push(area);
-                    console.log(region);
+                    region.push(data.province);
+                    region.push(data.city);
+                    region.push(data.area);
                     $('.list_area_address').setArea(region);
             }
-            
-			
             //添加收货人地址
             $('body').on('click','.add_address',function () {
                 var title='添加新的收货地址';
@@ -211,9 +251,18 @@
                                 region.push(data.city);
                                 region.push(data.area);
                                 _this.find('.area_address').setArea(region);
-
+                                $('.addressLayer').find('.select_address').hide();
+                                $('.edit_operate').find('.address_edit').show();
                             _this.on('click',function(){
                                 _this.parents('.item_addr').addClass('active').siblings().removeClass('active');
+                                var data=_this.parents('.item_addr').clone();
+                                $('#address_info').find('.item_addr').remove();
+                                $('#address_info').append(data);
+                                $('#address_info').find('.select_address').show();
+                                $('#address_info').find('.address_edit').hide();
+                                setTimeout(function(){
+                                    layer.closeAll();
+                                },1000)
                                 return false;
                             })
                         });
@@ -229,7 +278,6 @@
             $('body').on('click','.address_edit',function () {
                 var title='修改地址';
                 var data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
-                console.log(data);
                 addressLayer(title,data);
             });
             //设定默认地址
@@ -243,53 +291,56 @@
 				}
 			});
             //删除地址
-            $('body').on('click','.address_delete',function () {
-                var _this = $(this);
-                var postData = {};
-                postData.address_id = _this.siblings().find('.address_id').val();
-                layer.open({
-                    content : '删除你选中的地址吗',
-                    time:5,
-                    btn : ['是','否'],
-                    title: '提示',
-                    yes : function(index){
-                        _this.addClass("nodisabled");//防止重复提交
-                        var url = module + '/Address/del';
-                        $.ajax({
-                            url: url,
-                            data: postData,
-                            type: 'post',
-                            beforeSend: function(){
-                                $('.loading').show();
-                            },
-                            error:function(){
-                                $('.loading').hide();
-                                dialog.error('AJAX错误');
-                            },
-                            success: function(data){
-                                _this.removeClass("nodisabled");//删除防止重复提交
-                                $('.loading').hide();
-                                if(data.status == 1){
-                                    _this.parents('.item_addr').remove();
-                                    $.each($('.delivery_address .item_addr'),function(){
-                                        var _thisId=$(this).find('.address_id').val();
-                                        if(postData.address_id==_thisId){
-                                            $(this).remove();
-                                        }
-                                    })
-                                }
-                                if(data.status == 0){
-                                    dialog.error(data.info);
-                                }
-                            }
-                        });
-                        layer.close(index);
-                    }
-                });
+//             $('body').on('click','.address_delete',function () {
+//                 var _this = $(this);
+//                 var postData = {};
+//                 postData.address_id = _this.siblings().find('.address_id').val();
+//                 layer.open({
+//                     content : '删除你选中的地址吗',
+//                     time:5,
+//                     btn : ['是','否'],
+//                     title: '提示',
+//                     yes : function(index){
+//                         _this.addClass("nodisabled");//防止重复提交
+//                         var url = module + '/Address/del';
+//                         $.ajax({
+//                             url: url,
+//                             data: postData,
+//                             type: 'post',
+//                             beforeSend: function(){
+//                                 $('.loading').show();
+//                             },
+//                             error:function(){
+//                                 $('.loading').hide();
+//                                 dialog.error('AJAX错误');
+//                             },
+//                             success: function(data){
+//                                 _this.removeClass("nodisabled");//删除防止重复提交
+//                                 $('.loading').hide();
+//                                 if(data.status == 1){
+//                                     _this.parents('.item_addr').remove();
+//                                     $.each($('.delivery_address .item_addr'),function(){
+//                                         var _thisId=$(this).find('.address_id').val();
+//                                         if(postData.address_id==_thisId){
+//                                             $(this).remove();
+//                                         }
+//                                     })
+//                                 }
+//                                 if(data.status == 0){
+//                                     dialog.error(data.info);
+//                                 }
+//                             }
+//                         });
+//                         layer.close(index);
+//                     }
+//                 });
+//
+//		     })
 
-		    })
+
+
         })
-        //新增地址弹窗
+        //新增和修改地址弹窗
         var addressInfo=$('.section-address').html();
         function addressLayer(title,data){
             layer.open({
@@ -339,6 +390,7 @@
                     postData.city = area_address[1];
                     postData.area = area_address[2];
                     console.log(postData);
+                    // return false;
                     //添加或修改地址
                     var _this = $(this);
                     _this.addClass("nodisabled");//防止重复提交
@@ -360,32 +412,53 @@
                             if(data.status == 0){
 
                             }else{
-                                    if(!$.isEmptyObject(addressList)){
+                                    // if(!$.isEmptyObject(addressList)){
                                        
-                                    }else{
-                                        $('.address_info').find('span[class="consignee"]').text(postData.consignee);
-                                        $('.address_info').find('span[class="mobile"]').text(postData.mobile);
-                                        $('.address_info').find('span[class="detail_address"]').text(postData.detail_address);
-                                        $('.address_info').find('input[class="address_id"]').val(postData.address_id);
-                                        var region = [];
-                                        region.push(postData.province);
-                                        region.push(postData.city);
-                                        region.push(postData.area);
-                                        $('.address_info .list_area_address').setArea(region);
-                                    }
+                                    // }else{
+                                    //     $('.address_info').find('span[class="consignee"]').text(postData.consignee);
+                                    //     $('.address_info').find('span[class="mobile"]').text(postData.mobile);
+                                    //     $('.address_info').find('span[class="detail_address"]').text(postData.detail_address);
+                                    //     $('.address_info').find('input[class="address_id"]').val(postData.address_id);
+                                       
+                                    // }
                                     // if(data.is_default==1){
                                     //     $('.addressLayer .myswitch').addClass('myswitched');
                                     //     $('.addressLayer .myswitch').attr('data-off',1);
                                     // }
-                                    console.log(typeof postData.address_id);
-                                   
-                                        $('.delivery_address div:first').before(data);
-                                  
-                                    layer.close(index);
-                               
+                                    $('#address_info').find('.item_addr,.add_address').remove();
+                                    $('#address_info').append(data);
+                                    var region = [];
+                                    region.push(postData.province);
+                                    region.push(postData.city);
+                                    region.push(postData.area);
+                                    $('.item_addr .area_address').setArea(region);
+                                    $('.edit_operate').find('.address_edit').hide();
+                                    var len=$('.delivery_address .item_addr').length;
+                                    
+                                    if(!postData.address_id){
+                                        if(!len){
+                                            $('.delivery_address ').append(data);
+                                        }else{
+                                            $('.delivery_address div:first').before(data);
+                                        }
+                                         
+                                    }else{
+                                        $.each($('.delivery_address .item_addr'),function(index,val){
+                                            var _thisId=$(this).find('.address_id').val();
+                                            if(postData.address_id==_thisId){
+                                               
+                                                $(this).after(data);
+                                                 $(this).remove();
+                                            }
+                                        })
+                                    }
+                                    layer.closeAll();
                             }
                         }
                     });
+                },
+                no:function(){
+                    layer.closeAll();
                 }
             })
         }
