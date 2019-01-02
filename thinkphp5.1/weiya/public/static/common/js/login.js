@@ -1,24 +1,26 @@
 $(function(){
     //登录 / 注册-切换
     tab_down('.loginNav li','.loginTab ','click');
-
     //登录 or 注册 or 重置密码
     $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
         var postData = {};
         var content='';
-        var url = domain+'index/UserCenter/'+method;
+        var url = domain+'ucenter/UserCenter/'+method;
+        var postForm = null;
         if(method=='login'){//登录
-            postData = $('.loginLayer #formLogin').serializeObject();
+            postForm = $('.loginLayer #formLogin').length?$('.loginLayer #formLogin'):$('#formLogin');
         }else if(method=='register'){//注册
-            postData = $('#formRegister').serializeObject();
+            postForm = $('.loginLayer #formRegister').length?$('.loginLayer #formRegister'):$('#formRegister');
         }else if(method=='forgetPassword'){//重置密码
-            postData = $('.forgetPasswordLayer #formForgetPassword').serializeObject();
-        }else{
+            postForm = $('.loginLayer #formForgetPassword').length?$('.loginLayer #formForgetPassword'):$('#formForgetPassword');
+        }
+        if(!postForm){
             dialog.error('未知操作');
             return false;
         }
+        postData = postForm.serializeObject();
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && !register.vfyCheck(postData.captcha)){

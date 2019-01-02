@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Index extends \common\controller\UserBase{
+class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
@@ -15,7 +15,6 @@ class Index extends \common\controller\UserBase{
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'7'
-
         ];
         $categoryList  = $modelGoodsCategory->getList($config);
         $this ->assign('categoryList',$categoryList);
