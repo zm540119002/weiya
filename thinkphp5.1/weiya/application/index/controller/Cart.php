@@ -13,6 +13,11 @@ class Cart extends \common\controller\UserBase{
         }
     }
 
+    /**
+     * @return array
+     * @throws \Exception
+     *
+     */
     public function addCart(){
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
@@ -142,6 +147,21 @@ class Cart extends \common\controller\UserBase{
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
         }
+    }
+
+    //修改购物车数量
+    public function editCartNum(){
+        if(!request()->isPost()){
+            return errorMsg('请求方式错误');
+        }
+        $data = input('post.');
+        $data['user_id'] = $this -> user['id'];
+        $model = new \app\index\model\Cart();
+        $res = $model ->isUpdate(true)-> save($data);
+        if(false === $res){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
     }
 
 }

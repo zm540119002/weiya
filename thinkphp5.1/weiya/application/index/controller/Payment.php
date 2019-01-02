@@ -5,7 +5,7 @@ class Payment extends \common\controller\UserBase{
     //订单-支付
     public function orderPayment(){
         if( !empty(input('order_sn')) && !empty(input('?pay_code'))){
-            $modelOrder = new \app\purchase\model\Order();
+            $modelOrder = new \app\index\model\Order();
             $orderSn = input('order_sn','','string');
             $config = [
                 'where' => [
