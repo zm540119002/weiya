@@ -45,6 +45,7 @@ class weixinpay{
 
             //②、统一下单
             $input = new \WxPayUnifiedOrder();
+            print_r($input);exit;
             $input->SetBody("test");
             $input->SetAttach($payInfo['attach']);
             $input->SetOut_trade_no($payInfo['sn']);
@@ -55,9 +56,9 @@ class weixinpay{
             $input->SetNotify_url($payInfo['notify_url']);
             $input->SetTrade_type("JSAPI");
             $input->SetOpenid($openId);
-            print_r($input);exit;
             $config = new \WxPayConfig();
             $order = \WxPayApi::unifiedOrder($config, $input);
+            echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
             $jsApiParameters = $tools->GetJsApiParameters($order);
             //获取共享收货地址js函数参数
             $editAddress = $tools->GetEditAddressParameters();
