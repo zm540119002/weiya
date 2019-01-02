@@ -12,6 +12,7 @@ require_once(dirname(__FILE__)  . '/WxPay.JsApiPay.php');
 require_once(dirname(__FILE__) . '/WxPay.NativePay.php');
 require_once(dirname(__FILE__)  . '/log.php');
 require_once(dirname(__FILE__) . '/WxPay.Config.php');
+require_once(dirname(__FILE__) . '/lib/WxPay.Data.php');
 
 class weixinpay{
     /**支付端判断
@@ -44,7 +45,7 @@ class weixinpay{
             $openId = $tools->GetOpenid();
 
             //②、统一下单
-            $input = new WxPayUnifiedOrder();
+            $input = new \WxPayUnifiedOrder();
             print_r($input);exit;
             $input->SetBody("test");
             $input->SetAttach($payInfo['attach']);
