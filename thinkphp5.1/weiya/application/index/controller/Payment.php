@@ -20,7 +20,7 @@ class Payment extends \common\controller\UserBase{
             $orderInfo = $modelOrder->getInfo($config);
             $payInfo = [
                 'sn'=>$orderInfo['sn'],
-                'actually_amount'=>$orderInfo['actually_amount'],
+                'actually_amount'=>0.01,
                 'return_url' => $this->host.url('payComplete'),
                 'notify_url'=>$this->host."/purchase/".config('wx_config.call_back_url')
             ];
@@ -47,11 +47,9 @@ class Payment extends \common\controller\UserBase{
 
    //支付完跳转的页面
     public function payComplete(){
-        require_once dirname(__DIR__).'./../../../common/component/payment/alipay/wappay/service/AlipayTradeService.php';
-        require_once dirname(__DIR__).'./../../../common/component/payment/alipay/config.php';
         $arr = $_GET;
-        $alipaySevice = new \AlipayTradeService($config);
-        $result = $alipaySevice->check($arr);
+        $model = new \common\component\payment\alipay\alipay;
+        $result = $model->check($arr);
         print_r($result);exit;
 
         return $this->fetch();
