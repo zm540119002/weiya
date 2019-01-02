@@ -11,23 +11,23 @@ $(function(){
         var postForm = null;
         var loginSign = 'dialog';
         if(method=='login'){//登录
-            if($('.loginLayer #formLogin').length){//弹框
+            if($('.loginLayer #formLogin').length){//弹框登录
                 postForm = $('.loginLayer #formLogin');
-            }else{
+            }else{//页面登录
                 loginSign = 'page';
                 postForm = $('#formLogin');
             }
         }else if(method=='register'){//注册
-            if($('.loginLayer #formRegister').length){//弹框
+            if($('.loginLayer #formRegister').length){//弹框注册
                 postForm = $('.loginLayer #formRegister');
-            }else{
+            }else{//页面注册
                 loginSign = 'page';
                 postForm = $('#formRegister');
             }
         }else if(method=='forgetPassword'){//重置密码
-            if($('.loginLayer #formForgetPassword').length){//弹框
+            if($('.loginLayer #formForgetPassword').length){//弹框重置密码
                 postForm = $('.loginLayer #formForgetPassword');
-            }else{
+            }else{//页面重置密码
                 loginSign = 'page';
                 postForm = $('#formForgetPassword');
             }
@@ -59,12 +59,20 @@ $(function(){
                     if(loginSign=='page'){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
-                        $.isFunction(dialogLoginCallBack) && dialogLoginCallBack(data);
+                        if($.isFunction(dialogLoginCallBack)){
+                            dialogLoginCallBack(data)
+                        }else{
+                            dialogLoginDefaultCallBack(data);
+                        }
                     }
                 }
             });
         }
     });
+    //弹框登录成功默认回调函数
+    function dialogLoginDefaultCallBack(data) {
+        location.href = data.info;
+    }
 
     //显示隐藏密码
     //var onOff = true;
