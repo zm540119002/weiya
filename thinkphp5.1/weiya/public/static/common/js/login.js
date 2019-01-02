@@ -62,7 +62,7 @@ $(function(){
                         if($.isFunction(dialogLoginCallBack)){
                             dialogLoginCallBack(data)
                         }else{
-                            dialogLoginCommonCallBack(data);
+                            dialogLoginDefaultCallBack(data);
                         }
                     }
                 }
@@ -70,7 +70,7 @@ $(function(){
         }
     });
     //弹框登录成功默认回调函数
-    function dialogLoginCommonCallBack(data) {
+    function dialogLoginDefaultCallBack(data) {
         location.href = data.info;
     }
 
