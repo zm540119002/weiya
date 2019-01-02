@@ -1,24 +1,75 @@
+//登录-弹窗触发
+function loginDialog(){
+    var content=$('#dialLogin').html();
+    window.scrollTo(0,0);
+    layer.open({
+        className:'loginLayer',
+        content:content,
+        title:['登录','border-bottom:1px solid #d9d9d9;'],
+        success:function(){
+            tab_down('.loginNav li','.loginTab .login_wrap','click');
+            $('.layui-m-layershade').on('touchmove',function(e){
+                event.preventDefault();
+            });
+        }
+    });
+}
+//忘记密码-弹窗触发
+function forgetPasswordDialog(){
+    var content = $('#sectionForgetPassword').html();
+    layer.open({
+        className:'forgetPasswordLayer',
+        content:content,
+        success:function(){
+            $('.login_item .password').attr('type','password');
+            $('.view-password').removeClass('active');
+        }
+    });
+}
+$(function(){
+    //忘记密码-弹窗事件
+    $('body').on('click','.forget_dialog',function(){
+        forgetPasswordDialog();
+    });
+});
 $(function(){
     //登录 / 注册-切换
     tab_down('.loginNav li','.loginTab ','click');
-
     //登录 or 注册 or 重置密码
     $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
-        var postData = {};
         var content='';
-        var url = domain+'index/UserCenter/'+method;
+        var url = domain+'ucenter/UserCenter/'+method;
+        var postForm = null;
+        var loginSign = 'dialog';
         if(method=='login'){//登录
-            postData = $('.loginLayer #formLogin').serializeObject();
+            if($('.loginLayer #formLogin').length){//弹框登录
+                postForm = $('.loginLayer #formLogin');
+            }else{//页面登录
+                loginSign = 'page';
+                postForm = $('#formLogin');
+            }
         }else if(method=='register'){//注册
-            postData = $('#formRegister').serializeObject();
+            if($('.loginLayer #formRegister').length){//弹框注册
+                postForm = $('.loginLayer #formRegister');
+            }else{//页面注册
+                loginSign = 'page';
+                postForm = $('#formRegister');
+            }
         }else if(method=='forgetPassword'){//重置密码
-            postData = $('.forgetPasswordLayer #formForgetPassword').serializeObject();
-        }else{
+            if($('.loginLayer #formForgetPassword').length){//弹框重置密码
+                postForm = $('.loginLayer #formForgetPassword');
+            }else{//页面重置密码
+                loginSign = 'page';
+                postForm = $('#formForgetPassword');
+            }
+        }
+        if(!postForm){
             dialog.error('未知操作');
             return false;
         }
+        var postData = postForm.serializeObject();
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && !register.vfyCheck(postData.captcha)){
@@ -38,11 +89,23 @@ $(function(){
                     dialog.error(data.info);
                     return false;
                 }else if(data.status==1){
-                    location.href = data.info;
+                    if(loginSign=='page'){
+                        location.href = data.info;
+                    }else if(loginSign=='dialog'){
+                        if(typeof(dialogLoginCallBack) == "undefined"){
+                            dialogLoginDefaultCallBack(data);
+                        }else if($.isFunction(dialogLoginCallBack)){
+                            dialogLoginCallBack(data)
+                        }
+                    }
                 }
             });
         }
     });
+    //弹框登录成功默认回调函数
+    function dialogLoginDefaultCallBack(data) {
+        location.href = data.info;
+    }
 
     //显示隐藏密码
     //var onOff = true;

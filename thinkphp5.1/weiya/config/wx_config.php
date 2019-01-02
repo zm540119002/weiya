@@ -16,7 +16,7 @@
 return [
     //TODO: 修改这里配置为您自己申请的商户信息
     'appid'=>'wx9eee7ee8c2ae57dc',
-    'appsecret'=>'dfff2889c4d0037b362d426a5b2955e2',
+    'appsecret'=>'038b1468be75791a16269928b69cb3d3',
     'mchid' =>'1234887902',
     'key' => 'Pq8YLYz7llOp09v9KdeFZ373cey37Iub',
 

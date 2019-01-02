@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="public_css/public.css">
 	{block name="css-customize"}{/block}
 	<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="public_js/login.js"></script>
 	<script type="text/javascript">
 		var domain = '{:request()->domain()}'+'/'+'index.php/';
 		var module = domain + '{:request()->module()}/';
@@ -24,7 +25,6 @@
 {block name="content"}{/block}
 <!-- 公共模块-->
 {block name="common"}{/block}
-{include file="template/login_dialog.html" /}
 <!-- 页脚模块-->
 {block name="footer"}
 <footer class="f24">
@@ -42,7 +42,4 @@
 <script type="text/javascript" src="public_js/forbidscroll.js"></script>
 <!--自定义js-->
 {block name="script"}{/block}
-{block name="suf-script"}
-<script type="text/javascript" src="public_js/login.js"></script>
-{/block}
 </body></html>
