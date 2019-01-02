@@ -1,5 +1,15 @@
 <?php
-require_once(dirname(__FILE__) . '/lib/WxPay.Api.php');
+/**
+*
+* example目录下为简单的支付样例，仅能用于搭建快速体验微信支付使用
+* 样例的作用仅限于指导如何使用sdk，在安全上面仅做了简单处理， 复制使用样例代码时请慎重
+* 请勿直接直接使用样例对外提供服务
+* 
+**/
+require_once "../lib/WxPay.Api.php";
+require_once "WxPay.Config.php";
+require_once 'log.php';
+
 /**
  * 
  * 刷卡支付实现类
@@ -8,7 +18,6 @@ require_once(dirname(__FILE__) . '/lib/WxPay.Api.php');
  */
 class NativePay
 {
-
 	/**
 	 * 
 	 * 生成扫描支付URL,模式一
@@ -18,7 +27,12 @@ class NativePay
 	{
 		$biz = new WxPayBizPayUrl();
 		$biz->SetProduct_id($productId);
-		$values = WxpayApi::bizpayurl($biz);
+		try{
+			$config = new WxPayConfig();
+			$values = WxpayApi::bizpayurl($config, $biz);
+		} catch(Exception $e) {
+			Log::ERROR(json_encode($e));
+		}
 		$url = "weixin://wxpay/bizpayurl?" . $this->ToUrlParams($values);
 		return $url;
 	}
@@ -47,11 +61,16 @@ class NativePay
 	 */
 	public function GetPayUrl($input)
 	{
-
 		if($input->GetTrade_type() == "NATIVE")
 		{
-			$result = WxPayApi::unifiedOrder($input);
-			return $result;
+			try{
+				$config = new WxPayConfig();
+				$result = WxPayApi::unifiedOrder($config, $input);
+				return $result;
+			} catch(Exception $e) {
+				Log::ERROR(json_encode($e));
+			}
 		}
+		return false;
 	}
 }
