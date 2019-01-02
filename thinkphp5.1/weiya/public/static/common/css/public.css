@@ -3946,7 +3946,7 @@ select[name="nodeIds"]{
 .scroll_news{
     position:relative;
     padding:0 0.12rem;
-    /*margin:0.15rem 0;*/
+    margin:0 0 0.15rem 0;
     border:1px solid #d9d9d9;
     border-radius:5px;
     background: #fff;
