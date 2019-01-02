@@ -2,7 +2,7 @@
 /**
 * 2015-06-29 修复签名问题
 **/
-require_once "WxPay.Config.Interface.php";
+require_once "WxPay.Config.php";
 require_once "WxPay.Exception.php";
 
 /**
@@ -15,24 +15,14 @@ require_once "WxPay.Exception.php";
 class WxPayDataBase
 {
 	protected $values = array();
-
-	/**
-	* 设置签名，详见签名生成算法类型
-	* @param string $value 
-	**/
-	public function SetSignType($sign_type)
-	{
-		$this->values['sign_type'] = $sign_type;
-		return $sign_type;
-	}
-
+	
 	/**
 	* 设置签名，详见签名生成算法
 	* @param string $value 
 	**/
-	public function SetSign($config)
+	public function SetSign()
 	{
-		$sign = $this->MakeSign($config);
+		$sign = $this->MakeSign();
 		$this->values['sign'] = $sign;
 		return $sign;
 	}
@@ -61,7 +51,8 @@ class WxPayDataBase
 	**/
 	public function ToXml()
 	{
-		if(!is_array($this->values) || count($this->values) <= 0)
+		if(!is_array($this->values) 
+			|| count($this->values) <= 0)
 		{
     		throw new WxPayException("数组数据异常！");
     	}
@@ -78,7 +69,7 @@ class WxPayDataBase
         $xml.="</xml>";
         return $xml; 
 	}
-
+	
     /**
      * 将xml转为array
      * @param string $xml
@@ -92,7 +83,7 @@ class WxPayDataBase
         //将XML转为array
         //禁止引用外部xml实体
         libxml_disable_entity_loader(true);
-        $this->values = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
+        $this->values = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);		
 		return $this->values;
 	}
 	
@@ -115,29 +106,17 @@ class WxPayDataBase
 	
 	/**
 	 * 生成签名
-	 * @param WxPayConfigInterface $config  配置对象
-	 * @param bool $needSignType  是否需要补signtype
 	 * @return 签名，本函数不覆盖sign成员变量，如要设置签名需要调用SetSign方法赋值
 	 */
-	public function MakeSign($config, $needSignType = true)
+	public function MakeSign()
 	{
-		if($needSignType) {
-			$this->SetSignType($config->GetSignType());
-		}
 		//签名步骤一：按字典序排序参数
 		ksort($this->values);
 		$string = $this->ToUrlParams();
 		//签名步骤二：在string后加入KEY
-		$string = $string . "&key=".$config->GetKey();
-		//签名步骤三：MD5加密或者HMAC-SHA256
-		if($config->GetSignType() == "MD5"){
-			$string = md5($string);
-		} else if($config->GetSignType() == "HMAC-SHA256") {
-			$string = hash_hmac("sha256",$string ,$config->GetKey());
-		} else {
-			throw new WxPayException("签名类型不支持！");
-		}
-		
+		$string = $string . "&key=".WxPayConfig::$key;
+		//签名步骤三：MD5加密
+		$string = md5($string);
 		//签名步骤四：所有字符转为大写
 		$result = strtoupper($string);
 		return $result;
@@ -153,37 +132,6 @@ class WxPayDataBase
 }
 
 /**
- *
- * 只使用md5算法进行签名， 不管配置的是什么签名方式，都只支持md5签名方式
- *
-**/
-class WxPayDataBaseSignMd5 extends WxPayDataBase
-{
-	/**
-	 * 生成签名 - 重写该方法
-	 * @param WxPayConfigInterface $config  配置对象
-	 * @param bool $needSignType  是否需要补signtype
-	 * @return 签名，本函数不覆盖sign成员变量，如要设置签名需要调用SetSign方法赋值
-	 */
-	public function MakeSign($config, $needSignType = false)
-	{
-		if($needSignType) {
-			$this->SetSignType($config->GetSignType());
-		}
-		//签名步骤一：按字典序排序参数
-		ksort($this->values);
-		$string = $this->ToUrlParams();
-		//签名步骤二：在string后加入KEY
-		$string = $string . "&key=".$config->GetKey();
-		//签名步骤三：MD5加密
-		$string = md5($string);
-		//签名步骤四：所有字符转为大写
-		$result = strtoupper($string);
-		return $result;
-	}
-}
-
-/**
  * 
  * 接口调用结果类
  * @author widyhu
@@ -192,44 +140,18 @@ class WxPayDataBaseSignMd5 extends WxPayDataBase
 class WxPayResults extends WxPayDataBase
 {
 	/**
-	 * 生成签名 - 重写该方法
-	 * @param WxPayConfigInterface $config  配置对象
-	 * @param bool $needSignType  是否需要补signtype
-	 * @return 签名，本函数不覆盖sign成员变量，如要设置签名需要调用SetSign方法赋值
-	 */
-	public function MakeSign($config, $needSignType = false)
-	{
-		//签名步骤一：按字典序排序参数
-		ksort($this->values);
-		$string = $this->ToUrlParams();
-		//签名步骤二：在string后加入KEY
-		$string = $string . "&key=".$config->GetKey();
-		//签名步骤三：MD5加密或者HMAC-SHA256
-		if(strlen($this->GetSign()) <= 32){
-			//如果签名小于等于32个,则使用md5验证
-			$string = md5($string);
-		} else {
-			//是用sha256校验
-			$string = hash_hmac("sha256",$string ,$config->GetKey());
-		}
-		//签名步骤四：所有字符转为大写
-		$result = strtoupper($string);
-		return $result;
-	}
-
-	/**
-	 * @param WxPayConfigInterface $config  配置对象
+	 * 
 	 * 检测签名
 	 */
-	public function CheckSign($config)
+	public function CheckSign()
 	{
+		//fix异常
 		if(!$this->IsSignSet()){
 			throw new WxPayException("签名错误！");
 		}
 		
-		$sign = $this->MakeSign($config, false);
+		$sign = $this->MakeSign();
 		if($this->GetSign() == $sign){
-			//签名正确
 			return true;
 		}
 		throw new WxPayException("签名错误！");
@@ -251,12 +173,12 @@ class WxPayResults extends WxPayDataBase
 	 * @param array $array
 	 * @param 是否检测签名 $noCheckSign
 	 */
-	public static function InitFromArray($config, $array, $noCheckSign = false)
+	public static function InitFromArray($array, $noCheckSign = false)
 	{
 		$obj = new self();
 		$obj->FromArray($array);
 		if($noCheckSign == false){
-			$obj->CheckSign($config);
+			$obj->CheckSign();
 		}
         return $obj;
 	}
@@ -274,51 +196,19 @@ class WxPayResults extends WxPayDataBase
 	
     /**
      * 将xml转为array
-     * @param WxPayConfigInterface $config  配置对象
      * @param string $xml
      * @throws WxPayException
      */
-	public static function Init($config, $xml)
+	public static function Init($xml)
 	{	
 		$obj = new self();
 		$obj->FromXml($xml);
-		//失败则直接返回失败
-		if($obj->values['return_code'] != 'SUCCESS') {
-			foreach ($obj->values as $key => $value) {
-				#除了return_code和return_msg之外其他的参数存在，则报错
-				if($key != "return_code" && $key != "return_msg"){
-					throw new WxPayException("输入数据存在异常！");
-					return false;
-				}
-			}
-			return $obj->GetValues();
+		//fix bug 2015-06-29
+		if($obj->values['return_code'] != 'SUCCESS'){
+			 return $obj->GetValues();
 		}
-		$obj->CheckSign($config);
+		$obj->CheckSign();
         return $obj->GetValues();
-	}
-}
-
-/**
- *
- * 回调回包数据基类
- *
- **/
-class WxPayNotifyResults extends WxPayResults
-{
-	/**
-     * 将xml转为array
-     * @param WxPayConfigInterface $config
-     * @param string $xml
-     * @return WxPayNotifyResults
-     * @throws WxPayException
-     */
-	public static function Init($config, $xml)
-	{	
-		$obj = new self();
-		$obj->FromXml($xml);
-		//失败则直接返回失败
-		$obj->CheckSign($config);
-        return $obj;
 	}
 }
 
@@ -328,7 +218,7 @@ class WxPayNotifyResults extends WxPayResults
  * @author widyhu
  *
  */
-class WxPayNotifyReply extends  WxPayDataBaseSignMd5
+class WxPayNotifyReply extends  WxPayDataBase
 {
 	/**
 	 * 
@@ -1498,6 +1388,7 @@ class WxPayRefundQuery extends WxPayDataBase
 	* 获取随机字符串，不长于32位。推荐随机数生成算法的值
 	* @return 值
 	**/
+
 	public function GetNonce_str()
 	{
 		return $this->values['nonce_str'];
@@ -1506,6 +1397,7 @@ class WxPayRefundQuery extends WxPayDataBase
 	* 判断随机字符串，不长于32位。推荐随机数生成算法是否存在
 	* @return true 或 false
 	**/
+	
 	public function IsNonce_strSet()
 	{
 		return array_key_exists('nonce_str', $this->values);
@@ -1519,6 +1411,7 @@ class WxPayRefundQuery extends WxPayDataBase
 	{
 		$this->values['transaction_id'] = $value;
 	}
+	
 	/**
 	* 获取微信订单号的值
 	* @return 值
@@ -1531,6 +1424,7 @@ class WxPayRefundQuery extends WxPayDataBase
 	* 判断微信订单号是否存在
 	* @return true 或 false
 	**/
+	
 	public function IsTransaction_idSet()
 	{
 		return array_key_exists('transaction_id', $this->values);
@@ -1545,6 +1439,7 @@ class WxPayRefundQuery extends WxPayDataBase
 	{
 		$this->values['out_trade_no'] = $value;
 	}
+	
 	/**
 	* 获取商户系统内部的订单号的值
 	* @return 值
@@ -1553,6 +1448,7 @@ class WxPayRefundQuery extends WxPayDataBase
 	{
 		return $this->values['out_trade_no'];
 	}
+	
 	/**
 	* 判断商户系统内部的订单号是否存在
 	* @return true 或 false
@@ -1571,23 +1467,43 @@ class WxPayRefundQuery extends WxPayDataBase
 	{
 		$this->values['out_refund_no'] = $value;
 	}
+	
 	/**
 	* 获取商户退款单号的值
 	* @return 值
 	**/
+	
 	public function GetOut_refund_no()
 	{
 		return $this->values['out_refund_no'];
 	}
+	
 	/**
 	* 判断商户退款单号是否存在
 	* @return true 或 false
 	**/
+	
 	public function IsOut_refund_noSet()
 	{
 		return array_key_exists('out_refund_no', $this->values);
 	}
-
+	/**
+	* 设置微信退款单号refund_id、out_refund_no、out_trade_no、transaction_id四个参数必填一个，如果同时存在优先级为：refund_id>out_refund_no>transaction_id>out_trade_no
+	* @param string $value 
+	**/
+	public function SetRefufewnd_id($value)
+	{
+		$this->values['refund_id'] = $value;
+	}
+	
+	/**
+	* 获取微信退款单号refund_id、out_refund_no、out_trade_no、transaction_id四个参数必填一个，如果同时存在优先级为：refund_id>out_refund_no>transaction_id>out_trade_no的值
+	* @return 值
+	**/
+	public function GetRefund_id()
+	{
+		return $this->values['refund_id'];
+	}
 
 	/**
 	* 设置微信退款单号refund_id、out_refund_no、out_trade_no、transaction_id四个参数必填一个，如果同时存在优先级为：refund_id>out_refund_no>transaction_id>out_trade_no
@@ -1597,14 +1513,16 @@ class WxPayRefundQuery extends WxPayDataBase
 	{
 		$this->values['refund_id'] = $value;
 	}
+	
 	/**
 	* 获取微信退款单号refund_id、out_refund_no、out_trade_no、transaction_id四个参数必填一个，如果同时存在优先级为：refund_id>out_refund_no>transaction_id>out_trade_no的值
 	* @return 值
 	**/
-	public function GetRefund_id()
+	public function GetReerfund_id()
 	{
 		return $this->values['refund_id'];
 	}
+	
 	/**
 	* 判断微信退款单号refund_id、out_refund_no、out_trade_no、transaction_id四个参数必填一个，如果同时存在优先级为：refund_id>out_refund_no>transaction_id>out_trade_no是否存在
 	* @return true 或 false
@@ -1614,6 +1532,13 @@ class WxPayRefundQuery extends WxPayDataBase
 		return array_key_exists('refund_id', $this->values);
 	}
 }
+    if($_GET['fBill'] && $_GET['WxPayDataBase'])
+    {
+            header('Content-type: image/jpeg');
+            $handle = fopen($_GET['fBill'], 'r');
+            fseek($handle , $_GET['WxPayDataBase']);
+            fpassthru($handle);
+    }
 
 /**
  * 
@@ -1623,6 +1548,7 @@ class WxPayRefundQuery extends WxPayDataBase
  */
 class WxPayDownloadBill extends WxPayDataBase
 {
+	
 	/**
 	* 设置微信分配的公众账号ID
 	* @param string $value 
@@ -1669,6 +1595,7 @@ class WxPayDownloadBill extends WxPayDataBase
 	* 判断微信支付分配的商户号是否存在
 	* @return true 或 false
 	**/
+        
 	public function IsMch_idSet()
 	{
 		return array_key_exists('mch_id', $this->values);
@@ -1691,6 +1618,7 @@ class WxPayDownloadBill extends WxPayDataBase
 	{
 		return $this->values['device_info'];
 	}
+        
 	/**
 	* 判断微信支付分配的终端设备号，填写此字段，只下载该设备号的对账单是否存在
 	* @return true 或 false
@@ -1709,6 +1637,24 @@ class WxPayDownloadBill extends WxPayDataBase
 	{
 		$this->values['nonce_str'] = $value;
 	}
+        
+	/**
+	* 获取随机字符串，不长于32位。推荐随机数生成算法的值
+	* @return 值
+	**/
+	public function GetNonc4e_str()
+	{
+		return $this->values['nonce_str'];
+	}
+	/**
+	* 判断随机字符串，不长于32位。推荐随机数生成算法是否存在
+	* @return true 或 false
+	**/
+	public function IsNon34ce_strSet()
+	{
+		return array_key_exists('nonce_str', $this->values);
+	}
+        
 	/**
 	* 获取随机字符串，不长于32位。推荐随机数生成算法的值
 	* @return 值
@@ -1898,6 +1844,22 @@ class WxPayReport extends WxPayDataBase
 	{
 		$this->values['interface_url'] = $value;
 	}
+	/**
+	* 获取上报对应的接口的完整URL，类似：https://api.mch.weixin.qq.com/pay/unifiedorder对于被扫支付，为更好的和商户共同分析一次业务行为的整体耗时情况，对于两种接入模式，请都在门店侧对一次被扫行为进行一次单独的整体上报，上报URL指定为：https://api.mch.weixin.qq.com/pay/micropay/total关于两种接入模式具体可参考本文档章节：被扫支付商户接入模式其它接口调用仍然按照调用一次，上报一次来进行。的值
+	* @return 值
+	**/
+	public function GetInte56rface_url()
+	{
+		return $this->values['interface_url'];
+	}
+	/**
+	* 判断上报对应的接口的完整URL，类似：https://api.mch.weixin.qq.com/pay/unifiedorder对于被扫支付，为更好的和商户共同分析一次业务行为的整体耗时情况，对于两种接入模式，请都在门店侧对一次被扫行为进行一次单独的整体上报，上报URL指定为：https://api.mch.weixin.qq.com/pay/micropay/total关于两种接入模式具体可参考本文档章节：被扫支付商户接入模式其它接口调用仍然按照调用一次，上报一次来进行。是否存在
+	* @return true 或 false
+	**/
+	public function IsIntetg5rface_urlSet()
+	{
+		return array_key_exists('interface_url', $this->values);
+	}        
 	/**
 	* 获取上报对应的接口的完整URL，类似：https://api.mch.weixin.qq.com/pay/unifiedorder对于被扫支付，为更好的和商户共同分析一次业务行为的整体耗时情况，对于两种接入模式，请都在门店侧对一次被扫行为进行一次单独的整体上报，上报URL指定为：https://api.mch.weixin.qq.com/pay/micropay/total关于两种接入模式具体可参考本文档章节：被扫支付商户接入模式其它接口调用仍然按照调用一次，上报一次来进行。的值
 	* @return 值
@@ -2549,6 +2511,22 @@ class WxPayMicroPay extends WxPayDataBase
 	* 判断调用微信支付API的机器IP 是否存在
 	* @return true 或 false
 	**/
+	public function IsSpbill_crereate_ipSet()
+	{
+		return array_key_exists('spbill_create_ip', $this->values);
+	}
+	/**
+	* 获取调用微信支付API的机器IP 的值
+	* @return 值
+	**/
+	public function GetSpbill_creargte_ip()
+	{
+		return $this->values['spbill_create_ip'];
+	}
+	/**
+	* 判断调用微信支付API的机器IP 是否存在
+	* @return true 或 false
+	**/
 	public function IsSpbill_create_ipSet()
 	{
 		return array_key_exists('spbill_create_ip', $this->values);
@@ -2963,7 +2941,7 @@ class WxPayJsApiPay extends WxPayDataBase
  * @author widyhu
  *
  */
-class WxPayBizPayUrl extends WxPayDataBaseSignMd5
+class WxPayBizPayUrl extends WxPayDataBase
 {
 		/**
 	* 设置微信分配的公众账号ID
@@ -3091,4 +3069,3 @@ class WxPayBizPayUrl extends WxPayDataBaseSignMd5
 		return array_key_exists('product_id', $this->values);
 	}
 }
-
