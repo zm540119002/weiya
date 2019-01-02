@@ -36,6 +36,7 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
+        print_r($payInfo);exit;
         $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
         //①、获取用户openid
         try{
@@ -45,7 +46,6 @@ class weixinpay{
 
             //②、统一下单
             $input = new \WxPayUnifiedOrder();
-            print_r($input);exit;
             $input->SetBody("test");
             $input->SetAttach($payInfo['attach']);
             $input->SetOut_trade_no($payInfo['sn']);
