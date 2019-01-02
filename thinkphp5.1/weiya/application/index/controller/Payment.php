@@ -49,6 +49,7 @@ class Payment extends \common\controller\UserBase{
     public function payComplete(){
         $arr = $_GET;
         $model = new \common\component\payment\alipay\alipay;
+        print_r($arr);exit;
         $result = $model->check($arr);
         print_r($result);exit;
 
