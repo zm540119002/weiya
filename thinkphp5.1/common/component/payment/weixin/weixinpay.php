@@ -37,6 +37,7 @@ class weixinpay{
      */
     public static function getJSAPI($payInfo){
         $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
+        print_r($payInfo);exit;
         //①、获取用户openid
         try{
 
@@ -57,7 +58,6 @@ class weixinpay{
             $input->SetOpenid($openId);
             $config = new \WxPayConfig();
             $order = \WxPayApi::unifiedOrder($config, $input);
-            print_r($input);exit;
             $jsApiParameters = $tools->GetJsApiParameters($order);
             //获取共享收货地址js函数参数
             $editAddress = $tools->GetEditAddressParameters();
