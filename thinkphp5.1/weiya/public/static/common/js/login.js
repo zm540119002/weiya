@@ -59,12 +59,20 @@ $(function(){
                     if(loginSign=='page'){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
-                        $.isFunction(dialogLoginCallBack) && dialogLoginCallBack(data);
+                        if($.isFunction(dialogLoginCallBack)){
+                            dialogLoginCallBack(data)
+                        }else{
+                            dialogLoginCommonCallBack(data);
+                        }
                     }
                 }
             });
         }
     });
+    //弹框登录成功默认回调函数
+    function dialogLoginCommonCallBack(data) {
+        location.href = data.info;
+    }
 
     //显示隐藏密码
     //var onOff = true;
