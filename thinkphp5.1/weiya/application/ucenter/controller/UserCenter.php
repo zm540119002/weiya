@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\ucenter\controller;
 
 class UserCenter extends \think\Controller{
     /**登录

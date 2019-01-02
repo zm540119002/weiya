@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Index extends \common\controller\Base{
+class Index extends \common\controller\UserBase{
     /**首页
      */
     public function index(){
