@@ -9,12 +9,28 @@ $(function(){
         var content='';
         var url = domain+'ucenter/UserCenter/'+method;
         var postForm = null;
+        var loginSign = 'dialog';
         if(method=='login'){//登录
-            postForm = $('.loginLayer #formLogin').length?$('.loginLayer #formLogin'):$('#formLogin');
+            if($('.loginLayer #formLogin').length){//弹框
+                postForm = $('.loginLayer #formLogin');
+            }else{
+                loginSign = 'page';
+                postForm = $('#formLogin');
+            }
         }else if(method=='register'){//注册
-            postForm = $('.loginLayer #formRegister').length?$('.loginLayer #formRegister'):$('#formRegister');
+            if($('.loginLayer #formRegister').length){//弹框
+                postForm = $('.loginLayer #formRegister');
+            }else{
+                loginSign = 'page';
+                postForm = $('#formRegister');
+            }
         }else if(method=='forgetPassword'){//重置密码
-            postForm = $('.loginLayer #formForgetPassword').length?$('.loginLayer #formForgetPassword'):$('#formForgetPassword');
+            if($('.loginLayer #formForgetPassword').length){//弹框
+                postForm = $('.loginLayer #formForgetPassword');
+            }else{
+                loginSign = 'page';
+                postForm = $('#formForgetPassword');
+            }
         }
         if(!postForm){
             dialog.error('未知操作');
@@ -40,7 +56,11 @@ $(function(){
                     dialog.error(data.info);
                     return false;
                 }else if(data.status==1){
-                    location.href = data.info;
+                    if(loginSign=='page'){
+                        location.href = data.info;
+                    }else if(loginSign=='dialog'){
+                        $.isFunction(dialogLoginCallBack) && dialogLoginCallBack();
+                    }
                 }
             });
         }
