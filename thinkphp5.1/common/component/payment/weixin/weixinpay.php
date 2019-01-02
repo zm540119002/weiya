@@ -108,6 +108,10 @@ EOF;
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
+        $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
+                && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
+        $host = $http_type . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
+                (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ''));
         $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
         $html = <<<EOF
             <head>
@@ -121,7 +125,7 @@ EOF;
                           layer.open({
                                 title:['微信支付二维码','border-bottom:1px solid #d9d9d9'],
                                 className:'',
-                                content:'<img src="/uploads/{$code_url}">'
+                                content:'<img src="{$host}/uploads/{$code_url}">'
                          })
                      });
                 </script>
