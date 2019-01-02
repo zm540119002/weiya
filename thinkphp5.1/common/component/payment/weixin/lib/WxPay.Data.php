@@ -577,7 +577,6 @@ class WxPayUnifiedOrder extends WxPayDataBase
 	**/
 	public function SetOut_trade_no($value)
 	{
-		print_r($value);exit;
 		$this->values['out_trade_no'] = $value;
 	}
 	/**
