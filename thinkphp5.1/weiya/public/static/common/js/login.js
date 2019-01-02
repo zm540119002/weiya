@@ -93,7 +93,7 @@ $(function(){
                     if(loginSign=='page'){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
-                        if($.isFunction(dialogLoginCallBack)){
+                        if(dialogLoginCallBack && $.isFunction(dialogLoginCallBack)){
                             dialogLoginCallBack(data)
                         }else{
                             dialogLoginDefaultCallBack(data);
