@@ -1,4 +1,6 @@
 function dialogLoginCallBack(_this) {
+    console.log(_this);
+    return;
     var lis = null;
     if($(_this.context).hasClass('add_purchase_cart')){
         lis = _this.parents('li');
@@ -143,8 +145,6 @@ $(function () {
         //计算购物车商品列表总价
         calculateCartTotalPrice();
     });
-
-
     //加入购物车
     $('body').on('click','.add_cart,.add_purchase_cart',function(){
         var _this = $(this);
