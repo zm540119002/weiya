@@ -51,6 +51,7 @@ class weixinpay{
         $input->SetOpenid($openId);					//用户openID
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
+        print_r($jsApiParameters);exit;
         $html = <<<EOF
 			<script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
 			<script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
@@ -108,6 +109,10 @@ EOF;
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
+        $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
+                && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
+        $host = $http_type . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
+                (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ''));
         $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
         $html = <<<EOF
             <head>
@@ -121,7 +126,7 @@ EOF;
                           layer.open({
                                 title:['微信支付二维码','border-bottom:1px solid #d9d9d9'],
                                 className:'',
-                                content:'<img src="/uploads/{$code_url}">'
+                                content:'<img src="{$host}/uploads/{$code_url}">'
                          })
                      });
                 </script>
@@ -199,6 +204,7 @@ EOF;
         $input->SetNotify_url($payInfo['notify_url']);//支付回调验证地址
         $input->SetTrade_type("MWEB");				//支付类型
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
+
         $url = $order2['mweb_url'];
         $url = $url.'&redirect_url='.$payInfo['return_url'];//拼接支付完成后跳转的页面redirect_url
         $html = <<<EOF

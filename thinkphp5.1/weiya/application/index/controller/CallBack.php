@@ -228,10 +228,10 @@ class CallBack extends \common\controller\Base
                     echo "success";
                     return successMsg('已回调过，订单已处理');
                 }
-                if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
-                    //返回状态给微信服务器
-                    return errorMsg('回调的金额和订单的金额不符，终止购买');
-                }
+//                if ($orderInfo['actually_amount'] != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
+//                    //返回状态给微信服务器
+//                    return errorMsg('回调的金额和订单的金额不符，终止购买');
+//                }
                 $res = $this->orderHandle($payInfo, $orderInfo);
 
                 if (!$res['status']) {
