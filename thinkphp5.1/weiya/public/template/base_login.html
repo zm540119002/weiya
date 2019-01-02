@@ -9,30 +9,13 @@
 	<link rel="stylesheet" href="public_css/public.css">
 	{block name="css-customize"}{/block}
 	<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="public_js/login.js"></script>
 	<script type="text/javascript">
 		var domain = '{:request()->domain()}'+'/'+'index.php/';
 		var module = domain + '{:request()->module()}/';
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
 		var uploads = '{:request()->domain()}'+'/uploads/';
-		//忘记密码-弹窗触发
-		function forgetPasswordDialog(){
-			var content = $('#sectionForgetPassword').html();
-			layer.open({
-				className:'forgetPasswordLayer',
-				content:content,
-				success:function(){
-					$('.login_item .password').attr('type','password');
-					$('.view-password').removeClass('active');
-				}
-			});
-		}
-		$(function(){
-			//忘记密码-弹窗事件
-			$('body').on('click','.forget_dialog',function(){
-				forgetPasswordDialog();
-			});
-		});
 	</script>
 	<!--前置自定义js-->
 	{block name="pre-script"}{/block}

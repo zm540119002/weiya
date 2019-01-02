@@ -1,3 +1,37 @@
+//登录-弹窗触发
+function loginDialog(){
+    var content=$('#dialLogin').html();
+    window.scrollTo(0,0);
+    layer.open({
+        className:'loginLayer',
+        content:content,
+        title:['登录','border-bottom:1px solid #d9d9d9;'],
+        success:function(){
+            tab_down('.loginNav li','.loginTab .login_wrap','click');
+            $('.layui-m-layershade').on('touchmove',function(e){
+                event.preventDefault();
+            });
+        }
+    });
+}
+//忘记密码-弹窗触发
+function forgetPasswordDialog(){
+    var content = $('#sectionForgetPassword').html();
+    layer.open({
+        className:'forgetPasswordLayer',
+        content:content,
+        success:function(){
+            $('.login_item .password').attr('type','password');
+            $('.view-password').removeClass('active');
+        }
+    });
+}
+$(function(){
+    //忘记密码-弹窗事件
+    $('body').on('click','.forget_dialog',function(){
+        forgetPasswordDialog();
+    });
+});
 $(function(){
     //登录 / 注册-切换
     tab_down('.loginNav li','.loginTab ','click');
@@ -11,23 +45,23 @@ $(function(){
         var postForm = null;
         var loginSign = 'dialog';
         if(method=='login'){//登录
-            if($('.loginLayer #formLogin').length){//弹框
+            if($('.loginLayer #formLogin').length){//弹框登录
                 postForm = $('.loginLayer #formLogin');
-            }else{
+            }else{//页面登录
                 loginSign = 'page';
                 postForm = $('#formLogin');
             }
         }else if(method=='register'){//注册
-            if($('.loginLayer #formRegister').length){//弹框
+            if($('.loginLayer #formRegister').length){//弹框注册
                 postForm = $('.loginLayer #formRegister');
-            }else{
+            }else{//页面注册
                 loginSign = 'page';
                 postForm = $('#formRegister');
             }
         }else if(method=='forgetPassword'){//重置密码
-            if($('.loginLayer #formForgetPassword').length){//弹框
+            if($('.loginLayer #formForgetPassword').length){//弹框重置密码
                 postForm = $('.loginLayer #formForgetPassword');
-            }else{
+            }else{//页面重置密码
                 loginSign = 'page';
                 postForm = $('#formForgetPassword');
             }
@@ -59,10 +93,10 @@ $(function(){
                     if(loginSign=='page'){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
-                        if($.isFunction(dialogLoginCallBack)){
+                        if(dialogLoginCallBack && $.isFunction(dialogLoginCallBack)){
                             dialogLoginCallBack(data)
                         }else{
-                            dialogLoginCommonCallBack(data);
+                            dialogLoginDefaultCallBack(data);
                         }
                     }
                 }
@@ -70,7 +104,7 @@ $(function(){
         }
     });
     //弹框登录成功默认回调函数
-    function dialogLoginCommonCallBack(data) {
+    function dialogLoginDefaultCallBack(data) {
         location.href = data.info;
     }
 
