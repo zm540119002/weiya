@@ -96,7 +96,7 @@ $(function(){
                         console.log(typeof dialogLoginCallBack);
                         if(undefined==dialogLoginCallBack){
                             dialogLoginDefaultCallBack(data);
-                        }else if($.isFunction(dialogLoginCallBack)){
+                        }else{
                             dialogLoginCallBack(data)
                         }
                     }
