@@ -425,7 +425,7 @@
                                     //     $('.addressLayer .myswitch').addClass('myswitched');
                                     //     $('.addressLayer .myswitch').attr('data-off',1);
                                     // }
-                                    $('#address_info').find('.item_addr').remove();
+                                    $('#address_info').find('.item_addr,.add_address').remove();
                                     $('#address_info').append(data);
                                     var region = [];
                                     region.push(postData.province);
@@ -433,8 +433,15 @@
                                     region.push(postData.area);
                                     $('.item_addr .area_address').setArea(region);
                                     $('.edit_operate').find('.address_edit').hide();
+                                    var len=$('.delivery_address .item_addr').length;
+                                    
                                     if(!postData.address_id){
-                                         $('.delivery_address div:first').before(data);
+                                        if(!len){
+                                            $('.delivery_address ').append(data);
+                                        }else{
+                                            $('.delivery_address div:first').before(data);
+                                        }
+                                         
                                     }else{
                                         $.each($('.delivery_address .item_addr'),function(index,val){
                                             var _thisId=$(this).find('.address_id').val();

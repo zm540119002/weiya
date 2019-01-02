@@ -3,19 +3,41 @@
 <link rel="stylesheet" href="store_css/main.css">
 {/block}
 {block name="content"}
-<p>支付方式</p>
-<div>
-    <ul class="pay_nav">
-        <li data-paycode="1">微信支付</li>
-        <li data-paycode="2">支付宝支付</li>
-        <li data-paycode="3">银联支付</li>
-    </ul>
-</div>
-<form action="{:url('Payment/orderPayment')}" method="post">
-    <input type="hidden" name="order_sn" value="{$orderInfo.sn}"/>
-    <input type="hidden" name="pay_code" value="" class="pay_code"/>
-    <input type="submit" value="支付" />
-</form>
+<article class="f24 pay_wrapper">
+    <section class="pay_amount_item content-padding">
+        <div>订单金额：<span class="red">￥<price>1000.00</price></span></div>
+    </section>
+    <section class="content-padding ">
+        <p class="content-label">选择支付方式</p>
+        <div>
+            <ul class="pay_nav">
+                <li data-paycode="1">
+                    微信支付
+                    <!--<input type="checkbox" checked="checked" class=""/>-->
+                    <span class="selected"></span>
+                    <span class="wx"></span>
+                </li>
+                <li data-paycode="2">
+                    支付宝支付
+                    <!--<input type="checkbox" class=""/>-->
+                    <span class="selected"></span>
+                    <span class="wx"></span>
+                </li>
+                <li data-paycode="3">银联支付
+                    <!--<input type="checkbox" class=""/>-->
+                    <span class="selected"></span>
+                    <span class="wx"></span>
+                </li>
+            </ul>
+        </div>
+        <p>*线下银行转账/现金支付需将证据拍照上传</p>
+        <form action="{:url('Payment/orderPayment')}" method="post" class="pay_form">
+            <input type="hidden" name="order_sn" value="{$orderInfo.sn}"/>
+            <input type="hidden" name="pay_code" value="" class="pay_code"/>
+            <input type="submit" value="立即支付" />
+        </form>
+    </section>
+</article>
 {/block}
 {block name="common"}
 
@@ -27,6 +49,7 @@
         $('.pay_nav li').on('click',function(){
             $(this).addClass('current').siblings().removeClass('current');
             var pay_code = $(this).data('paycode');
+            $(this).find('input[type="checkbox"]').prop('checked',true);
             $('.pay_code').val(pay_code);
         })
     });
