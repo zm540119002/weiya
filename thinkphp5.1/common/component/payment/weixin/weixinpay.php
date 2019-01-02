@@ -36,8 +36,11 @@ class weixinpay{
      */
     public static function getJSAPI($payInfo){
         $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
+        print_r(11);exit;
         $tools = new \JsApiPay();
+        print_r($tools);
         $openId = $tools->GetOpenid();
+        print_r($openId);exit;
         $input = new \WxPayUnifiedOrder();
         $input->SetBody('美尚云');					//商品名称
         $input->SetAttach($payInfo['attach']);					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
@@ -193,6 +196,7 @@ EOF;
         //统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
         //使用统一支付接口
         $input = new \WxPayUnifiedOrder();
+        print_r($input);exit;
         $input->SetBody('美尚云');					//商品名称
         $input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
         $input->SetOut_trade_no($payInfo['sn']);			//订单号
