@@ -93,6 +93,8 @@ $(function(){
                     if(loginSign=='page'){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
+                        console.log(data);
+                        return;
                         if(typeof(dialogLoginCallBack) == "undefined"){
                             dialogLoginDefaultCallBack(data);
                         }else if($.isFunction(dialogLoginCallBack)){
@@ -105,7 +107,6 @@ $(function(){
     });
     //弹框登录成功默认回调函数
     function dialogLoginDefaultCallBack(data) {
-        console.log(123);
         location.href = data.info;
     }
 
