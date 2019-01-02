@@ -3752,6 +3752,13 @@ input[type=text]::-webkit-focus-inner {
     width: 10.875%;
     text-align: center;
 }
+.item_addr .address_delete{
+    position: absolute;
+    /*right: 3%;*/
+    top:34%;
+    margin-top: 0;
+    color:#ff0000;
+}
 .item_addr .ia-r {
     position: absolute;
     right: 3%;
@@ -4865,14 +4872,14 @@ select[name="nodeIds"]{
 .add_address{
     position:relative;
     display:block;
-    padding:0.15rem 0 0.12rem 0.15rem;
+    padding:0.20rem 0 0.18rem 0.15rem;
     border-bottom:5px solid #f2f2f2;
 }
 .add_address::after{
     content: '';
     display: inline-block;
     position: absolute;
-    top: 35%;
+    top: 42%;
     right: 0.15rem;
     width: .5em;
     height: .5em;
@@ -4881,6 +4888,18 @@ select[name="nodeIds"]{
     -webkit-transform: translate(-70%) rotateZ(-133deg);
     -moz-transform: translate(-70%) rotateZ(-45deg);
     -ms-transform: translate(-70%) rotateZ(-45deg);
+}
+.add_address span{
+    background: #ff0000;
+    color: #fff;
+    width: 0.20rem;
+    height: 0.25rem;
+    display: inline-block;
+    line-height: 0.25rem;
+    text-align:center;
+}
+.edit_operate{
+    margin:0.15rem 0 0;
 }
 .goods_order_item{
     padding:0.20rem 0 0;

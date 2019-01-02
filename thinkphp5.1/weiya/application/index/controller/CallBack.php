@@ -80,18 +80,18 @@ class CallBack extends \common\controller\Base
         // 判断签名是否正确  判断支付状态
         if ($sign === $data_sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
             if ($order_type == 'order') {
-                $modelOrder = new \app\purchase\model\Order();
+                $modelOrder = new \app\index\model\Order();
                 $config = [
                     'where' => [
                         ['o.status', '=', 0],
                         ['o.sn', '=', $data['order_sn']],
                     ], 'field' => [
                         'o.id', 'o.sn', 'o.amount',
-                        'o.user_id', 'o.actually_amount', 'o.logistics_status'
+                        'o.user_id', 'o.actually_amount', 'o.order_status'
                     ],
                 ];
                 $orderInfo = $modelOrder->getInfo($config);
-                if ($orderInfo['logistics_status'] > 1) {
+                if ($orderInfo['order_status'] > 1) {
                     return successMsg('已回调过，订单已处理');
                 }
                 if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
@@ -148,17 +148,26 @@ class CallBack extends \common\controller\Base
             if ($data['respMsg'] == 'Success!') {
                 // 修改订单支付状态
                 if ($order_type == 'order') {
-                    $modelOrder = new \app\purchase\model\Order();
+                    $modelOrder = new \app\index\model\Order();
                     $config = [
                         'where' => [
                             ['o.status', '=', 0],
                             ['o.sn', '=', $data['order_sn']],
                         ], 'field' => [
                             'o.id', 'o.sn', 'o.amount',
-                            'o.user_id', 'o.actually_amount', 'o.logistics_status'
+                            'o.user_id', 'o.actually_amount', 'o.order_status'
                         ],
                     ];
                     $orderInfo = $modelOrder->getInfo($config);
+                    if ($orderInfo['order_status'] > 1) {
+                        echo "success";
+                        return successMsg('已回调过，订单已处理');
+                    }
+                    if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
+                        //返回状态给微信服务器
+                        echo "fail"; //验证失败
+                        return errorMsg('回调的金额和订单的金额不符，终止购买');
+                    }
                     $res = $this->orderHandle($data, $orderInfo);
                     if ($res['status']) {
                         echo "success"; // 处理成功
@@ -203,25 +212,32 @@ class CallBack extends \common\controller\Base
             //如果有做过处理，不执行商户的业务程序
             //注意：
             //付款完成后，支付宝系统发送该交易状态通知
-
-
             if ($order_type == 'order') {
-                $modelOrder = new \app\purchase\model\Order();
+                $modelOrder = new \app\index\model\Order();
                 $config = [
                     'where' => [
                         ['o.status', '=', 0],
                         ['o.sn', '=', $payInfo['order_sn']],
                     ], 'field' => [
                         'o.id', 'o.sn', 'o.amount',
-                        'o.user_id', 'o.actually_amount'
+                        'o.user_id', 'o.actually_amount','o.order_status'
                     ],
                 ];
                 $orderInfo = $modelOrder->getInfo($config);
+                if ($orderInfo['order_status'] > 1) {
+                    echo "success";
+                    return successMsg('已回调过，订单已处理');
+                }
+                if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
+                    //返回状态给微信服务器
+                    return errorMsg('回调的金额和订单的金额不符，终止购买');
+                }
                 $res = $this->orderHandle($payInfo, $orderInfo);
+
                 if (!$res['status']) {
                     echo "fail";    //请不要修改或删除
                 } else {
-                    echo "success";        //请不要修改或删除
+                    echo "success"; //请不要修改或删除
                 }
             }
         }
@@ -334,7 +350,7 @@ class CallBack extends \common\controller\Base
         $modelOrder->startTrans();
         //更新订单状态
         $data2 = [];
-        $data2['logistics_status'] = 2;
+        $data2['order_status'] = 2;
         $data2['payment_code'] = $data['payment_code'];
         $data2['pay_sn'] = $data['pay_sn'];
         $data2['payment_time'] = $data['payment_time'];
