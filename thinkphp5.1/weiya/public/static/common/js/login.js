@@ -59,7 +59,7 @@ $(function(){
                     if(loginSign=='page'){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
-                        $.isFunction(dialogLoginCallBack) && dialogLoginCallBack();
+                        $.isFunction(dialogLoginCallBack) && dialogLoginCallBack(data);
                     }
                 }
             });
