@@ -11,7 +11,7 @@ require_once(dirname(__FILE__) . '/lib/WxPay.Api.php');
 require_once(dirname(__FILE__)  . '/WxPay.JsApiPay.php');
 require_once(dirname(__FILE__) . '/WxPay.NativePay.php');
 require_once(dirname(__FILE__)  . '/log.php');
-require_once "WxPay.Config.php";
+require_once(dirname(__FILE__) . '/WxPay.Config.php');
 
 class weixinpay{
     /**支付端判断

@@ -6,8 +6,11 @@
 * 请勿直接直接使用样例对外提供服务
 * 
 **/
-require_once "./lib/WxPay.Api.php";
-require_once "WxPay.Config.php";
+//require_once "./lib/WxPay.Api.php";
+//require_once "WxPay.Config.php";
+require_once(dirname(__FILE__) . '/lib/WxPay.Api.php');
+require_once(dirname(__FILE__) . '/WxPay.Config.php');
+
 /**
  * 
  * JSAPI支付实现类
