@@ -45,6 +45,7 @@ class weixinpay{
 
             //②、统一下单
             $input = new \WxPayUnifiedOrder();
+            print_r($input);exit;
             $input->SetBody("test");
             $input->SetAttach($payInfo['attach']);
             $input->SetOut_trade_no($payInfo['sn']);
