@@ -94,10 +94,10 @@ $(function(){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
                         console.log(typeof dialogLoginCallBack);
-                        if(dialogLoginCallBack!='undefined' && $.isFunction(dialogLoginCallBack)){
-                            dialogLoginCallBack(data)
-                        }else{
+                        if(dialogLoginCallBack=='undefined'){
                             dialogLoginDefaultCallBack(data);
+                        }else if($.isFunction(dialogLoginCallBack)){
+                            dialogLoginCallBack(data)
                         }
                     }
                 }
