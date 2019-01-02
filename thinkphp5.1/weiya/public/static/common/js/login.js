@@ -1,3 +1,37 @@
+//登录-弹窗触发
+function loginDialog(){
+    var content=$('#dialLogin').html();
+    window.scrollTo(0,0);
+    layer.open({
+        className:'loginLayer',
+        content:content,
+        title:['登录','border-bottom:1px solid #d9d9d9;'],
+        success:function(){
+            tab_down('.loginNav li','.loginTab .login_wrap','click');
+            $('.layui-m-layershade').on('touchmove',function(e){
+                event.preventDefault();
+            });
+        }
+    });
+}
+//忘记密码-弹窗触发
+function forgetPasswordDialog(){
+    var content = $('#sectionForgetPassword').html();
+    layer.open({
+        className:'forgetPasswordLayer',
+        content:content,
+        success:function(){
+            $('.login_item .password').attr('type','password');
+            $('.view-password').removeClass('active');
+        }
+    });
+}
+$(function(){
+    //忘记密码-弹窗事件
+    $('body').on('click','.forget_dialog',function(){
+        forgetPasswordDialog();
+    });
+});
 $(function(){
     //登录 / 注册-切换
     tab_down('.loginNav li','.loginTab ','click');
