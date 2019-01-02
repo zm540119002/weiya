@@ -24,7 +24,6 @@ class weixinpay{
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
             weixinpay::h5_pay($payInfo);
         }else{//微信浏览器(手机端)
-            print_r(11);exit;
             weixinpay::getJSAPI($payInfo);
         }
     }
@@ -46,6 +45,7 @@ class weixinpay{
 
             //②、统一下单
             $input = new \WxPayUnifiedOrder();
+            print_r($input);exit;
             $input->SetBody("test");
             $input->SetAttach($payInfo['attach']);
             $input->SetOut_trade_no($payInfo['sn']);
@@ -58,6 +58,7 @@ class weixinpay{
             $input->SetOpenid($openId);
             $config = new \WxPayConfig();
             $order = \WxPayApi::unifiedOrder($config, $input);
+            echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
             $jsApiParameters = $tools->GetJsApiParameters($order);
             //获取共享收货地址js函数参数
             $editAddress = $tools->GetEditAddressParameters();
