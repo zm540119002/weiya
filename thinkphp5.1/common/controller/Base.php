@@ -1,7 +1,7 @@
 <?php
 namespace common\controller;
 use \common\component\image\Image;
-require_once dirname(__DIR__).'./component/payment/weixin/WxPay.JsApiPay.php';
+require_once '../component/payment/weixin/WxPay.JsApiPay.php';
 /**基于公共基础控制器
  */
 class Base extends \think\Controller{
