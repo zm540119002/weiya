@@ -3883,6 +3883,15 @@ select[name="nodeIds"]{
     padding:.15rem 0;
     border-bottom:1px solid #d9d9d9;
 }
+.goodsInfoLayer .bottom-layer-info li{
+    padding:0.15rem;
+    border-bottom:none;
+}
+.goodsInfoLayer .layer_top_name{
+    padding:0 0 0.25rem 0;
+    margin:0 0 0 0.15rem;
+    border-bottom:1px solid #d9d9d9;
+}
 .layui-m-layer .layui-m-layerchild.goodsInfoLayer{
     position:fixed;
     left:0;
@@ -3900,6 +3909,9 @@ select[name="nodeIds"]{
     bottom:0;
     height: 100%; 
     right: 0;*/
+}
+.goodsInfoLayer .goods_title{
+    text-align:left;
 }
 .sample_purchase{
     display:block;
