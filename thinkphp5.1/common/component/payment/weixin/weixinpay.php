@@ -275,7 +275,7 @@ EOF;
             //1.用户访问微信服务器地址 先获取到微信get方式传递过来的code
             //2.根据code获取到openID
             if(! isset($_GET['code']))
-            {
+            { 
                 //没有获取到微信返回来的code ，让用户再次访问微信服务器地址
 
                 //redirect_uri 解释
@@ -284,7 +284,7 @@ EOF;
 
                 //组装跳转地址
                 $redirect_uri = $OPENIDURL .'appid='.config('wx_config.appid').'&redirect_uri='.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'&response_type=code&scope='.'snsapi_base'.'&state=STATE#wechat_redirect';
-
+                print_r($redirect_uri);exit;
 //                echo $redirect_uri;
 
                 //跳转 让用过去获取code
@@ -294,7 +294,7 @@ EOF;
             {
                 //调用接口获取openId
                 $openidurl =$OPENIDURL.'appid='.config('wx_config.appid').'&secret='.config('wx_config.appsecret').'&code='.$_GET['code'].'&grant_type=authorization_code';
-                print_r($openidurl);exit;
+
                 //请求获取用户的openID
                 $data = file_get_contents($openidurl);
                 $arr = json_decode($data,true);
