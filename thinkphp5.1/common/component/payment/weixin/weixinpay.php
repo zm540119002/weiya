@@ -134,57 +134,6 @@ EOF;
         echo  $html;
     }
 
-    //生成支付二维码
-    public static function payQRcode($url,$logo=''){
-        //生成二维码图片
-//        $object = new \common\component\code\Qrcode();
-//        $qrcodePath = config('uploads');//保存文件路径
-//        $fileName = time().'.png';//保存文件名
-//        $outFile = $qrcodePath.$fileName;
-//        $level = 'L'; //容错级别
-//        $size = 10; //生成图片大小
-//        $frameSize = 2; //边框像素
-//        $saveAndPrint = true;
-//        $object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
-//        return $fileName;
-
-
-        //include 'phpqrcode.php';
-
-        $object = new \common\component\code\Qrcode();
-//        $value = 'http://www.cnblogs.com/txw1958/'; //二维码内容
-        $value =$url; //二维码内容
-        $errorCorrectionLevel = 'L';//容错级别
-        $matrixPointSize = 6;//生成图片大小
-        $qrcodePath = config('uploads');//保存文件路径
-        $fileName = time().'.png';//保存文件名
-        $outFile = $qrcodePath.$fileName;
-       //生成二维码图片
-        $object->png($value, $outFile, $errorCorrectionLevel, $matrixPointSize, 2,$saveandprint=false);
-        $QR = $outFile;//已经生成的原始二维码图
-
-        if (!empty($logo)) {
-            $QR = imagecreatefromstring(file_get_contents($QR));
-            $logo = imagecreatefromstring(file_get_contents($logo));
-            $QR_width = imagesx($QR);//二维码图片宽度
-            $QR_height = imagesy($QR);//二维码图片高度
-            $logo_width = imagesx($logo);//logo图片宽度
-            $logo_height = imagesy($logo);//logo图片高度
-            $logo_qr_width = $QR_width / 5;
-            $scale = $logo_width/$logo_qr_width;
-            $logo_qr_height = $logo_height/$scale;
-            $from_width = ($QR_width - $logo_qr_width) / 2;
-            //重新组合图片并调整大小
-            imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width,
-                $logo_qr_height, $logo_width, $logo_height);
-        }
-         //输出图片
-        imagepng($QR, 'helloweixin.png');
-        echo '<img src="helloweixin.png">';
-
-
-    }
-
     /**
      * @param $payInfo
      * H5 微信支付
