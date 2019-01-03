@@ -14,7 +14,6 @@ $(function () {
         var cart_ids=[];
         cart_ids.push(_li.data('cart_id'));
         postData.cart_ids = cart_ids;
-        console.log(postData);return false
         var type = 'single';
         delCart(postData,type,$(this));
     });
@@ -30,9 +29,8 @@ $(function () {
             }
         });
         postData.cart_ids = cart_ids;
-        console.log(postData);return false
         var type = 'more';
-        delCart(postData,type,$('.goods_list li'));
+        delCart(postData,type,$('.cart_goods_list li'));
     });
 });
 //从购物车里替换单个商品信息
@@ -63,7 +61,7 @@ function replaceOneGoodsToCart(obj) {
 }
 //选择或当个删除购物车
 function delCart(postData,type,obj) {
-    var url = CONTROLLER + '/delCart';
+    var url = controller + 'delCart';
     layer.open({
         content:'是否删除？',
         btn:['确定','取消'],

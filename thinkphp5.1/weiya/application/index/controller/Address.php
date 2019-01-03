@@ -121,23 +121,18 @@ class Address extends \common\controller\UserBase {
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-//        $id = input('post.address_id',0,'int');
+        $id = input('post.address_id',0,'int');
         $model = new \common\model\Address();
-
         $condition = [
-
+            ['user_id','=',$this->user['id']],
+            ['id','=',$id],
         ];
-        $model->del($condition,$tag=false);
-//        $condition = [
-//            ['user_id','=',$this->user['id']],
-//            ['id','=',$id],
-//        ];
-//        $result = $model -> del($condition);
-//        if($result['status']){
-//            return successMsg('删除成功');
-//        }else{
-//            return errorMsg('删除失败');
-//        }
+        $result = $model -> del($condition);
+        if($result['status']){
+            return successMsg('删除成功');
+        }else{
+            return errorMsg('删除失败');
+        }
 
     }
 

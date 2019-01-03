@@ -164,4 +164,25 @@ class Cart extends \common\controller\UserBase{
         return successMsg('成功');
     }
 
+
+
+    //删除地址
+    public function del(){
+        if(!request()->isAjax()){
+            return errorMsg(config('custom.not_ajax'));
+        }
+        $ids = input('post.cart_ids/a');
+        $model = new \app\index\model\Cart();
+        $condition = [
+            ['user_id','=',$this->user['id']],
+            ['id','in',$ids],
+        ];
+        $result = $model -> del($condition,false);
+        if($result['status']){
+            return successMsg('删除成功');
+        }else{
+            return errorMsg('删除失败');
+        }
+
+    }
 }
