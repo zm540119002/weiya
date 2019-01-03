@@ -31,6 +31,7 @@ class Payment extends \common\controller\UserBase{
             ];
             $payCode = input('pay_code','0','int');
 
+            print_r($payCode);exit;
             //微信支付
             if($payCode == 1){
                 print_r(11);exit;
