@@ -57,7 +57,6 @@ class weixinpay{
             $input->SetOpenid($openId);
             $config = new \WxPayConfig();
             $order = \WxPayApi::unifiedOrder($config, $input);
-            echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
             $jsApiParameters = $tools->GetJsApiParameters($order);
             //获取共享收货地址js函数参数
             $editAddress = $tools->GetEditAddressParameters();
