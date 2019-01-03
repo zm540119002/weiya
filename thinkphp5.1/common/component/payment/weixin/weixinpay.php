@@ -34,13 +34,11 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-
+        $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
         $trade_no = $payInfo['sn'];
-        print_r($trade_no);exit;
-        $input = new \WxPayUnifiedOrder();
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
-        $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
+        $input = new \WxPayUnifiedOrder();
         $input->SetBody('美尚云');					//商品名称
         $input->SetAttach($payInfo['attach']);					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
         $input->SetOut_trade_no($trade_no);			//订单号
