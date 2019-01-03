@@ -3903,8 +3903,12 @@ select[name="nodeIds"]{
     background: #ff7bac;
     color:#fff;
     border-radius:5px;
-    padding:0.05rem 0.10rem;
+    padding:0.05rem 0.15rem;
     margin:0.05rem 0.25rem 0 0;
+}
+.project_p_item .sample_purchase{
+    margin-top:0;
+    font-size:0.20rem;
 }
 .layui-m-layer-shareqrCodeLayer .layui-m-layercont{
     padding:10px;
