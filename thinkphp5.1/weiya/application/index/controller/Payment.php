@@ -4,6 +4,7 @@ namespace app\index\controller;
 class Payment extends \common\controller\UserBase{
     //订单-支付
     public function orderPayment(){
+        print_r(input());exit;
         if( !empty(input('order_sn')) && !empty(input('?pay_code'))){
             $modelOrder = new \app\index\model\Order();
             $orderSn = input('order_sn','','string');
@@ -25,7 +26,7 @@ class Payment extends \common\controller\UserBase{
                 'notify_url'=>$this->host."/index/".config('wx_config.call_back_url')
             ];
             $payCode = input('pay_code','0','int');
-            print_r(input());exit;
+
             //微信支付
             if($payCode == 1){
                 $payInfo['notify_url'] = $payInfo['notify_url'].'/weixin.order';
