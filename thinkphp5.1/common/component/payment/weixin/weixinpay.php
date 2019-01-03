@@ -26,7 +26,6 @@ class weixinpay{
             weixinpay::getJSAPI($payInfo);
         }
     }
-
     /**微信公众号支付
      * @param  string   $openId 	openid
      * @param  string   $goods 		商品名称
@@ -35,10 +34,10 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-        $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
+        $input = new \WxPayUnifiedOrder();
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
-        $input = new \WxPayUnifiedOrder();
+        $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
         $input->SetBody('美尚云');					//商品名称
         $input->SetAttach($payInfo['attach']);					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
         $input->SetOut_trade_no($payInfo['sn']);			//订单号
@@ -108,6 +107,10 @@ EOF;
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
+        $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
+                && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
+        $host = $http_type . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
+                (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ''));
         $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
         $html = <<<EOF
             <head>
@@ -121,7 +124,7 @@ EOF;
                           layer.open({
                                 title:['微信支付二维码','border-bottom:1px solid #d9d9d9'],
                                 className:'',
-                                content:'<img src="/uploads/{$code_url}">'
+                                content:'<img src="{$host}/uploads/{$code_url}">'
                          })
                      });
                 </script>
@@ -199,6 +202,7 @@ EOF;
         $input->SetNotify_url($payInfo['notify_url']);//支付回调验证地址
         $input->SetTrade_type("MWEB");				//支付类型
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
+
         $url = $order2['mweb_url'];
         $url = $url.'&redirect_url='.$payInfo['return_url'];//拼接支付完成后跳转的页面redirect_url
         $html = <<<EOF
@@ -258,5 +262,46 @@ EOF;
         // 这句file_put_contents是用来查看服务器返回的退款结果 测试完可以删除了
         //file_put_contents(APP_ROOT.'/Api/wxpay/logs/log3.txt',arrayToXml($result),FILE_APPEND);
         return $result;
+    }
+
+    //获取openid
+    public function getOpenId()
+    {
+        $OPENIDURL = 'https://api.weixin.qq.com/sns/oauth2/access_token?';
+        //如果已经获取到用户的openId就存储在session中
+
+            //1.用户访问微信服务器地址 先获取到微信get方式传递过来的code
+            //2.根据code获取到openID
+            if(! isset($_GET['code']))
+            {
+                //没有获取到微信返回来的code ，让用户再次访问微信服务器地址
+
+                //redirect_uri 解释
+                //跳转地址：你发起请求微信服务器获取code ，
+                //微信服务器返回来给你的code的接收地址（通常就是发起支付的页面地址）
+
+                //组装跳转地址
+                $redirect_uri = $OPENIDURL .'appid='.config('wx_config.appid').'&redirect_uri='.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'&response_type=code&scope='.'snsapi_base'.'&state=STATE#wechat_redirect';
+
+//                echo $redirect_uri;
+
+                //跳转 让用过去获取code
+                header("location:{$redirect_uri}");
+            }
+            else
+            {
+                //调用接口获取openId
+                $openidurl =$OPENIDURL.'appid='.config('wx_config.appid').'&secret='.config('wx_config.appsecret').'&code='.$_GET['code'].'&grant_type=authorization_code';
+
+                //请求获取用户的openID
+                $data = file_get_contents($openidurl);
+                $arr = json_decode($data,true);
+                //获取到的openid保存到session 中
+                $_SESSION['openid'] = $arr['openid'];
+
+                return $arr['openid'];
+            }
+
+
     }
 }
