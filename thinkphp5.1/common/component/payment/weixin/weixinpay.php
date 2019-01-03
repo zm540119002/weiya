@@ -50,7 +50,6 @@ class weixinpay{
         $input->SetOpenid($openId);					//用户openID
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
-        print_r($jsApiParameters);exit;
         $html = <<<EOF
 			<script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
 			<script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
@@ -88,6 +87,7 @@ class weixinpay{
                 callpay();
             </script>
 EOF;
+        print_r($html);exit;
         echo  $html;
     }
 
