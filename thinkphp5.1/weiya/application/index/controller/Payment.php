@@ -2,6 +2,18 @@
 namespace app\index\controller;
 require_once dirname(__DIR__).'./../../../common/component/payment/weixin/WxPay.JsApiPay.php';
 class Payment extends \common\controller\UserBase{
+    public function __construct(){
+        parent::__construct();
+        if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ){
+            $openId =  session('open_id');
+            if(empty($openId)){
+                $tools = new \JsApiPay();
+                $openId  = $tools->GetOpenid();
+                session('open_id',$openId);
+            }
+        }
+    }
+
     //订单-支付
     public function orderPayment(){
         //微信支付
