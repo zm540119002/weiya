@@ -269,7 +269,6 @@ EOF;
     //获取openid
     public function getOpenId()
     {
-        print_r(config('wx_config.appsecret'));exit;
         $OPENIDURL = 'https://api.weixin.qq.com/sns/oauth2/access_token?';
         //如果已经获取到用户的openId就存储在session中
 
@@ -295,7 +294,7 @@ EOF;
             {
                 //调用接口获取openId
                 $openidurl =$OPENIDURL.'appid='.config('wx_config.appid').'&secret='.config('wx_config.appsecret').'&code='.$_GET['code'].'&grant_type=authorization_code';
-
+                print_r($openidurl);exit;
                 //请求获取用户的openID
                 $data = file_get_contents($openidurl);
                 $arr = json_decode($data,true);
