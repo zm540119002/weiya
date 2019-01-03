@@ -95,7 +95,6 @@ class unionpay
         );
         AcpService::sign ( $params );
         $uri = SDKConfig::getSDKConfig()->frontTransUrl;
-        print_r($uri);exit;
         $html_form = AcpService::createAutoFormHtml( $params, $uri );
         echo  $html_form;
     }
