@@ -25,6 +25,7 @@ class Payment extends \common\controller\UserBase{
                 'notify_url'=>$this->host."/index/".config('wx_config.call_back_url')
             ];
             $payCode = input('pay_code','0','int');
+            print_r(input());exit;
             //微信支付
             if($payCode == 1){
                 $payInfo['notify_url'] = $payInfo['notify_url'].'/weixin.order';
