@@ -3981,10 +3981,10 @@ select[name="nodeIds"]{
 .scroll_news .news_tit{
     /*width:1.68rem;
     height:.6rem;*/
-    position:absolute;
+    /*position:absolute;
     top:.17rem;
     left:.10rem;
-    display:block;
+    display:block;*/
 }
 .news_tit img{
     /*width:90%;*/
