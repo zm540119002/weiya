@@ -35,11 +35,7 @@ class weixinpay{
      */
     public static function getJSAPI($payInfo){
         $input = new \WxPayUnifiedOrder();
-        print_r($input);
-
-
         $tools = new \JsApiPay();
-
         $openId = $tools->GetOpenid();
         print_r($openId);exit;
         $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
