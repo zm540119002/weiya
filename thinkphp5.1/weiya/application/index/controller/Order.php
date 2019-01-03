@@ -46,7 +46,7 @@ class Order extends \common\controller\UserBase
         //开启事务
         $modelOrder->startTrans();
         //订单编号
-        $orderSN = generateSN();
+        $orderSN = generateSN(5);
         //组装父订单数组
         $data = [
                 'sn' => $orderSN,
