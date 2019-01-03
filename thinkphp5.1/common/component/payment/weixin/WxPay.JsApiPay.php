@@ -51,7 +51,7 @@ class JsApiPay
 		} else {
 			//获取code码，以获取openid
 		    $code = $_GET['code'];
-			$openid = $this->getOpenidFromMp($code);
+			$openid = $this->GetOpenidFromMp($code);
 			return $openid;
 		}
 	}
@@ -93,7 +93,6 @@ class JsApiPay
 	 */
 	public function GetOpenidFromMp($code)
 	{
-		print_r(111);exit;
 		$url = $this->__CreateOauthUrlForOpenid($code);
 		//初始化curl
 		$ch = curl_init();
