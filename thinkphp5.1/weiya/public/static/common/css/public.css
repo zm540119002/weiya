@@ -278,7 +278,7 @@ i{
     position: absolute;
     top: 0;
     right:0.75rem;
-    border: 1px solid #ff0000;
+    /*border: 1px solid #ff0000;*/
     height: 18px;
     line-height:18px;
     color:#ff0000;
