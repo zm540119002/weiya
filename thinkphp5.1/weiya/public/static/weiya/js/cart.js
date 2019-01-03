@@ -22,10 +22,9 @@ $(function () {
     $('body').on('click','.detele_carts',function(){
         var postData = {};
         var cart_ids = [];
-
-        $.each($('.goods_list li'),function(){
+        $.each($('.cart_goods_list li'),function(){
             var _this=$(this);
-            if(_this.find('.sigle_checkbox').is(':checked')){
+            if(_this.find('.sign_checkitem').is(':checked')){
                 var cart_id = _this.data('cart_id');
                 cart_ids.push(cart_id);
             }
