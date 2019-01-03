@@ -4,30 +4,12 @@ namespace app\index\controller;
 class Payment extends \common\controller\UserBase{
     //订单-支付
     public function orderPayment(){
-        $modelOrder = new \app\index\model\Order();
-        $orderSn = input('order_sn','','string');
-        $config = [
-            'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $orderSn],
-                ['o.user_id', '=', $this->user['id']],
-            ],'field' => [
-                'o.id', 'o.sn', 'o.amount','o.actually_amount',
-                'o.user_id','o.type'
-            ],
-        ];
-        $orderInfo = $modelOrder->getInfo($config);
-        $payInfo = [
-            'sn'=>$orderInfo['sn'],
-            'actually_amount'=>0.01,
-            'return_url' => $this->host.url('payComplete'),
-            'notify_url'=>$this->host."/index/".config('wx_config.call_back_url')
-        ];
-        $payCode = input('pay_code','0','int');
-        $payInfo['notify_url'] = $payInfo['notify_url'].'/weixin.order';
-        \common\component\payment\weixin\weixinpay::wxPay($payInfo);
+
+        if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ){
+            echo "1";exit;
+        }
+
         //微信支付
-       exit;
         if( !empty(input('order_sn')) && !empty(input('?pay_code'))){
             $modelOrder = new \app\index\model\Order();
             $orderSn = input('order_sn','','string');
