@@ -42,6 +42,7 @@ class weixinpay{
         try{
 
             $tools = new \JsApiPay();
+            print_r(111);exit;
             print_r(input());exit;
             $openId = $tools->GetOpenid();
             //②、统一下单
