@@ -7,7 +7,6 @@ class Payment extends \common\controller\UserBase{
         if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ){
             $tools = new \JsApiPay();
             $openId  = $tools->GetOpenid();
-            print_r($openId);exit;
         }
         //微信支付
         if( !empty(input('order_sn')) && !empty(input('?pay_code'))){
@@ -34,6 +33,7 @@ class Payment extends \common\controller\UserBase{
 
             //微信支付
             if($payCode == 1){
+                print_r(11);exit;
                 $payInfo['notify_url'] = $payInfo['notify_url'].'/weixin.order';
                 $payInfo['open_id'] = $openId;
                 print_r($payInfo);exit;
