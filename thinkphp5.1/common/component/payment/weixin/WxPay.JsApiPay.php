@@ -49,6 +49,7 @@ class JsApiPay
 			header("Location: $url");
 			exit();
 		} else {
+			print_r(111);exit;
 			//获取code码，以获取openid
 		    $code = $_GET['code'];
 			$openid = $this->GetOpenidFromMp($code);
@@ -97,7 +98,7 @@ class JsApiPay
 		//初始化curl
 		$ch = curl_init();
 		//设置超时
-		curl_setopt($ch, CURLOPT_TIMEOUT, $this->curl_timeout);
+//		curl_setopt($ch, CURLOPT_TIMEOUT, $this->curl_timeout);
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,FALSE);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,FALSE);
