@@ -37,7 +37,7 @@ class weixinpay{
         $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
         $input = new \WxPayUnifiedOrder();
         $tools = new \JsApiPay();
-        print_r($tools);exit;
+        print_r($input);exit;
         $openId = $tools->GetOpenid();
         print_r($openId);exit;
         $input->SetBody('美尚云');					//商品名称
