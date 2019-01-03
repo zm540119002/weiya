@@ -28,7 +28,6 @@ class Payment extends \common\controller\UserBase{
             //微信支付
             if($payCode == 1){
                 $payInfo['notify_url'] = $payInfo['notify_url'].'/weixin.order';
-                print_r(11);exit;
                 \common\component\payment\weixin\weixinpay::wxPay($payInfo);
             }
             //支付宝支付
