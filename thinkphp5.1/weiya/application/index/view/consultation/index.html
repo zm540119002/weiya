@@ -150,7 +150,7 @@
 				</a>
 			</li>
 			<li class="each_column">
-				<a href="{:url('Cart/index')}">
+				<a href="javascript:void(0)" class="my_cart">
 					<span class="cart f_icon"></span>
 					<span class="f_txt">采购车</span>
 				</a>
@@ -174,6 +174,47 @@
 <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
 	$(function(){
+<<<<<<< HEAD
+=======
+		$('body').on('click','.my_cart',function () {
+			var url = module + 'Cart/index';
+			var postData = {};
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(xhr){
+					$('.loading').show();
+				},
+				error:function(xhr){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					$('.loading').hide();
+					if(data.status==0){
+						dialog.error(data.info);
+					}else if(data.code==1){
+						if(data.data == 'no_login'){
+							loginDialog();
+						}
+					}else if(data.status==1){
+						location.href = url;
+					}else{
+					}
+				}
+			});
+		});
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+>>>>>>> ce64fcc23d62ad3fc651e2c18b9519013a68b26b
 		//查看文本
 		$('.more-text-box').moreText({
 			mainCell:".more-text",
