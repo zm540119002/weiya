@@ -88,9 +88,9 @@ function delCart(postData,type,obj) {
                         if(type == 'more'){
                             $.each(obj,function(){
                                 var _this=$(this);
-                                var cartId = _this.data('id');
-                                for(var i=0;i<postData.foreign_ids.length;i++){
-                                    if(cartId == postData.foreign_ids[i]){
+                                var cartId = _this.data('cart_id');
+                                for(var i=0;i<postData.cart_ids.length;i++){
+                                    if(cartId == postData.cart_ids[i]){
                                         _this.remove();
                                     }
                                 }
@@ -102,7 +102,6 @@ function delCart(postData,type,obj) {
                         }else{
                             $('.select_checkbox_box').show();
                         }
-                        calculateTotalPrice();
                         dialog.success(data.info);
                     }
                 }
