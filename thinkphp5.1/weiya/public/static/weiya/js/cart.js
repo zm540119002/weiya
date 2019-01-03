@@ -39,7 +39,7 @@ function replaceOneGoodsToCart(obj) {
     var postData = {};
     postData.foreign_id = _li.data('id');
     postData.num = obj.find('.gshopping_count').val();
-    var url = CONTROLLER + '/replaceOneGoodsToCart';
+    var url = controller + 'replaceOneGoodsToCart';
     $.ajax({
         url: url,
         data: postData,
