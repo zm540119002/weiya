@@ -269,6 +269,7 @@ EOF;
     //获取openid
     public function getOpenId()
     {
+        print_r(config('wx_config.appsecret'));exit;
         $OPENIDURL = 'https://api.weixin.qq.com/sns/oauth2/access_token?';
         //如果已经获取到用户的openId就存储在session中
 
