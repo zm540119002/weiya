@@ -17,7 +17,7 @@ class weixinpay{
      * @param $payInfo
      * @param $backUrl
      */
-    public static function wxPay($payInfo){
+    public static function  a($payInfo){
         if (!isPhoneSide()) {//pc端微信扫码支付
             weixinpay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
@@ -36,9 +36,10 @@ class weixinpay{
      */
     public static function getJSAPI($payInfo){
         $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
+        $input = new \WxPayUnifiedOrder();
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
-        $input = new \WxPayUnifiedOrder();
+        print_r($openId);exit;
         $input->SetBody('美尚云');					//商品名称
         $input->SetAttach($payInfo['attach']);					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
         $input->SetOut_trade_no($payInfo['sn']);			//订单号
