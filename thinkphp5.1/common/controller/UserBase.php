@@ -20,13 +20,13 @@ class UserBase extends Base{
             }
         }
 
-//        if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ){
-//            $openId =  session('open_id');
-//            if(empty($openId)){
-//                $tools = new \JsApiPay();
-//                $openId  = $tools->GetOpenid();
-//                session('open_id',$openId);
-//            }
-//        }
+        if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ){
+            $openId =  session('open_id');
+            if(empty($openId)){
+                $tools = new \JsApiPay();
+                $openId  = $tools->GetOpenid();
+                session('open_id',$openId);
+            }
+        }
     }
 }
