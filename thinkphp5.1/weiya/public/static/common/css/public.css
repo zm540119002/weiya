@@ -281,7 +281,12 @@ i{
     /*border: 1px solid #ff0000;*/
     height: 18px;
     line-height:18px;
-    color:#ff0000;
+    background:#ff0000;
+    color:#fff;
+}
+.cart_num.cur{
+    border-radius: 10px;
+    padding: 1px 6px;
 }
 .dark_green{background:#0f9143;}
 .goods_total_price{color:#ff6482;;padding-left: 0.18rem;font-size:0.32rem;}
@@ -3893,6 +3898,14 @@ select[name="nodeIds"]{
     height: 100%; 
     right: 0;*/
 }
+.sample_purchase{
+    display:block;
+    background: #ff5401;
+    color:#fff;
+    border-radius:5px;
+    padding:0.05rem 0.10rem;
+    margin:0.05rem 0.25rem 0 0;
+}
 .layui-m-layer-shareqrCodeLayer .layui-m-layercont{
     padding:10px;
 }
@@ -3909,6 +3922,12 @@ select[name="nodeIds"]{
     line-height: 40px;
     right: -10px;
     top:-14px;
+}
+.goodsInfoLayer .layui-m-layerbtn{
+    width:40px;
+    height:40px;
+    line-height:40px;
+    border-radius: 100%;
 }
 .layui-m-layer-shareqrCodeLayer .layui-m-layerbtn span{
     color:#575757;
