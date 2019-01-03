@@ -96,12 +96,6 @@ function delCart(postData,type,obj) {
                                 }
                             });
                         }
-                        // if( $('.goods_list li').length == 0){
-                        //     $('.select_checkbox_box').hide();
-                        //     $('#no_data').show();
-                        // }else{
-                        //     $('.select_checkbox_box').show();
-                        // }
                         dialog.success(data.info);
                     }
                 }
