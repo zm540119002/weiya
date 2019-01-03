@@ -7,6 +7,7 @@ function dialogLoginCallBack(_this) {
         lis = $('ul.goods_list').find('li[data-buy_type="1"]');
     }
     var postData = assemblyData(lis);
+    console.log(postData);
     if(!postData){
         return false;
     }
@@ -277,7 +278,7 @@ $(function () {
                 var specification=_this.parents('li').find('.specification_text').text();
                 $('.goodsInfoLayer .goods_title').text(goodsTitle);
                 $('.goodsInfoLayer li').data('id',id);
-                alert($('.goodsInfoLayer li').data('id',id));
+                alert($('.goodsInfoLayer li').data('id'));
                 $('.goodsInfoLayer price').text(price);
                 $('.goodsInfoLayer .specification').text(specification);
             },

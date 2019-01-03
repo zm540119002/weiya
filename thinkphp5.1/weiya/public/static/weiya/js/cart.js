@@ -96,6 +96,7 @@ function delCart(postData,type,obj) {
                                 }
                             });
                         }
+                        calculateCartTotalPrice();
                         dialog.success(data.info);
                     }
                 }
