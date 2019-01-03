@@ -39,7 +39,7 @@
                         <input class="input-filed" type="tel" name="" value="" placeholder="手机号码">
                     </div>
                     <div class="msg_item">
-                        <textarea class="input-filed" rows="" cols="" placeholder="留言文字..."></textarea>
+                        <textarea class="input-filed leaving_msg" rows="" cols="" placeholder="留言文字..."></textarea>
                     </div>
                 </form>
                 <a href="javascript:void(0);" class="submit_msg">递交留言</a>
@@ -47,17 +47,10 @@
         </div>
         <div class="weiya_item "></div>
 		<div class="weiya_item hide">
-			<div class="columns_flex l-r-sides top_title">
-				<span>
-					<img class="left" src="weiya_img/wyyz_logo.png" alt="">
-					<span class="cpy_name">维雅生物科技</span>
-				</span>
-				<span>2017-12-8 9:47</span>
-			</div>
 			<ul>
 				<li>
 					<div class="more-text-box">
-						<p class="more-text"><span class="intro_title">#小分子活性肽系列#</span>小分子美容多肽具有结构简单活性稳定、分子量小极易透皮吸收，护肤作用机理明确、质量可控、安全性高无副作用等特点，成为生物药妆配方系列中最广泛配伍使用的原料，也是国际大牌护肤品牌的最爱，可应用于原液、面膜、乳霜等剂型，研发各类医学护肤功能产品.</p>
+						<p class="more-text">[案例分享] 是非成败转头空，青山依旧在，惯看秋月春风。一壶浊酒喜相逢，古今多少事，滚滚长江东逝水，浪花淘尽英雄。 几度夕阳红。白发渔樵江渚上，都付笑谈中。滚滚长江东逝水。</p>
 					</div>
 					<div class="dynamic_img columns_flex">
 						<a>
@@ -95,7 +88,7 @@
 				</li>
 				<li>
 					<div class="more-text-box">
-						<p class="more-text"><span class="intro_title">#玻尿酸活性肽原液#</span>上新，超浓缩的原液精华，富含EGF、aFGF、bFGF生长因子、玻尿酸、多种天然植物等成分，能迅速修护受损和老化肌肤，促进表皮细胞更新，增厚鲜嫩皮膜，重建天然屏障，使肌肤细嫩弹滑、富有光泽</p>
+						<p class="more-text">[案例分享] 是非成败转头空，青山依旧在，惯看秋月春风。一壶浊酒喜相逢，古今多少事，滚滚长江东逝水，浪花淘尽英雄。 几度夕阳红。白发渔樵江渚上，都付笑谈中。滚滚长江东逝水。</p>
 					</div>
 					<div class="dynamic_img columns_flex">
 						<a>
@@ -181,15 +174,6 @@
 <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		//轮播
-		var swiper = new Swiper('.swiper-container', {
-			spaceBetween: 30,
-			autoplay:true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		});
 		//查看文本
 		$('.more-text-box').moreText({
 			mainCell:".more-text",
@@ -200,74 +184,5 @@
 			$('.weiya_item').hide().eq($(this).index()).show();
 		});    
 	});
-	// 百度地图API功能
-	var map = new BMap.Map("allmap");    // 创建Map实例
-	// 初始化地图,设置中心点坐标和地图级别
-	//map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  
-	
-	//map.centerAndZoom("广州",12); 
-	function setPlace(targetCity){
-		map.clearOverlays();    //清除地图上所有覆盖物
-		function myFun(){
-			var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
-			map.centerAndZoom(pp,12);
-			//偏移中心居中
-			map.panBy(205,165);
-			//添加标注
-			map.addOverlay(new BMap.Marker(pp));    
-			//设置地图显示的城市 此项是必须设置的
-			//map.setCurrentCity("广州市经济技术开发区科学城开源大道206号"); 
-		}
-		
-
-		var local = new BMap.LocalSearch(map, { //智能搜索
-		onSearchComplete: myFun
-		});
-		local.search(targetCity);	
-	}
-	// var geolocation = new BMap.Geolocation(); 
-    // 	geolocation.getCurrentPosition(function(r){ 
-	// 		if(this.getStatus() == BMAP_STATUS_SUCCESS){ 
-	// 			var mk = new BMap.Marker(r.point); 
-	// 			map.addOverlay(mk); 
-	// 			//map.panTo(r.point);//地图中心点移到当前位置 
-	// 			var latCurrent = r.point.lat; 
-	// 			var lngCurrent = r.point.lng; 
-	// 			alert('我的位置：'+ latCurrent + ',' + lngCurrent);
-	
-	// 			location.href="http://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination=39.89778,116.709684&mode=driving&region=广州市经济技术开发区科学城开源大道&output=html"; 
-	
-	// 		} 
-	// 		else { 
-	// 			alert('failed'+this.getStatus()); 
-	// 		}         
-	// 	},{enableHighAccuracy: true}) 
-
-	// 	map.addOverlay(marker);   
-	// 	var licontent="<b>健龙森羽毛球馆</b><br>";   
-	// 		licontent+="<span><strong>地址：</strong>北京市通州区滨河中路108号</span><br>";   
-	// 		licontent+="<span><strong>电话：</strong>(010)81556565 / 6969</span><br>";           
-	// 	var opts = {  
-	// 		width : 200, 
-	// 		height: 80, 
-	// 	};          
-	// 	var  infoWindow = new BMap.InfoWindow(licontent, opts);   
-	// 	marker.openInfoWindow(infoWindow);   
-	// 	marker.addEventListener('click',function(){ 
-	// 		marker.openInfoWindow(infoWindow); 
-	// 	});
-	//添加地图类型控件
-	map.addControl(new BMap.MapTypeControl({
-		mapTypes:[
-			BMAP_NORMAL_MAP,
-			BMAP_HYBRID_MAP
-		]}));	  
-	
-	//开启鼠标滚轮缩放
-	map.enableScrollWheelZoom(true); 
-	//window.onload=function(){
-	var addr="广州市经济技术开发区科学城开源大道206号";
-		setPlace(addr);
-	//}
 </script>
 {/block}

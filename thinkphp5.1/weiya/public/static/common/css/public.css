@@ -4908,6 +4908,9 @@ select[name="nodeIds"]{
 .msg_item .m_l:last-child{
     border-left:1px solid #d9d9d9;
 }
+.leaving_msg{
+    height:2.5rem;
+}
 .submit_msg{
     display:block;
     width:2.5rem;
