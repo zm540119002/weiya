@@ -9,10 +9,8 @@
 namespace common\component\payment\weixin;
 require_once(dirname(__FILE__) . '/lib/WxPay.Api.php');
 require_once(dirname(__FILE__)  . '/WxPay.JsApiPay.php');
-require_once(dirname(__FILE__) . '/WxPay.NativePay.php');
+require_once(dirname(__FILE__)  . '/WxPay.NativePay.php');
 require_once(dirname(__FILE__)  . '/log.php');
-require_once(dirname(__FILE__) . '/WxPay.Config.php');
-require_once(dirname(__FILE__) . '/lib/WxPay.Data.php');
 
 class weixinpay{
     /**支付端判断
@@ -25,6 +23,7 @@ class weixinpay{
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
             weixinpay::h5_pay($payInfo);
         }else{//微信浏览器(手机端)
+            print_r(11);exit;
             weixinpay::getJSAPI($payInfo);
         }
     }
@@ -38,31 +37,21 @@ class weixinpay{
      */
     public static function getJSAPI($payInfo){
         $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
-        //①、获取用户openid
-        try{
-
-            $tools = new \JsApiPay();
-            $openId = $tools->GetOpenid();
-            //②、统一下单
-            $input = new \WxPayUnifiedOrder();
-            $input->SetBody("test");
-            $input->SetAttach($payInfo['attach']);
-            $input->SetOut_trade_no($payInfo['sn']);
-            $input->SetTotal_fee($payInfo['actually_amount'] * 100);
-            $input->SetTime_start(date("YmdHis"));
-            $input->SetTime_expire(date("YmdHis", time() + 600));
-            $input->SetGoods_tag("test");
-            $input->SetNotify_url($payInfo['notify_url']);
-            $input->SetTrade_type("JSAPI");
-            $input->SetOpenid($openId);
-            $config = new \WxPayConfig();
-            $order = \WxPayApi::unifiedOrder($config, $input);
-            $jsApiParameters = $tools->GetJsApiParameters($order);
-            //获取共享收货地址js函数参数
-            $editAddress = $tools->GetEditAddressParameters();
-        } catch(\Exception $e) {
-            \Log::ERROR(json_encode($e));
-        }
+        $tools = new \JsApiPay();
+        $openId = $tools->GetOpenid();
+        $input = new \WxPayUnifiedOrder();
+        $input->SetBody('美尚云');					//商品名称
+        $input->SetAttach($payInfo['attach']);					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
+        $input->SetOut_trade_no($payInfo['sn']);			//订单号
+        $input->SetTotal_fee($payInfo['actually_amount'] * 100);			//支付金额,单位:分
+        $input->SetTime_start(date("YmdHis"));		//支付发起时间
+        $input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
+        $input->SetGoods_tag("test3");
+        $input->SetNotify_url($payInfo['notify_url']);//支付回调验证地址
+        $input->SetTrade_type("JSAPI");				//支付类型
+        $input->SetOpenid($openId);					//用户openID
+        $order = \WxPayApi::unifiedOrder($input);	//统一下单
+        $jsApiParameters = $tools->GetJsApiParameters($order);
         $html = <<<EOF
 			<script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
 			<script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
@@ -120,10 +109,6 @@ EOF;
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
-        $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
-                && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
-        $host = $http_type . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
-                (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ''));
         $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
         $html = <<<EOF
             <head>
@@ -137,7 +122,7 @@ EOF;
                           layer.open({
                                 title:['微信支付二维码','border-bottom:1px solid #d9d9d9'],
                                 className:'',
-                                content:'<img src="{$host}/uploads/{$code_url}">'
+                                content:'<img src="/uploads/{$code_url}">'
                          })
                      });
                 </script>
@@ -215,7 +200,6 @@ EOF;
         $input->SetNotify_url($payInfo['notify_url']);//支付回调验证地址
         $input->SetTrade_type("MWEB");				//支付类型
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
-
         $url = $order2['mweb_url'];
         $url = $url.'&redirect_url='.$payInfo['return_url'];//拼接支付完成后跳转的页面redirect_url
         $html = <<<EOF
