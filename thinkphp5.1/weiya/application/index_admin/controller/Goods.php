@@ -243,7 +243,7 @@ class Goods extends Base {
     public function generateQRcode($info){
         $oldQRCodes = $info['rq_code_url'];
         $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
-        $url = request()->domain().'/index.php/weiya_customization/Goods/detail/id/'.$info['id'];
+        $url = request()->domain().'/index.php/index/Goods/detail/id/'.$info['id'];
         $newRelativePath = config('upload_dir.weiya_goods');
         $shareQRCodes = createLogoQRcode($url,$newRelativePath);
         if(mb_strlen( $info['headline'], 'utf-8')>20){
@@ -534,12 +534,12 @@ class Goods extends Base {
         imagefill($im, 0, 0, $color);
         imagettftext($im, 20, 0, 100, 35, $text_color, $init['font'], $init['title']); //XX官方旗舰店
         imagettftext($im, 16, 0, 100, 60, $text_color1, $init['font'], $init['slogan']);   //标语
-        imagettftext($im, 20, 0, 20, 670, $red_color, $init['font'], $init['money']); //金额
-        imagettftext($im, 12, 0, 20, 700, $text_color, $init['font'], $init['name1']); //说明
-        imagettftext($im, 12, 0, 20, 720, $text_color, $init['font'], $init['name2']); //说明
-        imagettftext($im, 12, 0, 20,745, $text_color1, $init['font'], $init['specification']); //规格
+        imagettftext($im, 12, 0, 20, 670, $text_color, $init['font'], $init['name1']); //说明
+        imagettftext($im, 12, 0, 20, 700, $text_color, $init['font'], $init['name2']); //说明
+        imagettftext($im, 20, 0, 20, 750, $red_color, $init['font'], $init['money']); //金额
+//        imagettftext($im, 12, 0, 20,745, $text_color1, $init['font'], $init['specification']); //规格
         imagecopyresized($im, $logoImg['obj'], 10, 10, 0, 0, 90, 60, $logoImg['width'], $logoImg['height'] );  //平台logo
-        imagecopyresized($im, $goodsImg['obj'], 10, 106, 0, 0, 460, 534, $goodsImg['width'], $goodsImg['height']);  //商品
+        imagecopyresized($im, $goodsImg['obj'], 10, 80, 0, 0, 500, 534, $goodsImg['width'], $goodsImg['height']);  //商品
         imagecopyresized($im, $qrcode['obj'], 350, 650, 0, 0, 120, 120, $qrcode['width'], $qrcode['height'] );  //二维
         $dir = config('upload_dir.upload_path').'/'.$init['save_path'].'compose/';
         if(!is_dir($dir)){
