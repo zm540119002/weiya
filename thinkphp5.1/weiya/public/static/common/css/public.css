@@ -342,7 +342,13 @@ i{
     text-align: center;
     display: block;
 }
-.group_btn30{width:33.3%;box-sizing: border-box;}
+.group_btn30{
+    width:33.3%;
+    box-sizing: border-box;
+}
+.group_btn30:first-child{
+    padding:0 0 0 0.12rem;
+}
 .group_btn50{width:50%;}
 .group_btn100{width:100%;}
 .group_cart_nav .bfff{border-top:1px solid #d9d9d9;}
@@ -1032,7 +1038,7 @@ background-position: 0 -27px;
     background-image: url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
     /*background-size: 30px 345px;*/
-    background-size: 0.48rem 5.85rem;
+    background-size: 0.48rem 6.5rem;
     display: block;
 }
 .foot_nav_bar a span.store{
@@ -1071,6 +1077,14 @@ background-position: 0 -27px;
 .foot_nav_bar .current a span.manufacturer{
     /*background-position:0 -143px;*/
     background-position:0 -2.44rem;
+}
+.foot_nav_bar .current a span.my{
+    /*background-position:0 -54px;*/
+    background-position:0 -6rem;
+}
+.foot_nav_bar .current a span.business{
+    /*background-position:0 -54px;*/
+    background-position:0 -2.46rem;
 }
 .layui-m-layermain .layui-m-layerchild.cloudTwitterLayer,
 .layui-m-layermain .layui-m-layerchild.editDetailLayer {
@@ -4870,6 +4884,40 @@ select[name="nodeIds"]{
 .c_mobile p a{
     color:#06c;
 }
+.msg_content{
+    padding:0.15rem;
+}
+.msg_item{
+    margin:0 0 0.25rem 0;
+    background: #fff;
+    border-radius:4px;
+}
+.msg_content .msg_item{
+    display:flex;
+    display:-webkit-flex;
+    justify-content: space-between;
+}
+.msg_item .input-filed{
+    border:none;
+}
+.msg_item .m_l{
+    padding:0 0.15rem 0 0.15rem;
+    width:50%;
+    box-sizing: border-box;
+}
+.msg_item .m_l:last-child{
+    border-left:1px solid #d9d9d9;
+}
+.submit_msg{
+    display:block;
+    width:2.5rem;
+    padding:0.10rem 0;
+    margin:0 auto;
+    background: #009A3E;
+    color:#fff;
+    text-align:center;
+    border-radius:4px;
+}
 /*订单*/
 .add_address{
     position:relative;
@@ -4926,6 +4974,11 @@ select[name="nodeIds"]{
     height:450px;
     overflow-x:hidden;
     overflow-y:auto;
+}
+.addressLayer .layui-m-layerbtn{
+    position:fixed;
+    left:0;
+    bottom:0;
 }
 /*支付*/
 .pay_wrapper{

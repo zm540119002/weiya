@@ -12,8 +12,8 @@
                 <p>13679898358</p>
             </div>
         </div>
-        <a href="">
-            <span></span>
+        <a href="javascript:void(0);">
+           退出
         </a>
     </section>
     <section class="separation-line">
@@ -40,7 +40,7 @@
                 <span class="cart"></span>
                 采购车
             </a>
-            <a href="{:url('Address/manage')}" class="person-td">
+            <a href="javascript:void(0)" class="person-td address_manage">
                 <span class="addr"></span>
                 收货人地址
             </a>
@@ -101,13 +101,13 @@
 				</a>
 			</li>
 			<li class="each_column">
-				<a href="">
+				<a href="{:url('Consultation/index')}">
 					<span class="business f_icon"></span>
 					<span class="f_txt">业务咨询</span>
 				</a>
 			</li>
 			<li class="each_column">
-				<a href="">
+				<a href="javascript:void(0)"  class="my_cart" >
 					<span class="cart f_icon"></span>
 					<span class="f_txt">采购车</span>
 				</a>
@@ -160,6 +160,36 @@
                 }
             });
         });
+        $('body').on('click','.address_manage',function () {
+            var url = module + 'Address/manage';
+            var postData = {};
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else if(data.code==1){
+                        if(data.data == 'no_login'){
+                            loginDialog();
+                        }
+                    }else if(data.status==1){
+                        location.href = url;
+                    }else{
+                    }
+                }
+            });
+        });
+
     })
 </script>
 {/block}
