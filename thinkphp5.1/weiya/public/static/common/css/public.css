@@ -3979,8 +3979,8 @@ select[name="nodeIds"]{
     background: #fff;
 }
 .scroll_news .news_tit{
-    width:1.68rem;
-    height:.6rem;
+    /*width:1.68rem;
+    height:.6rem;*/
     position:absolute;
     top:.17rem;
     left:.10rem;
