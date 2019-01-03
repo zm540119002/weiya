@@ -36,8 +36,7 @@ class weixinpay{
     public static function getJSAPI($payInfo){
         $input = new \WxPayUnifiedOrder();
         $tools = new \JsApiPay();
-//        $openId = $tools->GetOpenid();
-        $openId = weixinpay::getOpenId();
+        $openId = $tools->GetOpenid();
         print_r($openId);exit;
         $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
         $input->SetBody('美尚云');					//商品名称
@@ -283,8 +282,8 @@ EOF;
                 //微信服务器返回来给你的code的接收地址（通常就是发起支付的页面地址）
 
                 //组装跳转地址
-                $redirect_uri = $OPENIDURL .'appid='.config('wx_config.appid').'&secret='.config('wx_config.appsecret').'&redirect_uri='.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'&response_type=code&scope='.'snsapi_base'.'&state=STATE#wechat_redirect';
-                print_r($redirect_uri);exit;
+                $redirect_uri = $OPENIDURL .'appid='.config('wx_config.appid').'&redirect_uri='.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'&response_type=code&scope='.'snsapi_base'.'&state=STATE#wechat_redirect';
+
 //                echo $redirect_uri;
 
                 //跳转 让用过去获取code
