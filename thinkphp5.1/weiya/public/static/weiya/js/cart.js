@@ -14,7 +14,7 @@ $(function () {
         var foreign_ids=[];
         foreign_ids.push(_li.data('id'));
         postData.foreign_ids = foreign_ids;
-        console.log(postData);return
+        console.log(postData);return false
         var type = 'single';
         delCart(postData,type,$(this));
     });
@@ -22,6 +22,7 @@ $(function () {
     $('body').on('click','.detele_carts',function(){
         var postData = {};
         var foreign_ids = [];
+
         $.each($('.goods_list li'),function(){
             var _this=$(this);
             if(_this.find('.sigle_checkbox').is(':checked')){
@@ -30,6 +31,7 @@ $(function () {
             }
         });
         postData.foreign_ids = foreign_ids;
+        console.log(postData);return false
         var type = 'more';
         delCart(postData,type,$('.goods_list li'));
     });
