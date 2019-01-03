@@ -50,14 +50,11 @@ class JsApiPay
 			Header("Location: $url");
 			exit();
 		} else {
-			print_r(111);exit;
 			//获取code码，以获取openid
 		    $code = $_GET['code'];
-
 			$openid = $this->GetOpenidFromMp($code);
 			return $openid;
 		}
-		print_r(333);exit;
 	}
 	
 	/**
@@ -119,6 +116,7 @@ class JsApiPay
 		$data = json_decode($res,true);
 		$this->data = $data;
 		$openid = $data['openid'];
+		print_r(11);exit;
 		return $openid;
 	}
 	
