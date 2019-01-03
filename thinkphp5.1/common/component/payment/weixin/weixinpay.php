@@ -62,11 +62,11 @@ class weixinpay{
                         'getBrandWCPayRequest',$jsApiParameters,
                         function(res){
                             if(res.err_msg == "get_brand_wcpay_request:ok"){
-                                dialog.success('支付成功！',"{$payInfo['return_url']}".'&method=weixin&back_code=success');
+                                dialog.success('支付成功！',"{$payInfo['return_url']}");
                             }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
-                                dialog.success('取消支付！',"{$payInfo['return_url']}.'&method=weixin&back_code=cancel'");
+                                dialog.success('取消支付！',"{$payInfo['return_url']}");
                             }else{
-                                dialog.success('支付失败！',"{$payInfo['return_url']}.'&method=weixin&back_code=error'");
+                                dialog.success('支付失败！',"{$payInfo['return_url']}");
                             }
                         }
                     );
