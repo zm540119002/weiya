@@ -11,9 +11,9 @@ $(function () {
     $('body').on('click','.detele_cart',function(){
         var _li = $(this).parents('li');
         var postData = {};
-        var foreign_ids=[];
-        foreign_ids.push(_li.data('id'));
-        postData.foreign_ids = foreign_ids;
+        var cart_ids=[];
+        cart_ids.push(_li.data('cart_id'));
+        postData.cart_ids = cart_ids;
         console.log(postData);return false
         var type = 'single';
         delCart(postData,type,$(this));
@@ -21,16 +21,16 @@ $(function () {
     //选择删除购物车
     $('body').on('click','.detele_carts',function(){
         var postData = {};
-        var foreign_ids = [];
+        var cart_ids = [];
 
         $.each($('.goods_list li'),function(){
             var _this=$(this);
             if(_this.find('.sigle_checkbox').is(':checked')){
-                var foreign_id = _this.data('id');
-                foreign_ids.push(foreign_id);
+                var cart_id = _this.data('cart_id');
+                cart_ids.push(cart_id);
             }
         });
-        postData.foreign_ids = foreign_ids;
+        postData.cart_ids = cart_ids;
         console.log(postData);return false
         var type = 'more';
         delCart(postData,type,$('.goods_list li'));
