@@ -827,11 +827,14 @@ color: #ed6d00;
 }
 .top_radius .hot{
     display:inline-block;
+    vertical-align: middle;
+    margin:0.05rem 0 0 0;
+    /*display:inline-block;
     padding:0.05rem 0.12rem;
     margin:0.05rem .14rem 0 0;
     background:#E60012;
     color:#fff;
-    border-radius:5px;
+    border-radius:5px;*/
 }
 .module-navigation .top_radius{
     background:#fff;
@@ -3887,7 +3890,7 @@ select[name="nodeIds"]{
     bottom:0;
 }
 .goodsInfoLayer .layui-m-layercont{
-    padding: 10px 0 0 0;
+    padding:0.35rem 0 0 0;
     /*padding:10px 0 0 10px;
     
     position: fixed;
@@ -4508,7 +4511,7 @@ select[name="nodeIds"]{
     height:100%;
 }
 
-.goods_title{
+.list_r .goods_title{
     overflow:hidden; 
     text-overflow:ellipsis;
     display:-webkit-box; 
