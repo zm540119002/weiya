@@ -4,10 +4,6 @@ require_once dirname(__DIR__).'./../../../common/component/payment/weixin/WxPay.
 class Payment extends \common\controller\UserBase{
     //订单-支付
     public function orderPayment(){
-        if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ){
-            $tools = new \JsApiPay();
-            $openId  = $tools->GetOpenid();
-        }
         //微信支付
         if( !empty(input('order_sn')) && !empty(input('?pay_code'))){
             $modelOrder = new \app\index\model\Order();
@@ -30,14 +26,9 @@ class Payment extends \common\controller\UserBase{
                 'notify_url'=>$this->host."/index/".config('wx_config.call_back_url')
             ];
             $payCode = input('pay_code','0','int');
-
-            print_r($payCode);exit;
             //微信支付
             if($payCode == 1){
-                print_r(11);exit;
                 $payInfo['notify_url'] = $payInfo['notify_url'].'/weixin.order';
-                $payInfo['open_id'] = $openId;
-                print_r($payInfo);exit;
                 \common\component\payment\weixin\weixinpay::wxPay($payInfo);
             }
             //支付宝支付
