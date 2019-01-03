@@ -3559,7 +3559,9 @@ input[type=text]::-webkit-focus-inner {
     margin:0.08rem 0 0 2.8rem;
     color:#575757 ;
 }
-.list_r price{}
+.list_r price{
+    fonts-size:0.30rem;
+}
 .content_main .list .info_r{
     margin-left:1.82rem;
 }
