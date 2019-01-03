@@ -34,14 +34,15 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-        print_r($payInfo);exit;
+
+        $trade_no = $payInfo['sn'];
         $input = new \WxPayUnifiedOrder();
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
         $input->SetBody('美尚云');					//商品名称
         $input->SetAttach($payInfo['attach']);					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
-        $input->SetOut_trade_no($payInfo['sn']);			//订单号
+        $input->SetOut_trade_no($trade_no);			//订单号
         $input->SetTotal_fee($payInfo['actually_amount'] * 100);			//支付金额,单位:分
         $input->SetTime_start(date("YmdHis"));		//支付发起时间
         $input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
