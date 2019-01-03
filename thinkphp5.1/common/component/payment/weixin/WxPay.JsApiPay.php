@@ -57,6 +57,7 @@ class JsApiPay
 			$openid = $this->GetOpenidFromMp($code);
 			return $openid;
 		}
+		print_r(333);exit;
 	}
 	
 	/**
