@@ -289,6 +289,7 @@ $(function () {
                 $('.goodsInfoLayer .specification').text(specification);
                 $('.goodsInfoLayer .goods_img').attr('src',goodsImg);
                 $('.goodsInfoLayer .minimum_sample_quantity').text(minimum_sample_quantity);
+                $('.goodsInfoLayer .minimum_order_quantity').val(minimum_sample_quantity);
             },
             no:function(){
             }
@@ -441,12 +442,21 @@ function goodsNumReduce(obj,opt) {
 function goodsNumPlus(obj,opt) {
     var _li = obj.parents('li');
     var num = _li.find('.gshopping_count').val();
+    var buy_type=_li.data('buy_type');
+    var orderQuantity=parseInt(opt.order_quantity);
     if(num==0){
         _li.find('.gshopping_count').val(opt.order_quantity);
     }else{
         num=parseInt(num);
         num=num+parseInt(opt.increase_quantity);
         _li.find('.gshopping_count').val(num);
+    }
+    if(buy_type==2){
+        if(num<=orderQuantity){
+            return false;
+        }
+        num=parseInt(num);
+        _li.find('.gshopping_count').val(++num);
     }
 }
 //购物车中单个商品数量自减
