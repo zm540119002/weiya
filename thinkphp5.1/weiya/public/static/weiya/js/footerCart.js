@@ -300,6 +300,7 @@ $(function () {
             className:'goodsInfoLayer',
             content: goodsInfoLayer,
             closeBtn:2,
+            type:1,
             shadeClose:false,
             btn:[''],
             // fixed:false,
@@ -314,7 +315,7 @@ $(function () {
                 $('.goodsInfoLayer .goods_title').text(goodsTitle);
                 $('.goodsInfoLayer li').data('id',id);
                 console.log($('.goodsInfoLayer li').data('id'));
-                $('.goodsInfoLayer price').text(price);
+                $('.goodsInfoLayer .sample_price').text(price);
                 $('.goodsInfoLayer .specification').text(specification);
                 $('.goodsInfoLayer .goods_img').attr('src',goodsImg);
                 $('.goodsInfoLayer .minimum_sample_quantity').text(minimum_sample_quantity);
@@ -406,7 +407,7 @@ function calculateTotalPrice(obj){
                 isInt = false;
                 return false;
             }
-            amount += _thisLi.find('price').text() * num;
+            amount += _thisLi.find('.sample_price').text() * num;
         });
         $('.goodsInfoLayer footer').find('price').html(amount.toFixed(2));
     }else{
@@ -470,22 +471,28 @@ function goodsNumReduce(obj,opt) {
 //单个商品数量自加
 function goodsNumPlus(obj,opt) {
     var _li = obj.parents('li');
-    var num = _li.find('.gshopping_count').val();
     var buy_type=_li.data('buy_type');
     var orderQuantity=parseInt(opt.order_quantity);
-    if(num==0){
-        _li.find('.gshopping_count').val(opt.order_quantity);
-    }else{
+    if(buy_type==1){
+        var num = _li.find('.gshopping_count').val();
         num=parseInt(num);
-        num=num+parseInt(opt.increase_quantity);
-        _li.find('.gshopping_count').val(num);
-    }
-    if(buy_type==2){
-        if(num<=orderQuantity){
-            return false;
+        if(num==0){
+            _li.find('.gshopping_count').val(opt.order_quantity);
+        }else{
+            num=num+parseInt(opt.increase_quantity);
+            _li.find('.gshopping_count').val(num);
         }
+    }
+    
+    if(buy_type==2){
+        var num = $('.goodsInfoLayer').find('.gshopping_count').val();
         num=parseInt(num);
-        _li.find('.gshopping_count').val(++num);
+        if(num>=orderQuantity){
+            dialog.error('购买限额为'+num);
+            //return false;
+        }else{
+            $('.goodsInfoLayer').find('.gshopping_count').val(++num);
+        }
     }
 }
 //购物车中单个商品数量自减
