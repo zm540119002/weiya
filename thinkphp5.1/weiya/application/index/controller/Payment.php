@@ -23,7 +23,9 @@ class Payment extends \common\controller\UserBase{
                 'sn'=>$orderInfo['sn'],
                 'actually_amount'=>0.01,
                 'return_url' => $this->host.url('payComplete'),
-                'notify_url'=>$this->host."/index/".config('wx_config.call_back_url')
+                'cancel_url' => $this->host.url('payCancel'),
+                'fail_url' => $this->host.url('payFail'),
+                'notify_url'=>$this->host."/index/".config('wx_config.call_back_url'),
             ];
             $payCode = input('pay_code','0','int');
             //微信支付
@@ -51,6 +53,14 @@ class Payment extends \common\controller\UserBase{
         $arr = $_GET;
         $model = new \common\component\payment\alipay\alipay;
         $result = $model->check($arr);
+        return $this->fetch();
+    }
+    //取消支付完跳转的页面
+    public function payCancel(){
+        return $this->fetch();
+    }
+    //支付失败完跳转的页面
+    public function payFail(){
         return $this->fetch();
     }
 
