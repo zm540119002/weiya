@@ -26,6 +26,7 @@ class Cart extends \common\controller\UserBase{
         if(empty($goodsList)){
             return errorMsg('没有数据');
         }
+        print_r($goodsList);exit;
         $userId = $this->user['id'];
         $model = new \app\index\model\Cart();
         $config = [
