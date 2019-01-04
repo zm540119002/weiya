@@ -276,11 +276,13 @@ $(function () {
                 var id=_this.parents('li').data('id');
                 var price=_this.parents('li').find('price').text();
                 var specification=_this.parents('li').find('.specification_text').text();
+                var goodsImg=_this.parents('li').find('.goods_img').attr('src');
                 $('.goodsInfoLayer .goods_title').text(goodsTitle);
                 $('.goodsInfoLayer li').data('id',id);
                 alert($('.goodsInfoLayer li').data('id'));
                 $('.goodsInfoLayer price').text(price);
                 $('.goodsInfoLayer .specification').text(specification);
+                $('.goodsInfoLayer .goods_img').attr('src',goodsImg);
             },
             no:function(){
             }

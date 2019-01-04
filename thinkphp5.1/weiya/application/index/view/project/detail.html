@@ -96,9 +96,9 @@
 			<li data-id="{$info.id}" data-buy_type="1">
 				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
 					{empty name="info.thumb_img"}
-					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+					<img class="left goods_img" src="public_img/default/no_pic_100.jpg" alt="">
 					{else /}
-					<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
+					<img class="left goods_img" src="public_uploads/{$info.thumb_img}" alt="">
 					{/empty}
 				</a>
 				<div class="list_r">
