@@ -330,6 +330,9 @@ i{
     font-size:0.28rem;
     border-bottom:6px solid #f2f2f2;
 }
+price{
+    font-size:0.30rem;
+}
  .group_cart_nav{
     height:0.8rem;
     line-height:0.8rem;
@@ -3880,7 +3883,7 @@ select[name="nodeIds"]{
     border-radius:0;
 }
 .bottom-layer-info{
-    margin-bottom:1rem;
+    margin-bottom:0.8rem;
 }
 .bottom-layer-info li{
     padding:.15rem 0;
