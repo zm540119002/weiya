@@ -260,7 +260,7 @@ class Goods extends Base {
             'name1'=> $name1,
             'name2'=> $name2,
             'specification'=> '规格：'.$info['specification'],
-            'money'=>'￥'.$info['bulk_price'].' 元',
+            'money'=>'¥'.$info['bulk_price'].' 元',
             'logo_img'=> request()->domain().'/static/weiya/img/logo.png', // 460*534
             'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
             'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
