@@ -218,6 +218,10 @@ $(function () {
             }
         });
         postData.cartIds = cartIds;
+        if($.isEmptyArray(cartIds)){
+            dialog.error('请选择要结算的商品');
+            return false
+        }
         var _this = $(this);
         _this.addClass("nodisabled");//防止重复提交
         generateOrder(postData,_this);
