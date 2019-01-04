@@ -3892,6 +3892,12 @@ select[name="nodeIds"]{
     margin:0 0 0 0.15rem;
     border-bottom:1px solid #d9d9d9;
 }
+.layer_top_name .l_img{
+    max-width:18%;
+}
+.layer_top_name .l_img img{
+    width:100%;
+}
 .layui-m-layer .layui-m-layerchild.goodsInfoLayer{
     position:fixed;
     left:0;
