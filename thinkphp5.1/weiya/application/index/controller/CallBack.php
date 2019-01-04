@@ -264,12 +264,13 @@ class CallBack extends \common\controller\Base
             ['user_id', '=', $orderInfo['user_id']],
             ['sn', '=', $data['order_sn']],
         ];
-        $returnData = $modelOrder->edit($data2, $condition);
-        if (!$returnData['status']) {
+        $res = $modelOrder->allowField(true)->save($data2,$condition);
+        if($res === false){
             $modelOrder->rollback();
             //返回状态给微信服务器
-            return errorMsg($modelOrder->getLastSql());
+            return errorMsg('失败');
         }
+
         
 //        //根据订单号查询关联的商品
 //        $modelOrderDetail = new \app\index\model\OrderDetail();
