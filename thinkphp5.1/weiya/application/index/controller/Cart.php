@@ -62,8 +62,6 @@ class Cart extends \common\controller\UserBase{
                 $addData[] = $data;
             }
         }
-        print_r($addData);
-        print_r($updateData);exit;
         $model->startTrans();
         if(!empty($addData)){
             $res =  $model->saveAll($addData);
