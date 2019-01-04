@@ -202,8 +202,8 @@ $(function () {
     });
     //购物车列表页
     $('body').on('click','.add_cart_icon',function(){
-    var url = module + 'Cart/index';
-    location.href=url;
+        var url = module + 'Cart/index';
+        location.href=url;
     });
     //去结算
     $('body').on('click','.settlement',function(){
