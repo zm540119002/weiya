@@ -19,7 +19,7 @@ class Order extends \common\controller\UserBase
                 ['c.status', '=', 0],
                 ['c.id', 'in', $cartIds],
             ], 'field' => [
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity','g.sample_price',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.store_id','c.buy_type','c.num',
             ],'join'=>[
                 ['goods g','g.id = c.foreign_id','left']
