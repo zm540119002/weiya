@@ -304,14 +304,14 @@
 			pageSize:6,
 			goods_id:id
 		};
-		getPagingListByClick(config,getData);
+		getPagingList(config,getData);
 		//加载更多评论
 		$('body').on('click','.comment-next-page',function (){
 			var page = $(this).data('page');
 			var	pageIndex=parseInt(page)+1;
 			$(this).data('page',pageIndex);
 			config.currentPage = page;
-			getPagingListByClick(config,getData);
+			getPagingList(config,getData);
 		});
 
 		//获取推荐商品
