@@ -1,4 +1,5 @@
 function dialogLoginCallBack(_this) {
+    console.log(_this.context);
     var lis = null;
     if($(_this.context).hasClass('add_purchase_cart')){
         lis = _this.parents('li');
@@ -6,6 +7,7 @@ function dialogLoginCallBack(_this) {
         lis = $('ul.goods_list').find('li[data-buy_type="1"]');
     }
     var postData = assemblyData(lis);
+    console.log(postData);
     if(!postData){
         return false;
     }
@@ -24,7 +26,7 @@ function dialogLoginCallBack(_this) {
         },
         success: function(data){
             $('.loading').hide();
-            $(_this.context).removeClass("nodisabled");//防止重复提交
+            $(_this).removeClass("nodisabled");//防止重复提交
             if(data.status==0){
                 dialog.error(data.info);
             }
@@ -36,12 +38,12 @@ function dialogLoginCallBack(_this) {
                 dialog.success(data.info);
                 var num = 0;
                 $.each(lis,function(index,val){
-                    var buyType=$(_this.context).data('buy_type');
+                    var buyType=$(this).data('buy_type');
                     if(buyType==1){
-                        num += parseInt($(_this.context).find('.gshopping_count').val());
+                        num += parseInt($(this).find('.gshopping_count').val());
                     }
                 });
-                $('footer').find('.cart_num').text(num);
+                $('footer').find('.cart_num').text(1).addClass('cur');
                 $('footer').find('.add_num').text('+'+num).addClass('current');
                 setTimeout(function(){
                     $('.add_num').removeClass('current');
@@ -266,7 +268,7 @@ $(function () {
             content: goodsInfoLayer,
             closeBtn:2,
             shadeClose:false,
-            btn:['取消'],
+            btn:['X'],
             // fixed:false,
             success:function(){
                 var winHeight=$(window).height();
@@ -276,6 +278,7 @@ $(function () {
                 var specification=_this.parents('li').find('.specification_text').text();
                 $('.goodsInfoLayer .goods_title').text(goodsTitle);
                 $('.goodsInfoLayer li').data('id',id);
+                alert($('.goodsInfoLayer li').data('id'));
                 $('.goodsInfoLayer price').text(price);
                 $('.goodsInfoLayer .specification').text(specification);
             },

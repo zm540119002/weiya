@@ -45,12 +45,15 @@
 								<a class="qrcode_share"  href="javascript:void(0);"></a>
 							</div>
 						</div>
-						<div>
-							<span class="hot left">热</span>
-							<p class="title_name f28">{$info.headline}</p>
+						<div class="title_name goods_title  f28">
+							<span class="hot">
+								<img src="public_img/hot.png" alt="">
+							</span>
+							<!--<p class="title_name goods_title  f28"></p>-->
+							{$info.headline}
 						</div>
-						<p class="specification_text">{$info.specification}</p>
-						<p class="product_intro">{$info.intro|raw}</p>
+						<!--<p class="specification_text">{$info.specification}</p>
+						<p class="product_intro">{$info.intro|raw}</p>-->
 						<div class="tags_item columns_flex l-r-sides">
 							<div>
 								{volist name="$info.tag" id="tag"}

@@ -1,9 +1,10 @@
 <?php
 namespace app\index\controller;
-//require_once dirname(__DIR__).'./../../../common/component/payment/alipay/lib/alipay_notify.class.php';
+require_once dirname(__DIR__).'./../../../common/component/payment/weixin/WxPay.JsApiPay.php';
 class Payment extends \common\controller\UserBase{
     //订单-支付
     public function orderPayment(){
+        //微信支付
         if( !empty(input('order_sn')) && !empty(input('?pay_code'))){
             $modelOrder = new \app\index\model\Order();
             $orderSn = input('order_sn','','string');

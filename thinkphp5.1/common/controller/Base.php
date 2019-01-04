@@ -1,6 +1,7 @@
 <?php
 namespace common\controller;
 use \common\component\image\Image;
+
 /**基于公共基础控制器
  */
 class Base extends \think\Controller{
@@ -15,7 +16,8 @@ class Base extends \think\Controller{
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
-        
+
+     
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){
