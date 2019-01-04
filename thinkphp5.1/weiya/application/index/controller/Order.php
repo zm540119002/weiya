@@ -32,9 +32,9 @@ class Order extends \common\controller\UserBase
 
         foreach ($goodsList as $k => &$goodsInfo) {
             if($goodsInfo['buy_type'] == 2){
-                $goodsSalePrice = $goodsInfo['minimum_sample_quantity'];
+                $goodsSalePrice = $goodsInfo['sample_price'];
             }else{
-                $goodsSalePrice = $goodsInfo['minimum_order_quantity'];
+                $goodsSalePrice = $goodsInfo['bulk_price'];
             }
             $goodsList[$k]['price'] = $goodsSalePrice;
             $goodsList[$k]['store_id'] = $goodsInfo['store_id'];
@@ -46,7 +46,7 @@ class Order extends \common\controller\UserBase
         //开启事务
         $modelOrder->startTrans();
         //订单编号
-        $orderSN = generateSN(5);
+        $orderSN = generateSN();
         //组装父订单数组
         $data = [
                 'sn' => $orderSN,
@@ -198,7 +198,7 @@ class Order extends \common\controller\UserBase
                 return errorMsg('删除失败');
             }
         }
-        
+
         $orderSn = input('post.order_sn','','string');
         return successMsg('成功',array('order_sn'=>$orderSn));
     }
