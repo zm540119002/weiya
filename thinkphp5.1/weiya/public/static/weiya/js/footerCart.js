@@ -224,8 +224,9 @@ $(function () {
                         loginDialog();
                     }
                 }else if(data.status==1){
-                    location.href = url;
+
                 }else{
+                    location.href = url;
                 }
             }
         });
