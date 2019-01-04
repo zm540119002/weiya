@@ -175,24 +175,30 @@ class Order extends \common\controller\UserBase
         if(false === $res){
             return errorMsg('失败');
         }
-//        //根据订单号查询关联的商品
-//        $modelOrderDetail = new \app\index\model\OrderDetail();
-//        $config = [
-//            'where' => [
-//                ['od.status', '=', 0],
-//                ['od.father_order_id', '=', $fatherOrderId],
-//            ], 'field' => [
-//                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id',
-//            ]
-//        ];
-//        $orderDetailList = $modelOrderDetail->getList($config);
-//        $modelOrderChild = new \app\index\model\OrderChild();
-//        //生成子订单
-//        $rse = $modelOrderChild -> createOrderChild($orderDetailList,$this->user['id']);
-//        if(!$rse['status']){
-//            $modelOrder->rollback();
-//            return errorMsg($modelOrder->getLastSql());
-//        }
+        //根据订单号查询关联的购物车的商品 删除
+        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $config = [
+            'where' => [
+                ['od.status', '=', 0],
+                ['od.father_order_id', '=', $fatherOrderId],
+            ], 'field' => [
+                'od.goods_id','od.buy_type'
+            ]
+        ];
+        $orderDetailList = $modelOrderDetail->getList($config);
+        $model = new \app\index\model\Cart();
+        foreach ($orderDetailList as &$orderDetailInfo){
+            $condition = [
+                ['user_id','=',$this->user['id']],
+                ['foreign_id','=',$orderDetailInfo['goods_id']],
+                ['buy_type','in',$orderDetailInfo['buy_type']],
+            ];
+            $result = $model -> del($condition,false);
+            if(!$result['status']){
+                return errorMsg('删除失败');
+            }
+        }
+        
         $orderSn = input('post.order_sn','','string');
         return successMsg('成功',array('order_sn'=>$orderSn));
     }
