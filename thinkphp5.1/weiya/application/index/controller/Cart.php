@@ -164,8 +164,6 @@ class Cart extends \common\controller\UserBase{
         return successMsg('成功');
     }
 
-
-
     //删除地址
     public function del(){
         if(!request()->isAjax()){
