@@ -382,7 +382,7 @@ function calculateTotalPrice(obj){
                 isInt = false;
                 return false;
             }
-            amount += _thisLi.find('price').text() * num;
+            amount += _thisLi.find('.sample_price').text() * num;
         });
         $('.goodsInfoLayer footer').find('price').html(amount.toFixed(2));
     }else{
