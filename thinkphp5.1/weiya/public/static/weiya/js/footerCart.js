@@ -236,6 +236,10 @@ $(function () {
         postData.father_order_id = orderId;
         postData.order_sn = orderSn;
         postData.address_id = addressId;
+        if(!addressId){
+            dialog.error('请选择收货地址');
+            return false;
+        }
         _this.addClass("nodisabled");//防止重复提交
         var url = module + 'Order/confirmOrder';
         $.ajax({
