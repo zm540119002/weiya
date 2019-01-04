@@ -268,7 +268,7 @@ $(function () {
             content: goodsInfoLayer,
             closeBtn:2,
             shadeClose:false,
-            btn:['X'],
+            btn:[''],
             // fixed:false,
             success:function(){
                 var winHeight=$(window).height();

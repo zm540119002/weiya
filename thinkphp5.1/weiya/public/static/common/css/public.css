@@ -3956,10 +3956,16 @@ select[name="nodeIds"]{
     top:-14px;
 }
 .goodsInfoLayer .layui-m-layerbtn{
-    width:40px;
-    height:40px;
-    line-height:40px;
+    width:0.5rem;
+    height:0.5rem;
+    line-height:0.5rem;
     border-radius: 100%;
+    background-image:url(../../common/img/icons/layer_close.png);
+    background-size:0.5rem;
+    background-position:center;
+    top:-32px;
+    background-color:transparent;
+    border-top:none;
 }
 .layui-m-layer-shareqrCodeLayer .layui-m-layerbtn span{
     color:#575757;
