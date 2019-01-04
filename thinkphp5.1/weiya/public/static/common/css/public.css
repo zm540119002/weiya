@@ -4052,7 +4052,7 @@ select[name="nodeIds"]{
 }
 .scroll_news .news_item a{
     display:block;
-    /*width:210px;*/
+    width:3.25rem;
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
