@@ -66,6 +66,8 @@ class Scene extends \common\controller\Base{
                     ['id', '=', $id],
                 ],
             ];
+            $css = (input('css'));
+            $this->assign('css',$css);
             $info = $model->getInfo($config);
             if(empty($info)){
                 $this->error('此商品已下架');
