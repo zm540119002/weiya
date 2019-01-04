@@ -279,7 +279,7 @@ $(function () {
                 var goodsImg=_this.parents('li').find('.goods_img').attr('src');
                 $('.goodsInfoLayer .goods_title').text(goodsTitle);
                 $('.goodsInfoLayer li').data('id',id);
-                alert($('.goodsInfoLayer li').data('id'));
+                console.log($('.goodsInfoLayer li').data('id'));
                 $('.goodsInfoLayer price').text(price);
                 $('.goodsInfoLayer .specification').text(specification);
                 $('.goodsInfoLayer .goods_img').attr('src',goodsImg);
