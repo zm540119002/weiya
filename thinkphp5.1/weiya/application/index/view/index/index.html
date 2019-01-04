@@ -55,7 +55,7 @@
 			<div class="scene_wrapper">
 				{volist name="sceneList" id="info" }
 				<div class="graphic_item graphic_item_65 img{$key}" >
-					<a href="{:url('Scene/detail',['id'=>$info.id,'css'=>'css.'$key])}"  data-id="{$info.id}">
+					<a href="{:url('Scene/detail',['id'=>$info.id,'css'=>'css'.$key])}"  data-id="{$info.id}">
 						<div class="show-img">
 							{empty name="info.thumb_img"}
 							<img src="public_img/default/no_pic_100.jpg" alt="">
