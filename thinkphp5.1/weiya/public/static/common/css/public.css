@@ -354,6 +354,9 @@ i{
 .group_btn30:first-child{
     padding:0 0 0 0.12rem;
 }
+.goodsInfoLayer .group_btn30:first-child{
+    text-align: left;
+}
 .group_btn50{width:50%;}
 .group_btn100{width:100%;}
 .group_cart_nav .bfff{border-top:1px solid #d9d9d9;}
@@ -3888,12 +3891,13 @@ select[name="nodeIds"]{
     border-bottom:none;
 }
 .goodsInfoLayer .layer_top_name{
-    padding:0 0 0.25rem 0;
+    /*padding:0 0 0.25rem 0;*/
     margin:0 0 0 0.15rem;
     border-bottom:1px solid #d9d9d9;
 }
 .layer_top_name .l_img{
     max-width:18%;
+    margin:-0.14rem 0 0;
 }
 .layer_top_name .l_img img{
     width:100%;
