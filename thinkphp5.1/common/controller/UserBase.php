@@ -1,6 +1,6 @@
 <?php
 namespace common\controller;
-require_once dirname(__DIR__).'/component/payment/weixin/WxPay.JsApiPay.php';
+
 /**用户信息验证控制器基类
  */
 class UserBase extends Base{
@@ -19,14 +19,6 @@ class UserBase extends Base{
                 $this->error(config('custom.error_login'),url($this->loginUrl));
             }
         }
-
-        if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ){
-            $openId =  session('open_id');
-            if(empty($openId)){
-                $tools = new \JsApiPay();
-                $openId  = $tools->GetOpenid();
-                session('open_id',$openId);
-            }
-        }
+        
     }
 }
