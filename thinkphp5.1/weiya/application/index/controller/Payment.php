@@ -30,7 +30,7 @@ class Payment extends \common\controller\UserBase{
             $payCode = input('pay_code','0','int');
             //微信支付
             if($payCode == 1){
-                $payInfo['notify_url'] = $this->host."/index/CallBack/weixinCallBack/order";
+                $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinCallBack/type/order";
                 \common\component\payment\weixin\weixinpay::wxPay($payInfo);
             }
             //支付宝支付

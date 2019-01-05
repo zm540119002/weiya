@@ -81,9 +81,10 @@ class CallBack extends \common\controller\Base
         // 判断签名是否正确  判断支付状态
         if (($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
             $order_type = '';
-            if (strpos($_SERVER['QUERY_STRING'], 'order') == true) {
-                $order_type = 'order';
+            if(input('?type')){
+                $order_type =input('type');
             }
+            file_put_contents('c.txt',$order_type);
             if ($order_type == 'order') {
                 $modelOrder = new \app\index\model\Order();
                 $config = [
@@ -96,11 +97,9 @@ class CallBack extends \common\controller\Base
                     ],
                 ];
                 $orderInfo = $modelOrder->getInfo($config);
-
                 if ($orderInfo['order_status'] > 1) {
                     return successMsg('已回调过，订单已处理');
                 }
-
                 if ($orderInfo['actually_amount'] * 100 != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
                     //返回状态给微信服务器
                     return errorMsg('回调的金额和订单的金额不符，终止购买');
@@ -390,26 +389,26 @@ class CallBack extends \common\controller\Base
             //返回状态给微信服务器
             return errorMsg('失败');
         }
-        //根据订单号查询关联的商品
-        $modelOrderDetail = new \app\index\model\OrderDetail();
-        $config = [
-            'where' => [
-                ['od.status', '=', 0],
-                ['od.father_order_id', '=', $orderInfo['id']],
-            ], 'field' => [
-                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id'
-            ]
-        ];
-
-        $orderDetailList = $modelOrderDetail->getList($config);
-        $modelOrderChild = new \app\index\model\OrderChild();
-
-        //生成子订单
-        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
-        if(!$rse['status']){
-            $modelOrder->rollback();
-            return errorMsg($modelOrder->getLastSql());
-        }
+//        //根据订单号查询关联的商品
+//        $modelOrderDetail = new \app\index\model\OrderDetail();
+//        $config = [
+//            'where' => [
+//                ['od.status', '=', 0],
+//                ['od.father_order_id', '=', $orderInfo['id']],
+//            ], 'field' => [
+//                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id'
+//            ]
+//        ];
+//
+//        $orderDetailList = $modelOrderDetail->getList($config);
+//        $modelOrderChild = new \app\index\model\OrderChild();
+//
+//        //生成子订单
+//        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
+//        if(!$rse['status']){
+//            $modelOrder->rollback();
+//            return errorMsg($modelOrder->getLastSql());
+//        }
         $modelOrder->commit();//提交事务
         //返回状态给微信服务器
         return successMsg('成功');
