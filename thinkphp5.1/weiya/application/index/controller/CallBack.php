@@ -56,8 +56,6 @@ class CallBack extends \common\controller\Base
                     ],
                 ];
                 $orderInfo = $modelOrder->getInfo($config);
-
-                file_put_contents('c.txt',$modelOrder->getLastSql());
                 if ($orderInfo['order_status'] > 1) {
                     return successMsg('已回调过，订单已处理');
                 }
@@ -65,7 +63,6 @@ class CallBack extends \common\controller\Base
                     //返回状态给微信服务器
                     return errorMsg('回调的金额和订单的金额不符，终止购买');
                 }
-                file_put_contents('c.txt','2222');
                 $res = $this->orderHandle($data, $orderInfo);
                 if ($res['status']) {
                     $this->successReturn();
