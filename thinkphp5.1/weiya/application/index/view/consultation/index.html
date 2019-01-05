@@ -30,15 +30,15 @@
                         <p>叶雯雯：<a href="tel:18820019781">18820019781</a></p>
                     </div>
                 </div>
-                <form>
+                <form class="message_form">
                     <div class="msg_item">
-                        <input class="input-filed" type="text" name="" value="" placeholder="你的姓名">
+                        <input class="input-filed" type="text" name="name" value="" placeholder="你的姓名">
                     </div>
                     <div class="msg_item">
-                        <input class="input-filed" type="tel" name="" value="" placeholder="手机号码">
+                        <input class="input-filed" type="tel" name="mobile" value="" placeholder="手机号码">
                     </div>
                     <div class="msg_item">
-                        <textarea class="input-filed leaving_msg" rows="" cols="" placeholder="留言文字..."></textarea>
+                        <textarea class="input-filed leaving_msg" name="message" rows="" cols="" placeholder="留言文字..."></textarea>
                     </div>
                 </form>
                 <a href="javascript:void(0);" class="submit_msg">递交留言</a>
@@ -169,51 +169,8 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
 	$(function(){
-
-		$('body').on('click','.my_cart',function () {
-			var url = module + 'Cart/index';
-			var postData = {};
-			$.ajax({
-				url: url,
-				data: postData,
-				type: 'post',
-				beforeSend: function(xhr){
-					$('.loading').show();
-				},
-				error:function(xhr){
-					$('.loading').hide();
-					dialog.error('AJAX错误');
-				},
-				success: function(data){
-					$('.loading').hide();
-					if(data.status==0){
-						dialog.error(data.info);
-					}else if(data.code==1){
-						if(data.data == 'no_login'){
-							loginDialog();
-						}
-					}else if(data.status==1){
-
-					}else{
-						location.href = url;
-					}
-				}
-			});
-		});
-		//轮播
-		var swiper = new Swiper('.swiper-container', {
-			spaceBetween: 30,
-			autoplay:true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		});
-
 		//查看文本
 		$('.more-text-box').moreText({
 			mainCell:".more-text",
@@ -223,6 +180,35 @@
 			$(this).addClass('current').siblings().removeClass('current');
 			$('.weiya_item').hide().eq($(this).index()).show();
 		});    
+		//递交留言
+		$('.submit_msg').on('click',function(){
+			var postData=$('.message_form').serializeObject();
+			var content='';
+			if(!postData.name){
+				content='请填写你的姓名';
+			}else if(!postData.mobile){
+				content='请填写你手机号码';
+			}else if(!postData.message){
+				content='请填写你的留言';
+			}
+			if(content){
+				dialog.error(content);
+				return false;
+			}
+			console.log(postData);
+			$.ajax({
+				type:'post',
+				url:'',
+				data:'',
+				success:function(){
+
+				},
+				error:function(xhr){
+					dialog.error(xhr);
+				}
+			})
+
+		})
 	});
 </script>
 {/block}
