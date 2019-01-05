@@ -4994,6 +4994,13 @@ select[name="nodeIds"]{
     text-align:center;
     border-radius:4px;
 }
+.message_list li{
+    padding:0.25rem 0.30rem;
+    border-bottom:1px solid #d9d9d9;
+}
+.message_list .msg_r{
+    margin:0 0 0 1rem;
+}
 .report_list li{
     position:relative;
 }
