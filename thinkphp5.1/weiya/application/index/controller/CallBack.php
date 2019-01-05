@@ -69,9 +69,7 @@ class CallBack extends \common\controller\Base
 
         //sign不参与签名算法
         unset($data['sign']);
-
         $sign = $this->makeSign($data);
-
         $data['payment_code'] = 1;//weixin 支付
         $data['actually_amount'] = $data['total_fee'];//支付金额
         $data['pay_sn'] = $data['transaction_id'];//服务商返回的交易号
@@ -384,6 +382,7 @@ class CallBack extends \common\controller\Base
             ['sn', '=', $data['order_sn']],
         ];
         $res = $modelOrder->allowField(true)->save($data2,$condition);
+        file_put_contents('b.txt',$modelOrder->getLastSql());
         if($res === false){
             $modelOrder->rollback();
             //返回状态给微信服务器
