@@ -7,7 +7,6 @@ use common\component\payment\unionpay\sdk\SDKConfig;
 class CallBack extends \common\controller\Base
 {
     public function weixinBack(){
-        file_put_contents('a.txt','2222');
         $xml = file_get_contents('php://input');
 //        $xml = "<xml><appid><![CDATA[wx9eee7ee8c2ae57dc]]></appid>
 //<attach><![CDATA[weixin]]></attach>
@@ -40,24 +39,25 @@ class CallBack extends \common\controller\Base
         $data['payment_time'] = $data['time_end'];//支付时间
 
         // 判断签名是否正确  判断支付状态
-        if (($data_sign == $sign) && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
+        if ( ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
             $order_type = '';
             if(input('?type')){
                 $order_type =input('type');
             }
-            file_put_contents('b.txt',$order_type);
             if ($order_type == 'order') {
                 $modelOrder = new \app\index\model\Order();
                 $config = [
                     'where' => [
                         ['o.status', '=', 0],
-                        ['o.sn', '=', $data['order_sn']],
+                        ['o.sn', '=', $data['out_trade_no']],
                     ], 'field' => [
                         'o.id', 'o.sn', 'o.amount',
                         'o.user_id', 'o.actually_amount', 'o.order_status'
                     ],
                 ];
                 $orderInfo = $modelOrder->getInfo($config);
+
+                file_put_contents('c.txt',$modelOrder->getLastSql());
                 if ($orderInfo['order_status'] > 1) {
                     return successMsg('已回调过，订单已处理');
                 }
