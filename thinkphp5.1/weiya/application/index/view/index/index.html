@@ -232,7 +232,6 @@
 			}
 		});
 
-
 		$('body').on('click','.my_cart',function () {
 			var url = module + 'Cart/index';
 			var postData = {};
@@ -257,8 +256,9 @@
 							loginDialog();
 						}
 					}else if(data.status==1){
-						location.href = url;
+
 					}else{
+						location.href = url;
 					}
 				}
 			});

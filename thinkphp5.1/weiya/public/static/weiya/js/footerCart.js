@@ -1,5 +1,4 @@
 function dialogLoginCallBack(_this) {
-    console.log(_this.context);
     var lis = null;
     if($(_this.context).hasClass('add_purchase_cart')){
         lis = _this.parents('li');
@@ -209,7 +208,34 @@ $(function () {
     //购物车列表页
     $('body').on('click','.add_cart_icon',function(){
         var url = module + 'Cart/index';
-        location.href=url;
+        var postData = {};
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'post',
+            beforeSend: function(xhr){
+                $('.loading').show();
+            },
+            error:function(xhr){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+
+                $('.loading').hide();
+                if(data.status==0){
+                    dialog.error(data.info);
+                }else if(data.code==1){
+                    if(data.data == 'no_login'){
+                        loginDialog();
+                    }
+                }else if(data.status==1){
+
+                }else{
+                    location.href = url;
+                }
+            }
+        });
     });
     //去结算
     $('body').on('click','.settlement',function(){
