@@ -9,6 +9,7 @@ class CallBack extends \common\controller\Base
     //支付回调
     public function notifyUrl()
     {
+        file_put_contents('a.txt','aaa');
         $this->weixinBack('order');
         die;
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.order') == true) {
@@ -270,8 +271,6 @@ class CallBack extends \common\controller\Base
             //返回状态给微信服务器
             return errorMsg('失败');
         }
-
-        
 //        //根据订单号查询关联的商品
 //        $modelOrderDetail = new \app\index\model\OrderDetail();
 //        $config = [
