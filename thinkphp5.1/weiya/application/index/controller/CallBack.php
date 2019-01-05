@@ -7,6 +7,7 @@ use common\component\payment\unionpay\sdk\SDKConfig;
 class CallBack extends \common\controller\Base
 {
     public function weixinBack(){
+        file_put_contents('a.txt','2222');
         $xml = file_get_contents('php://input');
 //        $xml = "<xml><appid><![CDATA[wx9eee7ee8c2ae57dc]]></appid>
 //<attach><![CDATA[weixin]]></attach>
@@ -29,7 +30,6 @@ class CallBack extends \common\controller\Base
 //";
         $data = xmlToArray($xml);
         $data_sign = $data['sign'];
-
         //sign不参与签名算法
         unset($data['sign']);
         $sign = $this->makeSign($data);
@@ -45,7 +45,7 @@ class CallBack extends \common\controller\Base
             if(input('?type')){
                 $order_type =input('type');
             }
-            file_put_contents('c.txt',$order_type);
+            file_put_contents('b.txt',$order_type);
             if ($order_type == 'order') {
                 $modelOrder = new \app\index\model\Order();
                 $config = [
@@ -65,6 +65,7 @@ class CallBack extends \common\controller\Base
                     //返回状态给微信服务器
                     return errorMsg('回调的金额和订单的金额不符，终止购买');
                 }
+                file_put_contents('c.txt','2222');
                 $res = $this->orderHandle($data, $orderInfo);
                 if ($res['status']) {
                     $this->successReturn();
@@ -242,7 +243,7 @@ class CallBack extends \common\controller\Base
             ['sn', '=', $data['order_sn']],
         ];
         $res = $modelOrder->allowField(true)->save($data2,$condition);
-        file_put_contents('b.txt',$modelOrder->getLastSql());
+        file_put_contents('d.txt',$modelOrder->getLastSql());
         if($res === false){
             $modelOrder->rollback();
             //返回状态给微信服务器
