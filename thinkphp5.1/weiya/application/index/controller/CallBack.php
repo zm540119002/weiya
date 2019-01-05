@@ -40,7 +40,7 @@ class CallBack extends \common\controller\Base
         $data['payment_time'] = $data['time_end'];//支付时间
 
         // 判断签名是否正确  判断支付状态
-        if (($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
+        if (($data_sign == $sign) && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
             $order_type = '';
             if(input('?type')){
                 $order_type =input('type');
@@ -112,7 +112,6 @@ class CallBack extends \common\controller\Base
 //           echo "fail"; //验证失败
 //           die;
 //       }
-
        $data['payment_code'] = 3;
        $data['order_sn'] = $data['orderId'];//系统的订单号
        $data['actually_amount'] = $data['txnAmt'];//支付金额
