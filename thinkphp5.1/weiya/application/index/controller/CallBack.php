@@ -1,9 +1,9 @@
 <?php
 namespace app\index\controller;
-use Think\Controller;
-use common\component\payment\unionpay\sdk\AcpService;
-use common\component\payment\alipay\lib\AlipayNotify;
-use common\component\payment\weixin\Jssdk;
+//use Think\Controller;
+//use common\component\payment\unionpay\sdk\AcpService;
+//use common\component\payment\alipay\lib\AlipayNotify;
+//use common\component\payment\weixin\Jssdk;
 class CallBack extends \common\controller\Base
 {
     //支付回调
@@ -43,37 +43,35 @@ class CallBack extends \common\controller\Base
 
     }
 
-    /**
-     * @param $data ///支付商返回的数据
-     * @param $payment_type //支付方式
-     * @param $order_type //支付单类型
-     */
-    //支付完成，调用不同的支付的回调处理
-    private function callBack($payment_type, $order_type)
-    {
-        if ($payment_type == 'weixin') {
-            file_put_contents('a.txt','zzzzzzzzzz');
-            $this->weixinBack($order_type);
-        }
-        if ($payment_type == 'ali') {
-            $this->aliBack($order_type);
-        }
-        if ($payment_type = 'union') {
-            $this->unionBack($order_type);
-        }
-    }
-
-
-    //微信支付回调处理
-    private function weixinBack($order_type)
-    {
+    public function weixinCallBack(){
         $xml = file_get_contents('php://input');
-        file_put_contents('b.txt',$xml);
+//        $xml = "<xml><appid><![CDATA[wx9eee7ee8c2ae57dc]]></appid>
+//<attach><![CDATA[weixin]]></attach>
+//<bank_type><![CDATA[HXB_CREDIT]]></bank_type>
+//<cash_fee><![CDATA[1]]></cash_fee>
+//<fee_type><![CDATA[CNY]]></fee_type>
+//<is_subscribe><![CDATA[Y]]></is_subscribe>
+//<mch_id><![CDATA[1234887902]]></mch_id>
+//<nonce_str><![CDATA[jx0ylr9h1t3nel5ukt4cqiy4xqk729n0]]></nonce_str>
+//<openid><![CDATA[oNalMuA6iE-T45TPb_ZeQYlJ3Jjk]]></openid>
+//<out_trade_no><![CDATA[20190105135318529087889079702409]]></out_trade_no>
+//<result_code><![CDATA[SUCCESS]]></result_code>
+//<return_code><![CDATA[SUCCESS]]></return_code>
+//<sign><![CDATA[2C2F10429F4B7E9BD6982E1D9B773A09]]></sign>
+//<time_end><![CDATA[20190105141014]]></time_end>
+//<total_fee>1</total_fee>
+//<trade_type><![CDATA[NATIVE]]></trade_type>
+//<transaction_id><![CDATA[4200000232201901056153817685]]></transaction_id>
+//</xml>
+//";
         $data = xmlToArray($xml);
         $data_sign = $data['sign'];
+
         //sign不参与签名算法
         unset($data['sign']);
+
         $sign = $this->makeSign($data);
+
         $data['payment_code'] = 1;//weixin 支付
         $data['actually_amount'] = $data['total_fee'];//支付金额
         $data['pay_sn'] = $data['transaction_id'];//服务商返回的交易号
@@ -81,7 +79,11 @@ class CallBack extends \common\controller\Base
         $data['payment_time'] = $data['time_end'];//支付时间
 
         // 判断签名是否正确  判断支付状态
-        if ($sign === $data_sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
+        if (($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
+            $order_type = '';
+            if (strpos($_SERVER['QUERY_STRING'], 'order') == true) {
+                $order_type = 'order';
+            }
             if ($order_type == 'order') {
                 $modelOrder = new \app\index\model\Order();
                 $config = [
@@ -94,10 +96,12 @@ class CallBack extends \common\controller\Base
                     ],
                 ];
                 $orderInfo = $modelOrder->getInfo($config);
+
                 if ($orderInfo['order_status'] > 1) {
                     return successMsg('已回调过，订单已处理');
                 }
-                if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
+
+                if ($orderInfo['actually_amount'] * 100 != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
                     //返回状态给微信服务器
                     return errorMsg('回调的金额和订单的金额不符，终止购买');
                 }
@@ -129,121 +133,236 @@ class CallBack extends \common\controller\Base
             //返回状态给微信服务器
             $this->errorReturn($data['out_trade_no']);
         }
+
+    }
+
+    /**
+     * @param $data ///支付商返回的数据
+     * @param $payment_type //支付方式
+     * @param $order_type //支付单类型
+     */
+    //支付完成，调用不同的支付的回调处理
+    private function callBack($payment_type, $order_type)
+    {
+        if ($payment_type == 'weixin') {
+            file_put_contents('a.txt','zzzzzzzzzz');
+            $this->weixinBack($order_type);
+        }
+        if ($payment_type == 'ali') {
+            $this->aliBack($order_type);
+        }
+        if ($payment_type = 'union') {
+            $this->unionBack($order_type);
+        }
+    }
+
+
+    //微信支付回调处理
+    private function weixinBack($order_type)
+    {
+        $xml = file_get_contents('php://input');
+//        $xml = "<xml><appid><![CDATA[wx9eee7ee8c2ae57dc]]></appid>
+//<attach><![CDATA[weixin]]></attach>
+//<bank_type><![CDATA[HXB_CREDIT]]></bank_type>
+//<cash_fee><![CDATA[1]]></cash_fee>
+//<fee_type><![CDATA[CNY]]></fee_type>
+//<is_subscribe><![CDATA[Y]]></is_subscribe>
+//<mch_id><![CDATA[1234887902]]></mch_id>
+//<nonce_str><![CDATA[jx0ylr9h1t3nel5ukt4cqiy4xqk729n0]]></nonce_str>
+//<openid><![CDATA[oNalMuA6iE-T45TPb_ZeQYlJ3Jjk]]></openid>
+//<out_trade_no><![CDATA[20190105135318529087889079702409]]></out_trade_no>
+//<result_code><![CDATA[SUCCESS]]></result_code>
+//<return_code><![CDATA[SUCCESS]]></return_code>
+//<sign><![CDATA[2C2F10429F4B7E9BD6982E1D9B773A09]]></sign>
+//<time_end><![CDATA[20190105141014]]></time_end>
+//<total_fee>1</total_fee>
+//<trade_type><![CDATA[NATIVE]]></trade_type>
+//<transaction_id><![CDATA[4200000232201901056153817685]]></transaction_id>
+//</xml>
+//";
+        $data = xmlToArray($xml);
+        $data_sign = $data['sign'];
+
+        //sign不参与签名算法
+        unset($data['sign']);
+
+        $sign = $this->makeSign($data);
+
+        $data['payment_code'] = 1;//weixin 支付
+        $data['actually_amount'] = $data['total_fee'];//支付金额
+        $data['pay_sn'] = $data['transaction_id'];//服务商返回的交易号
+        $data['order_sn'] = $data['out_trade_no'];//系统的订单号
+        $data['payment_time'] = $data['time_end'];//支付时间
+
+        // 判断签名是否正确  判断支付状态
+        if ($data_sign == $sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
+            if ($order_type == 'order') {
+                $modelOrder = new \app\index\model\Order();
+                $config = [
+                    'where' => [
+                        ['o.status', '=', 0],
+                        ['o.sn', '=', $data['order_sn']],
+                    ], 'field' => [
+                        'o.id', 'o.sn', 'o.amount',
+                        'o.user_id', 'o.actually_amount', 'o.order_status'
+                    ],
+                ];
+                $orderInfo = $modelOrder->getInfo($config);
+
+                if ($orderInfo['order_status'] > 1) {
+                    return successMsg('已回调过，订单已处理');
+                }
+
+                if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
+                    //返回状态给微信服务器
+                    return errorMsg('回调的金额和订单的金额不符，终止购买');
+                }
+
+                $res = $this->orderHandle($data, $orderInfo);
+                if ($res['status']) {
+                    $this->successReturn();
+                } else {
+                    $this->errorReturn();
+                }
+            }
+            if ($order_type == 'recharge') {
+                $res = $this->rechargeHandle($data);
+                if ($res['status']) {
+                    $this->successReturn();
+                } else {
+                    $this->errorReturn();
+                }
+            }
+
+            if ($order_type == 'group_buy') {
+                $res = $this->groupBuyHandle($data);
+                if ($res['status']) {
+                    $this->successReturn();
+                } else {
+                    $this->errorReturn();
+                }
+            }
+        } else {
+            //返回状态给微信服务器
+            $this->errorReturn($data['out_trade_no']);
+        }
+
     }
 
 
     //银联支付回调处理
     private function unionBack($order_type)
     {
-        $data = $_POST;
-        //计算得出通知验证结果
-
-        $unionpayNotify = new AcpService($this->unionpay_config); // 使用银联原生自带的累 和方法 这里只是引用了一下 而已
-        $verify_result = $unionpayNotify->validate($data);
-        if ($verify_result) //验证成功
-        {
-            $data['payment_code'] = 3;
-            $data['order_sn'] = $data['orderId'];//系统的订单号
-            $data['actually_amount'] = $data['txnAmt'];//支付金额
-            $data['pay_sn'] = $data['queryId'];//服务商返回的交易号
-            $data['payment_time'] = $data['time_end'];//支付时间
-            // 解释: 交易成功且结束，即不可再做任何操作。
-            if ($data['respMsg'] == 'Success!') {
-                // 修改订单支付状态
-                if ($order_type == 'order') {
-                    $modelOrder = new \app\index\model\Order();
-                    $config = [
-                        'where' => [
-                            ['o.status', '=', 0],
-                            ['o.sn', '=', $data['order_sn']],
-                        ], 'field' => [
-                            'o.id', 'o.sn', 'o.amount',
-                            'o.user_id', 'o.actually_amount', 'o.order_status'
-                        ],
-                    ];
-                    $orderInfo = $modelOrder->getInfo($config);
-                    if ($orderInfo['order_status'] > 1) {
-                        echo "success";
-                        return successMsg('已回调过，订单已处理');
-                    }
-                    if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
-                        //返回状态给微信服务器
-                        echo "fail"; //验证失败
-                        return errorMsg('回调的金额和订单的金额不符，终止购买');
-                    }
-                    $res = $this->orderHandle($data, $orderInfo);
-                    if ($res['status']) {
-                        echo "success"; // 处理成功
-                    } else {
-                        echo "fail"; //验证失败
-                    }
-                }
-
-                if ($order_type == 'recharge') {
-                    $res = $this->rechargeHandle($data);
-                    if ($res['status']) {
-                        echo "success"; // 处理成功
-                    } else {
-                        echo "fail"; //验证失败
-                    }
-                }
-            }
-        } else {
-            echo "fail"; //验证失败
-        }
+        print_r(88888);exit;
+//        $data = $_POST;
+//        //计算得出通知验证结果
+//
+//        $unionpayNotify = new \AcpService($this->unionpay_config); // 使用银联原生自带的累 和方法 这里只是引用了一下 而已
+//        $verify_result = $unionpayNotify->validate($data);
+//        if ($verify_result) //验证成功
+//        {
+//            $data['payment_code'] = 3;
+//            $data['order_sn'] = $data['orderId'];//系统的订单号
+//            $data['actually_amount'] = $data['txnAmt'];//支付金额
+//            $data['pay_sn'] = $data['queryId'];//服务商返回的交易号
+//            $data['payment_time'] = $data['time_end'];//支付时间
+//            // 解释: 交易成功且结束，即不可再做任何操作。
+//            if ($data['respMsg'] == 'Success!') {
+//                // 修改订单支付状态
+//                if ($order_type == 'order') {
+//                    $modelOrder = new \app\index\model\Order();
+//                    $config = [
+//                        'where' => [
+//                            ['o.status', '=', 0],
+//                            ['o.sn', '=', $data['order_sn']],
+//                        ], 'field' => [
+//                            'o.id', 'o.sn', 'o.amount',
+//                            'o.user_id', 'o.actually_amount', 'o.order_status'
+//                        ],
+//                    ];
+//                    $orderInfo = $modelOrder->getInfo($config);
+//                    if ($orderInfo['order_status'] > 1) {
+//                        echo "success";
+//                        return successMsg('已回调过，订单已处理');
+//                    }
+//                    if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
+//                        //返回状态给微信服务器
+//                        echo "fail"; //验证失败
+//                        return errorMsg('回调的金额和订单的金额不符，终止购买');
+//                    }
+//                    $res = $this->orderHandle($data, $orderInfo);
+//                    if ($res['status']) {
+//                        echo "success"; // 处理成功
+//                    } else {
+//                        echo "fail"; //验证失败
+//                    }
+//                }
+//
+//                if ($order_type == 'recharge') {
+//                    $res = $this->rechargeHandle($data);
+//                    if ($res['status']) {
+//                        echo "success"; // 处理成功
+//                    } else {
+//                        echo "fail"; //验证失败
+//                    }
+//                }
+//            }
+//        } else {
+//            echo "fail"; //验证失败
+//        }
     }
 
     //支付宝支付回调处理
     private function aliBack($order_type)
     {
-        require_once dirname(__DIR__) . './../../../common/component/payment/alipay/wappay/service/AlipayTradeService.php';
-        require_once dirname(__DIR__) . './../../../common/component/payment/alipay/config.php';
-        $data = $_POST;
-        $payInfo['payment_code'] = 2; //支付类型
-        $payInfo['order_sn'] = $data['out_trade_no'];//系统的订单号
-        $payInfo['actually_amount'] = $data['receipt_amount'];//支付金额
-        $payInfo['pay_sn'] = $data['trade_no'];//服务商返回的交易号
-        $payInfo['payment_time'] = $data['gmt_payment'];//支付时间
-
-        $alipaySevice = new \AlipayTradeService($config);
-        $alipaySevice->writeLog(var_export($_POST, true));
-        $result = $alipaySevice->check($_POST);
-        if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
-            //判断该笔订单是否在商户网站中已经做过处理
-            //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-            //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
-            //如果有做过处理，不执行商户的业务程序
-            //注意：
-            //付款完成后，支付宝系统发送该交易状态通知
-            if ($order_type == 'order') {
-                $modelOrder = new \app\index\model\Order();
-                $config = [
-                    'where' => [
-                        ['o.status', '=', 0],
-                        ['o.sn', '=', $payInfo['order_sn']],
-                    ], 'field' => [
-                        'o.id', 'o.sn', 'o.amount',
-                        'o.user_id', 'o.actually_amount','o.order_status'
-                    ],
-                ];
-                $orderInfo = $modelOrder->getInfo($config);
-                if ($orderInfo['order_status'] > 1) {
-                    echo "success";
-                    return successMsg('已回调过，订单已处理');
-                }
-//                if ($orderInfo['actually_amount'] != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
-//                    //返回状态给微信服务器
-//                    return errorMsg('回调的金额和订单的金额不符，终止购买');
+//        require_once dirname(__DIR__) . './../../../common/component/payment/alipay/wappay/service/AlipayTradeService.php';
+//        require_once dirname(__DIR__) . './../../../common/component/payment/alipay/config.php';
+//        $data = $_POST;
+//        $payInfo['payment_code'] = 2; //支付类型
+//        $payInfo['order_sn'] = $data['out_trade_no'];//系统的订单号
+//        $payInfo['actually_amount'] = $data['receipt_amount'];//支付金额
+//        $payInfo['pay_sn'] = $data['trade_no'];//服务商返回的交易号
+//        $payInfo['payment_time'] = $data['gmt_payment'];//支付时间
+//
+//        $alipaySevice = new \AlipayTradeService($config);
+//        $alipaySevice->writeLog(var_export($_POST, true));
+//        $result = $alipaySevice->check($_POST);
+//        if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
+//            //判断该笔订单是否在商户网站中已经做过处理
+//            //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+//            //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
+//            //如果有做过处理，不执行商户的业务程序
+//            //注意：
+//            //付款完成后，支付宝系统发送该交易状态通知
+//            if ($order_type == 'order') {
+//                $modelOrder = new \app\index\model\Order();
+//                $config = [
+//                    'where' => [
+//                        ['o.status', '=', 0],
+//                        ['o.sn', '=', $payInfo['order_sn']],
+//                    ], 'field' => [
+//                        'o.id', 'o.sn', 'o.amount',
+//                        'o.user_id', 'o.actually_amount','o.order_status'
+//                    ],
+//                ];
+//                $orderInfo = $modelOrder->getInfo($config);
+//                if ($orderInfo['order_status'] > 1) {
+//                    echo "success";
+//                    return successMsg('已回调过，订单已处理');
 //                }
-                $res = $this->orderHandle($payInfo, $orderInfo);
-
-                if (!$res['status']) {
-                    echo "fail";    //请不要修改或删除
-                } else {
-                    echo "success"; //请不要修改或删除
-                }
-            }
-        }
+////                if ($orderInfo['actually_amount'] != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
+////                    //返回状态给微信服务器
+////                    return errorMsg('回调的金额和订单的金额不符，终止购买');
+////                }
+//                $res = $this->orderHandle($payInfo, $orderInfo);
+//
+//                if (!$res['status']) {
+//                    echo "fail";    //请不要修改或删除
+//                } else {
+//                    echo "success"; //请不要修改或删除
+//                }
+//            }
+//        }
     }
 
     /**
@@ -271,25 +390,26 @@ class CallBack extends \common\controller\Base
             //返回状态给微信服务器
             return errorMsg('失败');
         }
-//        //根据订单号查询关联的商品
-//        $modelOrderDetail = new \app\index\model\OrderDetail();
-//        $config = [
-//            'where' => [
-//                ['od.status', '=', 0],
-//                ['od.father_order_id', '=', $orderInfo['id']],
-//            ], 'field' => [
-//                'od.goods_id', 'od.price', 'od.num', 'od.store_id',
-//            ]
-//        ];
-//        $orderDetailList = $modelOrderDetail->getList($config);
-//        $modelOrderChild = new \app\index\model\OrderChild();
-//
-//        //生成子订单
-//        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
-//        if(!$rse['status']){
-//            $modelOrder->rollback();
-//            return errorMsg($modelOrder->getLastSql());
-//        }
+        //根据订单号查询关联的商品
+        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $config = [
+            'where' => [
+                ['od.status', '=', 0],
+                ['od.father_order_id', '=', $orderInfo['id']],
+            ], 'field' => [
+                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id'
+            ]
+        ];
+
+        $orderDetailList = $modelOrderDetail->getList($config);
+        $modelOrderChild = new \app\index\model\OrderChild();
+
+        //生成子订单
+        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
+        if(!$rse['status']){
+            $modelOrder->rollback();
+            return errorMsg($modelOrder->getLastSql());
+        }
         $modelOrder->commit();//提交事务
         //返回状态给微信服务器
         return successMsg('成功');
