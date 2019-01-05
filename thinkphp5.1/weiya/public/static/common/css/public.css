@@ -34,7 +34,8 @@ body{
 .fl{float:left;}
 .fr{float:right;}
 .f12{font-size:0.12rem;}
-.f16{font-size:0.12rem;}
+.f16{font-size:0.16rem;}
+.f18{font-size:0.18rem;}
 .f20{font-size:0.20rem;}
 .f22{font-size:0.22rem;}
 .f24{font-size:0.24rem;}
@@ -3939,7 +3940,7 @@ select[name="nodeIds"]{
     color:#fff;
     border-radius:5px;
     padding:0.05rem 0.15rem;
-    margin:0.05rem 0.25rem 0 0;
+    margin:0.12rem 0.25rem 0 0;
 }
 .list_r .sample_purchase{
     margin-top:0;
@@ -4992,6 +4993,14 @@ select[name="nodeIds"]{
     color:#fff;
     text-align:center;
     border-radius:4px;
+}
+.report_list li{
+    position:relative;
+}
+.report_list .upload_report{
+    position:absolute;
+    right:0.15rem;
+    color:#0066cc;
 }
 /*订单*/
 .add_address{
