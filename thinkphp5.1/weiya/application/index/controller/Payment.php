@@ -1,6 +1,5 @@
 <?php
 namespace app\index\controller;
-require_once dirname(__DIR__).'./../../../common/component/payment/weixin/WxPay.JsApiPay.php';
 class Payment extends \common\controller\UserBase{
     //订单-支付
     public function orderPayment(){
