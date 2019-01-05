@@ -273,20 +273,23 @@ i{
     background-repeat: no-repeat;
     background-size:0.5rem 0.45rem;
     background-position: center;
+    text-indent: -99999rem;
 }
 .cart_num {
     position: absolute;
-    top: 0;
-    right:0.75rem;
+    top: 0.05rem;
+    right:0.65rem;
     /*border: 1px solid #ff0000;*/
-    height: 18px;
-    line-height:18px;
+    height: 16px;
+    line-height:16px;
     background:#ff0000;
     color:#fff;
+    text-indent: initial;
 }
 .cart_num.cur{
     border-radius: 10px;
-    padding: 1px 6px;
+    padding:0 0.125rem;
+    font-size:0.12rem;
 }
 .dark_green{background:#0f9143;}
 .goods_total_price{color:#ff6482;;padding-left: 0.18rem;font-size:0.32rem;}
@@ -2979,6 +2982,7 @@ input[type=text]::-webkit-focus-inner {
     font-size: 18px;
     pointer-events: none;
     z-index: 30;
+    text-indent: initial;
 }
 .add_num.current{
     display:block;
@@ -3894,9 +3898,12 @@ select[name="nodeIds"]{
     border-bottom:none;
 }
 .goodsInfoLayer .layer_top_name{
-    /*padding:0 0 0.25rem 0;*/
+    padding:0.25rem 0.10rem 0.10rem 0;
     margin:0 0 0 0.15rem;
     border-bottom:1px solid #d9d9d9;
+}
+.sample_price{
+    font-size:0.30rem;
 }
 .layer_top_name .l_img{
     max-width:18%;
@@ -4845,6 +4852,10 @@ select[name="nodeIds"]{
 .orderDetail_list .orderDetail_r,
 .cart_list_r{margin:0 0 0 1.8rem;}
 /*走进维雅介绍*/
+.notice_wrapper img{
+    width:100%;
+    vertical-align: middle;
+}
 .process p{
     line-height: 24px;
 }

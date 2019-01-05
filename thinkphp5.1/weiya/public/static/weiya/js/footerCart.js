@@ -85,8 +85,15 @@ $(function () {
              $(this).val(orderNum);
              return false;
         }
+        if(buyNum>orderNum){
+            dialog.error('购买限额为'+orderNum);
+            $(this).val(orderNum);
+            return false;
+        }
         //计算商品列表总价
         calculateTotalPrice($(this));
+      
+        
     });
     //购物车加
     $('body').on('click','.cart_gplus',function(){
@@ -182,15 +189,14 @@ $(function () {
                 else if(data.code==1 && data.data=='no_login'){
 					loginDialog();
                     return false
-				}
-                else{
+				}else{
                     //dialog.success(data.info);
                     var num = 0;
                     $.each(lis,function(){
                         num += parseInt($(this).find('.gshopping_count').val());
                     });
                     //parseInt($('footer').find('num').text())+parseInt(num)
-                    $('.goodsInfoLayer').find('.cart_num').text(num);
+                    $('.goodsInfoLayer').find('.cart_num').text(num).addClass('cur');
                     $('.goodsInfoLayer').find('.add_num').text('+'+num).addClass('current');
                     setTimeout(function(){
                         $('.add_num').removeClass('current');
