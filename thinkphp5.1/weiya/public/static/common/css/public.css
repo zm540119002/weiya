@@ -3392,11 +3392,27 @@ input[type=text]::-webkit-focus-inner {
 .foot_operate_bar .modify{
     background:#009A3E;
 }
-.pay_form{
+.pay_forms,.recharge_form{
     position:fixed;
     left:0;
     bottom:0;
     width:100%;
+}
+.recharge_form{
+    height:0.8rem;
+    line-height:0.8rem;
+    border-top:1px solid #ccc;
+}
+.recharge_form span,
+.recharge_form input{
+    display: block;
+    width:50%;
+    float:left;
+}
+.recharge_form input[type="submit"]{
+    height:100%;
+    background: #FF7BAC;
+    color:#fff;
 }
 .pay_amount_item{
     background:#fff;
@@ -3434,7 +3450,8 @@ input[type=text]::-webkit-focus-inner {
     background-size: 0.42rem .85rem;
     background-position:0 0;
 }
-.pay_nav li.current{
+.pay_nav li.current,
+.recharge_m_list li.current{
     background:#009A3E;
     color:#fff;
 }
@@ -5074,4 +5091,20 @@ select[name="nodeIds"]{
 /*支付*/
 .pay_wrapper{
     background: #f2f2f2;
+}
+.recharge_amount_item{
+    background: #f2f2f2;
+}
+.recharge_m_list{
+    margin:0.20rem 0 0;
+    overflow:hidden;
+}
+.recharge_m_list li{
+    float:left;
+    width:30%;
+    padding:0.10rem 0;
+    margin:0 0.15rem 0.20rem 0;
+    background:#fff;
+    text-align:center;
+    border:1px solid #009A3E;
 }
