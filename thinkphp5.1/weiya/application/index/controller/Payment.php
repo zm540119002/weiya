@@ -1,6 +1,5 @@
 <?php
 namespace app\index\controller;
-require_once dirname(__DIR__).'./../../../common/component/payment/weixin/WxPay.JsApiPay.php';
 class Payment extends \common\controller\UserBase{
     //订单-支付
     public function orderPayment(){
@@ -30,18 +29,18 @@ class Payment extends \common\controller\UserBase{
             $payCode = input('pay_code','0','int');
             //微信支付
             if($payCode == 1){
-                $payInfo['notify_url'] = $this->host."/index/CallBack/weixinCallBack/order";
+                $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/order";
                 \common\component\payment\weixin\weixinpay::wxPay($payInfo);
             }
             //支付宝支付
             if($payCode == 2){
-                $payInfo['notify_url'] = $payInfo['notify_url'].'/ali.order';
+                $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/aliBack/type/order";
                 $model = new \common\component\payment\alipay\alipay;
                 $model->aliPay($payInfo);
             }
             //银联支付
             if($payCode == 3){
-                $payInfo['notify_url'] = $payInfo['notify_url'].'/union.order';
+                $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/unionBack/type/order";
                 $model = new \common\component\payment\unionpay\unionpay;
                 $model->unionPay($payInfo);
             }
