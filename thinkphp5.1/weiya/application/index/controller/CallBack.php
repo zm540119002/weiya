@@ -10,8 +10,8 @@ class CallBack extends \common\controller\Base
     public function notifyUrl()
     {
         $this->weixinBack('order');
-        die;
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.order') == true) {
+            file_put_contents('a.txt','aaa');
             $this->callBack('weixin', 'order');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.recharge') == true) {
@@ -51,8 +51,8 @@ class CallBack extends \common\controller\Base
     //支付完成，调用不同的支付的回调处理
     private function callBack($payment_type, $order_type)
     {
-
         if ($payment_type == 'weixin') {
+            file_put_contents('a.txt','zzzzzzzzzz');
             $this->weixinBack($order_type);
         }
         if ($payment_type == 'ali') {
@@ -68,6 +68,7 @@ class CallBack extends \common\controller\Base
     private function weixinBack($order_type)
     {
         $xml = file_get_contents('php://input');
+        file_put_contents('b.txt',$xml);
         $data = xmlToArray($xml);
         $data_sign = $data['sign'];
         //sign不参与签名算法
@@ -270,8 +271,6 @@ class CallBack extends \common\controller\Base
             //返回状态给微信服务器
             return errorMsg('失败');
         }
-
-        
 //        //根据订单号查询关联的商品
 //        $modelOrderDetail = new \app\index\model\OrderDetail();
 //        $config = [

@@ -221,7 +221,6 @@ $(function () {
                 dialog.error('AJAX错误');
             },
             success: function(data){
-
                 $('.loading').hide();
                 if(data.status==0){
                     dialog.error(data.info);
