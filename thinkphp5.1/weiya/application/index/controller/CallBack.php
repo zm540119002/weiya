@@ -344,7 +344,6 @@ class CallBack extends \common\controller\Base
         $modelWallet = new \app\index\model\Wallet();
         $config = [
             ['user_id', '=', $info['user_id']],
-            ['sn', '=', $data['order_sn']],
         ];
         $walletInfo = $modelWallet->getInfo($config);
         if(empty($walletInfo)){
