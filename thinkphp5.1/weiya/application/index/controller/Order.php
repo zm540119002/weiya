@@ -82,7 +82,6 @@ class Order extends \common\controller\UserBase
         $modelOrder->commit();
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
-
    //订单-结算页
     public function settlement()
     {
@@ -108,7 +107,6 @@ class Order extends \common\controller\UserBase
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
     }
-
     //订单-详情页
     public function detail()
     {
@@ -223,7 +221,6 @@ class Order extends \common\controller\UserBase
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
     }
-
     //订单管理
     public function manage(){
         if(input('?order_status')){
@@ -231,6 +228,47 @@ class Order extends \common\controller\UserBase
             $this ->assign('order_status',$orderStatus);
         }
        return $this->fetch();
+    }
+
+    /**
+     * @return array|mixed
+     * 查出产商相关产品 分页查询
+     */
+    public function getList(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $model = new \app\index\model\Goods();
+        $config=[
+            'where'=>[
+                ['g.status', '=', 0],
+                ['g.shelf_status', '=', 3],
+            ],
+            'field'=>[
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+            ],
+            'order'=>[
+                'is_selection'=>'desc',
+                'sort'=>'desc',
+                'id'=>'desc'
+            ],
+        ];
+        if(input('?get.category_id') && input('get.category_id/d')){
+            $config['where'][] = ['g.category_id_1', '=', input('get.category_id/d')];
+        }
+        $keyword = input('get.keyword','');
+        if($keyword) {
+            $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
+        }
+
+        $list = $model -> pageQuery($config);
+        $this->assign('list',$list);
+        if(isset($_GET['pageType'])){
+            if($_GET['pageType'] == 'index' ){
+                return $this->fetch('list_index_tpl');
+            }
+        }
     }
 
 
