@@ -347,11 +347,11 @@ class CallBack extends \common\controller\Base
         ];
         $walletInfo = $modelWallet->getInfo($config);
         if(empty($walletInfo)){
-            $data = [
+            $data3 = [
                'user_id' => $info['user_id'],
                'amount' =>  $data['actually_amount'],
             ];
-            $res = $modelWallet->isUpdate(false)->save();
+            $res = $modelWallet->isUpdate(false)->save($data3);
             if(!$res){
                 $modelWallet->rollback();
                 //返回状态给微信服务器
