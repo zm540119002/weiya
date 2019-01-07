@@ -1,7 +1,7 @@
 <?php
 namespace app\index\model;
 
-class Cart extends \common\model\Base {
+class Wallet extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'wallet';
 	// 设置主键
