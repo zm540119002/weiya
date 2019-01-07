@@ -20,6 +20,9 @@ class Payment extends \common\controller\UserBase{
             ],
         ];
         $orderInfo = $modelOrder->getInfo($config);
+        if(!$orderInfo['actually_amount']){
+            return errorMsg('支付不能为0');
+        }
         $payInfo = [
             'sn'=>$orderInfo['sn'],
             'actually_amount'=>$orderInfo['actually_amount'],
@@ -56,18 +59,6 @@ class Payment extends \common\controller\UserBase{
         }
         $model = new \app\index\model\WalletDetail();
         $amount = input('amount/f');
-        /*
-         * `sn` varchar(32) NOT NULL DEFAULT '' COMMENT '编号',
-  `user_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID：user.id',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '类型：0：保留 1：充值 2：支付',
-  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '状态：0 ：启用 1：禁用 2：删除',
-  `recharge_status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '充值状态：0 未完成 1 完成',
-  `amount` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '总金额',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
-  `pay_sn` varchar(50) NOT NULL COMMENT '支付订单号',
-  `payment_code` varchar(10) NOT NULL COMMENT '''支付方式：',
-  `payment_time` varchar(20) NOT NULL COMMENT '支付时间',
-         */
         //生成充值明细
         $WalletDetailSn = generateSN();
         $data = [
