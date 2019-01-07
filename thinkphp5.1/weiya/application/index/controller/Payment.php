@@ -20,6 +20,7 @@ class Payment extends \common\controller\UserBase{
             ],
         ];
         $orderInfo = $modelOrder->getInfo($config);
+        print_r($orderInfo['actually_amount']);exit;
         if(!$orderInfo['actually_amount']){
             return errorMsg('支付不能为0');
         }
