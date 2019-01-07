@@ -342,6 +342,23 @@ class CallBack extends \common\controller\Base
             return errorMsg('失败');
         }
         $modelWallet = new \app\index\model\Wallet();
+        $config = [
+            ['user_id', '=', $info['user_id']],
+            ['sn', '=', $data['order_sn']],
+        ];
+        $walletInfo = $modelWallet->getInfo($config);
+        if(empty($walletInfo)){
+            $data = [
+               'user_id' => $info['user_id'],
+               'amount' =>  $data['actually_amount'],
+            ];
+            $res = $modelWallet->isUpdate(false)->save();
+            if(!$res){
+                $modelWallet->rollback();
+                //返回状态给微信服务器
+                return errorMsg('失败');
+            }
+        }
         $where = [
             ['user_id', '=', $info['user_id']],
         ];
