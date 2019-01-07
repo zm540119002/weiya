@@ -19,5 +19,6 @@ class UserBase extends Base{
                 $this->error(config('custom.error_login'),url($this->loginUrl));
             }
         }
+        
     }
 }

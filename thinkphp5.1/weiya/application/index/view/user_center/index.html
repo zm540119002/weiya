@@ -1,6 +1,5 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
 {/block}
 {block name="content"}
 <article class="person-center-wrapper f24">
@@ -18,13 +17,13 @@
     </section>
     <section class="separation-line">
         <div class="flex_item">
-            <a href="" class="person-td">
+            <a href="{:url('MessageCenter/index')}" class="person-td">
                 <span class="my-msg">
                     <i class="num">1</i>
                 </span>
                 消息
             </a>
-            <a href="" class="person-td">
+            <a href="{:url('Notice/index')}" class="person-td">
                 <span class="notice"></span>
                 定制须知
             </a>
@@ -40,33 +39,33 @@
                 <span class="cart"></span>
                 采购车
             </a>
-            <a href="javascript:void(0)" class="person-td address_manage">
+            <a href="javascript:void(0)" class="person-td address_manage" >
                 <span class="addr"></span>
                 收货人地址
             </a>
-            <a href="" class="person-td">
+            <a href="javascript:void(0)" class="person-td recharge">
                 <span class="charge"></span>
                 采购充值
             </a>
-            <a href="" class="person-td">
+            <a href="javascript:void(0)" class="person-td order_manage" data-order_status="1">
                 <span class="wait_pay"></span>
                 待付款
             </a>
         </div>
         <div class="flex_item">
-            <a href="" class="person-td">
+            <a href="javascript:void(0)" class="person-td order_manage"  data-order_status="2">
                 <span class="wait_recevie"></span>
                 待收货
             </a>
-            <a href="" class="person-td">
+            <a href="javascript:void(0)" class="person-td order_manage"  data-order_status="3">
                 <span class="commit"></span>
                 待评价
             </a>
-            <a href="" class="person-td">
+            <a href="javascript:void(0)" class="person-td order_manage"  data-order_status="4">
                 <span class="after_s"></span>
                 售后
             </a>
-            <a href="" class="person-td">
+            <a href="javascript:void(0)" class="person-td order_manage"  data-order_status="5">
                 <span class="complete"></span>
                 已完成
             </a>
@@ -78,7 +77,7 @@
                 <span class="brand"></span>
                 我的品牌
             </a>
-            <a href="" class="person-td">
+            <a href="{:url('Report/index')}" class="person-td">
                 <span class="presentation"></span>
                 我的报告
             </a>
@@ -154,8 +153,9 @@
                             loginDialog();
                         }
                     }else if(data.status==1){
-                        location.href = url;
+
                     }else{
+                        location.href = url;
                     }
                 }
             });
@@ -183,13 +183,104 @@
                             loginDialog();
                         }
                     }else if(data.status==1){
-                        location.href = url;
+
                     }else{
+                        location.href = url;
                     }
                 }
             });
         });
+        $('body').on('click','.recharge',function () {
+            var url = module + 'Wallet/recharge';
+            var postData = {};
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else if(data.code==1){
+                        if(data.data == 'no_login'){
+                            loginDialog();
+                        }
+                    }else if(data.status==1){
 
+                    }else{
+                        location.href = url;
+                    }
+                }
+            });
+        });
+        $('body').on('click','.recharge',function () {
+            var url = module + 'Wallet/recharge';
+            var postData = {};
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else if(data.code==1){
+                        if(data.data == 'no_login'){
+                            loginDialog();
+                        }
+                    }else if(data.status==1){
+
+                    }else{
+                        location.href = url;
+                    }
+                }
+            });
+        });
+        $('body').on('click','.order_manage',function () {
+            var url = module + 'Order/manage';
+            var orderStatus = $(this).data('order_status');
+            var postData = {};
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else if(data.code==1){
+                        if(data.data == 'no_login'){
+                            loginDialog();
+                        }
+                    }else if(data.status==1){
+
+                    }else{
+                        location.href = url+'/order_status/'+orderStatus;
+                    }
+                }
+            });
+        });
     })
 </script>
 {/block}

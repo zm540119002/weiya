@@ -234,7 +234,7 @@ class Jssdk {
       //获取code码，以获取openid
       $code = $_GET['code'];
       session('code1',$code);
-      $data = $this->getOpenidFromMp($code);
+      $data = $this->GetOpenidFromMp($code);
       return $data['openid'];
     }
   }

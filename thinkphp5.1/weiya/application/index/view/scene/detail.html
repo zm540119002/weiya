@@ -1,6 +1,7 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
 <link rel="stylesheet" href="factory_css/main.css">
+<link rel="stylesheet" href="factory_css/{$css}.css">
 {/block}
 {block name="content"}
 <article class="f24">
@@ -31,9 +32,12 @@
 			<ul>
 				<li>
 					<div class="top_radius f20 top_module">
-						<div>
-							<span class="hot left">热</span>
-							<p class="f28">{$info.name}</p>
+						<div class="f28">
+							<span class="hot">
+								<img src="public_img/hot.png" alt="">
+							</span>
+							{$info.name}
+							<!--<p class="f28">{$info.name}</p>-->
 						</div>
 						<p class="product_intro">{$info.intro}</p>
 						<div class="tags_item columns_flex l-r-sides">
@@ -99,17 +103,17 @@
 					{/empty}
 				</a>
 				<div class="list_r">
-					<p>{$info.headline}</p>
-					<div>单品规格<span>{$info.specification}</span></div>
+					<p class="text-intro">{$info.headline}</p>
+					<!--<div>单品规格<span>{$info.specification}</span></div>-->
 					<div>
-						<span>￥<price>{$info.bulk_price}</price></span>
+						<span class="red">￥<price>{$info.bulk_price}</price></span>
 					</div>
 					<div class="columns_flex l-r-sides">
 						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
 						</div>
-						<a href="javascript:void(0);" class="sample_purchase">样品购买
+						<!--<a href="javascript:void(0);" class="sample_purchase">样品购买
 							<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
-						</a>
+						</a>-->
 					</div>
 					<div class="quantity_wrapper selected-number">
 						<a href="javascript:void(0);" class="greduce">-</a>

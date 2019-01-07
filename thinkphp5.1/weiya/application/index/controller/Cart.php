@@ -30,7 +30,7 @@ class Cart extends \common\controller\UserBase{
         $model = new \app\index\model\Cart();
         $config = [
           'where' => [
-              ['c.user_id','=',$userId]
+              ['user_id','=',$userId]
           ]
         ];
         $cartList = $model->getList($config);
@@ -93,7 +93,7 @@ class Cart extends \common\controller\UserBase{
          $config=[
              'where'=>[
                  ['c.user_id','=',$userId],
-                 ['c.create_time','>',time()-7*24*60*60],//只展示7天的数据
+//                 ['c.create_time','>',time()-7*24*60*60],//只展示7天的数据
                  ['c.status','=',0],
              ],'join' => [
                  ['goods g','g.id = c.foreign_id','left']
@@ -164,4 +164,23 @@ class Cart extends \common\controller\UserBase{
         return successMsg('成功');
     }
 
+    //删除地址
+    public function del(){
+        if(!request()->isAjax()){
+            return errorMsg(config('custom.not_ajax'));
+        }
+        $ids = input('post.cart_ids/a');
+        $model = new \app\index\model\Cart();
+        $condition = [
+            ['user_id','=',$this->user['id']],
+            ['id','in',$ids],
+        ];
+        $result = $model -> del($condition,false);
+        if($result['status']){
+            return successMsg('删除成功');
+        }else{
+            return errorMsg('删除失败');
+        }
+
+    }
 }

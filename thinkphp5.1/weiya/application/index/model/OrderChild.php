@@ -7,12 +7,12 @@ class OrderChild extends \common\model\Base {
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-    protected $connection = 'db_config_common';
+    protected $connection = 'db_config_weiya';
 	//表的别名
 	protected $alias = 'oc';
 
     //生成子订单
-	public function createOrderChild($orderDetailList,$userId = 0)
+	public function createOrderChild($orderDetailList)
 	{
 		$this->startTrans();
         $storeId = $orderDetailList[0]['store_id'];
@@ -32,7 +32,7 @@ class OrderChild extends \common\model\Base {
                     if ($storeId == $orderDetail['store_id']) {
                         $childOrderData[$k]['father_order_id'] = $orderDetailList[0]['father_order_id'];
                         $childOrderData[$k]['sn'] = generateSN();
-                        $childOrderData[$k]['user_id'] = $userId;
+                        $childOrderData[$k]['user_id'] = $orderDetailList[0]['user_id'];
                         $totalPrices = $orderDetail['price'] * $orderDetail['num'];
                         $childOrderData[$k]['amount'] += number_format($totalPrices, 2, '.', '');
                         $childOrderData[$k]['actually_amount'] += number_format($totalPrices, 2, '.', '');
@@ -52,7 +52,7 @@ class OrderChild extends \common\model\Base {
                 [
                     'father_order_id' => $orderDetailList[0]['father_order_id'],
                     'sn' => generateSN(),
-                    'user_id' => $userId,
+                    'user_id' => $orderDetailList[0]['user_id'],
                     'amount' => $amount,
                     'actually_amount' => $amount,
                     'create_time' =>  time(),
@@ -61,6 +61,7 @@ class OrderChild extends \common\model\Base {
             ];
         }
         $childOrders = $this->allowField(true)->saveAll($childOrderData)->toArray();
+
         if (!count($childOrders)) {
             $this->rollback();
             return errorMsg('失败');
@@ -78,7 +79,7 @@ class OrderChild extends \common\model\Base {
                     ['goods_id','=',$goodsId],
                     ['store_id','=',$value['store_id']],
                 ];
-				$modelOrderDetail = new \app\purchase\model\OrderDetail();
+				$modelOrderDetail = new \app\index\model\OrderDetail();
                 $res = $modelOrderDetail->where($condition)->setField($data);
                 if(false === $res){
                     return errorMsg('失败');

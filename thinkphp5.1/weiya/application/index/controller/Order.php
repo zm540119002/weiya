@@ -19,7 +19,7 @@ class Order extends \common\controller\UserBase
                 ['c.status', '=', 0],
                 ['c.id', 'in', $cartIds],
             ], 'field' => [
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity','g.sample_price',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.store_id','c.buy_type','c.num',
             ],'join'=>[
                 ['goods g','g.id = c.foreign_id','left']
@@ -32,9 +32,9 @@ class Order extends \common\controller\UserBase
 
         foreach ($goodsList as $k => &$goodsInfo) {
             if($goodsInfo['buy_type'] == 2){
-                $goodsSalePrice = $goodsInfo['minimum_sample_quantity'];
+                $goodsSalePrice = $goodsInfo['sample_price'];
             }else{
-                $goodsSalePrice = $goodsInfo['minimum_order_quantity'];
+                $goodsSalePrice = $goodsInfo['bulk_price'];
             }
             $goodsList[$k]['price'] = $goodsSalePrice;
             $goodsList[$k]['store_id'] = $goodsInfo['store_id'];
@@ -46,7 +46,7 @@ class Order extends \common\controller\UserBase
         //开启事务
         $modelOrder->startTrans();
         //订单编号
-        $orderSN = generateSN(15);
+        $orderSN = generateSN();
         //组装父订单数组
         $data = [
                 'sn' => $orderSN,
@@ -82,7 +82,6 @@ class Order extends \common\controller\UserBase
         $modelOrder->commit();
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
-
    //订单-结算页
     public function settlement()
     {
@@ -108,7 +107,6 @@ class Order extends \common\controller\UserBase
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
     }
-
     //订单-详情页
     public function detail()
     {
@@ -175,24 +173,30 @@ class Order extends \common\controller\UserBase
         if(false === $res){
             return errorMsg('失败');
         }
-//        //根据订单号查询关联的商品
-//        $modelOrderDetail = new \app\index\model\OrderDetail();
-//        $config = [
-//            'where' => [
-//                ['od.status', '=', 0],
-//                ['od.father_order_id', '=', $fatherOrderId],
-//            ], 'field' => [
-//                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id',
-//            ]
-//        ];
-//        $orderDetailList = $modelOrderDetail->getList($config);
-//        $modelOrderChild = new \app\index\model\OrderChild();
-//        //生成子订单
-//        $rse = $modelOrderChild -> createOrderChild($orderDetailList,$this->user['id']);
-//        if(!$rse['status']){
-//            $modelOrder->rollback();
-//            return errorMsg($modelOrder->getLastSql());
-//        }
+        //根据订单号查询关联的购物车的商品 删除
+        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $config = [
+            'where' => [
+                ['od.status', '=', 0],
+                ['od.father_order_id', '=', $fatherOrderId],
+            ], 'field' => [
+                'od.goods_id','od.buy_type'
+            ]
+        ];
+        $orderDetailList = $modelOrderDetail->getList($config);
+        $model = new \app\index\model\Cart();
+        foreach ($orderDetailList as &$orderDetailInfo){
+            $condition = [
+                ['user_id','=',$this->user['id']],
+                ['foreign_id','=',$orderDetailInfo['goods_id']],
+                ['buy_type','in',$orderDetailInfo['buy_type']],
+            ];
+            $result = $model -> del($condition,false);
+            if(!$result['status']){
+                return errorMsg('删除失败');
+            }
+        }
+
         $orderSn = input('post.order_sn','','string');
         return successMsg('成功',array('order_sn'=>$orderSn));
     }
@@ -216,6 +220,55 @@ class Order extends \common\controller\UserBase
         $unlockingFooterCart = unlockingFooterCartConfig([4]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
+    }
+    //订单管理
+    public function manage(){
+        if(input('?order_status')){
+            $orderStatus = input('order_status');
+            $this ->assign('order_status',$orderStatus);
+        }
+       return $this->fetch();
+    }
+
+    /**
+     * @return array|mixed
+     * 查出产商相关产品 分页查询
+     */
+    public function getList(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $model = new \app\index\model\Goods();
+        $config=[
+            'where'=>[
+                ['g.status', '=', 0],
+                ['g.shelf_status', '=', 3],
+            ],
+            'field'=>[
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+            ],
+            'order'=>[
+                'is_selection'=>'desc',
+                'sort'=>'desc',
+                'id'=>'desc'
+            ],
+        ];
+        if(input('?get.category_id') && input('get.category_id/d')){
+            $config['where'][] = ['g.category_id_1', '=', input('get.category_id/d')];
+        }
+        $keyword = input('get.keyword','');
+        if($keyword) {
+            $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
+        }
+
+        $list = $model -> pageQuery($config);
+        $this->assign('list',$list);
+        if(isset($_GET['pageType'])){
+            if($_GET['pageType'] == 'index' ){
+                return $this->fetch('list_index_tpl');
+            }
+        }
     }
 
 
