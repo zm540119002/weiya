@@ -8,7 +8,7 @@ class Wallet extends \common\controller\UserBase{
         return $this->fetch();
     }
 
-    public function Recharge(){
+    public function recharge(){
         if (request()->isPost()) {
            //
         }else{
