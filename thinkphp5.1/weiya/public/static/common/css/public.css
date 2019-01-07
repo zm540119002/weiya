@@ -5134,6 +5134,7 @@ select[name="nodeIds"]{
 /*支付*/
 .btn_s{
     padding: 0.02rem 0.20rem;
+    margin:0.15rem 0 0;
     color: #CA1D1D;
     border: 1px solid #CA1D1D;
     border-radius: 0.5rem;
