@@ -12,7 +12,7 @@ class OrderChild extends \common\model\Base {
 	protected $alias = 'oc';
 
     //生成子订单
-	public function createOrderChild($orderDetailList,$userId = 0)
+	public function createOrderChild($orderDetailList)
 	{
 		$this->startTrans();
         $storeId = $orderDetailList[0]['store_id'];
@@ -32,7 +32,7 @@ class OrderChild extends \common\model\Base {
                     if ($storeId == $orderDetail['store_id']) {
                         $childOrderData[$k]['father_order_id'] = $orderDetailList[0]['father_order_id'];
                         $childOrderData[$k]['sn'] = generateSN();
-                        $childOrderData[$k]['user_id'] = $userId;
+                        $childOrderData[$k]['user_id'] = $orderDetailList[0]['user_id'];
                         $totalPrices = $orderDetail['price'] * $orderDetail['num'];
                         $childOrderData[$k]['amount'] += number_format($totalPrices, 2, '.', '');
                         $childOrderData[$k]['actually_amount'] += number_format($totalPrices, 2, '.', '');

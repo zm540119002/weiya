@@ -1,9 +1,6 @@
 <?php
 namespace app\index\controller;
-//use Think\Controller;
-use common\component\payment\unionpay\sdk\AcpService;
-use common\component\payment\unionpay\sdk\SDKConfig;
-//use common\component\payment\alipay\lib\AlipayNotify;
+
 class CallBack extends \common\controller\Base
 {
     public function weixinBack(){

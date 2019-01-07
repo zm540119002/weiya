@@ -39,7 +39,7 @@ class Order extends \common\model\Base {
                 ['od.status', '=', 0],
                 ['od.father_order_id', '=', $orderInfo['id']],
             ], 'field' => [
-                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id'
+                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id','od.user_id'
             ]
         ];
 
