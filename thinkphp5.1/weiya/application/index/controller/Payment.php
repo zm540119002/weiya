@@ -5,7 +5,7 @@ class Payment extends \common\controller\UserBase{
     public function orderPayment(){
         //微信支付
         if( empty(input('order_sn')) || empty(input('?pay_code'))){
-            return errorMsg('参数错误');
+            $this -> error('参数错误');
         }
         $modelOrder = new \app\index\model\Order();
         $orderSn = input('order_sn','','string');
@@ -22,7 +22,6 @@ class Payment extends \common\controller\UserBase{
         $orderInfo = $modelOrder->getInfo($config);
         if($orderInfo['actually_amount']<=0){
             $this -> error('支付不能为0');
-            return errorMsg('支付不能为0');
         }
         $payInfo = [
             'sn'=>$orderInfo['sn'],
@@ -56,7 +55,7 @@ class Payment extends \common\controller\UserBase{
     public function rechargePayment(){
         //微信支付
         if( empty(input('amount')) ||  empty(input('?pay_code'))){
-            return errorMsg('参数错误');
+            $this -> error('参数错误');
         }
         $model = new \app\index\model\WalletDetail();
         $amount = input('amount/f');
@@ -70,7 +69,7 @@ class Payment extends \common\controller\UserBase{
         ];
         $res = $model->isUpdate(false)->save($data);
         if(!$res){
-            return errorMsg('生成充值明细失败');
+            $this -> error('生成充值明细失败');
         }
         //支付信息
         $payInfo = [
