@@ -224,5 +224,14 @@ class Order extends \common\controller\UserBase
         return $this->fetch();
     }
 
+    //订单管理
+    public function manage(){
+        if(input('?order_status')){
+            $orderStatus = input('order_status');
+            $this ->assign('order_status',$orderStatus);
+        }
+       return $this->fetch();
+    }
+
 
 }

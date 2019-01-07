@@ -58,7 +58,7 @@
         </div>
         <p>*线下银行转账/现金支付需将证据拍照上传</p>
         <form action="{:url('Payment/orderPayment')}" method="post" class="recharge_form">
-            <input type="hidden" name="order_sn" value="{$orderInfo.sn}"/>
+            <input type="hidden" name="recharge_amount" value=""/>
             <input type="hidden" name="pay_code" value="" class="pay_code"/>
             <span class="red">￥<price>0.00</price></span>
             <input type="submit" value="充值支付" />
@@ -78,11 +78,26 @@
             var pay_code = $(this).data('paycode');
             $(this).find('input[type="checkbox"]').prop('checked',true);
             $('.pay_code').val(pay_code);
-        })
+        });
         $('.recharge_m_list li').on('click',function(){
             $(this).addClass('current').siblings().removeClass('current');
             var rechargeMoney = $(this).find('span').text();
             $('.recharge_form price').text(rechargeMoney);
+            $('input[name="recharge_amount"]').val(rechargeMoney);
+        });
+
+        $('body').on('click','.pay_btn',function () {
+            var pay_code = $('input[name=pay_code]').val();
+            var rechargeMoney = $('input[name=recharge_amount]').val();
+            if(rechargeMoney){
+                dialog.error('充值金额不能为0');
+                return false;
+            }
+            if(!pay_code){
+                dialog.error('请选择支付方式');
+                return false;
+            }
+
         })
     });
 </script>

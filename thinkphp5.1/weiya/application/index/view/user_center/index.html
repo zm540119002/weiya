@@ -43,7 +43,7 @@
                 <span class="addr"></span>
                 收货人地址
             </a>
-            <a href="{:url('Recharge/index')}" class="person-td">
+            <a href="javascript:void(0)" class="person-td recharge">
                 <span class="charge"></span>
                 采购充值
             </a>
@@ -162,6 +162,36 @@
         });
         $('body').on('click','.address_manage',function () {
             var url = module + 'Address/manage';
+            var postData = {};
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else if(data.code==1){
+                        if(data.data == 'no_login'){
+                            loginDialog();
+                        }
+                    }else if(data.status==1){
+
+                    }else{
+                        location.href = url;
+                    }
+                }
+            });
+        });
+        $('body').on('click','.recharge',function () {
+            var url = module + 'Recharge/index';
             var postData = {};
             $.ajax({
                 url: url,
