@@ -20,76 +20,76 @@ class CallBack extends \common\controller\Base
         $data['payment_time'] = $data['time_end'];//支付时间
 
         // 判断签名是否正确  判断支付状态
-        if (($data_sign == $sign )&& ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
-            $order_type = '';
-            if(input('?type')){
-                $order_type =input('type');
-            }
-            if ($order_type == 'order') {
-                $modelOrder = new \app\index\model\Order();
-                $config = [
-                    'where' => [
-                        ['o.status', '=', 0],
-                        ['o.sn', '=', $data['out_trade_no']],
-                    ], 'field' => [
-                        'o.id', 'o.sn', 'o.amount',
-                        'o.user_id', 'o.actually_amount', 'o.order_status'
-                    ],
-                ];
-                $orderInfo = $modelOrder->getInfo($config);
-//                if ($orderInfo['order_status'] > 1) {
-//                    return successMsg('已回调过，订单已处理');
-//                }
-//                if ($orderInfo['actually_amount'] * 100 != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
-//                    //返回状态给微信服务器
-//                    return errorMsg('回调的金额和订单的金额不符，终止购买');
-//                }
-                $res = $this->orderHandle($data, $orderInfo);
-                if ($res['status']) {
-                    $this->successReturn();
-                } else {
-                    $this->errorReturn();
-                }
-            }
-            //充值
-            if ($order_type == 'recharge') {
-                $modelOrder = new \app\index\model\WalletDetail();
-                $config = [
-                    'where' => [
-                        ['wd.status', '=', 0],
-                        ['wd.sn', '=', $data['out_trade_no']],
-                    ], 'field' => [
-                        'wd.id', 'wd.sn', 'wd.amount',
-                        'wd.user_id','wd.recharge_status'
-                    ],
-                ];
-                $info = $modelOrder->getInfo($config);
-                if ($info['recharge_status'] == 1) {
+        if ( ($data_sign !== $sign) || ($data['return_code'] !== 'SUCCESS') || ($data['result_code'] !== 'SUCCESS')) {
+            //返回状态给微信服务器
+            $this->errorReturn($data['out_trade_no']);
+        }
+
+        $order_type = '';
+        if(input('?type')){
+            $order_type =input('type');
+        }
+        if ($order_type == 'order') {
+            $modelOrder = new \app\index\model\Order();
+            $config = [
+                'where' => [
+                    ['o.status', '=', 0],
+                    ['o.sn', '=', $data['out_trade_no']],
+                ], 'field' => [
+                    'o.id', 'o.sn', 'o.amount',
+                    'o.user_id', 'o.actually_amount', 'o.order_status'
+                ],
+            ];
+            $orderInfo = $modelOrder->getInfo($config);
+                if ($orderInfo['order_status'] > 1) {
                     return successMsg('已回调过，订单已处理');
                 }
-                if ($info['amount'] * 100 != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
+                if ($orderInfo['actually_amount'] * 100 != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
                     //返回状态给微信服务器
                     return errorMsg('回调的金额和订单的金额不符，终止购买');
                 }
-                $res = $this->rechargeHandle($data,$info);
-                if ($res['status']) {
-                    $this->successReturn();
-                } else {
-                    $this->errorReturn();
-                }
+            $res = $this->orderHandle($data, $orderInfo);
+            if ($res['status']) {
+                $this->successReturn();
+            } else {
+                $this->errorReturn();
             }
+        }
+        //充值
+        if ($order_type == 'recharge') {
+            $modelOrder = new \app\index\model\WalletDetail();
+            $config = [
+                'where' => [
+                    ['wd.status', '=', 0],
+                    ['wd.sn', '=', $data['out_trade_no']],
+                ], 'field' => [
+                    'wd.id', 'wd.sn', 'wd.amount',
+                    'wd.user_id','wd.recharge_status'
+                ],
+            ];
+            $info = $modelOrder->getInfo($config);
+            if ($info['recharge_status'] == 1) {
+                return successMsg('已回调过，订单已处理');
+            }
+            if ($info['amount'] * 100 != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
+                //返回状态给微信服务器
+                return errorMsg('回调的金额和订单的金额不符，终止购买');
+            }
+            $res = $this->rechargeHandle($data,$info);
+            if ($res['status']) {
+                $this->successReturn();
+            } else {
+                $this->errorReturn();
+            }
+        }
 
-            if ($order_type == 'group_buy') {
-                $res = $this->groupBuyHandle($data);
-                if ($res['status']) {
-                    $this->successReturn();
-                } else {
-                    $this->errorReturn();
-                }
+        if ($order_type == 'group_buy') {
+            $res = $this->groupBuyHandle($data);
+            if ($res['status']) {
+                $this->successReturn();
+            } else {
+                $this->errorReturn();
             }
-        } else {
-            //返回状态给微信服务器
-            $this->errorReturn($data['out_trade_no']);
         }
 
     }
@@ -335,22 +335,41 @@ class CallBack extends \common\controller\Base
             ['sn', '=', $data['order_sn']],
         ];
         $res = $modelWalletDetail->allowField(true)->save($data2,$condition);
-        file_put_contents('d.txt',$modelWalletDetail->getLastSql());
         if($res === false){
             $modelWalletDetail->rollback();
             //返回状态给微信服务器
             return errorMsg('失败');
         }
         $modelWallet = new \app\index\model\Wallet();
-        $where = [
-            ['user_id', '=', $info['user_id']],
+        $config = [
+            'where'=>[
+                ['user_id', '=', $info['user_id']],
+            ]
         ];
-        $res = $modelWallet->where($where)->setInc('amount', $data['actually_amount']);
-        if($res === false){
-            $modelWallet->rollback();
-            //返回状态给微信服务器
-            return errorMsg('失败');
+        $walletInfo = $modelWallet->getInfo($config);
+        if(empty($walletInfo)){
+            $data3 = [
+               'user_id' => $info['user_id'],
+               'amount' =>  $info['amount'],
+            ];
+            $res = $modelWallet->isUpdate(false)->save($data3);
+            if(!$res){
+                $modelWallet->rollback();
+                //返回状态给微信服务器
+                return errorMsg('失败');
+            }
+        }else{
+            $where = [
+                ['user_id', '=', $info['user_id']],
+            ];
+            $res = $modelWallet->where($where)->setInc('amount', $info['amount']);
+            if($res === false){
+                $modelWallet->rollback();
+                //返回状态给微信服务器
+                return errorMsg('失败');
+            }
         }
+
         $modelWalletDetail->commit();//提交事务
         //返回状态给微信服务器
         return successMsg('成功');
