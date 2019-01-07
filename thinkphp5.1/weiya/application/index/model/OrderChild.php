@@ -61,6 +61,7 @@ class OrderChild extends \common\model\Base {
             ];
         }
         $childOrders = $this->allowField(true)->saveAll($childOrderData)->toArray();
+
         if (!count($childOrders)) {
             $this->rollback();
             return errorMsg('失败');
