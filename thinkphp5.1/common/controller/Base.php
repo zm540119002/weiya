@@ -16,15 +16,16 @@ class Base extends \think\Controller{
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
-//        if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ){
-//            $openId =  session('open_id');
-//            if(empty($openId)){
-//                $tools = new \JsApiPay();
-//                $openId  = $tools->GetOpenid();
-//                session('open_id',$openId);
-//            }
-//        }
-     
+        if( !request()->isAjax()){
+            if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ){
+                $openId =  session('open_id');
+                if(empty($openId)){
+                    $tools = new \JsApiPay();
+                    $openId  = $tools->GetOpenid();
+                    session('open_id',$openId);
+                }
+            }
+        }
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){
