@@ -5151,3 +5151,6 @@ select[name="nodeIds"]{
     text-align:center;
     border:1px solid #009A3E;
 }
+.order_success{
+    text-align: center;
+}
