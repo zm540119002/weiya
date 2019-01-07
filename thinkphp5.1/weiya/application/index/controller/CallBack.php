@@ -285,7 +285,6 @@ class CallBack extends \common\controller\Base
             ['sn', '=', $data['order_sn']],
         ];
         $res = $modelOrder->allowField(true)->save($data2,$condition);
-        file_put_contents('d.txt',$modelOrder->getLastSql());
         if($res === false){
             $modelOrder->rollback();
             //返回状态给微信服务器
