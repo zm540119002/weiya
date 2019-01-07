@@ -1,0 +1,23 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+    <link rel="stylesheet" type="text/css" href="factory_css/main.css">
+{/block}
+{block name="nav">提交订单{/block}
+{block name="content"}
+
+{/block}
+{block name="footer"}
+{include file="template/footer_menu.html" /}
+{/block}
+
+{block name="script"}
+    <script src="public_js/jquery.area.js"></script>
+    <script type="text/javascript" src="weiya_js/footerCart.js"></script>
+    <script type="text/javascript">
+        var order_status={:json_encode($order_status)};
+        $(function(){
+
+        });
+
+    </script>
+{/block}
