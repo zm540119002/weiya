@@ -14,6 +14,7 @@ class OrderChild extends \common\model\Base {
     //生成子订单
 	public function createOrderChild($orderDetailList)
 	{
+        print_r($orderDetailList);exit;
 		$this->startTrans();
         $storeId = $orderDetailList[0]['store_id'];
         $splitOrderFlag = 0; //0：不拆 1：拆
