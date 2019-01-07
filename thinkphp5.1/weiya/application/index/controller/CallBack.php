@@ -29,7 +29,6 @@ class CallBack extends \common\controller\Base
 //";
         $data = xmlToArray($xml);
         $data_sign = $data['sign'];
-
         //sign不参与签名算法
         unset($data['sign']);
         $sign = $this->makeSign($data);
@@ -40,18 +39,17 @@ class CallBack extends \common\controller\Base
         $data['payment_time'] = $data['time_end'];//支付时间
 
         // 判断签名是否正确  判断支付状态
-        if (($data_sign == $sign) && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
+        if (($data_sign == $sign )&& ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
             $order_type = '';
             if(input('?type')){
                 $order_type =input('type');
             }
-            file_put_contents('c.txt',$order_type);
             if ($order_type == 'order') {
                 $modelOrder = new \app\index\model\Order();
                 $config = [
                     'where' => [
                         ['o.status', '=', 0],
-                        ['o.sn', '=', $data['order_sn']],
+                        ['o.sn', '=', $data['out_trade_no']],
                     ], 'field' => [
                         'o.id', 'o.sn', 'o.amount',
                         'o.user_id', 'o.actually_amount', 'o.order_status'
@@ -242,7 +240,7 @@ class CallBack extends \common\controller\Base
             ['sn', '=', $data['order_sn']],
         ];
         $res = $modelOrder->allowField(true)->save($data2,$condition);
-        file_put_contents('b.txt',$modelOrder->getLastSql());
+        file_put_contents('d.txt',$modelOrder->getLastSql());
         if($res === false){
             $modelOrder->rollback();
             //返回状态给微信服务器

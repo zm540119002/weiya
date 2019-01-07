@@ -20,7 +20,7 @@ class Payment extends \common\controller\UserBase{
             $orderInfo = $modelOrder->getInfo($config);
             $payInfo = [
                 'sn'=>$orderInfo['sn'],
-                'actually_amount'=>0.01,
+                'actually_amount'=>$orderInfo['actually_amount'],
                 'return_url' => $this->host.url('payComplete'),
                 'cancel_url' => $this->host.url('payCancel'),
                 'fail_url' => $this->host.url('payFail'),
