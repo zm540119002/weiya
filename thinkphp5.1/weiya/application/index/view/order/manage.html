@@ -113,13 +113,21 @@
 {/block}
 
 {block name="script"}
-    <script src="public_js/jquery.area.js"></script>
     <script type="text/javascript" src="weiya_js/footerCart.js"></script>
+    <script type="text/javascript" src="public_js/paging.js"></script>
     <script type="text/javascript">
-       
+        var config = {
+            url:module+'Order/getList',
+            requestEnd:false,
+            loadTrigger:false,
+            currentPage:1,
+
+        };
+        var postData = {
+            pageSize:10,
+        };
         $(function(){
             var order_status={:json_encode($order_status)};
-            console.log(typeof order_status);
             order_status=parseInt(order_status);
             switch(order_status){
                 case 1:
@@ -135,6 +143,11 @@
                 $('.menu_nav li').eq(order_status).addClass('current');
                 break;
             }
+            if(!order_status){
+                postData.order_status = order_status;
+            }
+            getPagingList(config,postData);
+
         });
     </script>
 {/block}
