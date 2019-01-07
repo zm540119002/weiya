@@ -8,25 +8,6 @@ class CallBack extends \common\controller\Base
 {
     public function weixinBack(){
         $xml = file_get_contents('php://input');
-//        $xml = "<xml><appid><![CDATA[wx9eee7ee8c2ae57dc]]></appid>
-//<attach><![CDATA[weixin]]></attach>
-//<bank_type><![CDATA[HXB_CREDIT]]></bank_type>
-//<cash_fee><![CDATA[1]]></cash_fee>
-//<fee_type><![CDATA[CNY]]></fee_type>
-//<is_subscribe><![CDATA[Y]]></is_subscribe>
-//<mch_id><![CDATA[1234887902]]></mch_id>
-//<nonce_str><![CDATA[jx0ylr9h1t3nel5ukt4cqiy4xqk729n0]]></nonce_str>
-//<openid><![CDATA[oNalMuA6iE-T45TPb_ZeQYlJ3Jjk]]></openid>
-//<out_trade_no><![CDATA[20190105135318529087889079702409]]></out_trade_no>
-//<result_code><![CDATA[SUCCESS]]></result_code>
-//<return_code><![CDATA[SUCCESS]]></return_code>
-//<sign><![CDATA[2C2F10429F4B7E9BD6982E1D9B773A09]]></sign>
-//<time_end><![CDATA[20190105141014]]></time_end>
-//<total_fee>1</total_fee>
-//<trade_type><![CDATA[NATIVE]]></trade_type>
-//<transaction_id><![CDATA[4200000232201901056153817685]]></transaction_id>
-//</xml>
-//";
         $data = xmlToArray($xml);
         $data_sign = $data['sign'];
         //sign不参与签名算法
@@ -70,8 +51,27 @@ class CallBack extends \common\controller\Base
                     $this->errorReturn();
                 }
             }
+            //充值
             if ($order_type == 'recharge') {
-                $res = $this->rechargeHandle($data);
+                $modelOrder = new \app\index\model\WalletDetail();
+                $config = [
+                    'where' => [
+                        ['wd.status', '=', 0],
+                        ['wd.sn', '=', $data['out_trade_no']],
+                    ], 'field' => [
+                        'wd.id', 'wd.sn', 'wd.amount',
+                        'wd.user_id','wd.recharge_status'
+                    ],
+                ];
+                $info = $modelOrder->getInfo($config);
+                if ($info['recharge_status'] == 1) {
+                    return successMsg('已回调过，订单已处理');
+                }
+                if ($info['amount'] * 100 != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
+                    //返回状态给微信服务器
+                    return errorMsg('回调的金额和订单的金额不符，终止购买');
+                }
+                $res = $this->rechargeHandle($data,$info);
                 if ($res['status']) {
                     $this->successReturn();
                 } else {
@@ -148,7 +148,25 @@ class CallBack extends \common\controller\Base
            }
 
            if ($order_type == 'recharge') {
-               $res = $this->rechargeHandle($data);
+               $modelOrder = new \app\index\model\WalletDetail();
+               $config = [
+                   'where' => [
+                       ['wd.status', '=', 0],
+                       ['wd.sn', '=', $data['out_trade_no']],
+                   ], 'field' => [
+                       'wd.id', 'wd.sn', 'wd.amount',
+                       'wd.user_id','wd.recharge_status'
+                   ],
+               ];
+               $info = $modelOrder->getInfo($config);
+               if ($info['recharge_status'] == 1) {
+                   return successMsg('已回调过，订单已处理');
+               }
+               if ($info['amount'] * 100 != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
+                   //返回状态给微信服务器
+                   return errorMsg('回调的金额和订单的金额不符，终止购买');
+               }
+               $res = $this->rechargeHandle($data,$info);
                if ($res['status']) {
                    echo "success"; // 处理成功
                } else {
@@ -217,6 +235,33 @@ class CallBack extends \common\controller\Base
                     echo "success"; //请不要修改或删除
                 }
             }
+            if ($order_type == 'recharge') {
+                $modelOrder = new \app\index\model\WalletDetail();
+                $config = [
+                    'where' => [
+                        ['wd.status', '=', 0],
+                        ['wd.sn', '=', $data['out_trade_no']],
+                    ], 'field' => [
+                        'wd.id', 'wd.sn', 'wd.amount',
+                        'wd.user_id','wd.recharge_status'
+                    ],
+                ];
+                $info = $modelOrder->getInfo($config);
+                if ($info['recharge_status'] == 1) {
+                    return successMsg('已回调过，订单已处理');
+                }
+                if ($info['amount'] != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
+                    //返回状态给微信服务器
+                    return errorMsg('回调的金额和订单的金额不符，终止购买');
+                }
+                $res = $this->rechargeHandle($data,$info);
+                if ($res['status']) {
+                    echo "success"; // 处理成功
+                } else {
+                    echo "fail"; //验证失败
+                }
+            }
+
         }
     }
 
@@ -246,43 +291,70 @@ class CallBack extends \common\controller\Base
             //返回状态给微信服务器
             return errorMsg('失败');
         }
-//        //根据订单号查询关联的商品
-//        $modelOrderDetail = new \app\index\model\OrderDetail();
-//        $config = [
-//            'where' => [
-//                ['od.status', '=', 0],
-//                ['od.father_order_id', '=', $orderInfo['id']],
-//            ], 'field' => [
-//                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id'
-//            ]
-//        ];
-//
-//        $orderDetailList = $modelOrderDetail->getList($config);
-//        $modelOrderChild = new \app\index\model\OrderChild();
-//
-//        //生成子订单
-//        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
-//        if(!$rse['status']){
-//            $modelOrder->rollback();
-//            return errorMsg($modelOrder->getLastSql());
-//        }
+        //根据订单号查询关联的商品
+        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $config = [
+            'where' => [
+                ['od.status', '=', 0],
+                ['od.father_order_id', '=', $orderInfo['id']],
+            ], 'field' => [
+                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id'
+            ]
+        ];
+
+        $orderDetailList = $modelOrderDetail->getList($config);
+        $modelOrderChild = new \app\index\model\OrderChild();
+
+        //生成子订单
+        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
+        if(!$rse['status']){
+            $modelOrder->rollback();
+            return errorMsg($modelOrder->getLastSql());
+        }
         $modelOrder->commit();//提交事务
         //返回状态给微信服务器
         return successMsg('成功');
 
     }
 
-    //生成子订单  子订单和order_detail表的关联
-    private function splitOrder(){
-
-    }
 
     /**充值支付回调
      * @param $parameter
      */
-    private function rechargeHandle($data)
+    private function rechargeHandle($data,$info)
     {
-
+        $modelWalletDetail = new \app\index\model\WalletDetail();
+        $modelWalletDetail->startTrans();
+        //更新订单状态
+        $data2 = [];
+        $data2['recharge_status'] = 2;
+        $data2['payment_code'] = $data['payment_code'];
+        $data2['pay_sn'] = $data['pay_sn'];
+        $data2['payment_time'] = $data['payment_time'];
+        $condition = [
+            ['user_id', '=', $info['user_id']],
+            ['sn', '=', $data['order_sn']],
+        ];
+        $res = $modelWalletDetail->allowField(true)->save($data2,$condition);
+        file_put_contents('d.txt',$modelWalletDetail->getLastSql());
+        if($res === false){
+            $modelWalletDetail->rollback();
+            //返回状态给微信服务器
+            return errorMsg('失败');
+        }
+        $modelWallet = new \app\index\model\Wallet();
+        $where = [
+            ['user_id', '=', $info['user_id']],
+        ];
+        $res = $modelWallet->where($where)->setInc('amount', $data['actually_amount']);
+        if($res === false){
+            $modelWallet->rollback();
+            //返回状态给微信服务器
+            return errorMsg('失败');
+        }
+        $modelWalletDetail->commit();//提交事务
+        //返回状态给微信服务器
+        return successMsg('成功');
     }
 
     /**团购订单支付回调

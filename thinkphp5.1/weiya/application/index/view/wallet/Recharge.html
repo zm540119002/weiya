@@ -1,13 +1,40 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
 {/block}
 {block name="content"}
 <article class="f24 pay_wrapper">
-    <section class="pay_amount_item content-padding">
-        <div>订单金额：<span class="red">￥<price>{$orderInfo.amount}</price></span></div>
+    <section class="header_title separation-line">
+		<h2 class="f24">采购充值</h2>
+	</section>
+    <section class="recharge_amount_item content-padding">
+        <div class="columns_flex l-r-sides">
+            <span>选择充值金额</span>
+            <span>充值记录></span>
+        </div>
+        <ul class="recharge_m_list">
+            <li>
+                <span>3000</span>元
+            </li>
+            <li>
+                <span>5000</span>元
+            </li>
+            <li>
+                <span>10000</span>元
+            </li>
+            <li>
+                <span>20000</span>元
+            </li>
+            <li>
+                <span>50000</span>元
+            </li>
+            <li>
+                <span>100000</span>元
+            </li>
+        </ul>
     </section>
     <section class="content-padding ">
-        <p class="content-label">选择支付方式</p>
+        <p class="content-label">选择充值方式</p>
         <div>
             <ul class="pay_nav">
                 <li data-paycode="1">
@@ -30,10 +57,11 @@
             </ul>
         </div>
         <p>*线下银行转账/现金支付需将证据拍照上传</p>
-        <form action="{:url('Payment/orderPayment')}" method="post" class="pay_form" id="pay_info">
-            <input type="hidden" name="order_sn" value="{$orderInfo.sn}"/>
+        <form action="{:url('Payment/rechargePayment')}" method="post" class="recharge_form">
+            <input type="hidden" name="amount" value=""/>
             <input type="hidden" name="pay_code" value="" class="pay_code"/>
-            <input type="submit" value="立即支付" class="pay_btn"/>
+            <span class="red">￥<price>0.00</price></span>
+            <input type="submit" value="充值支付" class="pay_btn"/>
         </form>
     </section>
 </article>
@@ -51,9 +79,20 @@
             $(this).find('input[type="checkbox"]').prop('checked',true);
             $('.pay_code').val(pay_code);
         });
+        $('.recharge_m_list li').on('click',function(){
+            $(this).addClass('current').siblings().removeClass('current');
+            var rechargeMoney = $(this).find('span').text();
+            $('.recharge_form price').text(rechargeMoney);
+            $('input[name="amount"]').val(rechargeMoney);
+        });
 
         $('body').on('click','.pay_btn',function () {
             var pay_code = $('input[name=pay_code]').val();
+            var rechargeMoney = $('input[name=amount]').val();
+            if(!rechargeMoney){
+                dialog.error('充值金额不能为0');
+                return false;
+            }
             if(!pay_code){
                 dialog.error('请选择支付方式');
                 return false;
