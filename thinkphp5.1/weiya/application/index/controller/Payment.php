@@ -21,6 +21,7 @@ class Payment extends \common\controller\UserBase{
         ];
         $orderInfo = $modelOrder->getInfo($config);
         if($orderInfo['actually_amount']<=0){
+            $this -> error('支付不能为0');
             return errorMsg('支付不能为0');
         }
         $payInfo = [
