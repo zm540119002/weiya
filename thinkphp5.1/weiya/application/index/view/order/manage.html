@@ -1,10 +1,103 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-    <link rel="stylesheet" type="text/css" href="factory_css/main.css">
 {/block}
-{block name="nav">提交订单{/block}
+{block name="nav">我的订单{/block}
 {block name="content"}
-
+<article class="f24 ">
+    <section class="header_title separation-line">
+		<h2 class="f24">我的订单</h2>
+	</section>
+    <section class="order_main_wrapper">
+        <nav>
+            <ul class="menu_nav">
+                <li>
+                    <a href="javascript:void(0);">全部</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">待付款</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">待收货</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">待评价</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">已完成</a>
+                </li>
+            </ul>
+        </nav>
+        <ul class="order_list list">
+            <li>
+                <div class="order_top">
+                    <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
+                    <div class="order_top_r">
+                        <p>美肤美肤美肤美肤美肤美肤</p>
+                        <p>￥<price>500.00</price></p>
+                        <p>X<span>1</span></p>
+                    </div>
+                </div>
+                <div class="order_bottom">
+                    <p>共<span>1</span>件商品 需付款:<span class="red">￥<price>500.00</price></span></p>
+                    <p class="order_operate_btn">
+                        <a>取消订单</a>
+                        <a>去支付</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="order_top">
+                    <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
+                    <div class="order_top_r">
+                        <p>美肤美肤美肤美肤美肤美肤</p>
+                        <p>￥<price>500.00</price></p>
+                        <p>X<span>1</span></p>
+                    </div>
+                </div>
+                <div class="order_bottom">
+                    <p>共<span>1</span>件商品 需付款:<span class="red">￥<price>500.00</price></span></p>
+                    <p class="order_operate_btn">
+                        <a>确认收货</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="order_top">
+                    <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
+                    <div class="order_top_r">
+                        <p>美肤美肤美肤美肤美肤美肤</p>
+                        <p>￥<price>500.00</price></p>
+                        <p>X<span>1</span></p>
+                    </div>
+                </div>
+                <div class="order_bottom">
+                    <p>共<span>1</span>件商品 需付款:<span class="red">￥<price>500.00</price></span></p>
+                    <p class="order_operate_btn">
+                        <a>申请售后</a>
+                        <a>评价</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="order_top">
+                    <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
+                    <div class="order_top_r">
+                        <p>美肤美肤美肤美肤美肤美肤</p>
+                        <p>￥<price>500.00</price></p>
+                        <p>X<span>1</span></p>
+                    </div>
+                </div>
+                <div class="order_bottom">
+                    <p>共<span>1</span>件商品 需付款:<span class="red">￥<price>500.00</price></span></p>
+                    <p class="order_operate_btn">
+                        <a>查看评价</a>
+                        <a>再次购买</a>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </section>
+</article>
 {/block}
 {block name="footer"}
 {include file="template/footer_menu.html" /}
@@ -14,10 +107,25 @@
     <script src="public_js/jquery.area.js"></script>
     <script type="text/javascript" src="weiya_js/footerCart.js"></script>
     <script type="text/javascript">
-        var order_status={:json_encode($order_status)};
+       
         $(function(){
-
+            var order_status={:json_encode($order_status)};
+            console.log(typeof order_status);
+            order_status=parseInt(order_status);
+            switch(order_status){
+                case 1:
+                $('.menu_nav li').eq(order_status).addClass('current');
+                break;
+                case 2:
+                $('.menu_nav li').eq(order_status).addClass('current');
+                break;
+                case 3:
+                $('.menu_nav li').eq(order_status).addClass('current');
+                break;
+                case 4:
+                $('.menu_nav li').eq(order_status).addClass('current');
+                break;
+            }
         });
-
     </script>
 {/block}

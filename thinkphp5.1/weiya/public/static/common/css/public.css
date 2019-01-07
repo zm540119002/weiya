@@ -5027,6 +5027,49 @@ select[name="nodeIds"]{
     color:#0066cc;
 }
 /*订单*/
+.order_main_wrapper{
+    background: #f2f2f2;
+}
+.menu_nav{
+    display:flex;
+    display:-webkit-flex;
+    padding:0.12rem 0.15rem;
+    justify-content: space-between;
+    border-bottom:1px solid #d9d9d9;
+}
+.menu_nav li.current a{
+    color:#FF7BAC;
+}
+.order_list{
+    padding:0.15rem;
+}
+.order_list li{
+    border:none;
+    padding:0;
+}
+.order_top{
+    padding:0.15rem;
+    border-bottom:1px solid #d9d9d9;
+}
+.order_top img{
+    max-width:1rem;
+}
+.order_top_r{
+    margin:0 0 0 1.2rem;
+}
+.order_bottom{
+    padding:0.10rem 0.15rem 0.20rem;
+    text-align:right;
+}
+.order_operate_btn{
+    margin:0.12rem 0 0;
+}
+.order_operate_btn a{
+    padding:0.02rem 0.20rem;
+    color:#CA1D1D;
+    border:1px solid #CA1D1D;
+    border-radius:0.5rem;
+}
 .add_address{
     position:relative;
     display:block;
