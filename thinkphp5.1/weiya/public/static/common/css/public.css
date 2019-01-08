@@ -3392,7 +3392,7 @@ input[type=text]::-webkit-focus-inner {
 .foot_operate_bar .modify{
     background:#009A3E;
 }
-.pay_forms,.recharge_form{
+.pay_form,.recharge_form{
     position:fixed;
     left:0;
     bottom:0;
