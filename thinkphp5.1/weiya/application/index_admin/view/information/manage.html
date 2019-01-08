@@ -151,7 +151,7 @@
             $('body').on('click','.set-auth-status',function(){
                 var _this = $(this);
                 var text = _this.text();
-                var auth_status = _this.data('auth-status');
+                var auth_status = _this.data('auth_status');
                 var _thisTr = $(this).parents('tr');
                 var postData ={};
                 postData.id = _thisTr.data('id');
