@@ -4371,14 +4371,14 @@ select[name="nodeIds"]{
 .flex_item a span{
     position:relative;
     /*width: 30px; */
-    width: 0.6rem;
+    width: 0.48rem;
     /* height: 25px; */
-    height: 0.56rem;
+    height: 0.5rem;
     margin: 0 auto;
     background-image: url(../../common/img/icons/my_center_icons.png);
     background-repeat: no-repeat;
     /* background-size: 30px 345px; */
-    background-size: 0.58rem 9rem;
+    background-size: 0.48rem 7rem;
     display: block;
 }
 .flex_item .num{
@@ -4392,31 +4392,31 @@ select[name="nodeIds"]{
     border-radius:0.12rem;
 }
 .flex_item a span.my-msg{
-    background-position:0 6px;
+    background-position:0 0.15rem;
 }
 .flex_item a span.notice{
-    background-position:0 -0.55rem;
+    background-position:0 -0.35rem;
 }
 .flex_item a span.collec{
-    background-position:0 -1.3rem;
+    background-position:0 -0.9rem;
 }
 .flex_item a span.share{
     background-position:0 -1.95rem;
 }
 .flex_item a span.cart{
-    background-position:0 -2.54rem;
+    background-position:0 -1.945rem;
 }
 .flex_item a span.addr{
-    background-position:0 -3.12rem;
+    background-position:0 -2.38rem;
 }
 .flex_item a span.charge{
-    background-position:0 -3.75rem;
+    background-position:0 -2.88rem;
 }
 .flex_item a span.wait_pay{
-    background-position:0 -4.38rem;
+    background-position:0 -3.35rem;
 }
 .flex_item a span.wait_recevie{
-    background-position:0 -5rem;
+    background-position:0 -3.88rem;
 }
 .flex_item a span.commit{
     background-position:0 -5.6rem;

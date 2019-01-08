@@ -160,11 +160,8 @@ class Order extends \common\controller\UserBase
         }
         $fatherOrderId = input('post.father_order_id',0,'int');
         $modelOrder = new \app\index\model\Order();
-
-        $data = [
-            'order_status' => 1,
-            'address_id' => input('post.address_id',0,'int'),
-        ];
+        $data = input('post.');
+        $data['order_status'] = 1;
         $condition = [
             ['user_id','=',$this->user['id']],
             ['id','=',$fatherOrderId],
@@ -180,7 +177,7 @@ class Order extends \common\controller\UserBase
                 ['od.status', '=', 0],
                 ['od.father_order_id', '=', $fatherOrderId],
             ], 'field' => [
-                'od.goods_id','od.buy_type'
+                'od.goods_id','od.buy_type','od.price', 'od.num', 'od.store_id','od.father_order_id','od.user_id'
             ]
         ];
         $orderDetailList = $modelOrderDetail->getList($config);
@@ -196,6 +193,16 @@ class Order extends \common\controller\UserBase
                 return errorMsg('删除失败');
             }
         }
+
+      //根据订单号查询关联的商品
+        $modelOrderChild = new \app\index\model\OrderChild();
+        //生成子订单
+        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
+        if(!$rse['status']){
+            $modelOrder->rollback();
+            return errorMsg($modelOrderChild->getError());
+        }
+
 
         $orderSn = input('post.order_sn','','string');
         return successMsg('成功',array('order_sn'=>$orderSn));
@@ -243,6 +250,7 @@ class Order extends \common\controller\UserBase
         $config=[
             'where'=>[
                 ['o.status', '=', 0],
+                ['o.user_id', '=', $this->user['id']],
             ],
             /**
              *   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
@@ -270,11 +278,19 @@ class Order extends \common\controller\UserBase
              */
             'field'=>[
                 'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
-                'o.address_id','o.create_time','o.payment_time','o.finished_time',''
-            ],
-            'order'=>[
+                'o.address_id','o.create_time','o.payment_time','o.finished_time',
+                'a.consignee',
+                'oc.sn as order_child_sn',
 
+//                'od.goods_id',
+//                'g.name'
+            ],'join'=>[
+                ['order_child oc','oc.father_order_id = o.id','left'],
+                ['common.address a','a.id = o.address_id','left'],
+//                ['order_detail od','od.father_order_id = oc.father_order_id','left'],
+//                ['goods g','g.id = od.goods_id','left'],
             ],
+
         ];
         if(input('?get.category_id') && input('get.category_id/d')){
             $config['where'][] = ['g.category_id_1', '=', input('get.category_id/d')];
@@ -285,6 +301,7 @@ class Order extends \common\controller\UserBase
         }
 
         $list = $model -> pageQuery($config);
+        print_r($list->toArray());exit;
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'index' ){
