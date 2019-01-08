@@ -1,5 +1,5 @@
 //登录-弹窗触发
-function loginDialog(){
+function loginDialog(fn_name){
     var content=$('#dialLogin').html();
     window.scrollTo(0,0);
     layer.open({
@@ -11,23 +11,37 @@ function loginDialog(){
             $('.layui-m-layershade').on('touchmove',function(e){
                 event.preventDefault();
             });
+            $('input[name="fn_name"]').val(fn_name)
         }
     });
 }
 
 //登录-弹窗触发
 function logoutDialog(){
-    var content=$('#dialLogin').html();
-    window.scrollTo(0,0);
+    var url = domain+'ucenter/UserCenter/logout';
     layer.open({
-        className:'loginLayer',
-        content:content,
-        title:['登录','border-bottom:1px solid #d9d9d9;'],
-        success:function(){
-            tab_down('.loginNav li','.loginTab .login_wrap','click');
-            $('.layui-m-layershade').on('touchmove',function(e){
-                event.preventDefault();
+        content:'是否退出？',
+        btn:['确定','取消'],
+        yes:function(index){
+            $.ajax({
+                url: url,
+                data: {},
+                type: 'post',
+                beforeSend: function(){
+                    $('.loading').show();
+                },
+                error:function(){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status){
+                        location.href = domain+'index/UserCenter/index';
+                    }
+                }
             });
+            layer.close(index);
         }
     });
 }
@@ -46,11 +60,11 @@ function forgetPasswordDialog(){
 $(function(){
     //忘记密码-弹窗事件
     $('body').on('click','#login_dialog',function(){
-        loginDialog();
+        loginDialog('reload');
     });
     //忘记密码-弹窗事件
-    $('body').on('click','.logout_dialog',function(){
-        forgetPasswordDialog();
+    $('body').on('click','#logout_dialog',function(){
+        logoutDialog();
     });
     //忘记密码-弹窗事件
     $('body').on('click','.forget_dialog',function(){
@@ -117,11 +131,18 @@ $(function(){
                     if(loginSign=='page'){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
-                        if(typeof(dialogLoginCallBack) == "undefined" && $.isFunction(dialogLoginCallBack)){
-                            dialogLoginCallBack(data);
-                        }else{
-                            dialogLoginDefaultCallBack(data)
+                        if(data.fn_name){
+                            var str = data.fn_name;
+                            eval(str +"()");
+                            return false;
                         }
+                        dialogLoginDefaultCallBack(data)
+                        // if(typeof(dialogLoginCallBack) == "undefined" || !$.isFunction(dialogLoginCallBack)){
+                        //     dialogLoginDefaultCallBack(data)
+                        // }else{
+                        //     dialogLoginCallBack(data);
+                        // }
+                        
                     }
                 }
             });
@@ -130,6 +151,10 @@ $(function(){
     //弹框登录成功默认回调函数
     function dialogLoginDefaultCallBack(data) {
         location.href = data.info;
+    }
+    //弹框登录成功默认回调函数
+    function reload() {
+        location.reload()
     }
 
     //显示隐藏密码
