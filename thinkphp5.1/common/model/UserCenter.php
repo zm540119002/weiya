@@ -18,14 +18,8 @@ class UserCenter extends Base {
 		$field = [
 			'status',
 		];
-		$returnData = '';
 		$user = $this->where($where)->field($field)->find();
-		if(!$user){
-			$returnData = '账号不存在';
-		}elseif($user['status']==1){
-			$returnData = '账号异常，请申诉';
-		}
-		return $returnData;
+		return $user;
 	}
 
 	/**登录
@@ -38,12 +32,13 @@ class UserCenter extends Base {
 			if(!$validateUser->scene('login')->check($data)) {
 				return errorMsg($validateUser->getError());
 			}
-			$res = $this->loginCheck($data['mobile_phone']);
-			if($res){
-				return errorMsg($res);
+			$user = $this->loginCheck($data['mobile_phone']);
+			if(!$user){
+				return errorMsg('账号不存在！');
+			}elseif($user['status']==1){
+				return errorMsg('账号异常，请申诉！');
 			}
 			return $this->_login($data);
-
 		}else{
 			return errorMsg('登录信息不完善！');
 		}
@@ -100,9 +95,14 @@ class UserCenter extends Base {
 			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
 				return errorMsg('验证码错误，请重新获取验证码！');
 			}
-			$res = $this->loginCheck($data['mobile_phone']);
-			if($res){
-				return errorMsg($res);
+			$user = $this->loginCheck($data['mobile_phone']);
+			if(!$user){
+				if(!$this->_register($data)){
+					return errorMsg('注册失败');
+				}
+				return $this->_login($data);
+			}elseif($user['status']==1){
+				return errorMsg('账号异常，请申诉！');
 			}
 			$saveData['salt'] = create_random_str(10,0);//盐值
 			$saveData['password'] = md5($saveData['salt'] . $data['password']);//加密

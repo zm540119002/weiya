@@ -46,7 +46,7 @@ function logoutDialog(){
     });
 }
 //忘记密码-弹窗触发
-function forgetPasswordDialog(){
+function forgetPasswordDialog(fn_name){
     var content = $('#sectionForgetPassword').html();
     layer.open({
         className:'forgetPasswordLayer',
@@ -54,6 +54,7 @@ function forgetPasswordDialog(){
         success:function(){
             $('.login_item .password').attr('type','password');
             $('.view-password').removeClass('active');
+            $('input[name="fn_name"]').val(fn_name)
         }
     });
 }
@@ -68,7 +69,8 @@ $(function(){
     });
     //忘记密码-弹窗事件
     $('body').on('click','.forget_dialog',function(){
-        forgetPasswordDialog();
+        var fn_name = $(this).siblings('input[name="fn_name"]').val();
+        forgetPasswordDialog(fn_name);
     });
 });
 $(function(){
@@ -97,8 +99,9 @@ $(function(){
                 postForm = $('#formRegister');
             }
         }else if(method=='forgetPassword'){//重置密码
-            if($('.loginLayer #formForgetPassword').length){//弹框重置密码
-                postForm = $('.loginLayer #formForgetPassword');
+            console.log($('.forgetPasswordLayer  #formForgetPassword').length);
+            if($('.forgetPasswordLayer  #formForgetPassword').length){//弹框重置密码
+                postForm = $('.forgetPasswordLayer #formForgetPassword');
             }else{//页面重置密码
                 loginSign = 'page';
                 postForm = $('#formForgetPassword');
