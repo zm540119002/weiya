@@ -1144,9 +1144,9 @@ background-position: 0 -27px;
 .register-btn{width:100%;margin:0.5rem auto 0.5rem;display:block;text-align:center;border-radius:0.15rem;
     background: #F39800;border:none;padding:0.28rem 0;color:#fff;}
 .ftipc{padding:0.15rem;}
-.loginLayer .layui-m-layercont,
-.registerLayer .layui-m-layercont,
-.forgetPasswdLayer .layui-m-layercont,
+.layui-m-layer .loginLayer .layui-m-layercont,
+.layui-m-layer .registerLayer .layui-m-layercont,
+.layui-m-layer .forgetPasswdLayer .layui-m-layercont,
 .notesLayer .layui-m-layercont{padding:0 0.15rem;text-align:left;}
 .loginLayer .layui-m-layerbtn,
 .registerLayer .layui-m-layerbtn
