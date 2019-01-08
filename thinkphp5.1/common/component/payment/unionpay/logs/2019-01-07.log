@@ -1,0 +1,105 @@
+2019-01-07 14:47:13, INFO, 112.97.247.9, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[71]------ =====签名报文开始====== 
+2019-01-07 14:47:13, INFO, 112.97.247.9, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/cert_util.php ], Line[39]------ 读取签名证书…… 
+2019-01-07 14:47:13, INFO, 112.97.247.9, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/cert_util.php ], Line[71]------ 签名证书读取成功，序列号：73925732709 
+2019-01-07 14:47:13, INFO, 112.97.247.9, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[84]------ 签名key=val&...串 >accessType=0&backUrl=http://www.worldview.com.cn/index.php/index/CallBack/unionBack/type/recharge&bizType=000201&certId=73925732709&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://www.worldview.com.cn/index.php/index/Payment/payComplete.html&merId=802440072770520&orderId=20190107144713533988719904247762&payTimeout=20190107150213&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20190107144713&txnType=01&version=5.1.0 
+2019-01-07 14:47:13, INFO, 112.97.247.9, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[101]------ 摘要sha256x16 >7d2b9c70ad42a1bba893e2713bfbd11b53315f917d4dabd61f618ed317617b65 
+2019-01-07 14:47:13, INFO, 112.97.247.9, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[106]------ 签名串为 >Puo9VSfMevGPNhCc9Dx3m8tRbSkKRaqJqrEzRJr07OvJ//UyUAHYOt65341MaYTq+5lB2vVZoyhBNDN27xKz/d+17hymbKgdDxo1HHtl1qxnmutRsgTp4wfcnLgbs3XdESnqfbOP4OL7hPUEY52+K0zpULukp6CBKwH4zwzZbeK2Cp2YAi7jNQsaQOu4ZU3FwOvyQSoxGneDrobfhUO4fkoJ4nXfy91nXhcqtAj6xAsnRMyieDBMwSPPqBXZ6RudUaaZAAlnoZCH9IfnFyY0SF+BvqiD3DvST/vFM8ZB7MwIyJn/w9Tx80cVsXXfLdZ1ro2aAWOx+FB+hP0VvR0XEg== 
+2019-01-07 14:47:13, INFO, 112.97.247.9, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[119]------ =====签名报文结束====== 
+2019-01-07 14:47:13, INFO, 112.97.247.9, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[364]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://gateway.95516.com/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.1.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://www.worldview.com.cn/index.php/index/Payment/payComplete.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://www.worldview.com.cn/index.php/index/CallBack/unionBack/type/recharge" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="802440072770520" />
+    <input type="hidden" name="orderId" id="orderId" value="20190107144713533988719904247762" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20190107144713" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="1" />
+    <input type="hidden" name="payTimeout" id="payTimeout" value="20190107150213" />
+    <input type="hidden" name="certId" id="certId" value="73925732709" />
+    <input type="hidden" name="signature" id="signature" value="Puo9VSfMevGPNhCc9Dx3m8tRbSkKRaqJqrEzRJr07OvJ//UyUAHYOt65341MaYTq+5lB2vVZoyhBNDN27xKz/d+17hymbKgdDxo1HHtl1qxnmutRsgTp4wfcnLgbs3XdESnqfbOP4OL7hPUEY52+K0zpULukp6CBKwH4zwzZbeK2Cp2YAi7jNQsaQOu4ZU3FwOvyQSoxGneDrobfhUO4fkoJ4nXfy91nXhcqtAj6xAsnRMyieDBMwSPPqBXZ6RudUaaZAAlnoZCH9IfnFyY0SF+BvqiD3DvST/vFM8ZB7MwIyJn/w9Tx80cVsXXfLdZ1ro2aAWOx+FB+hP0VvR0XEg==" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2019-01-07 15:21:30, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[71]------ =====签名报文开始====== 
+2019-01-07 15:21:30, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/cert_util.php ], Line[39]------ 读取签名证书…… 
+2019-01-07 15:21:30, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/cert_util.php ], Line[71]------ 签名证书读取成功，序列号：73925732709 
+2019-01-07 15:21:30, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[84]------ 签名key=val&...串 >accessType=0&backUrl=http://www.worldview.com.cn/index.php/index/CallBack/unionBack/type/order&bizType=000201&certId=73925732709&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://www.worldview.com.cn/index.php/index/Payment/payComplete.html&merId=802440072770520&orderId=20190107152125342439188754046618&payTimeout=20190107153630&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20190107152130&txnType=01&version=5.1.0 
+2019-01-07 15:21:30, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[101]------ 摘要sha256x16 >e9d6f41995fb897126fef79fef219b082e09d5f354b7517cda127ea4ba42c8ea 
+2019-01-07 15:21:30, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[106]------ 签名串为 >VgmeJPtFI+glPLAZQrSDxtW6eRx92P/TBdTmvyQitkJRZ+TlWgVIhwJxPyZvJlYPZT7OSXzCtWl9FIWY8YVb14oSne4FcX4AxcUAiUJV4mU3FWoNPK4FKclpQOU07RMY0CmWN5JjIqs7/oiEyiPoDnPphld990IsgGRNxVwx4ibKIvfcmgJyzY/0nhA9/mu/HZTt1JWvc3PWW2y8OsyKX4VX9yooZn7kpNtKfU6sayMP0bkD4Mq2PCFNISXSQIYlPd9KJIzMfgjrQxaMyyTkcLoZDUPazlTBFGOCiuYNDxsiqG81T6OEHIitaUUL6MkmDqU89UKUitViBQ/Bg1Ivrg== 
+2019-01-07 15:21:30, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[119]------ =====签名报文结束====== 
+2019-01-07 15:21:30, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[364]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://gateway.95516.com/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.1.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://www.worldview.com.cn/index.php/index/Payment/payComplete.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://www.worldview.com.cn/index.php/index/CallBack/unionBack/type/order" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="802440072770520" />
+    <input type="hidden" name="orderId" id="orderId" value="20190107152125342439188754046618" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20190107152130" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="1" />
+    <input type="hidden" name="payTimeout" id="payTimeout" value="20190107153630" />
+    <input type="hidden" name="certId" id="certId" value="73925732709" />
+    <input type="hidden" name="signature" id="signature" value="VgmeJPtFI+glPLAZQrSDxtW6eRx92P/TBdTmvyQitkJRZ+TlWgVIhwJxPyZvJlYPZT7OSXzCtWl9FIWY8YVb14oSne4FcX4AxcUAiUJV4mU3FWoNPK4FKclpQOU07RMY0CmWN5JjIqs7/oiEyiPoDnPphld990IsgGRNxVwx4ibKIvfcmgJyzY/0nhA9/mu/HZTt1JWvc3PWW2y8OsyKX4VX9yooZn7kpNtKfU6sayMP0bkD4Mq2PCFNISXSQIYlPd9KJIzMfgjrQxaMyyTkcLoZDUPazlTBFGOCiuYNDxsiqG81T6OEHIitaUUL6MkmDqU89UKUitViBQ/Bg1Ivrg==" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2019-01-07 15:45:44, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[71]------ =====签名报文开始====== 
+2019-01-07 15:45:44, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/cert_util.php ], Line[39]------ 读取签名证书…… 
+2019-01-07 15:45:44, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/cert_util.php ], Line[71]------ 签名证书读取成功，序列号：73925732709 
+2019-01-07 15:45:44, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[84]------ 签名key=val&...串 >accessType=0&backUrl=http://www.worldview.com.cn/index.php/index/CallBack/unionBack/type/order&bizType=000201&certId=73925732709&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://www.worldview.com.cn/index.php/index/Payment/payComplete.html&merId=802440072770520&orderId=20190107154540729413774487822312&payTimeout=20190107160044&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20190107154544&txnType=01&version=5.1.0 
+2019-01-07 15:45:44, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[101]------ 摘要sha256x16 >05f0a3a2b1cb6ef4cf3723a5a1089958a8c8c15a4502efdb54b57919616ed1af 
+2019-01-07 15:45:44, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[106]------ 签名串为 >dCnJRrPYsUmMzYnpF0VZLzy4KBHpqCP/pM4w1reAxYPkonmioi8TRZMS2CLuGKb29KtErDY/amw0flBfqUzzQtXOqJ/30WEaBF+q04IDZOITyVXqi2B/dt5TizBwz8Cqj/dyrYOXEGv0ArIU4OEzHAp7zSAW2VHSZ1RCF7t5XbAXoglHMB1gJ69XoIaj2oow7Bs5ejSrisHO1NDHvZozieDfNrTffcx1jxecPir4XoRNHwc+CEUbpQqB+sQrXMOJmsI5JIGkwpI+SwfCrujNOUAUY+f9tOegOwjmG1qOtFK3ZMaakPIt9X5xkcBTvjExDICajx8PgojvPzN5IbIDjw== 
+2019-01-07 15:45:44, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[119]------ =====签名报文结束====== 
+2019-01-07 15:45:44, INFO, 14.18.29.112, File[ /home/www/web_weiya/thinkphp5.1/common/component/payment/unionpay/sdk/AcpService.php ], Line[364]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://gateway.95516.com/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.1.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://www.worldview.com.cn/index.php/index/Payment/payComplete.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://www.worldview.com.cn/index.php/index/CallBack/unionBack/type/order" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="802440072770520" />
+    <input type="hidden" name="orderId" id="orderId" value="20190107154540729413774487822312" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20190107154544" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="1" />
+    <input type="hidden" name="payTimeout" id="payTimeout" value="20190107160044" />
+    <input type="hidden" name="certId" id="certId" value="73925732709" />
+    <input type="hidden" name="signature" id="signature" value="dCnJRrPYsUmMzYnpF0VZLzy4KBHpqCP/pM4w1reAxYPkonmioi8TRZMS2CLuGKb29KtErDY/amw0flBfqUzzQtXOqJ/30WEaBF+q04IDZOITyVXqi2B/dt5TizBwz8Cqj/dyrYOXEGv0ArIU4OEzHAp7zSAW2VHSZ1RCF7t5XbAXoglHMB1gJ69XoIaj2oow7Bs5ejSrisHO1NDHvZozieDfNrTffcx1jxecPir4XoRNHwc+CEUbpQqB+sQrXMOJmsI5JIGkwpI+SwfCrujNOUAUY+f9tOegOwjmG1qOtFK3ZMaakPIt9X5xkcBTvjExDICajx8PgojvPzN5IbIDjw==" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 

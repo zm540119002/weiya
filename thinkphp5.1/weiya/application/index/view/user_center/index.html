@@ -4,16 +4,30 @@
 {block name="content"}
 <article class="person-center-wrapper f24">
     <section class="separation-line columns_flex l-r-sides flex_item">
+        {empty name="user"}
         <div>
-            <img src="" alt="" class="left">
+           <a>
+               <span></span>
+               注册登录
+           </a>
+        </div>
+        {else /}
+        <div class="user_top_item">
+            {empty name="user.avatar"}
+            <img src="public_img/default/chat_head.jpg" class="left">
+            {else /}
+            <img src="public_uploads/{$user.avatar}" class="left">
+            {/empty}
             <div>
-                <span>张三</span>
-                <p>13679898358</p>
+                <span>{$user.name}</span>
+                <p>{$user.mobile_phone}</p>
             </div>
         </div>
         <a href="javascript:void(0);">
-           退出
+            退出
         </a>
+        {/empty}
+
     </section>
     <section class="separation-line">
         <div class="flex_item">
@@ -129,6 +143,7 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
+    var user={:json_encode($user)};
     $(function () {
         $('body').on('click','.my_cart',function () {
             var url = module + 'Cart/index';
