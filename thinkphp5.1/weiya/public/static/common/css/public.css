@@ -4270,6 +4270,9 @@ select[name="nodeIds"]{
     margin:0 auto;
     text-align: center;
 }
+.user_top_item{
+    flex:4;
+}
 .user_top_item img{
     width:15%;
 }
