@@ -236,7 +236,7 @@ $(function () {
             }
         });
     });
-    //去结算
+    //去结算 生成订单
     $('body').on('click','.settlement',function(){
         var postData = {};
         var cartIds = [];
@@ -260,17 +260,27 @@ $(function () {
     //确认订单
     $('body').on('click','.confirm_order',function () {
         _this = $(this);
+        var consignee=$('.consigneeInfo input[name="layer_consignee"]').val();
+        var province=$('.consigneeInfo input[name="province"]').val();
+        var city=$('.consigneeInfo input[name="city"]').val();
+        var area=$('.consigneeInfo input[name="area"]').val();
+        var detail_address=$('.consigneeInfo input[name="layer_detail_address"]').val();
         var orderId = $('.order_id').val();
         var orderSn = $('.order_sn').val();
         var addressId = $('.address_id').val();
-        var postData = {};
-        postData.father_order_id = orderId;
-        postData.order_sn = orderSn;
-        postData.address_id = addressId;
         if(!addressId){
             dialog.error('请选择收货地址');
             return false;
         }
+        var postData ={
+            father_order_id:orderId,
+            order_sn:orderSn,
+            consignee:consignee,
+            province:province,
+            city:city,
+            area:area,
+            detail_address:detail_address
+        };
         _this.addClass("nodisabled");//防止重复提交
         var url = module + 'Order/confirmOrder';
         $.ajax({
