@@ -6,21 +6,13 @@
     <section class="separation-line columns_flex l-r-sides flex_item">
         {empty name="user"}
         <div>
-            {empty name="user.avatar"}
-            <img src="public_img/default/chat_head.jpg" class="left">
-            {else /}
-            <img src="public_uploads/{$user.avatar}" class="left">
-            {/empty}
-            <div>
-                <span>{$user.name}</span>
-                <p>{$user.mobile_phone}</p>
-            </div>
+           <a>
+               <span></span>
+               注册登录
+           </a>
         </div>
-        <a href="javascript:void(0);">
-            退出
-        </a>
         {else /}
-        <div>
+        <div class="user_top_item">
             {empty name="user.avatar"}
             <img src="public_img/default/chat_head.jpg" class="left">
             {else /}

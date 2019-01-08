@@ -4265,6 +4265,9 @@ select[name="nodeIds"]{
     border-radius:5px;
     padding:0 0.12rem;
 }
+.user_top_item img{
+    width:100%;
+}
 /*订单客服售前*/
 .chat_content_wrapper{
     padding-top:1rem;
