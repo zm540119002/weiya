@@ -20,8 +20,8 @@
                 <a href="javascript:void(0);" class="edit">编辑</a>
                 | <a href="javascript:void(0);" class="del">删除</a>
             </td>
-            <td class="w96 auth_status">
-                <span>{$vo.auth_status|getAuthStatus}</span>
+            <td class="w96 ">
+                <span class="auth_status">{$vo.auth_status|getAuthStatus}</span>
                 {if  $vo.auth_status == 1}
                 <a href="javascript:void(0);" class="set-auth-status" data-auth_status="2">审核通过</a>
                 <a href="javascript:void(0);" class="set-auth-status" data-auth_status="-1">审核不通过</a>

@@ -4,6 +4,10 @@
 <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
 {/block}
 {block name="content"}
+<div class="set_status_btn" style="display: none;">
+    <a href="javascript:void(0);" class="set-auth-status" data-auth_status="2">审核通过</a>
+    <a href="javascript:void(0);" class="set-auth-status" data-auth_status="-1">审核不通过</a>
+</div>
     <div class="page">
         <div class="fixed-bar">
             <div class="item-title">
@@ -163,17 +167,20 @@
                     yes:function (index) {
                         $.post(url,postData,function(msg){
                             dialog.msg(msg,'',function(){
-                                _thisTr.find('.auth_status').text(text);
                                 if(auth_status == 2){
+                                    _thisTr.find('.auth_status').text('审核通过');
                                     _this.text('重置');
                                     _this.data('auth_status',1);
+                                    _this.next().remove();
                                 }else if(auth_status == 1){
-                                    _this.text('审核通过');
-                                    _this.data('auth_status',2);
+                                    _thisTr.find('.auth_status').text('待审核');
+                                    _this.remove();
+                                    _thisTr.find('.auth_status').after($('.set_status_btn').html());
+
                                 }
                                 else if(auth_status == -1){
-                                    _this.text('审核通过');
-                                    _this.data('auth_status',2);
+                                    _thisTr.find('.auth_status').text('审核不通过');
+                                    _this.remove();
                                 }
                             });
                         });
