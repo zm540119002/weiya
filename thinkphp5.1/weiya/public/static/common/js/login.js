@@ -5,6 +5,7 @@ function loginDialog(fn_name){
     layer.open({
         className:'loginLayer',
         content:content,
+        type:1,
         title:['登录','border-bottom:1px solid #d9d9d9;'],
         success:function(){
             tab_down('.loginNav li','.loginTab .login_wrap','click');
@@ -51,6 +52,7 @@ function forgetPasswordDialog(fn_name){
     layer.open({
         className:'forgetPasswordLayer',
         content:content,
+        type:1,
         success:function(){
             $('.login_item .password').attr('type','password');
             $('.view-password').removeClass('active');
