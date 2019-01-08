@@ -4382,6 +4382,11 @@ select[name="nodeIds"]{
 .person-center-wrapper .separation-line{
     border-bottom:18px solid #f2f2f2;
 }
+.flex_item a img{
+    display:block;
+    width:0.8rem;
+    margin:0 auto;
+}
 .flex_item a span{
     position:relative;
     /*width: 30px; */
