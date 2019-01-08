@@ -4265,6 +4265,11 @@ select[name="nodeIds"]{
     border-radius:5px;
     padding:0 0.12rem;
 }
+.user_top{
+    width:2rem;
+    margin:0 auto;
+    text-align: center;
+}
 .user_top_item img{
     width:15%;
 }
