@@ -479,6 +479,9 @@ price{
 .bottom_nav_fixed a{
     font-size:0;
 }
+.weiya_item .bottom_nav_fixed{
+    bottom:0.8rem;
+}
 .common_default_img{
     width:100%;
     height:auto;
@@ -4288,7 +4291,7 @@ select[name="nodeIds"]{
     justify-content: center;
 }
 .content .msg{
-    background: #fff;
+    background:transparent;
 }
 .bottom_flex{
     display:flex;
@@ -5163,4 +5166,170 @@ select[name="nodeIds"]{
 }
 .c_text{
     margin:0 0 0.12rem 0;
+}
+/*订单客服售前*/
+.layui-m-layerchild.chatLayer{
+    background:#f2f2f2;
+}
+.chat_content_wrapper{
+    padding-top:1rem;
+}
+.chat_item.hide{
+    display:none;
+}
+.chatMsg-ct li{
+    padding:0.10rem 0.15rem;
+    margin:0 0 .15rem 0;
+    border:none;
+    background:none;
+}
+.chatMsg-ct li.others{
+    margin-bottom:0.35rem;
+}
+.avatar{
+    position:relative;
+    max-width:40px;
+}
+.avatar img{
+    width:100%;
+}
+.avatar .news_num{
+    position: absolute;
+    top: -0.15rem;
+    right: -0.12rem;
+    /*border: 1px solid #ff0000;*/
+    border-radius: 100%;
+    width: 50%;
+    background: #ff0000;
+    color: #fff;
+    text-align: center;
+}
+.customer_sidebar a span{
+    position: absolute;
+    top: 0.15rem;
+    right:0.12rem;
+    /*border: 1px solid #ff0000;*/
+   
+    font-size:0.24rem;
+}
+.customer_sidebar a span.news_num{
+    width:50%;
+    right:-0.10rem;
+    top:-0.12rem;
+    background:#ff0000;
+    color:#fff;
+    border-radius:100%;
+}
+.chat_item .content{
+    margin:0 0 0 0.20rem;
+    background:#fff;
+    border-radius:5px;
+    color:#333;
+    padding:0.08rem;
+}
+.chat_item .me .content{
+    margin:0 0.20rem 0 0; 
+    background:#22AC38;   
+}
+.chat_list.new_msg{
+    border-color:#ff0000;
+}
+.customer_btn.twinkle{
+    -webkit-animation:twinkling 1s infinite ease-in-out
+}
+@-webkit-keyframes twinkling{    /*透明度由0到1*/
+    0%{
+        opacity:0; /*透明度为0*/
+        }
+    100%{
+        opacity:1; /*透明度为1*/
+
+    }
+}
+.others,
+.me,
+.chat_list,
+.time{
+    display:flex;
+}
+.me{
+    flex-direction:row-reverse;
+}
+.me .author{
+    text-align:right;
+}
+.time{
+    justify-content: center;
+}
+.content .msg{
+    
+}
+.chat_list{
+    position:relative;
+}
+.chat_list .detele_chat{
+    position:absolute;
+    right:0.15rem;
+    color:#ff0000;
+}
+.bottom_flex{
+    display:flex;
+    display:-webkit-flex;
+    justify-content: space-between;
+    padding:0.15rem 0;
+}
+.bottom_flex .send_out_text{
+    width:85%;
+    padding:0.12rem 0;
+    text-indent:0.12rem;
+}
+.bottom_flex .send_btn{
+    width:15%;
+}
+.mid_module_right{
+    display:flex;
+    display:-webkit-flex;
+}
+.count_down_box{
+    padding:0.05rem 0.18rem 0.05rem 0.12rem;
+    background: #000;
+    color:#fff;
+    border-radius:0.5rem;
+    font-size:0.20rem;
+}
+.mid_module_left .d-r{
+    margin:0 0 0 0.8rem;
+}
+.mid_module_right span.item{
+    display:block;
+    margin:0 auto;
+    width:0.80rem;
+    height:0.80rem;
+    background-image:url(../../common/img/icons/cut-off.png);
+    background-repeat: no-repeat;
+    background-size:0.7rem 1.55rem;
+}
+.mid_module_right span.end_time{
+    background-position:0 0;
+}
+.mid_module_right span.factory{
+    background-position:0 -0.85rem;
+}
+.wk_notice{
+    color:#1CAD99;
+}
+.tags_item_r a span{
+    display:inline-block;
+    width:0.4rem;
+    height:0.35rem;
+    background-image:url(../../common/img/icons/detail_icons.png);
+    background-repeat: no-repeat;
+    background-size:0.35rem 2.18rem;
+    vertical-align: -6px;
+}
+.tags_item_r .collection span{
+    background-position:0 0;
+}
+.tags_item_r .share span{
+    background-position:0 -0.44rem;
 }
