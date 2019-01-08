@@ -6,7 +6,7 @@ namespace  common\component\payment\unionpay;
  * Date: 2017/12/9
  * Time: 10:16
  */
-require_once(dirname(__FILE__) .'/sdk/acp_service.php');
+//require_once(dirname(__FILE__) .'/sdk/acp_service.php');
 use common\component\payment\unionpay\sdk\AcpService;
 use common\component\payment\unionpay\sdk\SDKConfig;
 

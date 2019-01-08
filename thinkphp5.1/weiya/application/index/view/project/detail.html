@@ -96,9 +96,9 @@
 			<li data-id="{$info.id}" data-buy_type="1">
 				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
 					{empty name="info.thumb_img"}
-					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+					<img class="left goods_img" src="public_img/default/no_pic_100.jpg" alt="">
 					{else /}
-					<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
+					<img class="left goods_img" src="public_uploads/{$info.thumb_img}" alt="">
 					{/empty}
 				</a>
 				<div class="list_r">
@@ -110,9 +110,9 @@
 					<div class="columns_flex l-r-sides project_p_item">
 						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
 						</div>
-						<a href="javascript:void(0);" class="sample_purchase" >样品购买
+						<!--<a href="javascript:void(0);" class="sample_purchase" >样品购买
 							<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
-						</a>
+						</a>-->
 					</div>
 					<div class="quantity_wrapper selected-number">
 						<a href="javascript:void(0);" class="greduce" >-</a>

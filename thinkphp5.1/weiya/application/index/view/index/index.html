@@ -55,7 +55,7 @@
 			<div class="scene_wrapper">
 				{volist name="sceneList" id="info" }
 				<div class="graphic_item graphic_item_65 img{$key}" >
-					<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
+					<a href="{:url('Scene/detail',['id'=>$info.id,'css'=>'css'.$key])}"  data-id="{$info.id}">
 						<div class="show-img">
 							{empty name="info.thumb_img"}
 							<img src="public_img/default/no_pic_100.jpg" alt="">
@@ -232,7 +232,6 @@
 			}
 		});
 
-
 		$('body').on('click','.my_cart',function () {
 			var url = module + 'Cart/index';
 			var postData = {};
@@ -245,9 +244,10 @@
 				},
 				error:function(xhr){
 					$('.loading').hide();
-					dialog.error('AJAX错误');
+					dialog.error('AJAX错误！');
 				},
 				success: function(data){
+
 					$('.loading').hide();
 					if(data.status==0){
 						dialog.error(data.info);
@@ -256,8 +256,9 @@
 							loginDialog();
 						}
 					}else if(data.status==1){
-						location.href = url;
+
 					}else{
+						location.href = url;
 					}
 				}
 			});

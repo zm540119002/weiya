@@ -19,7 +19,7 @@ class Order extends \common\controller\UserBase
                 ['c.status', '=', 0],
                 ['c.id', 'in', $cartIds],
             ], 'field' => [
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity','g.sample_price',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.store_id','c.buy_type','c.num',
             ],'join'=>[
                 ['goods g','g.id = c.foreign_id','left']
@@ -32,9 +32,9 @@ class Order extends \common\controller\UserBase
 
         foreach ($goodsList as $k => &$goodsInfo) {
             if($goodsInfo['buy_type'] == 2){
-                $goodsSalePrice = $goodsInfo['minimum_sample_quantity'];
+                $goodsSalePrice = $goodsInfo['sample_price'];
             }else{
-                $goodsSalePrice = $goodsInfo['minimum_order_quantity'];
+                $goodsSalePrice = $goodsInfo['bulk_price'];
             }
             $goodsList[$k]['price'] = $goodsSalePrice;
             $goodsList[$k]['store_id'] = $goodsInfo['store_id'];
@@ -46,7 +46,7 @@ class Order extends \common\controller\UserBase
         //开启事务
         $modelOrder->startTrans();
         //订单编号
-        $orderSN = generateSN(5);
+        $orderSN = generateSN();
         //组装父订单数组
         $data = [
                 'sn' => $orderSN,
@@ -82,7 +82,6 @@ class Order extends \common\controller\UserBase
         $modelOrder->commit();
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
-
    //订单-结算页
     public function settlement()
     {
@@ -108,7 +107,6 @@ class Order extends \common\controller\UserBase
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
     }
-
     //订单-详情页
     public function detail()
     {
@@ -162,11 +160,8 @@ class Order extends \common\controller\UserBase
         }
         $fatherOrderId = input('post.father_order_id',0,'int');
         $modelOrder = new \app\index\model\Order();
-
-        $data = [
-            'order_status' => 1,
-            'address_id' => input('post.address_id',0,'int'),
-        ];
+        $data = input('post.');
+        $data['order_status'] = 1;
         $condition = [
             ['user_id','=',$this->user['id']],
             ['id','=',$fatherOrderId],
@@ -175,24 +170,40 @@ class Order extends \common\controller\UserBase
         if(false === $res){
             return errorMsg('失败');
         }
-//        //根据订单号查询关联的商品
-//        $modelOrderDetail = new \app\index\model\OrderDetail();
-//        $config = [
-//            'where' => [
-//                ['od.status', '=', 0],
-//                ['od.father_order_id', '=', $fatherOrderId],
-//            ], 'field' => [
-//                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id',
-//            ]
-//        ];
-//        $orderDetailList = $modelOrderDetail->getList($config);
-//        $modelOrderChild = new \app\index\model\OrderChild();
-//        //生成子订单
-//        $rse = $modelOrderChild -> createOrderChild($orderDetailList,$this->user['id']);
-//        if(!$rse['status']){
-//            $modelOrder->rollback();
-//            return errorMsg($modelOrder->getLastSql());
-//        }
+        //根据订单号查询关联的购物车的商品 删除
+        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $config = [
+            'where' => [
+                ['od.status', '=', 0],
+                ['od.father_order_id', '=', $fatherOrderId],
+            ], 'field' => [
+                'od.goods_id','od.buy_type','od.price', 'od.num', 'od.store_id','od.father_order_id','od.user_id'
+            ]
+        ];
+        $orderDetailList = $modelOrderDetail->getList($config);
+        $model = new \app\index\model\Cart();
+        foreach ($orderDetailList as &$orderDetailInfo){
+            $condition = [
+                ['user_id','=',$this->user['id']],
+                ['foreign_id','=',$orderDetailInfo['goods_id']],
+                ['buy_type','in',$orderDetailInfo['buy_type']],
+            ];
+            $result = $model -> del($condition,false);
+            if(!$result['status']){
+                return errorMsg('删除失败');
+            }
+        }
+
+      //根据订单号查询关联的商品
+        $modelOrderChild = new \app\index\model\OrderChild();
+        //生成子订单
+        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
+        if(!$rse['status']){
+            $modelOrder->rollback();
+            return errorMsg($modelOrderChild->getError());
+        }
+
+
         $orderSn = input('post.order_sn','','string');
         return successMsg('成功',array('order_sn'=>$orderSn));
     }
@@ -216,6 +227,87 @@ class Order extends \common\controller\UserBase
         $unlockingFooterCart = unlockingFooterCartConfig([4]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
+    }
+    //订单管理
+    public function manage(){
+        if(input('?order_status')){
+            $orderStatus = input('order_status');
+            $this ->assign('order_status',$orderStatus);
+        }
+       return $this->fetch();
+    }
+
+    /**
+     * @return array|mixed
+     * 查出产商相关产品 分页查询
+     */
+    public function getList(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+
+        $model = new \app\index\model\Order();
+        $config=[
+            'where'=>[
+                ['o.status', '=', 0],
+                ['o.user_id', '=', $this->user['id']],
+            ],
+            /**
+             *   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+            `sn` varchar(32) NOT NULL COMMENT '编号',
+            `pay_sn` varchar(33) NOT NULL DEFAULT '' COMMENT '支付单号',
+            `status` tinyint(3) NOT NULL DEFAULT '0' COMMENT '状态：0 ：启用 1：禁用 2：删除',
+            `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '类型：0：普通 1：团购',
+            `order_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '物流状态：0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消 6:售后',
+            `after_sale_status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '售后服务状态 0：正常 1：待处理 2：已完成',
+            `payment_code` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '支付方式：0 微信 1：支付宝 3：网银',
+            `amount` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '总金额',
+            `coupons_pay` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '代金券支付金额',
+            `wallet_pay` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '钱包支付金额',
+            `actually_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '实际支付金额',
+            `remark` varchar(2000) NOT NULL DEFAULT '' COMMENT '备注说明',
+            `user_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID：user.id',
+            `address_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '地址ID:consignee_address.id',
+            `coupons_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '代金券ID:coupons.id',
+            `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '生成时间',
+            `payment_time` varchar(14) NOT NULL DEFAULT '' COMMENT '支付时间',
+            `finished_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '完成时间',
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8 COMMENT='订单表';
+
+             */
+            'field'=>[
+                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
+                'o.address_id','o.create_time','o.payment_time','o.finished_time',
+                'a.consignee',
+                'oc.sn as order_child_sn',
+
+//                'od.goods_id',
+//                'g.name'
+            ],'join'=>[
+                ['order_child oc','oc.father_order_id = o.id','left'],
+                ['common.address a','a.id = o.address_id','left'],
+//                ['order_detail od','od.father_order_id = oc.father_order_id','left'],
+//                ['goods g','g.id = od.goods_id','left'],
+            ],
+
+        ];
+        if(input('?get.category_id') && input('get.category_id/d')){
+            $config['where'][] = ['g.category_id_1', '=', input('get.category_id/d')];
+        }
+        $keyword = input('get.keyword','');
+        if($keyword) {
+            $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
+        }
+
+        $list = $model -> pageQuery($config);
+        print_r($list->toArray());exit;
+        $this->assign('list',$list);
+        if(isset($_GET['pageType'])){
+            if($_GET['pageType'] == 'index' ){
+                return $this->fetch('list_index_tpl');
+            }
+        }
     }
 
 

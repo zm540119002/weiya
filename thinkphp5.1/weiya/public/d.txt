@@ -1,0 +1,1 @@
+UPDATE `wallet_detail`  SET `recharge_status` = 2 , `payment_code` = '1' , `pay_sn` = '4200000216201901074442448806' , `payment_time` = '20190107142448'  WHERE  `user_id` = 16  AND `sn` = '20190107142441168957320452272419'

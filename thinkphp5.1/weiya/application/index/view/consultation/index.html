@@ -1,6 +1,5 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
 {/block}
 {block name="content"}
 <article class="f24">
@@ -12,119 +11,70 @@
             <li>
                 <a href="javascript:void(0);">在线客服咨询</a>
             </li>
-            <li>
+            <!--<li>
                 <a href="javascript:void(0);">部分案例分享</a>
-            </li>
+            </li>-->
         </ul>
 	</section>
     <section class="content_main">
         <div class="weiya_item">
+			<div class="content-padding msg_item msg_top_item">
+				<div class="m_l c_mobile">
+					<p>品牌定制顾问</p>
+					<p>宫学莹：<a href="tel:13711326631">13711326631</a></p>
+					<p>周清萍：<a href="tel:13660613163">13660613163</a></p>
+				</div>
+				<div class="m_l c_mobile">
+					<p>品牌定制客服</p>
+					<p>叶雯雯：<a href="tel:18820019781">18820019781</a></p>
+				</div>
+			</div>
             <div class="msg_content">
-                <div class="content-padding msg_item ">
-                    <div class="m_l c_mobile">
-                        <p>品牌定制顾问</p>
-                        <p>宫学莹：<a href="tel:13711326631">13711326631</a></p>
-                        <p>周清萍：<a href="tel:13660613163">13660613163</a></p>
-                    </div>
-                    <div class="m_l c_mobile">
-                        <p>品牌定制客服</p>
-                        <p>叶雯雯：<a href="tel:18820019781">18820019781</a></p>
-                    </div>
-                </div>
-                <form>
+                <form class="message_form">
                     <div class="msg_item">
-                        <input class="input-filed" type="text" name="" value="" placeholder="你的姓名">
+                        <input class="input-filed" type="text" name="name" value="" placeholder="你的姓名">
                     </div>
                     <div class="msg_item">
-                        <input class="input-filed" type="tel" name="" value="" placeholder="手机号码">
+                        <input class="input-filed" type="tel" name="mobile" value="" placeholder="手机号码">
                     </div>
                     <div class="msg_item">
-                        <textarea class="input-filed leaving_msg" rows="" cols="" placeholder="留言文字..."></textarea>
+                        <textarea class="input-filed leaving_msg" name="message" rows="" cols="" placeholder="留言文字..."></textarea>
                     </div>
                 </form>
                 <a href="javascript:void(0);" class="submit_msg">递交留言</a>
             </div>
         </div>
-        <div class="weiya_item "></div>
-		<div class="weiya_item hide">
-			<ul>
-				<li>
-					<div class="more-text-box">
-						<p class="more-text">[案例分享] 是非成败转头空，青山依旧在，惯看秋月春风。一壶浊酒喜相逢，古今多少事，滚滚长江东逝水，浪花淘尽英雄。 几度夕阳红。白发渔樵江渚上，都付笑谈中。滚滚长江东逝水。</p>
-					</div>
-					<div class="dynamic_img columns_flex">
-						<a>
-							<img src="weiya_img/zjwy_cp01.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp02.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp03.jpg" alt="">
-						</a>
-					</div>
-					<div class="dynamic_img columns_flex">
-						<a>
-							<img src="weiya_img/zjwy_cp04.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp05.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp06.jpg" alt="">
-						</a>
-					</div>
-					<div class="dynamic_img columns_flex">
-						<a>
-							<img src="weiya_img/zjwy_cp07.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp08.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp09.jpg" alt="">
-						</a>
-					</div>
-				</li>
-				<li>
-					<div class="more-text-box">
-						<p class="more-text">[案例分享] 是非成败转头空，青山依旧在，惯看秋月春风。一壶浊酒喜相逢，古今多少事，滚滚长江东逝水，浪花淘尽英雄。 几度夕阳红。白发渔樵江渚上，都付笑谈中。滚滚长江东逝水。</p>
-					</div>
-					<div class="dynamic_img columns_flex">
-						<a>
-							<img src="weiya_img/zjwy_cp10.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp11.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp12.jpg" alt="">
-						</a>
-					</div>
-					<div class="dynamic_img columns_flex">
-						<a>
-							<img src="weiya_img/zjwy_cp13.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp14.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp15.jpg" alt="">
-						</a>
-					</div>
-					<div class="dynamic_img columns_flex">
-						<a>
-							<img src="weiya_img/zjwy_cp16.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp17.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp18.jpg" alt="">
-						</a>
-					</div>
-				</li>
-			</ul>
+        <div class="weiya_item hide">
+			<div class="ws_chatMsg-panel flex1">
+				<div class="chatMsg-ct">
+					<ul class="clearfix chat_item" data-from_id="17">
+						<li class="me read" data-id="342">
+							<div class="avatar">
+										<img src="http://msy.meishangyun.com/static/common/img/default/chat_head.jpg">
+									</div>
+							<div class="content">
+								<p class="author">乔峰<span class="create_time">2019-01-07 17:37</span></p>
+								<div class="msg">是打发士大夫的</div>
+							</div>
+						</li>
+						<li class="me read" data-id="343">
+							<div class="avatar">
+								<img src="http://msy.meishangyun.com/static/common/img/default/chat_head.jpg">
+							</div>
+							<div class="content">
+								<p class="author">乔峰<span class="create_time">2019-01-07 17:37</span></p>
+								<div class="msg">打发士大夫</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="bottom_nav_fixed">
+				<div class="bottom_flex">
+					<input class="send_out_text" type="text" name="" value="">
+					<input class="send_btn" type="button" value="发送">
+				</div>
+			</div>
 		</div>
     </section>
 </article>
@@ -170,50 +120,8 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
 	$(function(){
-
-		$('body').on('click','.my_cart',function () {
-			var url = module + 'Cart/index';
-			var postData = {};
-			$.ajax({
-				url: url,
-				data: postData,
-				type: 'post',
-				beforeSend: function(xhr){
-					$('.loading').show();
-				},
-				error:function(xhr){
-					$('.loading').hide();
-					dialog.error('AJAX错误');
-				},
-				success: function(data){
-					$('.loading').hide();
-					if(data.status==0){
-						dialog.error(data.info);
-					}else if(data.code==1){
-						if(data.data == 'no_login'){
-							loginDialog();
-						}
-					}else if(data.status==1){
-						location.href = url;
-					}else{
-					}
-				}
-			});
-		});
-		//轮播
-		var swiper = new Swiper('.swiper-container', {
-			spaceBetween: 30,
-			autoplay:true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		});
-
 		//查看文本
 		$('.more-text-box').moreText({
 			mainCell:".more-text",
@@ -223,6 +131,35 @@
 			$(this).addClass('current').siblings().removeClass('current');
 			$('.weiya_item').hide().eq($(this).index()).show();
 		});    
+		//递交留言
+		$('.submit_msg').on('click',function(){
+			var postData=$('.message_form').serializeObject();
+			var content='';
+			if(!postData.name){
+				content='请填写你的姓名';
+			}else if(!postData.mobile){
+				content='请填写你手机号码';
+			}else if(!postData.message){
+				content='请填写你的留言';
+			}
+			if(content){
+				dialog.error(content);
+				return false;
+			}
+			console.log(postData);
+			$.ajax({
+				type:'post',
+				url:'',
+				data:'',
+				success:function(){
+
+				},
+				error:function(xhr){
+					dialog.error(xhr);
+				}
+			})
+
+		})
 	});
 </script>
 {/block}

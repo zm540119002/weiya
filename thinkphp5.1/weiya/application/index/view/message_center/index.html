@@ -1,0 +1,85 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24 ">
+    <section class="header_title separation-line">
+		<h2 class="f24">消息中心</h2>
+	</section>
+	<section class="">
+		<ul class="message_list">
+			<li>
+				<img src="public_img/logistics.png" alt="" class="left logistics">
+				<div class="msg_r">
+					<p class="columns_flex l-r-sides">
+						<span>物流消息</span>
+						<span>2019-1-5</span>
+					</p>
+					<p>已签收，您在南极星家居专营店购买的商品...</p>
+				</div>
+			</li>
+			<li>
+				<img src="public_img/notice.png" alt="" class="left">
+				<div class="msg_r">
+					<p class="columns_flex l-r-sides">
+						<span>通知消息</span>
+						<span>2019-1-5</span>
+					</p>
+					<p>已签收，您在南极星家居专营店购买的商品...</p>
+				</div>
+			</li>
+			<li>
+				<img src="public_img/interaction.png" alt="" class="left">
+				<div class="msg_r">
+					<p class="columns_flex l-r-sides">
+						<span>互动消息</span>
+						<span>2019-1-5</span>
+					</p>
+					<p>已签收，您在南极星家居专营店购买的商品...</p>
+				</div>
+			</li>
+		</ul>
+	</section>
+</article>
+<section class="bottom_nav_fixed bottom_white">
+	<nav class=" foot_nav_bar">
+		<ul class="columns_flex">
+			<li class="each_column current">
+				<a href="{:url('Index/index')}">
+					<span class="store f_icon"></span>
+					<span class="f_txt">药妆定制</span>
+				</a>
+			</li>
+			<li class="each_column ">
+				<a href="javascript:void(0)">
+					<span class="practitioners f_icon"></span>
+					<span class="f_txt">走进维雅</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('Consultation/index')}">
+					<span class="business f_icon"></span>
+					<span class="f_txt">业务咨询</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="javascript:void(0)" class="my_cart">
+					<span class="cart f_icon"></span>
+					<span class="f_txt">采购车</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('UserCenter/index')}">
+					<span class="my f_icon"></span>
+					<span class="f_txt">我的</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+{/block}

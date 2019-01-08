@@ -1,0 +1,70 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24 notice_wrapper">
+    <section class="header_title separation-line">
+		<h2 class="f24">我的报告</h2>
+	</section>
+	<section class="content-padding">
+		<ul class="list report_list">
+			<li>
+				<span class="pdf"></span>
+				面膜美肤111111111报告
+				<a href="javascript:void(0);" class="upload_report">下载</a>
+			</li>
+			<li>
+				<span class="pdf"></span>
+				面膜美肤2222222222报告
+				<a href="javascript:void(0);" class="upload_report">下载</a>
+			</li>
+			<li>
+				<span class="pdf"></span>
+				面膜美肤3333333333报告
+				<a href="javascript:void(0);" class="upload_report">下载</a>
+			</li>
+		</ul>
+	</section>
+</article>
+<section class="bottom_nav_fixed bottom_white">
+	<nav class=" foot_nav_bar">
+		<ul class="columns_flex">
+			<li class="each_column current">
+				<a href="{:url('Index/index')}">
+					<span class="store f_icon"></span>
+					<span class="f_txt">药妆定制</span>
+				</a>
+			</li>
+			<li class="each_column ">
+				<a href="javascript:void(0)">
+					<span class="practitioners f_icon"></span>
+					<span class="f_txt">走进维雅</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('Consultation/index')}">
+					<span class="business f_icon"></span>
+					<span class="f_txt">业务咨询</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="javascript:void(0)" class="my_cart">
+					<span class="cart f_icon"></span>
+					<span class="f_txt">采购车</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('UserCenter/index')}">
+					<span class="my f_icon"></span>
+					<span class="f_txt">我的</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+{/block}

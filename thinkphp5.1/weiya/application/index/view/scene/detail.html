@@ -1,6 +1,7 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
 <link rel="stylesheet" href="factory_css/main.css">
+<link rel="stylesheet" href="factory_css/{$css}.css">
 {/block}
 {block name="content"}
 <article class="f24">
@@ -110,9 +111,9 @@
 					<div class="columns_flex l-r-sides">
 						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
 						</div>
-						<a href="javascript:void(0);" class="sample_purchase">样品购买
+						<!--<a href="javascript:void(0);" class="sample_purchase">样品购买
 							<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
-						</a>
+						</a>-->
 					</div>
 					<div class="quantity_wrapper selected-number">
 						<a href="javascript:void(0);" class="greduce">-</a>
