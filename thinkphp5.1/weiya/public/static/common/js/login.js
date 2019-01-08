@@ -93,9 +93,9 @@ $(function(){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
                         if(typeof(dialogLoginCallBack) == "undefined"){
-                            dialogLoginDefaultCallBack(data);
-                        }else if($.isFunction(dialogLoginCallBack)){
-                            dialogLoginCallBack(data)
+                            dialogLoginCallBack(data);
+                        }else{
+                            dialogLoginDefaultCallBack(data)
                         }
                     }
                 }
