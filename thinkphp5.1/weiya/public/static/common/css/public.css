@@ -4371,7 +4371,7 @@ select[name="nodeIds"]{
 .flex_item a span{
     position:relative;
     /*width: 30px; */
-    width: 0.6rem;
+    width: 0.48rem;
     /* height: 25px; */
     height: 0.56rem;
     margin: 0 auto;
@@ -4398,7 +4398,7 @@ select[name="nodeIds"]{
     background-position:0 -0.55rem;
 }
 .flex_item a span.collec{
-    background-position:0 -1.3rem;
+    background-position:0 -1.26rem;
 }
 .flex_item a span.share{
     background-position:0 -1.95rem;
