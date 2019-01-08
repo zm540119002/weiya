@@ -95,9 +95,6 @@ $(function(){
             return false;
         }
         var postData = postForm.serializeObject();
-        console.log(method);
-        console.log(postData);
-        return;
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && !register.vfyCheck(postData.captcha)){
