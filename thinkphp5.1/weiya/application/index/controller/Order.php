@@ -280,7 +280,31 @@ class Order extends \common\controller\UserBase
         $info['goods_list'] = $goodsList;
         $info['goods_num'] = $goodsNum;
         $this->assign('info',$info);
-        $unlockingFooterCart = unlockingFooterCartConfig([11]);
+        $configFooter = [];
+        switch ($info['order_status'])
+        {
+            case "1":
+                $configFooter = [5];
+                break;
+            case "2":
+                $configFooter = [];
+                break;
+            case "3":
+                $configFooter = [];
+                break;
+            case "4":
+                $configFooter = [];
+                break;
+            case "5":
+                $configFooter = [];
+                break;
+            case "6":
+                $configFooter = [];
+                break;
+            default:
+
+        }
+        $unlockingFooterCart = unlockingFooterCartConfig($configFooter);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
 
