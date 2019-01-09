@@ -4,18 +4,20 @@ function loginDialog(fn_name){
     window.scrollTo(0,0);
     layer.open({
         className:'loginLayer',
+        type:1,
+        shadeClose:false,
         content:content,
         title:['登录','border-bottom:1px solid #d9d9d9;'],
-        success:function(){
+        success:function(indexs,i){
             tab_down('.loginNav li','.loginTab .login_wrap','click');
             $('.layui-m-layershade').on('touchmove',function(e){
                 event.preventDefault();
             });
-            $('input[name="fn_name"]').val(fn_name)
+            $('input[name="fn_name"]').val(fn_name);
+            fixedLayer();
         }
     });
 }
-
 //登录-弹窗触发
 function logoutDialog(){
     var url = domain+'ucenter/UserCenter/logout';
@@ -52,10 +54,12 @@ function forgetPasswordDialog(fn_name){
         className:'forgetPasswordLayer',
         content:content,
         type:1,
+        shadeClose:false,
         success:function(){
             $('.login_item .password').attr('type','password');
             $('.view-password').removeClass('active');
-            $('input[name="fn_name"]').val(fn_name)
+            $('input[name="fn_name"]').val(fn_name);
+            fixedLayer();
         }
     });
 }
@@ -138,6 +142,8 @@ $(function(){
                         if(data.fn_name){
                             var str = data.fn_name;
                             eval(str +"()");
+                            $('.layui-m-layer').remove();
+                            cancleFixedLayer();
                             return false;
                         }
                         dialogLoginDefaultCallBack(data);
@@ -156,11 +162,6 @@ $(function(){
     function dialogLoginDefaultCallBack(data) {
         location.href = data.info;
     }
-    //弹框登录成功默认回调函数
-    function reload() {
-        location.reload()
-    }
-
     //显示隐藏密码
     //var onOff = true;
     $('body').on('click','.view-password',function(){
@@ -174,7 +175,6 @@ $(function(){
             $('.view-password').removeClass('active');
         }
     });
-
     //获取验证码
     var timer;
     var requestSign = true;
@@ -227,7 +227,6 @@ $(function(){
             }
         });
     });
-
     //使用须知
     var attentionForm=$('#attentionForm').html();
     $('body').on('click','.use-attention',function(){

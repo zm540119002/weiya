@@ -1,0 +1,18 @@
+{notempty name='info'}
+<li>
+	<span class="create_time">{$info.create_time|date='Y-m-d H:i'}</span>
+</li>
+<li class="{$info.who} {if $info.read} read{else /} unread{/if}" data-id="{$info.id}" data-from_id="{$info.from_id}">
+	<div class="avatar">
+		{empty name="info.avatar"}
+		<img src="public_img/default/chat_head.jpg">
+		{else /}
+		<img src="public_uploads/{$info.avatar}">
+		{/empty}
+	</div>
+	<div class="content">
+		<p class="author">{$info.name}</p>
+		<div class="msg">{$info.content}</div>
+	</div>
+</li>
+{/notempty}

@@ -705,6 +705,17 @@ function cartCheckedBox(obj){
     // });
     $('footer .checkall').prop('checked',sign);
 }
+//固定弹窗不滚动
+function fixedLayer(){
+    scrollTop = $(document).scrollTop();//获取当前滚动条位置
+    $("body").addClass("flexd");//设置绝对定位，此时不操作的话底层页面回到最初位置
+    $("body").css("top",-scrollTop);//设置top属性确保屏幕显示滚动条的当前位置
+}
+//取消弹窗不滚动
+function cancleFixedLayer(){
+    $("body").removeClass("flexd");//取消绝对定位
+    $("body").scrollTop(scrollTop);//滚动条回到停留位置
+}
 //文档就绪
 $(function(){
     //返回顶部

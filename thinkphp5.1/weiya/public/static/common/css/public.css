@@ -1147,7 +1147,7 @@ background-position: 0 -27px;
 .layui-m-layer .loginLayer .layui-m-layercont,
 .layui-m-layer .registerLayer .layui-m-layercont,
 .layui-m-layer .forgetPasswdLayer .layui-m-layercont,
-.notesLayer .layui-m-layercont{padding:0 0.15rem;text-align:left;}
+.notesLayer .layui-m-layercont{padding:0 0.25rem;text-align:left;}
 .loginLayer .layui-m-layerbtn,
 .registerLayer .layui-m-layerbtn
 .forgetPasswdLayer .layui-m-layerbtn{border-top:none;}
@@ -1163,6 +1163,10 @@ background-position: 0 -27px;
     left:0;
     right:0;
     bottom:0;*/
+}
+.layui-m-layer .loginLayer.layui-m-layerchild,
+.layui-m-layer .forgetPasswordLayer.layui-m-layerchild{
+    border-radius: 10px;
 }
 .forgetPasswdLayer .layui-m-layerbtn span[yes],
 .vendorInfoLayer .layui-m-layerbtn span[yes],
