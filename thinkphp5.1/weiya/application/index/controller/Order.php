@@ -257,7 +257,6 @@ class Order extends \common\controller\UserBase
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time','o.finished_time',
                 'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
                 'g.name','g.thumb_img',
-                'g.name'
                 ],
                 'join'=>[
                     ['order_detail od','od.father_order_id = o.id','left'],
