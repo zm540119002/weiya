@@ -293,6 +293,7 @@ class Order extends \common\controller\UserBase
             return $item;
         });
         $this->assign('list',$list);
+        print_r($list);exit;
         if(isset($_GET['pageType'])){
             $pageType = $_GET['pageType'];
             $this->fetch($pageType);
