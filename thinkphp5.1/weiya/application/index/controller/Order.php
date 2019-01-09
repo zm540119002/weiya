@@ -253,6 +253,7 @@ class Order extends \common\controller\UserBase
             ]
         ];
         $info = $model->getInfo($config);
+        $info =  $info!=0?$info->toArray():[];
         print_r($info);exit;
         $list = $model -> pageQuery($config)->each(function($item, $key){
             $modelOrderDetail = new \app\index\model\OrderDetail();
