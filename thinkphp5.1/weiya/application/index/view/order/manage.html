@@ -29,82 +29,6 @@
         </nav>
         <ul class="order_list list" id="list">
 
-            <li>
-                <div class="order_top">
-                    <a href="" class="">
-                        <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
-                        <div class="order_top_r">
-                            <p>美肤美肤美肤美肤美肤美肤</p>
-                            <p>￥<price>500.00</price></p>
-                            <p>X<span>1</span></p>
-                        </div>
-                    </a>
-                </div>
-                <div class="order_bottom">
-                    <p>共<span>1</span>件商品 需付款:<span class="red">￥<price>500.00</price></span></p>
-                    <p class="order_operate_btn">
-                        <a>取消订单</a>
-                        <a>去支付</a>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <div class="order_top">
-                    <a href="" class="">
-                        <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
-                        <div class="order_top_r">
-                            <p>美肤美肤美肤美肤美肤美肤</p>
-                            <p>￥<price>500.00</price></p>
-                            <p>X<span>1</span></p>
-                        </div>
-                    </a>
-                </div>
-                <div class="order_bottom">
-                    <p>共<span>1</span>件商品 需付款:<span class="red">￥<price>500.00</price></span></p>
-                    <p class="order_operate_btn">
-                        <a>确认收货</a>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <div class="order_top">
-                    <a href="" class="">
-                        <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
-                        <div class="order_top_r">
-                            <p>美肤美肤美肤美肤美肤美肤</p>
-                            <p>￥<price>500.00</price></p>
-                            <p>X<span>1</span></p>
-                        </div>
-                    </a>
-                </div>
-                <div class="order_bottom">
-                    <p>共<span>1</span>件商品 需付款:<span class="red">￥<price>500.00</price></span></p>
-                    <p class="order_operate_btn">
-                        <a>申请售后</a>
-                        <a>评价</a>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <div class="order_top">
-                    <a href="" class="">
-                        <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
-                        <div class="order_top_r">
-                            <p>美肤美肤美肤美肤美肤美肤</p>
-                            <p>￥<price>500.00</price></p>
-                            <p>X<span>1</span></p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="order_bottom">
-                    <p>共<span>1</span>件商品 需付款:<span class="red">￥<price>500.00</price></span></p>
-                    <p class="order_operate_btn">
-                        <a>查看评价</a>
-                        <a>再次购买</a>
-                    </p>
-                </div>
-            </li>
         </ul>
     </section>
 </article>
@@ -125,7 +49,7 @@
 
         };
         var postData = {
-            pageSize:10,
+            pageSize:4,
             pageType:'list_tpl'
         };
         $(function(){
@@ -150,6 +74,13 @@
             }
             getPagingList(config,postData);
 
+            //下拉加载
+            $(window).on('scroll',function(){
+                if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+                    config.loadTrigger = false;
+                    getPagingList(config,postData);
+                }
+            });
         });
     </script>
 {/block}
