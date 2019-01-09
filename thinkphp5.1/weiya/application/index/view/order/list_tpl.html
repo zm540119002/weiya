@@ -3,11 +3,13 @@
 {volist name="info.goods_list" id="goods_info"}
 <li data-id="{$goods_info.goods_id}">
     <div class="order_top">
-        {empty name="goods_info.thumb_img"}
-        <img src="public_img/default/no_pic_100.jpg" class="left">
-        {else /}
-        <img src="public_uploads/{$goods_info.thumb_img}" class="left">
-        {/empty}
+        <a href="{:url('Goods/detail',['id'=>$goods_info.goods_id])}">
+            {empty name="goods_info.thumb_img"}
+            <img src="public_img/default/no_pic_100.jpg" class="left">
+            {else /}
+            <img src="public_uploads/{$goods_info.thumb_img}" class="left">
+            {/empty}
+        </a>
         <div class="order_top_r">
             <p>{$goods_info.name}</p>
             <p>￥<price>{$goods_info.price}</price></p>
