@@ -298,6 +298,7 @@ class Order extends \common\controller\UserBase
             $item['goods_num'] = $goodsNum;
             return $item;
         });
+        print_r($list);exit;
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             $pageType = $_GET['pageType'];
