@@ -83,7 +83,6 @@ class Goods extends \common\controller\Base{
         }
         
         $list = $model -> pageQuery($config);
-        print_r($model->getLastSql());exit;
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'index' ){
