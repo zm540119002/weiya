@@ -255,7 +255,9 @@ class Order extends \common\controller\UserBase
                 'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
                 'o.finished_time',
-            ]
+            ],'order'=>[
+            'o.id'=>'desc'
+        ]
 
         ];
         if(input('?get.order_status') && input('get.order_status/d')){
@@ -284,9 +286,7 @@ class Order extends \common\controller\UserBase
                 ],
                 'join'=>[
                     ['goods g','g.id = od.goods_id','left'],
-                ],'order'=>[
-                    'id'=>'desc'
-                ]
+                ],
 
             ];
             $goodsList = $modelOrderDetail -> getList($config);
