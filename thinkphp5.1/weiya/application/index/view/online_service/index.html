@@ -3,6 +3,17 @@
 {/block}
 {block name="content"}
 <article class="f24">
+	<section id="chatListOtherTpl" style="display:none;">
+		<li class="others unread">
+			<div class="avatar">
+				<img src="public_img/default/chat_head.jpg">
+			</div>
+			<div class="content">
+				<p class="author">乔峰<span class="create_time">2019-01-07 17:37</span></p>
+				<div class="msg"></div>
+			</div>
+		</li>
+	</section>
 	<section class="">
 		<ul class="nav_menu weiya_menu">
 			<li>
@@ -13,36 +24,35 @@
 			</li>
 		</ul>
 	</section>
-		<div class="weiya_item">
-			<div class="ws_chatMsg-panel flex1">
-				<div class="chatMsg-ct">
-					<ul class="clearfix chat_item" data-from_id="17">
-						<li class="me read" data-id="342">
-							<div class="avatar">
-								<img src="http://msy.meishangyun.com/static/common/img/default/chat_head.jpg">
-							</div>
-							<div class="content">
-								<p class="author">乔峰<span class="create_time">2019-01-07 17:37</span></p>
-								<div class="msg">是打发士大夫的</div>
-							</div>
-						</li>
-						<li class="me read" data-id="343">
-							<div class="avatar">
-								<img src="http://msy.meishangyun.com/static/common/img/default/chat_head.jpg">
-							</div>
-							<div class="content">
-								<p class="author">乔峰<span class="create_time">2019-01-07 17:37</span></p>
-								<div class="msg">打发士大夫</div>
-							</div>
-						</li>
-					</ul>
-				</div>
+	<section id="chatLayerContainer">
+		<div class="ws_chatMsg-panel flex1">
+			<div class="chatMsg-ct">
+				<ul class="clearfix chat_item list">
+					<li class="me read" data-id="342">
+						<div class="avatar">
+							<img src="http://msy.meishangyun.com/static/common/img/default/chat_head.jpg">
+						</div>
+						<div class="content">
+							<p class="author">乔峰<span class="create_time">2019-01-07 17:37</span></p>
+							<div class="msg">是打发士大夫的</div>
+						</div>
+					</li>
+					<li class="me read" data-id="343">
+						<div class="avatar">
+							<img src="http://msy.meishangyun.com/static/common/img/default/chat_head.jpg">
+						</div>
+						<div class="content">
+							<p class="author">乔峰<span class="create_time">2019-01-07 17:37</span></p>
+							<div class="msg">打发士大夫</div>
+						</div>
+					</li>
+				</ul>
 			</div>
-			<div class="bottom_nav_fixed">
-				<div class="bottom_flex">
-					<input class="send_out_text" type="text" name="" value="">
-					<input class="send_btn" type="button" value="发送">
-				</div>
+		</div>
+		<div class="bottom_nav_fixed">
+			<div class="bottom_flex">
+				<input class="send_out_text" type="text" name="" value="">
+				<input class="send_btn" type="button" value="发送">
 			</div>
 		</div>
 	</section>
@@ -88,41 +98,164 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">
-	$(function(){
-		//查看文本
-		$('.more-text-box').moreText({
-			mainCell:".more-text",
-			openBtn:'显示全部>'
+	function on_message_call_back(data) {
+		var chatListOtherTpl = $('#chatListOtherTpl');
+		chatListOtherTpl.find('.msg').text(data.content);
+		chatListOtherTpl.find('.author').text(data.from_name);
+		chatListOtherTpl.find('.create_time').text(data.create_time);
+		chatListOtherTpl.find('li').attr('data-id',data.id);
+		chatListOtherTpl.find('li').attr('data-from_id',data.from_id);
+		if(data.avatar){
+			chatListOtherTpl.find('img').attr('src',data.avatar);
+		}
+		//已打开聊天框
+		if($('.chatLayer ').length) {
+			var postData = {};
+			postData.from_id = data.from_id;
+			postData.messageIds = [];
+			postData.messageIds.push(data.id);
+			var url = domain + 'index/CustomerService/setMessageRead';
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function (xhr) {
+					$('.loading').show();
+				},
+				error: function (xhr) {
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function (data) {
+					$('.loading').hide();
+					if (data.status == 0) {
+						dialog.error(data.info);
+					} else {
+						chatListOtherTpl.find('li').attr('class', 'others read');
+						$('.chatLayer .chat_item').append(chatListOtherTpl.html());
+						//聊天框滚动条置底
+						chatDialogSetBottom();
+					}
+				}
+			});
+		}else{
+			//未打开聊天框
+			var num = $('span.news_num').text();
+			$('span.news_num').text(++num);
+			$('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());
+		}
+	}
+</script>
+<script type="text/javascript" src="public_js/web-socket.js"></script>
+<script type="text/javascript">
+	$(function () {
+		//页面初始化
+		var postData = {
+		};
+		var config = {
+			url: action,
+			postData: postData
+		};
+		getList(config);
+		//聊天对话框弹窗
+		$('body').on('click','.customer_btn',function(){
+			var _this=$(this);
+			layer.open({
+				className:'chatLayer',
+				content:$('#chatLayerContainer').html(),
+				type:1,
+				anim:'up',
+				btn:['','关闭'],
+				success:function(){
+					var winH=$(document).height();
+					$('.chatLayer .chat_item').html($('#chatLayerContainer .chat_item').html());
+					//设置信息已读
+					setMessageRead($('#chatLayerContainer'));
+					//聊天框滚动条置底
+					chatDialogSetBottom();
+				},
+				no:function(){
+					$('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').html());
+					//设置信息已读
+					setMessageRead($('#chatLayerContainer'));
+				}
+			});
 		});
-		//递交留言
-		$('.submit_msg').on('click',function(){
-			var postData=$('.message_form').serializeObject();
-			var content='';
-			if(!postData.name){
-				content='请填写你的姓名';
-			}else if(!postData.mobile){
-				content='请填写你手机号码';
-			}else if(!postData.message){
-				content='请填写你的留言';
-			}
-			if(content){
-				dialog.error(content);
+		//设置信息已读
+		function setMessageRead(obj) {
+			var postData = {};
+			postData.messageIds = [];
+			$.each(obj.find('li.others.unread'), function () {
+				postData.messageIds.push($(this).data('id'));
+				postData.from_id = $(this).data('from_id');
+			});
+			if (!postData.messageIds.length) {
 				return false;
 			}
-			console.log(postData);
+			var url = domain + 'index/CustomerService/setMessageRead';
 			$.ajax({
-				type:'post',
-				url:'',
-				data:'',
-				success:function(){},
-				error:function(xhr){
-					dialog.error(xhr);
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function (xhr) {
+					$('.loading').show();
+				},
+				error: function (xhr) {
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function (data) {
+					$('.loading').hide();
+					if (data.status == 0) {
+						dialog.error(data.info);
+					} else {
+						$('span.news_num').text('');
+						$('.chatLayer li.others.unread').removeClass('unread').addClass('read');
+					}
 				}
-			})
-
-		})
+			});
+		}
+		//发送文本获取焦点
+		$('body').on('focus','.send_out_text',function(){
+			//聊天框滚动条置底
+			chatDialogSetBottom();
+		});
+		//发送聊天内容
+		$('body').on('click','.send_btn',function(){
+			var chatListTpl = $('#chatListTpl');
+			var _this=$(this).prev();
+			if(!_this.val()){
+				dialog.error('不能发送空内容！');
+				return false;
+			}
+			var to_user_id = 17;
+			var postData = {to_user_id:to_user_id,content:_this.val()};
+			var url = domain + 'index/CustomerService/sendMessage';
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(xhr){
+					$('.loading').show();
+				},
+				error:function(xhr){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					$('.loading').hide();
+					if(data.status==0){
+						dialog.error(data.info);
+					}else{
+						$('.chatLayer .chat_item').append(data);
+						//聊天框滚动条置底
+						chatDialogSetBottom();
+						_this.val('');
+					}
+				}
+			});
+		});
 	});
 </script>
 {/block}
