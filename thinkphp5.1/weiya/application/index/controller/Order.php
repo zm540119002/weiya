@@ -281,7 +281,7 @@ class Order extends \common\controller\UserBase
                     ['od.father_order_id','=',$item['id']]
                 ],
                 'field'=>[
-                    "sum('od.num') goods_num",'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                    'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
                     'g.name','g.thumb_img',
                 ],
                 'join'=>[
@@ -290,13 +290,15 @@ class Order extends \common\controller\UserBase
 
             ];
             $goodsList = $modelOrderDetail -> getList($config);
-            $goodsNum = $modelOrderDetail -> where('father_order_id',$item['id']) ->sum('num');
+            $goodsNum = 0;
+            foreach ($goodsList as &$goods){
+                $goodsNum+=$goods['num'];
+            }
             $item['goods_list'] = $goodsList;
             $item['goods_num'] = $goodsNum;
             return $item;
         });
         $this->assign('list',$list);
-        print_r($list);exit;
         if(isset($_GET['pageType'])){
             $pageType = $_GET['pageType'];
             $this->fetch($pageType);
