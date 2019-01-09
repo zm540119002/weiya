@@ -283,20 +283,23 @@ class Order extends \common\controller\UserBase
         $configFooter = [];
         switch ($info['order_status'])
         {
+            /*
+             * 0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消 6:售后',
+             */
             case "1":
                 $configFooter = [5];
                 break;
             case "2":
-                $configFooter = [];
+                $configFooter = [12];
                 break;
             case "3":
-                $configFooter = [];
+                $configFooter = [13];
                 break;
             case "4":
-                $configFooter = [];
+                $configFooter = [14];
                 break;
             case "5":
-                $configFooter = [];
+                $configFooter = [14];
                 break;
             case "6":
                 $configFooter = [];

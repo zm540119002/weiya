@@ -28,6 +28,9 @@ return [
         ['name'   => '去结算','class'=>'settlement'],//9
         ['name'   => '全选','class'=>'checked_all'],//10
         ['name'   => '提交订单','class'=>'confirm_order'],//11
+        ['name'   => '确认收货','class'=>'confirm_receive'],//12
+        ['name'   => '去评价','class'=>'to_evaluate '],//13
+        ['name'   => '再次购买','class'=>' purchase_again '],//14
 
     ],
 
