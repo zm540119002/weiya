@@ -4,15 +4,16 @@
 {block name="nav">订单详情{/block}
 {block name="content"}
 <article class="scroll-wrapper f24">
-    <div class="">
+    <div class="order_wrapper">
         <div class="separation-line content-padding">
             <div>
                 <span>订单号：</span>
-                <span>00000000000000</span>
+                <input type="hidden" id="order_sn" value="{$info.sn}"/>
+                <span>{$info.sn}</span>
             </div>
             <div>
                 <span>下单时间：</span>
-                <span>2018-7-10日 9:00AM</span>
+                <span>{$info.create_time}</span>
             </div>
             <div>
                 <span>分类：</span>
@@ -20,21 +21,42 @@
             </div>
             <div>
                 <span>状态：</span>
+                {if $info.order_status == 1}
+                <!--1:待付款-->
                 <span>待付款</span>
+                {elseif $info.order_status == 2 }
+                <!--2:待收货-->
+                <span>待收货</span>
+                {elseif $info.order_status == 3 }
+                <!--3:待评价-->
+                <span>待评价</span>
+                {elseif $info.order_status == 4 }
+                <!--4:已完成-->
+                <span>已完成</span>
+                {elseif $info.order_status == 5 }
+                <!--5:已取消-->
+                <span>已取消</span>
+                {elseif $info.order_status == 6}
+                <!--6:售后-->
+                <span>售后</span>
+                {else /}
+
+                {/if}
+
             </div>
             <div>
                 <span>总价：</span>
-                <span>￥<price>5000</price></span>
+                <span>￥<price>{$info.amount}</price></span>
             </div>
         </div>
         <div class="separation-line content-padding">
             <div>
                 <span>下单用户：</span>
-                <span>张三</span>
+                <span>{$info.name}</span>
             </div>
             <div>
                 <span>手机号码：</span>
-                <span>13430369778</span>
+                <span>{$info.mobile_phone}</span>
             </div>
             <div>
                 <span>订单来源：</span>
@@ -42,11 +64,11 @@
             </div>
             <div>
                 <span>支付金额：</span>
-                <span>￥<price>1000</price></span>
+                <span>￥<price>{$info.actually_amount}</price></span>
             </div>
             <div>
                 <span>支付方式：</span>
-                <span>账户钱包/微信支付/支付宝/银联</span>
+                <span>{$info.payment_code|getPaymentCode}账户钱包/微信支付/支付宝/银联</span>
             </div>
             <div>
                 <span>支付备注：</span>
@@ -60,32 +82,43 @@
             </div>
             <div>
                 <span>收货人姓名：</span>
-                <span>李四</span>
+                <span>{$info.consignee}</span>
             </div>
             <div>
                 <span>手机号码：</span>
-                <span>13679898520</span>
+                <span>{$info.mobile}</span>
             </div>
             <div>
                 <span>收货地址：</span>
-                <span>广东省广州市海珠区</span>
+                <span>{$info.province}{$info.city}{$info.area}{$info.detail_address}</span>
             </div>
             <div>
                 <span>备注：</span>
-                <span>包装好点</span>
+                <span>{$info.remark}</span>
             </div>
         </div>
-        <div class="content-padding">
-            <p>维雅品牌定制</p>
-            <div class="columns_flex">
-                <img src="public/static/common/img/default/no_pic_100.jpg" alt="">
-                <div>
-                    <p>XXXXXXXXXXXXXX</p>
-                    <p>规格：<span></span></p>
-                    <p>￥<price>5000</price></p>
-                    <p>数量：<span>4</span></p>
+        <div class="content-padding bottom_padding">
+            <p class="content-label">维雅品牌定制</p>
+            {volist name="info.goods_list" id="goods_info"}
+                <div class="columns_flex">
+                    {empty name="goods_info.thumb_img"}
+                    <div class="list_left_img">
+                        <img src="public_img/default/no_pic_100.jpg" class="left">
+                    </div>
+                    {else /}
+                    <div class="list_left_img">
+                        <img src="public_uploads/{$goods_info.thumb_img}" class="left">
+                    </div>
+                    {/empty}
+                    <div>
+                        <p>{$goods_info.name}</p>
+                        <p>规格：<span>{$goods_info.specification}</span></p>
+                        <p>￥<price>{$goods_info.price}</price></p>
+                        <p>数量：<span>X{$goods_info.num}</span></p>
+                    </div>
                 </div>
-            </div>
+            {/volist}
+
         </div>
     </div>
 </article>
