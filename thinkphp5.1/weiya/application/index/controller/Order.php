@@ -325,7 +325,15 @@ class Order extends \common\controller\UserBase
         if(!input('?post.id') && !$id){
             return errorMsg('失败');
         }
-        $rse = $model->where(['id'=>input('post.id/d')])->setField(['auth_status'=>input('post.auth_status/d')]);
+        $where=[
+            ['id','=',$id],
+            ['user_id'=>$this->user['id']],
+        ];
+        $authStatus = input('post.auth_status/d');
+        $data = [
+            'auth_status' => $authStatus,
+        ];
+        $rse = $model->where($where)->setField($data);
         if(!$rse){
             return errorMsg('失败');
         }

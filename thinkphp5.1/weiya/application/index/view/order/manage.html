@@ -91,10 +91,9 @@
                     id:id,
                     auth_status:5
                 };
-                console.log(postData);return false;
                 var url = module+'Order/setOrderStatus';
                 layer.open({
-                    content:'是否退出？',
+                    content:'确定取消订单？',
                     btn:['确定','取消'],
                     yes:function(index){
                         $.ajax({
