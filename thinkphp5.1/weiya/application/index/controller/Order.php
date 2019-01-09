@@ -152,47 +152,45 @@ class Order extends \common\controller\UserBase
         return $this->fetch();
 
     }
-    //确定订单
+    //确定订单 //订单-详情页
     public function confirmOrder()
     {
-        if (!request()->isPost()) {
-            return errorMsg('请求方式错误');
-        }
-        $fatherOrderId = input('post.father_order_id',0,'int');
-        $modelOrder = new \app\index\model\Order();
-        $data = input('post.');
-        $data['order_status'] = 1;
-        $condition = [
-            ['user_id','=',$this->user['id']],
-            ['id','=',$fatherOrderId],
-        ];
-        $res = $modelOrder -> allowField(true) -> save($data,$condition);
-        if(false === $res){
-            return errorMsg('失败');
-        }
-        //根据订单号查询关联的购物车的商品 删除
-        $modelOrderDetail = new \app\index\model\OrderDetail();
-        $config = [
-            'where' => [
-                ['od.status', '=', 0],
-                ['od.father_order_id', '=', $fatherOrderId],
-            ], 'field' => [
-                'od.goods_id','od.buy_type','od.price', 'od.num', 'od.store_id','od.father_order_id','od.user_id'
-            ]
-        ];
-        $orderDetailList = $modelOrderDetail->getList($config);
-        $model = new \app\index\model\Cart();
-        foreach ($orderDetailList as &$orderDetailInfo){
+        if (request()->isPost()) {
+            $fatherOrderId = input('post.father_order_id',0,'int');
+            $modelOrder = new \app\index\model\Order();
+            $data = input('post.');
+            $data['order_status'] = 1;
             $condition = [
                 ['user_id','=',$this->user['id']],
-                ['foreign_id','=',$orderDetailInfo['goods_id']],
-                ['buy_type','in',$orderDetailInfo['buy_type']],
+                ['id','=',$fatherOrderId],
             ];
-            $result = $model -> del($condition,false);
-            if(!$result['status']){
-                return errorMsg('删除失败');
+            $res = $modelOrder -> allowField(true) -> save($data,$condition);
+            if(false === $res){
+                return errorMsg('失败');
             }
-        }
+            //根据订单号查询关联的购物车的商品 删除
+            $modelOrderDetail = new \app\index\model\OrderDetail();
+            $config = [
+                'where' => [
+                    ['od.status', '=', 0],
+                    ['od.father_order_id', '=', $fatherOrderId],
+                ], 'field' => [
+                    'od.goods_id','od.buy_type','od.price', 'od.num', 'od.store_id','od.father_order_id','od.user_id'
+                ]
+            ];
+            $orderDetailList = $modelOrderDetail->getList($config);
+            $model = new \app\index\model\Cart();
+            foreach ($orderDetailList as &$orderDetailInfo){
+                $condition = [
+                    ['user_id','=',$this->user['id']],
+                    ['foreign_id','=',$orderDetailInfo['goods_id']],
+                    ['buy_type','in',$orderDetailInfo['buy_type']],
+                ];
+                $result = $model -> del($condition,false);
+                if(!$result['status']){
+                    return errorMsg('删除失败');
+                }
+            }
 
 //      //根据订单号查询关联的商品
 //        $modelOrderChild = new \app\index\model\OrderChild();
@@ -204,8 +202,50 @@ class Order extends \common\controller\UserBase
 //        }
 
 
-        $orderSn = input('post.order_sn','','string');
-        return successMsg('成功',array('order_sn'=>$orderSn));
+            $orderSn = input('post.order_sn','','string');
+            return successMsg('成功',array('order_sn'=>$orderSn));
+        }
+
+        $modelOrder = new \app\index\model\Order();
+        $orderSn = input('order_sn');
+        $config = [
+            'where' => [
+                ['o.status', '=', 0],
+                ['o.sn', '=', $orderSn],
+                ['o.user_id', '=', $this->user['id']],
+            ],'join' => [
+                ['order_detail od','od.father_order_id = o.id','left'],
+                ['goods g','g.id = od.goods_id','left']
+            ],'field' => [
+                'o.id', 'o.sn', 'o.amount',
+                'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type',
+                'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
+            ],
+        ];
+        $orderGoodsList = $modelOrder->getList($config);
+        $this ->assign('orderGoodsList',$orderGoodsList);
+
+        //地址
+        $modelAddress =  new \common\model\Address();
+        $config = [
+            'where' => [
+                ['a.status', '=', 0],
+                ['a.user_id', '=', $this->user['id']],
+            ],
+        ];
+        $addressList = $modelAddress ->getList($config);
+        $defaultAddress = [];
+        foreach ($addressList as &$addressInfo){
+            if($addressInfo['is_default'] == 1){
+                $defaultAddress = $addressInfo;
+                break;
+            }
+        }
+        $this->assign('defaultAddress', $defaultAddress);
+        $this->assign('addressList', $addressList);
+        $unlockingFooterCart = unlockingFooterCartConfig([11]);
+        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+        return $this->fetch();
     }
     //支付
     public function pay()
