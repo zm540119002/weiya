@@ -288,7 +288,7 @@ class Order extends \common\controller\UserBase
 
             ];
             $goodsList = $modelOrderDetail -> getList($config);
-            $goodsNum = $modelOrderDetail -> where(  ['od.father_order_id','=',$item['id']]) ->sum('num');
+            $goodsNum = $modelOrderDetail -> where(  ['father_order_id','=',$item['id']]) ->sum('num');
             $item['goods_list'] = $goodsList;
             $item['goods_num'] = $goodsNum;
             return $item;
