@@ -1,20 +1,19 @@
 {notempty name="list"}
 {volist name="list" id="info"}
 {volist name="info.goods_list" id="goods_info"}
-1
 <li data-id="{$goods_info.goods_id}">
     <div class="order_top">
         <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
         <div class="order_top_r">
-            <p>{$goods_info.name}</p>
-            <p>￥<price>{$goods_info.price}</price></p>
-            <p>X<span>{$goods_info.num}</span></p>
+            <p>美肤美肤美肤美肤美肤美肤</p>
+            <p>￥<price>500.00</price></p>
+            <p>X<span>1</span></p>
         </div>
     </div>
 </li>
 {/volist}
 <div class="order_bottom">
-    <p>共<span>{$info.goods_num}</span>件商品 需付款:<span class="red">￥<price>{$info.amount}</price></span></p>
+    <p>共<span>1</span>件商品 需付款:<span class="red">￥<price>500.00</price></span></p>
     <p class="order_operate_btn">
         <a>取消订单</a>
         <a>去支付</a>
