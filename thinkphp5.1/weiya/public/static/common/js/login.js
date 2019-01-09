@@ -4,9 +4,10 @@ function loginDialog(fn_name){
     window.scrollTo(0,0);
     layer.open({
         className:'loginLayer',
+        type:1,
         content:content,
         title:['登录','border-bottom:1px solid #d9d9d9;'],
-        success:function(){
+        success:function(indexs,i){
             tab_down('.loginNav li','.loginTab .login_wrap','click');
             $('.layui-m-layershade').on('touchmove',function(e){
                 event.preventDefault();
@@ -138,6 +139,7 @@ $(function(){
                         if(data.fn_name){
                             var str = data.fn_name;
                             eval(str +"()");
+                            $('.layui-m-layer').remove();
                             return false;
                         }
                         dialogLoginDefaultCallBack(data);
