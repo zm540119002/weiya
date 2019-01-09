@@ -76,8 +76,6 @@ class UserCenter extends \think\Controller{
 
     //用户中心
     public function index(){
-        $a = request()->domain();
-        print_r($a);exit;
         $this->assign('user',session('user'));
         return $this->fetch();
     }
