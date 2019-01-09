@@ -317,6 +317,7 @@ $(function () {
     $('body').on('click','.confirm_order',function () {
         _this = $(this);
         var consignee=$('.consigneeInfo input[name="layer_consignee"]').val();
+        var mobile=$('.consigneeInfo input[name="layer_mobile"]').val();
         var province=$('.consigneeInfo input[name="province"]').val();
         var city=$('.consigneeInfo input[name="city"]').val();
         var area=$('.consigneeInfo input[name="area"]').val();
