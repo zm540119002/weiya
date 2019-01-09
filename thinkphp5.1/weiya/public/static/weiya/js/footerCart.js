@@ -333,6 +333,7 @@ $(function () {
             father_order_id:orderId,
             order_sn:orderSn,
             consignee:consignee,
+            mobile:mobile,
             province:province,
             city:city,
             area:area,
