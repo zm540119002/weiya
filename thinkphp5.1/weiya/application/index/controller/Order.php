@@ -324,7 +324,23 @@ class Order extends \common\controller\UserBase
         }
 
         $list = $model -> pageQuery($config)->each(function($item, $key){
-            $item['nickname'] = 'think';
+            $modelOrderDetail = new \app\index\model\OrderDetail();
+            $config=[
+                'where'=>[
+                    ['od.status', '=', 0],
+                    ['od.father_order_id','=',$item['id']]
+                ],
+                'field'=>[
+                    'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                    'g.name','g.thumb_img',
+                ],
+                'join'=>[
+                    ['goods g','g.id = od.goods_id','left'],
+                ],
+
+            ];
+            $goodsList = $modelOrderDetail -> getList($config);
+            $item['goods_list'] = $goodsList;
             return $item;
         });
         print_r($list);exit;
