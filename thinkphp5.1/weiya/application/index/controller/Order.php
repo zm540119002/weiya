@@ -254,8 +254,8 @@ class Order extends \common\controller\UserBase
             ],
             'field'=>[
                 'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
-                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time','o.finished_time',
-                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
+                'o.finished_time','od.goods_id', 'od.price', 'od.num', 'od.buy_type',
                 'g.name','g.thumb_img',
                 ],
                 'join'=>[
@@ -278,6 +278,15 @@ class Order extends \common\controller\UserBase
         }
 
         $list = $model -> pageQuery($config);
+        $list = count($list)!=0?$list->toArray():[];
+        print_r($list);exit;
+        $orderIds = array_unique(array_column($list,'id'));
+        $res = [];
+        foreach ($orderIds as $value){
+            foreach ($orderIds as $value){
+
+            }
+        }
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'index' ){

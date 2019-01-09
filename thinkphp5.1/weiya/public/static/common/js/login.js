@@ -162,6 +162,9 @@ $(function(){
     function dialogLoginDefaultCallBack(data) {
         location.href = data.info;
     }
+    function reload() {
+        location.reload();
+    }
     //显示隐藏密码
     //var onOff = true;
     $('body').on('click','.view-password',function(){
