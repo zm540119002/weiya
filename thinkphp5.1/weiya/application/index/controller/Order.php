@@ -194,14 +194,14 @@ class Order extends \common\controller\UserBase
             }
         }
 
-      //根据订单号查询关联的商品
-        $modelOrderChild = new \app\index\model\OrderChild();
-        //生成子订单
-        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
-        if(!$rse['status']){
-            $modelOrder->rollback();
-            return errorMsg($modelOrderChild->getError());
-        }
+//      //根据订单号查询关联的商品
+//        $modelOrderChild = new \app\index\model\OrderChild();
+//        //生成子订单
+//        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
+//        if(!$rse['status']){
+//            $modelOrder->rollback();
+//            return errorMsg($modelOrderChild->getError());
+//        }
 
 
         $orderSn = input('post.order_sn','','string');
@@ -245,7 +245,6 @@ class Order extends \common\controller\UserBase
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-
         $model = new \app\index\model\Order();
         $config=[
             'where'=>[
@@ -255,13 +254,10 @@ class Order extends \common\controller\UserBase
             'field'=>[
                 'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
-                'o.finished_time','od.goods_id', 'od.price', 'od.num', 'od.buy_type',
-                'g.name','g.thumb_img',
-                ],
-                'join'=>[
-                    ['order_detail od','od.father_order_id = o.id','left'],
-                    ['goods g','g.id = od.goods_id','left'],
-            ],
+                'o.finished_time',
+            ],'order'=>[
+            'o.id'=>'desc'
+        ]
 
         ];
         if(input('?get.order_status') && input('get.order_status/d')){
@@ -277,22 +273,35 @@ class Order extends \common\controller\UserBase
             $config['where'][] = ['o.name', 'like', '%' . trim($keyword) . '%'];
         }
 
-        $list = $model -> pageQuery($config);
-        $list = count($list)!=0?$list->toArray():[];
-        $orderIds = array_unique(array_column($list['data'],'id'));
-        $res = [];
-        foreach ($orderIds as $orderId){
-            foreach ($list['data'] as $goods){
-                if($orderId==$goods['id']){
-                    $res[$orderId][] = $goods;
-                }
-            }
-        }
-        $this->assign('list',$res);
-        if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'index' ){
+        $list = $model -> pageQuery($config)->each(function($item, $key){
+            $modelOrderDetail = new \app\index\model\OrderDetail();
+            $config=[
+                'where'=>[
+                    ['od.status', '=', 0],
+                    ['od.father_order_id','=',$item['id']]
+                ],
+                'field'=>[
+                    'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                    'g.name','g.thumb_img',
+                ],
+                'join'=>[
+                    ['goods g','g.id = od.goods_id','left'],
+                ],
 
+            ];
+            $goodsList = $modelOrderDetail -> getList($config);
+            $goodsNum = 0;
+            foreach ($goodsList as &$goods){
+                $goodsNum+=$goods['num'];
             }
+            $item['goods_list'] = $goodsList;
+            $item['goods_num'] = $goodsNum;
+            return $item;
+        });
+        $this->assign('list',$list);
+        if(isset($_GET['pageType'])){
+            $pageType = $_GET['pageType'];
+            $this->fetch($pageType);
         }
         return $this->fetch('list_tpl');
     }

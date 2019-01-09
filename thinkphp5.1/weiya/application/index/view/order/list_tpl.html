@@ -1,21 +1,31 @@
 {notempty name="list"}
 {volist name="list" id="info"}
-<li data-id="$info.id">
+<a href="{:url('Order/OrderDetail',['sn'=>$info.sn])}">
+{volist name="info.goods_list" id="goods_info"}
+<li data-id="{$goods_info.goods_id}">
     <div class="order_top">
-        <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
+        <a href="{:url('Goods/detail',['id'=>$goods_info.goods_id])}">
+            {empty name="goods_info.thumb_img"}
+            <img src="public_img/default/no_pic_100.jpg" class="left">
+            {else /}
+            <img src="public_uploads/{$goods_info.thumb_img}" class="left">
+            {/empty}
+        </a>
         <div class="order_top_r">
-            <p>美肤美肤美肤美肤美肤美肤</p>
-            <p>￥<price>500.00</price></p>
-            <p>X<span>1</span></p>
+            <p>{$goods_info.name}</p>
+            <p>￥<price>{$goods_info.price}</price></p>
+            <p>X<span>{$goods_info.num}</span></p>
         </div>
     </div>
-    <div class="order_bottom">
-        <p>共<span>1</span>件商品 需付款:<span class="red">￥<price>500.00</price></span></p>
-        <p class="order_operate_btn">
-            <a>取消订单</a>
-            <a>去支付</a>
-        </p>
-    </div>
 </li>
+{/volist}
+</a>
+<div class="order_bottom">
+    <p>共<span>{$info.goods_num}</span>件商品 需付款:<span class="red">￥<price>{$info.amount}</price></span></p>
+    <p class="order_operate_btn">
+        <a>取消订单</a>
+        <a>去支付</a>
+    </p>
+</div>
 {/volist}
 {/notempty}
