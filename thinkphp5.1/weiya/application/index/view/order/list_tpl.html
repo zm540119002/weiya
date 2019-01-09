@@ -24,7 +24,7 @@
     <p>共<span>{$info.goods_num}</span>件商品 需付款:<span class="red">￥<price>{$info.amount}</price></span></p>
     <p class="order_operate_btn">
         <a>取消订单</a>
-        <a>去支付</a>
+        <a href="{:url('Order/pay',['order_sn'=>$info.sn])}">去支付</a>
     </p>
 </div>
 {/volist}
