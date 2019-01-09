@@ -96,6 +96,7 @@
                         </div>
                     </a>
                 </div>
+
                 <div class="order_bottom">
                     <p>共<span>1</span>件商品 需付款:<span class="red">￥<price>500.00</price></span></p>
                     <p class="order_operate_btn">
@@ -125,6 +126,7 @@
         };
         var postData = {
             pageSize:10,
+            pageType:'list_tpl'
         };
         $(function(){
             var order_status={:json_encode($order_status)};

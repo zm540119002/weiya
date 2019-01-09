@@ -1,0 +1,51 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="shopping_header_title separation-line">
+		<span></span>
+		<h2>购物车</h2>
+	</section>
+	<section id="no_data">
+		<div class="cart_data_empty">
+			<p>注：采购车里超过7天未结算的商品会被系统自动清理</p>
+		</div>
+	</section>
+	<ul class="cart_goods_list" id="list">
+	</ul>
+</article>
+{/block}
+{block name="common"}
+{include file="template/footer_menu.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript" src="weiya_js/footerCart.js"></script>
+<script type="text/javascript" src="weiya_js/cart.js"></script>
+<script type="text/javascript">
+	var config = {
+		url:module+'Cart/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+
+	};
+	var postData = {
+		pageSize:20,
+		pageType:'index'
+	};
+	$(function(){
+		//初始化分类商品页面
+		getPagingList(config,postData);
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config.loadTrigger = false;
+				getPagingList(config,postData);
+			}
+		});
+	});
+</script>
+{/block}
