@@ -43,7 +43,7 @@ function getPagingList(config,postData) {
     //请求结束标志
     if(config.requestEnd){
         $('.ctype-title').remove();
-        config.container.after('<div class="ctype-title"><span class="line"></span><span class="txt f24">已到底部，加载完！</span><span class="line"></span></div>')
+        config.container.after('<div class="ctype-title"><span class="line"></span><span class="txt f24">已到底部，加载完！</span><span class="line"></span></div>');
         config.loadTrigger = true;
         return false;
     }
@@ -77,7 +77,7 @@ var disableBtn=function disableBtn(){
     listUl.find('li:first').find('.up-btn').prop('disabled','disabled').addClass('disabled');
     listUl.find('li:last').find('.down-btn').prop('disabled','disabled').addClass('disabled');
     listUl.find('li:last').find('.down-btn').addClass('down-disabled-icons');
-}
+};
 
 
 
