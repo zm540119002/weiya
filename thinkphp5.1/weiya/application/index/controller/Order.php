@@ -279,14 +279,16 @@ class Order extends \common\controller\UserBase
 
         $list = $model -> pageQuery($config);
         $list = count($list)!=0?$list->toArray():[];
-        print_r($list);exit;
-        $orderIds = array_unique(array_column($list,'id'));
+        $orderIds = array_unique(array_column($list['data'],'id'));
         $res = [];
-        foreach ($orderIds as $value){
-            foreach ($orderIds as $value){
-
+        foreach ($orderIds as $orderId){
+            foreach ($list as $goods){
+                if($orderId==$goods['id']){
+                    $res[$orderId][] = $goods;
+                }
             }
         }
+        print_r($res);exit;
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'index' ){
