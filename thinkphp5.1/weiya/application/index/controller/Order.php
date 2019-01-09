@@ -252,60 +252,16 @@ class Order extends \common\controller\UserBase
                 ['o.status', '=', 0],
                 ['o.user_id', '=', $this->user['id']],
             ],
-            /**
-             *   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
-            `sn` varchar(32) NOT NULL COMMENT '编号',
-            `pay_sn` varchar(33) NOT NULL DEFAULT '' COMMENT '支付单号',
-            `status` tinyint(3) NOT NULL DEFAULT '0' COMMENT '状态：0 ：启用 1：禁用 2：删除',
-            `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '类型：0：普通 1：团购',
-            `order_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '物流状态：0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消 6:售后',
-            `after_sale_status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '售后服务状态 0：正常 1：待处理 2：已完成',
-            `payment_code` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '支付方式：0 微信 1：支付宝 3：网银',
-            `amount` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '总金额',
-            `coupons_pay` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '代金券支付金额',
-            `wallet_pay` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '钱包支付金额',
-            `actually_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '实际支付金额',
-            `remark` varchar(2000) NOT NULL DEFAULT '' COMMENT '备注说明',
-            `user_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID：user.id',
-            `address_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '地址ID:consignee_address.id',
-            `coupons_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '代金券ID:coupons.id',
-            `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '生成时间',
-            `payment_time` varchar(14) NOT NULL DEFAULT '' COMMENT '支付时间',
-            `finished_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '完成时间',
-            PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8 COMMENT='订单表';
-            `price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '成交价格',
-            `num` smallint(5) unsigned NOT NULL DEFAULT '1' COMMENT '成交数量',
-            `goods_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品id 关联goods表',
-            `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID：user.id',
-            `father_order_id` int(10) NOT NULL DEFAULT '0' COMMENT '父订单 关联order表id',
-            `child_order_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '拆分后子订单ID 关联order_childk表id ',
-            `buy_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '购买类型：1：批量 2：样品',
-             *
-             * `consignee` varchar(50) NOT NULL DEFAULT '' COMMENT '收货人',
-            `mobile` varchar(15) NOT NULL DEFAULT '' COMMENT '手机电话',
-            `province` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '省',
-            `city` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '市',
-            `area` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '区',
-            `detail_address` varchar(255) NOT NULL DEFAULT '' COMMENT '详细地址',
-             */
             'field'=>[
-                'o.id','o.sn','o.order_status','o.amount',
-//                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
-
-//                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
-//                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time','o.finished_time',
-//                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
-//                'g.name','g.thumb_img'
-//                'od.goods_id',
-//                'g.name'
-          ],
-//'join'=>[
-//                ['order_detail od','od.father_order_id = o.id','left'],
-////                ['goods g','g.id = od.goods_id','left'],
-////                ['order_detail od','od.father_order_id = oc.father_order_id','left'],
-////                ['goods g','g.id = od.goods_id','left'],
-//            ],
+                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
+                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time','o.finished_time',
+                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                'g.name','g.thumb_img',
+                ],
+                'join'=>[
+                    ['order_detail od','od.father_order_id = o.id','left'],
+                    ['goods g','g.id = od.goods_id','left'],
+            ],
 
         ];
         if(input('?get.order_status') && input('get.order_status/d')){
@@ -322,15 +278,13 @@ class Order extends \common\controller\UserBase
         }
 
         $list = $model -> pageQuery($config);
-
-        print_r( $list->toArray()['data']);exit;
-        print_r(array_column( $list->data,'id'));exit;
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'index' ){
-                return $this->fetch('list_index_tpl');
+
             }
         }
+        return $this->fetch('list_tpl');
     }
 
 
