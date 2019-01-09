@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<meta charset="UTF-8">
 	<title>{block name="title"}{$Think.config.custom.title}{/block}</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -11,7 +12,6 @@
 	<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		var domain = '{:request()->domain()}'+'/'+'index.php/';
-		console.log(domain);
 		var module = domain + '{:request()->module()}/';
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
