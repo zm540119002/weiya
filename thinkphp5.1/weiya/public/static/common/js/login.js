@@ -16,7 +16,6 @@ function loginDialog(fn_name){
         }
     });
 }
-
 //登录-弹窗触发
 function logoutDialog(){
     var url = domain+'ucenter/UserCenter/logout';
@@ -158,11 +157,6 @@ $(function(){
     function dialogLoginDefaultCallBack(data) {
         location.href = data.info;
     }
-    //弹框登录成功默认回调函数
-    function reload() {
-        location.reload()
-    }
-
     //显示隐藏密码
     //var onOff = true;
     $('body').on('click','.view-password',function(){
@@ -176,7 +170,6 @@ $(function(){
             $('.view-password').removeClass('active');
         }
     });
-
     //获取验证码
     var timer;
     var requestSign = true;
@@ -229,7 +222,6 @@ $(function(){
             }
         });
     });
-
     //使用须知
     var attentionForm=$('#attentionForm').html();
     $('body').on('click','.use-attention',function(){
