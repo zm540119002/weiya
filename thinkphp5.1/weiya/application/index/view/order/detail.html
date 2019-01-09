@@ -4,7 +4,7 @@
 {block name="nav">订单详情{/block}
 {block name="content"}
 <article class="scroll-wrapper f24">
-    <div class="">
+    <div class="order_wrapper">
         <div class="separation-line content-padding">
             <div>
                 <span>订单号：</span>
@@ -96,20 +96,24 @@
                 <span>{$info.remark}</span>
             </div>
         </div>
-        <div class="content-padding">
-            <p>维雅品牌定制</p>
+        <div class="content-padding bottom_padding">
+            <p class="content-label">维雅品牌定制</p>
             {volist name="info.goods_list" id="goods_info"}
                 <div class="columns_flex">
                     {empty name="goods_info.thumb_img"}
-                    <img src="public_img/default/no_pic_100.jpg" class="left">
+                    <div class="list_left_img">
+                        <img src="public_img/default/no_pic_100.jpg" class="left">
+                    </div>
                     {else /}
-                    <img src="public_uploads/{$goods_info.thumb_img}" class="left">
+                    <div class="list_left_img">
+                        <img src="public_uploads/{$goods_info.thumb_img}" class="left">
+                    </div>
                     {/empty}
                     <div>
                         <p>{$goods_info.name}</p>
                         <p>规格：<span>{$goods_info.specification}</span></p>
                         <p>￥<price>{$goods_info.price}</price></p>
-                        <p>数量：<span>>{$goods_info.num}</span></p>
+                        <p>数量：<span>X{$goods_info.num}</span></p>
                     </div>
                 </div>
             {/volist}

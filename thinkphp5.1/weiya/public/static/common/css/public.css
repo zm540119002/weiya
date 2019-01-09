@@ -64,6 +64,12 @@ body{
     -webkit-box-orient: vertical;
     word-break:break-all;
 }
+.content-box,.content-padding{
+    padding:0.20rem 0.15rem;
+}
+.bottom_padding{
+    padding:0.20rem 0.15rem 0.8rem 0.15rem;
+}
 .content-row-list{
     margin:0 0 .18rem 0;
 }
@@ -998,9 +1004,8 @@ background-position: 0 -27px;
     width:50%;
 }
 /*内容框*/
-.content-box,.content-padding{
-    padding:0.20rem 0.15rem;
-}.content-box:last-child{
+
+.content-box:last-child{
     padding-bottom:1rem;
 }
 .column_type.current{
@@ -5056,6 +5061,17 @@ select[name="nodeIds"]{
     color:#0066cc;
 }
 /*订单*/
+.order_wrapper .columns_flex{
+    padding:0 0 0.15rem 0;
+    margin:0 0 0.20rem 0;
+    border-bottom:1px solid #d9d9d9;
+}
+.list_left_img{
+    max-width:1rem;
+}
+.list_left_img img{
+    width:100%;
+}
 .order_main_wrapper{
     background: #f2f2f2;
 }
