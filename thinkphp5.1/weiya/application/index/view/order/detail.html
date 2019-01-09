@@ -8,11 +8,11 @@
         <div class="separation-line content-padding">
             <div>
                 <span>订单号：</span>
-                <span>00000000000000</span>
+                <span>{$info.sn}</span>
             </div>
             <div>
                 <span>下单时间：</span>
-                <span>2018-7-10日 9:00AM</span>
+                <span>{$info.create_time}</span>
             </div>
             <div>
                 <span>分类：</span>
@@ -20,11 +20,32 @@
             </div>
             <div>
                 <span>状态：</span>
+                {if $info.order_status == 1}
+                <!--1:待付款-->
                 <span>待付款</span>
+                {elseif $info.order_status == 2 }
+                <!--2:待收货-->
+                <span>待收货</span>
+                {elseif $info.order_status == 3 }
+                <!--3:待评价-->
+                <span>待评价</span>
+                {elseif $info.order_status == 4 }
+                <!--4:已完成-->
+                <span>已完成</span>
+                {elseif $info.order_status == 5 }
+                <!--5:已取消-->
+                <span>已取消</span>
+                {elseif $info.order_status == 6}
+                <!--6:售后-->
+                <span>售后</span>
+                {else /}
+
+                {/if}
+
             </div>
             <div>
                 <span>总价：</span>
-                <span>￥<price>5000</price></span>
+                <span>￥<price>{$info.amount}</price></span>
             </div>
         </div>
         <div class="separation-line content-padding">

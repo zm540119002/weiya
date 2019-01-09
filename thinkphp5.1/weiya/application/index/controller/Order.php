@@ -248,6 +248,9 @@ class Order extends \common\controller\UserBase
                 'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
                 'o.finished_time',
+                'u.name'
+            ],'join'=>[
+                ['common.user u','u.id = o.user_id','left'],
             ],'order'=>[
                 'o.id'=>'desc'
             ]
@@ -276,33 +279,7 @@ class Order extends \common\controller\UserBase
         }
         $info['goods_list'] = $goodsList;
         $info['goods_num'] = $goodsNum;
-        print_r($info);exit;
-        $list = $model -> pageQuery($config)->each(function($item, $key){
-            $modelOrderDetail = new \app\index\model\OrderDetail();
-            $config=[
-                'where'=>[
-                    ['od.status', '=', 0],
-                    ['od.father_order_id','=',$item['id']]
-                ],
-                'field'=>[
-                    'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
-                    'g.name','g.thumb_img',
-                ],
-                'join'=>[
-                    ['goods g','g.id = od.goods_id','left'],
-                ],
-
-            ];
-            $goodsList = $modelOrderDetail -> getList($config);
-            $goodsNum = 0;
-            foreach ($goodsList as &$goods){
-                $goodsNum+=$goods['num'];
-            }
-            $item['goods_list'] = $goodsList;
-            $item['goods_num'] = $goodsNum;
-            return $item;
-        });
-        $this->assign('list',$list);
+        $this->assign('info',$info);
         $unlockingFooterCart = unlockingFooterCartConfig([11]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
