@@ -1,8 +1,9 @@
 {notempty name="list"}
 {volist name="list" id="info"}
-{volist name="info.goods_list" id="goods_info"}
 <li data-id="{$goods_info.goods_id}">
-    <div class="order_top">
+{volist name="info.goods_list" id="goods_info"}
+
+    <div class="order_item">
         <a href="{:url('Goods/detail',['id'=>$goods_info.goods_id])}">
             {empty name="goods_info.thumb_img"}
             <img src="public_img/default/no_pic_100.jpg" class="left">
@@ -16,7 +17,7 @@
             <p>X<span>{$goods_info.num}</span></p>
         </div>
     </div>
-</li>
+
 {/volist}
 <div class="order_bottom">
     <p>共<span>{$info.goods_num}</span>件商品 需付款:<span class="red">￥<price>{$info.amount}</price></span></p>
@@ -25,5 +26,7 @@
         <a>去支付</a>
     </p>
 </div>
+</li>
+
 {/volist}
 {/notempty}
