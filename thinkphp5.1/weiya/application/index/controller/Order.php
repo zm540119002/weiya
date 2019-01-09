@@ -294,7 +294,6 @@ class Order extends \common\controller\UserBase
 
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
-            print_r(11);exit;
             $pageType = $_GET['pageType'];
             $this->fetch($pageType);
         }
