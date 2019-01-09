@@ -160,8 +160,7 @@
 		url:module+'Goods/getList',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1,
-
+		currentPage:1
 	};
 	var postData = {
 		pageSize:10,
@@ -207,11 +206,11 @@
 				url:module+'Goods/getList',
 				requestEnd:false,
 				loadTrigger:false,
-				currentPage:1,
+				currentPage:1
 			};
 			postData.category_id = _this.data('category-id');
 			getPagingList(config,postData);
-		})
+		});
 
 		//下拉加载
 		var offsetHeight=$('.nav_menu').offset().top;

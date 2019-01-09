@@ -16,6 +16,7 @@ class Base extends \think\Controller{
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
+
         if (!request()->isAjax() && (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) ){
             $openId =  session('open_id');
             if(empty($openId)){
@@ -138,13 +139,12 @@ class Base extends \think\Controller{
         $fileName = generateSN(5) . $ext;
         //带存储路径的文件名
         $photo = $storePath . $fileName;
-
         // 生成文件
         $returnData = file_put_contents($photo, base64_decode($data), true);
         if(false === $returnData){
             return errorMsg('保存文件失败');
         }
-      //压缩文件
+        //压缩文件
         if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
             $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
             $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
@@ -153,8 +153,4 @@ class Base extends \think\Controller{
         }
         return $tempRelativePath . $fileName;
     }
-
-  
-
-
 }
