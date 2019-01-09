@@ -107,51 +107,7 @@ class Order extends \common\controller\UserBase
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
     }
-    //订单-详情页
-    public function detail()
-    {
-//        $modelOrder = new \app\index\model\Order();
-//        $orderSn = input('order_sn');
-//        $config = [
-//            'where' => [
-//                ['o.status', '=', 0],
-//                ['o.sn', '=', $orderSn],
-//                ['o.user_id', '=', $this->user['id']],
-//            ],'join' => [
-//                ['order_detail od','od.father_order_id = o.id','left'],
-//                ['goods g','g.id = od.goods_id','left']
-//            ],'field' => [
-//                'o.id', 'o.sn', 'o.amount',
-//                'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type',
-//                'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
-//            ],
-//        ];
-//        $orderGoodsList = $modelOrder->getList($config);
-//        $this ->assign('orderGoodsList',$orderGoodsList);
-//
-//        //地址
-//        $modelAddress =  new \common\model\Address();
-//        $config = [
-//            'where' => [
-//                ['a.status', '=', 0],
-//                ['a.user_id', '=', $this->user['id']],
-//            ],
-//        ];
-//        $addressList = $modelAddress ->getList($config);
-//        $defaultAddress = [];
-//        foreach ($addressList as &$addressInfo){
-//            if($addressInfo['is_default'] == 1){
-//                $defaultAddress = $addressInfo;
-//                break;
-//            }
-//        }
-//        $this->assign('defaultAddress', $defaultAddress);
-//        $this->assign('addressList', $addressList);
-//        $unlockingFooterCart = unlockingFooterCartConfig([11]);
-//        $this->assign('unlockingFooterCart', $unlockingFooterCart);
-        return $this->fetch();
 
-    }
     //确定订单 //订单-详情页
     public function confirmOrder()
     {
@@ -275,6 +231,82 @@ class Order extends \common\controller\UserBase
             $this ->assign('order_status',$orderStatus);
         }
        return $this->fetch();
+    }
+
+    //订单-详情页
+    public function detail()
+    {
+        $model = new \app\index\model\Order();
+        $orderSn = input('order_sn');
+        $config=[
+            'where'=>[
+                ['o.status', '=', 0],
+                ['o.user_id', '=', $this->user['id']],
+                ['o.sn', '=', $orderSn],
+            ],
+            'field'=>[
+                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
+                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
+                'o.finished_time',
+            ],'order'=>[
+                'o.id'=>'desc'
+            ]
+        ];
+        $info = $model->getInfo($config);
+        $info =  $info!=0?$info->toArray():[];
+        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $config=[
+            'where'=>[
+                ['od.status', '=', 0],
+                ['od.father_order_id','=',$info['id']]
+            ],
+            'field'=>[
+                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                'g.name','g.thumb_img',
+            ],
+            'join'=>[
+                ['goods g','g.id = od.goods_id','left'],
+            ],
+
+        ];
+        $goodsList = $modelOrderDetail -> getList($config);
+        $goodsNum = 0;
+        foreach ($goodsList as &$goods){
+            $goodsNum+=$goods['num'];
+        }
+        $info['goods_list'] = $goodsList;
+        $info['goods_num'] = $goodsNum;
+        print_r($info);exit;
+        $list = $model -> pageQuery($config)->each(function($item, $key){
+            $modelOrderDetail = new \app\index\model\OrderDetail();
+            $config=[
+                'where'=>[
+                    ['od.status', '=', 0],
+                    ['od.father_order_id','=',$item['id']]
+                ],
+                'field'=>[
+                    'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                    'g.name','g.thumb_img',
+                ],
+                'join'=>[
+                    ['goods g','g.id = od.goods_id','left'],
+                ],
+
+            ];
+            $goodsList = $modelOrderDetail -> getList($config);
+            $goodsNum = 0;
+            foreach ($goodsList as &$goods){
+                $goodsNum+=$goods['num'];
+            }
+            $item['goods_list'] = $goodsList;
+            $item['goods_num'] = $goodsNum;
+            return $item;
+        });
+        $this->assign('list',$list);
+        $unlockingFooterCart = unlockingFooterCartConfig([11]);
+        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+        return $this->fetch();
+
     }
 
     /**
