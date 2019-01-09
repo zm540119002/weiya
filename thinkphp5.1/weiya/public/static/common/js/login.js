@@ -5,7 +5,6 @@ function loginDialog(fn_name){
     layer.open({
         className:'loginLayer',
         content:content,
-        type:1,
         title:['登录','border-bottom:1px solid #d9d9d9;'],
         success:function(){
             tab_down('.loginNav li','.loginTab .login_wrap','click');
@@ -141,7 +140,7 @@ $(function(){
                             eval(str +"()");
                             return false;
                         }
-                        dialogLoginDefaultCallBack(data)
+                        dialogLoginDefaultCallBack(data);
                         // if(typeof(dialogLoginCallBack) == "undefined" || !$.isFunction(dialogLoginCallBack)){
                         //     dialogLoginDefaultCallBack(data)
                         // }else{
