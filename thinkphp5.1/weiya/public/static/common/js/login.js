@@ -5,6 +5,7 @@ function loginDialog(fn_name){
     layer.open({
         className:'loginLayer',
         type:1,
+        shadeClose:false,
         content:content,
         title:['登录','border-bottom:1px solid #d9d9d9;'],
         success:function(indexs,i){
@@ -12,7 +13,8 @@ function loginDialog(fn_name){
             $('.layui-m-layershade').on('touchmove',function(e){
                 event.preventDefault();
             });
-            $('input[name="fn_name"]').val(fn_name)
+            $('input[name="fn_name"]').val(fn_name);
+            fixedLayer();
         }
     });
 }
@@ -53,10 +55,12 @@ function forgetPasswordDialog(fn_name){
         className:'forgetPasswordLayer',
         content:content,
         type:1,
+        shadeClose:false,
         success:function(){
             $('.login_item .password').attr('type','password');
             $('.view-password').removeClass('active');
-            $('input[name="fn_name"]').val(fn_name)
+            $('input[name="fn_name"]').val(fn_name);
+            fixedLayer();
         }
     });
 }
@@ -140,6 +144,7 @@ $(function(){
                             var str = data.fn_name;
                             eval(str +"()");
                             $('.layui-m-layer').remove();
+                            cancleFixedLayer();
                             return false;
                         }
                         dialogLoginDefaultCallBack(data);
