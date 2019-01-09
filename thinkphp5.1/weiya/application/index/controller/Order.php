@@ -284,7 +284,7 @@ class Order extends \common\controller\UserBase
 
             }
         }
-        return $this->fetch('list_index_tpl');
+        return $this->fetch('list_tpl');
     }
 
 
