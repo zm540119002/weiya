@@ -22,8 +22,24 @@
             <div class="order_bottom">
                 <p>共<span>{$info.goods_num}</span>件商品 需付款:<span class="red">￥<price>{$info.amount}</price></span></p>
                 <p class="order_operate_btn">
+                    {if $info.order_status == 1}
                     <a>取消订单</a>
+                    1:待付款
                     <a href="{:url('Order/pay',['order_sn'=>$info.sn])}">去支付</a>
+                    {elseif $info.order_status == 2 }
+                    2:待收货
+                    {elseif $info.order_status == 3 }
+                    3:待评价
+                    {elseif $info.order_status == 4 }
+                    4:已完成
+                    {elseif $info.order_status == 5 }
+                    5:已取消
+                    {elseif $info.order_status == 6}
+                    6:售后',
+                    {else /}
+                  
+                    {/if}
+
                 </p>
             </div>
     </li>
