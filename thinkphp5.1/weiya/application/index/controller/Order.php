@@ -281,9 +281,10 @@ class Order extends \common\controller\UserBase
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'index' ){
-                return $this->fetch('list_index_tpl');
+
             }
         }
+        return $this->fetch('list_index_tpl');
     }
 
 
