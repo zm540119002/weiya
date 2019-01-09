@@ -546,14 +546,7 @@ function cartGoodsNumPlus(obj) {
     //num=num+parseInt(opt.increase_quantity);
     _item.find('.cart_gshopping_count').val(++num);
 }
-// function cartGoodsNumPlus(obj) {
-//     var _item = obj.parents('.item');
-//         _item.find('.sign_checkitem').prop("checked",true);
-//     var num = _item.find('.cart_gshopping_count').val();
-//     num=parseInt(num);
-//     //num=num+parseInt(opt.increase_quantity);
-//     _item.find('.cart_gshopping_count').val(++num);
-// }
+
 //修改购物车商品数量
 function editCartNum(postData,obj) {
     var url = module + 'Cart/editCartNum';
@@ -574,8 +567,4 @@ function editCartNum(postData,obj) {
             
         }
     });
-}
-
-function callBack() {
-    
 }
