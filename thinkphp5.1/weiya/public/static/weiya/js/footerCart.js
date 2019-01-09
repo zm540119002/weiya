@@ -41,7 +41,7 @@ function dialogLoginCallBack(_this) {
                         num += parseInt($(this).find('.gshopping_count').val());
                     }
                 });
-                $('footer').find('.cart_num').text(1).addClass('cur');
+                $('footer').find('.cart_num').addClass('cur');
                 $('footer').find('.add_num').text('+'+num).addClass('current');
                 setTimeout(function(){
                     $('.add_num').removeClass('current');

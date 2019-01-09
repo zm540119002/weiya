@@ -289,8 +289,10 @@ i{
 }
 .cart_num.cur{
     border-radius: 10px;
-    padding:0 0.125rem;
-    font-size:0.12rem;
+    /*padding:0 0.125rem;
+    font-size:0.12rem;*/
+    width: 0.2rem;
+    height: 0.2rem;
 }
 .dark_green{background:#0f9143;}
 .goods_total_price{color:#ff6482;;padding-left: 0.18rem;font-size:0.32rem;}
