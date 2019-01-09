@@ -402,7 +402,6 @@ $(function () {
 
 //生成订单
 function generateOrder(postData,obj) {
-    console.log(postData);return false
     var url = module + 'Order/generate';
     $.ajax({
         url: url,
