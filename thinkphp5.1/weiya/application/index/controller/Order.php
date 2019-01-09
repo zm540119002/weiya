@@ -284,7 +284,9 @@ class Order extends \common\controller\UserBase
                 ],
                 'join'=>[
                     ['goods g','g.id = od.goods_id','left'],
-                ],
+                ],'order'=>[
+                    'id'=>'desc'
+                ]
 
             ];
             $goodsList = $modelOrderDetail -> getList($config);
