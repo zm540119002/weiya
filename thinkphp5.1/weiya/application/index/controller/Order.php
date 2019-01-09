@@ -322,7 +322,7 @@ class Order extends \common\controller\UserBase
         }
 
         $list = $model -> pageQuery($config);
-       
+        print_r($list->data);exit;
         print_r(array_column( $list->data,'id'));exit;
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
