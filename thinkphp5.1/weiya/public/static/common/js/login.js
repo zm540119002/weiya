@@ -139,6 +139,7 @@ $(function(){
                         if(data.fn_name){
                             var str = data.fn_name;
                             eval(str +"()");
+                            return false;
                         }
                         dialogLoginDefaultCallBack(data);
                         // if(typeof(dialogLoginCallBack) == "undefined" || !$.isFunction(dialogLoginCallBack)){
