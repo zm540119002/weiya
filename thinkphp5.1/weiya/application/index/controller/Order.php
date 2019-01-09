@@ -245,7 +245,52 @@ class Order extends \common\controller\UserBase
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
+/*
+ *  [0] => Array
+                (
+                    [id] => 151
+                    [pay_sn] =>
+                    [sn] => 20190107174042810857237791750415
+                    [order_status] => 1
+                    [payment_code] => 0
+                    [amount] => 0.01
+                    [actually_amount] => 0.01
+                    [remark] =>
+                    [consignee] =>
+                    [mobile] =>
+                    [province] => 0
+                    [city] => 0
+                    [area] => 0
+                    [detail_address] =>
+                    [create_time] => 2019-01-07 17:40:42
+                    [payment_time] =>
+                    [finished_time] => 0
+                    ['goods_list']=>array(
+                                        [0] => Array
+                                        (
 
+                                            [goods_id] => 36
+                                            [price] => 0.01
+                                            [num] => 1
+                                            [buy_type] => 1
+                                            [name] => 玻尿酸活性肽依赖修护冻干组 12组
+                                            [thumb_img] => weiya_goods/1544606743613510.jpg
+                                        )
+                                        [1] => Array
+                                        (
+
+                                            [goods_id] => 36
+                                            [price] => 0.01
+                                            [num] => 1
+                                            [buy_type] => 1
+                                            [name] => 玻尿酸活性肽依赖修护冻干组 12组
+                                            [thumb_img] => weiya_goods/1544606743613510.jpg
+                                        )
+                                     )
+
+                )
+
+ */
         $model = new \app\index\model\Order();
         $config=[
             'where'=>[
@@ -255,13 +300,14 @@ class Order extends \common\controller\UserBase
             'field'=>[
                 'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
-                'o.finished_time','od.goods_id', 'od.price', 'od.num', 'od.buy_type',
-                'g.name','g.thumb_img',
+                'o.finished_time',
+//                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+//                'g.name','g.thumb_img',
                 ],
-                'join'=>[
-                    ['order_detail od','od.father_order_id = o.id','left'],
-                    ['goods g','g.id = od.goods_id','left'],
-            ],
+//                'join'=>[
+//                    ['order_detail od','od.father_order_id = o.id','left'],
+//                    ['goods g','g.id = od.goods_id','left'],
+//                ],
 
         ];
         if(input('?get.order_status') && input('get.order_status/d')){
@@ -277,7 +323,11 @@ class Order extends \common\controller\UserBase
             $config['where'][] = ['o.name', 'like', '%' . trim($keyword) . '%'];
         }
 
-        $list = $model -> pageQuery($config);
+        $list = $model -> pageQuery($config)->each(function($item, $key){
+            $item['nickname'] = 'think';
+            return $item;
+        });
+        print_r($list);exit;
         $list = count($list)!=0?$list->toArray():[];
         $orderIds = array_unique(array_column($list['data'],'id'));
         $res = [];
