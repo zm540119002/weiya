@@ -1,56 +1,3 @@
-function dialogLoginCallBack(_this) {
-    var lis = null;
-    if($(_this.context).hasClass('add_purchase_cart')){
-        lis = _this.parents('li');
-    }else{
-        lis = $('ul.goods_list').find('li[data-buy_type="1"]');
-    }
-    var postData = assemblyData(lis);
-    if(!postData){
-        return false;
-    }
-    var url = module + 'Cart/addCart';
-    $(_this).addClass("nodisabled");//防止重复提交
-    $.ajax({
-        url: url,
-        data: postData,
-        type: 'post',
-        beforeSend: function(){
-            $('.loading').show();
-        },
-        error:function(){
-            $('.loading').hide();
-            dialog.error('AJAX错误');
-        },
-        success: function(data){
-            $('.loading').hide();
-            $(_this).removeClass("nodisabled");//防止重复提交
-            if(data.status==0){
-                dialog.error(data.info);
-            }
-            else if(data.code==1 && data.data=='no_login'){
-                loginDialog();
-                return false;
-            }
-            else{
-                dialog.success(data.info);
-                var num = 0;
-                $.each(lis,function(index,val){
-                    var buyType=$(this).data('buy_type');
-                    if(buyType==1){
-                        num += parseInt($(this).find('.gshopping_count').val());
-                    }
-                });
-                $('footer').find('.cart_num').addClass('cur');
-                $('footer').find('.add_num').text('+'+num).addClass('current');
-                setTimeout(function(){
-                    $('.add_num').removeClass('current');
-                },2000)
-
-            }
-        }
-    });
-}
 
 function addCart(_this) {
     var lis = null;
@@ -317,6 +264,7 @@ $(function () {
     $('body').on('click','.confirm_order',function () {
         _this = $(this);
         var consignee=$('.consigneeInfo input[name="layer_consignee"]').val();
+        var mobile=$('.consigneeInfo input[name="layer_mobile"]').val();
         var province=$('.consigneeInfo input[name="province"]').val();
         var city=$('.consigneeInfo input[name="city"]').val();
         var area=$('.consigneeInfo input[name="area"]').val();
@@ -332,6 +280,7 @@ $(function () {
             father_order_id:orderId,
             order_sn:orderSn,
             consignee:consignee,
+            mobile:mobile,
             province:province,
             city:city,
             area:area,
@@ -363,7 +312,7 @@ $(function () {
     });
 
 
-    //购物车弹窗
+    //购物车弹窗 样品购买
     var goodsInfoLayer=$('#goodsInfoLayer').html();
     var pageii;
     $('.sample_purchase').on('click',function(){
@@ -398,6 +347,12 @@ $(function () {
             
         });
     });
+    //去支付
+    $('body').on('click','.pay',function () {
+        var orderSn =  $('#order_sn').val();
+        location.href = module + 'Order/pay/order_sn/' + orderSn;
+    })
+
 });
 
 //生成订单
@@ -417,7 +372,7 @@ function generateOrder(postData,obj) {
         success: function(data){
             obj.removeClass("nodisabled");//防止重复提交
             $('.loading').hide();
-            location.href = module + 'Order/detail/order_sn/' + data.order_sn;
+            location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
         }
     });
 }

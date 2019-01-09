@@ -107,9 +107,61 @@ class Order extends \common\controller\UserBase
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
     }
-    //订单-详情页
-    public function detail()
+
+    //确定订单 //订单-详情页
+    public function confirmOrder()
     {
+        if (request()->isPost()) {
+            $fatherOrderId = input('post.father_order_id',0,'int');
+            $modelOrder = new \app\index\model\Order();
+            $data = input('post.');
+            $data['order_status'] = 1;
+            $condition = [
+                ['user_id','=',$this->user['id']],
+                ['id','=',$fatherOrderId],
+            ];
+            $res = $modelOrder -> allowField(true) -> save($data,$condition);
+            if(false === $res){
+                return errorMsg('失败');
+            }
+            //根据订单号查询关联的购物车的商品 删除
+            $modelOrderDetail = new \app\index\model\OrderDetail();
+            $config = [
+                'where' => [
+                    ['od.status', '=', 0],
+                    ['od.father_order_id', '=', $fatherOrderId],
+                ], 'field' => [
+                    'od.goods_id','od.buy_type','od.price', 'od.num', 'od.store_id','od.father_order_id','od.user_id'
+                ]
+            ];
+            $orderDetailList = $modelOrderDetail->getList($config);
+            $model = new \app\index\model\Cart();
+            foreach ($orderDetailList as &$orderDetailInfo){
+                $condition = [
+                    ['user_id','=',$this->user['id']],
+                    ['foreign_id','=',$orderDetailInfo['goods_id']],
+                    ['buy_type','in',$orderDetailInfo['buy_type']],
+                ];
+                $result = $model -> del($condition,false);
+                if(!$result['status']){
+                    return errorMsg('删除失败');
+                }
+            }
+
+//      //根据订单号查询关联的商品
+//        $modelOrderChild = new \app\index\model\OrderChild();
+//        //生成子订单
+//        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
+//        if(!$rse['status']){
+//            $modelOrder->rollback();
+//            return errorMsg($modelOrderChild->getError());
+//        }
+
+
+            $orderSn = input('post.order_sn','','string');
+            return successMsg('成功',array('order_sn'=>$orderSn));
+        }
+
         $modelOrder = new \app\index\model\Order();
         $orderSn = input('order_sn');
         $config = [
@@ -128,7 +180,7 @@ class Order extends \common\controller\UserBase
         ];
         $orderGoodsList = $modelOrder->getList($config);
         $this ->assign('orderGoodsList',$orderGoodsList);
-      
+
         //地址
         $modelAddress =  new \common\model\Address();
         $config = [
@@ -150,62 +202,6 @@ class Order extends \common\controller\UserBase
         $unlockingFooterCart = unlockingFooterCartConfig([11]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
-
-    }
-    //确定订单
-    public function confirmOrder()
-    {
-        if (!request()->isPost()) {
-            return errorMsg('请求方式错误');
-        }
-        $fatherOrderId = input('post.father_order_id',0,'int');
-        $modelOrder = new \app\index\model\Order();
-        $data = input('post.');
-        $data['order_status'] = 1;
-        $condition = [
-            ['user_id','=',$this->user['id']],
-            ['id','=',$fatherOrderId],
-        ];
-        $res = $modelOrder -> allowField(true) -> save($data,$condition);
-        if(false === $res){
-            return errorMsg('失败');
-        }
-        //根据订单号查询关联的购物车的商品 删除
-        $modelOrderDetail = new \app\index\model\OrderDetail();
-        $config = [
-            'where' => [
-                ['od.status', '=', 0],
-                ['od.father_order_id', '=', $fatherOrderId],
-            ], 'field' => [
-                'od.goods_id','od.buy_type','od.price', 'od.num', 'od.store_id','od.father_order_id','od.user_id'
-            ]
-        ];
-        $orderDetailList = $modelOrderDetail->getList($config);
-        $model = new \app\index\model\Cart();
-        foreach ($orderDetailList as &$orderDetailInfo){
-            $condition = [
-                ['user_id','=',$this->user['id']],
-                ['foreign_id','=',$orderDetailInfo['goods_id']],
-                ['buy_type','in',$orderDetailInfo['buy_type']],
-            ];
-            $result = $model -> del($condition,false);
-            if(!$result['status']){
-                return errorMsg('删除失败');
-            }
-        }
-
-//      //根据订单号查询关联的商品
-//        $modelOrderChild = new \app\index\model\OrderChild();
-//        //生成子订单
-//        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
-//        if(!$rse['status']){
-//            $modelOrder->rollback();
-//            return errorMsg($modelOrderChild->getError());
-//        }
-
-
-        $orderSn = input('post.order_sn','','string');
-        return successMsg('成功',array('order_sn'=>$orderSn));
     }
     //支付
     public function pay()
@@ -235,6 +231,86 @@ class Order extends \common\controller\UserBase
             $this ->assign('order_status',$orderStatus);
         }
        return $this->fetch();
+    }
+
+    //订单-详情页
+    public function detail()
+    {
+        $model = new \app\index\model\Order();
+        $orderSn = input('order_sn');
+        $config=[
+            'where'=>[
+                ['o.status', '=', 0],
+                ['o.user_id', '=', $this->user['id']],
+                ['o.sn', '=', $orderSn],
+            ],
+            'field'=>[
+                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
+                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
+                'o.finished_time',
+                'u.name','u.mobile_phone'
+            ],'join'=>[
+                ['common.user u','u.id = o.user_id','left'],
+            ],'order'=>[
+                'o.id'=>'desc'
+            ]
+        ];
+        $info = $model->getInfo($config);
+        $info =  $info!=0?$info->toArray():[];
+        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $config=[
+            'where'=>[
+                ['od.status', '=', 0],
+                ['od.father_order_id','=',$info['id']]
+            ],
+            'field'=>[
+                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                'g.name','g.thumb_img','g.specification'
+            ],
+            'join'=>[
+                ['goods g','g.id = od.goods_id','left'],
+            ],
+
+        ];
+        $goodsList = $modelOrderDetail -> getList($config);
+        $goodsNum = 0;
+        foreach ($goodsList as &$goods){
+            $goodsNum+=$goods['num'];
+        }
+        $info['goods_list'] = $goodsList;
+        $info['goods_num'] = $goodsNum;
+        $this->assign('info',$info);
+        $configFooter = [];
+        switch ($info['order_status'])
+        {
+            /*
+             * 0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消 6:售后',
+             */
+            case "1":
+                $configFooter = [5];
+                break;
+            case "2":
+                $configFooter = [12];
+                break;
+            case "3":
+                $configFooter = [13];
+                break;
+            case "4":
+                $configFooter = [14];
+                break;
+            case "5":
+                $configFooter = [14];
+                break;
+            case "6":
+                $configFooter = [];
+                break;
+            default:
+
+        }
+        $unlockingFooterCart = unlockingFooterCartConfig($configFooter);
+        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+        return $this->fetch();
+
     }
 
     /**
