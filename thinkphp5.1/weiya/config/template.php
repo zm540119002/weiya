@@ -32,19 +32,19 @@ return [
     'taglib_end'   => '}',
     'tpl_replace_string' => [
         //公共资源路径
-        'public_img' => Request::domain() .'/static/common/img',
-        'public_js' => Request::domain() .'/static/common/js',
-        'public_css' => Request::domain() .'/static/common/css',
-        'public_hui_admin' => Request::domain() .'/static/admin/hadmin',
-        'public_admin_common_js' => Request::domain() .'/static/admin/common/js',
-        'public_admin_common_css' => Request::domain() .'/static/admin/common/css',
-        'public_admin_common_img' => Request::domain() .'/static/admin/common/img',
+        'public_img' =>'/static/common/img',
+        'public_js' =>'/static/common/js',
+        'public_css' =>'/static/common/css',
+        'public_hui_admin' => '/static/admin/hadmin',
+        'public_admin_common_js' => '/static/admin/common/js',
+        'public_admin_common_css' => '/static/admin/common/css',
+        'public_admin_common_img' => '/static/admin/common/img',
         //公共上传路径
-        'public_uploads' => Request::domain() .'/uploads',
+        'public_uploads' => '/uploads',
         //维雅资源路径
-        'weiya_img' => Request::domain() .'/static/weiya/img',
-        'weiya_js' => Request::domain() .'/static/weiya/js',
-        'weiya_css' => Request::domain() .'/static/weiya/css',
+        'weiya_img' => '/static/weiya/img',
+        'weiya_js' => '/static/weiya/js',
+        'weiya_css' => '/static/weiya/css',
 
         //后台
         // 'public_admin_pc' => Request::domain() .'/static/admin_pc',
