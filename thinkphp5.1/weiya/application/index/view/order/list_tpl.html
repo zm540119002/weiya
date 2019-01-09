@@ -23,15 +23,20 @@
                 <p>共<span>{$info.goods_num}</span>件商品 需付款:<span class="red">￥<price>{$info.amount}</price></span></p>
                 <p class="order_operate_btn">
                     {if $info.order_status == 1}
-                    <a>取消订单</a>
-                    1:待付款
+                    <!--1:待付款-->
+                    <a href="javascript:void(0);">取消订单</a>
                     <a href="{:url('Order/pay',['order_sn'=>$info.sn])}">去支付</a>
                     {elseif $info.order_status == 2 }
-                    2:待收货
+                    <!--2:待收货-->
+                    <a href="javascript:void(0);">确认收货</a>
                     {elseif $info.order_status == 3 }
-                    3:待评价
+                    <!--3:待评价-->
+                    <a href="javascript:void(0);">申请售后</a>
+                    <a href="javascript:void(0);">评价</a>
                     {elseif $info.order_status == 4 }
-                    4:已完成
+                    <!--4:已完成-->
+                    <a href="javascript:void(0);">查看评价</a>
+                    <a href="javascript:void(0);">再次购买</a>
                     {elseif $info.order_status == 5 }
                     5:已取消
                     {elseif $info.order_status == 6}
