@@ -1,46 +1,31 @@
 {notempty name="list"}
 {volist name="list" id="info"}
+    <li data-id="{$info.id}">
+            <a href="{:url('order/orderDetail',['sn'=>$info.sn])}">
+                {volist name="info.goods_list" id="goods_info"}
+                <div class="order_item">
 
-<li data-id="{$info.id}">
-        <a href="{:url('order/orderDetail',['sn'=>$info.sn])}">
-            {volist name="info.goods_list" id="goods_info"}
-            <div class="order_item">
-            
-                    {empty name="goods_info.thumb_img"}
-                    <img src="public_img/default/no_pic_100.jpg" class="left">
-                    {else /}
-                    <img src="public_uploads/{$goods_info.thumb_img}" class="left">
-                    {/empty}
-            
-                <div class="order_top_r">
-                    <p>{$goods_info.name}</p>
-                    <p>￥<price>{$goods_info.price}</price></p>
-                    <p>X<span>{$goods_info.num}</span></p>
+                        {empty name="goods_info.thumb_img"}
+                        <img src="public_img/default/no_pic_100.jpg" class="left">
+                        {else /}
+                        <img src="public_uploads/{$goods_info.thumb_img}" class="left">
+                        {/empty}
+
+                    <div class="order_top_r">
+                        <p>{$goods_info.name}</p>
+                        <p>￥<price>{$goods_info.price}</price></p>
+                        <p>X<span>{$goods_info.num}</span></p>
+                    </div>
                 </div>
+                {/volist}
+            </a>
+            <div class="order_bottom">
+                <p>共<span>{$info.goods_num}</span>件商品 需付款:<span class="red">￥<price>{$info.amount}</price></span></p>
+                <p class="order_operate_btn">
+                    <a>取消订单</a>
+                    <a href="{:url('Order/pay',['order_sn'=>$info.sn])}">去支付</a>
+                </p>
             </div>
-            {/volist}
-        </a>
-        <div class="order_bottom">
-            <p>共<span>{$info.goods_num}</span>件商品 需付款:<span class="red">￥<price>{$info.amount}</price></span></p>
-            <p class="order_operate_btn">
-                <a>取消订单</a>
-                <a>去支付</a>
-            </p>
-        </div>
-   
-</li>
-<<<<<<< HEAD
-{/volist}
-</a>
-<div class="order_bottom">
-    <p>共<span>{$info.goods_num}</span>件商品 需付款:<span class="red">￥<price>{$info.amount}</price></span></p>
-    <p class="order_operate_btn">
-        <a>取消订单</a>
-        <a href="{:url('Order/pay',['order_sn'=>$info.sn])}">去支付</a>
-    </p>
-</div>
-=======
-
->>>>>>> 24f8dd82bbc1ade90175afff0047a85548c78e35
+    </li>
 {/volist}
 {/notempty}
