@@ -6,7 +6,7 @@ class Index extends \common\controller\Base{
      */
     public function index(){
         $a = request()->domain();
-        print_r($a);exit;
+        print_r(1111);exit;
         //获取商品的分类
         $modelGoodsCategory = new \app\index\model\GoodsCategory();
         $config =[
