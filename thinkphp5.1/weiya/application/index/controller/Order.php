@@ -254,6 +254,28 @@ class Order extends \common\controller\UserBase
         ];
         $info = $model->getInfo($config);
         $info =  $info!=0?$info->toArray():[];
+        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $config=[
+            'where'=>[
+                ['od.status', '=', 0],
+                ['od.father_order_id','=',$info['id']]
+            ],
+            'field'=>[
+                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                'g.name','g.thumb_img',
+            ],
+            'join'=>[
+                ['goods g','g.id = od.goods_id','left'],
+            ],
+
+        ];
+        $goodsList = $modelOrderDetail -> getList($config);
+        $goodsNum = 0;
+        foreach ($goodsList as &$goods){
+            $goodsNum+=$goods['num'];
+        }
+        $info['goods_list'] = $goodsList;
+        $info['goods_num'] = $goodsNum;
         print_r($info);exit;
         $list = $model -> pageQuery($config)->each(function($item, $key){
             $modelOrderDetail = new \app\index\model\OrderDetail();
