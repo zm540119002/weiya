@@ -3,7 +3,7 @@ namespace app\index_admin\controller;
 
 /**供应商验证控制器基类
  */
-class Scene extends Base {
+class Information extends Base {
     
     public function manage(){
         return $this->fetch('manage');
@@ -14,21 +14,17 @@ class Scene extends Base {
      * 审核
      */
     public function edit(){
-        $model = new \app\index_admin\model\Scene();
+        $model = new \app\index_admin\model\Information();
         if(request()->isPost()){
-            if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($_POST['thumb_img']));
-            }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_information'),basename($item));
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
-
             }
             $data = $_POST;
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
@@ -39,10 +35,7 @@ class Scene extends Base {
                     ],
                 ];
                 $info = $model->getInfo($config);
-                //删除就图片
-                if($info['thumb_img']){
-                    delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
-                }
+
                 if($info['main_img']){
                     //删除商品详情图
                     $oldImgArr = explode(',',$info['main_img']);
@@ -87,30 +80,30 @@ class Scene extends Base {
      *  分页查询
      */
     public function getList(){
-        $model = new \app\index_admin\model\Scene();
+        $model = new \app\index_admin\model\Information();
         $where = [];
-        $where[] = ['s.status','=',0];
+        $where[] = ['i.status','=',0];
         if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-            $where[] = ['s.category_id_1','=',input('get.category_id_1',0,'int')];
+            $where[] = ['i.category_id_1','=',input('get.category_id_1',0,'int')];
         }
         if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
-            $where[] = ['s.category_id_2','=',input('get.category_id_2',0,'int')];
+            $where[] = ['i.category_id_2','=',input('get.category_id_2',0,'int')];
         }
         if(isset($_GET['category_id_3']) && intval($_GET['category_id_3'])){
-            $where[] = ['s.category_id_3','=',input('get.category_id_3',0,'int')];
+            $where[] = ['i.category_id_3','=',input('get.category_id_3',0,'int')];
         }
         $keyword = input('get.keyword','','string');
         if($keyword){
-            $where[] = ['s.name','like', '%' . trim($keyword) . '%'];
+            $where[] = ['i.headline','like', '%' . trim($keyword) . '%'];
         }
         $config = [
             'where'=>$where,
             'field'=>[
-                's.id','s.name','s.thumb_img','s.main_img','s.intro','s.shelf_status','s.sort','s.create_time','s.is_selection'
+                'i.id','i.headline','i.content','i.main_img','i.auth_status','i.sort','i.create_time'
             ],
             'order'=>[
-                's.id'=>'desc',
-                's.sort'=>'desc',
+                'i.id'=>'desc',
+                'i.sort'=>'desc',
             ],
         ];
         $list = $model ->pageQuery($config);
@@ -129,7 +122,7 @@ class Scene extends Base {
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index_admin\model\Scene();
+        $model = new \app\index_admin\model\Information();
         $id = input('post.id/d');
         if(input('?post.id') && $id){
             $condition = [
@@ -148,16 +141,16 @@ class Scene extends Base {
     /**
      * 上下架
      */
-    public function setShelfStatus(){
+    public function setAuthStatus(){
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index_admin\model\Scene();
+        $model = new \app\index_admin\model\Information();
         $id = input('post.id/d');
         if(!input('?post.id') && !$id){
             return errorMsg('失败');
         }
-        $rse = $model->where(['id'=>input('post.id/d')])->setField(['shelf_status'=>input('post.shelf_status/d')]);
+        $rse = $model->where(['id'=>input('post.id/d')])->setField(['auth_status'=>input('post.auth_status/d')]);
         if(!$rse){
             return errorMsg('失败');
         }

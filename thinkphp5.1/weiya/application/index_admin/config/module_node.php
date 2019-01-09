@@ -25,5 +25,12 @@ return [
                 ['id'=>301,'name'=>'项目管理','display'=>1,'controller'=>'Project','action'=>'manage',],
             ],
         ],
+        'information'=>[
+            'id'=>300,'name'=>'资讯','type'=>2,
+            'sub_menu' => [
+//                ['id'=>201,'name'=>'项目分类管理','display'=>1,'controller'=>'ProjectCategory','action'=>'manage',],
+                ['id'=>301,'name'=>'资讯管理','display'=>1,'controller'=>'Information','action'=>'manage',],
+            ],
+        ],
     ],
 ];

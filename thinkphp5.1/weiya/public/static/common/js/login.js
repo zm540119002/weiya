@@ -1,5 +1,5 @@
 //登录-弹窗触发
-function loginDialog(){
+function loginDialog(fn_name){
     var content=$('#dialLogin').html();
     window.scrollTo(0,0);
     layer.open({
@@ -11,25 +11,67 @@ function loginDialog(){
             $('.layui-m-layershade').on('touchmove',function(e){
                 event.preventDefault();
             });
+            $('input[name="fn_name"]').val(fn_name)
+        }
+    });
+}
+
+//登录-弹窗触发
+function logoutDialog(){
+    var url = domain+'ucenter/UserCenter/logout';
+    layer.open({
+        content:'是否退出？',
+        btn:['确定','取消'],
+        yes:function(index){
+            $.ajax({
+                url: url,
+                data: {},
+                type: 'post',
+                beforeSend: function(){
+                    $('.loading').show();
+                },
+                error:function(){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status){
+                        location.href = domain+'index/UserCenter/index';
+                    }
+                }
+            });
+            layer.close(index);
         }
     });
 }
 //忘记密码-弹窗触发
-function forgetPasswordDialog(){
+function forgetPasswordDialog(fn_name){
     var content = $('#sectionForgetPassword').html();
     layer.open({
         className:'forgetPasswordLayer',
         content:content,
+        type:1,
         success:function(){
             $('.login_item .password').attr('type','password');
             $('.view-password').removeClass('active');
+            $('input[name="fn_name"]').val(fn_name)
         }
     });
 }
 $(function(){
     //忘记密码-弹窗事件
+    $('body').on('click','#login_dialog',function(){
+        loginDialog('reload');
+    });
+    //忘记密码-弹窗事件
+    $('body').on('click','#logout_dialog',function(){
+        logoutDialog();
+    });
+    //忘记密码-弹窗事件
     $('body').on('click','.forget_dialog',function(){
-        forgetPasswordDialog();
+        var fn_name = $(this).siblings('input[name="fn_name"]').val();
+        forgetPasswordDialog(fn_name);
     });
 });
 $(function(){
@@ -58,8 +100,9 @@ $(function(){
                 postForm = $('#formRegister');
             }
         }else if(method=='forgetPassword'){//重置密码
-            if($('.loginLayer #formForgetPassword').length){//弹框重置密码
-                postForm = $('.loginLayer #formForgetPassword');
+            console.log($('.forgetPasswordLayer  #formForgetPassword').length);
+            if($('.forgetPasswordLayer  #formForgetPassword').length){//弹框重置密码
+                postForm = $('.forgetPasswordLayer #formForgetPassword');
             }else{//页面重置密码
                 loginSign = 'page';
                 postForm = $('#formForgetPassword');
@@ -92,11 +135,18 @@ $(function(){
                     if(loginSign=='page'){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
-                        if(typeof(dialogLoginCallBack) == "undefined"){
-                            dialogLoginDefaultCallBack(data);
-                        }else if($.isFunction(dialogLoginCallBack)){
-                            dialogLoginCallBack(data)
+                        if(data.fn_name){
+                            var str = data.fn_name;
+                            eval(str +"()");
+                            return false;
                         }
+                        dialogLoginDefaultCallBack(data);
+                        // if(typeof(dialogLoginCallBack) == "undefined" || !$.isFunction(dialogLoginCallBack)){
+                        //     dialogLoginDefaultCallBack(data)
+                        // }else{
+                        //     dialogLoginCallBack(data);
+                        // }
+                        
                     }
                 }
             });
@@ -105,6 +155,10 @@ $(function(){
     //弹框登录成功默认回调函数
     function dialogLoginDefaultCallBack(data) {
         location.href = data.info;
+    }
+    //弹框登录成功默认回调函数
+    function reload() {
+        location.reload()
     }
 
     //显示隐藏密码
