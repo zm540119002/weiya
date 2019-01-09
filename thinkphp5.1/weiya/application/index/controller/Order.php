@@ -194,14 +194,14 @@ class Order extends \common\controller\UserBase
             }
         }
 
-      //根据订单号查询关联的商品
-        $modelOrderChild = new \app\index\model\OrderChild();
-        //生成子订单
-        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
-        if(!$rse['status']){
-            $modelOrder->rollback();
-            return errorMsg($modelOrderChild->getError());
-        }
+//      //根据订单号查询关联的商品
+//        $modelOrderChild = new \app\index\model\OrderChild();
+//        //生成子订单
+//        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
+//        if(!$rse['status']){
+//            $modelOrder->rollback();
+//            return errorMsg($modelOrderChild->getError());
+//        }
 
 
         $orderSn = input('post.order_sn','','string');
