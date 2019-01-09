@@ -82,3 +82,13 @@ function unlockingFooterCartConfig($arr){
     }
     return $tempArr;
 }
+
+
+//获取店铺合作类型
+/**
+ * @param $num
+ * @return string`'支付方式：0：保留 1 微信 2：支付宝 3：网银 4:钱包',
+ */
+function getPaymentCode($num){
+    return $num?config('custom.payment_code')[$num]:'';
+}

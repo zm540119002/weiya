@@ -265,7 +265,7 @@ class Order extends \common\controller\UserBase
             ],
             'field'=>[
                 'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
-                'g.name','g.thumb_img',
+                'g.name','g.thumb_img','g.specification'
             ],
             'join'=>[
                 ['goods g','g.id = od.goods_id','left'],
