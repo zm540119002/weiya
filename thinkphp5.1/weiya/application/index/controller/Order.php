@@ -261,7 +261,6 @@ class Order extends \common\controller\UserBase
                 ],
                 'join'=>[
                     ['order_detail od','od.father_order_id = o.id','left'],
-                    ['order_detail od','od.father_order_id = oc.father_order_id','left'],
                     ['goods g','g.id = od.goods_id','left'],
             ],
 
