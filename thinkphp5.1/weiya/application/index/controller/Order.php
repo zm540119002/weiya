@@ -251,7 +251,6 @@ class Order extends \common\controller\UserBase
             'where'=>[
                 ['o.status', '=', 0],
                 ['o.user_id', '=', $this->user['id']],
-                ['o.order_status', '>', 0],
             ],
             /**
              *   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
@@ -292,7 +291,7 @@ class Order extends \common\controller\UserBase
              */
             'field'=>[
                 'o.id','o.sn','o.order_status','o.amount',
-                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+//                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
 
 //                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
 //                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time','o.finished_time',
@@ -300,16 +299,19 @@ class Order extends \common\controller\UserBase
 //                'g.name','g.thumb_img'
 //                'od.goods_id',
 //                'g.name'
-            ],'join'=>[
-                ['order_detail od','od.father_order_id = o.id','left'],
-//                ['goods g','g.id = od.goods_id','left'],
-//                ['order_detail od','od.father_order_id = oc.father_order_id','left'],
-//                ['goods g','g.id = od.goods_id','left'],
-            ],
+          ],
+//'join'=>[
+//                ['order_detail od','od.father_order_id = o.id','left'],
+////                ['goods g','g.id = od.goods_id','left'],
+////                ['order_detail od','od.father_order_id = oc.father_order_id','left'],
+////                ['goods g','g.id = od.goods_id','left'],
+//            ],
 
         ];
         if(input('?get.order_status') && input('get.order_status/d')){
             $config['where'][] = ['o.order_status', '=', input('get.order_status/d')];
+        }else{
+            $config['where'][] = ['o.order_status', '>', 0];
         }
         if(input('?get.category_id') && input('get.category_id/d')){
             $config['where'][] = ['o.category_id_1', '=', input('get.category_id/d')];
