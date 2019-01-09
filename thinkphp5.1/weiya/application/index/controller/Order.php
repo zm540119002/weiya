@@ -288,8 +288,7 @@ class Order extends \common\controller\UserBase
                 }
             }
         }
-        print_r($res);exit;
-        $this->assign('list',$list);
+        $this->assign('list',$res);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'index' ){
 
