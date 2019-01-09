@@ -1,13 +1,13 @@
 {notempty name="list"}
 {volist name="list" id="info"}
 {volist name="info.goods_list" id="goods_info"}
-<li data-id="$goods_info">
+<li data-id="{$goods_info.goods_id}">
     <div class="order_top">
         <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
         <div class="order_top_r">
             <p>美肤美肤美肤美肤美肤美肤</p>
-            <p>￥<price>500.00</price></p>
-            <p>X<span>1</span></p>
+            <p>￥<price>{$goods_info.price}</price></p>
+            <p>X<span>{$goods_info.num}</span></p>
         </div>
     </div>
 </li>
