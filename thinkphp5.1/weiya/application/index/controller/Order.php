@@ -321,9 +321,8 @@ class Order extends \common\controller\UserBase
             $config['where'][] = ['o.name', 'like', '%' . trim($keyword) . '%'];
         }
 
-        $list = $model -> pageQuery($config);
-
-        print_r( $list->toArray()['data']);exit;
+        $list = $model -> pageQuery($config)->toArray()['data'];
+        print_r( $list);exit;
         print_r(array_column( $list->data,'id'));exit;
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
