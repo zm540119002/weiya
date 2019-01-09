@@ -5,6 +5,8 @@ class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
+        $a = request()->domain();
+        print_r($a);exit;
         //获取商品的分类
         $modelGoodsCategory = new \app\index\model\GoodsCategory();
         $config =[
@@ -48,23 +50,6 @@ class Index extends \common\controller\Base{
         ];
         $projectList  = $modelProject->getList($config);
         $this ->assign('projectList',$projectList);
-
-//        //获取精选的商品
-//        $modelGoods = new \app\index\model\Goods();
-//        $config =[
-//            'where' => [
-//                ['status', '=', 0],
-//                ['is_selection', '=', 1],
-//                ['shelf_status','=',3]
-//            ], 'order'=>[
-//                'sort'=>'desc',
-//                'id'=>'desc'
-//            ],  'limit'=>'6'
-//
-//        ];
-//        $goodsList  = $modelGoods->getList($config);
-//        $this ->assign('goodsList',$goodsList);
-      
         return $this->fetch();
     }
 }
