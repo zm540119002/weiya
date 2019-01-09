@@ -299,8 +299,8 @@ class Order extends \common\controller\UserBase
 //                'g.name','g.thumb_img'
 //                'od.goods_id',
 //                'g.name'
-          ],
-//'join'=>[
+                ],
+                //'join'=>[
 //                ['order_detail od','od.father_order_id = o.id','left'],
 ////                ['goods g','g.id = od.goods_id','left'],
 ////                ['order_detail od','od.father_order_id = oc.father_order_id','left'],
@@ -323,7 +323,7 @@ class Order extends \common\controller\UserBase
 
         $list = $model -> pageQuery($config)->toArray()['data'];
         $oderIds =array_column( $list,'id');
-        
+
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'index' ){
