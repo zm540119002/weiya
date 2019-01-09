@@ -291,9 +291,12 @@ class Order extends \common\controller\UserBase
             `detail_address` varchar(255) NOT NULL DEFAULT '' COMMENT '详细地址',
              */
             'field'=>[
-                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark','o.order_status',
-                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time','o.finished_time',
+                'o.id','o.sn','o.order_status','o.amount',
                 'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+
+//                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
+//                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time','o.finished_time',
+//                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
 //                'g.name','g.thumb_img'
 //                'od.goods_id',
 //                'g.name'
