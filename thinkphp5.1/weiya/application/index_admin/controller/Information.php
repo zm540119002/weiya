@@ -139,7 +139,7 @@ class Information extends Base {
     }
 
     /**
-     * 上下架
+     * 设置状态
      */
     public function setAuthStatus(){
         if(!request()->isPost()){
