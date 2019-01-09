@@ -251,6 +251,7 @@ class Order extends \common\controller\UserBase
             'where'=>[
                 ['o.status', '=', 0],
                 ['o.user_id', '=', $this->user['id']],
+                ['o.order_status', '>', 0],
             ],
             /**
              *   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
@@ -281,34 +282,43 @@ class Order extends \common\controller\UserBase
             `father_order_id` int(10) NOT NULL DEFAULT '0' COMMENT '父订单 关联order表id',
             `child_order_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '拆分后子订单ID 关联order_childk表id ',
             `buy_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '购买类型：1：批量 2：样品',
+             *
+             * `consignee` varchar(50) NOT NULL DEFAULT '' COMMENT '收货人',
+            `mobile` varchar(15) NOT NULL DEFAULT '' COMMENT '手机电话',
+            `province` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '省',
+            `city` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '市',
+            `area` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '区',
+            `detail_address` varchar(255) NOT NULL DEFAULT '' COMMENT '详细地址',
              */
             'field'=>[
-                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
-                'o.address_id','o.create_time','o.payment_time','o.finished_time',
-                'a.consignee',
+                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark','o.order_status',
+                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time','o.finished_time',
                 'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
-                'g.name','g.thump_img'
+//                'g.name','g.thumb_img'
 //                'od.goods_id',
 //                'g.name'
             ],'join'=>[
-                ['common.address a','a.id = o.address_id','left'],
                 ['order_detail od','od.father_order_id = o.id','left'],
-                ['goods g','g.id = od.goods_id','left'],
+//                ['goods g','g.id = od.goods_id','left'],
 //                ['order_detail od','od.father_order_id = oc.father_order_id','left'],
 //                ['goods g','g.id = od.goods_id','left'],
             ],
 
         ];
+        if(input('?get.order_status') && input('get.order_status/d')){
+            $config['where'][] = ['o.order_status', '=', input('get.order_status/d')];
+        }
         if(input('?get.category_id') && input('get.category_id/d')){
-            $config['where'][] = ['g.category_id_1', '=', input('get.category_id/d')];
+            $config['where'][] = ['o.category_id_1', '=', input('get.category_id/d')];
         }
         $keyword = input('get.keyword','');
         if($keyword) {
-            $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
+            $config['where'][] = ['o.name', 'like', '%' . trim($keyword) . '%'];
         }
 
         $list = $model -> pageQuery($config);
-      
+
+        print_r($model->getLastSql());exit;
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'index' ){
