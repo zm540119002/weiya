@@ -349,7 +349,8 @@ $(function () {
     });
     //去支付
     $('body').on('click','.pay',function () {
-       alret(11);
+        var orderSn =  $('#order_sn').val();
+        location.href = module + 'Order/pay/order_sn/' + orderSn;
     })
 
 });
