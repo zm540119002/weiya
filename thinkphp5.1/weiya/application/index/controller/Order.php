@@ -306,14 +306,14 @@ class Order extends \common\controller\UserBase
 
         ];
         if(input('?get.order_status') && input('get.order_status/d')){
-            $config['where'][] = ['g.order_status', '=', input('get.order_status/d')];
+            $config['where'][] = ['o.order_status', '=', input('get.order_status/d')];
         }
         if(input('?get.category_id') && input('get.category_id/d')){
-            $config['where'][] = ['g.category_id_1', '=', input('get.category_id/d')];
+            $config['where'][] = ['o.category_id_1', '=', input('get.category_id/d')];
         }
         $keyword = input('get.keyword','');
         if($keyword) {
-            $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
+            $config['where'][] = ['o.name', 'like', '%' . trim($keyword) . '%'];
         }
 
         $list = $model -> pageQuery($config);
