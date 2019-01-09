@@ -1537,7 +1537,8 @@ background-position: 0 -27px;
 .layui-m-layerchild.addsalesgoodsLayer,
 .layui-m-layerchild.storeListLayer,
 .layui-m-layerchild.chatLayer,
-.layui-m-layerchild.addressLayer{
+.layui-m-layerchild.addressLayer,
+.layui-m-layerchild.setBrandLayer{
     position:fixed; 
     left:0; 
     top:0; 
@@ -1625,6 +1626,10 @@ background-position: 0 -27px;
     /*position: absolute;
     top:50%;
     transform: translateY(-50%);*/
+}
+.setBrandLayer ul{
+    background: #f2f2f2;
+    padding:0.20rem 0.15rem 0 0.15rem;
 }
 .goodsvideoLayer .layui-m-layercont,
 .qrCodePicLayer .layui-m-layercont{
