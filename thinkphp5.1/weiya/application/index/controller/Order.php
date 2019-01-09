@@ -279,7 +279,7 @@ class Order extends \common\controller\UserBase
                     ['od.father_order_id','=',$item['id']]
                 ],
                 'field'=>[
-                    "count(od.id) goods_num",'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                    'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
                     'g.name','g.thumb_img',
                 ],
                 'join'=>[
@@ -289,7 +289,6 @@ class Order extends \common\controller\UserBase
             ];
             $goodsList = $modelOrderDetail -> getList($config);
             $item['goods_list'] = $goodsList;
-            $item['goods_num'] = $goodsList[0]['goods_num'];
             return $item;
         });
         $this->assign('list',$list);
