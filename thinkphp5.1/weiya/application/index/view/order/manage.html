@@ -118,9 +118,45 @@
                         });
                         layer.close(index);
                     }
-            })
-
+                })
              });
+
+            //确认收货
+            $('body').on('click','.cancel_order',function () {
+                var _this = $(this);
+                var _thisTr =_this.parents('li');
+                var id = _thisTr.data('id');
+                var postData ={
+                    id:id,
+                    order_status:3
+                };
+                var url = module+'Order/setOrderStatus';
+                layer.open({
+                    content:'确定收货？',
+                    btn:['确定','取消'],
+                    yes:function(index){
+                        $.ajax({
+                            url: url,
+                            data: postData,
+                            type: 'post',
+                            beforeSend: function(){
+                                $('.loading').show();
+                            },
+                            error:function(){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                $('.loading').hide();
+                                if(data.status){
+
+                                }
+                            }
+                        });
+                        layer.close(index);
+                    }
+                })
+            });
         });
     </script>
 {/block}
