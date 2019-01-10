@@ -23,9 +23,9 @@ class Index extends \common\controller\Base{
         $config =[
             'where' => [
                 ['status', '=', 0],
-                ['shelf_status','=',3]
+                ['shelf_status','=',3],
+                ['is_selection','=',1],
             ], 'order'=>[
-                'is_selection'=>'desc',
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'6'
@@ -39,9 +39,9 @@ class Index extends \common\controller\Base{
         $config =[
             'where' => [
                 ['status', '=', 0],
-                ['shelf_status','=',3]
+                ['shelf_status','=',3],
+                ['is_selection','=',1],
             ], 'order'=>[
-                'is_selection'=>'desc',
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'6'

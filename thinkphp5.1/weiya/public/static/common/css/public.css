@@ -1651,6 +1651,10 @@ background-position: 0 -27px;
     overflow-y:auto;
     
 }
+.count_down_module{
+    padding:0.15rem;
+    background: #fff;
+}
 .setBrandLayer ul{
     background: #f2f2f2;
     padding:0.20rem 0.15rem 0 0.15rem;
@@ -4393,6 +4397,12 @@ select[name="nodeIds"]{
 }
 .wk_notice{
     color:#1CAD99;
+}
+.wk_notice .intro_title{
+    color:#eee409;
+}
+.wk_notice .more{
+    color:#ff4745;
 }
 .tags_item_r a span{
     display:inline-block;

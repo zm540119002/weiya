@@ -27,8 +27,13 @@
 	</section>
 	<section class="content-padding content_main wy_list" style="background:url(public_uploads/{$info.background_img});">
 		<div class="">
-			<p class="top_b_text wk_notice separation">[品牌定制须知] 品牌定制利润为王！维雅生物药妆精选优质项目产品任你选，帮助用户开启自主品牌可持续发展经营！用户在线选购产品并支付品牌定制单，其他全部交给维雅品牌定制服务团队。</p>
-			<div class="columns_flex l-r-sides separation">
+			<div class="top_b_text wk_notice separation">
+				<p class="more-text">
+				<span class="intro_title">[品牌定制须知]</span>
+				品牌定制利润为王！维雅生物药妆精选优质项目产品任你选，帮助用户开启自主品牌可持续发展经营！用户在线选购产品并支付品牌定制单，其他全部交给维雅品牌定制服务团队。
+				</p>
+			</div>
+			<div class="columns_flex l-r-sides count_down_module">
 				<div class="mid_module_left">
 					<img src="public_img/wy_dz.png" alt="">
 					<div>
@@ -105,6 +110,11 @@
 		var id = {$info.id};
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
+		//查看文本
+		$('.wk_notice').moreText({
+			mainCell:".more-text",
+			openBtn:'展开'
+		});
 	});
 </script>
 {/block}
