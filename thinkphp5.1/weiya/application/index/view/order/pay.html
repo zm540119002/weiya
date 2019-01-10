@@ -31,7 +31,12 @@
                     钱包支付
                     <!--<input type="checkbox" checked="checked" class=""/>-->
                     <span class="selected"></span>
-                    <span class="wx"></span>
+                    {notempty name="walletInfo"}
+                    <span class="wx">余额：￥<price>{$walletInfo.amount}</price></span>
+                    {else /}
+                    <span class="wx">余额：￥<price>0.00</price></span>
+                    {/notempty}
+
                 </li>
             </ul>
         </div>
