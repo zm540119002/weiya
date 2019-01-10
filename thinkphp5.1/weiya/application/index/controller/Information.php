@@ -35,7 +35,6 @@ class Information extends \common\controller\Base{
             $item['main_img'] = explode(',',(string)$item['main_img']);
             return $item;
         });
-        print_r($list);exit;
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             $pageType = $_GET['pageType'];
