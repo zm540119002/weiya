@@ -1,6 +1,6 @@
 <?php
 namespace app\index\controller;
-use think\facade\Request;
+
 class Index extends \common\controller\Base{
     /**首页
      */
@@ -49,5 +49,9 @@ class Index extends \common\controller\Base{
         $projectList  = $modelProject->getList($config);
         $this ->assign('projectList',$projectList);
         return $this->fetch();
+    }
+
+    public function hello(){
+        return 'hello world!';
     }
 }

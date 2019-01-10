@@ -743,6 +743,9 @@ price{
 .slider_banner{
     /*margin-top:94px;*/
 }
+.slider_banner img{
+    width:100%;
+}
 .foot_nav_bar{
     text-align:center;
     padding:0.085rem 0;
