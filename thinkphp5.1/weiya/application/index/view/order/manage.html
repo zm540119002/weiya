@@ -68,6 +68,8 @@
                 case 4:
                 $('.menu_nav li').eq(order_status).addClass('current');
                 break;
+                default:
+                    $('.menu_nav li').eq(0).addClass('current');
             }
             if(order_status){
                 postData.order_status = order_status;
@@ -80,6 +82,95 @@
                     config.loadTrigger = false;
                     getPagingList(config,postData);
                 }
+            });
+
+            //取消订单
+            $('body').on('click','.cancel_order',function () {
+                var _this = $(this);
+                var _thisTr =_this.parents('li');
+                var id = _thisTr.data('id');
+                var postData ={
+                    id:id,
+                    order_status:5
+                };
+                var url = module+'Order/setOrderStatus';
+                layer.open({
+                    content:'确定取消订单？',
+                    btn:['确定','取消'],
+                    yes:function(index){
+                        $.ajax({
+                            url: url,
+                            data: postData,
+                            type: 'post',
+                            beforeSend: function(){
+                                $('.loading').show();
+                            },
+                            error:function(){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                $('.loading').hide();
+                                if(data.status){
+
+                                }
+                            }
+                        });
+                        layer.close(index);
+                    }
+                })
+             });
+            //确认收货
+            $('body').on('click','.confirm_receive',function () {
+                var _this = $(this);
+                var _thisTr =_this.parents('li');
+                var id = _thisTr.data('id');
+                var postData ={
+                    id:id,
+                    order_status:3
+                };
+                var url = module+'Order/setOrderStatus';
+                layer.open({
+                    content:'确定收货？',
+                    btn:['确定','取消'],
+                    yes:function(index){
+                        $.ajax({
+                            url: url,
+                            data: postData,
+                            type: 'post',
+                            beforeSend: function(){
+                                $('.loading').show();
+                            },
+                            error:function(){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                $('.loading').hide();
+                                if(data.status){
+
+                                }
+                            }
+                        });
+                        layer.close(index);
+                    }
+                })
+            });
+            //去评价
+            $('body').on('click','.to_evaluate',function () {
+
+            });
+            //查看评论
+            $('body').on('click','.see_evaluation',function () {
+
+            });
+            //再次购买
+            $('body').on('click','.purchase_again',function () {
+
+            });
+            //申请售后
+            $('body').on('click','.apply_after_sales',function () {
+
             });
         });
     </script>

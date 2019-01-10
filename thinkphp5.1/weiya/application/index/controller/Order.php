@@ -314,6 +314,34 @@ class Order extends \common\controller\UserBase
     }
 
     /**
+     * 设置状态
+     */
+    public function setOrderStatus(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+        $model = new \app\index\model\Order();
+        $id = input('post.id/d');
+        if(!input('?post.id') && !$id){
+            return errorMsg('失败');
+        }
+        $where=[
+            ['id','=',$id],
+            ['user_id','=',$this->user['id']],
+        ];
+        $orderStatus = input('post.order_status/d');
+        $data = [
+            'order_status' => $orderStatus,
+        ];
+        $rse = $model->where($where)->setField($data);
+        if(!$rse){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
+    }
+
+
+    /**
      * @return array|mixed
      * 查出产商相关产品 分页查询
      */
