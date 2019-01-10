@@ -8,7 +8,8 @@
 	<link rel="stylesheet" href="public_css/base.css">
 	<link rel="stylesheet" href="public_css/public.css">
 	{block name="css-customize"}{/block}
-	<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
+	<!--<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>-->
+	<script type="text/javascript" src="{:request()->domain()}/static/common/js/jquery/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		var domain = '{:request()->domain()}'+'/'+'index.php/';
 		var module = domain + '{:request()->module()}/';
