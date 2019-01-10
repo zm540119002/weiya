@@ -316,6 +316,15 @@ i{
     -webkit-transform:translate(-70%) rotateZ(-133deg);-moz-transform:translate(-70%) rotateZ(-45deg);
     -ms-transform:translate(-70%) rotateZ(-45deg);
 }
+.project_details{
+    padding:0 0 0.15rem 0;
+    margin:0 0 0.20rem 0;
+    border-bottom:1px solid #d9d9d9;
+    color:#575757;
+}
+.project_details::after{
+    top:18%;
+}
 .weixin_pay_nav{background: #ff6482;}
 /*评分评论*/
 .goods_star_score{display: flex;display: -webkit-flex;padding:0.15rem 0.12rem;justify-content:space-between;}
