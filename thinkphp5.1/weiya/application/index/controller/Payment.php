@@ -49,6 +49,11 @@ class Payment extends \common\controller\UserBase{
             $model = new \common\component\payment\unionpay\unionpay;
             $model->unionPay($payInfo);
         }
+        //银联支付
+        if($payCode == 4){
+            $model = new \common\component\payment\unionpay\unionpay;
+            $model->unionPay($payInfo);
+        }
     }
 
     //充值-支付
