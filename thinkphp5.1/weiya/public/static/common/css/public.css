@@ -4398,6 +4398,12 @@ select[name="nodeIds"]{
 .wk_notice{
     color:#1CAD99;
 }
+.wk_notice .intro_title{
+    color:#eee409;
+}
+.wk_notice .more{
+    color:#ff4745;
+}
 .tags_item_r a span{
     display:inline-block;
     width:0.4rem;
