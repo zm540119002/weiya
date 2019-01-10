@@ -18,34 +18,27 @@ class Information extends \common\controller\Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $model = new\app\index\model\Scene();
+        $model = new\app\index\model\Information();
         $config=[
             'where'=>[
             ],
-            'field'=>[
-                'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
-                g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
-                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort,g.trait'
-            ],
             'order'=>[
                 'sort'=>'desc',
-                'line_num'=>'asc',
                 'id'=>'desc'
             ],
         ];
-        if(input('?get.storeId') && (int)input('?get.storeId')){
-            $config['where'][] = ['g.store_id', '=', input('get.storeId')];
-        }
         $keyword = input('get.keyword','');
         if($keyword) {
             $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
         }
-        $list = $model -> pageQuery($config);
+        $list = $model -> pageQuery($config)->each(function($item, $key){
+            $item['main_img'] = explode(',',(string)$item['main_img']);
+            return $item;
+        });
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'store' ){//店铺产品列表
-                return $this->fetch('list_tpl');
-            }
+            $pageType = $_GET['pageType'];
+            return $this->fetch($pageType);
         }
     }
 
