@@ -14,7 +14,7 @@ Route::get('think', function () {
 });
 
 // 完整域名绑定到index模块
-Route::domain('www.worldview.com.cn', 'index/Index/index');
+//Route::domain('www.worldview.com.cn', 'index/Index/index');
 return [
 
 ];
