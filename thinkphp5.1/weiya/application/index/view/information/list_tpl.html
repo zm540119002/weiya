@@ -14,7 +14,9 @@
     <div class="dynamic_img columns_flex">
         {notempty name="list"}
         {volist name="info.main_img" id="main_img"}
-            <img src="public_uploads/{$main_img}" alt="">
+            <a href="javascript:void(0);">
+                <img src="public_uploads/{$main_img}" alt="">
+            </a>
         {/volist}
         {/notempty}
     </div>
