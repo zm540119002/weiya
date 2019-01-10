@@ -16,7 +16,7 @@
                     <span class="selected"></span>
                     <span class="wx"></span>
                 </li>
-                <li data-paycode="2">
+                <li data-paycode="2" id="alipay">
                     支付宝支付
                     <!--<input type="checkbox" class=""/>-->
                     <span class="selected"></span>
@@ -45,6 +45,11 @@
 {block name="script"}
 <script type="text/javascript">
     $(function(){
+        alert(isWeiXin())
+        if(isWeiXin()){
+
+            $('#alipay').remove();
+        }
         $('.pay_nav li').on('click',function(){
             $(this).addClass('current').siblings().removeClass('current');
             var pay_code = $(this).data('paycode');
