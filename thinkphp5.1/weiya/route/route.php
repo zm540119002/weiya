@@ -10,11 +10,12 @@
 // +----------------------------------------------------------------------
 
 Route::get('think', function () {
-    return 'hello,ThinkPHP5!';
+    return 'hello,ThinkPHP555555555555555555555555!';
 });
 
 Route::get('hello/:name', 'index/hello');
-
+// 完整域名绑定到index模块
+Route::domain('www.worldview.com.cn', 'index');
 return [
 
 ];
