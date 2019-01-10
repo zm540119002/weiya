@@ -320,7 +320,7 @@ class Order extends \common\controller\UserBase
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index_admin\model\Information();
+        $model = new \app\index\model\Order();
         $id = input('post.id/d');
         if(!input('?post.id') && !$id){
             return errorMsg('失败');
