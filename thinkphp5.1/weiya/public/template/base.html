@@ -15,6 +15,7 @@
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
 		var uploads = '{:request()->domain()}'+'/uploads/';
+		console.log(domain);
 	</script>
 	<!--前置自定义js-->
 	{block name="pre-script"}{/block}
