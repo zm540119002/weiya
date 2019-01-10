@@ -49,7 +49,7 @@
 							</li>
 						</ul>
 					</div>
-					<a class="news_more" href="{:url('Information/index')}">更多</a>
+					<a class="news_more" href="javascript:void(0)">更多</a>
 				</div>
 			</div>
 			<div class="scene_wrapper">
@@ -262,6 +262,12 @@
 				}
 			});
 		});
+		/**
+		 *
+		 */
+		$('body').on('click','.new_more',function () {
+			location.href = module + 'Information/index';
+		})
 	});
 </script>
 {/block}
