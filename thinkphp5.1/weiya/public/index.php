@@ -11,7 +11,7 @@
 
 // [ 应用入口文件 ]
 namespace think;
-
+echo 123;exit;
 // 加载基础文件
 require __DIR__ . '/../../framework/base.php';
 
