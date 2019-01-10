@@ -47,7 +47,6 @@ class Index extends \common\controller\Base{
             ],  'limit'=>'6'
         ];
         $projectList  = $modelProject->getList($config);
-        print_r($projectList);exit;
         $this ->assign('projectList',$projectList);
         return $this->fetch();
     }
