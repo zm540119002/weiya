@@ -4607,10 +4607,18 @@ select[name="nodeIds"]{
     overflow:hidden;
     margin:0 0 .20rem 0;
 }
+.dynamic_img {
+    overflow:hidden;
+}
 .dynamic_img a{
     width:31%;
     margin:0 3% 0.10rem 0;
     border:1px solid #d9d9d9;
+    float:left;
+}
+.info_img a{
+    width:30%;
+    margin:0 1% 0.10rem 1%;
 }
 .dynamic_img a:last-child{
     margin-right:0;
