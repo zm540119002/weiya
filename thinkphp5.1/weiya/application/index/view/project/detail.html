@@ -3,20 +3,31 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
+<article class="f24" style="display: none">
+	<section>
+		<p>
+			{empty name="info.detail_img"}
+					<img src="public_img/default/no_pic_1000.jpg" alt="">
+				{else /}
+				{volist name="info.detail_img" id="detail_img"}
+					<img src="public_uploads/{$detail_img}" alt="" class="">
+				{/volist}
+		   {/empty}
+		</p>
+	</section>
+</article>
 <article class="f24">
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				{notempty name="info.goods_video"}
 				<div class="swiper-slide swiper-slide-active">
-					<video  src="public_uploads/{$info.goods_video}" autoplay="autoplay"></video>
+					{empty name="info.main_img"}
+					<img src="public_img/default/no_pic_100.jpg" class="left">
+					{else /}
+					<img src="public_uploads/{$info.main_img}" class="left">
+					{/empty}
 				</div>
-				{/notempty}
-				{volist name="info.main_img" id="main_img"}
-				<div class="swiper-slide swiper-slide-active">
-					<img src="public_uploads/{$main_img}" alt="" class="common_default_img">
-				</div>
-				{/volist}
+
 			</div>
 			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
 				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
@@ -138,15 +149,6 @@
 <script type="text/javascript">
 	$(function(){
 		var id = {$info.id};
-		//轮播
-		var swiper = new Swiper('.swiper-container', {
-			spaceBetween: 30,
-			autoplay:true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		});
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 	});
