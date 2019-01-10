@@ -5015,6 +5015,12 @@ select[name="nodeIds"]{
 .weiya_item ul{
     padding:0.12rem;
 }
+.weiya_item ul.info_list{
+    padding:0;
+}
+ul.info_list li{
+    padding:0.12rem;
+}
 .title1{
     width:75%;
     display: block;
