@@ -3,19 +3,21 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
-<article class="f24" style="display: none">
-	<section>
-		<p>
-			{empty name="info.detail_img"}
+<section class="project_detail_preview" style="display:none">
+	<div class="project_detail_list">
+		{empty name="info.detail_img"}
+				<p>
 					<img src="public_img/default/no_pic_1000.jpg" alt="">
-				{else /}
-				{volist name="info.detail_img" id="detail_img"}
+				</p>
+			{else /}
+			{volist name="info.detail_img" id="detail_img"}
+				<p>
 					<img src="public_uploads/{$detail_img}" alt="" class="">
-				{/volist}
-		   {/empty}
-		</p>
-	</section>
-</article>
+				</p>
+			{/volist}
+		{/empty}
+	</div>
+</section>
 <article class="f24">
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
@@ -67,7 +69,7 @@
 					<div class="content-padding">
 						<p class="top_b_text wk_notice separation">[品牌定制须知] 品牌定制利润为王！维雅生物药妆精选优质项目产品任你选，帮助用户开启自主品牌可持续发展经营！用户在线选购产品并支付品牌定制单，其他全部交给维雅品牌定制服务团队。</p>
 						<div class="">
-							<a href="" class="project_details right-arrow">点击了解更多项目详情</a>
+							<a href="javascript:;" class="project_details right-arrow">点击了解更多项目详情</a>
 						</div>
 						<div class="columns_flex l-r-sides separation">
 							<div class="mid_module_left">
@@ -151,6 +153,22 @@
 		var id = {$info.id};
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
+		//预览项目详情
+		$('body').on('click','.project_details',function(){
+			var project_detail=$('.project_detail_preview').html();
+			layer.open({
+				title:['项目详情图','border-bottom:1px solid #d9d9d9;'],
+				className:'projectDetailLayer',
+				type:1,
+				anim:'up',
+				content:project_detail,
+				btn:['返回'],
+				success:function(){
+					var winH=$(window).height();
+					$('.project_detail_list').css('height',winH+'px');
+				}
+			})
+		})
 	});
 </script>
 {/block}

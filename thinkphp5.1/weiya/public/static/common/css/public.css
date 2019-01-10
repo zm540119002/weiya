@@ -1639,6 +1639,18 @@ background-position: 0 -27px;
     top:50%;
     transform: translateY(-50%);*/
 }
+.projectDetailLayer p img{
+    width:100%;
+    vertical-align: middle;
+}
+.projectDetailLayer p:last-child img{
+    padding-bottom:2rem;
+}
+.project_detail_list{
+    overflow-x:hidden;
+    overflow-y:auto;
+    
+}
 .setBrandLayer ul{
     background: #f2f2f2;
     padding:0.20rem 0.15rem 0 0.15rem;
@@ -5189,10 +5201,14 @@ select[name="nodeIds"]{
     overflow-y:auto;
 }
 .addressLayer .layui-m-layerbtn,
-.setBrandLayer .layui-m-layerbtn{
+.setBrandLayer .layui-m-layerbtn,
+.projectDetailLayer .layui-m-layerbtn{
     position:fixed;
     left:0;
     bottom:0;
+}
+.projectDetailLayer .layui-m-layerbtn{
+    bottom:1rem;
 }
 .brand_list li{
     padding:0;
