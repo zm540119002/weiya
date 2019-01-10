@@ -11,7 +11,9 @@
 
 // [ 应用入口文件 ]
 namespace think;
-
+use think\facade\Request;
+echo Request::domain();
+exit;
 // 加载基础文件
 require __DIR__ . '/../../framework/base.php';
 
