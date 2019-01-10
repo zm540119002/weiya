@@ -45,8 +45,9 @@
 {block name="script"}
 <script type="text/javascript">
     $(function(){
+        alert(isWeiXin())
         if(isWeiXin()){
-            alert(111)
+
             $('#alipay').remove();
         }
         $('.pay_nav li').on('click',function(){
