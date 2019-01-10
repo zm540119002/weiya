@@ -4,13 +4,11 @@
             <a href="{:url('order/detail',['order_sn'=>$info.sn])}">
                 {volist name="info.goods_list" id="goods_info"}
                 <div class="order_item">
-
                         {empty name="goods_info.thumb_img"}
                         <img src="public_img/default/no_pic_100.jpg" class="left">
                         {else /}
                         <img src="public_uploads/{$goods_info.thumb_img}" class="left">
                         {/empty}
-
                     <div class="order_top_r">
                         <p>{$goods_info.name}</p>
                         <p>￥<price>{$goods_info.price}</price></p>

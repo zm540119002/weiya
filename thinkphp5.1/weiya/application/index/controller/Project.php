@@ -70,6 +70,51 @@ class Project extends \common\controller\Base{
             if(empty($info)){
                 $this->error('此商品已下架');
             }
+            $info['detail_img'] = explode(',',(string)$info['detail_img']);
+            $info['tag'] = explode(',',(string)$info['tag']);
+            $this->assign('info',$info);
+            //获取相关的商品
+            $modelProjectGoods = new \app\index\model\ProjectGoods();
+            $config =[
+                'where' => [
+                    ['pg.status', '=', 0],
+                    ['pg.project_id', '=', $id],
+                ],'field'=>[
+                    'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+                ],'join'=>[
+                    ['goods g','g.id = pg.goods_id','left']
+                ]
+            ];
+            $goodsList= $modelProjectGoods->getList($config);
+            $this->assign('goodsList',$goodsList);
+            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
+            $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            return $this->fetch();
+        }
+    }
+
+    /**详情页
+     */
+    public function detailImg(){
+        if(request()->isAjax()){
+        }else{
+            $id = intval(input('id'));
+            if(!$id){
+                $this->error('此项目已下架');
+            }
+            $model = new \app\index\model\Project();
+            $config =[
+                'where' => [
+                    ['p.status', '=', 0],
+                    ['p.shelf_status', '=', 3],
+                    ['p.id', '=', $id],
+                ],
+            ];
+            $info = $model->getInfo($config);
+            if(empty($info)){
+                $this->error('此商品已下架');
+            }
             $info['main_img'] = explode(',',(string)$info['main_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
             $this->assign('info',$info);
