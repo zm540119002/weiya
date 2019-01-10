@@ -330,10 +330,7 @@ class Order extends \common\controller\UserBase
             ['user_id'=>$this->user['id']],
         ];
         $authStatus = input('post.auth_status/d');
-        $data = [
-            'auth_status' => $authStatus,
-        ];
-        $rse = $model->where($where)->setField($data);
+        $rse = $model->where($where)->setField( 'auth_status' , $authStatus);
         if(!$rse){
             return errorMsg('失败');
         }
