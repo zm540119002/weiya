@@ -45,9 +45,8 @@
 {block name="script"}
 <script type="text/javascript">
     $(function(){
-        alert(isWeiXin())
+        //如果是微信浏览器
         if(isWeiXin()){
-
             $('#alipay').remove();
         }
         $('.pay_nav li').on('click',function(){
