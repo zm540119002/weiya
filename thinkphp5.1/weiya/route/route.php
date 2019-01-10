@@ -12,7 +12,7 @@
 Route::get('think', function () {
     return 'hello,ThinkPHP555555555555555555555555!';
 });
-Route::rule('/','index/Index/index');
+//Route::get('/','index/Index/index');
 return [
 
 ];
