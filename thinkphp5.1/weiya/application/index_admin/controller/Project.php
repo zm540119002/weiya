@@ -31,15 +31,18 @@ class Project extends Base {
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
                 $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['thumb_img']));
             }
-            if( isset($_POST['main_img']) && $_POST['main_img'] ){
-                $detailArr = explode(',',input('post.main_img','','string'));
+            if(  isset($_POST['main_img']) && $_POST['main_img'] ){
+                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['main_img']));
+            }
+            if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
+                $detailArr = explode(',',input('post.detail_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
                         $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($item));
                     }
                 }
-                $_POST['main_img'] = implode(',',$tempArr);
+                $_POST['detail_img'] = implode(',',$tempArr);
             }
             $data = $_POST;
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
@@ -55,9 +58,12 @@ class Project extends Base {
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
                 if($info['main_img']){
+                    delImgFromPaths($info['main_img'],$_POST['main_img']);
+                }
+                if($info['detail_img']){
                     //删除商品详情图
-                    $oldImgArr = explode(',',$info['main_img']);
-                    $newImgArr = explode(',',$_POST['main_img']);
+                    $oldImgArr = explode(',',$info['detail_img']);
+                    $newImgArr = explode(',',$_POST['detail_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 $where = [
