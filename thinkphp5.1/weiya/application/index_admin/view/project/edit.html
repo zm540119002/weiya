@@ -70,13 +70,33 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>项目主图:</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>广告图：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+                            <div class="upload-picture-module f24">
+                                <div>
+                                    <div class="picture-module">
+                                        <input type="file" class="uploadImg uploadSingleImg" name="">
+                                        {empty name="info.thumb_img"}
+                                        <img class="upload_img" src="">
+                                        {else /}
+                                        <img class="upload_img " src="public_uploads/{$info.main_img}" />
+                                        {/empty}
+                                        <input type="hidden" class="layer-thumbnail-picture img" value="{$info.main_img}" name="main_img"/>
+                                    </div>
+                                    <!--<p>企业营业执照</p>-->
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>详情图:</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <!-- 加载编辑器的容器 -->
-                            <script id="main_img" type="text/plain">
+                            <script id="detail_img" type="text/plain">
                                 
                             </script>
-                            <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
+                            <input id="detailImg" type="hidden" value="{$info.detail_img|formatImg}">
                         </td>
                     </tr>
                     <tr>
@@ -103,23 +123,24 @@
 <script src="http://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
-    var main_img = UE.getEditor('main_img');
+    var detail_img_obj = UE.getEditor('detail_img');
 </script>
     <script type="text/javascript">
         $(function(){
             //项目主图
-            main_img.ready(function() {
-                main_img.setContent($('#mainImg').val());
+            detail_img_obj.ready(function() {
+                detail_img_obj.setContent($('#detailImg').val());
             });
             //确定
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
                 //主图
-                postData.main_img = '';
-                $.each($('#main_img').find('iframe').contents().find('.view img'),function(){
-                    postData.main_img += $(this).attr('src') + ',';
+                postData.detail_img = '';
+                $.each($('#detail_img').find('iframe').contents().find('.view img'),function(){
+                    postData.detail_img += $(this).attr('src') + ',';
 
                 });
+                console.log(postData);return false
                 var url = module +'Project/edit';
                 var _this = $(this);
                 _this.addClass("nodisabled");//防止重复提交
