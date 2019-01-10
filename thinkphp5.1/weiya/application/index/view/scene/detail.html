@@ -1,7 +1,5 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="factory_css/main.css">
-<link rel="stylesheet" href="factory_css/{$css}.css">
 {/block}
 {block name="content"}
 <article class="f24">
@@ -27,7 +25,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="content-padding content_main wy_list">
+	<section class="content-padding content_main wy_list" style="background:url(public_uploads/{$info.background_img});">
 		<div class="">
 			<p class="top_b_text wk_notice separation">[品牌定制须知] 品牌定制利润为王！维雅生物药妆精选优质项目产品任你选，帮助用户开启自主品牌可持续发展经营！用户在线选购产品并支付品牌定制单，其他全部交给维雅品牌定制服务团队。</p>
 			<div class="columns_flex l-r-sides separation">
@@ -49,14 +47,6 @@
 				<div class="mid_module_right">
 					<span><span class="item end_time"></span>周五结单</span>
 					<span><span class="item factory"></span>品质工厂</span>
-				</div>
-			</div>
-			<div class="columns_flex l-r-sides">
-				<div>
-					我的品牌定制<span>xxxxx</span>
-				</div>
-				<div>
-					<a>设定></a>
 				</div>
 			</div>
 		</div>
