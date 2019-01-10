@@ -70,6 +70,27 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>背景颜色：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+                            <div class="upload-picture-module f24">
+                                <div>
+                                    <div class="picture-module">
+                                        <input type="file" class="uploadImg uploadSingleImg" name="">
+                                        {empty name="info.thumb_img"}
+                                        <img class="upload_img" src="">
+                                        {else /}
+                                        <img class="upload_img " src="public_uploads/{$info.background_img}" />
+                                        {/empty}
+                                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.background_img}" name="background_img"/>
+                                    </div>
+                                    <!--<p>企业营业执照</p>-->
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>项目主图:</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <!-- 加载编辑器的容器 -->

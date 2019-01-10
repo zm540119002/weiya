@@ -3,92 +3,13 @@
 {/block}
 {block name="content"}
 <article class="f24">
+	<section class="header_title separation-line">
+		<h2 class="f24">维雅资讯</h2>
+	</section>
 	<section class="content_main weiya_content">
 		<div class="weiya_item ">
-			<div class="columns_flex l-r-sides top_title">
-				<span>
-					<img class="left" src="weiya_img/wyyz_logo.png" alt="">
-					<span class="cpy_name">维雅生物科技</span>
-				</span>
-				<span>2017-12-8 9:47</span>
-			</div>
-			<ul>
-				<li>
-					<div class="more-text-box">
-						<p class="more-text">#小分子活性肽系列小分子美容多肽具有结构简单活性稳定、分子量小极易透皮吸收，护肤作用机理明确、质量可控、安全性高无副作用等特点，成为生物药妆配方系列中最广泛配伍使用的原料，也是国际大牌护肤品牌的最爱，可应用于原液、面膜、乳霜等剂型，研发各类医学护肤功能产品.</p>
-					</div>
-					<div class="dynamic_img columns_flex">
-						<a>
-							<img src="weiya_img/zjwy_cp01.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp02.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp03.jpg" alt="">
-						</a>
-					</div>
-					<div class="dynamic_img columns_flex">
-						<a>
-							<img src="weiya_img/zjwy_cp04.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp05.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp06.jpg" alt="">
-						</a>
-					</div>
-					<div class="dynamic_img columns_flex">
-						<a>
-							<img src="weiya_img/zjwy_cp07.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp08.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp09.jpg" alt="">
-						</a>
-					</div>
-				</li>
-				<li>
-					<div class="more-text-box">
-						<p class="more-text">#玻尿酸活性肽原液上新，超浓缩的原液精华，富含EGF、aFGF、bFGF生长因子、玻尿酸、多种天然植物等成分，能迅速修护受损和老化肌肤，促进表皮细胞更新，增厚鲜嫩皮膜，重建天然屏障，使肌肤细嫩弹滑、富有光泽</p>
-					</div>
-					<div class="dynamic_img columns_flex">
-						<a>
-							<img src="weiya_img/zjwy_cp10.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp11.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp12.jpg" alt="">
-						</a>
-					</div>
-					<div class="dynamic_img columns_flex">
-						<a>
-							<img src="weiya_img/zjwy_cp13.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp14.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp15.jpg" alt="">
-						</a>
-					</div>
-					<div class="dynamic_img columns_flex">
-						<a>
-							<img src="weiya_img/zjwy_cp16.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp17.jpg" alt="">
-						</a>
-						<a>
-							<img src="weiya_img/zjwy_cp18.jpg" alt="">
-						</a>
-					</div>
-				</li>
+			<ul id="list">
+
 			</ul>
 		</div>
 	</section>
@@ -100,19 +21,17 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/paging.js"></script>
-<script type="text/javascript" src="weiya_js/footerCart.js"></script>
-<script type="text/javascript" src="weiya_js/cart.js"></script>
 <script type="text/javascript">
 	var config = {
-		url:module+'Cart/getList',
+		url:module+'Information/getList',
 		requestEnd:false,
 		loadTrigger:false,
 		currentPage:1,
 
 	};
 	var postData = {
-		pageSize:20,
-		pageType:'index'
+		pageSize:10,
+		pageType:'list_tpl'
 	};
 	$(function(){
 		//初始化分类商品页面

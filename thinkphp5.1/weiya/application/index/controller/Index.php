@@ -1,12 +1,10 @@
 <?php
 namespace app\index\controller;
-use think\facade\Request;
+
 class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
-        echo Request::domain();
-        exit;
         //获取商品的分类
         $modelGoodsCategory = new \app\index\model\GoodsCategory();
         $config =[
@@ -25,9 +23,9 @@ class Index extends \common\controller\Base{
         $config =[
             'where' => [
                 ['status', '=', 0],
-                ['shelf_status','=',3]
+                ['shelf_status','=',3],
+                ['is_selection','=',1],
             ], 'order'=>[
-                'is_selection'=>'desc',
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'6'
@@ -41,9 +39,9 @@ class Index extends \common\controller\Base{
         $config =[
             'where' => [
                 ['status', '=', 0],
-                ['shelf_status','=',3]
+                ['shelf_status','=',3],
+                ['is_selection','=',1],
             ], 'order'=>[
-                'is_selection'=>'desc',
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'6'

@@ -743,6 +743,9 @@ price{
 .slider_banner{
     /*margin-top:94px;*/
 }
+.slider_banner img{
+    width:100%;
+}
 .foot_nav_bar{
     text-align:center;
     padding:0.085rem 0;
@@ -1635,6 +1638,22 @@ background-position: 0 -27px;
     /*position: absolute;
     top:50%;
     transform: translateY(-50%);*/
+}
+.projectDetailLayer p img{
+    width:100%;
+    vertical-align: middle;
+}
+.projectDetailLayer p:last-child img{
+    padding-bottom:2rem;
+}
+.project_detail_list{
+    overflow-x:hidden;
+    overflow-y:auto;
+    
+}
+.count_down_module{
+    padding:0.15rem;
+    background: #fff;
 }
 .setBrandLayer ul{
     background: #f2f2f2;
@@ -4379,6 +4398,15 @@ select[name="nodeIds"]{
 .wk_notice{
     color:#1CAD99;
 }
+.wk_notice .more-text{
+    color:#fff;
+}
+.wk_notice .intro_title{
+    color:#eee409;
+}
+.wk_notice .more{
+    color:#ff4745;
+}
 .tags_item_r a span{
     display:inline-block;
     width:0.4rem;
@@ -4579,10 +4607,18 @@ select[name="nodeIds"]{
     overflow:hidden;
     margin:0 0 .20rem 0;
 }
+.dynamic_img {
+    overflow:hidden;
+}
 .dynamic_img a{
     width:31%;
     margin:0 3% 0.10rem 0;
     border:1px solid #d9d9d9;
+    float:left;
+}
+.info_img a{
+    width:30%;
+    margin:0 1% 0.10rem 1%;
 }
 .dynamic_img a:last-child{
     margin-right:0;
@@ -5186,10 +5222,14 @@ select[name="nodeIds"]{
     overflow-y:auto;
 }
 .addressLayer .layui-m-layerbtn,
-.setBrandLayer .layui-m-layerbtn{
+.setBrandLayer .layui-m-layerbtn,
+.projectDetailLayer .layui-m-layerbtn{
     position:fixed;
     left:0;
     bottom:0;
+}
+.projectDetailLayer .layui-m-layerbtn{
+    bottom:1rem;
 }
 .brand_list li{
     padding:0;

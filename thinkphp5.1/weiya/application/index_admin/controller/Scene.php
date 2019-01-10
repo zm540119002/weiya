@@ -19,6 +19,9 @@ class Scene extends Base {
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
                 $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($_POST['thumb_img']));
             }
+            if(  isset($_POST['background_img']) && $_POST['background_img'] ){
+                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($_POST['background_img']));
+            }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
@@ -42,6 +45,9 @@ class Scene extends Base {
                 //删除就图片
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
+                }
+                if($info['background_img']){
+                    delImgFromPaths($info['background_img'],$_POST['background_img']);
                 }
                 if($info['main_img']){
                     //删除商品详情图
