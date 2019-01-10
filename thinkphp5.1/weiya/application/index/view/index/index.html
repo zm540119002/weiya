@@ -39,7 +39,6 @@
 						<ul class="news_list j_scroll_news">
 							<li class="news_item">
 								<a>
-									<span class="red">最新</span>维雅品牌定制平台正式上线啦！
 								</a>
 							</li>
 							<li class="news_item">
@@ -49,7 +48,7 @@
 							</li>
 						</ul>
 					</div>
-					<a class="news_more" href="{:url('Information/index')}">更多</a>
+					<a class="news_more" href="javascript:void(0)">更多</a>
 				</div>
 			</div>
 			<div class="scene_wrapper">
@@ -262,6 +261,12 @@
 				}
 			});
 		});
+		/**
+		 *查看更多资讯
+		 */
+		$('body').on('click','.new_more',function () {
+			location.href = module + 'Information/index';
+		})
 	});
 </script>
 {/block}
