@@ -5025,11 +5025,12 @@ ul.info_list li{
 .browse_volume .eyes{
     background-image: url(../../common/img/icons/dynamin-icons.png);
     background-repeat: no-repeat;
-    background-size: 0.5rem 1.8rem;
-    background-position: 0 0;
-    width: 0.5rem;
+    background-size: 0.35rem 1.55rem;
+    background-position: 0 -0.35rem;
+    width: 0.35rem;
     display: inline-block;
-    height: 0.8rem;
+    height: 0.35rem;
+    vertical-align: top;
 }
 .title1{
     width:75%;
