@@ -68,6 +68,8 @@
                 case 4:
                 $('.menu_nav li').eq(order_status).addClass('current');
                 break;
+                default:
+                    $('.menu_nav li').eq(0).addClass('current');
             }
             if(order_status){
                 postData.order_status = order_status;
