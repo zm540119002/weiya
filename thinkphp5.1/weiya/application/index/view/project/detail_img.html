@@ -1,0 +1,30 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24">
+	<section>
+		<p>
+			<img src="public_img/default/no_pic_1000.jpg" alt="" class="">
+		</p>
+	</section>
+</article>
+
+{/block}
+{block name="common"}
+	{include file="public/sample_layer" /}
+{/block}
+{block name="footer"}
+	{include file="template/footer_menu.html" /}
+{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript" src="weiya_js/footerCart.js"></script>
+<script type="text/javascript">
+	$(function(){
+	
+	});
+</script>
+{/block}
