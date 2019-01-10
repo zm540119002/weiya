@@ -5176,7 +5176,8 @@ select[name="nodeIds"]{
     overflow-x:hidden;
     overflow-y:auto;
 }
-.addressLayer .layui-m-layerbtn{
+.addressLayer .layui-m-layerbtn,
+.setBrandLayer .layui-m-layerbtn{
     position:fixed;
     left:0;
     bottom:0;
