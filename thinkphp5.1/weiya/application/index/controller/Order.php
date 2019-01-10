@@ -329,9 +329,9 @@ class Order extends \common\controller\UserBase
             ['id','=',$id],
             ['user_id','=',$this->user['id']],
         ];
-        $authStatus = input('post.auth_status/d');
+        $orderStatus = input('post.order_status/d');
         $data = [
-            'auth_status' => $authStatus,
+            'order_status' => $orderStatus,
         ];
         $rse = $model->where($where)->setField($data);
         if(!$rse){
