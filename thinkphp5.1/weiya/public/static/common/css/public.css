@@ -4398,6 +4398,9 @@ select[name="nodeIds"]{
 .wk_notice{
     color:#1CAD99;
 }
+.wk_notice .more-text{
+    color:#fff;
+}
 .wk_notice .intro_title{
     color:#eee409;
 }
