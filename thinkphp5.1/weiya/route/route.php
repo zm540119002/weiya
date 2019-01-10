@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 
 Route::get('think', function () {
-    return 'hello,ThinkPHP5!';
+    return 'hello,ThinkPHP555555555555555555555555!';
 });
 
 Route::get('hello/:name', 'index/hello');
