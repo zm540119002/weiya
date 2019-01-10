@@ -1572,7 +1572,8 @@ background-position: 0 -27px;
 .setRoleLayer .layui-m-layerbtn,
 .setOrganizeLayer .layui-m-layerbtn,
 .rolePowerLayer .layui-m-layerbtn,
-.vendorInfoLayer .layui-m-layerbtn{
+.vendorInfoLayer .layui-m-layerbtn,
+.projectDetailLayer .layui-m-layerbtn{
     display: flex;
     justify-content: space-between;
     position:absolute;
@@ -1602,14 +1603,16 @@ background-position: 0 -27px;
 .vendorInfoLayer .layui-m-layerbtn span[yes],
 .storeShopListLayer .layui-m-layerbtn span[no],
 .employeeAccountLayer .layui-m-layerbtn span[no],
-.shopConsigneeLayer .layui-m-layerbtn span[no]{
+.shopConsigneeLayer .layui-m-layerbtn span[no],
+.projectDetailLayer .layui-m-layerbtn span[yes]{
     width:50px;
     border:none;
 }
 .factoryListLayer .layui-m-layerbtn span[no],
 .setRoleLayer .layui-m-layerbtn span[no],
 .setOrganizeLayer .layui-m-layerbtn span[no],
-.vendorInfoLayer .layui-m-layerbtn span[no]{
+.vendorInfoLayer .layui-m-layerbtn span[no],
+.projectDetailLayer .layui-m-layerbtn span[no]{
     visibility: hidden;
 }
 .factoryListLayer .layui-m-layerbtn span[yes],
@@ -5245,9 +5248,9 @@ ul.info_list li{
     left:0;
     bottom:0;
 }
-.projectDetailLayer .layui-m-layerbtn{
+/*.projectDetailLayer .layui-m-layerbtn{
     bottom:1rem;
-}
+}*/
 .brand_list li{
     padding:0;
 
