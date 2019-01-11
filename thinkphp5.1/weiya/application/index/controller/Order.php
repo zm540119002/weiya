@@ -112,7 +112,6 @@ class Order extends \common\controller\UserBase
     public function confirmOrder()
     {
         if (request()->isPost()) {
-            print_r(input());exit;
             $fatherOrderId = input('post.father_order_id',0,'int');
             $modelOrder = new \app\index\model\Order();
             $data = input('post.');
@@ -136,6 +135,7 @@ class Order extends \common\controller\UserBase
                 ]
             ];
             $orderDetailList = $modelOrderDetail->getList($config);
+            print_r($orderDetailList);exit;
             $model = new \app\index\model\Cart();
             foreach ($orderDetailList as &$orderDetailInfo){
                 $condition = [
@@ -148,18 +148,6 @@ class Order extends \common\controller\UserBase
                     return errorMsg('删除失败');
                 }
             }
-
-
-//      //根据订单号查询关联的商品
-//        $modelOrderChild = new \app\index\model\OrderChild();
-//        //生成子订单
-//        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
-//        if(!$rse['status']){
-//            $modelOrder->rollback();
-//            return errorMsg($modelOrderChild->getError());
-//        }
-
-
             $orderSn = input('post.order_sn','','string');
             return successMsg('成功',array('order_sn'=>$orderSn));
         }else{
