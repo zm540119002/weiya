@@ -1,7 +1,7 @@
 <?php
 namespace app\index_admin\controller;
 
-class Base extends \common\controller\Base{
+class Base extends \common\controller\UserBase{
     public function __construct(){
         parent::__construct();
         $node = new \common\lib\Node();
