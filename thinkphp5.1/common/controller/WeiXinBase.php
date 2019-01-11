@@ -1,19 +1,17 @@
 <?php
 namespace common\controller;
 
-use \common\component\payment\weixin\Jssdk;
-
-class Wx extends UserBase{
+class WeiXinBase extends UserBase{
     private $_jssdk = null;
     public function __construct(){
         parent::__construct();
-        $this->_jssdk = new Jssdk(config('custom.wx_config')['appid'], config('custom.wx_config')['appsecret']);
+        $this->_jssdk = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
         $this -> signPackage = $this -> weiXinShareInit();
     }
 
     //微信分享初始化
     public function weiXinShareInit(){
-        $signPackage =  $this->_jssdk->GetSignPackage();
+        $signPackage =  $this->_jssdk->getSignPackage();
         return $signPackage;
     }
 

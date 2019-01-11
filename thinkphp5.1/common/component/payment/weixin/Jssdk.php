@@ -10,7 +10,7 @@ class Jssdk {
   public function __construct($appId, $appSecret) {
     $this->appId = $appId;
     $this->appSecret = $appSecret;
-    $this->path = __DIR__ . 'Jssdk.class.php/';
+    $this->path = __DIR__ . 'Jssdk.php/';
     $data = json_decode($this->get_php_file("access_token.php"));
     if ($data->expire_time < time()) {
       // 如果是企业号用以下URL获取access_token
