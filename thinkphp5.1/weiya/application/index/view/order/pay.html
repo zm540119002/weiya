@@ -54,6 +54,7 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" src="public_js/wallet.js"></script>
 <script type="text/javascript">
     $(function(){
         //如果是微信浏览器
@@ -74,7 +75,8 @@
                 return false;
             }
             if(pay_code == 4){
-                alert('输入支付密码');return false
+                walletPayDialog();
+                return false
             }
 
         })
