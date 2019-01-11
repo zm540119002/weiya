@@ -306,6 +306,7 @@ $(function () {
 
                 }else if(data.status == 1){
                     location.href = module + 'Order/toPay/order_sn/' + data.order_sn;
+
                 }
             }
         });

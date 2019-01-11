@@ -5333,6 +5333,9 @@ ul.info_list li{
     height:100%;
     text-align: center;
 }
+.payPasswordLayer .payment_password{
+    padding:0.25rem;
+}
 /*订单客服售前*/
 .layui-m-layerchild.chatLayer{
     background:#f2f2f2;
