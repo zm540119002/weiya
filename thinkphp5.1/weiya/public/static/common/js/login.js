@@ -214,6 +214,9 @@ $(function(){
             }
             time--;
         }
+        console.log(send_sms);
+        console.log(postData);
+        return;
         var url = send_sms;
         $.post(url,postData,function(msg){
             requestSign = true;

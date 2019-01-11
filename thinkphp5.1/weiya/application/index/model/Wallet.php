@@ -13,36 +13,35 @@ class Wallet extends \common\model\Base {
 
 	/**登录-账号检查
 	 */
-	public function loginCheck($mobilePhone){
+	public function loginCheck($uid){
 		$where = [
-			['mobile_phone','=',$mobilePhone],
+			['user_id','=',$uid],
 		];
 		$field = [
 			'status',
 		];
-		$user = $this->where($where)->field($field)->find();
-		return $user;
+		$wallet = $this->where($where)->field($field)->find();
+		return $wallet;
 	}
 
 	/**登录
 	 */
 	public function login($data){
-		$data['mobile_phone'] = trim($data['mobile_phone']);
+		//		$validateUser = new \common\validate\User();
+//		if(!$validateUser->scene('resetPassword')->check($data)){
+//			return errorMsg($validateUser->getError());
+//		}
 		$data['password'] = trim($data['password']);
-		$validateUser = new \common\validate\User();
-		if($data['mobile_phone'] && $data['password']){//账号密码登录
-			if(!$validateUser->scene('login')->check($data)) {
-				return errorMsg($validateUser->getError());
-			}
-			$user = $this->loginCheck($data['mobile_phone']);
-			if(!$user){
+		if($data['password']){//账号密码登录
+			$wallet = $this->loginCheck($data['user_id']);
+			if(!$wallet){
 				return errorMsg('账号不存在！');
-			}elseif($user['status']==1){
+			}elseif($wallet['status']==1){
 				return errorMsg('账号异常，请申诉！');
 			}
 			return $this->_login($data);
 		}else{
-			return errorMsg('登录信息不完善！');
+			return errorMsg('密码错误！');
 		}
 	}
 
@@ -56,11 +55,11 @@ class Wallet extends \common\model\Base {
 		$field = [
 			'id','name','nickname',
 		];
-		$user = $this->where($where)->field($field)->find();
-		if(!$user){
+		$wallet = $this->where($where)->field($field)->find();
+		if(!$wallet){
 			return false;
 		}
-		return $user;
+		return $wallet;
 	}
 
 	/**注册
@@ -89,28 +88,28 @@ class Wallet extends \common\model\Base {
 	/**重置密码
 	 */
 	public function resetPassword($data){
-		$validateUser = new \common\validate\User();
-		if(!$validateUser->scene('resetPassword')->check($data)){
-			return errorMsg($validateUser->getError());
-		}
-		if($data['mobile_phone'] && $data['captcha']){
-			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
+//		$validateUser = new \common\validate\User();
+//		if(!$validateUser->scene('resetPassword')->check($data)){
+//			return errorMsg($validateUser->getError());
+//		}
+		if($data['user_id'] && $data['captcha']){
+			if(!$this->_checkCaptcha($data['user_id'],$data['captcha'])){
 				return errorMsg('验证码错误，请重新获取验证码！');
 			}
-			$user = $this->loginCheck($data['mobile_phone']);
-			if(!$user){
+			$wallet = $this->loginCheck($data['user_id']);
+			if(!$wallet){
 				if(!$this->_register($data)){
 					return errorMsg('注册失败');
 				}
 				return $this->_login($data);
-			}elseif($user['status']==1){
+			}elseif($wallet['status']==1){
 				return errorMsg('账号异常，请申诉！');
 			}
 			$saveData['salt'] = create_random_str(10,0);//盐值
 			$saveData['password'] = md5($saveData['salt'] . $data['password']);//加密
 			$where = array(
 				'status' => 0,
-				'mobile_phone' => $data['mobile_phone'],
+				'user_id' => $data['user_id'],
 			);
 			$response = $this->where($where)->update($saveData,$where);
 			if(!$response){
@@ -124,13 +123,11 @@ class Wallet extends \common\model\Base {
 	/**登录
 	 */
 	private function _login($data){
-		$user = $this->_get($data);
-		if(!$user){
+		$wallet = $this->_get($data);
+		if(!$wallet){
 			return errorMsg('密码错误,请重新输入！');
 		}
-		//更新最后登录时间
-		$this->_setLastLoginTimeById($user['id']);
-		return successMsg($this->_setSession($user),['fn_name'=>$data['fn_name']]);
+		return successMsg('成功');
 	}
 
 	/**注册
@@ -139,7 +136,6 @@ class Wallet extends \common\model\Base {
 		$salt = create_random_str(10,0);
 		$data['salt'] = $salt;//盐值;
 		$data['password'] = md5($salt . $data['password']);//加密;
-		$data['name'] = '游客';
 		$data['create_time'] = time();
 		$this->save($data);
 		if(!$this->getAttr('id')){
@@ -150,9 +146,9 @@ class Wallet extends \common\model\Base {
 
 	/**更新-最后登录时间
 	 */
-	private function _setLastLoginTimeById($userId){
+	private function _setLastLoginTimeById($walletId){
 		$where = array(
-			'id' => $userId,
+			'id' => $walletId,
 		);
 		$this->where($where)->setField('last_login_time', time());
 	}
@@ -160,33 +156,29 @@ class Wallet extends \common\model\Base {
 	/**获取登录信息
 	 */
 	private function _get($data){
-		if(!$data['mobile_phone']) {
+		if(!$data['user_id']) {
 			return false;
 		}
 		$where = array(
 			'status' => 0,
-			'mobile_phone' => $data['mobile_phone'],
+			'user_id' => $data['user_id'],
 		);
-		$field = array(
-			'id','name','nickname','mobile_phone','status','type','password','avatar',
-			'sex','salt','birthday','last_login_time',
-		);
-		$user = $this->field($field)->where($where)->find();
-		if(!count($user)) {
+		$wallet = $this->where($where)->find();
+		if(!count($wallet)) {
 			return false;
 		}
-		if($data['password'] && !slow_equals($user['password'],md5($user['salt'].$data['password']))){
+		if($data['password'] && !slow_equals($wallet['password'],md5($wallet['salt'].$data['password']))){
 			return false;
 		}
-		return $user->toArray();
+		return $wallet->toArray();
 	}
 
 	/**设置登录session
 	 */
-	private function _setSession($user){
-		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
-		session('user', $user);
-		session('user_sign', data_auth_sign($user));
+	private function _setSession($wallet){
+		$wallet = array_merge($wallet,array('rand' => create_random_str(10, 0),));
+		session('user', $wallet);
+		session('user_sign', data_auth_sign($wallet));
 		return session('backUrl');
 		//返回发起页或平台首页
 		$backUrl = session('backUrl');

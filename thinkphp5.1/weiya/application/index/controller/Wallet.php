@@ -12,9 +12,10 @@ class Wallet extends \common\controller\UserBase{
      */
     public function login(){
         if (request()->isAjax()) {
-            $modelUser = new \common\model\UserCenter();
+            $model = new \app\index\model\Wallet();;
             $postData = input('post.');
-            return $modelUser->login($postData);
+            $postData['user_id'] = $this->user['id'];
+            return $model->login($postData);
         } else {
             return $this->fetch();
         }
@@ -24,9 +25,10 @@ class Wallet extends \common\controller\UserBase{
      */
     public function forgetPassword(){
         if (request()->isAjax()) {
-            $modelUser = new \common\model\UserCenter();
+            $model = new \app\index\model\Wallet();;
             $postData = input('post.');
-            return $modelUser->resetPassword($postData);
+            $postData['user_id'] = $this->user['id'];
+            return $model->resetPassword($postData);
         } else {
             return $this->fetch();
         }
