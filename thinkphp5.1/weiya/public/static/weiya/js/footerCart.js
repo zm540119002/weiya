@@ -305,7 +305,7 @@ $(function () {
                 if(data.status == 0){
 
                 }else if(data.status == 1){
-                    location.href = module + 'Order/pay/order_sn/' + data.order_sn;
+                    location.href = module + 'Order/toPay/order_sn/' + data.order_sn;
                 }
             }
         });
