@@ -220,6 +220,18 @@ class Order extends \common\controller\UserBase
         ];
         $orderInfo = $modelOrder->getInfo($config);
         $this->assign('orderInfo', $orderInfo);
+        //钱包
+        $modelWallet = new \app\index\model\Wallet();
+        $config = [
+            'where' => [
+                ['status', '=', 0],
+                ['user_id', '=', $this->user['id']],
+            ],'field' => [
+                'id','amount',
+            ],
+        ];
+        $walletInfo = $modelWallet->getInfo($config);
+        $this->assign('walletInfo', $walletInfo);
         $unlockingFooterCart = unlockingFooterCartConfig([4]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
