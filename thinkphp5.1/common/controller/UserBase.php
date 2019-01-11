@@ -25,7 +25,6 @@ class UserBase extends Base{
             if(empty($openId)){
                 $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $openId  = $tools->getOpenid();
-                print_r(111);exit;
                 print_r($openId);exit;
                 session('open_id',$openId);
             }
