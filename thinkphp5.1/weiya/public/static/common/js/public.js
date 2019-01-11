@@ -686,10 +686,6 @@ function dialogFormDelDefaultCallBack(config,data) {
         layer.close(config.index);
     }
 }
-//聊天框滚动条置底
-function chatDialogSetBottom() {
-    $('.chatLayer .chat_item').scrollTop($('.chatLayer .chat_item')[0].scrollHeight);
-}
 //购物车加减数量勾选复选框
 function cartCheckedBox(obj){
     var sign = true;
