@@ -4008,10 +4008,9 @@ select[name="nodeIds"]{
 .sample_purchase{
     display:block;
     color:#575757;
-    border-radius:5px;
     padding:0 0.15rem 0.30rem 0;
     margin:0.12rem 0.15rem 0 0.15rem;
-     border-bottom:1px solid #d9d9d9;
+    border-bottom:1px solid #d9d9d9;
 }
 .list_r .sample_purchase{
     margin-top:0;
