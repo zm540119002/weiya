@@ -195,7 +195,7 @@ class Order extends \common\controller\UserBase
 
     }
     //支付
-    public function pay()
+    public function toPay()
     {
         $modelOrder = new \app\index\model\Order();
         $orderSn = input('order_sn');
