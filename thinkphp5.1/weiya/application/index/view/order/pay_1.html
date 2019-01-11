@@ -50,12 +50,37 @@
 </article>
 {/block}
 {block name="common"}
-
+{include file="template/wallet_password_dialog.html" /}
 {/block}
 
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" src="public_js/wallet.js"></script>
 <script type="text/javascript">
+    $(function(){
+        //如果是微信浏览器
+        if(isWeiXin()){
+            $('#alipay').remove();
+        }
+        $('.pay_nav li').on('click',function(){
+            $(this).addClass('current').siblings().removeClass('current');
+            var pay_code = $(this).data('paycode');
+            $(this).find('input[type="checkbox"]').prop('checked',true);
+            $('.pay_code').val(pay_code);
+        });
 
+        $('body').on('click','.pay_btn',function () {
+            var pay_code = $('input[name=pay_code]').val();
+            if(!pay_code){
+                dialog.error('请选择支付方式');
+                return false;
+            }
+            if(pay_code == 4){
+                walletPayDialog();
+                return false
+            }
+
+        })
+    });
 </script>
 {/block}
