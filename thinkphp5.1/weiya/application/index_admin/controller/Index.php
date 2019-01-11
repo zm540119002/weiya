@@ -5,6 +5,6 @@ class Index extends Base
 {
     //首页
     public function index(){
-        return $this->fetch();
+//        return $this->fetch();
     }
 }
