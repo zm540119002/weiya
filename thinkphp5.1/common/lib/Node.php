@@ -29,7 +29,7 @@ class Node
      */
     private function _setAllNode(){
         $this->_allNode = array_merge($this->_allNode,!empty(config('all_node.menu'))?config('all_node.menu'):[]);
-        $this->_allNode = array_merge($this->_allNode,!empty(config('module_node.menu'))?config('module_node'):[]);
+        $this->_allNode = array_merge($this->_allNode,!empty(config('module_node.menu'))?config('module_node')[0]:[]);
     }
     
     /**过滤不显示菜单
