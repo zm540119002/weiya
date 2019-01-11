@@ -284,63 +284,6 @@ class Goods extends Base {
         }
     }
 
-    //生成商品二维码
-    /**
-     * @return array
-     */
-    public function generateGoodsQRcode(){
-        if(request()->isPost()){
-            $id = input('post.id/d');
-            $config = [
-                'where'=>[
-                    ['id','=',$id],
-                    ['status','=',0]
-                ]
-            ];
-            $model = new \app\index_admin\model\Goods();
-            $info = $model -> getInfo($config);
-            $oldQRCodes = $info['rq_code_url'];
-            $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
-            $url = request()->domain().'/index.php/weiya_customization/Goods/detail/id/'.$id;
-            $newRelativePath = config('upload_dir.weiya_goods');
-            $shareQRCodes = createLogoQRcode($url,$newRelativePath);
-            if(mb_strlen( $info['headline'], 'utf-8')>20){
-                $name1 =  mb_substr( $info['headline'], 0, 20, 'utf-8' ) ;
-                $name2 =  mb_substr( $info['headline'], 20, 20, 'utf-8' ) ;
-            }else{
-                $name1 = $info['headline'];
-                $name2 = '';
-            }
-            $init = [
-                'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
-                'title'=>'维雅生物药妆',
-                'slogan'=>'领先的品牌定制平台',
-                'name1'=> $name1,
-                'name2'=> $name2,
-                'specification'=> '规格：'.$info['specification'],
-                'money'=>'￥'.$info['bulk_price'].' 元',
-                'logo_img'=> request()->domain().'/static/weiya/img/logo.png', // 460*534
-                'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
-                'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
-                'font'=>'./static/font/simhei.ttf',   //字体
-            ];
-            $res =  $this->compose($init);
-            if($res['status'] == 1){
-                $newQRCodes = $res['info'];
-                $res= $model->where(['id'=>$id])->setField(['rq_code_url'=>$newQRCodes]);
-                if(false === $res){
-                    return errorMsg('失败');
-                }
-                unlink($uploadPath.$shareQRCodes);
-                if(!empty($oldQRCodes)){
-                    unlink($uploadPath.$oldQRCodes);
-                }
-                return successMsg($newQRCodes);
-            }else{
-                return successMsg('失败',$res['info']);
-            }
-        }
-    }
 
     /**
      * 添加商品相关推荐商品
@@ -510,6 +453,65 @@ class Goods extends Base {
         return $this->fetch();
     }
 
+
+
+    //生成商品二维码
+    /**
+     * @return array
+     */
+    public function generateGoodsQRcode(){
+        if(request()->isPost()){
+            $id = input('post.id/d');
+            $config = [
+                'where'=>[
+                    ['id','=',$id],
+                    ['status','=',0]
+                ]
+            ];
+            $model = new \app\index_admin\model\Goods();
+            $info = $model -> getInfo($config);
+            $oldQRCodes = $info['rq_code_url'];
+            $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
+            $url = request()->domain().'/index.php/weiya_customization/Goods/detail/id/'.$id;
+            $newRelativePath = config('upload_dir.weiya_goods');
+            $shareQRCodes = createLogoQRcode($url,$newRelativePath);
+            if(mb_strlen( $info['headline'], 'utf-8')>20){
+                $name1 =  mb_substr( $info['headline'], 0, 20, 'utf-8' ) ;
+                $name2 =  mb_substr( $info['headline'], 20, 20, 'utf-8' ) ;
+            }else{
+                $name1 = $info['headline'];
+                $name2 = '';
+            }
+            $init = [
+                'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
+                'title'=>'维雅生物药妆',
+                'slogan'=>'领先的品牌定制平台',
+                'name1'=> $name1,
+                'name2'=> $name2,
+                'specification'=> '规格：'.$info['specification'],
+                'money'=>'￥'.$info['bulk_price'].' 元',
+                'logo_img'=> request()->domain().'/static/weiya/img/logo.png', // 460*534
+                'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
+                'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
+                'font'=>'./static/font/simhei.ttf',   //字体
+            ];
+            $res =  $this->compose($init);
+            if($res['status'] == 1){
+                $newQRCodes = $res['info'];
+                $res= $model->where(['id'=>$id])->setField(['rq_code_url'=>$newQRCodes]);
+                if(false === $res){
+                    return errorMsg('失败');
+                }
+                unlink($uploadPath.$shareQRCodes);
+                if(!empty($oldQRCodes)){
+                    unlink($uploadPath.$oldQRCodes);
+                }
+                return successMsg($newQRCodes);
+            }else{
+                return successMsg('失败',$res['info']);
+            }
+        }
+    }
 
     /**合成商品图片
      *

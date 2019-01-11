@@ -1,54 +1,26 @@
-//登录-弹窗触发
-function loginDialog(fn_name){
-    var content=$('#dialLogin').html();
+//钱包支付弹窗
+function walletPayDialog() {
+    var content=$('#walletPay').html();
     window.scrollTo(0,0);
     layer.open({
         className:'loginLayer',
         type:1,
         shadeClose:false,
         content:content,
-        title:['登录','border-bottom:1px solid #d9d9d9;'],
+        title:['支付','border-bottom:1px solid #d9d9d9;'],
         success:function(indexs,i){
             tab_down('.loginNav li','.loginTab .login_wrap','click');
             $('.layui-m-layershade').on('touchmove',function(e){
                 event.preventDefault();
             });
-            $('input[name="fn_name"]').val(fn_name);
-            fixedLayer();
+            // $('input[name="fn_name"]').val(fn_name);
+            // fixedLayer();
         }
     });
 }
-//退出-弹窗触发
-function logoutDialog(){
-    var url = domain+'ucenter/UserCenter/logout';
-    layer.open({
-        content:'是否退出？',
-        btn:['确定','取消'],
-        yes:function(index){
-            $.ajax({
-                url: url,
-                data: {},
-                type: 'post',
-                beforeSend: function(){
-                    $('.loading').show();
-                },
-                error:function(){
-                    $('.loading').hide();
-                    dialog.error('AJAX错误');
-                },
-                success: function(data){
-                    $('.loading').hide();
-                    if(data.status){
-                        location.href = domain+'index/UserCenter/index';
-                    }
-                }
-            });
-            layer.close(index);
-        }
-    });
-}
+
 //忘记密码-弹窗触发
-function forgetPasswordDialog(fn_name){
+function forgetWalletPasswordDialog(fn_name){
     var content = $('#sectionForgetPassword').html();
     layer.open({
         className:'forgetPasswordLayer',
@@ -63,6 +35,8 @@ function forgetPasswordDialog(fn_name){
         }
     });
 }
+
+
 $(function(){
     //忘记密码-弹窗事件
     $('body').on('click','#login_dialog',function(){
