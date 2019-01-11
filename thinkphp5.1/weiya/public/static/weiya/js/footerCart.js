@@ -350,7 +350,7 @@ $(function () {
     //去支付
     $('body').on('click','.pay',function () {
         var orderSn =  $('#order_sn').val();
-        location.href = module + 'Order/pay/order_sn/' + orderSn;
+        location.href = module + 'Order/toPay/order_sn/' + orderSn;
     })
 
 });
