@@ -1,0 +1,16 @@
+<li>
+	<span class="create_time">{$message.create_time|date='Y-m-d H:i'}</span>
+</li>
+<li class="{$message.who}{if $message.read} read{else /} unread{/if}" data-id="{$message.id}">
+	<div class="avatar">
+		{empty name="info.avatar"}
+		<img src="public_img/default/chat_head.jpg">
+		{else /}
+		<img src="public_uploads/{$message.avatar}">
+		{/empty}
+	</div>
+	<div class="content">
+		<p class="author">{$message.name}</p>
+		<div class="msg">{$message.content}</div>
+	</div>
+</li>

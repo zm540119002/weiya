@@ -10,7 +10,6 @@
 					{foreach $vo.sub_menu as $kk=>$vv }
 					<li>
 						<a href="{:url($vv.controller.'/'.$vv.action)}" title="{$vv.name}">{$vv.name}</a>
-						<!--<a data-href="{:url($vv.controller.'/'.$vv.action)}" data-title="{$vv.name}" href="javascript:void(0)">{$vv.name}</a>-->
 					</li>
 					{/foreach}
 				</ul>

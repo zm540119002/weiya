@@ -1,0 +1,138 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<!--对话框列表模板-->
+<section id="chatListTpl" style="display:none;">
+    <li class="me">
+        <div class="avatar">
+            <img src="public_img/default/chat_head.jpg">
+        </div>
+        <div class="content">
+            <p class="author">(小猫咪)</p>
+            <div class="msg"></div>
+        </div>
+    </li>
+</section>
+<!--对话框弹窗-->
+<section id="chatLayerContainer">
+    <div class="ws_chatMsg-panel flex1">
+        <div class="chatMsg-ct">
+            <ul class="clearfix chat_item"></ul>
+        </div>
+    </div>
+    <div class="bottom_nav_fixed">
+        <div class="bottom_flex">
+            <input class="send_out_text" type="text" name="" value="">
+            <input class="send_btn" type="button" value="发送">
+        </div>
+    </div>
+</section>
+<article class="f24">
+    <section class="top_nav_fixed">
+        <div class="top_bar columns_flex">
+            <div class="each_column">
+                <a class="personal_center">我的</a>
+            </div>
+            <div class="each_column top_search_module">
+                <input type="button" class="search_btn"/>
+                <input type="text" class="search_text" placeholder="美尚云搜索"/>
+            </div>
+            <div class="each_column">
+                <a class="home">首页</a>
+            </div>
+        </div>
+    </section>
+    <section class="specific_type separation-line">
+        <div class="columns_flex f20 l-r-sides">
+            <a href="{:url('CustomerClient/beforeSale')}">售前</a>
+            <a href="{:url('Order/index')}">打单</a>
+            <a href="{:url('Order/out')}">出仓</a>
+            <a href="{:url('Order/delivery')}">发货/完成</a>
+            <a href="{:url('Order/bill')}">填单</a>
+            <a href="{:url('CustomerClient/afterSale')}" class="current">售后</a>
+        </div>
+    </section>
+    <section class="f24 account-content-wrapper order-content-wrapper">
+        <ul class="list">
+            <li class="chat_list" data-id="1">
+                <div class="avatar">
+                    <img src="public_img/default/chat_head.jpg">
+                </div>
+                <div class="content">
+                    <p class="author">(小猫咪)</p>
+                    <div class="msg"></div>
+                </div>
+                <div class="chat_hidden_list"></div>
+            </li>
+            <li class="chat_list" data-id="2">
+                <div class="avatar">
+                    <img src="public_img/default/chat_head.jpg">
+                </div>
+                <div class="content">
+                    <p class="author">(小猫咪)</p>
+                    <div class="msg"></div>
+                </div>
+                <div class="chat_hidden_list"></div>
+            </li>
+            <li class="chat_list" data-id="3">
+                <div class="avatar">
+                    <img src="public_img/default/chat_head.jpg">
+                </div>
+                <div class="content">
+                    <p class="author">(小猫咪)</p>
+                    <div class="msg"></div>
+                </div>
+                <div class="chat_hidden_list"></div>
+            </li>
+        </ul>
+    </section>
+</article>
+{/block}
+{block name="common"}
+{include file="template/footer_menu_msy_store.html" /}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+    $(function () {
+        //聊天对话框弹窗
+        var chatLayerContainer=$('#chatLayerContainer').html();
+        var chatListId;
+        $('body').on('click','.list li',function(){
+            var _this=$(this);
+            chatListId=$(this).data('id');
+            layer.open({
+                className:'chatLayer',
+                content:chatLayerContainer,
+                type:1,
+                anim:'up',
+                btn:['','关闭'],
+                success:function(){
+                    var winH=$(document).height();
+                    var chatListInfo=_this.find('.chat_hidden_list').html();
+                    $('.chatLayer .chat_item').css('height',winH+'px');
+                    $('.chatLayer .chat_item').html(chatListInfo);
+                },
+                no:function(){
+                    var chatLayerList=$('.chatLayer .chat_item').html();
+                    console.log(chatLayerList);
+                    $('li[data-id='+chatListId+']').find('.chat_hidden_list').html(chatLayerList);
+                }
+            });
+        });
+        //发送聊天内容
+        var chatListTpl=$('#chatListTpl').html();
+        $('body').on('click','.send_btn',function(){
+            var text=$(this).prev().val();
+            if(!text){
+                dialog.error('不能发送空内容！');
+                return false;
+            }
+            $('.chatLayer .chat_item').append(chatListTpl);
+            $('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
+        });
+    });
+</script>
+{/block}
