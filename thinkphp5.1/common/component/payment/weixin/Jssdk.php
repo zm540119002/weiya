@@ -279,10 +279,10 @@ class Jssdk {
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,FALSE);
     curl_setopt($ch, CURLOPT_HEADER, FALSE);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    if(C('WX_CONFIG')['CURL_PROXY_HOST'] != "0.0.0.0"
-        && C('WX_CONFIG')['CURL_PROXY_PORT'] != 0){
-      curl_setopt($ch,CURLOPT_PROXY, C('WX_CONFIG')['CURL_PROXY_HOST']);
-      curl_setopt($ch,CURLOPT_PROXYPORT, C('WX_CONFIG')['CURL_PROXY_PORT']);
+    if( config('wx_config.curl_proxy_host') != "0.0.0.0"
+        && config('wx_config.curl_proxy_port') != 0){
+      curl_setopt($ch,CURLOPT_PROXY, config('wx_config.curl_proxy_host'));
+      curl_setopt($ch,CURLOPT_PROXYPORT, config('wx_config.curl_proxy_port'));
     }
     //运行curl，结果以jason形式返回
     $res = curl_exec($ch);
