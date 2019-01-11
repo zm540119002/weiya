@@ -5121,7 +5121,7 @@ ul.info_list li{
 }
 .msg_item .m_l:last-child{
     border-left:1px solid #d9d9d9;
-    padding-left:0.32rem;
+    padding-left:0.20rem;
 }
 .leaving_msg{
     height:2.5rem;
