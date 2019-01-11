@@ -7,7 +7,7 @@ function walletPayDialog() {
         type:1,
         shadeClose:false,
         content:content,
-        title:['支付','border-bottom:1px solid #d9d9d9;'],
+        title:['钱包支付密码','border-bottom:1px solid #d9d9d9;'],
         btn:['确定支付'],
         success:function(indexs,i){
             //钱包密码
@@ -43,7 +43,10 @@ function walletPayDialog() {
                 dialog.error('请输入正确4位数密码');
                 return false;
             }
-            layer.close(index);
+            $.post(url,postData,function (data) {
+                layer.close(index);
+            })
+            
         }
     });
 }
