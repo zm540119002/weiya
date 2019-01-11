@@ -493,6 +493,9 @@ price{
     font-size:0.24rem;
     z-index:6;
 }
+.chat_bottom_fixed{
+    bottom:0.8rem;
+}
 .bottom_nav_fixed a{
     font-size:0;
 }
@@ -4583,6 +4586,13 @@ select[name="nodeIds"]{
     background: #fff;
     border-bottom:5px solid #f2f2f2;
 }
+.service_menu_nav{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:90;
+}
 .weiya_menu li a{
     color:#333;
 }
@@ -4851,7 +4861,8 @@ select[name="nodeIds"]{
     transform: translate3d(0,-50%,0);
     height: auto;
 }
-.chatLayer ul{
+.chat_item.list{
+    height:560px;
     padding:0 0.25rem 0.25rem;
     margin:1rem 0 0;
     overflow-y:auto;
@@ -5315,11 +5326,19 @@ ul.info_list li{
 .chat_item.hide{
     display:none;
 }
+.chatMsg-ct{
+    padding:0 0 2rem 0;
+}
 .chatMsg-ct li{
     padding:0.10rem 0.15rem;
     margin:0 0 .15rem 0;
     border:none;
     background:none;
+}
+.create_time {
+    display: block;
+    text-align: center;
+    font-size: 0.12rem;
 }
 .chatMsg-ct li.others{
     margin-bottom:0.35rem;
