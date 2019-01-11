@@ -28,7 +28,7 @@ return [
         ],'customer'=>[
             'id'=>500,'name'=>'客服','type'=>2,
             'sub_menu' => [
-                ['id'=>501,'name'=>'售前','display'=>1,'controller'=>'custom_client','action'=>'index',],
+                ['id'=>501,'name'=>'售前','display'=>1,'controller'=>'custom_client','action'=>'beforeSale',],
             ],
         ],
     ],
