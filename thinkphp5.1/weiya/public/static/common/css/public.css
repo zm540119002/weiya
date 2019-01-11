@@ -5099,6 +5099,9 @@ ul.info_list li{
     margin:0 0.12rem 0 0;
     text-align:left;
 }
+.c_mobile .name.f_n{
+    width:0.75rem;
+}
 .c_mobile .name.first:nth-child(1){
     text-indent:0.25rem;
 }
