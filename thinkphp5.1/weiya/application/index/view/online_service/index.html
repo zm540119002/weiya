@@ -2,20 +2,20 @@
 {block name="css-customize"}
 {/block}
 {block name="content"}
+<section id="chatListOtherTpl" style="display:none;">
+	<li class="others unread">
+		<div class="avatar">
+			<img src="public_img/default/chat_head.jpg">
+		</div>
+		<div class="content">
+			<p class="author">乔峰<span class="create_time">2019-01-07 17:37</span></p>
+			<div class="msg"></div>
+		</div>
+	</li>
+</section>
 <article class="f24">
-	<section id="chatListOtherTpl" style="display:none;">
-		<li class="others unread">
-			<div class="avatar">
-				<img src="public_img/default/chat_head.jpg">
-			</div>
-			<div class="content">
-				<p class="author">乔峰<span class="create_time">2019-01-07 17:37</span></p>
-				<div class="msg"></div>
-			</div>
-		</li>
-	</section>
 	<section class="">
-		<ul class="nav_menu weiya_menu">
+		<ul class="nav_menu weiya_menu service_menu_nav">
 			<li>
 				<a href="{:url('Consultation/index')}">定制需求留言</a>
 			</li>
@@ -49,7 +49,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="bottom_nav_fixed">
+		<div class="bottom_nav_fixed chat_bottom_fixed">
 			<div class="bottom_flex">
 				<input class="send_out_text" type="text" name="" value="">
 				<input class="send_btn" type="button" value="发送">
