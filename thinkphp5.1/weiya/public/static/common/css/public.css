@@ -4586,6 +4586,10 @@ select[name="nodeIds"]{
     background: #fff;
     border-bottom:5px solid #f2f2f2;
 }
+.service_menu{
+    padding-left:1.5rem;
+    padding-right:1.5rem;
+}
 .service_menu_nav{
     position:fixed;
     top:0;
@@ -5089,6 +5093,21 @@ ul.info_list li{
 .c_mobile p:first-child{
     margin:0.12rem 0 0.15rem 0;
 }
+.c_mobile .name{
+    display:inline-block;
+    width:1rem;
+    margin:0 0.12rem 0 0;
+    text-align:left;
+}
+.c_mobile .name.f_n{
+    width:0.75rem;
+}
+.c_mobile .name.first:nth-child(1){
+    text-indent:0.25rem;
+}
+.c_mobile .c_m_l{
+    /*margin-left:-0.25rem;*/
+}
 .weiya_map{
     width:100%;
     height:4.5rem;
@@ -5110,6 +5129,8 @@ ul.info_list li{
     display:flex;
     display:-webkit-flex;
     justify-content: space-between;
+    padding-left:0.10rem;
+    padding-right:0.10rem;
 }
 .msg_item .input-filed{
     border:none;
