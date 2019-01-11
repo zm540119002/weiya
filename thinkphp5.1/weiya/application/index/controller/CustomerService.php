@@ -55,7 +55,7 @@ class CustomerService extends \common\controller\UserBase{
             $postData['create_time'] = $msgCreateTime;
             $postData['id'] = $res['id'];
             $this->assign('info',$postData);
-            return view('customer_client/info_tpl');
+            return view('online_service/info_tpl');
         }
     }
     /**设置消息已读
