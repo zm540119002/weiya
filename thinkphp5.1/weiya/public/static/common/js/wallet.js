@@ -3,35 +3,81 @@ function walletPayDialog() {
     var content=$('#walletPay').html();
     window.scrollTo(0,0);
     layer.open({
-        className:'loginLayer',
+        className:'payPasswordLayer',
         type:1,
         shadeClose:false,
         content:content,
         title:['支付','border-bottom:1px solid #d9d9d9;'],
+        btn:['确定支付'],
         success:function(indexs,i){
-            tab_down('.loginNav li','.loginTab .login_wrap','click');
-            $('.layui-m-layershade').on('touchmove',function(e){
-                event.preventDefault();
-            });
-            // $('input[name="fn_name"]').val(fn_name);
-            // fixedLayer();
+            //钱包密码
+            var oLis=$('.payPasswordLayer input.password_item');
+            for(var i = 0;i<oLis.length;i++){
+                var obj=oLis[i];
+                console.log(obj);
+                $(obj).data('index',i);
+                $(obj).attr('readonly',true);
+                $(obj).on('keyup',function(){
+                    var _this=$(this);
+                    _this.val().replace(/^(.).*$/,'$1');
+                    _this.attr('readonly',true);
+                    var next=_this.data('index')+1;
+                    console.log(next);
+                    if(next>oLis.length-1){
+                        console.log('12345678');
+                    }
+                    $(oLis[next]).removeAttr('readonly');
+                    $(oLis[next]).focus();
+                });
+            }
+            $(oLis[0]).removeAttr('readonly');
+        },
+        yes:function(index){
+            var oLis=$('.payPasswordLayer input.password_item');
+            var postData='';
+            for(var i=0;i<oLis.length;i++){
+                postData=postData+$(oLis[i]).val();
+            }
+            console.log(postData);
+            if(postData.length<4){
+                dialog.error('请输入正确4位数密码');
+                return false;
+            }
+            layer.close(index);
         }
     });
 }
 
 //忘记密码-弹窗触发
-function forgetWalletPasswordDialog(fn_name){
-    var content = $('#sectionForgetPassword').html();
+function forgetWalletPasswordDialog(){
+    var content = $('#WalletPasswordHtml').html();
     layer.open({
-        className:'forgetPasswordLayer',
+        title:['重置密码','border-bottom:1px solid #d9d9d9;'],
+        className:'forgetWalletPasswordLayer',
         content:content,
         type:1,
         shadeClose:false,
+        btn:['确定'],
         success:function(){
-            $('.login_item .password').attr('type','password');
-            $('.view-password').removeClass('active');
-            $('input[name="fn_name"]').val(fn_name);
-            fixedLayer();
+           
+        },
+        yes:function(){
+            var postForm = $('.forgetWalletPasswordLayer #ForgetWalletPassword');
+            var content='';
+            var postData = postForm.serializeObject();
+            console.log(postData);
+            if(!register.vfyCheck(postData.captcha)){
+                content = "请输入正确的验证码";
+            }else if(!register.pswCheck(postData.password)){
+                content = "请输入6-16数字或字母的密码";
+            }
+            if(content){
+                dialog.error(content);
+                return false;
+            }
+            $.post(url,postData,function (data) {
+
+            })
         }
     });
 }
@@ -47,10 +93,14 @@ $(function(){
         logoutDialog();
     });
     //忘记密码-弹窗事件
-    $('body').on('click','.forget_dialog',function(){
-        var fn_name = $(this).siblings('input[name="fn_name"]').val();
-        forgetPasswordDialog(fn_name);
+    $('body').on('click','.forget_wallet_password',function(){
+        //var fn_name = $(this).siblings('input[name="fn_name"]').val();
+        forgetWalletPasswordDialog();
     });
+    //钱包支付密码
+     function walletPayPassword(oLis){
+       
+     }
 });
 $(function(){
     //登录 / 注册-切换
