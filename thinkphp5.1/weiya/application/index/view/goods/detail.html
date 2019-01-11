@@ -101,6 +101,8 @@
 					<div class="content-padding columns_flex l-r-sides">
 						<div>
 							<p>采购数量(单位:{$info.purchase_unit|getUnit})</p>
+							<p>起订数量:<span class="order_quantity">{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
+							</p>
 						</div>
 						<div class="quantity_wrapper selected-number">
 							<a href="javascript:void(0);" class="greduce">-</a>
@@ -109,13 +111,11 @@
 							<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
 							<a href="javascript:void(0);" class="gplus">+</a>
 						</div>
-						<div>
-							<p>起订数量:<span class="order_quantity">{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
-							</p>
-							<a href="javascript:void(0);" class="sample_purchase" >样品购买
-								<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
-							</a>
-						</div>
+					</div>
+					<div class="">
+						<a href="javascript:void(0);" class="sample_purchase right-arrow" >样品购买
+							<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
+						</a>
 					</div>
 				</li>
 			</ul>

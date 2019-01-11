@@ -4001,13 +4001,16 @@ select[name="nodeIds"]{
 .goodsInfoLayer .goods_title{
     text-align:left;
 }
+.sample_purchase_box{
+    border-top:1px solid #d9d9d9;
+   
+}
 .sample_purchase{
     display:block;
-    background: #ff7bac;
-    color:#fff;
-    border-radius:5px;
-    padding:0.05rem 0.15rem;
-    margin:0.12rem 0.25rem 0 0;
+    color:#575757;
+    padding:0 0.15rem 0.30rem 0;
+    margin:0.12rem 0.15rem 0 0.15rem;
+    border-bottom:1px solid #d9d9d9;
 }
 .list_r .sample_purchase{
     margin-top:0;
@@ -4736,9 +4739,15 @@ select[name="nodeIds"]{
     text-align:center;
     box-sizing: border-box;
 }
+#menu ul li.active{
+    background: #d9d9d9;
+}
 .nav-floor a.active,
 .detail-nav li.active a{
     color:#ff7bac;
+}
+#menu ul li.active a{
+    color:#333;
 }
 .floor{
     /*height:600px;*/
