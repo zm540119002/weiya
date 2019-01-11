@@ -1,0 +1,294 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<!--对话框列表模板-->
+<section id="msgListOtherTpl" style="display:none;">
+    <li class="others">
+        <div class="avatar">
+            <img src="public_img/default/chat_head.jpg">
+        </div>
+        <div class="content">
+            <p class="author"></p>
+            <div class="msg"></div>
+        </div>
+    </li>
+</section>
+<section id="chatListTpl" style="display:none">
+    <li class="chat_list">
+        <a href="javascript:void(0);" class="detele_chat">删除</a>
+        <div class="avatar">
+            <img src="public_img/default/chat_head.jpg">
+            <span class="news_num">1</span>
+        </div>
+        <div class="content">
+            <p class="author"></p>
+        </div>
+        <!--对话框弹窗-->
+        <section class="chatLayerContainer">
+            <div class="ws_chatMsg-panel flex1">
+                <div class="chatMsg-ct">
+                    <ul class="clearfix chat_item">
+                        <li class="others unread">
+                            <div class="avatar">
+                                <img src="public_img/default/chat_head.jpg">
+                            </div>
+                            <div class="content">
+                                <p class="author"></p>
+                                <p class="create_time"></p>
+                                <div class="msg"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bottom_nav_fixed">
+                <div class="bottom_flex">
+                    <input class="send_out_text" type="text" name="" value="">
+                    <input class="send_btn" type="button" value="发送">
+                </div>
+            </div>
+        </section>
+    </li>
+</section>
+{include file="public/switch_factory_store" /}
+<section class="specific_type separation-line">
+    <div class="columns_flex f20 l-r-sides">
+        <a href="{:url('CustomerClient/beforeSale')}" class="current">售前</a>
+        <a href="{:url('Order/index')}">打单</a>
+        <a href="{:url('Order/out')}">出仓</a>
+        <a href="{:url('Order/delivery')}">发货/完成</a>
+        <a href="{:url('Order/bill')}">填单</a>
+        <a href="{:url('CustomerClient/afterSale')}">售后</a>
+    </div>
+</section>
+<section class="f24 account-content-wrapper order-content-wrapper">
+    <ul class="list"></ul>
+</section>
+</article>
+{/block}
+{block name="common"}
+{include file="template/footer_menu_msy_store.html" /}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+    function on_message_call_back(data) {
+        //找到聊天列表标记
+        var find_sign = false;
+        $.each($('.chatLayerContainer').find('ul'),function(){
+            var _this = $(this);
+            //找到聊天列表
+            if(_this.data('from_id')==data.from_id){
+                find_sign = true;
+                var msgListOtherTpl = $('#msgListOtherTpl');
+                msgListOtherTpl.find('.msg').text(data.content);
+                msgListOtherTpl.find('.author').text(data.from_name);
+                msgListOtherTpl.find('li').attr('data-id',data.id);
+                if(data.avatar){
+                    msgListOtherTpl.find('img').attr('src',data.avatar);
+                }
+                //已打开聊天框
+                if($('.chatLayer ').length){
+                    var postData = {};
+                    postData.from_id = data.from_id;
+                    postData.messageIds = [];
+                    postData.messageIds.push(data.id);
+                    var url = domain + 'index/CustomerService/setMessageRead';
+                    $.ajax({
+                        url: url,
+                        data: postData,
+                        type: 'post',
+                        beforeSend: function(xhr){
+                            $('.loading').show();
+                        },
+                        error:function(xhr){
+                            $('.loading').hide();
+                            dialog.error('AJAX错误');
+                        },
+                        success: function(data){
+                            $('.loading').hide();
+                            if(data.status==0){
+                                dialog.error(data.info);
+                            }else{
+                                msgListOtherTpl.find('li').attr('class','others read');
+                                $('.chatLayer .chat_item').append(msgListOtherTpl.html());
+                                //聊天框滚动条置底
+                                chatDialogSetBottom();
+                            }
+                        }
+                    });
+                }else{
+                    //未打开聊天框
+                    var num = _this.parents('li').find('span.news_num').text();
+                    _this.parents('li').find('span.news_num').text(++num);
+                    msgListOtherTpl.find('li').attr('class','others unread');
+                    _this.append(msgListOtherTpl.html());
+                }
+            }
+        });
+        if(!find_sign){
+            //未找到聊天列表，则追加一个
+            var chatListTpl = $('#chatListTpl');
+            chatListTpl.find('.author').text(data.from_name);
+            chatListTpl.find('.msg').text(data.content);
+            chatListTpl.find('.create_time').text(data.create_time);
+            chatListTpl.find('ul').attr('data-from_id',data.from_id);
+            chatListTpl.find('ul li').attr('data-id',data.id);
+            if(data.avatar){
+                msgListOtherTpl.find('img').attr('src',data.avatar);
+            }
+            $('ul.list').append(chatListTpl.html());
+        }
+    }
+</script>
+<script type="text/javascript" src="public_js/web-socket.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //页面初始化
+        var config = {
+            url: action
+        };
+        getList(config);
+        //聊天对话框弹窗
+        $('body').on('click','.list li',function(){
+            var _this=$(this);
+            var chatLayerContainer=_this.find('.chatLayerContainer');
+            layer.open({
+                className:'chatLayer',
+                content:chatLayerContainer,
+                type:1,
+                anim:'up',
+                btn:['','关闭'],
+                success:function(){
+                    var winH=$(document).height();
+                    $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
+                    //设置信息已读
+                    setMessageRead(_this);
+                    //聊天框滚动条置底
+                    chatDialogSetBottom();
+                    //下拉加载
+                    $('.chatLayer .chat_item').on('scroll',function(){
+                        if($('.chatLayer .chat_item').scrollTop()==0){
+                           console.log(1);
+                        }
+                    });
+                },
+                no:function(){
+                    chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
+                    //设置信息已读
+                    setMessageRead(_this);
+                }
+            });
+        });
+        //设置信息已读
+        function setMessageRead(obj){
+            var postData = {};
+            postData.from_id = obj.find('ul').data('from_id');
+            postData.messageIds = [];
+            $.each(obj.find('li.others.unread'),function(){
+                postData.messageIds.push($(this).data('id'));
+            });
+            if(!postData.messageIds.length){
+                return false;
+            }
+            var url = domain + 'index/CustomerService/setMessageRead';
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else{
+                        obj.find('span.news_num').text('');
+                        $('.chatLayer li.others.unread').removeClass('unread').addClass('read');
+                    }
+                }
+            });
+        }
+        //发送文本获取焦点
+        $('body').on('focus','.send_out_text',function(){
+            //聊天框滚动条置底
+            chatDialogSetBottom();
+        });
+        //发送聊天内容
+        $('body').on('click','.send_btn',function(){
+            var _this=$(this).prev();
+            if(!_this.val()){
+                dialog.error('不能发送空内容！');
+                return false;
+            }
+            var to_user_id = _this.parents('.chatLayer').find('ul').data('from_id');
+            var postData = {to_user_id:to_user_id,content:_this.val()};
+            var url = domain + 'index/CustomerService/sendMessage';
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else{
+                        $('.chatLayer .chat_item').append(data);
+                        _this.val('');
+                        //聊天框滚动条置底
+                        chatDialogSetBottom();
+                    }
+                }
+            });
+        });
+        //删除
+        $('body').on('click','.detele_chat',function(e){
+            e.stopPropagation();
+            var _thisLi=$(this).parent();
+            var postData = {};
+            postData.from_id = _thisLi.find('ul').data('from_id');
+            postData.messageIds = [];
+            $.each(_thisLi.find('li'),function(){
+                postData.messageIds.push($(this).data('id'));
+            });
+            var url = domain + 'index/CustomerService/delCustomerMessage';
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else{
+                        _thisLi.remove();
+                    }
+                }
+            });
+        });
+    });
+
+	
+</script>
+{/block}
