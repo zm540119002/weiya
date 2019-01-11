@@ -4586,6 +4586,12 @@ select[name="nodeIds"]{
     background: #fff;
     border-bottom:5px solid #f2f2f2;
 }
+.service_menu_nav{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+}
 .weiya_menu li a{
     color:#333;
 }
