@@ -493,6 +493,9 @@ price{
     font-size:0.24rem;
     z-index:6;
 }
+.chat_bottom_fixed{
+    bottom:1rem;
+}
 .bottom_nav_fixed a{
     font-size:0;
 }
