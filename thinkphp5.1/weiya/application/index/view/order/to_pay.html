@@ -49,17 +49,14 @@
     </section>
 </article>
 {/block}
-<<<<<<< HEAD
 {block name="common"}
 {include file="template/wallet_password_dialog.html" /}
 {include file="template/forget_wallet_password_dialog.html" /}
-=======
-
 {block name="footer"}
 {include file="template/footer_menu.html" /}
->>>>>>> 486f0798a9d6ecd175b76a8da2810aa0456a84c5
 {/block}
 {block name="script"}
+<script type="text/javascript" src="public_js/wallet.js"></script>
 <script type="text/javascript">
     $(function(){
         //如果是微信浏览器
@@ -83,12 +80,7 @@
                 walletPayDialog();
                 return false
             }
-
-<<<<<<< HEAD
         })
     });
-=======
-
->>>>>>> 486f0798a9d6ecd175b76a8da2810aa0456a84c5
 </script>
 {/block}
