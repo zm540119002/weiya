@@ -112,6 +112,7 @@ class Order extends \common\controller\UserBase
     public function confirmOrder()
     {
         if (request()->isPost()) {
+            print_r(input());exit;
             $fatherOrderId = input('post.father_order_id',0,'int');
             $modelOrder = new \app\index\model\Order();
             $data = input('post.');
@@ -147,6 +148,7 @@ class Order extends \common\controller\UserBase
                     return errorMsg('删除失败');
                 }
             }
+
 
 //      //根据订单号查询关联的商品
 //        $modelOrderChild = new \app\index\model\OrderChild();
