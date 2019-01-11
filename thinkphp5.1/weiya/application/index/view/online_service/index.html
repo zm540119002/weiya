@@ -229,7 +229,7 @@
 					if(data.status==0){
 						dialog.error(data.info);
 					}else{
-						$('.chatLayer .chat_item').append(data);
+						$('.list').append(data);
 						//聊天框滚动条置底
 						chatDialogSetBottom();
 						_this.val('');
