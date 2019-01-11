@@ -197,35 +197,34 @@ class Order extends \common\controller\UserBase
     //支付
     public function pay()
     {
-        echo '11';exit;
-//        $modelOrder = new \app\index\model\Order();
-//        $orderSn = input('order_sn');
-//        $config = [
-//            'where' => [
-//                ['o.status', '=', 0],
-//                ['o.sn', '=', $orderSn],
-//                ['o.user_id', '=', $this->user['id']],
-//            ],'field' => [
-//                'o.id', 'o.sn', 'o.amount',
-//                'o.user_id',
-//            ],
-//        ];
-//        $orderInfo = $modelOrder->getInfo($config);
-//        $this->assign('orderInfo', $orderInfo);
-//        //钱包
-//        $modelWallet = new \app\index\model\Wallet();
-//        $config = [
-//            'where' => [
-//                ['status', '=', 0],
-//                ['user_id', '=', $this->user['id']],
-//            ],'field' => [
-//                'id','amount',
-//            ],
-//        ];
-//        $walletInfo = $modelWallet->getInfo($config);
-//        $this->assign('walletInfo', $walletInfo);
-//        $unlockingFooterCart = unlockingFooterCartConfig([4]);
-//        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+        $modelOrder = new \app\index\model\Order();
+        $orderSn = input('order_sn');
+        $config = [
+            'where' => [
+                ['o.status', '=', 0],
+                ['o.sn', '=', $orderSn],
+                ['o.user_id', '=', $this->user['id']],
+            ],'field' => [
+                'o.id', 'o.sn', 'o.amount',
+                'o.user_id',
+            ],
+        ];
+        $orderInfo = $modelOrder->getInfo($config);
+        $this->assign('orderInfo', $orderInfo);
+        //钱包
+        $modelWallet = new \app\index\model\Wallet();
+        $config = [
+            'where' => [
+                ['status', '=', 0],
+                ['user_id', '=', $this->user['id']],
+            ],'field' => [
+                'id','amount',
+            ],
+        ];
+        $walletInfo = $modelWallet->getInfo($config);
+        $this->assign('walletInfo', $walletInfo);
+        $unlockingFooterCart = unlockingFooterCartConfig([4]);
+        $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
     }
     //订单管理
