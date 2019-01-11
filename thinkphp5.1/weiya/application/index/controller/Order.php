@@ -135,7 +135,6 @@ class Order extends \common\controller\UserBase
                 ]
             ];
             $orderDetailList = $modelOrderDetail->getList($config);
-            print_r($orderDetailList);exit;
             $model = new \app\index\model\Cart();
             foreach ($orderDetailList as &$orderDetailInfo){
                 $condition = [
