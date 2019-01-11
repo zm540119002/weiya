@@ -197,6 +197,7 @@ class Order extends \common\controller\UserBase
     //支付
     public function pay()
     {
+        echo '11';exit;
 //        $modelOrder = new \app\index\model\Order();
 //        $orderSn = input('order_sn');
 //        $config = [
