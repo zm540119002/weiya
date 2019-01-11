@@ -5325,11 +5325,19 @@ ul.info_list li{
 .chat_item.hide{
     display:none;
 }
+.chatMsg-ct{
+    padding:0 0 2rem 0;
+}
 .chatMsg-ct li{
     padding:0.10rem 0.15rem;
     margin:0 0 .15rem 0;
     border:none;
     background:none;
+}
+.create_time {
+    display: block;
+    text-align: center;
+    font-size: 0.12rem;
 }
 .chatMsg-ct li.others{
     margin-bottom:0.35rem;
