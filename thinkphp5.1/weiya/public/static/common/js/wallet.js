@@ -53,13 +53,13 @@ function walletPayDialog(fn_name,data) {
                 //       //     orderPayment(data.info);
                 //       // }
                 // var a = JSON.parse( data.info);
-                        var str = data
-                        console.log(str);return false
-                        var a =  $.parseJSON( data.info);
-                        // var a = JSON.parse( data.info);
-                        console.log(a)
-                        eval(str +'("'+a+'")');
-                        return false;
+                var str = data;
+                console.log(str);return false
+                var a =  $.parseJSON( data.info);
+                // var a = JSON.parse( data.info);
+                console.log(a)
+                eval(str +'("'+a+'")');
+                return false;
                 //     }
                 // }
                 // layer.close(index);
