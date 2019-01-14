@@ -208,7 +208,7 @@ $(function(){
             }
             time--;
         }
-        var url = send_sms;
+        var send_sms = '{:url("ucenter/UserCenter/sendSms")}';
         $.post(url,postData,function(msg){
             requestSign = true;
             if(msg.status == 0){
