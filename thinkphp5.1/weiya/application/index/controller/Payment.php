@@ -56,7 +56,7 @@ class Payment extends \common\controller\UserBase{
                 'where' => [
                     ['o.status', '=', 0],
                     ['o.sn', '=', $orderSn],
-                    ['o.user_id', '=', input('user_id')],
+                    ['o.user_id', '=', $this->user['id']],
                 ], 'field' => [
                     'o.id', 'o.sn', 'o.amount',
                     'o.user_id', 'o.actually_amount', 'o.order_status'
@@ -64,8 +64,26 @@ class Payment extends \common\controller\UserBase{
             ];
             $orderInfo = $modelOrder->getInfo($config);
             if ($orderInfo['order_status'] > 1) {
-                return successMsg('已回调过，订单已处理');
+                return errorMsg('订单已处理',['code'=>1]);
             }
+            $orderInfo['pay_sn'] = generateSN();
+            $modelWallet = new \app\index\model\Wallet();
+            $config = [
+                'where'=>[
+                    ['status', '=', 0],
+                    ['user_id', '=', $this->user['id']],
+                ]
+            ];
+            $walletInfo = $modelWallet->getInfo($config);
+            if($walletInfo['amount'] < $orderInfo['amount']){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                return errorMsg('余额不够',['code'=>2]);
+            }
+
+            $modelWalletDetail = new \app\index\model\WalletDetail();
+            $res = $modelWalletDetail->walletPaymentHandle($orderInfo);
+
 //            if ($orderInfo['actually_amount']  != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
 //                //返回状态给微信服务器
 //                return errorMsg('回调的金额和订单的金额不符，终止购买');
@@ -84,16 +102,13 @@ class Payment extends \common\controller\UserBase{
 //            $data['pay_sn'] = $data['transaction_id'];//服务商返回的交易号
 //            $data['order_sn'] = $data['out_trade_no'];//系统的订单号
 //            $data['payment_time'] = $data['time_end'];//支付时间
+            
+            
 
 
 
+            return  $modelOrder->orderHandle($data, $orderInfo);
 
-            $res = $modelOrder->orderHandle($data, $orderInfo);
-            if ($res['status']) {
-                $this->successReturn();
-            } else {
-                $this->errorReturn();
-            }
         }
     }
 
