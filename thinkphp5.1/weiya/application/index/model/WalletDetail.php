@@ -81,10 +81,11 @@ class WalletDetail extends \common\model\Base {
 		$data2['recharge_status'] = 2;
 		$data2['payment_code'] = 4;
 		$data2['pay_sn'] = $data['sn'];
-		$data2['payment_time'] = time();
+		$data2['payment_time'] = $data['payment_time'];
 		$data2['user_id'] = $data['user_id'];
 		$data2['sn'] = $data['sn'];
-		$data2['create_time'] = time();
+		$data2['create_time'] = $data['payment_time'];
+		$data2['amount'] = $data['actually_amount'];
 		$res = $modelWalletDetail->allowField(true)->save($data2);
 		if($res === false){
 			$modelWalletDetail->rollback();
@@ -92,21 +93,10 @@ class WalletDetail extends \common\model\Base {
 			return errorMsg('失败');
 		}
 		$modelWallet = new \app\index\model\Wallet();
-		$config = [
-			'where'=>[
-				['user_id', '=', $data['user_id']],
-			]
-		];
-		$walletInfo = $modelWallet->getInfo($config);
-		if($walletInfo['amount']<$data['amount']){
-			$modelWalletDetail->rollback();
-			//返回状态给微信服务器
-			return errorMsg('余额不够',['code'=>1]);
-		}
 		$where = [
 			['user_id', '=', $data['user_id']],
 		];
-		$res = $modelWallet->where($where)->setInc('amount', $data['amount']);
+		$res = $modelWallet->where($where)->setInc('amount', -1*$data['actually_amount']);
 		if($res === false){
 			$modelWallet->rollback();
 			//返回状态给微信服务器

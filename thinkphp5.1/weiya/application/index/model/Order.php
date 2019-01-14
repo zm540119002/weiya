@@ -27,7 +27,6 @@ class Order extends \common\model\Base {
 		];
 		$res = $this->allowField(true)->save($data2,$condition);
 		if($res === false){
-			$this->rollback();
 			//返回状态给微信服务器
 			return errorMsg('失败');
 		}
