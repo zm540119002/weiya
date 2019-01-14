@@ -74,10 +74,8 @@ $(function(){
 //忘记密码-弹窗触发
 function forgetWalletPasswordDialog(fn_name,data){
     var content = $('#WalletPasswordHtml').html();
-    console.log(fn_name);
-    console.log(data);
     layer.open({
-        title:['重置密码','border-bottom:1px solid #d9d9d9;'],
+        title:['重置支付密码','border-bottom:1px solid #d9d9d9;'],
         className:'forgetWalletPasswordLayer',
         content:content,
         type:1,
@@ -103,6 +101,7 @@ function forgetWalletPasswordDialog(fn_name,data){
             var url = module+'Wallet/forgetPassword';
             $.post(url,postData,function (data) {
                 if(data.status){
+                    //直接去支付
                     // var info =  JSON.parse(data.info);
                     // var fn_name = info.fn_name;
                     // if(fn_name){
@@ -111,6 +110,9 @@ function forgetWalletPasswordDialog(fn_name,data){
                     //     }
                     //     return false;
                     // }
+                    //
+
+                    //成功后弹出登录框
                     layer.close(index);
                     walletPayDialog(fn_name,data);
 
