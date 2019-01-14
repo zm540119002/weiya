@@ -885,6 +885,11 @@ color: #ed6d00;
     margin:0 0 0.25rem 0;
     border-bottom:1px solid #d9d9d9;
 }
+.separation_item{
+    padding:0 0 .15rem 0;
+    margin:0 0 0.25rem 0;
+    border-bottom:1px solid #d9d9d9;
+}
 .specific_type{
     padding:0.15rem;
     
@@ -4011,9 +4016,13 @@ select[name="nodeIds"]{
 .sample_purchase{
     display:block;
     color:#575757;
-    padding:0 0.15rem 0.30rem 0;
-    margin:0.12rem 0.15rem 0 0.15rem;
-    border-bottom:1px solid #d9d9d9;
+    padding:0 0.15rem 0 0;
+    /*margin:0.12rem 0.15rem 0 0.15rem;*/
+    /*border-bottom:1px solid #d9d9d9;*/
+}
+.sample_purchase::after{
+    top:20%;
+    right:0;
 }
 .list_r .sample_purchase{
     margin-top:0;
@@ -4979,6 +4988,9 @@ select[name="nodeIds"]{
 .purchase_goods_info del{color:#999;margin:0 0 0 0.15rem;}
 .orderDetail_list .orderDetail_r,
 .cart_list_r{margin:0 0 0 1.8rem;}
+.goods_list .content-padding{
+    padding-bottom:0;
+}
 /*走进维雅介绍*/
 .notice_wrapper img{
     width:100%;

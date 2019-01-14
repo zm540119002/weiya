@@ -89,33 +89,33 @@
 								<span><span class="item factory"></span>品质工厂</span>
 							</div>
 						</div>
-						<div class="columns_flex l-r-sides">
+						<div class="separation_item">
+							<a href="javascript:void(0);" class="sample_purchase right-arrow" >样品购买
+								<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
+							</a>
+						</div>
+						<div class="columns_flex l-r-sides separation_item">
 							<div>
-								我的品牌定制<span>xxxxx</span>
+								我的品牌定制<span></span>
 							</div>
 							<div>
 								<a>设定></a>
 							</div>
 						</div>
-					</div>
-					<div class="content-padding columns_flex l-r-sides">
-						<div>
-							<p>采购数量(单位:{$info.purchase_unit|getUnit})</p>
-							<p>起订数量:<span class="order_quantity">{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
-							</p>
+						<div class="columns_flex l-r-sides">
+							<div>
+								<p>采购数量(单位:{$info.purchase_unit|getUnit})</p>
+								<p>起订数量:<span class="order_quantity">{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
+								</p>
+							</div>
+							<div class="quantity_wrapper selected-number">
+								<a href="javascript:void(0);" class="greduce">-</a>
+								<input type="text" value="{$info.minimum_order_quantity}" class="f24 gshopping_count">
+								<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
+								<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
+								<a href="javascript:void(0);" class="gplus">+</a>
+							</div>
 						</div>
-						<div class="quantity_wrapper selected-number">
-							<a href="javascript:void(0);" class="greduce">-</a>
-							<input type="text" value="{$info.minimum_order_quantity}" class="f24 gshopping_count">
-							<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
-							<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
-							<a href="javascript:void(0);" class="gplus">+</a>
-						</div>
-					</div>
-					<div class="">
-						<a href="javascript:void(0);" class="sample_purchase right-arrow" >样品购买
-							<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
-						</a>
 					</div>
 				</li>
 			</ul>
