@@ -60,6 +60,9 @@ function walletPayDialog(fn_name,data) {
                          return false;
                     }
                 }
+                if(!data.status){
+                    dialog.success(data.info);
+                }
                 // layer.close(index);
             },'JSON')
             
@@ -95,14 +98,13 @@ function forgetWalletPasswordDialog(){
             }
             var url = module+'Wallet/forgetPassword';
             $.post(url,postData,function (data) {
-
+                dialog.success(data.info);
             })
         }
     });
 }
 //订单支付
  function orderPayment(postData) {
-     console.log(postData)
     var url = module + 'Payment/orderPayment';
     $.ajax({
         url: url,
@@ -116,8 +118,23 @@ function forgetWalletPasswordDialog(){
             dialog.error('AJAX错误');
         },
         success: function(data){
-            // obj.removeClass("nodisabled");//防止重复提交
             $('.loading').hide();
+            if(data.status){
+                location.href = module + 'Payment/payComplete';
+            }
+            if(!data.status){
+                if(data.code == 1){
+                    dialog.success(data.info,module+'Order/manage');
+                }else if(data.code == 2){
+                    //余额不足
+                    dialog.success(data.info);
+                }else{
+                    dialog.error('失败');
+                }
+
+            }
+            // obj.removeClass("nodisabled");//防止重复提交
+
             // location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
         }
     });
