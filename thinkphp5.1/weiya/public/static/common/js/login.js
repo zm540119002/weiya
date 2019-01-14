@@ -147,12 +147,6 @@ $(function(){
                             return false;
                         }
                         dialogLoginDefaultCallBack(data);
-                        // if(typeof(dialogLoginCallBack) == "undefined" || !$.isFunction(dialogLoginCallBack)){
-                        //     dialogLoginDefaultCallBack(data)
-                        // }else{
-                        //     dialogLoginCallBack(data);
-                        // }
-                        
                     }
                 }
             });
@@ -214,10 +208,6 @@ $(function(){
             }
             time--;
         }
-        console.log(send_sms);
-        console.log(postData);
-        return;
-        var url = send_sms;
         $.post(url,postData,function(msg){
             requestSign = true;
             if(msg.status == 0){
