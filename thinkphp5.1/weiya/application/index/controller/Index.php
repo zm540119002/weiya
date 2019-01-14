@@ -1,10 +1,12 @@
 <?php
 namespace app\index\controller;
-
+use think\facade\Request;
 class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
+        echo Request::domain();
+        exit;
         //获取商品的分类
         $modelGoodsCategory = new \app\index\model\GoodsCategory();
         $config =[
