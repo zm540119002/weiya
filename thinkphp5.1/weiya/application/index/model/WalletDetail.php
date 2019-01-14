@@ -68,4 +68,42 @@ class WalletDetail extends \common\model\Base {
 		//返回状态给微信服务器
 		return successMsg('成功');
 	}
+
+	/**钱包支付回调
+	 * @param $parameter
+	 */
+	public function walletPaymentHandle($data)
+	{
+		$modelWalletDetail = new \app\index\model\WalletDetail();
+		$modelWalletDetail->startTrans();
+		//生成钱包明细
+		$data2 = [];
+		$data2['recharge_status'] = 2;
+		$data2['payment_code'] = 4;
+		$data2['pay_sn'] = $data['sn'];
+		$data2['payment_time'] = $data['payment_time'];
+		$data2['user_id'] = $data['user_id'];
+		$data2['sn'] = $data['sn'];
+		$data2['create_time'] = $data['payment_time'];
+		$data2['amount'] = $data['actually_amount'];
+		$res = $modelWalletDetail->allowField(true)->save($data2);
+		if($res === false){
+			$modelWalletDetail->rollback();
+			//返回状态给微信服务器
+			return errorMsg('失败');
+		}
+		$modelWallet = new \app\index\model\Wallet();
+		$where = [
+			['user_id', '=', $data['user_id']],
+		];
+		$res = $modelWallet->where($where)->setInc('amount', -1*$data['actually_amount']);
+		if($res === false){
+			$modelWallet->rollback();
+			//返回状态给微信服务器
+			return errorMsg('失败');
+		}
+		$modelWalletDetail->commit();//提交事务
+		//返回状态给微信服务器
+		return successMsg('成功');
+	}
 }

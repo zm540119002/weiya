@@ -56,7 +56,7 @@ class Payment extends \common\controller\UserBase{
                 'where' => [
                     ['o.status', '=', 0],
                     ['o.sn', '=', $orderSn],
-                    ['o.user_id', '=', input('user_id')],
+                    ['o.user_id', '=', $this->user['id']],
                 ], 'field' => [
                     'o.id', 'o.sn', 'o.amount',
                     'o.user_id', 'o.actually_amount', 'o.order_status'
@@ -64,36 +64,46 @@ class Payment extends \common\controller\UserBase{
             ];
             $orderInfo = $modelOrder->getInfo($config);
             if ($orderInfo['order_status'] > 1) {
-                return successMsg('已回调过，订单已处理');
+                return errorMsg('订单已处理',['code'=>1]);
             }
-//            if ($orderInfo['actually_amount']  != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
-//                //返回状态给微信服务器
-//                return errorMsg('回调的金额和订单的金额不符，终止购买');
-//            }
 
-//            $data2['order_status'] = 2;
-//            $data2['payment_code'] = $data['payment_code'];
-//            $data2['pay_sn'] = $data['pay_sn'];
-//            $data2['payment_time'] = $data['payment_time'];
-//            $condition = [
-//                ['user_id', '=', $orderInfo['user_id']],
-//                ['sn', '=', $data['order_sn']],
-//            ];
-//            $data['payment_code'] = 1;//weixin 支付
-//            $data['actually_amount'] = $data['total_fee'];//支付金额
-//            $data['pay_sn'] = $data['transaction_id'];//服务商返回的交易号
-//            $data['order_sn'] = $data['out_trade_no'];//系统的订单号
-//            $data['payment_time'] = $data['time_end'];//支付时间
-
-
-
-
+            $modelWallet = new \app\index\model\Wallet();
+            $config = [
+                'where'=>[
+                    ['status', '=', 0],
+                    ['user_id', '=', $this->user['id']],
+                ]
+            ];
+            $walletInfo = $modelWallet->getInfo($config);
+            if($walletInfo['amount'] < $orderInfo['actually_amount']){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                return errorMsg('余额不够',['code'=>2]);
+            }
+            $modelOrder ->startTrans();
+            $modelWalletDetail = new \app\index\model\WalletDetail();
+            $orderInfo['pay_sn'] = generateSN();
+            $orderInfo['payment_time'] = time();
+            $res = $modelWalletDetail->walletPaymentHandle($orderInfo);
+            if(!$res['status'] ){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                return errorMsg('失败');
+            }
+            $data = [
+                'payment_code'=>4,
+                'pay_sn'=> $orderInfo['pay_sn'],
+                'payment_time'=> $orderInfo['payment_time'],
+                'order_sn'=> $orderInfo['sn'],
+            ];
             $res = $modelOrder->orderHandle($data, $orderInfo);
-            if ($res['status']) {
-                $this->successReturn();
-            } else {
-                $this->errorReturn();
+            if(!$res['status']){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                return errorMsg('失败');
             }
+            $modelOrder->commit();
+            return successMsg('成功');
         }
     }
 
