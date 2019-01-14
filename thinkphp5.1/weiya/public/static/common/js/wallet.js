@@ -47,21 +47,19 @@ function walletPayDialog(fn_name,data) {
 ;           postData.password = password;
             var url = module+'Wallet/login';
             $.post(url,postData,function (data) {
-                // if(data.status){
-                //     if(data.info.fn_name){
-                //       // if(data.info.fn_name == 'orderPayment'){
-                //       //     orderPayment(data.info);
-                //       // }
-                // var a = JSON.parse( data.info);
-                var str = data;
-                console.log(str);return false
-                var a =  $.parseJSON( data.info);
-                // var a = JSON.parse( data.info);
-                console.log(a)
-                eval(str +'("'+a+'")');
-                return false;
-                //     }
-                // }
+                if(data.status){
+                    var info =  JSON.parse( data.info);
+                    var fn_name = info.fn_name;
+                    if(fn_name){
+                      // if(data.info.fn_name == 'orderPayment'){
+                      //     orderPayment(data.info);
+                      // }
+                        info=JSON.parse( info );
+                        console.log(info)
+                        eval(fn_name +'("'+info+'")');
+                        return false;
+                    }
+                }
                 // layer.close(index);
             },'JSON')
             
@@ -104,6 +102,7 @@ function forgetWalletPasswordDialog(){
 }
 //订单支付
  function orderPayment(postData) {
+     console.log(postData)
     var url = module + 'Payment/orderPayment';
     $.ajax({
         url: url,
