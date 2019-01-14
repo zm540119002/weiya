@@ -54,11 +54,11 @@ function walletPayDialog(fn_name,data) {
                       if(fn_name == 'orderPayment'){
                           orderPayment(info);
                       }
-                        // info=JSON.parse( info );
-                        // console.log(info)
-                        // eval(fn_name +'("'+info+'")');
-                         return false;
+                        return false;
                     }
+                }
+                if(!data.status){
+                    dialog.success(data.info);
                 }
                 // layer.close(index);
             },'JSON')
@@ -66,6 +66,10 @@ function walletPayDialog(fn_name,data) {
         }
     });
 }
+
+$(function(){
+   
+})
 
 //忘记密码-弹窗触发
 function forgetWalletPasswordDialog(){
@@ -95,14 +99,25 @@ function forgetWalletPasswordDialog(){
             }
             var url = module+'Wallet/forgetPassword';
             $.post(url,postData,function (data) {
-
-            })
+                if(data.status){
+                    var info =  JSON.parse( data.info);
+                    var fn_name = info.fn_name;
+                    if(fn_name){
+                        if(fn_name == 'orderPayment'){
+                            orderPayment(info);
+                        }
+                        return false;
+                    }
+                }
+                if(!data.status){
+                    dialog.success(data.info);
+                }
+            },'JSON')
         }
     });
 }
 //订单支付
  function orderPayment(postData) {
-     console.log(postData)
     var url = module + 'Payment/orderPayment';
     $.ajax({
         url: url,
@@ -116,8 +131,23 @@ function forgetWalletPasswordDialog(){
             dialog.error('AJAX错误');
         },
         success: function(data){
-            // obj.removeClass("nodisabled");//防止重复提交
             $('.loading').hide();
+            if(data.status){
+                dialog.success(data.info,module + 'Payment/payComplete');
+            }
+            if(!data.status){
+                if(data.code == 1){
+                    dialog.success(data.info,module+'Order/manage');
+                }else if(data.code == 2){
+                    //余额不足
+                    dialog.success(data.info);
+                }else{
+                    dialog.error('失败');
+                }
+
+            }
+            // obj.removeClass("nodisabled");//防止重复提交
+
             // location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
         }
     });
