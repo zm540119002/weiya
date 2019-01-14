@@ -39,7 +39,7 @@ function logoutDialog(){
                 success: function(data){
                     $('.loading').hide();
                     if(data.status){
-                        location.href = domain+'index/UserCenter/index';
+                        location.reload();
                     }
                 }
             });
@@ -66,7 +66,7 @@ function forgetPasswordDialog(fn_name){
 $(function(){
     //忘记密码-弹窗事件
     $('body').on('click','#login_dialog',function(){
-        loginDialog('reload');
+        loginDialog();
     });
     //忘记密码-弹窗事件
     $('body').on('click','#logout_dialog',function(){
@@ -155,9 +155,6 @@ $(function(){
     //弹框登录成功默认回调函数
     function dialogLoginDefaultCallBack(data) {
         location.href = data.info;
-    }
-    function reload() {
-        location.reload();
     }
     //显示隐藏密码
     //var onOff = true;
