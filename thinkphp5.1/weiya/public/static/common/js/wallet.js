@@ -1,5 +1,5 @@
 //钱包支付弹窗
-function walletPayDialog(fn_name) {
+function walletPayDialog(fn_name,data) {
     var content=$('#walletPay').html();
     window.scrollTo(0,0);
     layer.open({
@@ -10,6 +10,8 @@ function walletPayDialog(fn_name) {
         title:['钱包支付密码','border-bottom:1px solid #d9d9d9;'],
         btn:['确定支付'],
         success:function(indexs,i){
+            $('#fn_name').val(fn_name);
+            $('#order_sn').val(data.order_sn);
             //钱包密码
             var oLis=$('.payPasswordLayer input.password_item');
             for(var i = 0;i<oLis.length;i++){
@@ -40,22 +42,28 @@ function walletPayDialog(fn_name) {
                 dialog.error('请输入正确4位数密码');
                 return false;
             }
-            var postData ={
-                password:password,
-            }
+            var postData = data;
+;           postData.fn_name = fn_name;
+;           postData.password = password;
             var url = module+'Wallet/login';
             $.post(url,postData,function (data) {
-                if(data.status){
-                    if(data.fn_name){
-                        var str = data.fn_name;
-                        eval(str +"()");
-                        $('.layui-m-layer').remove();
-                        cancleFixedLayer();
+                // if(data.status){
+                //     if(data.info.fn_name){
+                //       // if(data.info.fn_name == 'orderPayment'){
+                //       //     orderPayment(data.info);
+                //       // }
+                // var a = JSON.parse( data.info);
+                        var str = data
+                        console.log(str);return false
+                        var a =  $.parseJSON( data.info);
+                        // var a = JSON.parse( data.info);
+                        console.log(a)
+                        eval(str +'("'+a+'")');
                         return false;
-                    }
-                }
+                //     }
+                // }
                 // layer.close(index);
-            })
+            },'JSON')
             
         }
     });
@@ -95,7 +103,7 @@ function forgetWalletPasswordDialog(){
     });
 }
 //订单支付
-function orderPay(postData) {
+ function orderPayment(postData) {
     var url = module + 'Payment/orderPayment';
     $.ajax({
         url: url,
@@ -109,9 +117,9 @@ function orderPay(postData) {
             dialog.error('AJAX错误');
         },
         success: function(data){
-            obj.removeClass("nodisabled");//防止重复提交
+            // obj.removeClass("nodisabled");//防止重复提交
             $('.loading').hide();
-            location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
+            // location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
         }
     });
 }

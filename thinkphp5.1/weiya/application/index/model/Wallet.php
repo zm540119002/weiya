@@ -127,7 +127,8 @@ class Wallet extends \common\model\Base {
 		if(!$wallet){
 			return errorMsg('密码错误,请重新输入！');
 		}
-		return successMsg('成功');
+        unset($data['password']);
+		return successMsg(json_encode($data));
 	}
 
 	/**注册
