@@ -4063,6 +4063,7 @@ select[name="nodeIds"]{
 .loginLayer .layui-m-layerbtn,
 .forgetPasswordLayer .layui-m-layerbtn{
     background-image:url(../../common/img/icons/close_btn.png);
+    background-repeat:no-repeat;
     background-size: 0.25rem auto;
     top:3px;
     right:0;
