@@ -33,4 +33,13 @@ class Wallet extends \common\controller\UserBase{
             return $this->fetch();
         }
     }
+
+    /**忘记密码 /注册
+     */
+    public function recharge(){
+        if (request()->isAjax()) {
+        } else {
+            return $this->fetch();
+        }
+    }
 }
