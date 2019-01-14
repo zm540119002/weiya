@@ -38,9 +38,9 @@ function logoutDialog(){
                 },
                 success: function(data){
                     $('.loading').hide();
-                    // if(data.status){
-                    //     location.href = data.info;
-                    // }
+                    if(data.status){
+                        location.reload();
+                    }
                 }
             });
             layer.close(index);
@@ -155,9 +155,6 @@ $(function(){
     //弹框登录成功默认回调函数
     function dialogLoginDefaultCallBack(data) {
         location.href = data.info;
-    }
-    function reload() {
-        location.reload();
     }
     //显示隐藏密码
     //var onOff = true;
