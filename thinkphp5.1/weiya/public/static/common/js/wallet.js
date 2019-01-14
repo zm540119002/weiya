@@ -87,7 +87,7 @@ function forgetWalletPasswordDialog(fn_name,data){
             $('.forgetWalletPasswordLayer #fn_name').val(fn_name);
             $('.forgetWalletPasswordLayer #order_sn').val(data.order_sn);
         },
-        yes:function(){
+        yes:function(index){
             var postForm = $('.forgetWalletPasswordLayer #ForgetWalletPassword');
             var content='';
             var postData = postForm.serializeObject();
@@ -103,14 +103,17 @@ function forgetWalletPasswordDialog(fn_name,data){
             var url = module+'Wallet/forgetPassword';
             $.post(url,postData,function (data) {
                 if(data.status){
-                    var info =  JSON.parse(data.info);
-                    var fn_name = info.fn_name;
-                    if(fn_name){
-                        if(fn_name == 'orderPayment'){
-                            orderPayment(info);
-                        }
-                        return false;
-                    }
+                    // var info =  JSON.parse(data.info);
+                    // var fn_name = info.fn_name;
+                    // if(fn_name){
+                    //     if(fn_name == 'orderPayment'){
+                    //         orderPayment(info);
+                    //     }
+                    //     return false;
+                    // }
+                    layer.close(index);
+                    walletPayDialog(fn_name,data);
+
                 }
                 if(!data.status){
                     dialog.success(data.info);
