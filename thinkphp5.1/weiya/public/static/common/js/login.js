@@ -207,10 +207,9 @@ $(function(){
             }
             time--;
         }
-        var url = '{:url("ucenter/UserCenter/sendSms")}';
-        console.log(url);
+        console.log(send_sms_url);
         return;
-        $.post(url,postData,function(msg){
+        $.post(send_sms_url,postData,function(msg){
             requestSign = true;
             if(msg.status == 0){
                 $('.phone').val('').removeAttr("disabled");
