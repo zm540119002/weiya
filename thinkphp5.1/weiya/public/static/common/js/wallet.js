@@ -120,7 +120,7 @@ function forgetWalletPasswordDialog(){
         success: function(data){
             $('.loading').hide();
             if(data.status){
-                location.href = module + 'Payment/payComplete';
+                dialog.success(data.info,module + 'Payment/payComplete');
             }
             if(!data.status){
                 if(data.code == 1){
