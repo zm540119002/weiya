@@ -34,7 +34,8 @@ class Wallet extends \common\controller\UserBase{
         }
     }
 
-    /**忘记密码 /注册
+    /**
+     * 钱包充值页面
      */
     public function recharge(){
         if (request()->isAjax()) {
