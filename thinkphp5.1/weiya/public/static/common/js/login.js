@@ -147,12 +147,6 @@ $(function(){
                             return false;
                         }
                         dialogLoginDefaultCallBack(data);
-                        // if(typeof(dialogLoginCallBack) == "undefined" || !$.isFunction(dialogLoginCallBack)){
-                        //     dialogLoginDefaultCallBack(data)
-                        // }else{
-                        //     dialogLoginCallBack(data);
-                        // }
-                        
                     }
                 }
             });
