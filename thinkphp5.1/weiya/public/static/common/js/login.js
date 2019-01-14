@@ -8,6 +8,7 @@ function loginDialog(fn_name){
         shadeClose:false,
         content:content,
         title:['登录','border-bottom:1px solid #d9d9d9;'],
+        btn:[''],
         success:function(indexs,i){
             tab_down('.loginNav li','.loginTab .login_wrap','click');
             $('.layui-m-layershade').on('touchmove',function(e){
@@ -55,6 +56,7 @@ function forgetPasswordDialog(fn_name){
         content:content,
         type:1,
         shadeClose:false,
+        btn:[''],
         success:function(){
             $('.login_item .password').attr('type','password');
             $('.view-password').removeClass('active');

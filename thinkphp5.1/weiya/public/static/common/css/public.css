@@ -1655,12 +1655,11 @@ background-position: 0 -27px;
     vertical-align: middle;
 }
 .projectDetailLayer p:last-child img{
-    padding-bottom:2rem;
+    padding-bottom:0.8rem;
 }
 .project_detail_list{
     overflow-x:hidden;
     overflow-y:auto;
-    
 }
 .count_down_module{
     padding:0.15rem;
@@ -4032,7 +4031,9 @@ select[name="nodeIds"]{
     padding:10px;
 }
 .goodsInfoLayer .layui-m-layerbtn,
-.layui-m-layer-shareqrCodeLayer .layui-m-layerbtn{
+.layui-m-layer-shareqrCodeLayer .layui-m-layerbtn,
+.loginLayer .layui-m-layerbtn,
+.forgetPasswordLayer .layui-m-layerbtn{
     position:absolute;
     top:-25px;
     right:0;
@@ -4045,7 +4046,9 @@ select[name="nodeIds"]{
     right: -10px;
     top:-14px;
 }
-.goodsInfoLayer .layui-m-layerbtn{
+.goodsInfoLayer .layui-m-layerbtn,
+.loginLayer .layui-m-layerbtn,
+.forgetPasswordLayer .layui-m-layerbtn{
     width:0.5rem;
     height:0.5rem;
     line-height:0.5rem;
@@ -4057,8 +4060,14 @@ select[name="nodeIds"]{
     background-color:transparent;
     border-top:none;
 }
+.loginLayer .layui-m-layerbtn{
+    background-image:url(../../common/img/icons/close_btn.png);
+}
 .layui-m-layer-shareqrCodeLayer .layui-m-layerbtn span{
     color:#575757;
+}
+.forgetPasswordLayer .layui-m-layerbtn span[yes]{
+    background: transparent;
 }
 .goodsInfoLayer .bottom-layer-last{
     height:40px;
