@@ -15,7 +15,7 @@
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
 		var uploads = '{:request()->domain()}'+'/uploads/';
-		var send_sms = '{:url("sendSms")}';
+		var send_sms = '{:url("ucenter/UserCenter/sendSms")}';
 	</script>
 	<!--前置自定义js-->
 	{block name="pre-script"}{/block}
