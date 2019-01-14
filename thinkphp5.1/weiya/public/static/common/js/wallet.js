@@ -75,7 +75,7 @@ $(function(){
 function forgetWalletPasswordDialog(fn_name,data){
     var content = $('#WalletPasswordHtml').html();
     layer.open({
-        title:['重置支付密码','border-bottom:1px solid #d9d9d9;'],
+        title:['重置/设置支付密码','border-bottom:1px solid #d9d9d9;'],
         className:'forgetWalletPasswordLayer',
         content:content,
         type:1,
