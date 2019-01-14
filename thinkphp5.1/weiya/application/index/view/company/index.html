@@ -1,6 +1,6 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+<link rel="stylesheet" href="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
 {/block}
 {block name="content"}
 <article class="f24">
@@ -268,7 +268,7 @@
 				<div class="c_top">
 					<p class="f28">广东维雅生物科技有限公司</p>
 					<p>电话：<a href="tel:020-89117321">020-89117321</a>    热线：400-600 4938</p>
-					<p>官网：http://www.worldview.com.cn</p>
+					<p>官网：{:request()->scheme()}://www.worldview.com.cn</p>
 				</div>
 				<div class="c_mobile">
 					<p class="f26">维雅品牌定制服务中心</p>
@@ -418,7 +418,7 @@
 	// 			var lngCurrent = r.point.lng; 
 	// 			alert('我的位置：'+ latCurrent + ',' + lngCurrent);
 	
-	// 			location.href="http://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination=39.89778,116.709684&mode=driving&region=广州市经济技术开发区科学城开源大道&output=html"; 
+	// 			location.href="{:request()->scheme()}://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination=39.89778,116.709684&mode=driving&region=广州市经济技术开发区科学城开源大道&output=html"; 
 	
 	// 		} 
 	// 		else { 

@@ -51,13 +51,13 @@ function walletPayDialog(fn_name,data) {
                     var info =  JSON.parse( data.info);
                     var fn_name = info.fn_name;
                     if(fn_name){
-                      // if(data.info.fn_name == 'orderPayment'){
-                      //     orderPayment(data.info);
-                      // }
-                        info=JSON.parse( info );
-                        console.log(info)
-                        eval(fn_name +'("'+info+'")');
-                        return false;
+                      if(fn_name == 'orderPayment'){
+                          orderPayment(info);
+                      }
+                        // info=JSON.parse( info );
+                        // console.log(info)
+                        // eval(fn_name +'("'+info+'")');
+                         return false;
                     }
                 }
                 // layer.close(index);

@@ -4,6 +4,7 @@ class CallBack extends \common\controller\Base
 {
     public function weixinBack(){
         $xml = file_get_contents('php://input');
+
         $data = xmlToArray($xml);
         $data_sign = $data['sign'];
         //sign不参与签名算法
@@ -254,6 +255,115 @@ class CallBack extends \common\controller\Base
         }
     }
 
+//    /**
+//     * @param $data
+//     * 普通订单支付回调
+//     */
+//
+//    private function orderHandle($data, $orderInfo)
+//    {
+//        $modelOrder = new \app\index\model\Order();
+//        $modelOrder->startTrans();
+//        //更新订单状态
+//        $data2 = [];
+//        $data2['order_status'] = 2;
+//        $data2['payment_code'] = $data['payment_code'];
+//        $data2['pay_sn'] = $data['pay_sn'];
+//        $data2['payment_time'] = $data['payment_time'];
+//        $condition = [
+//            ['user_id', '=', $orderInfo['user_id']],
+//            ['sn', '=', $data['order_sn']],
+//        ];
+//        $res = $modelOrder->allowField(true)->save($data2,$condition);
+//        if($res === false){
+//            $modelOrder->rollback();
+//            //返回状态给微信服务器
+//            return errorMsg('失败');
+//        }
+////        //根据订单号查询关联的商品
+////        $modelOrderDetail = new \app\index\model\OrderDetail();
+////        $config = [
+////            'where' => [
+////                ['od.status', '=', 0],
+////                ['od.father_order_id', '=', $orderInfo['id']],
+////            ], 'field' => [
+////                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id'
+////            ]
+////        ];
+////
+////        $orderDetailList = $modelOrderDetail->getList($config);
+////        $modelOrderChild = new \app\index\model\OrderChild();
+////
+////        //生成子订单
+////        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
+////        if(!$rse['status']){
+////            $modelOrder->rollback();
+////            return errorMsg($modelOrder->getLastSql());
+////        }
+//        $modelOrder->commit();//提交事务
+//        //返回状态给微信服务器
+//        return successMsg('成功');
+//
+//    }
+
+
+//    /**充值支付回调
+//     * @param $parameter
+//     */
+//    private function rechargeHandle($data,$info)
+//    {
+//        $modelWalletDetail = new \app\index\model\WalletDetail();
+//        $modelWalletDetail->startTrans();
+//        //更新订单状态
+//        $data2 = [];
+//        $data2['recharge_status'] = 2;
+//        $data2['payment_code'] = $data['payment_code'];
+//        $data2['pay_sn'] = $data['pay_sn'];
+//        $data2['payment_time'] = $data['payment_time'];
+//        $condition = [
+//            ['user_id', '=', $info['user_id']],
+//            ['sn', '=', $data['order_sn']],
+//        ];
+//        $res = $modelWalletDetail->allowField(true)->save($data2,$condition);
+//        if($res === false){
+//            $modelWalletDetail->rollback();
+//            //返回状态给微信服务器
+//            return errorMsg('失败');
+//        }
+//        $modelWallet = new \app\index\model\Wallet();
+//        $config = [
+//            'where'=>[
+//                ['user_id', '=', $info['user_id']],
+//            ]
+//        ];
+//        $walletInfo = $modelWallet->getInfo($config);
+//        if(empty($walletInfo)){
+//            $data3 = [
+//               'user_id' => $info['user_id'],
+//               'amount' =>  $info['amount'],
+//            ];
+//            $res = $modelWallet->isUpdate(false)->save($data3);
+//            if(!$res){
+//                $modelWallet->rollback();
+//                //返回状态给微信服务器
+//                return errorMsg('失败');
+//            }
+//        }else{
+//            $where = [
+//                ['user_id', '=', $info['user_id']],
+//            ];
+//            $res = $modelWallet->where($where)->setInc('amount', $info['amount']);
+//            if($res === false){
+//                $modelWallet->rollback();
+//                //返回状态给微信服务器
+//                return errorMsg('失败');
+//            }
+//        }
+//
+//        $modelWalletDetail->commit();//提交事务
+//        //返回状态给微信服务器
+//        return successMsg('成功');
+//    }
 
 
     //成功返回
