@@ -38,9 +38,9 @@ function logoutDialog(){
                 },
                 success: function(data){
                     $('.loading').hide();
-                    if(data.status){
-                        location.href = domain+'index/UserCenter/index';
-                    }
+                    // if(data.status){
+                    //     location.href = data.info;
+                    // }
                 }
             });
             layer.close(index);
