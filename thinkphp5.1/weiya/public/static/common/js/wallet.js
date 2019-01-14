@@ -67,6 +67,10 @@ function walletPayDialog(fn_name,data) {
     });
 }
 
+$(function(){
+   
+})
+
 //忘记密码-弹窗触发
 function forgetWalletPasswordDialog(){
     var content = $('#WalletPasswordHtml').html();
@@ -95,8 +99,20 @@ function forgetWalletPasswordDialog(){
             }
             var url = module+'Wallet/forgetPassword';
             $.post(url,postData,function (data) {
-                dialog.success(data.info);
-            })
+                if(data.status){
+                    var info =  JSON.parse( data.info);
+                    var fn_name = info.fn_name;
+                    if(fn_name){
+                        if(fn_name == 'orderPayment'){
+                            orderPayment(info);
+                        }
+                        return false;
+                    }
+                }
+                if(!data.status){
+                    dialog.success(data.info);
+                }
+            },'JSON')
         }
     });
 }
