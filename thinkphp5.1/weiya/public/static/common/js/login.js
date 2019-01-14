@@ -39,7 +39,7 @@ function logoutDialog(){
                 success: function(data){
                     $('.loading').hide();
                     if(data.status){
-                        location.reload();
+                        location.href = domain+'index/UserCenter/index';
                     }
                 }
             });
@@ -156,6 +156,9 @@ $(function(){
     function dialogLoginDefaultCallBack(data) {
         location.href = data.info;
     }
+    function reload() {
+        location.reload();
+    }
     //显示隐藏密码
     //var onOff = true;
     $('body').on('click','.view-password',function(){
@@ -205,6 +208,7 @@ $(function(){
             }
             time--;
         }
+        var url = '{:url("ucenter/UserCenter/sendSms")}';
         $.post(url,postData,function(msg){
             requestSign = true;
             if(msg.status == 0){
