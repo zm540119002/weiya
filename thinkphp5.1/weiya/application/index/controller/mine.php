@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class UserCenter extends \think\Controller{
+class Mine extends \think\Controller{
 
     //用户中心
     public function index(){
