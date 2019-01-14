@@ -207,8 +207,6 @@ $(function(){
             }
             time--;
         }
-        console.log(send_sms_url);
-        return;
         $.post(send_sms_url,postData,function(msg){
             requestSign = true;
             if(msg.status == 0){
