@@ -54,10 +54,7 @@ function walletPayDialog(fn_name,data) {
                       if(fn_name == 'orderPayment'){
                           orderPayment(info);
                       }
-                        // info=JSON.parse( info );
-                        // console.log(info)
-                        // eval(fn_name +'("'+info+'")');
-                         return false;
+                        return false;
                     }
                 }
                 if(!data.status){
