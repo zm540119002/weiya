@@ -1,6 +1,5 @@
 <?php
 namespace app\index\controller;
-use think\facade\Request;
 class Index extends \common\controller\Base{
     /**首页
      */

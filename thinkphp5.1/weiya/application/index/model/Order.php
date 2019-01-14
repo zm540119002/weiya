@@ -15,7 +15,6 @@ class Order extends \common\model\Base {
      * 普通订单支付回调
      */
 	public function orderHandle($data,$orderInfo){
-		$this->startTrans();
 		//更新订单状态
 		$data2 = [];
 		$data2['order_status'] = 2;
@@ -52,7 +51,6 @@ class Order extends \common\model\Base {
 //            $this->rollback();
 //            return errorMsg($this->getError());
 //        }
-		$this->commit();//提交事务
 		//返回状态给微信服务器
 		return successMsg('成功');
 	}
