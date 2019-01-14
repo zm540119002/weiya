@@ -83,8 +83,9 @@
 
         $('body').on('click','.forget_wallet_password',function () {
             var pay_code = $('input[name=pay_code]').val();
-            var data = $('#pay_info').serializeObject()
-            forgetWalletPasswordDialog(fn_name,data)
+            var data = $('#pay_info').serializeObject();
+            data.pay_code = pay_code;
+            forgetWalletPasswordDialog('orderPayment',data)
         })
     });
 </script>

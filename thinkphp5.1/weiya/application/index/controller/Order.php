@@ -223,6 +223,7 @@ class Order extends \common\controller\UserBase
         ];
         $walletInfo = $modelWallet->getInfo($config);
         $this->assign('walletInfo', $walletInfo);
+        $this->assign('user',$this->user);
 //        $unlockingFooterCart = unlockingFooterCartConfig([5]);
 //        $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();

@@ -72,8 +72,10 @@ $(function(){
 })
 
 //忘记密码-弹窗触发
-function forgetWalletPasswordDialog(){
+function forgetWalletPasswordDialog(fn_name,data){
     var content = $('#WalletPasswordHtml').html();
+    console.log(fn_name);
+    console.log(data);
     layer.open({
         title:['重置密码','border-bottom:1px solid #d9d9d9;'],
         className:'forgetWalletPasswordLayer',
@@ -82,7 +84,8 @@ function forgetWalletPasswordDialog(){
         shadeClose:false,
         btn:['确定'],
         success:function(){
-           
+            $('.forgetWalletPasswordLayer #fn_name').val(fn_name);
+            $('.forgetWalletPasswordLayer #order_sn').val(data.order_sn);
         },
         yes:function(){
             var postForm = $('.forgetWalletPasswordLayer #ForgetWalletPassword');
@@ -100,7 +103,7 @@ function forgetWalletPasswordDialog(){
             var url = module+'Wallet/forgetPassword';
             $.post(url,postData,function (data) {
                 if(data.status){
-                    var info =  JSON.parse( data.info);
+                    var info =  JSON.parse(data.info);
                     var fn_name = info.fn_name;
                     if(fn_name){
                         if(fn_name == 'orderPayment'){
@@ -119,6 +122,7 @@ function forgetWalletPasswordDialog(){
 //订单支付
  function orderPayment(postData) {
     var url = module + 'Payment/orderPayment';
+     postData.pay_code=4;
     $.ajax({
         url: url,
         data: postData,

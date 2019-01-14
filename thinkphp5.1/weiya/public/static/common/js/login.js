@@ -175,6 +175,7 @@ $(function(){
     var timer;
     var requestSign = true;
     $('body').on('click','.send_sms',function(){
+
         if($(this).attr('disabled')){
             return false;
         }
