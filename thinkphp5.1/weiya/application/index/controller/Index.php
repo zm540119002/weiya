@@ -5,7 +5,7 @@ class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
-        echo Request::domain();
+        print_r(config('template.tpl_replace_string'));
         exit;
         //获取商品的分类
         $modelGoodsCategory = new \app\index\model\GoodsCategory();
