@@ -147,64 +147,55 @@ class Order extends \common\controller\UserBase
                     return errorMsg('删除失败');
                 }
             }
-
-//      //根据订单号查询关联的商品
-//        $modelOrderChild = new \app\index\model\OrderChild();
-//        //生成子订单
-//        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
-//        if(!$rse['status']){
-//            $modelOrder->rollback();
-//            return errorMsg($modelOrderChild->getError());
-//        }
-
-
             $orderSn = input('post.order_sn','','string');
             return successMsg('成功',array('order_sn'=>$orderSn));
-        }
+        }else{
+            $modelOrder = new \app\index\model\Order();
+            $orderSn = input('order_sn');
+            $config = [
+                'where' => [
+                    ['o.status', '=', 0],
+                    ['o.sn', '=', $orderSn],
+                    ['o.user_id', '=', $this->user['id']],
+                ],'join' => [
+                    ['order_detail od','od.father_order_id = o.id','left'],
+                    ['goods g','g.id = od.goods_id','left']
+                ],'field' => [
+                    'o.id', 'o.sn', 'o.amount',
+                    'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type',
+                    'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
+                ],
+            ];
+            $orderGoodsList = $modelOrder->getList($config);
+            $this ->assign('orderGoodsList',$orderGoodsList);
 
-        $modelOrder = new \app\index\model\Order();
-        $orderSn = input('order_sn');
-        $config = [
-            'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $orderSn],
-                ['o.user_id', '=', $this->user['id']],
-            ],'join' => [
-                ['order_detail od','od.father_order_id = o.id','left'],
-                ['goods g','g.id = od.goods_id','left']
-            ],'field' => [
-                'o.id', 'o.sn', 'o.amount',
-                'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type',
-                'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
-            ],
-        ];
-        $orderGoodsList = $modelOrder->getList($config);
-        $this ->assign('orderGoodsList',$orderGoodsList);
-
-        //地址
-        $modelAddress =  new \common\model\Address();
-        $config = [
-            'where' => [
-                ['a.status', '=', 0],
-                ['a.user_id', '=', $this->user['id']],
-            ],
-        ];
-        $addressList = $modelAddress ->getList($config);
-        $defaultAddress = [];
-        foreach ($addressList as &$addressInfo){
-            if($addressInfo['is_default'] == 1){
-                $defaultAddress = $addressInfo;
-                break;
+            //地址
+            $modelAddress =  new \common\model\Address();
+            $config = [
+                'where' => [
+                    ['a.status', '=', 0],
+                    ['a.user_id', '=', $this->user['id']],
+                ],
+            ];
+            $addressList = $modelAddress ->getList($config);
+            $defaultAddress = [];
+            foreach ($addressList as &$addressInfo){
+                if($addressInfo['is_default'] == 1){
+                    $defaultAddress = $addressInfo;
+                    break;
+                }
             }
+            $this->assign('defaultAddress', $defaultAddress);
+            $this->assign('addressList', $addressList);
+            $unlockingFooterCart = unlockingFooterCartConfig([11]);
+            $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            return $this->fetch();
         }
-        $this->assign('defaultAddress', $defaultAddress);
-        $this->assign('addressList', $addressList);
-        $unlockingFooterCart = unlockingFooterCartConfig([11]);
-        $this->assign('unlockingFooterCart', $unlockingFooterCart);
-        return $this->fetch();
+
+
     }
     //支付
-    public function pay()
+    public function toPay()
     {
         $modelOrder = new \app\index\model\Order();
         $orderSn = input('order_sn');
@@ -232,8 +223,8 @@ class Order extends \common\controller\UserBase
         ];
         $walletInfo = $modelWallet->getInfo($config);
         $this->assign('walletInfo', $walletInfo);
-        $unlockingFooterCart = unlockingFooterCartConfig([4]);
-        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+//        $unlockingFooterCart = unlockingFooterCartConfig([5]);
+//        $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
     }
     //订单管理

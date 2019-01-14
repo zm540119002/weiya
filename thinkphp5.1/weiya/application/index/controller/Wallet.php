@@ -8,13 +8,29 @@ class Wallet extends \common\controller\UserBase{
         return $this->fetch();
     }
 
-    public function recharge(){
-        if (request()->isPost()) {
-           //
-        }else{
+    /**登录
+     */
+    public function login(){
+        if (request()->isAjax()) {
+            $model = new \app\index\model\Wallet();;
+            $postData = input('post.');
+            $postData['user_id'] = $this->user['id'];
+            return $model->login($postData);
+        } else {
             return $this->fetch();
         }
-
-
+    }
+    
+    /**忘记密码 /注册
+     */
+    public function forgetPassword(){
+        if (request()->isAjax()) {
+            $model = new \app\index\model\Wallet();;
+            $postData = input('post.');
+            $postData['user_id'] = $this->user['id'];
+            return $model->resetPassword($postData);
+        } else {
+            return $this->fetch();
+        }
     }
 }

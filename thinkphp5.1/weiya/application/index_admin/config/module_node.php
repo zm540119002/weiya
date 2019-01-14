@@ -10,26 +10,25 @@ return [
                 ['id'=>101,'name'=>'商品分类管理','display'=>1,'controller'=>'GoodsCategory','action'=>'manage',],
                 ['id'=>102,'name'=>'商品管理','display'=>1,'controller'=>'Goods','action'=>'manage',],
             ],
-        ],
-        'scene'=>[
+        ],'scene'=>[
             'id'=>200,'name'=>'场景','type'=>2,
             'sub_menu' => [
-//                ['id'=>201,'name'=>'项目分类管理','display'=>1,'controller'=>'ProjectCategory','action'=>'manage',],
                 ['id'=>202,'name'=>'场景管理','display'=>1,'controller'=>'Scene','action'=>'manage',],
             ],
-        ],
-        'project'=>[
+        ],'project'=>[
             'id'=>300,'name'=>'项目','type'=>2,
             'sub_menu' => [
-//                ['id'=>201,'name'=>'项目分类管理','display'=>1,'controller'=>'ProjectCategory','action'=>'manage',],
                 ['id'=>301,'name'=>'项目管理','display'=>1,'controller'=>'Project','action'=>'manage',],
             ],
-        ],
-        'information'=>[
-            'id'=>300,'name'=>'资讯','type'=>2,
+        ],'information'=>[
+            'id'=>400,'name'=>'资讯','type'=>2,
             'sub_menu' => [
-//                ['id'=>201,'name'=>'项目分类管理','display'=>1,'controller'=>'ProjectCategory','action'=>'manage',],
-                ['id'=>301,'name'=>'资讯管理','display'=>1,'controller'=>'Information','action'=>'manage',],
+                ['id'=>401,'name'=>'资讯管理','display'=>1,'controller'=>'Information','action'=>'manage',],
+            ],
+        ],'customer'=>[
+            'id'=>500,'name'=>'客服','type'=>2,
+            'sub_menu' => [
+                ['id'=>501,'name'=>'售前','display'=>1,'controller'=>'custom_client','action'=>'beforeSale',],
             ],
         ],
     ],

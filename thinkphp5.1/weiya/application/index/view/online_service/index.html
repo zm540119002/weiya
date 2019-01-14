@@ -24,35 +24,10 @@
 			</li>
 		</ul>
 	</section>
-	<section id="chatContainer">
+	<section id="chatLayerContainer">
 		<div class="ws_chatMsg-panel flex1">
 			<div class="chatMsg-ct">
-				<ul class="clearfix chat_item list">
-					<!--<li class="me read" data-id="342">-->
-						<!--<div class="avatar">-->
-							<!--<img src="http://msy.meishangyun.com/static/common/img/default/chat_head.jpg">-->
-						<!--</div>-->
-						<!--<div class="content">-->
-							<!--<p class="author">乔峰<span class="create_time">2019-01-07 17:37</span></p>-->
-							<!--<div class="msg">是打发士大夫的</div>-->
-						<!--</div>-->
-					<!--</li>-->
-					<!--<li class="me read" data-id="343">-->
-						<!--<div class="avatar">-->
-							<!--<img src="http://msy.meishangyun.com/static/common/img/default/chat_head.jpg">-->
-						<!--</div>-->
-						<!--<div class="content">-->
-							<!--<p class="author">乔峰<span class="create_time">2019-01-07 17:37</span></p>-->
-							<!--<div class="msg">打发士大夫</div>-->
-						<!--</div>-->
-					<!--</li>-->
-					<li class="each_column">
-						<a href="{:url('Company/index')}">
-							<span class="practitioners f_icon"></span>
-							<span class="f_txt">走进维雅</span>
-						</a>
-					</li>
-				</ul>
+				<ul class="clearfix chat_item list"></ul>
 			</div>
 		</div>
 		<div class="bottom_nav_fixed chat_bottom_fixed">
@@ -152,6 +127,44 @@
 			$('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());
 		}
 	}
+	//设置信息已读
+	function setMessageRead(obj) {
+		var postData = {};
+		postData.messageIds = [];
+		$.each(obj.find('li.others.unread'), function () {
+			postData.messageIds.push($(this).data('id'));
+			postData.from_id = $(this).data('from_id');
+		});
+		if (!postData.messageIds.length) {
+			return false;
+		}
+		var url = domain + 'index/CustomerService/setMessageRead';
+		$.ajax({
+			url: url,
+			data: postData,
+			type: 'post',
+			beforeSend: function (xhr) {
+				$('.loading').show();
+			},
+			error: function (xhr) {
+				$('.loading').hide();
+				dialog.error('AJAX错误');
+			},
+			success: function (data) {
+				$('.loading').hide();
+				if (data.status == 0) {
+					dialog.error(data.info);
+				} else {
+					$('span.news_num').text('');
+					$('.chatLayer li.others.unread').removeClass('unread').addClass('read');
+				}
+			}
+		});
+	}
+	//聊天框滚动条置底
+	function chatDialogSetBottom() {
+		$('.list').scrollTop($('.list')[0].scrollHeight);
+	}
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
 <script type="text/javascript">
@@ -164,64 +177,6 @@
 			postData: postData
 		};
 		getList(config);
-		//聊天对话框弹窗
-		$('body').on('click','.customer_btn',function(){
-			var _this=$(this);
-			layer.open({
-				className:'chatLayer',
-				content:$('#chatLayerContainer').html(),
-				type:1,
-				anim:'up',
-				btn:['','关闭'],
-				success:function(){
-					var winH=$(document).height();
-					$('.chatLayer .chat_item').html($('#chatLayerContainer .chat_item').html());
-					//设置信息已读
-					setMessageRead($('#chatLayerContainer'));
-					//聊天框滚动条置底
-					chatDialogSetBottom();
-				},
-				no:function(){
-					$('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').html());
-					//设置信息已读
-					setMessageRead($('#chatLayerContainer'));
-				}
-			});
-		});
-		//设置信息已读
-		function setMessageRead(obj) {
-			var postData = {};
-			postData.messageIds = [];
-			$.each(obj.find('li.others.unread'), function () {
-				postData.messageIds.push($(this).data('id'));
-				postData.from_id = $(this).data('from_id');
-			});
-			if (!postData.messageIds.length) {
-				return false;
-			}
-			var url = domain + 'index/CustomerService/setMessageRead';
-			$.ajax({
-				url: url,
-				data: postData,
-				type: 'post',
-				beforeSend: function (xhr) {
-					$('.loading').show();
-				},
-				error: function (xhr) {
-					$('.loading').hide();
-					dialog.error('AJAX错误');
-				},
-				success: function (data) {
-					$('.loading').hide();
-					if (data.status == 0) {
-						dialog.error(data.info);
-					} else {
-						$('span.news_num').text('');
-						$('.chatLayer li.others.unread').removeClass('unread').addClass('read');
-					}
-				}
-			});
-		}
 		//发送文本获取焦点
 		$('body').on('focus','.send_out_text',function(){
 			//聊天框滚动条置底
@@ -254,7 +209,7 @@
 					if(data.status==0){
 						dialog.error(data.info);
 					}else{
-						$('.chatLayer .chat_item').append(data);
+						$('.list').append(data);
 						//聊天框滚动条置底
 						chatDialogSetBottom();
 						_this.val('');

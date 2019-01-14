@@ -1,0 +1,37 @@
+{notempty name='info'}
+<li class="chat_list">
+	<a href="javascript:void(0);" class="detele_chat">删除</a>
+	<div class="avatar">
+		{empty name="info.avatar"}
+		<img src="public_img/default/chat_head.jpg">
+		{else /}
+		<img src="public_uploads/{$info.avatar}">
+		{/empty}
+		<span class="news_num">{if $info.unreadCount}{$info.unreadCount}{/if}</span>
+	</div>
+	<div class="content">
+		<p class="author">{$info.name}</p>
+		<div class="msg"></div>
+	</div>
+	<!--对话框弹窗-->
+	<section class="chatLayerContainer">
+		<div class="ws_chatMsg-panel flex1">
+			<div class="chatMsg-ct">
+				<ul class="clearfix chat_item" data-from_id="{$info.from_id}">
+					{notempty name='info'}
+					{volist name="info.messages" id="message"}
+					{include file="customer_client/message_info_tpl" /}
+					{/volist}
+					{/notempty}
+				</ul>
+			</div>
+		</div>
+		<div class="bottom_nav_fixed">
+			<div class="bottom_flex">
+				<input class="send_out_text" type="text" name="" value="">
+				<input class="send_btn" type="button" value="发送">
+			</div>
+		</div>
+	</section>
+</li>
+{/notempty}
