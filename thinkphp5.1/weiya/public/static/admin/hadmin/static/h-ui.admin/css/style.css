@@ -1,3 +1,43 @@
 @charset "utf-8";
 /* 你自己的样式 */
-
+/*订单客服售前*/
+.chat_content_wrapper{
+    padding-top:1rem;
+}
+.chat_item.hide{
+    display:none;
+}
+.chatMsg-ct li{
+    margin:0 0 .5rem 0;
+}
+.others,
+.me,
+.chat_list,
+.time{
+    display:flex;
+}
+.me{
+    flex-direction:row-reverse;
+}
+.me .author{
+    text-align:right;
+}
+.time{
+    justify-content: center;
+}
+.content .msg{
+    background:transparent;
+}
+.bottom_flex{
+    display:flex;
+    display:-webkit-flex;
+    justify-content: space-between;
+    padding:0.15rem 0;
+}
+.bottom_flex .send_out_text{
+    width:85%;
+    padding:0.12rem 0;
+}
+.bottom_flex .send_btn{
+    width:15%;
+}
