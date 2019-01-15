@@ -175,6 +175,7 @@ $(function(){
     var timer;
     var requestSign = true;
     $('body').on('click','.send_sms',function(){
+
         if($(this).attr('disabled')){
             return false;
         }
@@ -207,8 +208,7 @@ $(function(){
             }
             time--;
         }
-        var url = '{:url("ucenter/UserCenter/sendSms")}';
-        $.post(url,postData,function(msg){
+        $.post(send_sms_url,postData,function(msg){
             requestSign = true;
             if(msg.status == 0){
                 $('.phone').val('').removeAttr("disabled");
