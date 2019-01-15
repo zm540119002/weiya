@@ -47,6 +47,9 @@ return [
         'weiya_css' => Request::domain() .'/static/weiya/css',
         //hui-ui
         'hui_lib' => Request::domain() .'/static/h-ui.lib',
+        'hui_js' => Request::domain() .'/static/h-ui/js',
+        'hui_css' => Request::domain() .'/static/h-ui/css',
+        'hui_img' => Request::domain() .'/static/h-ui/img',
         //hui-admin-ui
         'hui_admin_js' => Request::domain() .'/static/admin/h-ui.admin/js',
         'hui_admin_css' => Request::domain() .'/static/admin/h-ui.admin/css',
