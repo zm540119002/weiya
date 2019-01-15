@@ -317,13 +317,15 @@ function date(format, timestamp) {
 $.fn.serializeObject = function() {
     var o = {};
     var a = this.serializeArray();
-    $.each(a, function() {
+    $.each(a, function(index,val) {
+        console.log(val);
         if (o[this.name]) {
             if (!o[this.name].push) {
                 o[this.name] = [ o[this.name] ];
             }
             o[this.name].push(this.value || '');
         } else {
+            alert(123);
             o[this.name] = this.value || '';
         }
     });
