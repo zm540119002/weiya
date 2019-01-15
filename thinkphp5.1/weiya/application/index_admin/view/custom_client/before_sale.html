@@ -78,7 +78,7 @@
                 <a href="javascript:void(0);" class="detele_chat">删除</a>
                 <div class="avatar">
                     <img src="public_img/default/chat_head.jpg">
-                    <span class="news_num">1</span>
+                    <span class="news_num"></span>
                 </div>
                 <div class="content">
                     <p class="author">A客户</p>
@@ -119,7 +119,7 @@
                 <a href="javascript:void(0);" class="detele_chat">删除</a>
                 <div class="avatar">
                     <img src="public_img/default/chat_head.jpg">
-                    <span class="news_num">1</span>
+                    <span class="news_num"></span>
                 </div>
                 <div class="content">
                     <p class="author">B客户</p>
@@ -241,6 +241,11 @@
             $('ul.list').append(chatListTpl.html());
         }
     }
+    //聊天框滚动条置底
+	function chatDialogSetBottom() {
+        console.log($('.chat_item')[0].scrollHeight);
+		$('.chat_item').scrollTop(400);
+	}
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
 <script type="text/javascript">
@@ -335,6 +340,7 @@
             var url = domain + 'index/CustomerService/sendMessage';
             $('.chatLayer .chat_item').append(chatListTpl);
             $('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
+            chatDialogSetBottom();
             // $.ajax({
             //     url: url,
             //     data: postData,
