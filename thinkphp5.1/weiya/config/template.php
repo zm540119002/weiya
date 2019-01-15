@@ -45,11 +45,11 @@ return [
         'weiya_img' => Request::domain() .'/static/weiya/img',
         'weiya_js' => Request::domain() .'/static/weiya/js',
         'weiya_css' => Request::domain() .'/static/weiya/css',
-
-        //后台
-        // 'public_admin_pc' => Request::domain() .'/static/admin_pc',
-        // 'public_admin_pc_common_css' => Request::domain() .'/static/admin_pc/common/css',
-        // 'public_admin_pc_common_img' => Request::domain() .'/static/admin_pc/common/img',
-        // 'public_admin_pc_common_js' => Request::domain() .'/static/admin_pc/common/js',
+        //hui-ui
+        'hui_lib' => Request::domain() .'/static/h-ui.lib',
+        //hui-admin-ui
+        'hui_admin_js' => Request::domain() .'/static/admin/h-ui.admin/js',
+        'hui_admin_css' => Request::domain() .'/static/admin/h-ui.admin/css',
+        'hui_admin_img' => Request::domain() .'/static/admin/h-ui.admin/img',
     ],
 ];
