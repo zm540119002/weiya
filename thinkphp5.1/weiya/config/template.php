@@ -51,5 +51,6 @@ return [
         'hui_admin_js' => Request::domain() .'/static/admin/h-ui.admin/js',
         'hui_admin_css' => Request::domain() .'/static/admin/h-ui.admin/css',
         'hui_admin_img' => Request::domain() .'/static/admin/h-ui.admin/img',
+        'hui_admin_skin' => Request::domain() .'/static/admin/h-ui.admin/skin',
     ],
 ];
