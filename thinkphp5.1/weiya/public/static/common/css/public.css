@@ -5304,10 +5304,14 @@ ul.info_list li{
     font-weight:bold;
     margin:0 0 0.10rem 0;
 }
-.addressLayer .layui-m-layercont{
+.addressLayer .layui-m-layercont,
+.setBrandLayer .layui-m-layercont{
     height:450px;
     overflow-x:hidden;
     overflow-y:auto;
+}
+.setBrandLayer .layui-m-layercont{
+    height:550px;
 }
 .addressLayer .layui-m-layerbtn,
 .setBrandLayer .layui-m-layerbtn,

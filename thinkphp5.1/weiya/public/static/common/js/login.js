@@ -16,6 +16,9 @@ function loginDialog(fn_name){
             });
             $('input[name="fn_name"]').val(fn_name);
             fixedLayer();
+        },
+        yes:function(){
+            cancleFixedLayer();
         }
     });
 }
@@ -62,6 +65,9 @@ function forgetPasswordDialog(fn_name){
             $('.view-password').removeClass('active');
             $('input[name="fn_name"]').val(fn_name);
             fixedLayer();
+        },
+        yes:function(){
+            cancleFixedLayer();
         }
     });
 }

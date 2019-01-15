@@ -1,12 +1,34 @@
+<!--商标列表模板-->
+<section class="brandListTpl" style="display:none;">
+    <li>
+        <div class="list_top_item">
+            <p>第3类商标</p>
+            <div>
+                <img src="public_img/default/no_pic_40.jpg" alt="" class="left" />
+                <div>美肤品牌</div>
+            </div>
+        </div>
+        <div class="columns_flex l-r-sides list_bottom_item">
+            <div>
+                <span></span>
+                默认商标
+            </div>
+            <div>
+                <a href="javascript:void(0);" class="brand_edit">修改</a>
+                <a href="javascript:void(0);">删除</a>
+            </div>
+        </div>
+    </li>
+</section>
 <!--增加商标-->
 <section class="section-address bg-eae pt-5" style="display:none;">
-    <form action='#' method="post" class="bg-fff address_form">
-        <input type="hidden" class="" name="address_id" value="" />
+    <form method="post" class="bg-fff brand_form">
+        <!--<input type="hidden" class="" name="address_id" value="" />-->
         <div class="form-group box-flex clearfixed">
             <input type="text" name="brand_name" class="input-flex" placeholder="商标名称" value="">
         </div>
         <div class="form-group box-flex clearfixed">
-            <select name="" id="">
+            <select name="brand_type" id="">
                 <option value="">商标类别</option>
                 <option value="">1</option>
                 <option value="">2</option>
@@ -15,7 +37,7 @@
         <div class="upload-picture-module f24">
 			<div>
 				<div class="picture-module">
-					<input type="file" class="uploadImg uploadSingleImg" name="">
+					<input type="file" class="uploadImg uploadSingleImg" name="brand_logo">
 					<img class="upload_img" src="" alt="">
 					<input type="hidden" class="layer-thumbnail-picture img" data-src="" value=""/>
 				</div>
@@ -25,7 +47,7 @@
         <div class="upload-picture-module f24">
 			<div>
 				<div class="picture-module">
-					<input type="file" class="uploadImg uploadSingleImg" name="">
+					<input type="file" class="uploadImg uploadSingleImg" name="trademark_certificate">
 					<img class="upload_img" src="" alt="">
 					<input type="hidden" class="layer-thumbnail-picture img" data-src="" value=""/>
 				</div>
@@ -37,7 +59,7 @@
         <div class="upload-picture-module f24">
 			<div>
 				<div class="picture-module">
-					<input type="file" class="uploadImg uploadSingleImg" name="">
+					<input type="file" class="uploadImg uploadSingleImg" name="trademark_authorization">
 					<img class="upload_img" src="" alt="">
 					<input type="hidden" class="layer-thumbnail-picture img" data-src="" value=""/>
 				</div>
@@ -81,26 +103,9 @@
             </div>
         </div>-->
     <ul class="list brand_list">
-        <li >
-            <div class="list_top_item">
-                <p>第3类商标</p>
-                <div>
-                    <img src="public_img/default/no_pic_40.jpg" alt="" class="left" />
-                    <div>美肤品牌</div>
-                </div>
-            </div>
-            <div class="columns_flex l-r-sides list_bottom_item">
-                <div>
-                    <span></span>
-                    默认商标
-                </div>
-                <div>
-                    <a href="javascript:void(0);" class="brand_edit">修改</a>
-                    <a href="javascript:void(0);">删除</a>
-                </div>
-            </div>
-        </li>
+        
     </ul>
+    <a href="javascript:void(0);" class="add_brand">增加商标</a>
 </section>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script>
@@ -113,7 +118,6 @@ $('body').on('click','.select_address',function () {
         anim:'up',
         className:'setBrandLayer',
         content:delivery_address,
-        btn:['增加商标'],
         success:function(){
             $('.addressLayer .item_info').each(function(index,val){
                 //省市区初始化
@@ -142,12 +146,18 @@ $('body').on('click','.select_address',function () {
 
         },
         yes:function(index){
-            addressLayer('增加商标');
+            // addressLayer('增加商标');
             layer.close(index);
         }
     })
 });
-//修改地址
+//增加商标
+$('body').on('click','.add_brand',function () {
+    var title='增加商标';
+    //var data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
+    addressLayer(title);
+});
+//修改商标
 $('body').on('click','.brand_edit',function () {
     var title='修改商标';
     //var data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
@@ -160,7 +170,7 @@ function addressLayer(title,data){
         title:[title,'border-bottom:1px solid #d9d9d9;'],
         type:1,
         anim:'up',
-        className:'addressLayer',
+        className:'setBrandLayer',
         content:addressInfo,
         btn:['确定','取消'],
         success:function(){
@@ -183,7 +193,8 @@ function addressLayer(title,data){
         },
         yes:function(index){
         //     var area_address =$('.addressLayer .area-address-name').getArea();
-        //     var postData  = $(".addressLayer .address_form").serializeObject();
+            var postData  = $(".setBrandLayer .brand_form").serializeObject();
+            console.log(postData);
         //     var content='';
         //     if(!postData.consignee){
         //         content='请填写收货人姓名';
