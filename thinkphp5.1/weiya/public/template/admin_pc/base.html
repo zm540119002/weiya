@@ -11,8 +11,8 @@
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="hui_admin_css/H-ui.admin.css" />
     <link rel="stylesheet" type="text/css" href="hui_lib/Hui-iconfont/1.0.8/iconfont.css" />
-    <link rel="stylesheet" type="text/css" href="hui_admin_css/skin/default/skin.css" id="skin" />
-    <link rel="stylesheet" type="text/css" href="hui_admin_css/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="hui_admin_skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="hui_admin_css/style.css" />
     <!--[if IE 6]>
     <script type="text/javascript" src="hui_lib/DD_belatedPNG_0.0.8a-min.js" ></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -188,7 +188,7 @@
         <div class="Hui-tabNav-wp">
             <ul id="min_title_list" class="acrossTab cl">
                 <li class="active">
-                    <span title="我的桌面" data-href="welcome.html">我的桌面</span>
+                    <span title="我的桌面" data-href="javascript:void(0);">我的桌面</span>
                     <em></em>
                 </li>
             </ul>
@@ -205,7 +205,7 @@
     <div id="iframe_box" class="Hui-article">
         <div class="show_iframe">
             <div style="display:none" class="loading"></div>
-            <iframe scrolling="yes" frameborder="0" src="welcome.html"></iframe>
+            <iframe scrolling="yes" frameborder="0" src="{:url('index_admin/Index/welcome')}"></iframe>
         </div>
     </div>
 </section>
@@ -215,10 +215,22 @@
         <li id="closeall">关闭全部 </li>
     </ul>
 </div>
+{/block}
+{block name="footer"}
+<footer class="footer mt-20">
+    <div class="container">
+        <p>感谢jQuery、layer、laypage、Validform、UEditor、My97DatePicker、iconfont、
+            Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch<br>
+            Copyright &copy;2015-2017 H-ui.admin v3.1 All Rights Reserved.<br>
+            本后台系统由
+            <a href="http://www.h-ui.net/" target="_blank" title="H-ui前端框架">H-ui前端框架</a>提供前端技术支持
+        </p>
+    </div>
+</footer>
+{/block}
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="hui_lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="hui_lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="hui_admin_js/H-ui.min.js"></script>
 <script type="text/javascript" src="hui_admin_js/H-ui.admin.js"></script>
 <!--/_footer 作为公共模版分离出去-->
 <!--请在下方写此页面业务相关的脚本-->
@@ -283,4 +295,6 @@
         layer_show(title,url,w,h);
     }
 </script>
+<!--自定义js-->
+{block name="script"}{/block}
 </body></html>
