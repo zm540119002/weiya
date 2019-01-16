@@ -47,10 +47,13 @@ return [
         'weiya_css' => Request::domain() .'/static/weiya/css',
         //hui-ui
         'hui_lib' => Request::domain() .'/static/h-ui.lib',
+        'hui_js' => Request::domain() .'/static/h-ui/js',
+        'hui_css' => Request::domain() .'/static/h-ui/css',
+        'hui_img' => Request::domain() .'/static/h-ui/images',
         //hui-admin-ui
-        'hui_admin_js' => Request::domain() .'/static/admin/h-ui.admin/js',
-        'hui_admin_css' => Request::domain() .'/static/admin/h-ui.admin/css',
-        'hui_admin_img' => Request::domain() .'/static/admin/h-ui.admin/img',
-        'hui_admin_skin' => Request::domain() .'/static/admin/h-ui.admin/skin',
+        'hui_admin_js' => Request::domain() .'/static/h-ui.admin/js',
+        'hui_admin_css' => Request::domain() .'/static/h-ui.admin/css',
+        'hui_admin_img' => Request::domain() .'/static/h-ui.admin/images',
+        'hui_admin_skin' => Request::domain() .'/static/h-ui.admin/skin',
     ],
 ];
