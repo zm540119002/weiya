@@ -76,7 +76,7 @@ function forgetPasswordDialog(fn_name){
 $(function(){
     //忘记密码-弹窗事件
     $('body').on('click','#login_dialog',function(){
-        loginDialog();
+        loginDialog('flushPage');
     });
     //忘记密码-弹窗事件
     $('body').on('click','#logout_dialog',function(){
