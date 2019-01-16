@@ -1,0 +1,164 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<!--增加商标-->
+<section class="add_brand_tpl bg-eae pt-5" style="display:none;">
+    <form method="post" class="bg-fff brand_form">
+        <!--<input type="hidden" class="" name="address_id" value="" />-->
+        <div class="box-flex clearfixed">
+            <select name="brand_type" class="input-filed">
+                <option value="">商标类别</option>
+                <option value="食品">食品</option>
+                <option value="保健">保健</option>
+                <option value="护肤">护肤</option>
+            </select>
+        </div>
+        <div class="box-flex clearfixed">
+            <input type="text" name="brand_name" class="input-filed" placeholder="商标名称" value="">
+        </div>
+        <div class="upload-picture-module box-flex f24">
+			<div>
+				<div class="picture-module">
+					<input type="file" class="uploadImg uploadSingleImg" >
+					<img class="upload_img" src="" alt="">
+					<input type="hidden" name="brand_logo" class="img" data-src="" value=""/>
+				</div>
+			</div>
+            <div class="brand_txt">商标logo</div>
+		</div>
+        <div class="upload-picture-module box-flex f24">
+			<div>
+				<div class="picture-module">
+					<input type="file" class="uploadImg uploadSingleImg">
+					<img class="upload_img" src="" alt="">
+					<input type="hidden" name="trademark_certificate" class="img" data-src="" value=""/>
+				</div>
+			</div>
+            <div class="brand_txt">
+                商标证或受理通知书
+            </div>
+		</div>
+        <div class="upload-picture-module f24">
+			<div>
+				<div class="picture-module">
+					<input type="file" class="uploadImg uploadSingleImg">
+					<img class="upload_img" src="" alt="">
+					<input type="hidden" name="trademark_authorization" class="img" data-src="" value=""/>
+				</div>
+			</div>
+            <div class="brand_txt">
+                如非自有商标需所有权者授权
+            </div>
+		</div>
+    </form>
+</section>
+<article class="f24">
+	<section class="header_title separation-line">
+		<h2 class="f24">设定品牌</h2>
+	</section>
+	<ul class="brand_list list">
+        
+    </ul>
+</article>
+{/block}
+{block name="common"}
+{include file="template/footer_menu.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript">
+	
+    //增加商标
+    var addBrandInfo=$('.add_brand_tpl').html();
+    $('body').on('click','.add_brand',function () {
+        layer.open({
+            title:['增加商标','border-bottom:1px solid #d9d9d9;'],
+            type:1,
+            anim:'up',
+            className:'setBrandLayer',
+            content:addBrandInfo,
+            btn:['确定','取消'],
+            success:function(){
+                
+            },
+            yes:function(index){
+                var postData  = $(".setBrandLayer .brand_form").serializeObject();
+                var brandTpl=$('.brandListTpl').html();
+                console.log(postData);
+            
+                var content='';
+                if(!postData.brand_name){
+                    content='请填写商标名称';
+                }else if(!postData.brand_type){
+                    content='请选择商标类别';
+                }else if(!postData.brand_logo){
+                    content='请上传商标logo';
+                }else if(!postData.trademark_certificate){
+                    content='请上传商标证或受理通知书';
+                }else if(!postData.trademark_authorization){
+                    content='请上传商标所有权者授权书';
+                }
+                if(content){
+                    dialog.error(content);
+                    return false;
+                }
+                var config = {
+                    url:module + 'Brand/edit',
+                    postData:postData,
+                    index:index
+                };
+                dialogFormAdd(config);
+            
+            }
+        });
+    });
+    //修改商标
+    $('body').on('click','.edit_brand',function(){
+        var _this=$(this).parents('.list li');
+        layer.open({
+            title:['修改商标','border-bottom:1px solid #d9d9d9;'],
+            type:1,
+            anim:'up',
+            className:'setBrandLayer',
+            content:addBrandInfo,
+            btn:['确定','取消'],
+            success:function(){
+                copyDataByName(_this,$('.setBrandLayer .brand_form'));
+            },
+            yes:function(index){
+                var postData  = $(".setBrandLayer .brand_form").serializeObject();
+                var brandTpl=$('.brandListTpl').html();
+                console.log(postData);
+            
+                var content='';
+                if(!postData.brand_name){
+                    content='请填写商标名称';
+                }else if(!postData.brand_type){
+                    content='请选择商标类别';
+                }else if(!postData.brand_logo){
+                    content='请上传商标logo';
+                }else if(!postData.trademark_certificate){
+                    content='请上传商标证或受理通知书';
+                }else if(!postData.trademark_authorization){
+                    content='请上传商标所有权者授权书';
+                }
+                if(content){
+                    dialog.error(content);
+                    return false;
+                }
+                postData.id = _this.data('id');
+                var config = {
+                    url:module + 'Brand/edit',
+                    postData:postData,
+                    modifyObj:_this,
+                    index:index
+                };
+                dialogFormEdit(config);
+            }
+        });
+    });
+</script>
+{/block}
