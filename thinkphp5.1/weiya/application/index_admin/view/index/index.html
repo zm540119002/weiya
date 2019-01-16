@@ -19,13 +19,6 @@
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <!--前置自定义js-->
-    <script type="text/javascript">
-        var domain = '{:request()->domain()}'+'/'+'index.php/';
-        var module = domain + '{:request()->module()}/';
-        var controller = module + '{:request()->controller()}/';
-        var action = controller + '{:request()->action()}';
-        var uploads = '{:request()->domain()}'+'/uploads/';
-    </script>
     {block name="pre-script"}{/block}
     <title>{block name="title"}{$Think.config.custom.title}{/block}</title>
 </head>
@@ -33,10 +26,6 @@
 <header class="navbar-wrapper">
     <div class="navbar navbar-fixed-top">
         <div class="container-fluid cl">
-            <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">H-ui.admin</a>
-            <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a>
-            <span class="logo navbar-slogan f-l mr-10 hidden-xs">v3.1</span>
-            <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:void(0);">&#xe667;</a>
             <nav class="nav navbar-nav">
                 <ul class="cl">
                     <li class="dropDown dropDown_hover">
@@ -73,15 +62,15 @@
                 <ul class="cl">
                     <li>超级管理员</li>
                     <li class="dropDown dropDown_hover">
-                        <a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+                        <a href="javascript:void(0);" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
                             <li><a href="javascript:void(0);" onClick="myselfinfo()">个人信息</a></li>
-                            <li><a href="#">切换账户</a></li>
-                            <li><a href="#">退出</a></li>
+                            <li><a href="javascript:void(0);">切换账户</a></li>
+                            <li><a href="{:url('ucenter/UserCenter/logout')}">退出</a></li>
                         </ul>
                     </li>
                     <li id="Hui-msg">
-                        <a href="#" title="消息">
+                        <a href="javascript:void(0);" title="消息">
                             <span class="badge badge-danger">1</span>
                             <i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i>
                         </a>
@@ -134,7 +123,7 @@
         <div class="Hui-tabNav-wp">
             <ul id="min_title_list" class="acrossTab cl">
                 <li class="active">
-                    <span title="维雅公共后台首页" data-href="javascript:void(0);">维雅公共后台首页</span>
+                    <span title="我的桌面" data-href="javascript:void(0);">我的桌面</span>
                     <em></em>
                 </li>
             </ul>
@@ -162,14 +151,10 @@
     </ul>
 </div>
 <footer class="footer mt-20">
-    <div class="container">
-        <p>感谢jQuery、layer、laypage、Validform、UEditor、My97DatePicker、iconfont、
-            Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch<br>
-            Copyright &copy;2015-2017 H-ui.admin v3.1 All Rights Reserved.<br>
-            本后台系统由
-            <a href="http://www.h-ui.net/" target="_blank" title="H-ui前端框架">H-ui前端框架</a>提供前端技术支持
-        </p>
-    </div>
+    <a href="http://www.miitbeian.gov.cn">
+        <span class="icp_icon">Copyright 广东美尚网络科技有限公司</span>
+        <span class="icp_icon">粤ICP备14021421号</span>
+    </a>
 </footer>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="hui_lib/jquery/1.9.1/jquery.min.js"></script>
