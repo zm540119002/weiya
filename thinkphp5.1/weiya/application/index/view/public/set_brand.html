@@ -2,10 +2,10 @@
 <section class="brandListTpl" style="display:none;">
     <li>
         <div class="list_top_item">
-            <p>第3类商标</p>
+            <p>第<span class="brand_type"></span>类商标</p>
             <div>
-                <img src="public_img/default/no_pic_40.jpg" alt="" class="left" />
-                <div>美肤品牌</div>
+                <img src="public_img/default/no_pic_40.jpg" alt="" class="left brand_logo" />
+                <div class="brand_name">美肤品牌</div>
             </div>
         </div>
         <div class="columns_flex l-r-sides list_bottom_item">
@@ -14,8 +14,8 @@
                 默认商标
             </div>
             <div>
-                <a href="javascript:void(0);" class="brand_edit">修改</a>
-                <a href="javascript:void(0);">删除</a>
+                <a href="javascript:void(0);" class="edit_brand">修改</a>
+                <a href="javascript:void(0);" class="delete_brand">删除</a>
             </div>
         </div>
     </li>
@@ -24,47 +24,48 @@
 <section class="section-address bg-eae pt-5" style="display:none;">
     <form method="post" class="bg-fff brand_form">
         <!--<input type="hidden" class="" name="address_id" value="" />-->
-        <div class="form-group box-flex clearfixed">
-            <input type="text" name="brand_name" class="input-flex" placeholder="商标名称" value="">
+        <div class="box-flex clearfixed">
+            <input type="text" name="brand_name" class="input-filed" placeholder="商标名称" value="">
         </div>
-        <div class="form-group box-flex clearfixed">
-            <select name="brand_type" id="">
+        <div class="box-flex clearfixed">
+            <select name="brand_type" class="input-filed">
                 <option value="">商标类别</option>
-                <option value="">1</option>
-                <option value="">2</option>
+                <option value="食品">食品</option>
+                <option value="保健">保健</option>
+                <option value="护肤">护肤</option>
             </select>
         </div>
-        <div class="upload-picture-module f24">
+        <div class="upload-picture-module box-flex f24">
 			<div>
 				<div class="picture-module">
-					<input type="file" class="uploadImg uploadSingleImg" name="brand_logo">
+					<input type="file" class="uploadImg uploadSingleImg" >
 					<img class="upload_img" src="" alt="">
-					<input type="hidden" class="layer-thumbnail-picture img" data-src="" value=""/>
+					<input type="hidden" name="brand_logo" class="img" data-src="" value=""/>
 				</div>
 			</div>
-            <div>商标logo</div>
+            <div class="brand_txt">商标logo</div>
 		</div>
-        <div class="upload-picture-module f24">
+        <div class="upload-picture-module box-flex f24">
 			<div>
 				<div class="picture-module">
-					<input type="file" class="uploadImg uploadSingleImg" name="trademark_certificate">
+					<input type="file" class="uploadImg uploadSingleImg">
 					<img class="upload_img" src="" alt="">
-					<input type="hidden" class="layer-thumbnail-picture img" data-src="" value=""/>
+					<input type="hidden" name="trademark_certificate" class="img" data-src="" value=""/>
 				</div>
 			</div>
-            <div>
+            <div class="brand_txt">
                 商标证或受理通知书
             </div>
 		</div>
         <div class="upload-picture-module f24">
 			<div>
 				<div class="picture-module">
-					<input type="file" class="uploadImg uploadSingleImg" name="trademark_authorization">
+					<input type="file" class="uploadImg uploadSingleImg">
 					<img class="upload_img" src="" alt="">
-					<input type="hidden" class="layer-thumbnail-picture img" data-src="" value=""/>
+					<input type="hidden" name="trademark_authorization" class="img" data-src="" value=""/>
 				</div>
 			</div>
-            <div>
+            <div class="brand_txt">
                 如非自有商标需所有权者授权
             </div>
 		</div>
@@ -154,15 +155,26 @@ $('body').on('click','.select_address',function () {
 //增加商标
 $('body').on('click','.add_brand',function () {
     var title='增加商标';
-    //var data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
     addressLayer(title);
 });
 //修改商标
-$('body').on('click','.brand_edit',function () {
+$('body').on('click','.edit_brand',function () {
     var title='修改商标';
-    //var data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
     addressLayer(title);
 });
+//删除商标
+$('body').on('click','.setBrandLayer .delete_brand',function () {
+    var _this=$(this);
+    layer.open({
+        title:['删除商标','border-bottom:1px solid #d9d9d9;'],
+        content:'确定删除商标吗？',
+        btn:['确定','取消'],
+        yes:function(index){
+            _this.parents('li').remove();
+            layer.close(index);
+        }
+    })
+})
 //新增和修改品牌弹窗
 var addressInfo=$('.section-address').html();
 function addressLayer(title,data){
@@ -194,7 +206,18 @@ function addressLayer(title,data){
         yes:function(index){
         //     var area_address =$('.addressLayer .area-address-name').getArea();
             var postData  = $(".setBrandLayer .brand_form").serializeObject();
+            var brandTpl=$('.brandListTpl').html();
+            var len=$('.setBrandLayer li').length;
             console.log(postData);
+            if(!len){
+                $('.brand_list').append(brandTpl);
+            }else{
+                $('.brand_list li:last').after(brandTpl);
+            }
+            $('.brand_list li:last').find('.brand_name').text(postData.brand_name);
+            $('.brand_list li:last').find('.brand_type').text(postData.brand_type);
+            $('.brand_list li:last').find('.brand_logo').attr('src',postData.brand_logo);
+            layer.close(index);
         //     var content='';
         //     if(!postData.consignee){
         //         content='请填写收货人姓名';
