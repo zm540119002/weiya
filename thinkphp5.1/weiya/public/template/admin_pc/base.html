@@ -4,13 +4,6 @@
     <!--前置自定义js-->
     {block name="pre-script"}{/block}
     <script type="text/javascript" src="hui_lib/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        var domain = '{:request()->domain()}'+'/'+'index.php/';
-        var module = domain + '{:request()->module()}/';
-        var controller = module + '{:request()->controller()}/';
-        var action = controller + '{:request()->action()}';
-        var uploads = '{:request()->domain()}'+'/uploads/';
-    </script>
 </head><body>
 {block name="content"}
 {/block}
@@ -32,6 +25,11 @@
 {block name="script"}{/block}
 
 <script type="text/javascript">
+    var domain = '{:request()->domain()}'+'/'+'index.php/';
+    var module = domain + '{:request()->module()}/';
+    var controller = module + '{:request()->controller()}/';
+    var action = controller + '{:request()->action()}';
+    var uploads = '{:request()->domain()}'+'/uploads/';
     $(function(){
     });
 </script>
