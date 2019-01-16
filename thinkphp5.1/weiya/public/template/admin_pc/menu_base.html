@@ -107,24 +107,24 @@
 <aside class="Hui-aside">
     <div class="menu_dropdown bk_2">
         {notempty name='allDisplayMenu'}
-        {foreach $allDisplayMenu as $key=>$vo}
-        {notempty name="vo.sub_menu"}
-        <dl id="menu-tongji">
-            <dt><i class="Hui-iconfont">&#xe61a;</i> {$vo.name}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-            <dd>
-                <ul>
-                    {foreach $vo.sub_menu as $kk=>$vv }
-                    <li>
-                        <a data-href="{:url($vv.controller.'/'.$vv.action)}" data-title="{$vv.name}" href="javascript:void(0)">
-                            {$vv.name}
-                        </a>
-                    </li>
-                    {/foreach}
-                </ul>
-            </dd>
-        </dl>
-        {/notempty}
-        {/foreach}
+            {foreach $allDisplayMenu as $key=>$vo}
+                {notempty name="vo.sub_menu"}
+                <dl id="menu-tongji">
+                    <dt><i class="Hui-iconfont">&#xe61a;</i> {$vo.name}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                    <dd>
+                        <ul>
+                            {foreach $vo.sub_menu as $kk=>$vv }
+                            <li>
+                                <a data-href="{:url($vv.controller.'/'.$vv.action)}" data-title="{$vv.name}" href="javascript:void(0)">
+                                    {$vv.name}
+                                </a>
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </dd>
+                </dl>
+                {/notempty}
+            {/foreach}
         {/notempty}
     </div>
 </aside>
@@ -134,7 +134,7 @@
         <div class="Hui-tabNav-wp">
             <ul id="min_title_list" class="acrossTab cl">
                 <li class="active">
-                    <span title="维雅公共后台首页" data-href="javascript:void(0);">维雅公共后台首页</span>
+                    <span title="我的桌面" data-href="javascript:void(0);">我的桌面</span>
                     <em></em>
                 </li>
             </ul>
@@ -151,7 +151,7 @@
     <div id="iframe_box" class="Hui-article">
         <div class="show_iframe">
             <div style="display:none" class="loading"></div>
-            <iframe scrolling="yes" frameborder="0" src="{:url('welcome')}"></iframe>
+            <iframe scrolling="yes" frameborder="0" src="javascript:void(0);"></iframe>
         </div>
     </div>
 </section>
