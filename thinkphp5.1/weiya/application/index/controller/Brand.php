@@ -11,6 +11,7 @@ class Brand extends \common\controller\Base{
     }
 
     public function edit(){
+        $data = input('post.');
         $brandInfo = [
             'brand_type'=>1,
             'brand_name'=>'gaasg',
@@ -18,7 +19,7 @@ class Brand extends \common\controller\Base{
             'trademark_certificate'=>'temp/2019011615535288073.jpeg',
             'trademark_authorization'=>'temp/2019011615535288073.jpeg',
         ];
-        $this->assign('info',$brandInfo);
+        $this->assign('info',$data);
         return $this->fetch('info_tpl');
     }
 }
