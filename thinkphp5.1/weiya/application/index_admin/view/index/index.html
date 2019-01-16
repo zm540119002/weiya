@@ -19,13 +19,6 @@
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <!--前置自定义js-->
-    <script type="text/javascript">
-        var domain = '{:request()->domain()}'+'/'+'index.php/';
-        var module = domain + '{:request()->module()}/';
-        var controller = module + '{:request()->controller()}/';
-        var action = controller + '{:request()->action()}';
-        var uploads = '{:request()->domain()}'+'/uploads/';
-    </script>
     {block name="pre-script"}{/block}
     <title>{block name="title"}{$Think.config.custom.title}{/block}</title>
 </head>
