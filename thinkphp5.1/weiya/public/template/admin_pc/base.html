@@ -206,7 +206,9 @@
     <div id="iframe_box" class="Hui-article">
         <div class="show_iframe">
             <div style="display:none" class="loading"></div>
-            <iframe scrolling="yes" frameborder="0" src="{:url('index_admin/Index/welcome')}"></iframe>
+            {block name="content"}
+            <iframe scrolling="yes" frameborder="0" src="javascript:void(0);"></iframe>
+            {/block}
         </div>
     </div>
 </section>
@@ -216,7 +218,6 @@
         <li id="closeall">关闭全部 </li>
     </ul>
 </div>
-{/block}
 {block name="footer"}
 <footer class="footer mt-20">
     <div class="container">
