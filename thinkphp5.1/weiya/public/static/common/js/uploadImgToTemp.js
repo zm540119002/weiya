@@ -43,7 +43,6 @@ $(function(){
                 if(msg.status == 1){
                     uploadsSingleImgFlag = true;
                     $(obj).find('.img').val(msg.info);
-                    alert($(obj).find('.img').val());
                 }else{
                     dialog.error(msg.info)
                 }

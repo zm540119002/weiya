@@ -5358,6 +5358,10 @@ ul.info_list li{
     width: 100%;
     text-align: center;
 }
+.group_cart_nav a.add_brand{
+    padding:0;
+    color:#575757;
+}
 /*支付*/
 .btn_s{
     padding: 0.02rem 0.20rem;

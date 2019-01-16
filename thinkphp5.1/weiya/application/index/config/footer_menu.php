@@ -31,6 +31,7 @@ return [
         ['name'   => '确认收货','class'=>'confirm_receive'],//12
         ['name'   => '去评价','class'=>'to_evaluate '],//13
         ['name'   => '再次购买','class'=>' purchase_again '],//14
+        ['name'   => '增加商标','class'=>' add_brand '],//15
 
     ],
 
