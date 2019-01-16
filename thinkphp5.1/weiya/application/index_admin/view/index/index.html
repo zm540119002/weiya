@@ -1,31 +1,6 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="Bookmark" href="/favicon.ico" >
-    <link rel="Shortcut Icon" href="/favicon.ico" />
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="hui_lib/html5shiv.js"></script>
-    <script type="text/javascript" src="hui_lib/respond.min.js"></script>
-    <![endif]-->
-    <link rel="stylesheet" type="text/css" href="hui_admin_css/H-ui.admin.css" />
-    <link rel="stylesheet" type="text/css" href="hui_css/H-ui.css" />
-    <link rel="stylesheet" type="text/css" href="hui_lib/Hui-iconfont/1.0.8/iconfont.css" />
-    <link rel="stylesheet" type="text/css" href="hui_admin_skin/default/skin.css" id="skin" />
-    <link rel="stylesheet" type="text/css" href="hui_admin_css/style.css" />
-    <!--[if IE 6]>
-    <script type="text/javascript" src="hui_lib/DD_belatedPNG_0.0.8a-min.js" ></script>
-    <script>DD_belatedPNG.fix('*');</script>
-    <![endif]-->
-    <!--前置自定义js-->
-    <script type="text/javascript">
-        var domain = '{:request()->domain()}'+'/'+'index.php/';
-        var module = domain + '{:request()->module()}/';
-        var controller = module + '{:request()->controller()}/';
-        var action = controller + '{:request()->action()}';
-        var uploads = '{:request()->domain()}'+'/uploads/';
-    </script>
     {block name="pre-script"}{/block}
     <title>{block name="title"}{$Think.config.custom.title}{/block}</title>
 </head>
@@ -161,6 +136,7 @@
         <li id="closeall">关闭全部 </li>
     </ul>
 </div>
+{block name='footer'}
 <footer class="footer mt-20">
     <div class="container">
         <p>感谢jQuery、layer、laypage、Validform、UEditor、My97DatePicker、iconfont、
@@ -172,14 +148,6 @@
     </div>
 </footer>
 {/block}
-<!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="hui_lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="hui_lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="hui_js/H-ui.js"></script>
-<script type="text/javascript" src="hui_admin_js/H-ui.admin.js"></script>
-<!--/_footer 作为公共模版分离出去-->
-<!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="hui_lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
 <script type="text/javascript">
     $(function(){
         /*$("#min_title_list li").contextMenu('Huiadminmenu', {
