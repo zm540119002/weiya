@@ -58,61 +58,26 @@
 </section>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script>
-//设定品牌
-$('body').on('click','.set_brand',function () {
-    var brand_list_layer=$('.brand_list_layer').html();
-    layer.open({
-        title:['设定品牌','border-bottom:1px solid #d9d9d9;'],
-        type:1,
-        anim:'up',
-        className:'setBrandLayer',
-        content:brand_list_layer,
-        success:function(){
-            alert(1);
-            $('.setBrandLayer li').each(function(index,val){
-                _this.on('click',function(){
-                    alert(111);
-                //_this.parents('.item_addr').addClass('active').siblings().removeClass('active');
-                var brandName=$(this).find('input[name="brand_name"]').val();
-                $('.brand_name').text(brandName);
-                setTimeout(function(){
-                    layer.closeAll();
-                },1000)
-                return false;
-                })
-            });
+    //设定品牌
+    $('body').on('click','.set_brand',function () {
+        var brand_list_layer=$('.brand_list_layer').html();
+        layer.open({
+            title:['设定品牌','border-bottom:1px solid #d9d9d9;'],
+            type:1,
+            anim:'up',
+            className:'setBrandLayer',
+            content:brand_list_layer,
+            success:function(){
+                
 
-        },
-        yes:function(index){
-            // addressLayer('增加商标');
-            layer.close(index);
-        }
-    })
-});
-//增加商标
-// $('body').on('click','.add_brand',function () {
-//     var title='增加商标';
-//     addressLayer(title);
-// });
-//修改商标
-// $('body').on('click','.edit_brand',function () {
-//     var title='修改商标';
-//     addressLayer(title);
-// });
-//删除商标
-// $('body').on('click','.setBrandLayer .delete_brand',function () {
-//     var _this=$(this);
-//     layer.open({
-//         title:['删除商标','border-bottom:1px solid #d9d9d9;'],
-//         content:'确定删除商标吗？',
-//         btn:['确定','取消'],
-//         yes:function(index){
-//             _this.parents('li').remove();
-//             layer.close(index);
-//         }
-//     })
-// })
-//增加商标
+            },
+            yes:function(index){
+                // addressLayer('增加商标');
+                layer.close(index);
+            }
+        })
+    });
+    //增加商标
     var addBrandInfo=$('.add_brand_tpl').html();
     $('body').on('click','.add_brand',function () {
         layer.open({
@@ -157,7 +122,8 @@ $('body').on('click','.set_brand',function () {
         });
     });
     //修改商标
-    $('body').on('click','.edit_brand',function(){
+    $('body').on('click','.edit_brand',function(event){
+        event.stopPropagation();
         var _this=$(this).parents('.list li');
         layer.open({
             title:['修改商标','border-bottom:1px solid #d9d9d9;'],
@@ -207,126 +173,28 @@ $('body').on('click','.set_brand',function () {
             }
         });
     });
-//新增和修改品牌弹窗
-var addressInfo=$('.section-address').html();
-function addressLayer(title,data){
-    layer.open({
-        title:[title,'border-bottom:1px solid #d9d9d9;'],
-        type:1,
-        anim:'up',
-        className:'setBrandLayer',
-        content:addressInfo,
-        btn:['确定','取消'],
-        success:function(){
-            if(data){
-                $ ('input[name="consignee"]').val(data.layer_consignee);
-                $ ('input[name="mobile"]').val(data.layer_mobile);
-                $ ('input[name="detail_address"]').val(data.layer_detail_address);
-                $ ('input[name="address_id"]').val(data.layer_id);
-                var region = [];
-                region.push(data.province);
-                region.push(data.city);
-                region.push(data.area);
-                $('.addressLayer .area_address').setArea(region);
-                if(data.is_default==1){
-                    $('.addressLayer .myswitch').addClass('myswitched');
-                    $('.addressLayer .myswitch').attr('data-off',1);
-                }
+    //设定品牌
+    $('body').on('click','.setBrandLayer li',function(){
+        $(this).addClass('current').siblings().removeClass('current');
+        var brandName=$(this).find('input[name="brand_name"]').val();
+        $('.brand_name').text(brandName);
+        setTimeout(function(){
+            layer.closeAll();
+        },1000)
+        return false;
+    });
+    //删除商标
+    $('body').on('click','.delete_brand',function (event) {
+        event.stopPropagation();
+        var _this=$(this);
+        layer.open({
+            title:['删除商标','border-bottom:1px solid #d9d9d9;'],
+            content:'确定删除商标吗？',
+            btn:['确定','取消'],
+            yes:function(index){
+                _this.parents('li').remove();
+                layer.close(index);
             }
-            
-        },
-        yes:function(index){
-        //     var area_address =$('.addressLayer .area-address-name').getArea();
-            var postData  = $(".setBrandLayer .brand_form").serializeObject();
-            var brandTpl=$('.brandListTpl').html();
-            var len=$('.setBrandLayer li').length;
-            console.log(postData);
-            if(!len){
-                $('.brand_list').append(brandTpl);
-            }else{
-                $('.brand_list li:last').after(brandTpl);
-            }
-            $('.brand_list li:last').find('.brand_name').text(postData.brand_name);
-            $('.brand_list li:last').find('.brand_type').text(postData.brand_type);
-            $('.brand_list li:last').find('.brand_logo').attr('src',postData.brand_logo);
-            layer.close(index);
-        //     var content='';
-        //     if(!postData.consignee){
-        //         content='请填写收货人姓名';
-        //     }else if(!register.phoneCheck(postData.mobile)){
-        //         content='请填写正确的手机号码';
-        //     }else if(!area_address){
-        //         content='请选择地区';
-        //     }else if(!postData.detail_address){
-        //         content='请填写详细地址';
-        //     }
-        //     if(content){
-        //         dialog.error(content);
-        //         return false;
-        //     }
-        //     postData.is_default = $('.addressLayer .myswitch').attr('data-off');
-        //     postData.province = area_address[0];
-        //     postData.city = area_address[1];
-        //     postData.area = area_address[2];
-        //     //添加或修改地址
-        //     var _this = $(this);
-        //     _this.addClass("nodisabled");//防止重复提交
-        //     var url = module + '/Address/edit';
-        //     $.ajax({
-        //         url: url,
-        //         data: postData,
-        //         type: 'post',
-        //         beforeSend: function(){
-        //             $('.loading').show();
-        //         },
-        //         error:function(){
-        //             $('.loading').hide();
-        //             dialog.error('AJAX错误');
-        //         },
-        //         success: function(data){
-        //             _this.removeClass("nodisabled");//删除防止重复提交
-        //             $('.loading').hide();
-        //             if(data.status == 0){
-
-        //             }else{
-        //                     $('#address_info').find('.item_addr,.add_address').remove();
-        //                     $('#address_info').append(data);
-        //                     var region = [];
-        //                     region.push(postData.province);
-        //                     region.push(postData.city);
-        //                     region.push(postData.area);
-        //                     $('.item_addr .area_address').setArea(region);
-        //                     $('.edit_operate').find('.address_edit').hide();
-        //                     var len=$('.delivery_address .item_addr').length;
-                            
-        //                     if(!postData.address_id){
-        //                         if(!len){
-        //                             $('.delivery_address ').append(data);
-        //                         }else{
-        //                             $('.delivery_address div:first').before(data);
-        //                         }
-                                    
-        //                     }else{
-        //                         $.each($('.delivery_address .item_addr'),function(index,val){
-        //                             var _thisId=$(this).find('.address_id').val();
-        //                             if(postData.address_id==_thisId){
-                                        
-        //                                 $(this).after(data);
-        //                                     $(this).remove();
-        //                             }
-        //                         })
-        //                     }
-        //                     layer.closeAll();
-        //             }
-        //         }
-        //     });
-        // },
-        // no:function(){
-        //     $('.edit_operate').find('.address_edit').hide();
-        //     layer.closeAll();
-        // }
-        }
+        })
     })
-}
-
 </script>
