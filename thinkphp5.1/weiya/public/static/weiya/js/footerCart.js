@@ -332,7 +332,7 @@ $(function () {
                 var id=_this.parents('li').data('id');
                 var price=_this.parents('li').find('price').text();
                 var specification=_this.parents('li').find('.specification_text').text();
-                var goodsImg=_this.parents('li').find('.goods_img').attr('src');
+                var goodsImg=_this.parents('body').find('.swiper-slide').eq(0).find('img').attr('src');
                 var minimum_sample_quantity=_this.find('input').val();
                 $('.goodsInfoLayer .goods_title').text(goodsTitle);
                 $('.goodsInfoLayer li').data('id',id);
