@@ -300,6 +300,7 @@
                 var _this = $(this);
                 _this.addClass("nodisabled");//防止重复提交
                 $.post(action,postData,function(data){
+                    alert(1)
                     _this.removeClass("nodisabled");//防止重复提交
                     dialog.msg(data,'',function () {
                         location.href = controller + 'manage';
