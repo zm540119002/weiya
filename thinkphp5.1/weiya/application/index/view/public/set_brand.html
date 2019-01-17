@@ -58,35 +58,25 @@
 </section>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script>
-//设定品牌
-$('body').on('click','.set_brand',function () {
-    var brand_list_layer=$('.brand_list_layer').html();
-    layer.open({
-        title:['设定品牌','border-bottom:1px solid #d9d9d9;'],
-        type:1,
-        anim:'up',
-        className:'setBrandLayer',
-        content:brand_list_layer,
-        success:function(){
-            
+    //设定品牌
+    $('body').on('click','.set_brand',function () {
+        var brand_list_layer=$('.brand_list_layer').html();
+        layer.open({
+            title:['设定品牌','border-bottom:1px solid #d9d9d9;'],
+            type:1,
+            anim:'up',
+            className:'setBrandLayer',
+            content:brand_list_layer,
+            success:function(){
+                
 
-        },
-        yes:function(index){
-            // addressLayer('增加商标');
-            layer.close(index);
-        }
-    })
-});
-//增加商标
-// $('body').on('click','.add_brand',function () {
-//     var title='增加商标';
-//     addressLayer(title);
-// });
-//修改商标
-// $('body').on('click','.edit_brand',function () {
-//     var title='修改商标';
-//     addressLayer(title);
-// });
+            },
+            yes:function(index){
+                // addressLayer('增加商标');
+                layer.close(index);
+            }
+        })
+    });
     //增加商标
     var addBrandInfo=$('.add_brand_tpl').html();
     $('body').on('click','.add_brand',function () {
@@ -185,7 +175,7 @@ $('body').on('click','.set_brand',function () {
     });
     //设定品牌
     $('body').on('click','.setBrandLayer li',function(){
-        //_this.parents('.item_addr').addClass('active').siblings().removeClass('active');
+        $(this).addClass('current').siblings().removeClass('current');
         var brandName=$(this).find('input[name="brand_name"]').val();
         $('.brand_name').text(brandName);
         setTimeout(function(){

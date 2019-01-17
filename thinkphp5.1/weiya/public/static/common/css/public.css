@@ -1669,6 +1669,9 @@ background-position: 0 -27px;
     background: #f2f2f2;
     padding:0.20rem 0.15rem 0 0.15rem;
 }
+.setBrandLayer li{
+    border:1px solid #0066cc;
+}
 .goodsvideoLayer .layui-m-layercont,
 .qrCodePicLayer .layui-m-layercont{
      padding:15px;
