@@ -7,7 +7,7 @@
     <form method="post" class="bg-fff brand_form">
         <!--<input type="hidden" class="" name="address_id" value="" />-->
         <div class="box-flex clearfixed">
-            <select name="brand_type" class="input-filed">
+            <select name="type" class="input-filed">
                 <option value="">商标类别</option>
                 <option value="1">食品</option>
                 <option value="2">保健</option>
@@ -15,14 +15,14 @@
             </select>
         </div>
         <div class="box-flex clearfixed">
-            <input type="text" name="brand_name" class="input-filed" placeholder="商标名称" value="">
+            <input type="text" name="name" class="input-filed" placeholder="商标名称" value="">
         </div>
         <div class="upload-picture-module box-flex f24">
 			<div>
 				<div class="picture-module">
 					<input type="file" class="uploadImg uploadSingleImg" >
 					<img class="upload_img" src="" alt="">
-					<input type="hidden" name="brand_logo" class="img" data-src="" value=""/>
+					<input type="hidden" name="logo" class="img" data-src="" value=""/>
 				</div>
 			</div>
             <div class="brand_txt">商标logo</div>
@@ -32,7 +32,7 @@
 				<div class="picture-module">
 					<input type="file" class="uploadImg uploadSingleImg">
 					<img class="upload_img" src="" alt="">
-					<input type="hidden" name="trademark_certificate" class="img" data-src="" value=""/>
+					<input type="hidden" name="certificate" class="img" data-src="" value=""/>
 				</div>
 			</div>
             <div class="brand_txt">
@@ -44,7 +44,7 @@
 				<div class="picture-module">
 					<input type="file" class="uploadImg uploadSingleImg">
 					<img class="upload_img" src="" alt="">
-					<input type="hidden" name="trademark_authorization" class="img" data-src="" value=""/>
+					<input type="hidden" name="authorization" class="img" data-src="" value=""/>
 				</div>
 			</div>
             <div class="brand_txt">
@@ -58,7 +58,34 @@
 		<h2 class="f24">设定品牌</h2>
 	</section>
 	<ul class="brand_list list">
-        
+        {volist name="list" id="info"}
+        <li data-id="{$info.id}">
+            <div class="list_top_item">
+                <p>第<input class="brand_type" name="type" value="{$info.type}"/>类商标</p>
+                <div>
+                    {empty name="info.logo"}
+                    <img src="public_img/default/no_pic_40.jpg" alt="" class="left brand_logo" />
+                    {else /}
+                    <img src="public_uploads/{$info.logo}" alt="" class="left brand_logo" />
+                    {/empty}
+                    <input type="text" class="brand_name" name="name" value="{$info.name}"/>
+                    <input type="hidden" class="brand_logo" name="logo" value="{$info.logo}"/>
+                    <input type="hidden" class="" name="certificate" value="{$info.certificate}"/>
+                    <input type="hidden" class="" name="authorization" value="{$info.authorization}"/>
+                </div>
+            </div>
+            <div class="columns_flex l-r-sides list_bottom_item">
+                <div>
+                    <span></span>
+                    默认商标
+                </div>
+                <div>
+                    <a href="javascript:void(0);" class="edit_brand">修改</a>
+                    <a href="javascript:void(0);" class="delete_brand">删除</a>
+                </div>
+            </div>
+        </li>
+        {/volist}
     </ul>
 </article>
 {/block}
@@ -90,15 +117,15 @@
                 console.log(postData);
             
                 var content='';
-                if(!postData.brand_name){
+                if(!postData.name){
                     content='请填写商标名称';
-                }else if(!postData.brand_type){
+                }else if(!postData.type){
                     content='请选择商标类别';
-                }else if(!postData.brand_logo){
+                }else if(!postData.logo){
                     content='请上传商标logo';
-                }else if(!postData.trademark_certificate){
+                }else if(!postData.certificate){
                     content='请上传商标证或受理通知书';
-                }else if(!postData.trademark_authorization){
+                }else if(!postData.authorization){
                     content='请上传商标所有权者授权书';
                 }
                 if(content){
@@ -127,12 +154,13 @@
             btn:['确定','取消'],
             success:function(){
                 copyDataByName(_this,$('.setBrandLayer .brand_form'));
-                var brand_logo=_this.find('input[name="brand_logo"]').val();
-                var trademark_certificate=_this.find('input[name="trademark_certificate"]').val();
-                var trademark_authorization=_this.find('input[name="trademark_authorization"]').val();
-                $('.setBrandLayer').find('input[name="brand_logo"]').prev().attr('src',uploads+brand_logo);
-                $('.setBrandLayer').find('input[name="trademark_certificate"]').prev().attr('src',uploads+trademark_certificate);
-                $('.setBrandLayer').find('input[name="trademark_authorization"]').prev().attr('src',uploads+trademark_authorization);
+                var brand_logo=_this.find('input[name="logo"]').val();
+                var trademark_certificate=_this.find('input[name="certificate"]').val();
+                var trademark_authorization=_this.find('input[name="authorization"]').val();
+                console.log(brand_logo)
+                $('.setBrandLayer').find('input[name="logo"]').prev().attr('src',uploads+brand_logo);
+                $('.setBrandLayer').find('input[name="certificate"]').prev().attr('src',uploads+trademark_certificate);
+                $('.setBrandLayer').find('input[name="authorization"]').prev().attr('src',uploads+trademark_authorization);
             },
             yes:function(index){
                 var postData  = $(".setBrandLayer .brand_form").serializeObject();
@@ -140,15 +168,15 @@
                 console.log(postData);
             
                 var content='';
-                if(!postData.brand_name){
+                if(!postData.name){
                     content='请填写商标名称';
-                }else if(!postData.brand_type){
+                }else if(!postData.type){
                     content='请选择商标类别';
-                }else if(!postData.brand_logo){
+                }else if(!postData.logo){
                     content='请上传商标logo';
-                }else if(!postData.trademark_certificate){
+                }else if(!postData.certificate){
                     content='请上传商标证或受理通知书';
-                }else if(!postData.trademark_authorization){
+                }else if(!postData.authorization){
                     content='请上传商标所有权者授权书';
                 }
                 if(content){
