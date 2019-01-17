@@ -113,7 +113,7 @@ function forgetWalletPasswordDialog(fn_name,data){
                     //
 
                     //成功后弹出登录框
-                    layer.close(index);
+                    layer.closeAll();
                     walletPayDialog(fn_name,data);
 
                 }
