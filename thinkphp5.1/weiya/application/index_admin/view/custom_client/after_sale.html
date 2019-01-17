@@ -95,17 +95,6 @@
     $(function () {
         //聊天对话框弹窗
         var chatLayerContainer=$('#chatLayerContainer').html();
-        layer.open({
-            className:'chatLayer',
-            content:chatLayerContainer,
-            type:1,
-            anim:'up',
-            btn:['','关闭'],
-            success:function(){
-            },
-            no:function(){
-            }
-        });
         var chatListId;
         $('body').on('click','.list li',function(){
             var _this=$(this);
