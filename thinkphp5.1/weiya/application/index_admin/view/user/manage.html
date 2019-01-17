@@ -45,10 +45,10 @@
             var config = {
                 url:controller+'getList'
             };
-            getPagingList();
+            getPagingList(config);
             //搜索
             $('#searchUser').click(function(){
-                getPagingList();
+                getPagingList(config);
             });
             //编辑
             $('body').on('click','.edit',function(){
