@@ -1,7 +1,7 @@
 <?php
 namespace app\index_admin\controller;
 
-class CustomClient extends \common\controller\UserBaseAdmin{
+class CustomClient extends Base{
     /**售前
      */
     public function beforeSale(){
