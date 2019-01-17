@@ -166,7 +166,8 @@
 <script type="text/javascript" src="hui_lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
 <script type="text/javascript">
     $(function(){
-        /*$("#min_title_list li").contextMenu('Huiadminmenu', {
+        /*
+        $("#min_title_list li").contextMenu('Huiadminmenu', {
          bindings: {
          'closethis': function(t) {
          console.log(t);
@@ -178,7 +179,13 @@
          alert('Trigger was '+t.id+'\nAction was Email');
          },
          }
-         });*/
+         });
+         */
+        //菜单点击当前页效果
+        $('body').on('click','aside li',function(){
+            $('aside').find('li').removeClass('current');
+            $(this).addClass('current');
+        });
     });
     /*个人信息*/
     function myselfinfo(){
