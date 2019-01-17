@@ -382,7 +382,9 @@
 		$('.weiya_menu li').on('click',function(){
 			$(this).addClass('current').siblings().removeClass('current');
 			$('.weiya_item').hide().eq($(this).index()).show();
-		});    
+		}); 
+
+		 
 	});
 	// 百度地图API功能
 	var map = new BMap.Map("allmap");    // 创建Map实例
