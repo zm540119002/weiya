@@ -27,7 +27,7 @@ $context = array(
         // 请使用绝对路径
         'local_cert'                 => '/etc/nginx/cert/1714359_worldview.com.cn.pem', // 也可以是crt文件
         'local_pk'                   => '/etc/nginx/cert/1714359_worldview.com.cn.key',
-        'verify_peer'               => false,
+        'verify_peer'               => true,
         // 'allow_self_signed' => true, //如果是自签名证书需要开启此选项
     )
 );
