@@ -5358,6 +5358,9 @@ ul.info_list li{
     width: 100%;
     text-align: center;
 }
+.brand_logo{
+    max-width:40px;
+}
 .group_cart_nav a.add_brand{
     padding:0;
     color:#575757;

@@ -99,7 +99,7 @@
 								我的品牌定制<span></span>
 							</div>
 							<div>
-								<a>设定></a>
+								<a href="javascript:;" class="set_brand">设定></a>
 							</div>
 						</div>
 						<div class="columns_flex l-r-sides">
@@ -206,6 +206,7 @@
 {/block}
 {block name="common"}
 	{include file="public/sample_layer" /}
+	{include file="public/set_brand" /}
 {/block}
 {block name="footer"}
 	{include file="template/footer_menu.html" /}
@@ -239,8 +240,6 @@
 				$('.detail-nav').removeClass('top-fixed');
 			}
 		});
-		
-		// $('.scrollwrapper').scrollFloor();
 		//楼层
 		var menu = $('#menu');						
 		var items = $('#content').find('.floor');	
@@ -250,7 +249,6 @@
 			//滚动
 			var top = $(document).scrollTop();			
 			var currentId = '';
-			var top=$(document).scrollTop();
 			if(top>offsetHeight){
 				$('.detail-nav').addClass('top-fixed');
 			}else {

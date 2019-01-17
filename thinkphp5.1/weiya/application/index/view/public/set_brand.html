@@ -1,27 +1,5 @@
-<!--商标列表模板-->
-<section class="brandListTpl" style="display:none;">
-    <li>
-        <div class="list_top_item">
-            <p>第<span class="brand_type"></span>类商标</p>
-            <div>
-                <img src="public_img/default/no_pic_40.jpg" alt="" class="left brand_logo" />
-                <div class="brand_name">美肤品牌</div>
-            </div>
-        </div>
-        <div class="columns_flex l-r-sides list_bottom_item">
-            <div>
-                <span></span>
-                默认商标
-            </div>
-            <div>
-                <a href="javascript:void(0);" class="edit_brand">修改</a>
-                <a href="javascript:void(0);" class="delete_brand">删除</a>
-            </div>
-        </div>
-    </li>
-</section>
 <!--增加商标-->
-<section class="section-address bg-eae pt-5" style="display:none;">
+<section class="add_brand_tpl bg-eae pt-5" style="display:none;">
     <form method="post" class="bg-fff brand_form">
         <!--<input type="hidden" class="" name="address_id" value="" />-->
         <div class="box-flex clearfixed">
@@ -72,37 +50,7 @@
     </form>
 </section>
 <!--设定品牌列表-->
-<section class="delivery_address" style="display:none;">
-        <!--<div class="item_addr">
-            <div class="ia-l"></div>
-            <div class="item_info">
-                <input type="hidden" value="{$vo.id}" class="address_id"> 
-                <div class="mt_new">
-                    <span>{$vo.consignee}</span>
-                    <span>{$vo.mobile}</span>
-                    {if $vo.is_default eq 1 }
-                    <i class="default_tipc">默认</i>
-                    {/if}
-                </div>
-                <p class=""><span class="area_address" id="{$vo.id}"></span>{$vo.detail_address}</p>
-                <form style="display:none;" class="consigneeInfo">
-                    <input type="hidden" class="" name="province" value="{$vo.province}" />
-                    <input type="hidden" class="" name="city" value="{$vo.city}" />
-                    <input type="hidden" class="" name="area" value="{$vo.area}" />
-                    <input type="hidden" class="" name="layer_id" value="{$vo.id}" />
-                    <input type="hidden" class="" name="layer_consignee" value="{$vo.consignee}" />
-                    <input type="hidden" class="" name="layer_mobile" value="{$vo.mobile}" />
-                    <input type="hidden" class="" name="layer_detail_address" value="{$vo.detail_address}" />
-                    <input type="hidden" class="" name="is_default" value="{$vo.is_default}" />
-                </form>
-            </div>
-            <div class="edit_operate">
-                <a href="javascript:void(0);" class="select_address">选择地址></a>
-                <a href="javascript:void(0);" class="ia-r address_edit">
-                    <span class="iar-icon"></span>
-                </a>
-            </div>
-        </div>-->
+<section class="brand_list_layer" style="display:none;">
     <ul class="list brand_list">
         
     </ul>
@@ -111,37 +59,26 @@
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script>
 //设定品牌
-$('body').on('click','.select_address',function () {
-    var delivery_address=$('.delivery_address').html();
+$('body').on('click','.set_brand',function () {
+    var brand_list_layer=$('.brand_list_layer').html();
     layer.open({
         title:['设定品牌','border-bottom:1px solid #d9d9d9;'],
         type:1,
         anim:'up',
         className:'setBrandLayer',
-        content:delivery_address,
+        content:brand_list_layer,
         success:function(){
-            $('.addressLayer .item_info').each(function(index,val){
-                //省市区初始化
-                var _this=$(this);
-                var data=_this.find('.consigneeInfo').serializeObject();
-                var region = [];
-                    region.push(data.province);
-                    region.push(data.city);
-                    region.push(data.area);
-                    _this.find('.area_address').setArea(region);
-                    $('.addressLayer').find('.select_address').hide();
-                    $('.edit_operate').find('.address_edit').show();
+            alert(1);
+            $('.setBrandLayer li').each(function(index,val){
                 _this.on('click',function(){
-                    _this.parents('.item_addr').addClass('active').siblings().removeClass('active');
-                    var data=_this.parents('.item_addr').clone();
-                    $('#address_info').find('.item_addr').remove();
-                    $('#address_info').append(data);
-                    $('#address_info').find('.select_address').show();
-                    $('#address_info').find('.address_edit').hide();
-                    setTimeout(function(){
-                        layer.closeAll();
-                    },1000)
-                    return false;
+                    alert(111);
+                //_this.parents('.item_addr').addClass('active').siblings().removeClass('active');
+                var brandName=$(this).find('input[name="brand_name"]').val();
+                $('.brand_name').text(brandName);
+                setTimeout(function(){
+                    layer.closeAll();
+                },1000)
+                return false;
                 })
             });
 
@@ -153,28 +90,123 @@ $('body').on('click','.select_address',function () {
     })
 });
 //增加商标
-$('body').on('click','.add_brand',function () {
-    var title='增加商标';
-    addressLayer(title);
-});
+// $('body').on('click','.add_brand',function () {
+//     var title='增加商标';
+//     addressLayer(title);
+// });
 //修改商标
-$('body').on('click','.edit_brand',function () {
-    var title='修改商标';
-    addressLayer(title);
-});
+// $('body').on('click','.edit_brand',function () {
+//     var title='修改商标';
+//     addressLayer(title);
+// });
 //删除商标
-$('body').on('click','.setBrandLayer .delete_brand',function () {
-    var _this=$(this);
-    layer.open({
-        title:['删除商标','border-bottom:1px solid #d9d9d9;'],
-        content:'确定删除商标吗？',
-        btn:['确定','取消'],
-        yes:function(index){
-            _this.parents('li').remove();
-            layer.close(index);
-        }
-    })
-})
+// $('body').on('click','.setBrandLayer .delete_brand',function () {
+//     var _this=$(this);
+//     layer.open({
+//         title:['删除商标','border-bottom:1px solid #d9d9d9;'],
+//         content:'确定删除商标吗？',
+//         btn:['确定','取消'],
+//         yes:function(index){
+//             _this.parents('li').remove();
+//             layer.close(index);
+//         }
+//     })
+// })
+//增加商标
+    var addBrandInfo=$('.add_brand_tpl').html();
+    $('body').on('click','.add_brand',function () {
+        layer.open({
+            title:['增加商标','border-bottom:1px solid #d9d9d9;'],
+            type:1,
+            anim:'up',
+            className:'setBrandLayer',
+            content:addBrandInfo,
+            btn:['确定','取消'],
+            success:function(){
+                
+            },
+            yes:function(index){
+                var postData  = $(".setBrandLayer .brand_form").serializeObject();
+                var brandTpl=$('.brandListTpl').html();
+                console.log(postData);
+            
+                var content='';
+                if(!postData.brand_name){
+                    content='请填写商标名称';
+                }else if(!postData.brand_type){
+                    content='请选择商标类别';
+                }else if(!postData.brand_logo){
+                    content='请上传商标logo';
+                }else if(!postData.trademark_certificate){
+                    content='请上传商标证或受理通知书';
+                }else if(!postData.trademark_authorization){
+                    content='请上传商标所有权者授权书';
+                }
+                if(content){
+                    dialog.error(content);
+                    return false;
+                }
+                var config = {
+                    url:module + 'Brand/edit',
+                    postData:postData,
+                    index:index
+                };
+                dialogFormAdd(config);
+            
+            }
+        });
+    });
+    //修改商标
+    $('body').on('click','.edit_brand',function(){
+        var _this=$(this).parents('.list li');
+        layer.open({
+            title:['修改商标','border-bottom:1px solid #d9d9d9;'],
+            type:1,
+            anim:'up',
+            className:'setBrandLayer',
+            content:addBrandInfo,
+            btn:['确定','取消'],
+            success:function(){
+                copyDataByName(_this,$('.setBrandLayer .brand_form'));
+                var brand_logo=_this.find('input[name="brand_logo"]').val();
+                var trademark_certificate=_this.find('input[name="trademark_certificate"]').val();
+                var trademark_authorization=_this.find('input[name="trademark_authorization"]').val();
+                $('.setBrandLayer').find('input[name="brand_logo"]').prev().attr('src',uploads+brand_logo);
+                $('.setBrandLayer').find('input[name="trademark_certificate"]').prev().attr('src',uploads+trademark_certificate);
+                $('.setBrandLayer').find('input[name="trademark_authorization"]').prev().attr('src',uploads+trademark_authorization);
+            },
+            yes:function(index){
+                var postData  = $(".setBrandLayer .brand_form").serializeObject();
+                var brandTpl=$('.brandListTpl').html();
+                console.log(postData);
+            
+                var content='';
+                if(!postData.brand_name){
+                    content='请填写商标名称';
+                }else if(!postData.brand_type){
+                    content='请选择商标类别';
+                }else if(!postData.brand_logo){
+                    content='请上传商标logo';
+                }else if(!postData.trademark_certificate){
+                    content='请上传商标证或受理通知书';
+                }else if(!postData.trademark_authorization){
+                    content='请上传商标所有权者授权书';
+                }
+                if(content){
+                    dialog.error(content);
+                    return false;
+                }
+                postData.id = _this.data('id');
+                var config = {
+                    url:module + 'Brand/edit',
+                    postData:postData,
+                    modifyObj:_this,
+                    index:index
+                };
+                dialogFormEdit(config);
+            }
+        });
+    });
 //新增和修改品牌弹窗
 var addressInfo=$('.section-address').html();
 function addressLayer(title,data){
@@ -296,4 +328,5 @@ function addressLayer(title,data){
         }
     })
 }
+
 </script>

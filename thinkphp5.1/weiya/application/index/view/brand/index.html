@@ -9,9 +9,9 @@
         <div class="box-flex clearfixed">
             <select name="brand_type" class="input-filed">
                 <option value="">商标类别</option>
-                <option value="食品">食品</option>
-                <option value="保健">保健</option>
-                <option value="护肤">护肤</option>
+                <option value="1">食品</option>
+                <option value="2">保健</option>
+                <option value="3">护肤</option>
             </select>
         </div>
         <div class="box-flex clearfixed">
@@ -127,6 +127,12 @@
             btn:['确定','取消'],
             success:function(){
                 copyDataByName(_this,$('.setBrandLayer .brand_form'));
+                var brand_logo=_this.find('input[name="brand_logo"]').val();
+                var trademark_certificate=_this.find('input[name="trademark_certificate"]').val();
+                var trademark_authorization=_this.find('input[name="trademark_authorization"]').val();
+                $('.setBrandLayer').find('input[name="brand_logo"]').prev().attr('src',uploads+brand_logo);
+                $('.setBrandLayer').find('input[name="trademark_certificate"]').prev().attr('src',uploads+trademark_certificate);
+                $('.setBrandLayer').find('input[name="trademark_authorization"]').prev().attr('src',uploads+trademark_authorization);
             },
             yes:function(index){
                 var postData  = $(".setBrandLayer .brand_form").serializeObject();
@@ -160,5 +166,18 @@
             }
         });
     });
+    //删除商标
+    $('body').on('click','.delete_brand',function () {
+        var _this=$(this);
+        layer.open({
+            title:['删除商标','border-bottom:1px solid #d9d9d9;'],
+            content:'确定删除商标吗？',
+            btn:['确定','取消'],
+            yes:function(index){
+                _this.parents('li').remove();
+                layer.close(index);
+            }
+        })
+    })
 </script>
 {/block}
