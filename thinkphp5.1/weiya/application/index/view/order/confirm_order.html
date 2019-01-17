@@ -109,7 +109,12 @@
                         <div class="">购买类型：<span>样品购买</span></div>
                         {else /}
                         {/if}
-
+                        <div class="columns_flex">
+                            已设定品牌：<span class="brand_name">1111</span>
+                        </div>
+                        <div>
+                             <a href="javascript:;" class="set_brand">设定品牌></a>
+                        </div>
                     </div>
                 </li>
                 {/volist}
@@ -207,10 +212,12 @@
     <!--遮罩层-->
     <div id="areaMask" class="address_mask"></div>
 {/block}
+{block name="common"}
+	{include file="public/set_brand" /}
+{/block}
 {block name="footer"}
 {include file="template/footer_menu.html" /}
 {/block}
-
 {block name="script"}
     <script src="public_js/jquery.area.js"></script>
     <script type="text/javascript" src="weiya_js/footerCart.js"></script>
