@@ -225,7 +225,7 @@
         $('body').on('click','.setBrandLayer li',function(){
             $(this).addClass('current').siblings().removeClass('current');
             var brandName=$(this).find('input[name="name"]').val();
-            $('.name').text(brandName);
+            $('.brand_name').text(brandName);
             setTimeout(function(){
                 layer.closeAll();
             },1000)
