@@ -22,7 +22,7 @@
             <span class="news_num">1</span>
         </div>
         <div class="content">
-            <p class="author"></p>
+            <p class="author customer_name"></p>
         </div>
         <!--对话框弹窗-->
         <section class="chatLayerContainer">
@@ -77,11 +77,11 @@
             <li class="chat_list current">
                 <a href="javascript:void(0);" class="detele_chat">删除</a>
                 <div class="avatar">
-                    <img src="public_img/default/chat_head.jpg">
+                    <img src="public_img/default/chat_head.jpg" class="head_img">
                     <span class="news_num"></span>
                 </div>
                 <div class="content">
-                    <p class="author">A客户</p>
+                    <p class="author customer_name">A客户</p>
                 </div>
                 <!--对话框弹窗-->
                 <section class="chatLayerContainer">
@@ -118,11 +118,11 @@
             <li class="chat_list">
                 <a href="javascript:void(0);" class="detele_chat">删除</a>
                 <div class="avatar">
-                    <img src="public_img/default/chat_head.jpg">
+                    <img src="public_img/default/chat_head.jpg" class="head_img">
                     <span class="news_num"></span>
                 </div>
                 <div class="content">
-                    <p class="author">B客户</p>
+                    <p class="author customer_name">B客户</p>
                 </div>
                 <!--对话框弹窗-->
                 <section class="chatLayerContainer">
@@ -150,6 +150,10 @@
         </ul>
     </div>
     <div class="chat_right chat_main_wrapper">
+        <div class="chat_client">
+            <img src="" alt="" class="left head_img">
+            <span class="customer_name"></span>
+        </div>
         <div class="chatLayer chat_dialog_content">
             <div class="ws_chatMsg-panel flex1">
                 <div class="chatMsg-ct">
@@ -257,9 +261,12 @@
         //getList(config);
         //聊天对话框弹窗
         $('body').on('click','.list li',function(){
-            alert(1);
             var _this=$(this);
+            var customer_profile=_this.find('.head_img').attr('src');
+            var customer_name=_this.find('.customer_name').text();
             var chatLayerContainer=_this.find('.chatLayerContainer');
+            $('.chat_client').find('.head_img').attr('src',customer_profile);
+            $('.chat_client').find('.customer_name').text(customer_name);
             // layer.open({
             //     className:'chatLayer',
             //     content:chatLayerContainer,

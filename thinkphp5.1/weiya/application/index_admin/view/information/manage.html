@@ -102,7 +102,7 @@
                 var postData = {};
                 postData.id = _thisTr.data('id');
                 var url =  controller + 'del';
-                parent.layer.open({
+                layer.open({
                     btn: ['确定','取消'],//按钮
                     content:'删除你选中的商品吗？',
                     yes:function (index) {
@@ -111,7 +111,7 @@
                                 _thisTr.remove();
                             });
                         });
-                        parent.layer.close(index);
+                        layer.close(index);
                     }
                 });
             });
@@ -128,13 +128,13 @@
                 postData.ids= ids;
                 var url =  controller + '/del';
                 if(ids.length==0){
-                    parent.layer.tips('你还没有选择任何内容！','.btn',{
+                    layer.tips('你还没有选择任何内容！','.btn',{
                         tips:[4,'#0d7eff'],
                         time:1500
                     });
                     return false;
                 }else{
-                    parent.layer.confirm('删除你选中的商品吗？', {
+                    layer.confirm('删除你选中的商品吗？', {
                         btn: ['确定','取消'],//按钮
                         yes:function (index) {
                             $.post(url,postData,function(msg){
@@ -146,7 +146,7 @@
                                     })
                                 });
                             });
-                            parent.layer.close(index);
+                            layer.close(index);
                         }
                     })
                 }
@@ -161,7 +161,7 @@
                 postData.id = _thisTr.data('id');
                 postData.auth_status = auth_status;
                 var url =  controller + 'setAuthStatus';
-                parent.layer.open({
+                layer.open({
                     btn: ['确定','取消'],//按钮
                     content:"是否"+text+'?',
                     yes:function (index) {
@@ -184,7 +184,7 @@
                                 }
                             });
                         });
-                        parent.layer.close(index);
+                        layer.close(index);
                     }
                 });
             });

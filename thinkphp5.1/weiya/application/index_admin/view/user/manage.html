@@ -1,0 +1,99 @@
+{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+    <div class="page">
+        <div class="fixed-bar">
+            <div class="item-title">
+                <ul class="tab-base">
+                    <li><a href="{:url('User/manage')}" class="current"><span>管理</span></a></li>
+                    <li><a href="{:url('User/edit')}"><span>编辑</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content" id="mainContent">
+            <form id="form1">
+                <table class="search-form search_product_type">
+                    <tbody>
+                        <tr>
+                            <th>名称：</th>
+                            <td class="w160">
+                                <input class="text product_management_name" type="text" name="keyword" value="">
+                            </td>
+                            <td class="w70 tc">
+                                <label class="submit-border">
+                                    <input type="button" id="searchUser" class="submit product_search_btn" value="搜索">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div class="content" id="list"></div>
+        </div>
+    </div>
+    <!-- 隐藏区 -->
+    <div style="display:none">
+        <div id="loading">
+            <div class='loading'><img src='public_admin_common_img/default/loading.gif' alt='loading'></div>
+        </div>
+    </div>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+    <script type="text/javascript">
+        $(function () {
+            //加载第一页
+            var config = {
+                url:controller+'getList'
+            };
+            getPagingList(config);
+            //翻页
+            $('body').on('click','.pager2',function(){
+                var curIndex= $(this).parents('ul.pagination').find('li.active span').text();
+                var selectedPage=$(this).data('page');
+                if(selectedPage=='»'){
+                    curIndex++;
+                    selectedPage=curIndex;
+                }
+                if(selectedPage=='«'){
+                    curIndex--;
+                    selectedPage=curIndex;
+                }
+                config.currentPage = selectedPage;
+                config.currentPage = selectedPage;
+                getPagingList(config);
+            });
+            //搜索
+            $('#searchUser').click(function(){
+                config.currentPage = 0;
+                getPagingList(config);
+            });
+            //编辑
+            $('body').on('click','.edit',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  controller + 'edit/id/' + _thisTr.data('id');
+                location.href = url;
+            });
+            //角色设置
+            $('body').on('click','.empower',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  controller + 'empower/id/' + _thisTr.data('id') + '/name/' + _thisTr.data('name');
+                location.href = url;
+            });
+            //删除
+            $('body').on('click','.del',function(){
+                var _thisTr = $(this).parents('tr');
+                var postData = {};
+                postData.id = _thisTr.data('id');
+                var url =  controller + 'del';
+                $.post(url,postData,function(msg){
+                    dialog.msg(msg,'',function(){
+                        _thisTr.remove();
+                    });
+                });
+            });
+            //批量删除
+            $('body').on('click','.batchDel',function(){
+            });
+        });
+    </script>
+{/block}
