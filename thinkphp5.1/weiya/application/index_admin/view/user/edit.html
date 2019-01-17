@@ -1,0 +1,74 @@
+{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+    <div class="page">
+        <div class="fixed-bar">
+            <div class="item-title">
+                <ul class="tab-base">
+                    <li><a href="{:url('User/manage')}" ><span>管理</span></a></li>
+                    <li><a href="{:url('User/edit')}" class="current"><span>编辑</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top:15px;">
+            <form id="form1">
+                <table id=table18 class="add_new_merchandise" width="100%">
+                    <tbody>
+                        <tr class="tr-margin-item">
+                            <td class=dotted_bottom_gray width="12%" align="right"><font color="#FF0000">*</font>名称：</td>
+                            <td class=dotted_bottom_gray width="88%" align=left>
+                                <input style="width: 200px; " class="inputboxadmin" name="name" value="{$info.name|default=''}">
+                                <input type="hidden" name="id" value="{$info.id|default=0}">
+                            </td>
+                        </tr>
+                        <tr class="tr-margin-item">
+                            <td class=dotted_bottom_gray width="12%" align="right"><font color="#FF0000">*</font>昵称：</td>
+                            <td class=dotted_bottom_gray width="88%" align=left>
+                                <input style="width: 200px; " class="inputboxadmin" name="name" value="{$info.name|default=''}">
+                            </td>
+                        </tr>
+                        <tr class="tr-margin-item">
+                            <td class=dotted_bottom_gray width="12%" align="right"><font color="#FF0000">*</font>手机号码：</td>
+                            <td class=dotted_bottom_gray width="88%" align=left>
+                                <input style="width: 200px; " class="inputboxadmin" name="mobile_phone" value="{$info.mobile_phone|default=''}">
+                            </td>
+                        </tr>
+                        <tr class="tr-margin-item">
+                            <td class=dotted_bottom_gray width="12%" align="right"><font color="#FF0000">&nbsp;</font>备注：</td>
+                            <td class=dotted_bottom_gray width="88%" align=left>
+                                <textarea class="textareaadmin textarea_text remark-text" name="remark">{$info.remark|default=''}</textarea>
+                            </td>
+                        </tr>
+                        <tr class="tr-margin-item">
+                            <td width="11%"></td>
+                            <td height=60 width="50%" align=center>
+                                <a href='javascript:void(0);'><input class="button_save_black_4" value="确定" type="button"></a>
+                                <input class="button_save_black" name="add0" value="返回" type="button">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+    <script type="text/javascript">
+        $(function(){
+            //页面初始化
+            //确定
+            $('.button_save_black_4').on('click',function(){
+                var postData = $('#form1').serializeObject();
+                $.post(action,postData,function(msg){
+                    dialog.msg(msg,'',function () {
+                        location.href = controller + '/edit';
+                    });
+                },'JSON');
+            });
+            //返回
+            $('.button_save_black').click(function(){
+                location.href = controller + '/manage';
+            });
+        });
+    </script>
+{/block}

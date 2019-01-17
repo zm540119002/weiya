@@ -154,7 +154,7 @@
 <footer class="footer mt-20">
     <a href="http://www.miitbeian.gov.cn">
         <span class="icp_icon">Copyright 广东美尚网络科技有限公司</span>
-        <span class="icp_icon">粤ICP备14021421号</span>
+        <span class="icp_icon">粤ICP备18130945号-1</span>
     </a>
 </footer>
 <!--_footer 作为公共模版分离出去-->
@@ -167,19 +167,25 @@
 <script type="text/javascript" src="hui_lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
 <script type="text/javascript">
     $(function(){
-        /*$("#min_title_list li").contextMenu('Huiadminmenu', {
-         bindings: {
-         'closethis': function(t) {
-         console.log(t);
-         if(t.find("i")){
-         t.find("i").trigger("click");
-         }
-         },
-         'closeall': function(t) {
-         alert('Trigger was '+t.id+'\nAction was Email');
-         },
-         }
-         });*/
+        /*
+        $("#min_title_list li").contextMenu('Huiadminmenu', {
+            bindings: {
+                'closethis': function(t) {
+                    if(t.find("i")){
+                        t.find("i").trigger("click");
+                    }
+                },
+                'closeall': function(t) {
+                    alert('Trigger was '+t.id+'\nAction was Email');
+                }
+            }
+         });
+         */
+        //菜单点击当前页效果
+        $('body').on('click','aside li',function(){
+            $('aside').find('li').removeClass('current');
+            $(this).addClass('current');
+        });
     });
     /*个人信息*/
     function myselfinfo(){

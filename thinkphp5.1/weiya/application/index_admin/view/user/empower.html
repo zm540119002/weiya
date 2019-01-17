@@ -1,0 +1,66 @@
+{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+    <div class="page">
+        <div class="fixed-bar">
+            <div class="item-title">
+                <ul class="tab-base">
+                    <li><a href="{:url('User/manage')}"><span>管理</span></a></li>
+                    <li><a href="{:url('User/edit')}"><span>编辑</span></a></li>
+                    <li><a href="javascript:void(0);" class="current"><span>{$userName}</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="fixed-empty"></div>
+        <div style="margin:15px 0 0 20px;">
+            <table class="table tb-type2">
+                {include file="user/role_list" /}
+                <tfoot>
+                    <tr class="tr-margin-item">
+                        <td height="60" width="50%" align="left">
+                            <a href="javascript:void(0);"><input class="button_save_black_4" value="确定" type="button"></a>
+                            <input class="button_save_black" name="add0" value="返回" type="button">
+                        </td>
+                    </tr>           
+                </tfoot>
+            </table>
+        </div>
+    </div>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+    $(function(){
+        //页面初始化
+        var roleIds = '{:json_encode($roleIds)}';
+        roleIds = JSON.parse(roleIds);
+        $.each($('tbody').find('tr'),function(){
+            var _this = $(this);
+            for(var v of roleIds){
+                if(v==_this.data('role_id')){
+                    _this.find('.checkitem').prop('checked',true);
+                }
+            }
+        });
+        //确定
+        $('.button_save_black_4').on('click',function(){
+            var postData = {};
+            postData.roleIds = [];
+            $.each($('tbody').find('tr'),function(){
+                if($(this).find('.checkitem').prop('checked')){
+                    postData.roleIds.push($(this).data('role_id'));
+                }
+            });
+            postData.userId = '{$userId}';
+            $.post(action,postData,function(msg){
+                dialog.msg(msg,'',function () {
+                    location.href = controller + 'manage';
+                });
+            },'JSON');
+        });
+        //返回
+        $('.button_save_black').click(function(){
+            location.href = controller + 'manage';
+        });
+    });
+</script>
+{/block}

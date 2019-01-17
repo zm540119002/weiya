@@ -235,19 +235,6 @@ function isRolling(container){
         // return false;
     });
 }
-//获取列表
-function getPage(currentPage) {
-    $("#list").html($('#loading').html());
-    var url = controller+'getList';
-    var postData = $('#form1').serializeObject();
-    postData.page = currentPage ? currentPage : 1;
-    postData.pageSize = 10;
-    $.get(url, postData , function(data){
-        $('#list').html(data);
-    });
-}
-
-
 
 $(function () {
     //返回顶部
