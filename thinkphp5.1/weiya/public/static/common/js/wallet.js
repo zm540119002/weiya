@@ -114,7 +114,9 @@ function forgetWalletPasswordDialog(fn_name,data){
 
                     //成功后弹出登录框
                     layer.closeAll();
-                    walletPayDialog(fn_name,data);
+                    var info =  JSON.parse( data.info);
+                    console.log(typeof info)
+                    walletPayDialog(fn_name,info);
 
                 }
                 if(!data.status){
