@@ -32,7 +32,7 @@ $context = array(
     )
 );
 // gateway 进程，这里使用Text协议，可以用telnet测试
-$gateway = new Gateway("websocket://0.0.0.0:8282",$context);
+$gateway = new Gateway("websocket://0.0.0.0:443",$context);
 // 开启SSL，websocket+SSL 即wss
 $gateway->transport = 'ssl';
 // gateway名称，status方便查看
