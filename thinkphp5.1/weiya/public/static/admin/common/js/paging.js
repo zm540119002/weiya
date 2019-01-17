@@ -23,7 +23,6 @@ function getPagingList(config,getData) {
     getData = getData?getData:$('#form1').serializeObject();
     getData.page = config.currentPage ? config.currentPage : 1;
     getData.pageSize = getData.pageSize ? getData.pageSize: 10;
-
     $.ajax({
         url: config.url,
         data: getData,
