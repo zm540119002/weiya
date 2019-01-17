@@ -323,6 +323,7 @@
             $('.chatLayer .chat_item').append(chatListTpl);
             $('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
             chatDialogSetBottom();
+            _this.val('');
             // $.ajax({
             //     url: url,
             //     data: postData,
