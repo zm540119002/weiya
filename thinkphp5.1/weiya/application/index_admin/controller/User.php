@@ -1,8 +1,7 @@
 <?php
 namespace app\index_admin\controller;
 
-class User extends Base
-{
+class User extends \common\controller\UserBaseAdmin{
     /**用户-管理
      */
     public function manage(){
@@ -56,7 +55,23 @@ class User extends Base
             return config('custom.not_get');
         }
         $modelUser = new \common\model\User();
-        $list = $modelUser->pageQuery($this->user['id']);
+        $where = [
+            ['status', '=', 0],
+            ['type', '<>', 0],
+        ];
+        $keyword = input('get.keyword','');
+        if($keyword){
+            $where[] = ['name', 'like', '%'.trim($keyword).'%'];
+        }
+        $config = [
+            'where'=>$where,
+            'field'=>[
+                'id','name','nickname','mobile_phone',
+            ],'order'=>[
+                'id'=>'desc',
+            ],
+        ];
+        $list = $modelUser->pageQuery($config);
         $this->assign('list',$list);
         return $this->fetch('user_list');
     }

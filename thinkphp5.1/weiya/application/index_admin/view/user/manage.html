@@ -42,10 +42,30 @@
     <script type="text/javascript">
         $(function () {
             //加载第一页
-            getPage();
+            var config = {
+                url:controller+'getList'
+            };
+            getPagingList(config);
+            //翻页
+            $('body').on('click','.pager2',function(){
+                var curIndex= $(this).parents('ul.pagination').find('li.active span').text();
+                var selectedPage=$(this).data('page');
+                if(selectedPage=='»'){
+                    curIndex++;
+                    selectedPage=curIndex;
+                }
+                if(selectedPage=='«'){
+                    curIndex--;
+                    selectedPage=curIndex;
+                }
+                config.currentPage = selectedPage;
+                config.currentPage = selectedPage;
+                getPagingList(config);
+            });
             //搜索
             $('#searchUser').click(function(){
-                getPage();
+                config.currentPage = 0;
+                getPagingList(config);
             });
             //编辑
             $('body').on('click','.edit',function(){

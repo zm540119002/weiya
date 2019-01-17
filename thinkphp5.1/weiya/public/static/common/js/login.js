@@ -74,11 +74,11 @@ function forgetPasswordDialog(fn_name){
     });
 }
 $(function(){
-    //忘记密码-弹窗事件
+    //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
         loginDialog('flushPage');
     });
-    //忘记密码-弹窗事件
+    //退出-弹窗事件
     $('body').on('click','#logout_dialog',function(){
         logoutDialog();
     });
@@ -149,10 +149,10 @@ $(function(){
                     if(loginSign=='page'){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
+                         $('.layui-m-layer').remove();
                         if(data.fn_name){
                             var str = data.fn_name;
                             eval(str +"()");
-                            $('.layui-m-layer').remove();
                             cancleFixedLayer();
                             return false;
                         }

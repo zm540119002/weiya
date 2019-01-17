@@ -58,8 +58,7 @@
 </section>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
-    function branLayer() {
-        alert(2)
+    function brandLayer() {
         var brand_list_layer=$('.brand_list_layer').html();
         layer.open({
             title:['设定品牌','border-bottom:1px solid #d9d9d9;'],
@@ -69,10 +68,8 @@
             content:brand_list_layer,
             success:function(){
 
-
             },
             yes:function(index){
-                // addressLayer('增加商标');
                 layer.close(index);
             }
         })
@@ -99,12 +96,13 @@
                         dialog.error(data.info);
                     }else if(data.code==1){
                         if(data.data == 'no_login'){
-                            loginDialog('branLayer');
+                            loginDialog('brandLayer');
                         }
                     }else if(data.status==1){
 
                     }else{
-                        branLayer();
+                        
+                        brandLayer();
                     }
                 }
             });
