@@ -8,6 +8,10 @@
         <div class="box-flex clearfixed">
             <select name="type" class="input-filed">
                 <option value="">商标类别</option>
+                {volist name="{$Think.config.custom.brand_type}" id="brand_type"}
+                <option value="">{$brand_type}</option>
+                {/volist}
+
                 <option value="1">食品</option>
                 <option value="2">保健</option>
                 <option value="3">护肤</option>
