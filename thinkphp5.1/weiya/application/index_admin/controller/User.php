@@ -24,6 +24,7 @@ class User extends Base
                 'id' => $this->user['id'],
             ];
             $info = $modelUser->where($where)->find();
+            print_r($info);exit;
             $this->assign('info',$info);
             return $this->fetch();
         }
@@ -48,27 +49,7 @@ class User extends Base
             return $this->fetch();
         }
     }
-//分页查询
-    public function pageQuery($userId){
-        $where = [
-            ['status', '=', 0],
-            ['type', '<>', 0],
-        ];
-        if(isset($userId) && $userId){
-            $where[] = ['id', '<>', $userId];
-        }
-        $keyword = input('get.keyword','');
-        if($keyword){
-            $where[] = ['name', 'like', '%'.trim($keyword).'%'];
-        }
-        $field = array(
-            'id','name','nickname','mobile_phone','remark',
-        );
-        $order = 'id';
-        $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
-            input('get.pageSize',0,'int') : config('custom.default_page_size');
-        return $this->where($where)->field($field)->order($order)->paginate($pageSize);
-    }
+
     /**用户-列表
      */
     public function getList(){

@@ -16,50 +16,43 @@
                             <td class=dotted_bottom_gray width="12%" align="right">名称：</td>
                             <td class=dotted_bottom_gray width="88%" align=left>
                                 <span>{$info.name|default=''}</span>
-                                <!--<input style="width: 200px; " class="inputboxadmin" name="name" value="{$info.name|default=''}">-->
                                 <input type="hidden" name="id" value="{$info.id|default=0}">
                             </td>
                         </tr>
                         <tr class="tr-margin-item">
                             <td class=dotted_bottom_gray width="12%" align="right">昵称：</td>
                             <td class=dotted_bottom_gray width="88%" align=left>
-                                <span>{$info.name|default=''}</span>
-                                <!--<input style="width: 200px; " class="inputboxadmin" name="nickname" value="{$info.nickname|default=''}">-->
+                                <span>{$info.nickname|default=''}</span>
                             </td>
                         </tr>
                         <tr class="tr-margin-item">
                             <td class=dotted_bottom_gray width="12%" align="right">性别：</td>
                             <td class=dotted_bottom_gray width="88%" align=left>
                                 <span>{$info.sex|default=''}</span>
-                                <!--<input style="width: 200px; " class="inputboxadmin" name="nickname" value="{$info.nickname|default=''}">-->
                             </td>
                         </tr>
                         <tr class="tr-margin-item">
                             <td class=dotted_bottom_gray width="12%" align="right">手机号码：</td>
                             <td class=dotted_bottom_gray width="88%" align=left>
                                 <span>{$info.mobile_phone|default=''}</span>
-                                <!--<input style="width: 200px; " class="inputboxadmin" name="mobile_phone" value="{$info.mobile_phone|default=''}">-->
                             </td>
                         </tr>
                         <tr class="tr-margin-item">
                             <td class=dotted_bottom_gray width="12%" align="right">注册时间：</td>
                             <td class=dotted_bottom_gray width="88%" align=left>
                                 <span>{$info.create_time|date='Y-m-d H:i'|default=''}</span>
-                                <!--<input style="width: 200px; " class="inputboxadmin" name="mobile_phone" value="{$info.mobile_phone|default=''}">-->
                             </td>
                         </tr>
                         <tr class="tr-margin-item">
                             <td class=dotted_bottom_gray width="12%" align="right">最后登录时间：</td>
                             <td class=dotted_bottom_gray width="88%" align=left>
                                 <span>{$info.last_login_time|date='Y-m-d H:i'|default=''}</span>
-                                <!--<input style="width: 200px; " class="inputboxadmin" name="mobile_phone" value="{$info.mobile_phone|default=''}">-->
                             </td>
                         </tr>
                         <tr class="tr-margin-item">
                             <td class=dotted_bottom_gray width="12%" align="right">备注：</td>
                             <td class=dotted_bottom_gray width="88%" align=left>
                                 <span>{$info.remark|default=''}</span>
-                                <!--<textarea class="textareaadmin textarea_text remark-text" name="remark">{$info.remark|default=''}</textarea>-->
                             </td>
                         </tr>
                     </tbody>
@@ -67,11 +60,4 @@
             </form>
         </div>
     </div>
-{/block}
-{block name="footer"}{/block}
-{block name="script"}
-    <script type="text/javascript">
-        $(function(){
-        });
-    </script>
 {/block}
