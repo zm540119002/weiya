@@ -27,6 +27,10 @@ ws.onmessage = function(e){
                     $('.loading').hide();
                     if(msg.status==0){
                         dialog.error(msg.info);
+                    }else if(msg.code==1 && msg.data=='no_login'){
+                        //未登录
+                    }else if(msg.code==1){
+                        //已登录
                     }
                 }
             });
