@@ -24,7 +24,6 @@ class User extends Base
                 'id' => $this->user['id'],
             ];
             $info = $modelUser->where($where)->find();
-            print_r($modelUser->getLastSql());exit;
             $this->assign('info',$info);
             return $this->fetch();
         }
