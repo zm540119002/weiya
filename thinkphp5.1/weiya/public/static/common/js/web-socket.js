@@ -1,4 +1,4 @@
-ws = new WebSocket("wss://worldview.com.cn/wss");
+ws = new WebSocket("wss://www.worldview.com.cn/wss");
 ws.onopen = function(e){
     console.log('open');
 };
