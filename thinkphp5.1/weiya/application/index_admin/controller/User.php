@@ -1,8 +1,7 @@
 <?php
 namespace app\index_admin\controller;
 
-class User extends Base
-{
+class User extends \common\controller\UserBaseAdmin{
     /**用户-管理
      */
     public function manage(){
