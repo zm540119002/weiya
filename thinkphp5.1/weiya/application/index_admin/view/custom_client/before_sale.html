@@ -51,16 +51,6 @@
         </section>
     </li>
 </section>
-<section class="specific_type separation-line">
-    <div class="columns_flex f20 l-r-sides">
-        <a href="{:url('CustomerClient/beforeSale')}" class="current">售前</a>
-        <a href="{:url('Order/index')}">打单</a>
-        <a href="{:url('Order/out')}">出仓</a>
-        <a href="{:url('Order/delivery')}">发货/完成</a>
-        <a href="{:url('Order/bill')}">填单</a>
-        <a href="{:url('CustomerClient/afterSale')}">售后</a>
-    </div>
-</section>
 <section class="f24 chat_content_wrapper">
     <div class="left chat_left">
         <div class="left_top">
@@ -103,7 +93,7 @@
                                 </li>
                                 <li class="me read" data-id="356" data-from_id="19">
                                     <div class="avatar">
-                                        <img src="http://msy.meishangyun.com/static/common/img/default/chat_head.jpg">
+                                        <img src="public_img/default/chat_head.jpg">
                                     </div>
                                     <div class="content">
                                         <p class="author">阿三</p>
@@ -323,6 +313,7 @@
             $('.chatLayer .chat_item').append(chatListTpl);
             $('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
             chatDialogSetBottom();
+            _this.val('');
             // $.ajax({
             //     url: url,
             //     data: postData,
