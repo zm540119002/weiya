@@ -267,32 +267,6 @@
             var chatLayerContainer=_this.find('.chatLayerContainer');
             $('.chat_client').find('.head_img').attr('src',customer_profile);
             $('.chat_client').find('.customer_name').text(customer_name);
-            // layer.open({
-            //     className:'chatLayer',
-            //     content:chatLayerContainer,
-            //     type:1,
-            //     anim:'up',
-            //     btn:['','关闭'],
-            //     success:function(){
-            //         var winH=$(document).height();
-            //         $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
-            //         //设置信息已读
-            //         setMessageRead(_this);
-            //         //聊天框滚动条置底
-            //         chatDialogSetBottom();
-            //         //下拉加载
-            //         $('.chatLayer .chat_item').on('scroll',function(){
-            //             if($('.chatLayer .chat_item').scrollTop()==0){
-            //                console.log(1);
-            //             }
-            //         });
-            //     },
-            //     no:function(){
-            //         chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
-            //         //设置信息已读
-            //         setMessageRead(_this);
-            //     }
-            //});
             $('.chatLayer').html(chatLayerContainer.html());
         });
         //设置信息已读
