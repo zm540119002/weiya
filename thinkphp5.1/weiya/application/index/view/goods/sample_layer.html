@@ -1,0 +1,41 @@
+<!--底部弹窗-->
+<section id="goodsInfoLayer" style="display:none;">
+	<div class="columns_flex layer_top_name">
+        <div class="left l_img">
+		    <img src="" alt="" class="goods_img">
+        </div>
+		<p class="goods_title">台湾原装进口 真世酵素纤丽果冻</p>
+	</div>
+	<ul class="bottom-layer-info goods_list">
+        <li data-id="" data-buy_type="2">
+			<div class="columns_flex l-r-sides">
+				<div >
+					<span class="red">￥<prices class="sample_price">100.00</price></span>
+					<span class="specification">300ml/瓶</span>
+				</div>
+				<div>样品购买限额：<span class="minimum_sample_quantity"></span></div>
+			</div>
+            <div class="columns_flex l-r-sides">
+                <span>采购数量(单位：{$info.purchase_unit|getUnit})</span>
+                <div class="quantity_wrapper selected-number">
+                    <a href="javascript:void(0);" class="greduce" data-type="sample">-</a>
+                    <input type="text" value="0" class="f24 gshopping_count" data-type="sample">
+					<input type="hidden" class="minimum_order_quantity" value="">
+					<input type="hidden" class="increase_quantity" value="">
+                    <a href="javascript:void(0);" class="gplus" data-type="sample">+</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+	<footer class="f24 group_cart_nav" style="display: flex;">
+        <div class="group_btn30 bottom_item">
+            总计:<span class="amount">￥<price>0.00</price></span>
+        </div>
+        <div class="group_btn30 bottom_item">
+            <a href="javascript:void(0);" class=" add_cart_icon"><span class="add_num">+3</span><span class="cart_num"></span>购物车</a>
+        </div>
+        <div class="group_btn30 bottom_item">
+            <a href="javascript:void(0);" class=" add_cart_layer">加入购物车<span class="total_num"></span></a>
+        </div>
+    </footer>
+</section>
