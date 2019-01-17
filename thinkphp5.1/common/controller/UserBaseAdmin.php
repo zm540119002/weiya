@@ -12,6 +12,7 @@ class UserBaseAdmin extends Base{
         parent::__construct();
         //判断是否登录
         $this->user = checkLogin();
+        print_r($this->user );exit;
         if (!$this->user) {
             if (request()->isAjax()) {
                 $this->success('异步登录失败',url($this->indexUrl),'no_login',0);
