@@ -191,7 +191,6 @@ class Wallet extends \common\model\Base {
 	/**检查验证码
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
-		return true;//上线后再验证
 		return session('captcha_' . $mobilePhone) == $captcha ;
 	}
 }
