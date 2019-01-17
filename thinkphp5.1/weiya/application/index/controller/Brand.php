@@ -11,15 +11,85 @@ class Brand extends \common\controller\UserBase{
     }
 
     public function edit(){
-        $data = input('post.');
-        $brandInfo = [
-            'brand_type'=>1,
-            'brand_name'=>'gaasg',
-            'brand_logo'=>'temp/2019011615535029895.jpeg',
-            'trademark_certificate'=>'temp/2019011615535288073.jpeg',
-            'trademark_authorization'=>'temp/2019011615535288073.jpeg',
-        ];
-        $this->assign('info',$data);
-        return $this->fetch('info_tpl');
+        if(request()->isAjax()){
+            $userId = $this->user['id'];
+            $model = new  \app\index\model\Brand();
+            $data = input('post.');
+            if(input('?post.id') && !empty(input('post.id')) ){
+                //开启事务
+                $model -> startTrans();
+                //修改
+                $id = input('post.id');
+                $condition = [
+                    ['status','=',0],
+                    ['id','=',$id],
+                    ['user_id','=',$userId],
+                ];
+                $result = $model -> edit($data,$condition);
+                if( !$result['status'] ){
+                    $model ->rollback();
+                    return errorMsg('失败');
+                }
+                //修改其他地址不为默认值
+                if($_POST['is_default'] == 1){
+                    $where = [
+                        ['status','=',0],
+                        ['id',"<>",$id],
+                        ['user_id','=',$userId],
+                    ];
+                    $result = $model->where($where)->setField('is_default',0);
+                    if(false === $result){
+                        $model ->rollback();
+                        return errorMsg('失败');
+                    }
+                }
+                $model->commit();
+                $data['id'] = $id;
+                $this->assign('info',$data);
+                return $this->fetch('info_tpl');
+            }else{
+                //增加
+                $config = [
+                    'where'=>[
+                        ['status','=',0],
+                        ['user_id','=',$userId]
+                    ],
+                ];
+                $list = $model -> getList($config);
+                if(empty($list)){
+                    $data['is_default'] = 1;
+                }
+                //开启事务
+                $model -> startTrans();
+                $data['user_id'] = $userId;
+                $result = $model->edit($data);
+                if(!$result['status']){
+                    return errorMsg('失败');
+                }
+                $id = $result['id'];
+                //修改其他地址不为默认值
+                if($_POST['is_default'] == 1){
+                    $where = [
+                        ['status','=',0],
+                        ['id',"<>",$id],
+                        ['user_id','=',$userId],
+                    ];
+                    $result = $model->where($where)->setField('is_default',0);
+                    if(false === $result){
+                        $model ->rollback();
+                        return errorMsg('失败');
+                    }
+                }
+                $model->commit();
+                $data['id'] = $id;
+                $this -> assign('id',$id);
+                $this->assign('info',$data);
+                return $this->fetch('info_tpl');
+            }
+
+        }else{
+            return $this->fetch();
+        }
+
     }
 }

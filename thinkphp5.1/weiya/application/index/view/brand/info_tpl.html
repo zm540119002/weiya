@@ -1,16 +1,16 @@
-<li>
+<li data-id="{$info.id}">
     <div class="list_top_item">
-        <p>第<input class="brand_type" name="brand_type" value="{$info.brand_type}"/>类商标</p>
+        <p>第<input class="brand_type" name="type" value="{$info.type}"/>类商标</p>
         <div>
-            {empty name="info.brand_logo"}
+            {empty name="info.logo"}
             <img src="public_img/default/no_pic_40.jpg" alt="" class="left brand_logo" />
             {else /}
-            <img src="public_uploads/{$info.brand_logo}" alt="" class="left brand_logo" />
+            <img src="public_uploads/{$info.logo}" alt="" class="left brand_logo" />
             {/empty}
-            <input type="text" class="brand_name" name="brand_name" value="{$info.brand_name}"/>
-            <input type="hidden" class="brand_logo" name="brand_logo" value="{$info.brand_logo}"/>
-            <input type="hidden" class="" name="trademark_certificate" value="{$info.trademark_certificate}"/>
-            <input type="hidden" class="" name="trademark_authorization" value="{$info.trademark_authorization}"/>
+            <input type="text" class="brand_name" name="name" value="{$info.name}"/>
+            <input type="hidden" class="brand_logo" name="logo" value="{$info.logo}"/>
+            <input type="hidden" class="" name="certificate" value="{$info.certificate}"/>
+            <input type="hidden" class="" name="authorization" value="{$info.authorization}"/>
         </div>
     </div>
     <div class="columns_flex l-r-sides list_bottom_item">
