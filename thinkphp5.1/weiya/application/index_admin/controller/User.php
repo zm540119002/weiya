@@ -48,7 +48,27 @@ class User extends Base
             return $this->fetch();
         }
     }
-
+//分页查询
+    public function pageQuery($userId){
+        $where = [
+            ['status', '=', 0],
+            ['type', '<>', 0],
+        ];
+        if(isset($userId) && $userId){
+            $where[] = ['id', '<>', $userId];
+        }
+        $keyword = input('get.keyword','');
+        if($keyword){
+            $where[] = ['name', 'like', '%'.trim($keyword).'%'];
+        }
+        $field = array(
+            'id','name','nickname','mobile_phone','remark',
+        );
+        $order = 'id';
+        $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
+            input('get.pageSize',0,'int') : config('custom.default_page_size');
+        return $this->where($where)->field($field)->order($order)->paginate($pageSize);
+    }
     /**用户-列表
      */
     public function getList(){
@@ -56,7 +76,23 @@ class User extends Base
             return config('custom.not_get');
         }
         $modelUser = new \common\model\User();
-        $list = $modelUser->pageQuery($this->user['id']);
+        $where = [
+            ['status', '=', 0],
+            ['type', '<>', 0],
+        ];
+        $keyword = input('get.keyword','');
+        if($keyword){
+            $where[] = ['name', 'like', '%'.trim($keyword).'%'];
+        }
+        $config = [
+            'where'=>$where,
+            'field'=>[
+                'id','name','nickname','mobile_phone',
+            ],'order'=>[
+                'id'=>'desc',
+            ],
+        ];
+        $list = $modelUser->pageQuery($config);
         $this->assign('list',$list);
         return $this->fetch('user_list');
     }
