@@ -8,9 +8,9 @@
         <div class="box-flex clearfixed">
             <select name="type" class="input-filed">
                 <option value="">商标类别</option>
-                <option value="食品">食品</option>
-                <option value="保健">保健</option>
-                <option value="护肤">护肤</option>
+                {volist name="Think.config.custom.brand_type" id="brand_type"}
+                <option value="{$k}">{$brand_type}</option>
+                {/volist}
             </select>
         </div>
         <div class="upload-picture-module box-flex f24">

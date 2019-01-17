@@ -28,7 +28,9 @@ ws.onmessage = function(e){
                     if(msg.status==0){
                         dialog.error(msg.info);
                     }else if(msg.code==1 && msg.data=='no_login'){
-                        loginDialog();
+                        //未登录
+                    }else if(msg.code==1){
+                        //已登录
                     }
                 }
             });

@@ -5,6 +5,15 @@ class Brand extends \common\controller\UserBase{
     /**首页
      */
     public function index(){
+        $model = new  \app\index\model\Brand();
+        $config = [
+            'where'=>[
+                ['status','=',0],
+                ['user_id','=',$this->user['id']]
+            ],
+        ];
+        $list = $model -> getList($config);
+        $this->assign('list',$list);
         $unlockingFooterCart = unlockingFooterCartConfig([15]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
