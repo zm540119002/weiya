@@ -42,10 +42,13 @@
     <script type="text/javascript">
         $(function () {
             //加载第一页
-            getPage();
+            var config = {
+                url:controller+'getList'
+            };
+            getPagingList();
             //搜索
             $('#searchUser').click(function(){
-                getPage();
+                getPagingList();
             });
             //编辑
             $('body').on('click','.edit',function(){

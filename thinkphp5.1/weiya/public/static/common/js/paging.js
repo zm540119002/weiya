@@ -18,7 +18,7 @@ function commonCallBack(config,data){
 }
 
 /**获取分页列表
- * @param config  下拉分页配置 必须是全局变量
+ * @param config  必须是全局变量
  *例子
  * var config = {
         requestEnd:false,//必须配置项

@@ -3,7 +3,7 @@ function commonCallBack(config,data){
     config.container.html(data);
 }
 /**获取分页列表
- * @param config  下拉分页配置 必须是全局变量
+ * @param config  必须是全局变量
  *例子
  * var config = {
 		currentPage:1,//必须配置项
@@ -13,7 +13,6 @@ function commonCallBack(config,data){
  * @param getData 提交数据
  */
 function getPagingList(config,getData) {
-  
     //容器
     config.container = config.container?config.container:$("#list");
     //提交路径
@@ -50,4 +49,4 @@ var disableBtn=function disableBtn(){
     listUl.find('li:first').find('.up-btn').prop('disabled','disabled').addClass('disabled');
     listUl.find('li:last').find('.down-btn').prop('disabled','disabled').addClass('disabled');
     listUl.find('li:last').find('.down-btn').addClass('down-disabled-icons');
-}
+};
