@@ -95,6 +95,23 @@
     $(function () {
         //聊天对话框弹窗
         var chatLayerContainer=$('#chatLayerContainer').html();
+        layer.open({
+            className:'chatLayer',
+            content:chatLayerContainer,
+            type:1,
+            anim:'up',
+            btn:['','关闭'],
+            success:function(){
+                var winH=$(document).height();
+                var chatListInfo=_this.find('.chat_hidden_list').html();
+                $('.chatLayer .chat_item').css('height',winH+'px');
+                $('.chatLayer .chat_item').html(chatListInfo);
+            },
+            no:function(){
+                var chatLayerList=$('.chatLayer .chat_item').html();
+                $('li[data-id='+chatListId+']').find('.chat_hidden_list').html(chatLayerList);
+            }
+        });
         var chatListId;
         $('body').on('click','.list li',function(){
             var _this=$(this);
@@ -113,7 +130,6 @@
                 },
                 no:function(){
                     var chatLayerList=$('.chatLayer .chat_item').html();
-                    console.log(chatLayerList);
                     $('li[data-id='+chatListId+']').find('.chat_hidden_list').html(chatLayerList);
                 }
             });
