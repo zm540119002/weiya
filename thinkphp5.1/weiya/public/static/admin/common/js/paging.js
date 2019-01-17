@@ -40,7 +40,6 @@ function getPagingList(config,getData) {
         }
     });
 }
-
 //禁用移动按钮
 var disableBtn=function disableBtn(){
     var listUl = $('#list');

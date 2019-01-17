@@ -1,8 +1,7 @@
 <?php
 namespace app\index_admin\controller;
 
-class User extends Base
-{
+class User extends \common\controller\UserBaseAdmin{
     /**用户-管理
      */
     public function manage(){
@@ -48,27 +47,7 @@ class User extends Base
             return $this->fetch();
         }
     }
-//分页查询
-    public function pageQuery($userId){
-        $where = [
-            ['status', '=', 0],
-            ['type', '<>', 0],
-        ];
-        if(isset($userId) && $userId){
-            $where[] = ['id', '<>', $userId];
-        }
-        $keyword = input('get.keyword','');
-        if($keyword){
-            $where[] = ['name', 'like', '%'.trim($keyword).'%'];
-        }
-        $field = array(
-            'id','name','nickname','mobile_phone','remark',
-        );
-        $order = 'id';
-        $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
-            input('get.pageSize',0,'int') : config('custom.default_page_size');
-        return $this->where($where)->field($field)->order($order)->paginate($pageSize);
-    }
+
     /**用户-列表
      */
     public function getList(){
