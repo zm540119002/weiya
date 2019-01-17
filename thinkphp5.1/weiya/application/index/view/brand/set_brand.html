@@ -67,7 +67,25 @@
             className:'setBrandLayer',
             content:brand_list_layer,
             success:function(){
-
+                //
+                var url = module + 'Brand/getList';
+                var postData = {};
+                $.ajax({
+                    url: url,
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(xhr){
+                        $('.loading').show();
+                    },
+                    error:function(xhr){
+                        $('.loading').hide();
+                        dialog.error('AJAX错误！');
+                    },
+                    success: function(data){
+                        console.log(data)
+                        $('.brand_list_layer').find('.list').html(data);
+                    }
+                });
             },
             yes:function(index){
                 layer.close(index);
