@@ -116,6 +116,7 @@ class Order extends \common\controller\UserBase
         if (request()->isPost()) {
             $fatherOrderId = input('post.father_order_id',0,'int');
             $modelOrder = new \app\index\model\Order();
+            $modelOrder ->startTrans();
             $data = input('post.');
             $data['order_status'] = 1;
             $condition = [
@@ -124,6 +125,13 @@ class Order extends \common\controller\UserBase
             ];
             $res = $modelOrder -> allowField(true) -> save($data,$condition);
             if(false === $res){
+                $modelOrder ->rollback();
+                return errorMsg('失败');
+            }
+            $modelOrderDetail = new \app\index\model\OrderDetail();
+            $res = $modelOrderDetail -> isUpdate(true)-> saveAll($data['orderDetail']);
+            if (!count($res)) {
+                $modelOrder->rollback();
                 return errorMsg('失败');
             }
             //根据订单号查询关联的购物车的商品 删除
@@ -146,9 +154,11 @@ class Order extends \common\controller\UserBase
                 ];
                 $result = $model -> del($condition,false);
                 if(!$result['status']){
+                    $modelOrder->rollback();
                     return errorMsg('删除失败');
                 }
             }
+            $modelOrder -> commit();
             $orderSn = input('post.order_sn','','string');
             return successMsg('成功',array('order_sn'=>$orderSn));
         }else{
