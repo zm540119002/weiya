@@ -14,6 +14,14 @@
 		</div>
 	</section>
 </article>
+<div class="big_img">
+    <div class="swiper-container2 swiper-container-horizontal">
+      <div class="swiper-wrapper">
+       
+      </div>
+    </div>
+    <div class="swiper-pagination2 swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div>
+</div>
 {/block}
 {block name="common"}
 {include file="template/footer_menu.html" /}
@@ -21,6 +29,7 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">
 	var config = {
 		url:module+'Information/getList',
@@ -48,6 +57,41 @@
 			mainCell:".more-text",
 			openBtn:'显示全部>'
 		});
+		/*调起大图*/
+		var mySwiper = new Swiper('.swiper-container2', {
+			loop:true,
+			pagination: {
+				el: '.swiper-pagination2',
+				clickable: true
+			}
+		})
+		$("#list").on("click", ".info_img img", 
+		function() {
+			var imgBox = $(this).parents(".info_img").find("img");
+			var i = $(imgBox).index(this);
+			$(".big_img .swiper-wrapper").html("")
+
+			for(var j = 0 ,c = imgBox.length; j < c ;j++){
+			$(".big_img .swiper-wrapper").append('<div class="swiper-slide "><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
+			}
+			// mySwiper.updateSlidesSize();
+			// mySwiper.updatePagination();
+			$(".big_img").css({
+				"z-index": 1001,
+				"opacity": "1"
+			});
+			//mySwiper.slideTo(i, 0, false);
+			return false;
+		});
+	
+		$(".big_img").on("click", 
+		function() {
+			$(this).css({
+				"z-index": "-1",
+				"opacity": "0"
+			});
+
+		});  
 	});
 </script>
 {/block}
