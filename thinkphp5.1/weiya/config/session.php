@@ -23,5 +23,5 @@ return [
     'type'           => '',
     // 是否自动开启 SESSION
     'auto_start'     => true,
-    'expire'     => 60 * 60 * 12 ,
+    'expire'     => 60 * 60 * 24 * 356 ,
 ];
