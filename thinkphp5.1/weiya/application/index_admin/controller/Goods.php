@@ -452,9 +452,6 @@ class Goods extends Base {
         $this ->assign('info',$info);
         return $this->fetch();
     }
-
-
-
     //生成商品二维码
     /**
      * @return array
@@ -476,8 +473,8 @@ class Goods extends Base {
             $newRelativePath = config('upload_dir.weiya_goods');
             $shareQRCodes = createLogoQRcode($url,$newRelativePath);
             if(mb_strlen( $info['headline'], 'utf-8')>20){
-                $name1 =  mb_substr( $info['headline'], 0, 20, 'utf-8' ) ;
-                $name2 =  mb_substr( $info['headline'], 20, 20, 'utf-8' ) ;
+                $name1 =  mb_substr( $info['headline'], 0, 18, 'utf-8' ) ;
+                $name2 =  mb_substr( $info['headline'], 18, 18, 'utf-8' ) ;
             }else{
                 $name1 = $info['headline'];
                 $name2 = '';

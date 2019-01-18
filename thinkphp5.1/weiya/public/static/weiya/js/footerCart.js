@@ -313,6 +313,9 @@ $(function () {
         });
     });
 
+    //再次购买
+    
+
 
     //购物车弹窗 样品购买
     var goodsInfoLayer=$('#goodsInfoLayer').html();
