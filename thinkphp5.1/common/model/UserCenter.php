@@ -25,6 +25,7 @@ class UserCenter extends Base {
 	/**登录
 	 */
 	public function login($data){
+		return errorMsg($data);
 		$data['mobile_phone'] = trim($data['mobile_phone']);
 		$data['password'] = trim($data['password']);
 		$validateUser = new \common\validate\User();
