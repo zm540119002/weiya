@@ -8,7 +8,7 @@ function walletPayDialog(fn_name,data) {
         shadeClose:false,
         content:content,
         title:['钱包支付密码','border-bottom:1px solid #d9d9d9;'],
-        btn:['确定支付'],
+        btn:['确定支付',''],
         success:function(indexs,i){
             $('#fn_name').val(fn_name);
             $('#order_sn').val(data.order_sn);
