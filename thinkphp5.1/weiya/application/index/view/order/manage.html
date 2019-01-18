@@ -3,6 +3,28 @@
 {/block}
 {block name="nav">我的订单{/block}
 {block name="content"}
+<!--订单状态标签-->
+<section class="order_operate_btn-list" style="display:none;">
+    <!--1:待付款-->
+    <a href="javascript:void(0);" class="cancel_order">取消订单</a>
+    <a href="{:url('Order/toPay',['order_sn'=>$info.sn])}">去支付</a>
+
+    <!--2:待收货-->
+    <a href="javascript:void(0);" class="confirm_receive">确认收货</a>
+
+    <!--3:待评价-->
+    <a href="javascript:void(0);" class="apply_after_sales">申请售后</a>
+    <a href="javascript:void(0);" class="to_evaluate">评价</a>
+
+    <!--4:已完成-->
+    <a href="javascript:void(0);" class="see_evaluation">查看评价</a>
+    <a href="javascript:void(0);" class="purchase_again">再次购买</a>
+    <!--5:已取消-->
+    <a href="javascript:void(0);" class="order_canceled">已取消</a>
+    <!--6:售后-->
+    <a href="javascript:void(0);" class="">售后</a>
+</section>
+
 <article class="f24 ">
     <section class="header_title separation-line">
 		<h2 class="f24">我的订单</h2>
@@ -84,7 +106,7 @@
                 }
             });
 
-            //取消订单
+            //取消订单 `order_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '物流状态：0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消 6:售后',
             $('body').on('click','.cancel_order',function () {
                 var _this = $(this);
                 var _thisTr =_this.parents('li');
@@ -111,8 +133,12 @@
                             },
                             success: function(data){
                                 $('.loading').hide();
+                                if(!data.status){
+                                    dialog.error(data.info);
+                                    return false;
+                                }
                                 if(data.status){
-
+                                    _thisTr.remove();
                                 }
                             }
                         });
@@ -148,7 +174,7 @@
                             success: function(data){
                                 $('.loading').hide();
                                 if(data.status){
-
+                                    location.href =module +'Order/manage/order_status/'+ 3;
                                 }
                             }
                         });
