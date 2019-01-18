@@ -273,6 +273,13 @@ $(function () {
         var orderId = $('.order_id').val();
         var orderSn = $('.order_sn').val();
         var addressId = $('.address_id').val();
+        var orderDetail = {};
+        $.each('.goods_order_item li',function () {
+            _this = $(this);
+            var order_detail_id = _this.data('order_detail_id');
+            var brand_id = _this.find('.brand_name').data('id');
+            var brand_name = _this.find('.brand_name').text();
+        })
         if(!addressId){
             dialog.error('请选择收货地址');
             return false;

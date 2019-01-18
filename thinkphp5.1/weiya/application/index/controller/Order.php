@@ -134,7 +134,6 @@ class Order extends \common\controller\UserBase
                     ['od.father_order_id', '=', $fatherOrderId],
                 ], 'field' => [
                     'od.goods_id','od.buy_type','od.price', 'od.num', 'od.store_id','od.father_order_id','od.user_id',
-                    'od.'
                 ]
             ];
             $orderDetailList = $modelOrderDetail->getList($config);
@@ -165,7 +164,7 @@ class Order extends \common\controller\UserBase
                     ['goods g','g.id = od.goods_id','left']
                 ],'field' => [
                     'o.id', 'o.sn', 'o.amount',
-                    'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type',
+                    'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type','od.brand_id','od.brand_name','od.id as order_detail_id',
                     'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
                 ],
             ];
