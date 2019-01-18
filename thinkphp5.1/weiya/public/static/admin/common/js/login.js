@@ -95,7 +95,8 @@ $(function(){
     $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
-        console.log(method);exit;
+        console.log(method);
+        return;
         var content='';
         var url = domain+'ucenter/UserCenter/'+method;
         var postForm = null;
