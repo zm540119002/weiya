@@ -11,7 +11,6 @@ function addCart(_this) {
             return false;
         }
     }
-    return false;
     fn_name = 'addCart';
     if(!postData){
         return false;
