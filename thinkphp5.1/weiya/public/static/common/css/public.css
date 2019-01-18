@@ -4065,7 +4065,8 @@ select[name="nodeIds"]{
 }
 .goodsInfoLayer .layui-m-layerbtn,
 .loginLayer .layui-m-layerbtn,
-.forgetPasswordLayer .layui-m-layerbtn{
+.forgetPasswordLayer .layui-m-layerbtn,
+.brandLayer .layui-m-layerbtn{
     width:0.5rem;
     height:0.5rem;
     line-height:0.5rem;
@@ -5353,6 +5354,14 @@ ul.info_list li{
 /*.projectDetailLayer .layui-m-layerbtn{
     bottom:1rem;
 }*/
+.brandLayer .layui-m-layerbtn{
+    background-image:url(../../common/img/icons/close_btn.png);
+    background-repeat:no-repeat;
+    background-size: 0.25rem auto;
+    top:3px;
+    right:0;
+    left:initial;
+}
 .brand_list li{
     padding:0;
 
@@ -5439,7 +5448,7 @@ ul.info_list li{
     line-height: 0.5rem;
     border:1px solid #d9d9d9;
     border-right:none;
-}
+}s
 .payment_password_list li:last-child{
     border-right:1px solid #d9d9d9;
 }
