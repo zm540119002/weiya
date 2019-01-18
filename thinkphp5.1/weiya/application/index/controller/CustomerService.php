@@ -27,12 +27,13 @@ class CustomerService extends \common\controller\Base{
     public function sendMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
+            $msgCreateTime = time();
+            $msgId = '';
             if($this->user){//已登录
                 if($this->user['id']==$postData['to_user_id']){
                     return errorMsg('不能发给自己！');
                 }
                 $modelChatMessage = new \common\model\ChatMessage();
-                $msgCreateTime = time();
                 $saveData = [
                     'from_id' => $this->user['id'],
                     'to_id' => $postData['to_user_id'],
@@ -47,6 +48,7 @@ class CustomerService extends \common\controller\Base{
                 if($res['status']==0){
                     return errorMsg('保存失败！',$res);
                 }
+                $msgId = $res['id'];
                 if(Gateway::isUidOnline($postData['to_user_id'])){
                     $msg = [
                         'type' => 'msg',
@@ -55,20 +57,29 @@ class CustomerService extends \common\controller\Base{
                         'from_name' => $this->user['name'],
                         'avatar' => $this->user['avatar'],
                         'create_time' => date('Y-m-d H:i',$msgCreateTime),
-                        'id' => $res['id'],
+                        'id' => $msgId,
                     ];
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
                 }
             }else{//未登录
-                $clientId = Gateway::getClientIdByUid($postData['to_user_id']);
-                if(Gateway::isOnline($clientId)){
+                if(Gateway::isUidOnline($postData['to_user_id'])){
+                    $msg = [
+                        'type' => 'msg',
+                        'content' => $postData['content'],
+                        'from_id' => $postData['from_client_id'],
+                        'from_name' => '游客',
+                        'avatar' => '',
+                        'create_time' => date('Y-m-d H:i',$msgCreateTime),
+                        'id' => $msgId,
+                    ];
+                    Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
                 }
             }
             $postData['who'] = 'me';
             $postData['name'] = $this->user['name'];
             $postData['avatar'] = $this->user['avatar'];
             $postData['create_time'] = $msgCreateTime;
-            $postData['id'] = $res['id'];
+            $postData['id'] = $msgId;
             $this->assign('info',$postData);
             return view('online_service/info_tpl');
         }

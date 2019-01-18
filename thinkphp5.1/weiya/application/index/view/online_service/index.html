@@ -190,14 +190,12 @@
 				return false;
 			}
 			var postData = {
+				to_user_id:17,
 				content:_this.val()
 			};
-			if(loginSign){
-				postData.to_user_id = 17;
-			}else{
-				postData.client_id = clientId;
+			if(!loginSign){
+				postData.from_client_id = clientId;
 			}
-			console.log(postData);return;
 			var url = domain + 'index/CustomerService/sendMessage';
 			$.ajax({
 				url: url,
