@@ -374,6 +374,10 @@
         //搜索聊天客户
         $('body').on('click','.search_btn', function() {
             var searchText=$(this).next().val();
+            if(!searchText){
+                dialog.error('请输入名字搜索');
+                return false;
+            }
             $('.chat_left .chat_list').each(function(index,val){
                 console.log(index);
                 var _this=$(this);
@@ -384,9 +388,11 @@
                     return false;
                 }else{
                     _this.hide();
+                    $('.list .no_info').remove();
+                    $('.list').append('<li class="no_info">暂无此人</li>');
                 }
             })
-            $('.list').append('<li class="no_info">暂无此人</li>');
+            
         });
     });
 </script>
