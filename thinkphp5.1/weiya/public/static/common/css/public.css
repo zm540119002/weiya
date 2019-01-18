@@ -1620,8 +1620,15 @@ background-position: 0 -27px;
 .setRoleLayer .layui-m-layerbtn span[no],
 .setOrganizeLayer .layui-m-layerbtn span[no],
 .vendorInfoLayer .layui-m-layerbtn span[no],
-.projectDetailLayer .layui-m-layerbtn span[no]{
+.projectDetailLayer .layui-m-layerbtn span[no]
+{
     visibility: hidden;
+}
+.payPasswordLayer .layui-m-layerbtn{
+    position:relative;
+}
+.payPasswordLayer .layui-m-layerbtn span{
+    text-align:left;
 }
 .factoryListLayer .layui-m-layerbtn span[yes],
 .setRoleLayer .layui-m-layerbtn span[yes],
@@ -4064,12 +4071,19 @@ select[name="nodeIds"]{
     border-top:none;
 }
 .loginLayer .layui-m-layerbtn,
-.forgetPasswordLayer .layui-m-layerbtn{
+.forgetPasswordLayer .layui-m-layerbtn,
+.payPasswordLayer .layui-m-layerbtn span[type="0"]{
     background-image:url(../../common/img/icons/close_btn.png);
     background-repeat:no-repeat;
     background-size: 0.25rem auto;
     top:3px;
     right:0;
+}
+.payPasswordLayer .layui-m-layerbtn span[type="0"]{
+    top: -172px;
+    right: -248px;
+    width: 10px;
+    border-right: none;
 }
 .layui-m-layer-shareqrCodeLayer .layui-m-layerbtn span{
     color:#575757;
