@@ -61,7 +61,12 @@
 <script type="text/javascript" src="public_js/public.js"></script>
 <script type="text/javascript" src="public_js/common.js"></script>
 <script type="text/javascript">
-  $(function(){
-  });
+    var domain = '{:request()->domain()}'+'/'+'index.php/';
+    var module = domain + '{:request()->module()}/';
+    var controller = module + '{:request()->controller()}/';
+    var action = controller + '{:request()->action()}';
+    var uploads = '{:request()->domain()}'+'/uploads/';
+    $(function(){
+    });
 </script>
 </body></html>
