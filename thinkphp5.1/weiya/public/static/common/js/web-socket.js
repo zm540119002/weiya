@@ -1,4 +1,4 @@
-ws = new WebSocket("wss://www.worldview.com.cn/wss");
+ws = new WebSocket("wss://www.worldview.com.cn:8282");
 ws.onopen = function(e){
     console.log('open');
 };
@@ -28,7 +28,9 @@ ws.onmessage = function(e){
                     if(msg.status==0){
                         dialog.error(msg.info);
                     }else if(msg.code==1 && msg.data=='no_login'){
-                        loginDialog();
+                        //未登录
+                    }else if(msg.code==1){
+                        //已登录
                     }
                 }
             });

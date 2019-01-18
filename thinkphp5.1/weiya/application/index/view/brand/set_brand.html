@@ -8,9 +8,9 @@
         <div class="box-flex clearfixed">
             <select name="type" class="input-filed">
                 <option value="">商标类别</option>
-                <option value="食品">食品</option>
-                <option value="保健">保健</option>
-                <option value="护肤">护肤</option>
+                {volist name="Think.config.custom.brand_type" id="brand_type"}
+                <option value="{$k}">{$brand_type}</option>
+                {/volist}
             </select>
         </div>
         <div class="upload-picture-module box-flex f24">
@@ -83,7 +83,7 @@
                     },
                     success: function(data){
                         console.log(data)
-                        $('.brand_list_layer').find('.list').html(data);
+                        $('.setBrandLayer').find('.list').html(data);
                     }
                 });
             },
@@ -225,7 +225,7 @@
         $('body').on('click','.setBrandLayer li',function(){
             $(this).addClass('current').siblings().removeClass('current');
             var brandName=$(this).find('input[name="name"]').val();
-            $('.name').text(brandName);
+            $('.brand_name').text(brandName);
             setTimeout(function(){
                 layer.closeAll();
             },1000)

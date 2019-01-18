@@ -21,21 +21,20 @@ use \Workerman\Autoloader;
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 // 证书最好是申请的证书
-//$context = array(
-//    // 更多ssl选项请参考手册 http://php.net/manual/zh/context.ssl.php
-//    'ssl' => array(
-//        // 请使用绝对路径
-//        'local_cert'                 => '/etc/nginx/cert/1714359_worldview.com.cn.pem', // 也可以是crt文件
-//        'local_pk'                   => '/etc/nginx/cert/1714359_worldview.com.cn.key',
-//        'verify_peer'               => true,
-//        // 'allow_self_signed' => true, //如果是自签名证书需要开启此选项
-//    )
-//);
+$context = array(
+    // 更多ssl选项请参考手册 http://php.net/manual/zh/context.ssl.php
+    'ssl' => array(
+        // 请使用绝对路径
+        'local_cert'                 => '/etc/nginx/cert/1714359_worldview.com.cn.pem', // 也可以是crt文件
+        'local_pk'                   => '/etc/nginx/cert/1714359_worldview.com.cn.key',
+        'verify_peer'               => false,
+        // 'allow_self_signed' => true, //如果是自签名证书需要开启此选项
+    )
+);
 // gateway 进程，这里使用Text协议，可以用telnet测试
-$gateway = new Gateway("websocket://0.0.0.0:8282");
-//$gateway = new Gateway("websocket://0.0.0.0:8282",$context);
+$gateway = new Gateway("websocket://0.0.0.0:8282",$context);
 // 开启SSL，websocket+SSL 即wss
-//$gateway->transport = 'ssl';
+$gateway->transport = 'ssl';
 // gateway名称，status方便查看
 $gateway->name = 'YourAppGateway';
 // gateway进程数
