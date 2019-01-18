@@ -2,6 +2,8 @@ ws = new WebSocket("wss://www.worldview.com.cn:8282");
 ws.onopen = function(e){
     console.log('open');
 };
+var userId = '{$user.id}';
+console.log(userId);
 // 服务端主动推送消息时会触发这里的onmessage
 ws.onmessage = function(e){
     var data =  JSON.parse(e.data);
