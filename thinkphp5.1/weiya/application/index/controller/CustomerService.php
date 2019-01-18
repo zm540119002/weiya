@@ -27,11 +27,10 @@ class CustomerService extends \common\controller\Base{
     public function sendMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
-            $postData['to_user_id'] = 17;
-            if($this->user['id']==$postData['to_user_id']){
-                return errorMsg('不能发给自己！');
-            }
-            if($this->user){
+            if($this->user){//已登录
+                if($this->user['id']==$postData['to_user_id']){
+                    return errorMsg('不能发给自己！');
+                }
                 $modelChatMessage = new \common\model\ChatMessage();
                 $msgCreateTime = time();
                 $saveData = [
@@ -40,6 +39,7 @@ class CustomerService extends \common\controller\Base{
                     'content' => $postData['content'],
                     'create_time' => $msgCreateTime,
                 ];
+                //目的UID在线，标记为已发送
                 if(Gateway::isUidOnline($postData['to_user_id'])){
                     $saveData['send_sign'] = 1;
                 }
@@ -58,6 +58,10 @@ class CustomerService extends \common\controller\Base{
                         'id' => $res['id'],
                     ];
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
+                }
+            }else{//未登录
+                $clientId = Gateway::getClientIdByUid($postData['to_user_id']);
+                if(Gateway::isOnline($clientId)){
                 }
             }
             $postData['who'] = 'me';
