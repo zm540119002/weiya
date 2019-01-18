@@ -82,6 +82,23 @@ body{
     padding:0.18rem .15rem 0.18rem .18rem;
     border-bottom:1px solid #d9d9d9;
 }
+.option_list{
+    width:100%;
+    display:flex;
+    display:-webkit-flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.option_list li{
+    /*flex:1;*/
+    padding:0.05rem 0;
+    margin:0 0 0.22rem 0;
+    border:1px solid #17933D;
+    color:#17933D;
+    text-align:center;
+    border-radius:5px;
+    width:25%;
+}
 .row-item-mgl:last-child{
     border-bottom:none;
 }

@@ -273,12 +273,17 @@ $(function () {
         var orderId = $('.order_id').val();
         var orderSn = $('.order_sn').val();
         var addressId = $('.address_id').val();
-        var orderDetail = {};
+        var orderArr =[];
         $.each('.goods_order_item li',function () {
             _this = $(this);
             var order_detail_id = _this.data('order_detail_id');
             var brand_id = _this.find('.brand_name').data('id');
             var brand_name = _this.find('.brand_name').text();
+            orderDetail.push({
+                order_detail_id:order_detail_id,
+                brand_id:brand_id,
+                brand_name:brand_name
+            });
         })
         if(!addressId){
             dialog.error('请选择收货地址');
@@ -292,7 +297,8 @@ $(function () {
             province:province,
             city:city,
             area:area,
-            detail_address:detail_address
+            detail_address:detail_address,
+            orderDetail:orderArr
         };
         _this.addClass("nodisabled");//防止重复提交
         var url = module + 'Order/confirmOrder';
