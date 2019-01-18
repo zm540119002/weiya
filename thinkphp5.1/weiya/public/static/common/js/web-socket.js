@@ -2,10 +2,12 @@ ws = new WebSocket("wss://www.worldview.com.cn:8282");
 ws.onopen = function(e){
     console.log('open');
 };
+var clientId = '';
 // 服务端主动推送消息时会触发这里的onmessage
 ws.onmessage = function(e){
     var data =  JSON.parse(e.data);
     var type = data.type || '';
+    clientId = data.client_id;
     switch(type){
         case 'init':
             //未登录则返回
@@ -14,7 +16,7 @@ ws.onmessage = function(e){
             }
             // Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
             // 利用jquery发起ajax请求，将client_id发给后端进行uid绑定
-            var postData = {client_id: data.client_id};
+            var postData = {client_id: clientId};
             var url = domain + 'index/CustomerService/bindUid';
             $.ajax({
                 url: url,

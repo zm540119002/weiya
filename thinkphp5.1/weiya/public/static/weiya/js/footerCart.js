@@ -3,6 +3,7 @@ function addCart(_this) {
     var lis = null;
     lis = $('ul.goods_list').find('li[data-buy_type="1"]');
     var postData = assemblyData(lis);
+    console.log(postData);
     fn_name = 'addCart';
     if(!postData){
         return false;
@@ -394,6 +395,8 @@ function assemblyData(lis) {
         var _this = $(this);
         var num = _this.find('.gshopping_count').val();
         var buy_type=_this.data('buy_type');
+        var brand_id=_this.find('.brand_name').data('id');
+        var brand_name=_this.find('.brand_name').text();
         //alert(num);
         if(!isPosIntNumberOrZero(num)){
             isInt = false;
@@ -406,6 +409,8 @@ function assemblyData(lis) {
             tmp.foreign_id = goodsId;
             tmp.num = num;
             tmp.buy_type=buy_type;
+            tmp.brand_id=brand_id;
+            tmp.brand_name=brand_name;
             postData.goodsList.push(tmp);
         }
     });
