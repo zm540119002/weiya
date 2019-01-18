@@ -374,13 +374,18 @@
         //搜索聊天客户
         $('body').on('click','.search_btn', function() {
             var searchText=$(this).next().val();
-            $('.list li').each(function(){
+            $('.chat_left .chat_list').each(function(index,val){
+                console.log(index);
                 var _this=$(this);
                 var name=_this.find('.customer_name').text();
                 if(searchText==name){
                     _this.show().siblings().hide();
+                    return false;
+                }else{
+                    _this.hide();
                 }
             })
+            $('.list').append('<li class="no_info">暂无此人</li>');
         });
     });
 </script>
