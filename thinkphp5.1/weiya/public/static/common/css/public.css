@@ -56,6 +56,11 @@ body{
     text-indent:10px;
     font-size:0.24rem;
 }
+.disabled{
+    pointer-events: none;
+    background: #f2f2f2 !important;
+    border:1px solid #d9d9d9;
+}
 .text-intro{
     overflow : hidden;
     text-overflow: ellipsis;
@@ -1620,8 +1625,17 @@ background-position: 0 -27px;
 .setRoleLayer .layui-m-layerbtn span[no],
 .setOrganizeLayer .layui-m-layerbtn span[no],
 .vendorInfoLayer .layui-m-layerbtn span[no],
-.projectDetailLayer .layui-m-layerbtn span[no]{
+.projectDetailLayer .layui-m-layerbtn span[no]
+{
     visibility: hidden;
+}
+.payPasswordLayer .layui-m-layerbtn,
+.forgetWalletPasswordLayer .layui-m-layerbtn{
+    position:relative;
+}
+.payPasswordLayer .layui-m-layerbtn span,
+.forgetWalletPasswordLayer .layui-m-layerbtn span{
+    text-align:left;
 }
 .factoryListLayer .layui-m-layerbtn span[yes],
 .setRoleLayer .layui-m-layerbtn span[yes],
@@ -4064,12 +4078,25 @@ select[name="nodeIds"]{
     border-top:none;
 }
 .loginLayer .layui-m-layerbtn,
-.forgetPasswordLayer .layui-m-layerbtn{
+.forgetPasswordLayer .layui-m-layerbtn,
+.payPasswordLayer .layui-m-layerbtn span[type="0"],
+.forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
     background-image:url(../../common/img/icons/close_btn.png);
     background-repeat:no-repeat;
     background-size: 0.25rem auto;
     top:3px;
     right:0;
+}
+.payPasswordLayer .layui-m-layerbtn span[type="0"],
+.forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
+    top: -172px;
+    right: -248px;
+    width: 10px;
+    border-right: none;
+}
+.forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
+    top: -254px;
+    right: -286px;
 }
 .layui-m-layer-shareqrCodeLayer .layui-m-layerbtn span{
     color:#575757;
@@ -5411,6 +5438,10 @@ ul.info_list li{
     height: 0.5rem;
     line-height: 0.5rem;
     border:1px solid #d9d9d9;
+    border-right:none;
+}
+.payment_password_list li:last-child{
+    border-right:1px solid #d9d9d9;
 }
 .payment_password_list li input{
     display:block;
@@ -5420,6 +5451,9 @@ ul.info_list li{
 }
 .payPasswordLayer .payment_password{
     padding:0.25rem;
+}
+.forget_wallet_password{
+    color:#0066cc;
 }
 /*订单客服售前*/
 .layui-m-layerchild.chatLayer{
@@ -5595,6 +5629,7 @@ ul.info_list li{
 .tags_item_r .share span{
     background-position:0 -0.44rem;
 }
+
 /*图片放大样式*/
 .big_img{position: fixed;z-index: -1;opacity: 0;background: rgba(0,0,0,0.9);width: 100%;height: 100%;top:0;left:0;}
 .big_img .swiper-container2 {position: relative;width: 100%;height: 100%;}

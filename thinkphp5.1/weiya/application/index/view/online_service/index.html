@@ -75,11 +75,10 @@
 	</nav>
 </section>
 {/block}
-{block name="common"}
-{/block}
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
+	var loginSign = '{$loginSign}';
 	function on_message_call_back(data) {
 		var chatListOtherTpl = $('#chatListOtherTpl');
 		chatListOtherTpl.find('.msg').text(data.content);

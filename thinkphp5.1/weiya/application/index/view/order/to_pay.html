@@ -27,7 +27,11 @@
                     <span class="selected"></span>
                     <span class="wx"></span>
                 </li>
-                <li data-paycode="4">
+                {if $walletInfo.amount >= $orderInfo.amount}
+                <li data-paycode="4" >
+                {else /}
+                <li data-paycode="4" class="disabled">
+                {/if}
                     钱包支付
                     <!--<input type="checkbox" checked="checked" class=""/>-->
                     <span class="selected"></span>

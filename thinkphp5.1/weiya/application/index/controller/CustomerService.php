@@ -3,14 +3,22 @@ namespace app\index\controller;
 
 use common\component\GatewayClient\Gateway;
 
-class CustomerService extends \common\controller\UserBase{
+class CustomerService extends \common\controller\Base{
+    private $user = null;
+    public function __construct(){
+        parent::__construct();
+        //判断是否登录
+        $this->user = checkLogin();
+    }
     /**绑定用户ID
      */
     public function bindUid(){
         if(request()->isAjax()){
             $postData = input('post.');
-            // client_id与uid绑定
-            Gateway::bindUid($postData['client_id'], $this->user['id']);
+            if($this->user){
+                // client_id与uid绑定
+                Gateway::bindUid($postData['client_id'], $this->user['id']);
+            }
             return successMsg('成功！');
         }
     }
