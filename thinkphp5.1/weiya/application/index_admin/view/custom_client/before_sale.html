@@ -388,10 +388,11 @@
                     return false;
                 }else{
                     _this.hide();
+                    $('.list .no_info').remove();
+                    $('.list').append('<li class="no_info">暂无此人</li>');
                 }
             })
-            $('.list').html('');
-            $('.list').append('<li class="no_info">暂无此人</li>');
+            
         });
     });
 </script>
