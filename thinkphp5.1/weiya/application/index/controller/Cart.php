@@ -23,7 +23,6 @@ class Cart extends \common\controller\UserBase{
             return errorMsg('请求方式错误');
         }
         $goodsList = input('post.goodsList/a');
-        print_r($goodsList);
         if(empty($goodsList)){
             return errorMsg('没有数据');
         }
@@ -51,13 +50,11 @@ class Cart extends \common\controller\UserBase{
                         'num' => $goods['num'] + $cart['num'],
                         'brand_name' => $cart['brand_name'],
                         'brand_id' => $cart['brand_id'],
-                        'update_time'=>time(),
                     ];
                     $updateData[] = $data;
                 }
             }
             if(!$find){//如果没找到，则新增
-                print_r($goods);exit;
                 $data = [
                     'user_id' => $this->user['id'],
                     'foreign_id' => $goods['foreign_id'],
