@@ -80,7 +80,7 @@ function forgetWalletPasswordDialog(fn_name,data){
         content:content,
         type:1,
         shadeClose:false,
-        btn:['确定'],
+        btn:['确定',''],
         success:function(){
             $('.forgetWalletPasswordLayer #fn_name').val(fn_name);
             $('.forgetWalletPasswordLayer #order_sn').val(data.order_sn);
