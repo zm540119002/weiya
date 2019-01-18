@@ -8,6 +8,10 @@ ws.onmessage = function(e){
     var type = data.type || '';
     switch(type){
         case 'init':
+            //未登录则返回
+            if(!loginSign){
+                return false;
+            }
             // Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
             // 利用jquery发起ajax请求，将client_id发给后端进行uid绑定
             var postData = {client_id: data.client_id};
@@ -27,8 +31,6 @@ ws.onmessage = function(e){
                     $('.loading').hide();
                     if(msg.status==0){
                         dialog.error(msg.info);
-                    }else if(msg.code==1 && msg.data=='no_login'){
-                        //未登录
                     }else if(msg.code==1){
                         //已登录
                     }

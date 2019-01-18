@@ -83,7 +83,6 @@
                         dialog.error('AJAX错误！');
                     },
                     success: function(data){
-                        console.log(data)
                         $('.setBrandLayer').find('.list').html(data);
                         $('.setBrandLayer').find('.list').attr('id',id);
                     }
