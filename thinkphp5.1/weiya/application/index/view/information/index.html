@@ -57,11 +57,14 @@
 			mainCell:".more-text",
 			openBtn:'显示全部>'
 		});
-		/*调起大图 S*/
+		/*调起大图*/
 		var mySwiper = new Swiper('.swiper-container2', {
 			loop:true,
-			pagination: '.swiper-pagination2',
-			})
+			pagination: {
+				el: '.swiper-pagination2',
+				clickable: true
+			}
+		})
 		$("#list").on("click", ".info_img img", 
 		function() {
 			var imgBox = $(this).parents(".info_img").find("img");
