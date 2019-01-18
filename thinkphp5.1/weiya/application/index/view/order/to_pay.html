@@ -27,18 +27,18 @@
                     <span class="selected"></span>
                     <span class="wx"></span>
                 </li>
-                <li data-paycode="4">
+                {if $walletInfo.amount >= $order.amount}
+                <li data-paycode="4" >
+                {else /}
+                <li data-paycode="4" class="disabled">
+                {/if}
                     钱包支付
                     <!--<input type="checkbox" checked="checked" class=""/>-->
                     <span class="selected"></span>
                     {notempty name="walletInfo"}
-                    {if $walletInfo.amount > $orderInfo.amount}
                     <span class="wx">余额：￥<price>{$walletInfo.amount}</price></span>
                     {else /}
-                    <span class="wx disabled">余额：￥<price>{$walletInfo.amount}</price></span>
-                    {/if}
-                    {else /}
-                    <span class="wx disabled" >余额：￥<price>0.00</price></span>
+                    <span class="wx">余额：￥<price>0.00</price></span>
                     {/notempty}
 
                 </li>
