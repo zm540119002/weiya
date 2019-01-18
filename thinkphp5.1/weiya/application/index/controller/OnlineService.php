@@ -52,6 +52,7 @@ class OnlineService extends \common\controller\Base{
                 ];
                 $unreadCount = $modelChatMessage->getList($config);
                 $this->assign('unreadCount',$unreadCount[0]['num']);
+                $this->assign('userId',$this->user['id']);
             }
             return $this->fetch();
         }
