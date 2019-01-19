@@ -3,7 +3,13 @@ function addCart(_this) {
     var lis = null;
     lis = $('ul.goods_list').find('li[data-buy_type="1"]');
     var postData = assemblyData(lis);
-    console.log(postData);
+    var goodsList = postData.goodsList
+    for(var i=0;goodsList.length;i++){
+        if(goodsList[i].buy_type == 1 && !goodsList[i]['brand_name']){
+            dialog.error('请设置品牌');
+            return false;
+        }
+    }
     fn_name = 'addCart';
     if(!postData){
         return false;
@@ -274,15 +280,15 @@ $(function () {
         var orderSn = $('.order_sn').val();
         var addressId = $('.address_id').val();
         var orderArr =[];
-        $.each('.goods_order_item li',function () {
+        $.each($('.goods_order_item li'),function () {
             _this = $(this);
             var order_detail_id = _this.data('order_detail_id');
             var brand_id = _this.find('.brand_name').data('id');
             var brand_name = _this.find('.brand_name').text();
-            orderDetail.push({
-                order_detail_id:order_detail_id,
+            orderArr.push({
+                id:order_detail_id,
                 brand_id:brand_id,
-                brand_name:brand_name
+                brand_name:brand_name,
             });
         })
         if(!addressId){
