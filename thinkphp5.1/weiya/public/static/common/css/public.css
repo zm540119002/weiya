@@ -5376,6 +5376,7 @@ ul.info_list li{
     position:fixed;
     left:0;
     bottom:0;
+    z-index:99;
 }
 /*.projectDetailLayer .layui-m-layerbtn{
     bottom:1rem;
