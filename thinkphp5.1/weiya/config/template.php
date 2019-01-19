@@ -35,16 +35,6 @@ return [
         'public_img' => Request::domain() .'/static/common/img',
         'public_js' => Request::domain() .'/static/common/js',
         'public_css' => Request::domain() .'/static/common/css',
-        //admin资源路径
-        'admin_js' => Request::domain() .'/static/admin/js',
-        'admin_css' => Request::domain() .'/static/admin/css',
-        'admin_img' => Request::domain() .'/static/admin/img',
-        //上传路径
-        'public_uploads' => Request::domain() .'/uploads',
-        //维雅资源路径
-        'weiya_img' => Request::domain() .'/static/weiya/img',
-        'weiya_js' => Request::domain() .'/static/weiya/js',
-        'weiya_css' => Request::domain() .'/static/weiya/css',
         //h-ui资源路径
         'hui_js' => Request::domain() .'/static/h-ui/js',
         'hui_css' => Request::domain() .'/static/h-ui/css',
@@ -55,5 +45,15 @@ return [
         'hui_admin_css' => Request::domain() .'/static/h-ui.admin/css',
         'hui_admin_img' => Request::domain() .'/static/h-ui.admin/images',
         'hui_admin_skin' => Request::domain() .'/static/h-ui.admin/skin',
+        //admin资源路径
+        'admin_js' => Request::domain() .'/static/admin/js',
+        'admin_css' => Request::domain() .'/static/admin/css',
+        'admin_img' => Request::domain() .'/static/admin/img',
+        //上传路径
+        'public_uploads' => Request::domain() .'/uploads',
+        //维雅资源路径
+        'weiya_img' => Request::domain() .'/static/weiya/img',
+        'weiya_js' => Request::domain() .'/static/weiya/js',
+        'weiya_css' => Request::domain() .'/static/weiya/css',
     ],
 ];
