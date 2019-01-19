@@ -2,6 +2,8 @@
 {block name="css-customize"}
 {/block}
 {block name="content"}
+<input type="hidden" id="wallet_pay_back_function" value="" />
+<input type="hidden" id="wallet_pay_back_function_parameter" value="" />
 <article class="f24 pay_wrapper">
     <section class="pay_amount_item content-padding">
         <div>订单金额：<span class="red">￥<price>{$orderInfo.amount}</price></span></div>
@@ -80,15 +82,19 @@
                 return false;
             }
             if(pay_code == 4){
-                var data = $('#pay_info').serializeObject()
-                walletPayDialog('orderPayment',data);
+                var parameter = $('#pay_info').serialize();
+                $('#wallet_pay_back_function').val('orderPayment');
+                $('#wallet_pay_back_function_parameter').val(parameter);
+//                walletPayDialog('orderPayment',data);
+                walletPayDialog();
                 return false
             }
         });
 
         $('body').on('click','.forget_wallet_password',function () {
             var pay_code = $('input[name=pay_code]').val();
-            var data = $('#pay_info').serializeObject();
+//            var data = $('#pay_info').serializeObject();
+            var data = $('#pay_info').serialize();
             data.pay_code = pay_code;
             forgetWalletPasswordDialog('orderPayment',data)
         })
