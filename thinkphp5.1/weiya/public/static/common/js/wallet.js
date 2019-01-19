@@ -1,5 +1,5 @@
-//钱包支付弹窗
-function walletPayDialog(fn_name,data) {
+
+function walletPayDialog() {
     var content=$('#walletPay').html();
     window.scrollTo(0,0);
     layer.open({
@@ -10,8 +10,6 @@ function walletPayDialog(fn_name,data) {
         title:['钱包支付密码','border-bottom:1px solid #d9d9d9;'],
         btn:['确定支付',''],
         success:function(indexs,i){
-            $('#fn_name').val(fn_name);
-            $('#order_sn').val(data.order_sn);
             //钱包密码
             var oLis=$('.payPasswordLayer input.password_item');
             for(var i = 0;i<oLis.length;i++){
@@ -42,27 +40,24 @@ function walletPayDialog(fn_name,data) {
                 dialog.error('请输入正确4位数密码');
                 return false;
             }
-            var postData = data;
-;           postData.fn_name = fn_name;
-;           postData.password = password;
+            var postData = {
+                password:password,
+            };
             var url = module+'Wallet/login';
             $.post(url,postData,function (data) {
                 if(data.status){
-                    var info =  JSON.parse( data.info);
-                    var fn_name = info.fn_name;
-                    if(fn_name){
-                      if(fn_name == 'orderPayment'){
-                          orderPayment(info);
-                      }
+                    if(wallet_pay_back_function){
+                        eval(wallet_pay_back_function +"(wallet_pay_back_function_parameter)");
                         return false;
                     }
+                    flushPage();
                 }
                 if(!data.status){
                     dialog.success(data.info);
                 }
                 // layer.close(index);
-            },'JSON')
-            
+            })
+
         }
     });
 }
@@ -72,7 +67,7 @@ $(function(){
 })
 
 //忘记密码-弹窗触发
-function forgetWalletPasswordDialog(fn_name,data){
+function forgetWalletPasswordDialog(){
     var content = $('#WalletPasswordHtml').html();
     layer.open({
         title:['重置/设置支付密码','border-bottom:1px solid #d9d9d9;'],
@@ -82,8 +77,6 @@ function forgetWalletPasswordDialog(fn_name,data){
         shadeClose:false,
         btn:['确定',''],
         success:function(){
-            $('.forgetWalletPasswordLayer #fn_name').val(fn_name);
-            $('.forgetWalletPasswordLayer #order_sn').val(data.order_sn);
         },
         yes:function(index){
             var postForm = $('.forgetWalletPasswordLayer #ForgetWalletPassword');
@@ -114,9 +107,7 @@ function forgetWalletPasswordDialog(fn_name,data){
 
                     //成功后弹出登录框
                     layer.closeAll();
-                    var info =  JSON.parse( data.info);
-                    console.log(typeof info)
-                    walletPayDialog(fn_name,info);
+                    walletPayDialog();
 
                 }
                 if(!data.status){

@@ -5,7 +5,7 @@ var dialog = {
             content: message?message:'出错啦！'
             ,icon: 2
             ,skin: 'msg'
-            ,time: 2000 //2秒后自动关闭
+            ,time: 2 //2秒后自动关闭
         });
     },
     //成功弹出层

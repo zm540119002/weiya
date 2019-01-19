@@ -371,10 +371,6 @@ function getWeek(i) {
     //console.log(firstDay);
     //显示周日
     // var SundayTime =new Date(nowTime); 
-    console.log(day);
-
-   
-    
     if(day==5){
          //显示周五
         var Friday =new Date(7*oneDayTime+now.getTime()); 

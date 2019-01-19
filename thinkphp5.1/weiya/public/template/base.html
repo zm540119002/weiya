@@ -16,11 +16,17 @@
 		var action = controller + '{:request()->action()}';
 		var uploads = '{:request()->domain()}'+'/uploads/';
 		var send_sms_url = '{:url("ucenter/UserCenter/sendSms")}';
+		var login_back_function ='';
+		var login_back_function_parameter = {};
+		var wallet_pay_back_function = '';
+		var wallet_pay_back_function_parameter = {};
 	</script>
 	<!--前置自定义js-->
 	{block name="pre-script"}{/block}
 </head>
 <body>
+<input id="login_back_login" type="hidden" value="">
+
 <!-- 内容模块 -->
 {block name="content"}{/block}
 <!-- 公共模块-->

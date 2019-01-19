@@ -31,29 +31,29 @@ return [
     // 标签库标签结束标记
     'taglib_end'   => '}',
     'tpl_replace_string' => [
-        //公共资源路径
+        //common资源路径
         'public_img' => Request::domain() .'/static/common/img',
         'public_js' => Request::domain() .'/static/common/js',
         'public_css' => Request::domain() .'/static/common/css',
-        'public_hui_admin' => Request::domain() .'/static/admin/hadmin',
-        'public_admin_common_js' => Request::domain() .'/static/admin/js',
-        'public_admin_common_css' => Request::domain() .'/static/admin/css',
-        'public_admin_common_img' => Request::domain() .'/static/admin/img',
-        //公共上传路径
+        //admin资源路径
+        'admin_js' => Request::domain() .'/static/admin/js',
+        'admin_css' => Request::domain() .'/static/admin/css',
+        'admin_img' => Request::domain() .'/static/admin/img',
+        //上传路径
         'public_uploads' => Request::domain() .'/uploads',
         //维雅资源路径
         'weiya_img' => Request::domain() .'/static/weiya/img',
         'weiya_js' => Request::domain() .'/static/weiya/js',
         'weiya_css' => Request::domain() .'/static/weiya/css',
-        //h-ui
-        'hui_lib' => Request::domain() .'/static/h-ui.lib',
+        //h-ui资源路径
         'hui_js' => Request::domain() .'/static/h-ui/js',
         'hui_css' => Request::domain() .'/static/h-ui/css',
         'hui_img' => Request::domain() .'/static/h-ui/images',
-        //h-ui.admin
-        'hui_admin_js' => Request::domain() .'/static/h-ui.admin/js',
-        'hui_admin_css' => Request::domain() .'/static/h-ui.admin/css',
-        'hui_admin_img' => Request::domain() .'/static/h-ui.admin/images',
-        'hui_admin_skin' => Request::domain() .'/static/h-ui.admin/skin',
+        'hui_lib' => Request::domain() .'/static/h-ui.lib',
+        //h-ui.admin资源路径
+        'hui_admin2_js' => Request::domain() .'/static/h-ui.admin/js',
+        'hui_admin2_css' => Request::domain() .'/static/h-ui.admin/css',
+        'hui_admin2_img' => Request::domain() .'/static/h-ui.admin/images',
+        'hui_admin2_skin' => Request::domain() .'/static/h-ui.admin/skin',
     ],
 ];

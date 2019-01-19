@@ -54,8 +54,9 @@
 </article>
 {/block}
 {block name="common"}
-{include file="template/wallet_password_dialog.html" /}
-{include file="template/forget_wallet_password_dialog.html" /}
+<!--{include file="template/wallet_password_dialog.html" /}-->
+<!--{include file="template/forget_wallet_password_dialog.html" /}-->
+{include file="template/wallte.html" /}
 {/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/wallet.js"></script>
@@ -79,15 +80,18 @@
                 return false;
             }
             if(pay_code == 4){
-                var data = $('#pay_info').serializeObject()
-                walletPayDialog('orderPayment',data);
+                wallet_pay_back_function = 'orderPayment';
+                wallet_pay_back_function_parameter = $('#pay_info').serializeObject();
+//                walletPayDialog('orderPayment',data);
+                walletPayDialog();
                 return false
             }
         });
 
         $('body').on('click','.forget_wallet_password',function () {
             var pay_code = $('input[name=pay_code]').val();
-            var data = $('#pay_info').serializeObject();
+//            var data = $('#pay_info').serializeObject();
+            var data = $('#pay_info').serialize();
             data.pay_code = pay_code;
             forgetWalletPasswordDialog('orderPayment',data)
         })
