@@ -3,7 +3,13 @@ function addCart(_this) {
     var lis = null;
     lis = $('ul.goods_list').find('li[data-buy_type="1"]');
     var postData = assemblyData(lis);
-    console.log(postData);
+    var goodsList = postData.goodsList
+    for(var i=0;goodsList.length;i++){
+        if(goodsList[i].buy_type == 1 && !goodsList[i]['brand_name']){
+            dialog.error('请设置品牌');
+            return false;
+        }
+    }
     fn_name = 'addCart';
     if(!postData){
         return false;
