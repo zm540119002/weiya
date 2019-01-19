@@ -1,5 +1,6 @@
 
 function addCart(_this) {
+    loginBackFunction = addCart;
     var lis = null;
     lis = $('ul.goods_list').find('li[data-buy_type="1"]');
     var postData = assemblyData(lis);
@@ -11,7 +12,6 @@ function addCart(_this) {
             return false;
         }
     }
-    fn_name = 'addCart';
     if(!postData){
         return false;
     }
