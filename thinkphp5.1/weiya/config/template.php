@@ -27,7 +27,6 @@ return [
     // 模板引擎普通标签结束标记
     'tpl_end'      => '}',
     'taglib_begin' => '{',
-    // 标签库标签开始标记
     // 标签库标签结束标记
     'taglib_end'   => '}',
     'tpl_replace_string' => [
@@ -51,8 +50,6 @@ return [
         'index_admin_js' => Request::domain() .'/static/index_admin/js',
         'index_admin_css' => Request::domain() .'/static/index_admin/css',
         'index_admin_img' => Request::domain() .'/static/index_admin/img',
-        //上传路径
-        'public_uploads' => Request::domain() .'/uploads',
         //h-ui资源路径
         'hui_js' => Request::domain() .'/static/h-ui/js',
         'hui_css' => Request::domain() .'/static/h-ui/css',
@@ -63,5 +60,7 @@ return [
         'hui_admin2_css' => Request::domain() .'/static/h-ui.admin/css',
         'hui_admin2_img' => Request::domain() .'/static/h-ui.admin/images',
         'hui_admin2_skin' => Request::domain() .'/static/h-ui.admin/skin',
+        //上传路径
+        'public_uploads' => Request::domain() .'/uploads',
     ],
 ];

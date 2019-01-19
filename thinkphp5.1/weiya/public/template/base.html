@@ -16,10 +16,13 @@
 		var action = controller + '{:request()->action()}';
 		var uploads = '{:request()->domain()}'+'/uploads/';
 		var send_sms_url = '{:url("ucenter/UserCenter/sendSms")}';
-		var login_back_function ='';
+		var param = 123;
+		var payCallBack = function(param){
+			console.log(param);
+		};
 		var login_back_function_parameter = {};
-		var wallet_pay_back_function = '';
-		var wallet_pay_back_function_parameter = {};
+//		var wallet_pay_back_function = '';
+//		var wallet_pay_back_function_parameter = {};
 	</script>
 	<!--前置自定义js-->
 	{block name="pre-script"}{/block}

@@ -80,7 +80,8 @@
                 return false;
             }
             if(pay_code == 4){
-                wallet_pay_back_function = 'orderPayment';
+                payCallBack = orderPayment;
+//                wallet_pay_back_function = 'orderPayment';
                 wallet_pay_back_function_parameter = $('#pay_info').serializeObject();
 //                walletPayDialog('orderPayment',data);
                 walletPayDialog();
