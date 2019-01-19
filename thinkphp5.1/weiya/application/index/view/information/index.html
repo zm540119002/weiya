@@ -17,6 +17,10 @@
 <div class="big_img">
     <div class="swiper-container2 swiper-container-horizontal">
       <div class="swiper-wrapper">
+		  <div class="swiper-slide "><div class="cell">
+			  <img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564787676.jpg" / >
+		</div>
+	</div>
        
       </div>
     </div>
@@ -64,33 +68,33 @@
 				clickable: true
 			}
 		})
-		$("#list").on("click", ".info_img img", 
-		function() {
-			var imgBox = $(this).parents(".info_img").find("img");
-			var i = $(imgBox).index(this);
-			$(".big_img .swiper-wrapper").html("")
+		// $("#list").on("click", ".info_img img", 
+		// function() {
+		// 	var imgBox = $(this).parents(".info_img").find("img");
+		// 	var i = $(imgBox).index(this);
+		// 	$(".big_img .swiper-wrapper").html("")
 
-			for(var j = 0 ,c = imgBox.length; j < c ;j++){
-			$(".big_img .swiper-wrapper").append('<div class="swiper-slide "><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
-			}
-			// mySwiper.updateSlidesSize();
-			// mySwiper.updatePagination();
-			$(".big_img").css({
-				"z-index": 1001,
-				"opacity": "1"
-			});
-			//mySwiper.slideTo(i, 0, false);
-			return false;
-		});
+		// 	for(var j = 0 ,c = imgBox.length; j < c ;j++){
+		// 	$(".big_img .swiper-wrapper").append('<div class="swiper-slide "><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
+		// 	}
+		// 	// mySwiper.updateSlidesSize();
+		// 	// mySwiper.updatePagination();
+		// 	$(".big_img").css({
+		// 		"z-index": 1001,
+		// 		"opacity": "1"
+		// 	});
+		// 	//mySwiper.slideTo(i, 0, false);
+		// 	return false;
+		// });
 	
-		$(".big_img").on("click", 
-		function() {
-			$(this).css({
-				"z-index": "-1",
-				"opacity": "0"
-			});
+		// $(".big_img").on("click", 
+		// function() {
+		// 	$(this).css({
+		// 		"z-index": "-1",
+		// 		"opacity": "0"
+		// 	});
 
-		});  
+		// });  
 	});
 </script>
 {/block}
