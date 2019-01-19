@@ -168,3 +168,10 @@
     text-align: center;
     color:#36BCE4;
 }
+.row-item{
+    width:408px;
+    display:flex;
+    display:-webkit-flex;
+    margin:0 0 0 114px;
+    justify-content: space-between;
+}
