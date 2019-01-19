@@ -3,6 +3,13 @@ function addCart(_this) {
     var lis = null;
     lis = $('ul.goods_list').find('li[data-buy_type="1"]');
     var postData = assemblyData(lis);
+    var goodsList = postData.goodsList
+    for(var i=0;goodsList.length;i++){
+        if(goodsList[i].buy_type == 1 && !goodsList[i]['brand_name']){
+            dialog.error('请设置品牌');
+            return false;
+        }
+    }
     fn_name = 'addCart';
     if(!postData){
         return false;
@@ -272,6 +279,18 @@ $(function () {
         var orderId = $('.order_id').val();
         var orderSn = $('.order_sn').val();
         var addressId = $('.address_id').val();
+        var orderArr =[];
+        $.each($('.goods_order_item li'),function () {
+            _this = $(this);
+            var order_detail_id = _this.data('order_detail_id');
+            var brand_id = _this.find('.brand_name').data('id');
+            var brand_name = _this.find('.brand_name').text();
+            orderArr.push({
+                id:order_detail_id,
+                brand_id:brand_id,
+                brand_name:brand_name,
+            });
+        })
         if(!addressId){
             dialog.error('请选择收货地址');
             return false;
@@ -284,7 +303,8 @@ $(function () {
             province:province,
             city:city,
             area:area,
-            detail_address:detail_address
+            detail_address:detail_address,
+            orderDetail:orderArr
         };
         _this.addClass("nodisabled");//防止重复提交
         var url = module + 'Order/confirmOrder';
@@ -311,6 +331,9 @@ $(function () {
             }
         });
     });
+
+    //再次购买
+    
 
 
     //购物车弹窗 样品购买
@@ -391,6 +414,8 @@ function assemblyData(lis) {
         var _this = $(this);
         var num = _this.find('.gshopping_count').val();
         var buy_type=_this.data('buy_type');
+        var brand_id=_this.find('.brand_name').data('id');
+        var brand_name=_this.find('.brand_name').text();
         //alert(num);
         if(!isPosIntNumberOrZero(num)){
             isInt = false;
@@ -403,6 +428,8 @@ function assemblyData(lis) {
             tmp.foreign_id = goodsId;
             tmp.num = num;
             tmp.buy_type=buy_type;
+            tmp.brand_id=brand_id;
+            tmp.brand_name=brand_name;
             postData.goodsList.push(tmp);
         }
     });

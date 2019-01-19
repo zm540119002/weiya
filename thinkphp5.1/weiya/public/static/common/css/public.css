@@ -82,6 +82,23 @@ body{
     padding:0.18rem .15rem 0.18rem .18rem;
     border-bottom:1px solid #d9d9d9;
 }
+.option_list{
+    width:100%;
+    display:flex;
+    display:-webkit-flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.option_list li{
+    /*flex:1;*/
+    padding:0.05rem 0;
+    margin:0 0 0.22rem 0;
+    border:1px solid #17933D;
+    color:#17933D;
+    text-align:center;
+    border-radius:5px;
+    width:25%;
+}
 .row-item-mgl:last-child{
     border-bottom:none;
 }
@@ -4065,7 +4082,8 @@ select[name="nodeIds"]{
 }
 .goodsInfoLayer .layui-m-layerbtn,
 .loginLayer .layui-m-layerbtn,
-.forgetPasswordLayer .layui-m-layerbtn{
+.forgetPasswordLayer .layui-m-layerbtn,
+.brandLayer .layui-m-layerbtn{
     width:0.5rem;
     height:0.5rem;
     line-height:0.5rem;
@@ -5353,6 +5371,14 @@ ul.info_list li{
 /*.projectDetailLayer .layui-m-layerbtn{
     bottom:1rem;
 }*/
+.brandLayer .layui-m-layerbtn{
+    background-image:url(../../common/img/icons/close_btn.png);
+    background-repeat:no-repeat;
+    background-size: 0.25rem auto;
+    top:3px;
+    right:0;
+    left:initial;
+}
 .brand_list li{
     padding:0;
 
@@ -5439,7 +5465,7 @@ ul.info_list li{
     line-height: 0.5rem;
     border:1px solid #d9d9d9;
     border-right:none;
-}
+}s
 .payment_password_list li:last-child{
     border-right:1px solid #d9d9d9;
 }

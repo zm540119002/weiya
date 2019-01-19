@@ -20,7 +20,7 @@ class Order extends \common\controller\UserBase
                 ['c.id', 'in', $cartIds],
             ], 'field' => [
                 'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity','g.sample_price',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.store_id','c.buy_type','c.num',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.store_id','c.buy_type','c.num','c.brand_id','c.brand_name'
             ],'join'=>[
                 ['goods g','g.id = c.foreign_id','left']
             ]
@@ -72,6 +72,8 @@ class Order extends \common\controller\UserBase
             $dataDetail[$item]['user_id'] = $this->user['id'];
             $dataDetail[$item]['store_id'] = $goodsInfo['store_id'];
             $dataDetail[$item]['buy_type'] = $goodsInfo['buy_type'];
+            $dataDetail[$item]['brand_name'] = $goodsInfo['brand_name'];
+            $dataDetail[$item]['brand_id'] = $goodsInfo['brand_id'];
         }
         //生成订单明细
         $res = $modelOrderDetail->allowField(true)->saveAll($dataDetail)->toArray();
@@ -82,31 +84,31 @@ class Order extends \common\controller\UserBase
         $modelOrder->commit();
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
-   //订单-结算页
-    public function settlement()
-    {
-        $modelOrder = new \app\index\model\Order();
-        $orderSn = input('order_sn');
-        $config = [
-            'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $orderSn],
-                ['o.user_id', '=', $this->user['id']],
-            ],'join' => [
-                ['order_detail od','od.father_order_id = o.id','left'],
-                ['goods g','g.id = od.goods_id','left']
-            ],'field' => [
-                'o.id', 'o.sn', 'o.amount',
-                'o.user_id', 'od.goods_id','od.num','od.price',
-                'g.name','g.thumb_img',
-            ],
-        ];
-        $orderInfo = $modelOrder->getList($config);
-        $this ->assign('info',$orderInfo);
-        $unlockingFooterCart = unlockingFooterCartConfig([3]);
-        $this->assign('unlockingFooterCart', $unlockingFooterCart);
-        return $this->fetch();
-    }
+//   //订单-结算页
+//    public function settlement()
+//    {
+//        $modelOrder = new \app\index\model\Order();
+//        $orderSn = input('order_sn');
+//        $config = [
+//            'where' => [
+//                ['o.status', '=', 0],
+//                ['o.sn', '=', $orderSn],
+//                ['o.user_id', '=', $this->user['id']],
+//            ],'join' => [
+//                ['order_detail od','od.father_order_id = o.id','left'],
+//                ['goods g','g.id = od.goods_id','left']
+//            ],'field' => [
+//                'o.id', 'o.sn', 'o.amount',
+//                'o.user_id', 'od.goods_id','od.num','od.price','od.brand_name','od_brand_id',
+//                'g.name','g.thumb_img',
+//            ],
+//        ];
+//        $orderInfo = $modelOrder->getList($config);
+//        $this ->assign('info',$orderInfo);
+//        $unlockingFooterCart = unlockingFooterCartConfig([3]);
+//        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+//        return $this->fetch();
+//    }
 
     //确定订单 //订单-详情页
     public function confirmOrder()
@@ -114,6 +116,7 @@ class Order extends \common\controller\UserBase
         if (request()->isPost()) {
             $fatherOrderId = input('post.father_order_id',0,'int');
             $modelOrder = new \app\index\model\Order();
+            $modelOrder ->startTrans();
             $data = input('post.');
             $data['order_status'] = 1;
             $condition = [
@@ -122,6 +125,13 @@ class Order extends \common\controller\UserBase
             ];
             $res = $modelOrder -> allowField(true) -> save($data,$condition);
             if(false === $res){
+                $modelOrder ->rollback();
+                return errorMsg('失败');
+            }
+            $modelOrderDetail = new \app\index\model\OrderDetail();
+            $res = $modelOrderDetail -> isUpdate(true)-> saveAll($data['orderDetail']);
+            if (!count($res)) {
+                $modelOrder->rollback();
                 return errorMsg('失败');
             }
             //根据订单号查询关联的购物车的商品 删除
@@ -131,7 +141,7 @@ class Order extends \common\controller\UserBase
                     ['od.status', '=', 0],
                     ['od.father_order_id', '=', $fatherOrderId],
                 ], 'field' => [
-                    'od.goods_id','od.buy_type','od.price', 'od.num', 'od.store_id','od.father_order_id','od.user_id'
+                    'od.goods_id','od.buy_type','od.price', 'od.num', 'od.store_id','od.father_order_id','od.user_id',
                 ]
             ];
             $orderDetailList = $modelOrderDetail->getList($config);
@@ -144,9 +154,11 @@ class Order extends \common\controller\UserBase
                 ];
                 $result = $model -> del($condition,false);
                 if(!$result['status']){
+                    $modelOrder->rollback();
                     return errorMsg('删除失败');
                 }
             }
+            $modelOrder -> commit();
             $orderSn = input('post.order_sn','','string');
             return successMsg('成功',array('order_sn'=>$orderSn));
         }else{
@@ -162,7 +174,7 @@ class Order extends \common\controller\UserBase
                     ['goods g','g.id = od.goods_id','left']
                 ],'field' => [
                     'o.id', 'o.sn', 'o.amount',
-                    'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type',
+                    'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type','od.brand_id','od.brand_name','od.id as order_detail_id',
                     'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
                 ],
             ];

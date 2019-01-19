@@ -40,25 +40,30 @@ class Cart extends \common\controller\UserBase{
             //假定没找到
             $find = false;
             foreach ($cartList as $cart){
-                if($goods['foreign_id'] == $cart['foreign_id'] && $goods['buy_type'] == $cart['buy_type'] ){//找到了，则更新记录
+                if($goods['foreign_id'] == $cart['foreign_id'] && $goods['buy_type'] == $cart['buy_type'] && $goods['brand_name'] == $cart['brand_name'] ){//找到了，则更新记录
                     $find = true;
                     $data = [
                         'user_id' => $this->user['id'],
                         'id' => $cart['id'],
                         'foreign_id' => $cart['foreign_id'],
                         'buy_type' => $cart['buy_type'],
-                        'num' => $goods['num'] + $cart['num']
+                        'num' => $goods['num'] + $cart['num'],
+                        'brand_name' => $cart['brand_name'],
+                        'brand_id' => $cart['brand_id'],
                     ];
                     $updateData[] = $data;
                 }
             }
             if(!$find){//如果没找到，则新增
-                $data = [];
-                $data['user_id'] = $this->user['id'];
-                $data['foreign_id'] = $goods['foreign_id'];
-                $data['num'] = $goods['num'];
-                $data['buy_type'] = $goods['buy_type'];
-                $data['create_time'] = time();
+                $data = [
+                    'user_id' => $this->user['id'],
+                    'foreign_id' => $goods['foreign_id'],
+                    'buy_type' =>$goods['buy_type'],
+                    'num' =>$goods['num'],
+                    'brand_name' => $goods['brand_name'],
+                    'brand_id' => $goods['brand_id'],
+                    'create_time'=>time(),
+                ];
                 $addData[] = $data;
             }
         }

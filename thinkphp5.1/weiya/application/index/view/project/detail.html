@@ -101,7 +101,7 @@
 		<ul class="goods_list list">
 			{notempty name="goodsList"}
 			{volist name="goodsList" id="info"}
-			<li data-id="{$info.id}" data-buy_type="1">
+			<li data-id="{$info.id}" data-buy_type="1" id="li-id-{$key}">
 				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
 					{empty name="info.thumb_img"}
 					<img class="left goods_img" src="public_img/default/no_pic_100.jpg" alt="">

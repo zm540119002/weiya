@@ -189,8 +189,13 @@
 				dialog.error('不能发送空内容！');
 				return false;
 			}
-			var to_user_id = 17;
-			var postData = {to_user_id:to_user_id,content:_this.val()};
+			var postData = {
+				to_user_id:17,
+				content:_this.val()
+			};
+			if(!loginSign){
+				postData.from_client_id = clientId;
+			}
 			var url = domain + 'index/CustomerService/sendMessage';
 			$.ajax({
 				url: url,
