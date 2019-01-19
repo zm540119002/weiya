@@ -4406,7 +4406,10 @@ select[name="nodeIds"]{
     width:15%;
 }
 .user_info_r{
-    margin:0 0 0 -0.5rem;
+    margin:0 0 0 1rem;
+}
+a.sign_out{
+    margin: 0.18rem 0.12rem 0 0;
 }
 /*订单客服售前*/
 .chat_content_wrapper{
