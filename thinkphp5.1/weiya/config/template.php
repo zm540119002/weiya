@@ -51,8 +51,8 @@ return [
         'public_uploads' => Request::domain() .'/uploads',
         //维雅资源路径
         'index_img' => Request::domain() .'/static/index/img',
-        'weiya_js' => Request::domain() .'/static/index/js',
-        'weiya_css' => Request::domain() .'/static/index/css',
+        'index_js' => Request::domain() .'/static/index/js',
+        'index_css' => Request::domain() .'/static/index/css',
         //h-ui资源路径
         'hui_js' => Request::domain() .'/static/h-ui/js',
         'hui_css' => Request::domain() .'/static/h-ui/css',
