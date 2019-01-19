@@ -176,11 +176,9 @@ $(function(){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
                          $('.layui-m-layer').remove();
-                        if(login_back_function){
-                            eval(login_back_function +"(login_back_function_parameter)");
-                            return false;
-                        }
-                        dialogLoginDefaultCallBack(data);
+                        console.log(loginBackFunctionParameter);
+                        loginBackFunction(loginBackFunctionParameter);
+                        // dialogLoginDefaultCallBack(data);
                     }
                 }
             });
