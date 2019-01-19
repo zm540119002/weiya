@@ -46,10 +46,12 @@ function walletPayDialog() {
             var url = module+'Wallet/login';
             $.post(url,postData,function (data) {
                 if(data.status){
-                    if(wallet_pay_back_function){
-                        eval(wallet_pay_back_function +"(wallet_pay_back_function_parameter)");
-                        return false;
-                    }
+                    // if(wallet_pay_back_function){
+                    //     eval(wallet_pay_back_function +"(wallet_pay_back_function_parameter)");
+                    //     return false;
+                    // }
+
+                    payCallBack(data);
                     flushPage();
                 }
                 if(!data.status){
