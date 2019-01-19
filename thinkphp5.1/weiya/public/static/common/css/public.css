@@ -1596,6 +1596,10 @@ background-position: 0 -27px;
     -webkit-animation-duration: .5s; 
     animation-duration: .5s;
 }
+.layui-m-layer .setBrandLayer h3{
+    height:42px;
+    line-height:42px;
+}
 .editCompanyPicLayer .layui-m-layerbtn,
 .editParameterLayer .layui-m-layerbtn,
 .uploadThumbnailLayer .layui-m-layerbtn,
@@ -5367,8 +5371,8 @@ ul.info_list li{
     overflow-y:auto;
 }
 .layui-m-layer .setBrandLayer .layui-m-layercont{
-    height:550px;
-    padding:0 0 1rem 0;
+    height:450px;
+    padding:0 0 2rem 0;
 }
 .addressLayer .layui-m-layerbtn,
 .setBrandLayer .layui-m-layerbtn,
@@ -5376,6 +5380,7 @@ ul.info_list li{
     position:fixed;
     left:0;
     bottom:0;
+    z-index:99;
 }
 /*.projectDetailLayer .layui-m-layerbtn{
     bottom:1rem;
