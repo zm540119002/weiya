@@ -50,7 +50,7 @@ return [
         //上传路径
         'public_uploads' => Request::domain() .'/uploads',
         //维雅资源路径
-        'weiya_img' => Request::domain() .'/static/index/img',
+        'index_img' => Request::domain() .'/static/index/img',
         'weiya_js' => Request::domain() .'/static/index/js',
         'weiya_css' => Request::domain() .'/static/index/css',
         //h-ui资源路径
