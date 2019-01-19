@@ -46,10 +46,10 @@ return [
         'weiya_js' => Request::domain() .'/static/weiya/js',
         'weiya_css' => Request::domain() .'/static/weiya/css',
         //h-ui资源路径
-        'hui_lib' => Request::domain() .'/static/h-ui.lib',
         'hui_js' => Request::domain() .'/static/h-ui/js',
         'hui_css' => Request::domain() .'/static/h-ui/css',
         'hui_img' => Request::domain() .'/static/h-ui/images',
+        'hui_lib' => Request::domain() .'/static/h-ui.lib',
         //h-ui.admin资源路径
         'hui_admin_js' => Request::domain() .'/static/h-ui.admin/js',
         'hui_admin_css' => Request::domain() .'/static/h-ui.admin/css',

@@ -1,5 +1,73 @@
 //钱包支付弹窗
-function walletPayDialog(fn_name,data) {
+// function walletPayDialog(fn_name,data) {
+//     var content=$('#walletPay').html();
+//     window.scrollTo(0,0);
+//     layer.open({
+//         className:'payPasswordLayer',
+//         type:1,
+//         shadeClose:false,
+//         content:content,
+//         title:['钱包支付密码','border-bottom:1px solid #d9d9d9;'],
+//         btn:['确定支付',''],
+//         success:function(indexs,i){
+//             $('#fn_name').val(fn_name);
+//             $('#order_sn').val(data.order_sn);
+//             //钱包密码
+//             var oLis=$('.payPasswordLayer input.password_item');
+//             for(var i = 0;i<oLis.length;i++){
+//                 var obj=oLis[i];
+//                 $(obj).data('index',i);
+//                 $(obj).attr('readonly',true);
+//                 $(obj).on('keyup',function(){
+//                     var _this=$(this);
+//                     _this.val().replace(/^(.).*$/,'$1');
+//                     _this.attr('readonly',true);
+//                     var next=_this.data('index')+1;
+//                     if(next>oLis.length-1){
+//                         console.log('12345678');
+//                     }
+//                     $(oLis[next]).removeAttr('readonly');
+//                     $(oLis[next]).focus();
+//                 });
+//             }
+//             $(oLis[0]).removeAttr('readonly');
+//         },
+//         yes:function(index){
+//             var oLis=$('.payPasswordLayer input.password_item');
+//             var password='';
+//             for(var i=0;i<oLis.length;i++){
+//                 password=password+$(oLis[i]).val();
+//             }
+//             if(password.length<4){
+//                 dialog.error('请输入正确4位数密码');
+//                 return false;
+//             }
+//             var postData = data;
+// ;           postData.fn_name = fn_name;
+// ;           postData.password = password;
+//             var url = module+'Wallet/login';
+//             $.post(url,postData,function (data) {
+//                 if(data.status){
+//                     var info =  JSON.parse( data.info);
+//                     var fn_name = info.fn_name;
+//                     if(fn_name){
+//                       if(fn_name == 'orderPayment'){
+//                           orderPayment(info);
+//                       }
+//                         return false;
+//                     }
+//                 }
+//                 if(!data.status){
+//                     dialog.success(data.info);
+//                 }
+//                 // layer.close(index);
+//             },'JSON')
+//
+//         }
+//     });
+// }
+
+function walletPayDialog() {
     var content=$('#walletPay').html();
     window.scrollTo(0,0);
     layer.open({
@@ -10,8 +78,6 @@ function walletPayDialog(fn_name,data) {
         title:['钱包支付密码','border-bottom:1px solid #d9d9d9;'],
         btn:['确定支付',''],
         success:function(indexs,i){
-            $('#fn_name').val(fn_name);
-            $('#order_sn').val(data.order_sn);
             //钱包密码
             var oLis=$('.payPasswordLayer input.password_item');
             for(var i = 0;i<oLis.length;i++){
@@ -42,18 +108,21 @@ function walletPayDialog(fn_name,data) {
                 dialog.error('请输入正确4位数密码');
                 return false;
             }
-            var postData = data;
-;           postData.fn_name = fn_name;
-;           postData.password = password;
+            var postData = {
+                password:password,
+            };
             var url = module+'Wallet/login';
             $.post(url,postData,function (data) {
                 if(data.status){
-                    var info =  JSON.parse( data.info);
-                    var fn_name = info.fn_name;
+                    var fn_name = $('#wallet_pay_back_function').val();
+                    var parameter = $('#wallet_pay_back_function_parameter').val();
+                    console.log(parameter);
+                    console.log(fn_name);
+                    return false;
                     if(fn_name){
-                      if(fn_name == 'orderPayment'){
-                          orderPayment(info);
-                      }
+                        if(fn_name == 'orderPayment'){
+                            orderPayment(parameter);
+                        }
                         return false;
                     }
                 }
@@ -62,7 +131,7 @@ function walletPayDialog(fn_name,data) {
                 }
                 // layer.close(index);
             },'JSON')
-            
+
         }
     });
 }
