@@ -39,10 +39,10 @@ return [
         'common_index_img' => Request::domain() .'/static/common_index/img',
         'common_index_js' => Request::domain() .'/static/common_index/js',
         'common_index_css' => Request::domain() .'/static/common_index/css',
-        //admin资源路径
-        'admin_js' => Request::domain() .'/static/index_admin/js',
-        'admin_css' => Request::domain() .'/static/index_admin/css',
-        'admin_img' => Request::domain() .'/static/index_admin/img',
+        //index_admin资源路径
+        'index_admin_js' => Request::domain() .'/static/index_admin/js',
+        'index_admin_css' => Request::domain() .'/static/index_admin/css',
+        'index_admin_img' => Request::domain() .'/static/index_admin/img',
         //common_admin资源路径
         'common_admin_js' => Request::domain() .'/static/common_admin/js',
         'common_admin_css' => Request::domain() .'/static/common_admin/css',
