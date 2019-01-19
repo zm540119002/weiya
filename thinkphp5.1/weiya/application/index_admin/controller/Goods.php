@@ -487,7 +487,7 @@ class Goods extends Base {
                 'name2'=> $name2,
                 'specification'=> '规格：'.$info['specification'],
                 'money'=>'￥'.$info['bulk_price'].' 元',
-                'logo_img'=> request()->domain().'/static/weiya/img/logo.png', // 460*534
+                'logo_img'=> request()->domain().'/static/index/img/logo.png', // 460*534
                 'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
                 'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
                 'font'=>'./static/font/simhei.ttf',   //字体
@@ -505,7 +505,7 @@ class Goods extends Base {
                 }
                 return successMsg($newQRCodes);
             }else{
-                return successMsg('失败',$res['info']);
+                return successMsg('成功',$res['info']);
             }
         }
     }

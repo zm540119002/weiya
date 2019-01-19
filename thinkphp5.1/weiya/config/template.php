@@ -39,20 +39,20 @@ return [
         'common_index_img' => Request::domain() .'/static/common_index/img',
         'common_index_js' => Request::domain() .'/static/common_index/js',
         'common_index_css' => Request::domain() .'/static/common_index/css',
-        //index_admin资源路径
-        'index_admin_js' => Request::domain() .'/static/index_admin/js',
-        'index_admin_css' => Request::domain() .'/static/index_admin/css',
-        'index_admin_img' => Request::domain() .'/static/index_admin/img',
         //common_admin资源路径
         'common_admin_js' => Request::domain() .'/static/common_admin/js',
         'common_admin_css' => Request::domain() .'/static/common_admin/css',
         'common_admin_img' => Request::domain() .'/static/common_admin/img',
+        //维雅资源路径
+        'index_img' => Request::domain() .'/static/index/img',
+        'index_js' => Request::domain() .'/static/index/js',
+        'index_css' => Request::domain() .'/static/index/css',
+        //index_admin资源路径
+        'index_admin_js' => Request::domain() .'/static/index_admin/js',
+        'index_admin_css' => Request::domain() .'/static/index_admin/css',
+        'index_admin_img' => Request::domain() .'/static/index_admin/img',
         //上传路径
         'public_uploads' => Request::domain() .'/uploads',
-        //维雅资源路径
-        'weiya_img' => Request::domain() .'/static/index/img',
-        'weiya_js' => Request::domain() .'/static/index/js',
-        'weiya_css' => Request::domain() .'/static/index/css',
         //h-ui资源路径
         'hui_js' => Request::domain() .'/static/h-ui/js',
         'hui_css' => Request::domain() .'/static/h-ui/css',
