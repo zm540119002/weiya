@@ -4406,7 +4406,10 @@ select[name="nodeIds"]{
     width:15%;
 }
 .user_info_r{
-    margin:0 0 0 -0.5rem;
+    margin:0 0 0 1rem;
+}
+a.sign_out{
+    margin: 0.18rem 0.12rem 0 0;
 }
 /*订单客服售前*/
 .chat_content_wrapper{
@@ -5660,8 +5663,9 @@ ul.info_list li{
 .tags_item_r .share span{
     background-position:0 -0.44rem;
 }
-.after_sale_wrapper{
-    padding:0 0 0.8rem 0;
+.after_sale_wrapper,
+.person-center-wrapper{
+    padding:0 0 1.5rem 0;
 }
 /*图片放大样式*/
 .big_img{position: fixed;z-index: -1;opacity: 0;background: rgba(0,0,0,0.9);width: 100%;height: 100%;top:0;left:0;}
