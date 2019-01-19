@@ -35,7 +35,6 @@ return [
         'public_img' => Request::domain() .'/static/common/img',
         'public_js' => Request::domain() .'/static/common/js',
         'public_css' => Request::domain() .'/static/common/css',
-        'public_hui_admin' => Request::domain() .'/static/admin/hadmin',
         'public_admin_common_js' => Request::domain() .'/static/admin/js',
         'public_admin_common_css' => Request::domain() .'/static/admin/css',
         'public_admin_common_img' => Request::domain() .'/static/admin/img',
