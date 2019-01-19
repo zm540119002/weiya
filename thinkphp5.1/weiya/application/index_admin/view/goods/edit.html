@@ -1,7 +1,7 @@
 {extend name="template/admin_pc/base.html" /}
 {block name="css-customize"}
-    <link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
-    <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
+    <link type="text/css" rel="stylesheet" href="admin_css/fenlei.css" />
+    <link type="text/css" rel="stylesheet" href="admin_css/skin.css" />
 {/block}
 
 {block name="content"}
@@ -165,10 +165,10 @@
     </div>
 {/block}
 {block name="script"}
-    <script type="text/javascript" src="public_admin_common_js/Ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="admin_js/Ueditor/ueditor.config.js"></script>
     <!-- 编辑器源码文件 -->
-    <script type="text/javascript" src="public_admin_common_js/Ueditor/ueditor.all.js"></script>
-    <script type="text/javascript" charset="utf-8" src="public_admin_common_js/Ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="admin_js/Ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" charset="utf-8" src="admin_js/Ueditor/lang/zh-cn/zh-cn.js"></script>
     <script src="http://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
@@ -176,7 +176,7 @@
         var ueDetail = UE.getEditor('detail_img');
         var ueNotices = UE.getEditor('main_img');
     </script>
-    <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
+    <script type="text/javascript" src="admin_js/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function(){
             var parameters = '{$info.parameters|raw}';

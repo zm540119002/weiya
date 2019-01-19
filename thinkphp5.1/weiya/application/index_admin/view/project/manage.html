@@ -1,8 +1,4 @@
 {extend name="template/admin_pc/base.html" /}
-{block name="css-customize"}
-<link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
-<link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
-{/block}
 {block name="content"}
     <div class="page">
         <div class="fixed-bar">
@@ -43,13 +39,13 @@
     <!-- 隐藏区 -->
     <div style="display:none">
         <div id="loading">
-            <div class='loading'><img src='public_admin_common_img/default/loading.gif' alt='loading'></div>
+            <div class='loading'><img src='admin_img/default/loading.gif' alt='loading'></div>
         </div>
     </div>
 {/block}
 {block name="script"}
-    <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
-    <script type="text/javascript" src="public_admin_common_js/paging.js"></script>
+    <script type="text/javascript" src="admin_js/categoryLinkage.js"></script>
+    <script type="text/javascript" src="admin_js/paging.js"></script>
     <script type="text/javascript">
         $(function () {
             //加载第一页

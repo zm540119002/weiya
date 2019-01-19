@@ -35,9 +35,9 @@ return [
         'public_img' => Request::domain() .'/static/common/img',
         'public_js' => Request::domain() .'/static/common/js',
         'public_css' => Request::domain() .'/static/common/css',
-        'public_admin_common_js' => Request::domain() .'/static/admin/js',
-        'public_admin_common_css' => Request::domain() .'/static/admin/css',
-        'public_admin_common_img' => Request::domain() .'/static/admin/img',
+        'admin_js' => Request::domain() .'/static/admin/js',
+        'admin_css' => Request::domain() .'/static/admin/css',
+        'admin_img' => Request::domain() .'/static/admin/img',
         //公共上传路径
         'public_uploads' => Request::domain() .'/uploads',
         //维雅资源路径
