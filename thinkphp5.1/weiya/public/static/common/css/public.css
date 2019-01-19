@@ -5366,7 +5366,7 @@ ul.info_list li{
     overflow-x:hidden;
     overflow-y:auto;
 }
-.setBrandLayer .layui-m-layercont{
+.layui-m-layer .setBrandLayer .layui-m-layercont{
     height:550px;
     padding:0 0 1rem 0;
 }
