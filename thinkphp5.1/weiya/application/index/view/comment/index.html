@@ -6,27 +6,37 @@
 	<section class="header_title separation-line">
 		<h2 class="f24">商品评价</h2>
 	</section>
-	<section >
-		<div class="content-padding separation-line">
-			<span class="content-label">申请售后类型</span>
-			<ul class="option_list">
-				<li>商品调换</li>
-				<li>退货退款</li>
-				<li>仅退款</li>
-			</ul>
-			<span class="content-label">申请售后原因</span>
-			<ul class="option_list">
-				<li>不满意</li>
-				<li>质量问题</li>
-				<li>物流问题</li>
-				<li>收到商品损坏</li>
-				<li>配送有误</li>
-				<li>其他原因</li>
-			</ul>
-			<span class="content-label">售后问题描述</span>
-			<textarea rows="" cols="" class="text_description" placeholder="请填写售后问题"></textarea>
-			<span class="content-label">上传相关图片</span>
-			<p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+	<section>
+		<div class="content-padding score_review_item">
+			<div class="">
+				<span class="my_scoring left">描述相符</span>
+				<div class="my_score_star">
+					<div class="star_score star_img left">
+						<a href="javascript:void(0);" data-show="">
+							<img src="public_img/star.png" />
+						</a>
+						<a href="javascript:void(0);" data-show="">
+							<img src="public_img/star.png" />
+						</a>
+						<a href="javascript:void(0);" data-show="">
+							<img src="public_img/star.png" />
+						</a>
+						<a href="javascript:void(0);" data-show="">
+							<img src="public_img/star.png" />
+						</a>
+						<a href="javascript:void(0);" data-show="">
+							<img src="public_img/star.png" />
+						</a>
+					</div>
+					<span class="fraction my_fraction " data-score=""></span>
+				</div>
+			</div>
+		</div>
+		<div class="content-padding">
+			<span class="content-label">评价描述</span>
+			<textarea class="text_description" rows="" cols="" placeholder="说说该商品的优点和美中不足的地方吧，你的评价能帮助其他
+想购买的朋友哦！"></textarea>
+			<span class="content-label">评价可以附带上传商品图片</span>
 			<div class="upload-picture-module f24">
 				<div>
 					<div class="picture-module">
@@ -39,21 +49,6 @@
 			<form class="">
 				<ul class="upload-picture-module multi-picture-module f24"></ul>
 			</form>
-			<div class="error_tipc"></div>
-		</div>
-		<div class="content-padding ">
-			<span class="content-label">商品退回方式</span>
-			<ul class="option_list">
-				<li>快递至维雅</li>
-				<li>物流至维雅</li>
-				<li>不需要退回</li>
-			</ul>
-			<span class="content-label">运费承担方</span>
-			<ul class="option_list">
-				<li>用户承担运费</li>
-				<li>维雅承担运费</li>
-				<li>协商承担运费</li>
-			</ul>
 		</div>
 	</section>
 </article>
@@ -67,41 +62,20 @@
 <script type="text/javascript" src="public_js/uploadMultiImg.js"></script>
 <script type="text/javascript">
 	$(function(){
-		/*调起大图*/
-		var mySwiper = new Swiper('.swiper-container2', {
-			loop:true,
-			pagination: {
-				el: '.swiper-pagination2',
-				clickable: true
-			}
-		})
-		$("#list").on("click", ".info_img img", 
-		function() {
-			var imgBox = $(this).parents(".info_img").find("img");
-			var i = $(imgBox).index(this);
-			$(".big_img .swiper-wrapper").html("")
-
-			for(var j = 0 ,c = imgBox.length; j < c ;j++){
-			$(".big_img .swiper-wrapper").append('<div class="swiper-slide "><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
-			}
-			// mySwiper.updateSlidesSize();
-			// mySwiper.updatePagination();
-			$(".big_img").css({
-				"z-index": 1001,
-				"opacity": "1"
-			});
-			//mySwiper.slideTo(i, 0, false);
-			return false;
+		//点击星星评分
+		$('body').on('click','.star_score a',function(){
+			var star='public_img/star.png';
+			var starRed='public_img/starred.png';
+			var prompt=['1分','2分','3分','4分','5分'];
+			var starId=$(this).index();
+			$.each($('.star_score img'),function(){
+				$(this).attr('src',star);//遍历img元素为空心星
+			})
+			$(this).find('img').attr('src',starRed);
+			$(this).prevAll().find('img').attr('src',starRed);
+			$(this).parent().next('.fraction').text(prompt[starId]);
+			$(this).parent().next('.fraction').attr('data-score',starId+1);
 		});
-	
-		$(".big_img").on("click", 
-		function() {
-			$(this).css({
-				"z-index": "-1",
-				"opacity": "0"
-			});
-
-		});  
 	});
 </script>
 {/block}

@@ -2,7 +2,7 @@
 {block name="css-customize"}
 {/block}
 {block name="content"}
-<!--<article class="f24">
+<article class="f24">
 	<section class="header_title separation-line">
 		<h2 class="f24">维雅资讯</h2>
 	</section>
@@ -13,27 +13,29 @@
 			</ul>
 		</div>
 	</section>
-</article>-->
+</article>
 <div class="big_img">
-    <div class="swiper-container2 swiper-container-horizontal">
+	<section class="enlarge_img">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					<!--<img src="index_img/corporate_banner.jpg" alt="" class="common_default_img">-->
+				</div>
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>      
+	</section>
+    <!--<div class="swiper-container2 swiper-container-horizontal">
       <div class="swiper-wrapper">
-		  <div class="swiper-slide "><div class="cell">
-			  <img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564787676.jpg" / >
-		</div>
-		<div class="swiper-slide "><div class="cell">
-			  <img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564787676.jpg" / >
-		</div>
-		<div class="swiper-slide "><div class="cell">
-			  <img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564787676.jpg" / >
-		</div>
-		<div class="swiper-slide "><div class="cell">
-			  <img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564787676.jpg" / >
-		</div>
-	</div>
        
       </div>
     </div>
-    <div class="swiper-pagination2 swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div>
+    <div class="swiper-pagination2 swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div>-->
 </div>
 {/block}
 {block name="common"}
@@ -70,40 +72,40 @@
 			openBtn:'显示全部>'
 		});
 		/*调起大图*/
-		var mySwiper = new Swiper('.swiper-container2', {
+		var mySwiper = new Swiper('.swiper-container', {
 			loop:true,
 			pagination: {
-				el: '.swiper-pagination2',
+				el: '.swiper-pagination',
 				clickable: true
 			}
 		})
-		// $("#list").on("click", ".info_img img", 
-		// function() {
-		// 	var imgBox = $(this).parents(".info_img").find("img");
-		// 	var i = $(imgBox).index(this);
-		// 	$(".big_img .swiper-wrapper").html("")
+		$("#list").on("click", ".info_img img", 
+		function() {
+			var imgBox = $(this).parents(".info_img").find("img");
+			var i = $(imgBox).index(this);
+			$(".big_img .swiper-wrapper").html("")
 
-		// 	for(var j = 0 ,c = imgBox.length; j < c ;j++){
-		// 	$(".big_img .swiper-wrapper").append('<div class="swiper-slide "><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
-		// 	}
-		// 	// mySwiper.updateSlidesSize();
-		// 	// mySwiper.updatePagination();
-		// 	$(".big_img").css({
-		// 		"z-index": 1001,
-		// 		"opacity": "1"
-		// 	});
-		// 	//mySwiper.slideTo(i, 0, false);
-		// 	return false;
-		// });
+			for(var j = 0 ,c = imgBox.length; j < c ;j++){
+			$(".big_img .swiper-wrapper").append('<div class="swiper-slide swiper-slide-active"><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
+			}
+			// mySwiper.updateSlidesSize();
+			// mySwiper.updatePagination();
+			$(".big_img").css({
+				"z-index": 1001,
+				"opacity": "1"
+			});
+			//mySwiper.slideTo(i, 0, false);
+			return false;
+		});
 	
-		// $(".big_img").on("click", 
-		// function() {
-		// 	$(this).css({
-		// 		"z-index": "-1",
-		// 		"opacity": "0"
-		// 	});
+		$(".big_img").on("click", 
+		function() {
+			$(this).css({
+				"z-index": "-1",
+				"opacity": "0"
+			});
 
-		// });  
+		});  
 	});
 </script>
 {/block}
