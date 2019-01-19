@@ -2,7 +2,7 @@
 {block name="css-customize"}
 {/block}
 {block name="content"}
-<article class="f24">
+<article class="f24 after_sale_wrapper">
 	<section class="header_title separation-line">
 		<h2 class="f24">申请售后</h2>
 	</section>
@@ -24,8 +24,22 @@
 				<li>其他原因</li>
 			</ul>
 			<span class="content-label">售后问题描述</span>
-			<textarea rows="" cols="">适当放松的方式的方式的防守对方的</textarea>
+			<textarea rows="" cols="" class="text_description" placeholder="请填写售后问题"></textarea>
 			<span class="content-label">上传相关图片</span>
+			<p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+			<div class="upload-picture-module f24">
+				<div>
+					<div class="picture-module">
+						<input type="file" class="uploadMultiImg" id="file" name="" accept="image/*" multiple="" data-num="">
+						<img class="upload_img" src="" alt="">
+						<input type="hidden" class="business-license img"  value=""/>
+					</div>
+				</div>
+			</div>
+			<form class="">
+				<ul class="upload-picture-module multi-picture-module f24"></ul>
+			</form>
+			<div class="error_tipc"></div>
 		</div>
 		<div class="content-padding ">
 			<span class="content-label">商品退回方式</span>
@@ -49,24 +63,10 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="public_js/paging.js"></script>
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/uploadMultiImg.js"></script>
 <script type="text/javascript">
 	$(function(){
-		//初始化分类商品页面
-		getPagingList(config,postData);
-		//下拉加载
-		$(window).on('scroll',function(){
-			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-				config.loadTrigger = false;
-				getPagingList(config,postData);
-			}
-		});
-		//查看文本
-		$('.more-text-box').moreText({
-			mainCell:".more-text",
-			openBtn:'显示全部>'
-		});
 		/*调起大图*/
 		var mySwiper = new Swiper('.swiper-container2', {
 			loop:true,
