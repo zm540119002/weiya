@@ -146,3 +146,19 @@
 }
 .agreem_marquee a{color:#0066cc;text-decoration: underline;}
 .register_explain{padding-left:0.15rem;}
+/*后台登录*/
+.weiya_logo{
+    margin:35px 0 35px 100px;
+}
+.weiya_logo img{
+    max-width:200px;
+}
+.loginWraper{
+    height:780px;
+    background:url(../../common/img/weiya_bg.png) no-repeat;
+}
+.loginBox{
+    width: 550px;
+    height: 660px;
+    padding: 94px 0 0 1000px;
+}
