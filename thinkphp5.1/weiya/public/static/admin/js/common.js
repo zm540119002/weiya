@@ -341,19 +341,6 @@ $.extend({
     }
 });
 
-/**
- * 将已序列化的表单数据转为Json对象
- * @param str
- * @returns {Object|*}
- */
-function serializeToJson(str) {
-    var serializeObj = {};
-    $.each(str, function () {
-        serializeObj[this.name] = this.value;
-    });
-    return serializeObj;
-}
-
 /**清空表单
  * $obj jquery 对象
  */
