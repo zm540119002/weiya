@@ -50,9 +50,9 @@ return [
         //上传路径
         'public_uploads' => Request::domain() .'/uploads',
         //维雅资源路径
-        'weiya_img' => Request::domain() .'/static/weiya/img',
-        'weiya_js' => Request::domain() .'/static/weiya/js',
-        'weiya_css' => Request::domain() .'/static/weiya/css',
+        'index_img' => Request::domain() .'/static/index/img',
+        'index_js' => Request::domain() .'/static/index/js',
+        'index_css' => Request::domain() .'/static/index/css',
         //h-ui资源路径
         'hui_js' => Request::domain() .'/static/h-ui/js',
         'hui_css' => Request::domain() .'/static/h-ui/css',
