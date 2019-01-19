@@ -505,7 +505,7 @@ class Goods extends Base {
                 }
                 return successMsg($newQRCodes);
             }else{
-                return successMsg('失败',$res['info']);
+                return successMsg('成功',$res['info']);
             }
         }
     }

@@ -1,5 +1,31 @@
+// //登录-弹窗触发
+// function loginDialog(fn_name){
+//     var content=$('#dialLogin').html();
+//     window.scrollTo(0,0);
+//     layer.open({
+//         className:'loginLayer',
+//         type:1,
+//         shadeClose:false,
+//         content:content,
+//         title:['登录','border-bottom:1px solid #d9d9d9;'],
+//         btn:[''],
+//         success:function(indexs,i){
+//             tab_down('.loginNav li','.loginTab .login_wrap','click');
+//             $('.layui-m-layershade').on('touchmove',function(e){
+//                 event.preventDefault();
+//             });
+//             $('input[name="fn_name"]').val(fn_name);
+//             fixedLayer();
+//         },
+//         yes:function(index){
+//             cancleFixedLayer();
+//             layer.close(index);
+//         }
+//     });
+// }
+
 //登录-弹窗触发
-function loginDialog(fn_name){
+function loginDialog(){
     var content=$('#dialLogin').html();
     window.scrollTo(0,0);
     layer.open({
@@ -14,7 +40,6 @@ function loginDialog(fn_name){
             $('.layui-m-layershade').on('touchmove',function(e){
                 event.preventDefault();
             });
-            $('input[name="fn_name"]').val(fn_name);
             fixedLayer();
         },
         yes:function(index){
@@ -151,10 +176,8 @@ $(function(){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
                          $('.layui-m-layer').remove();
-                        if(data.fn_name){
-                            var str = data.fn_name;
-                            eval(str +"()");
-                            cancleFixedLayer();
+                        if(login_back_function){
+                            eval(login_back_function +"(login_back_function_parameter)");
                             return false;
                         }
                         dialogLoginDefaultCallBack(data);
