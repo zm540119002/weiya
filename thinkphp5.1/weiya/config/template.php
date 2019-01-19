@@ -44,9 +44,9 @@ return [
         'admin_css' => Request::domain() .'/static/index_admin/css',
         'admin_img' => Request::domain() .'/static/index_admin/img',
         //common_admin资源路径
-        'common_admin2_js' => Request::domain() .'/static/common_admin/js',
-        'common_admin2_css' => Request::domain() .'/static/common_admin/css',
-        'common_admin2_img' => Request::domain() .'/static/common_admin/img',
+        'common_admin_js' => Request::domain() .'/static/common_admin/js',
+        'common_admin_css' => Request::domain() .'/static/common_admin/css',
+        'common_admin_img' => Request::domain() .'/static/common_admin/img',
         //上传路径
         'public_uploads' => Request::domain() .'/uploads',
         //维雅资源路径
