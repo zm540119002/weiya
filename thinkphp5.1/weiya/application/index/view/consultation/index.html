@@ -105,7 +105,7 @@
 			if(!postData.name){
 				content='请填写你的姓名';
 			}else if(!register.phoneCheck(postData.mobile)){
-				content='请填写你手机号码';
+				content='请填写正确的手机号码';
 			}else if(!postData.message){
 				content='请填写你的留言';
 			}
@@ -113,12 +113,18 @@
 				dialog.error(content);
 				return false;
 			}
-			console.log(postData);
+			var url = module+'Consultation/addNeedsMessage';
 			$.ajax({
 				type:'post',
-				url:'',
-				data:'',
-				success:function(){},
+				url:url,
+				data:postData,
+				success:function(data){
+					 if(data.status){
+						 dialog.success(data.info);
+						 return false;
+					 }
+					dialog.error(data.info);
+				},
 				error:function(xhr){
 					dialog.error(xhr);
 				}

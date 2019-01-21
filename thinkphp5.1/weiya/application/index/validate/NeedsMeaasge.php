@@ -1,25 +1,26 @@
 <?php
-namespace app\mall\validate;
+namespace app\index\validate;
 
-class Mall extends \think\Validate
+class NeedsMessage extends \think\Validate
 {
     //验证规则
     protected $rule = [
         'name'  => [
             'require',
-            'max' => 64,
+            'max' => 30,
+        ],
+        'mobile'=>[
+            'mobile',
+        ],
+        'message'=>[
+            'require',
         ],
     ];
     //验证消息
     protected $message  =   [
         'name.require' => '名称必须！',
         'name.max' => '名称最多不能超过64个字符！',
+        'message.require' => '留言不能为空！',
     ];
-    //验证场景
-    protected $scene = [
-        //验证编辑
-        'edit'  =>  [
-            'name',
-        ],
-    ];
+
 }
