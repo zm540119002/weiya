@@ -144,16 +144,16 @@ $(function(){
                     return false;
                 }else if(data.status==1){
                     if(loginSign=='page'){
-                        location.href = data.info;
+                        // location.href = data.info;
                     }else if(loginSign=='dialog'){
                          $('.layui-m-layer').remove();
-                        if(!loginBackFunctionParameter){
-                            loginBackFunctionParameter = data.info;
-                        }
-                        console.log(loginBackFunctionParameter);
-                        return;
-                        loginBackFunction(loginBackFunctionParameter);
                     }
+                    if(!loginBackFunctionParameter){
+                        loginBackFunctionParameter = data.info;
+                    }
+                    console.log(loginBackFunctionParameter);
+                    return;
+                    loginBackFunction(loginBackFunctionParameter);
                 }
             });
         }
