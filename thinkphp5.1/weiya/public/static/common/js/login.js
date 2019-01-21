@@ -95,10 +95,9 @@ $(function(){
         var method = _this.data('method');
         var content='';
         var url = domain+'ucenter/UserCenter/'+method;
-        console.log(url);
         var postForm = null;
         var loginSign = 'dialog';
-        if(method=='login'){//登录
+        if(method=='login' || method=='login_admin'){//登录
             if($('.loginLayer #formLogin').length){//弹框登录
                 postForm = $('.loginLayer #formLogin');
             }else{//页面登录
