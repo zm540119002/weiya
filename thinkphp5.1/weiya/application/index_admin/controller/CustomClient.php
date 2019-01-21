@@ -1,7 +1,7 @@
 <?php
 namespace app\index_admin\controller;
 
-class CustomClient extends \common\controller\UserBaseAdmin{
+class CustomClient extends Base{
 //    protected $user = [];
 //    public function __construct(){
 //        parent::__construct();
