@@ -119,10 +119,13 @@ $(function(){
                 postForm = $('#formForgetPassword');
             }
         }
+        console.log(345);
         if(!postForm){
+            console.log(123);
             dialog.error('未知操作');
             return false;
         }
+        console.log(444);
         var postData = postForm.serializeObject();
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
@@ -138,7 +141,6 @@ $(function(){
             errorTipc(content);
             return false;
         }else{
-            console.log(url);
             $.post(url,postData,function (data) {
                 return;
                 if(data.status==0){
