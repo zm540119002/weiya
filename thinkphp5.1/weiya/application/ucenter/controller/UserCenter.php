@@ -81,7 +81,7 @@ class UserCenter extends \think\Controller{
             return errorMsg($response->Message);
         }
         //设置session
-        session('captcha_'.$mobilePhone,$captcha);
+        session('captcha_'.$mobilePhone,$captcha,Session::prefix(''));
         return successMsg($response->Message);
     }
 }
