@@ -93,7 +93,6 @@ $(function(){
     $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
-        var content='';
         var url = domain+'ucenter/UserCenter/'+method;
         var postForm = null;
         var loginSign = 'dialog';
@@ -124,6 +123,7 @@ $(function(){
             return false;
         }
         var postData = postForm.serializeObject();
+        var content='';
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && !register.vfyCheck(postData.captcha)){
@@ -131,13 +131,11 @@ $(function(){
         }else if(!register.pswCheck(postData.password)){
             content = "请输入6-16数字或字母的密码";
         }
-        console.log(123);
+        console.log(content);
         if(method && content){
-            console.log(456);
             dialog.error(content);
             return false;
         }else if(content){
-            console.log(789);
             errorTipc(content);
             return false;
         }else{
