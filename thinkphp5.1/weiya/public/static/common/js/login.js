@@ -151,8 +151,6 @@ $(function(){
                     if(!loginBackFunctionParameter){
                         loginBackFunctionParameter = data.info;
                     }
-                    console.log(loginBackFunctionParameter);
-                    return;
                     loginBackFunction(loginBackFunctionParameter);
                 }
             });
