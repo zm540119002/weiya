@@ -78,7 +78,7 @@ function logoutDialog(){
     });
 }
 //忘记密码-弹窗触发
-function forgetPasswordDialog(fn_name){
+function forgetPasswordDialog(){
     var content = $('#sectionForgetPassword').html();
     layer.open({
         className:'forgetPasswordLayer',
@@ -89,7 +89,6 @@ function forgetPasswordDialog(fn_name){
         success:function(){
             $('.login_item .password').attr('type','password');
             $('.view-password').removeClass('active');
-            $('input[name="fn_name"]').val(fn_name);
             fixedLayer();
         },
         yes:function(index){
@@ -101,7 +100,8 @@ function forgetPasswordDialog(fn_name){
 $(function(){
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
-        loginDialog('flushPage');
+        loginBackFunction =flushPage;
+        loginDialog();
     });
     //退出-弹窗事件
     $('body').on('click','#logout_dialog',function(){
@@ -109,8 +109,7 @@ $(function(){
     });
     //忘记密码-弹窗事件
     $('body').on('click','.forget_dialog',function(){
-        var fn_name = $(this).siblings('input[name="fn_name"]').val();
-        forgetPasswordDialog(fn_name);
+        forgetPasswordDialog();
     });
 });
 $(function(){
@@ -176,18 +175,12 @@ $(function(){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
                          $('.layui-m-layer').remove();
-                        console.log(loginBackFunctionParameter);
                         loginBackFunction(loginBackFunctionParameter);
-                        // dialogLoginDefaultCallBack(data);
                     }
                 }
             });
         }
     });
-    //弹框登录成功默认回调函数
-    function dialogLoginDefaultCallBack(data) {
-        location.href = data.info;
-    }
     //显示隐藏密码
     //var onOff = true;
     $('body').on('click','.view-password',function(){

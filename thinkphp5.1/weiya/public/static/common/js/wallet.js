@@ -131,7 +131,6 @@ function forgetWalletPasswordDialog(){
         success: function(data){
             $('.loading').hide();
             if(data.status){
-                console.log(12548);return false
                 dialog.success(data.info,module + 'Payment/payComplete');
             }
             if(!data.status){
