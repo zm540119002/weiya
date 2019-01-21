@@ -30,32 +30,32 @@ return [
     // 标签库标签结束标记
     'taglib_end'   => '}',
     'tpl_replace_string' => [
-        //common资源路径
-        'public_img' => Request::domain() .'/static/common/img',
+        //common    资源路径
         'public_js' => Request::domain() .'/static/common/js',
         'public_css' => Request::domain() .'/static/common/css',
+        'public_img' => Request::domain() .'/static/common/img',
         //common_index  资源路径
-        'common_index_img' => Request::domain() .'/static/common_index/img',
         'common_index_js' => Request::domain() .'/static/common_index/js',
         'common_index_css' => Request::domain() .'/static/common_index/css',
-        //common_admin资源路径
+        'common_index_img' => Request::domain() .'/static/common_index/img',
+        //common_admin  资源路径
         'common_admin_js' => Request::domain() .'/static/common_admin/js',
         'common_admin_css' => Request::domain() .'/static/common_admin/css',
         'common_admin_img' => Request::domain() .'/static/common_admin/img',
-        //维雅资源路径
-        'index_img' => Request::domain() .'/static/index/img',
+        //维雅    资源路径
         'index_js' => Request::domain() .'/static/index/js',
         'index_css' => Request::domain() .'/static/index/css',
-        //index_admin资源路径
+        'index_img' => Request::domain() .'/static/index/img',
+        //index_admin   资源路径
         'index_admin_js' => Request::domain() .'/static/index_admin/js',
         'index_admin_css' => Request::domain() .'/static/index_admin/css',
         'index_admin_img' => Request::domain() .'/static/index_admin/img',
-        //h-ui资源路径
+        //h-ui  资源路径
         'hui_js' => Request::domain() .'/static/h-ui/js',
         'hui_css' => Request::domain() .'/static/h-ui/css',
         'hui_img' => Request::domain() .'/static/h-ui/images',
         'hui_lib' => Request::domain() .'/static/h-ui.lib',
-        //h-ui.admin资源路径
+        //h-ui.admin    资源路径
         'hui_admin_js' => Request::domain() .'/static/h-ui.admin/js',
         'hui_admin_css' => Request::domain() .'/static/h-ui.admin/css',
         'hui_admin_img' => Request::domain() .'/static/h-ui.admin/images',
