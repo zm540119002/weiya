@@ -1,22 +1,8 @@
 
-function addCart(_this) {
-    loginBackFunction = addCart;
-    var lis = null;
-    lis = $('ul.goods_list').find('li[data-buy_type="1"]');
-    var postData = assemblyData(lis);
-    var goodsList = postData.goodsList
-    console.log(goodsList);
-    for(var i=0;i<goodsList.length;i++){
-        if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
-            dialog.error('请设置品牌');
-            return false;
-        }
-    }
-    if(!postData){
-        return false;
-    }
+function addCart(postData) {
+    console.log(postData)
     var url = module + 'Cart/addCart';
-    $(_this).addClass("nodisabled");//防止重复提交
+    postData.aa.addClass("nodisabled");//防止重复提交
     $.ajax({
         url: url,
         data: postData,
@@ -30,23 +16,25 @@ function addCart(_this) {
         },
         success: function(data){
             $('.loading').hide();
-            $(_this).removeClass("nodisabled");//防止重复提交
+            // $(postData._this).removeClass("nodisabled");//防止重复提交
             if(data.status==0){
                 dialog.error(data.info);
             }
             else if(data.code==1 && data.data=='no_login'){
-                loginDialog(fn_name);
+                loginDialog();
+                loginBackFunction = addCart;
+                loginBackFunctionParameter = postData;
                 return false;
             }
             else{
                 dialog.success(data.info);
                 var num = 0;
-                $.each(lis,function(index,val){
-                    var buyType=$(this).data('buy_type');
-                    if(buyType==1){
-                        num += parseInt($(this).find('.gshopping_count').val());
-                    }
-                });
+                // $.each( postData.lis,function(index,val){
+                //     var buyType=$(this).data('buy_type');
+                //     if(buyType==1){
+                //         num += parseInt($(this).find('.gshopping_count').val());
+                //     }
+                // });
                 $('footer').find('.cart_num').addClass('cur');
                 $('footer').find('.add_num').text('+'+num).addClass('current');
                 setTimeout(function(){
@@ -164,8 +152,26 @@ $(function () {
 
     //加入购物车
     $('body').on('click','.add_cart,.add_purchase_cart',function(){
-            var _this = $(this);
-            addCart(_this);
+        var _this = $(this);
+        var lis = null;
+        lis = $('ul.goods_list').find('li[data-buy_type="1"]');
+        var postData = assemblyData(lis);
+        console.log(postData)
+        // var goodsList = postData.goodsList;
+        // console.log(goodsList);
+        // for(var i=0;i<goodsList.length;i++){
+        //     if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
+        //         dialog.error('请设置品牌');
+        //         return false;
+        //     }
+        // }
+        if(!postData){
+            return false;
+        }
+        postData.aa = _this;
+        // postData.lis = lis;
+
+        addCart(postData);
     });
     //样品弹窗加入购物车
     $('body').on('click','.goodsInfoLayer .add_cart_layer',function(){
