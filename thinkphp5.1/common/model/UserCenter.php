@@ -1,6 +1,6 @@
 <?php
 namespace common\model;
-use think\facade\Session;
+
 class UserCenter extends Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'user';
@@ -183,13 +183,13 @@ class UserCenter extends Base {
 	 */
 	private function _setSession($user){
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
-		session('user', $user,config('custom.session_prefix'));
-		session('user_sign', data_auth_sign($user),config('custom.session_prefix'));
+		session('user',$user);
+		session('user_sign',data_auth_sign($user));
 		//返回发起页或平台首页
-		$backUrl = session('backUrl','',config('custom.session_prefix'))?:session('returnUrl','',config('custom.session_prefix'));
-		$pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
-		preg_match ($pattern,$backUrl,$matches);
-		return $backUrl?(is_ssl()?'https://':'http://').$backUrl:url('Index/index');
+		$jumpUrl = session('backUrl')?:session('returnUrl');
+		$pattern  =  '/index.php\/([A-Z][a-z]*)\//';
+		preg_match ($pattern,$jumpUrl,$matches);
+		return $jumpUrl?:url('index/Index/index');
 	}
 	
 	/**检查验证码

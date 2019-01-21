@@ -2,11 +2,10 @@
 namespace common\controller;
 use \common\component\image\Image;
 use think\facade\Session;
-use think\facade\Request;
 /**基于公共基础控制器
  */
 class Base extends \think\Controller{
-    protected $host;
+    protected $host = null;
     public function __construct(){
         parent::__construct();
         //登录验证后跳转回原验证发起页
@@ -14,13 +13,11 @@ class Base extends \think\Controller{
                 && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
         $this->host = $http_type . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ''));
-        //session前缀设置
-        Session::prefix(Request::module());
         //去到页面跟返回跳转一样，前端不用传参
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] :
-            $this->host . $_SERVER['HTTP_REFERER'],config('custom.session_prefix'));
+            $this->host . $_SERVER['HTTP_REFERER']);
         //去到页面跟返回跳转不一样，前端传参returnUrl
-        session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''),config('custom.session_prefix'));
+        session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){

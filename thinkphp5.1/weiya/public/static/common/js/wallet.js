@@ -131,11 +131,19 @@ function forgetWalletPasswordDialog(){
             var postForm = $('.forgetWalletPasswordLayer #ForgetWalletPassword');
             var content='';
             var postData = postForm.serializeObject();
-            // if(!register.vfyCheck(postData.captcha)){
-            //     content = "请输入正确的验证码";
-            // }else if(!register.pswCheck(postData.password)){
-            //     content = "请输入4数字或字母的密码";
-            // }
+
+            var oLis=$('.forgetWalletPasswordLayer input.password_item');
+            var password='';
+            for(var i=0;i<oLis.length;i++){
+                password=password+$(oLis[i]).val();
+            }
+            postData.password = password;
+            console.log(postData)
+            if(!register.vfyCheck(postData.captcha)){
+                content = "请输入正确的验证码";
+            }else if(!postData.password&&postData.password.length<4){
+                content = "请输入4位数字的密码";
+            }
             if(content){
                 dialog.error(content);
                 return false;

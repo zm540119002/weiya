@@ -1,6 +1,5 @@
 <?php
 namespace app\ucenter\controller;
-use think\facade\Session;
 class UserCenter extends \think\Controller{
     /**登录
      */
@@ -13,7 +12,6 @@ class UserCenter extends \think\Controller{
             return $this->fetch();
         }
     }
-
     /**后台登录
      */
     public function login_admin(){
@@ -25,7 +23,6 @@ class UserCenter extends \think\Controller{
             return $this->fetch();
         }
     }
-
     /**注册
      */
     public function register(){
@@ -35,7 +32,6 @@ class UserCenter extends \think\Controller{
             return $modelUser->register($postData);
         }
     }
-
     /**忘记密码
      */
     public function forgetPassword(){
@@ -47,18 +43,16 @@ class UserCenter extends \think\Controller{
             return $this->fetch();
         }
     }
-
     //退出
     public function logout(){
-        session('user',null,config('custom.session_prefix'));
-        session('user_sign',null,config('custom.session_prefix'));
-        session('backUrl',null,config('custom.session_prefix'));
-        session('returnUrl',null,config('custom.session_prefix'));
+        session('user',null);
+        session('user_sign',null);
+        session('backUrl',null);
+        session('returnUrl',null);
         header('Content-type: text/html; charset=utf-8');
         return successMsg('成功');
         return redirect('login');
     }
-
     /*发送验证码
      */
     public function sendSms(){
@@ -81,7 +75,7 @@ class UserCenter extends \think\Controller{
             return errorMsg($response->Message);
         }
         //设置session
-        session('captcha_'.$mobilePhone,$captcha,config('custom.session_prefix'));
+        session('captcha_'.$mobilePhone,$captcha);
         return successMsg($response->Message);
     }
 }

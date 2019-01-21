@@ -71,6 +71,10 @@ function forgetPasswordDialog(){
         }
     });
 }
+var loginBackFunctionParameter = {};
+var loginBackFunction = function(parameter){
+    location.href = parameter.jump_url;
+};
 $(function(){
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
@@ -148,11 +152,7 @@ $(function(){
                     }else if(loginSign=='dialog'){
                          $('.layui-m-layer').remove();
                     }
-                    if(!loginBackFunctionParameter){
-                        loginBackFunctionParameter = data.info;
-                    }
-                    console.log(loginBackFunctionParameter);
-                    return;
+                    loginBackFunctionParameter.jump_url = data.info;
                     loginBackFunction(loginBackFunctionParameter);
                 }
             });
