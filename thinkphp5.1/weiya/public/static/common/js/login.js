@@ -73,8 +73,6 @@ function forgetPasswordDialog(){
 }
 var loginBackFunctionParameter = {};
 var loginBackFunction = function(parameter){
-    console.log(parameter.jump_url);
-    return;
     location.href = parameter.jump_url;
 };
 $(function(){
