@@ -12,7 +12,6 @@ class UserCenter extends \think\Controller{
             return $this->fetch();
         }
     }
-
     /**后台登录
      */
     public function login_admin(){
@@ -24,7 +23,6 @@ class UserCenter extends \think\Controller{
             return $this->fetch();
         }
     }
-
     /**注册
      */
     public function register(){
@@ -34,7 +32,6 @@ class UserCenter extends \think\Controller{
             return $modelUser->register($postData);
         }
     }
-
     /**忘记密码
      */
     public function forgetPassword(){
@@ -46,7 +43,6 @@ class UserCenter extends \think\Controller{
             return $this->fetch();
         }
     }
-
     //退出
     public function logout(){
         session('user',null);
@@ -57,7 +53,6 @@ class UserCenter extends \think\Controller{
         return successMsg('成功');
         return redirect('login');
     }
-
     /*发送验证码
      */
     public function sendSms(){
