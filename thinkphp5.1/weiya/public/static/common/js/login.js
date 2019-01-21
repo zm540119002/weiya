@@ -119,13 +119,10 @@ $(function(){
                 postForm = $('#formForgetPassword');
             }
         }
-        console.log(345);
         if(!postForm){
-            console.log(123);
             dialog.error('未知操作');
             return false;
         }
-        console.log(444);
         var postData = postForm.serializeObject();
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
@@ -134,6 +131,7 @@ $(function(){
         }else if(!register.pswCheck(postData.password)){
             content = "请输入6-16数字或字母的密码";
         }
+        console.log(123);
         if(method && content){
             dialog.error(content);
             return false;
