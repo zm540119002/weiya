@@ -139,7 +139,6 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
-                return;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
@@ -148,6 +147,11 @@ $(function(){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
                          $('.layui-m-layer').remove();
+                        if(!loginBackFunctionParameter){
+                            loginBackFunctionParameter = data.info;
+                        }
+                        console.log(loginBackFunctionParameter);
+                        return;
                         loginBackFunction(loginBackFunctionParameter);
                     }
                 }
