@@ -20,6 +20,7 @@ class Base extends \think\Controller{
         //去到页面跟返回跳转不一样，前端传参returnUrl
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''),config('custom.session_prefix'));
         print_r(session(''));
+        print_r(config('custom.session_prefix'));
         exit;
     }
     //返回图片临时相对路径
