@@ -7,6 +7,8 @@ class Comment extends \common\controller\Base{
     public function index(){
         if(request()->isAjax()){
         }else{
+            $unlockingFooterCart = unlockingFooterCartConfig([16]);
+            $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
         }
     }

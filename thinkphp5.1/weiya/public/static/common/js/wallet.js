@@ -46,13 +46,7 @@ function walletPayDialog() {
             var url = module+'Wallet/login';
             $.post(url,postData,function (data) {
                 if(data.status){
-                    // if(wallet_pay_back_function){
-                    //     eval(wallet_pay_back_function +"(wallet_pay_back_function_parameter)");
-                    //     return false;
-                    // }
-
-                    payCallBack(data);
-                    flushPage();
+                    walletPayCallBack(walletPayCallBackParameter);
                 }
                 if(!data.status){
                     dialog.success(data.info);
@@ -137,6 +131,7 @@ function forgetWalletPasswordDialog(){
         success: function(data){
             $('.loading').hide();
             if(data.status){
+                console.log(12548);return false
                 dialog.success(data.info,module + 'Payment/payComplete');
             }
             if(!data.status){

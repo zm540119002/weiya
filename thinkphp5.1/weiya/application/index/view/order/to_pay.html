@@ -54,8 +54,6 @@
 </article>
 {/block}
 {block name="common"}
-<!--{include file="template/wallet_password_dialog.html" /}-->
-<!--{include file="template/forget_wallet_password_dialog.html" /}-->
 {include file="template/wallte.html" /}
 {/block}
 {block name="script"}
@@ -80,10 +78,8 @@
                 return false;
             }
             if(pay_code == 4){
-                payCallBack = orderPayment;
-//                wallet_pay_back_function = 'orderPayment';
-                wallet_pay_back_function_parameter = $('#pay_info').serializeObject();
-//                walletPayDialog('orderPayment',data);
+                walletPayCallBack = orderPayment;
+                walletPayCallBackParameter = $('#pay_info').serializeObject();
                 walletPayDialog();
                 return false
             }

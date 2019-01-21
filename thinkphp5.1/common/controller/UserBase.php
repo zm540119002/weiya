@@ -29,4 +29,8 @@ class UserBase extends Base{
             }
         }
     }
+    
+    public function checkLogin(){
+        
+    }
 }

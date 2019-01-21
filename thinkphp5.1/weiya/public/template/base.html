@@ -16,11 +16,14 @@
 		var action = controller + '{:request()->action()}';
 		var uploads = '{:request()->domain()}'+'/uploads/';
 		var send_sms_url = '{:url("ucenter/UserCenter/sendSms")}';
-		var param = 123;
-		var payCallBack = function(param){
-			console.log(param);
+		var walletPayCallBackParameter = {};
+		var walletPayCallBack = function(walletPayCallBackParameter){
+
 		};
-		var login_back_function_parameter = {};
+		var loginBackFunctionParameter = {};
+		var loginBackFunction = function(parameter){
+			location.href = parameter.jump_url;
+		};
 //		var wallet_pay_back_function = '';
 //		var wallet_pay_back_function_parameter = {};
 	</script>
