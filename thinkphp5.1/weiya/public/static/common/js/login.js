@@ -119,7 +119,9 @@ $(function(){
                 postForm = $('#formForgetPassword');
             }
         }
+        console.log(345);
         if(!postForm){
+            console.log(123);
             dialog.error('未知操作');
             return false;
         }
@@ -138,7 +140,6 @@ $(function(){
             errorTipc(content);
             return false;
         }else{
-            console.log(url);
             $.post(url,postData,function (data) {
                 return;
                 if(data.status==0){
