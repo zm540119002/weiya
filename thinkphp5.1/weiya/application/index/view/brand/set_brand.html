@@ -58,6 +58,7 @@
 </section>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
+    //设置品牌弹窗
     function brandLayer(obj) {
         var brand_list_layer=$('.brand_list_layer').html();
         layer.open({
@@ -84,9 +85,14 @@
                     success: function(data){
                         $('.setBrandLayer').find('.list').html(data);
                         $('.setBrandLayer').find('.list').attr('id',obj.id);
+                        changeInputLen($('.input_width'));
                         cancleFixedLayer();
                     }
                 });
+                //
+               
+                    
+               
             },
             yes:function(index){
                 layer.close(index);
@@ -212,6 +218,7 @@
                         dialog.error(content);
                         return false;
                     }
+                   
                     postData.id = _this.data('id');
                     var config = {
                         url:module + 'Brand/edit',
@@ -220,6 +227,7 @@
                         index:index
                     };
                     dialogFormEdit(config);
+                   
                 }
             });
         });
@@ -249,6 +257,7 @@
                 }
             })
         });
+        
     })
 
 </script>
