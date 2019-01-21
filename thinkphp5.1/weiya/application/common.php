@@ -88,9 +88,9 @@ function unlockingFooterCartConfig($arr){
 function getPaymentCode($num){
     return $num?config('custom.payment_code')[$num]:'';
 }
-/**获取店铺合作类型
+/**获取品牌分类
  * @param $num
- * @return string`'支付方式：0：保留 1 微信 2：支付宝 3：网银 4:钱包',
+ * @return string
  */
 function getBrandType($num){
     return $num?config('custom.brand_type')[$num]:'';
