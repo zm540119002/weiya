@@ -185,6 +185,7 @@ class UserCenter extends Base {
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
 		session('user', $user);
 		session('user_sign', data_auth_sign($user));
+		print_r(session('backUrl'));exit;
 		return session('backUrl');
 		//返回发起页或平台首页
 		$backUrl = session('backUrl');
