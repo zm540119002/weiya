@@ -8,14 +8,6 @@ class UserCenter extends Base {
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_common';
-	// session 前缀
-	private $_session_prefix = null;
-
-	public function __construct($data)
-	{
-		parent::__construct($data);
-		$this->_session_prefix = $_POST['session_prefix'];
-	}
 
 	/**登录-账号检查
 	 */
@@ -191,12 +183,12 @@ class UserCenter extends Base {
 	 */
 	private function _setSession($user){
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
-		session('user',$user,$this->_session_prefix);
-		session('user_sign',data_auth_sign($user),$this->_session_prefix);
+		session('user',$user);
+		session('user_sign',data_auth_sign($user));
 		print_r(session(''));
 		exit;
 		//返回发起页或平台首页
-		$backUrl = session('backUrl','',$this->_session_prefix)?:session('returnUrl','',$this->_session_prefix);
+		$backUrl = session('backUrl')?:session('returnUrl');
 		$pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
 		preg_match ($pattern,$backUrl,$matches);
 		return $backUrl?(is_ssl()?'https://':'http://').$backUrl:url('Index/index');
@@ -205,6 +197,6 @@ class UserCenter extends Base {
 	/**检查验证码
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
-		return session('captcha_' . $mobilePhone,'',$this->_session_prefix) == $captcha ;
+		return session('captcha_' . $mobilePhone) == $captcha ;
 	}
 }
