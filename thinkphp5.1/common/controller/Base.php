@@ -16,6 +16,7 @@ class Base extends \think\Controller{
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //去到页面跟返回跳转不一样，前端传参returnUrl
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
+        print_r(session('backUrl'));
         print_r(session('returnUrl'));
         exit;
     }
