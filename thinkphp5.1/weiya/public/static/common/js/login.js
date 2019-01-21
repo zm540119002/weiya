@@ -100,7 +100,8 @@ function forgetPasswordDialog(){
 $(function(){
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
-        loginDialog('flushPage');
+        loginBackFunction =flushPage;
+        loginDialog();
     });
     //退出-弹窗事件
     $('body').on('click','#logout_dialog',function(){
