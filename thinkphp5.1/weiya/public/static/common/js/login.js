@@ -98,6 +98,7 @@ $(function(){
         var postForm = null;
         var loginSign = 'dialog';
         if(method=='login' || method=='login_admin'){//登录
+            console.log(url);
             if($('.loginLayer #formLogin').length){//弹框登录
                 postForm = $('.loginLayer #formLogin');
             }else{//页面登录
