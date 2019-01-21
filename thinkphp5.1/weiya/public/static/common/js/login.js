@@ -93,11 +93,10 @@ $(function(){
     $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
-        var content='';
         var url = domain+'ucenter/UserCenter/'+method;
         var postForm = null;
         var loginSign = 'dialog';
-        if(method=='login'){//登录
+        if(method=='login' || method=='login_admin'){//登录
             if($('.loginLayer #formLogin').length){//弹框登录
                 postForm = $('.loginLayer #formLogin');
             }else{//页面登录
@@ -112,7 +111,6 @@ $(function(){
                 postForm = $('#formRegister');
             }
         }else if(method=='forgetPassword'){//重置密码
-            console.log($('.forgetPasswordLayer  #formForgetPassword').length);
             if($('.forgetPasswordLayer  #formForgetPassword').length){//弹框重置密码
                 postForm = $('.forgetPasswordLayer #formForgetPassword');
             }else{//页面重置密码
@@ -125,9 +123,10 @@ $(function(){
             return false;
         }
         var postData = postForm.serializeObject();
+        var content='';
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
-        }else if(method!='login' && !register.vfyCheck(postData.captcha)){
+        }else if(method!='login' && method!='login_admin' && !register.vfyCheck(postData.captcha)){
             content = "请输入正确的验证码";
         }else if(!register.pswCheck(postData.password)){
             content = "请输入6-16数字或字母的密码";
@@ -140,17 +139,21 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
-                return;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
                 }else if(data.status==1){
                     if(loginSign=='page'){
-                        location.href = data.info;
+                        // location.href = data.info;
                     }else if(loginSign=='dialog'){
                          $('.layui-m-layer').remove();
-                        loginBackFunction(loginBackFunctionParameter);
                     }
+                    if(!loginBackFunctionParameter){
+                        loginBackFunctionParameter = data.info;
+                    }
+                    console.log(loginBackFunctionParameter);
+                    return;
+                    loginBackFunction(loginBackFunctionParameter);
                 }
             });
         }

@@ -18,14 +18,31 @@ function walletPayDialog() {
                 $(obj).attr('readonly',true);
                 $(obj).on('keyup',function(){
                     var _this=$(this);
-                    _this.val().replace(/^(.).*$/,'$1');
-                    _this.attr('readonly',true);
-                    var next=_this.data('index')+1;
-                    if(next>oLis.length-1){
-                        console.log('12345678');
+                    var len=_this.val().length;
+                    var reg=/^\d+$/;
+                    if(!reg.test(_this.val())){
+                        var result=_this.val().substring(0,1);
+                        _this.val(result);
+                        dialog.error('只能输入纯数字密码');
+                        return false;
+                    }else{
+                        if(len==0){
+                            _this.removeAttr('readonly');
+                            _this.focus();
+                        }else if(len>1){
+                            var result=_this.val().substring(0,1);
+                            _this.val(result);
+                            dialog.error('每个框只能输入一位数字');
+                            _this.removeAttr('readonly');
+                        }else{
+                            var next=_this.data('index')+1;
+                            if(next>oLis.length-1){
+                                //obj.attr('readonly',true);
+                            }
+                            $(oLis[next]).removeAttr('readonly');
+                            $(oLis[next]).focus(); 
+                        }
                     }
-                    $(oLis[next]).removeAttr('readonly');
-                    $(oLis[next]).focus();
                 });
             }
             $(oLis[0]).removeAttr('readonly');
@@ -73,6 +90,42 @@ function forgetWalletPasswordDialog(){
         shadeClose:false,
         btn:['确定',''],
         success:function(){
+            //钱包密码
+            var oLis=$('.forgetWalletPasswordLayer input.password_item');
+            for(var i = 0;i<oLis.length;i++){
+                var obj=oLis[i];
+                $(obj).data('index',i);
+                $(obj).attr('readonly',true);
+                $(obj).on('keyup',function(){
+                    var _this=$(this);
+                    var len=_this.val().length;
+                    var reg=/^\d+$/;
+                    if(!reg.test(_this.val())){
+                        var result=_this.val().substring(0,1);
+                        _this.val(result);
+                        dialog.error('只能输入纯数字密码');
+                        return false;
+                    }else{
+                        if(len==0){
+                            _this.removeAttr('readonly');
+                            _this.focus();
+                        }else if(len>1){
+                            var result=_this.val().substring(0,1);
+                            _this.val(result);
+                            dialog.error('每个框只能输入一位数字');
+                            _this.removeAttr('readonly');
+                        }else{
+                            var next=_this.data('index')+1;
+                            if(next>oLis.length-1){
+                                //obj.attr('readonly',true);
+                            }
+                            $(oLis[next]).removeAttr('readonly');
+                            $(oLis[next]).focus(); 
+                        }
+                    }
+                });
+            }
+            $(oLis[0]).removeAttr('readonly');
         },
         yes:function(index){
             var postForm = $('.forgetWalletPasswordLayer #ForgetWalletPassword');
