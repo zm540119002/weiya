@@ -93,9 +93,9 @@ $(function(){
     $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
-        console.log(method);
         var content='';
         var url = domain+'ucenter/UserCenter/'+method;
+        console.log(url);
         var postForm = null;
         var loginSign = 'dialog';
         if(method=='login'){//登录
@@ -113,7 +113,6 @@ $(function(){
                 postForm = $('#formRegister');
             }
         }else if(method=='forgetPassword'){//重置密码
-            console.log($('.forgetPasswordLayer  #formForgetPassword').length);
             if($('.forgetPasswordLayer  #formForgetPassword').length){//弹框重置密码
                 postForm = $('.forgetPasswordLayer #formForgetPassword');
             }else{//页面重置密码
