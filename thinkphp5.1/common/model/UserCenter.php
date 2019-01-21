@@ -11,6 +11,13 @@ class UserCenter extends Base {
 	// session 前缀
 	private $_session_prefix = null;
 
+	public function __construct($data)
+	{
+		parent::__construct($data);
+		print_r($_POST);
+		exit;
+	}
+
 	/**登录-账号检查
 	 */
 	public function loginCheck($mobilePhone){
