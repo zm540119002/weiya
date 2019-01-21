@@ -158,8 +158,6 @@ $(function(){
         }else if(!register.pswCheck(postData.password)){
             content = "请输入6-16数字或字母的密码";
         }
-        console.log(postData);
-        return ;
         if(method && content){
             dialog.error(content);
             return false;
@@ -168,6 +166,7 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
+                return;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
