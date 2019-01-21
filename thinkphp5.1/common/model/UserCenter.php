@@ -181,6 +181,8 @@ class UserCenter extends Base {
 	/**设置登录session
 	 */
 	private function _setSession($user){
+		print_r(Session::prefix(''));
+		exit;
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
 		session('user', $user);
 		session('user_sign', data_auth_sign($user));
