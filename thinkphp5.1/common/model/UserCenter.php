@@ -183,6 +183,7 @@ class UserCenter extends Base {
 	 */
 	private function _setSession($user){
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
+		print_r(Session::prefix(''));exit;
 		session('user', $user,Session::prefix(''));
 		session('user_sign', data_auth_sign($user),Session::prefix(''));
 		//返回发起页或平台首页
