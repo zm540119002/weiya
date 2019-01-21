@@ -15,8 +15,6 @@ class UserCenter extends Base {
 	{
 		parent::__construct($data);
 		$this->_session_prefix = $_POST['session_prefix'];
-		print_r($this->_session_prefix);
-		exit;
 	}
 
 	/**登录-账号检查
@@ -195,6 +193,8 @@ class UserCenter extends Base {
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
 		session('user',$user,$this->_session_prefix);
 		session('user_sign',data_auth_sign($user),$this->_session_prefix);
+		print_r(session(''));
+		exit;
 		//返回发起页或平台首页
 		$backUrl = session('backUrl','',$this->_session_prefix)?:session('returnUrl','',$this->_session_prefix);
 		$pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
