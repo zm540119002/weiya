@@ -5,8 +5,8 @@ namespace common\controller;
  */
 class UserBaseAdmin extends Base{
     protected $user = null;
-    protected $loginUrl = 'ucenter/UserCenterAdmin/login';//用户中心URL
-    protected $indexUrl = 'Index/index';//首页URL
+    protected $loginUrl = 'ucenter/UserCenter/login_admin';//用户中心URL
+    protected $indexUrl = 'index_admin/Index/index';//首页URL
     
     public function __construct(){
         parent::__construct();
