@@ -178,8 +178,8 @@ class Wallet extends \common\model\Base {
 	 */
 	private function _setSession($wallet){
 		$wallet = array_merge($wallet,array('rand' => create_random_str(10, 0),));
-		session('user', $wallet,Session::prefix(''));
-		session('user_sign', data_auth_sign($wallet),Session::prefix(''));
+		session('user', $wallet,config('custom.session_prefix'));
+		session('user_sign', data_auth_sign($wallet),config('custom.session_prefix'));
 		return session('backUrl');
 		//返回发起页或平台首页
 		$backUrl = session('backUrl');

@@ -183,11 +183,10 @@ class UserCenter extends Base {
 	 */
 	private function _setSession($user){
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
-		print_r(Session::prefix(''));exit;
-		session('user', $user,Session::prefix(''));
-		session('user_sign', data_auth_sign($user),Session::prefix(''));
+		session('user', $user,config('custom.session_prefix'));
+		session('user_sign', data_auth_sign($user),config('custom.session_prefix'));
 		//返回发起页或平台首页
-		$backUrl = session('backUrl','',Session::prefix(''))?:session('returnUrl','',Session::prefix(''));
+		$backUrl = session('backUrl','',config('custom.session_prefix'))?:session('returnUrl','',config('custom.session_prefix'));
 		$pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
 		preg_match ($pattern,$backUrl,$matches);
 		return $backUrl?(is_ssl()?'https://':'http://').$backUrl:url('Index/index');

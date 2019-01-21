@@ -18,9 +18,9 @@ class Base extends \think\Controller{
         Session::prefix(Request::module());
         //去到页面跟返回跳转一样，前端不用传参
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] :
-            $this->host . $_SERVER['HTTP_REFERER'],Session::prefix(''));
+            $this->host . $_SERVER['HTTP_REFERER'],config('custom.session_prefix'));
         //去到页面跟返回跳转不一样，前端传参returnUrl
-        session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''),Session::prefix(''));
+        session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''),config('custom.session_prefix'));
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){

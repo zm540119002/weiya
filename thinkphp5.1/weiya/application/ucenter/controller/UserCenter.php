@@ -50,10 +50,10 @@ class UserCenter extends \think\Controller{
 
     //退出
     public function logout(){
-        session('user',null,Session::prefix(''));
-        session('user_sign',null,Session::prefix(''));
-        session('backUrl',null,Session::prefix(''));
-        session('returnUrl',null,Session::prefix(''));
+        session('user',null,config('custom.session_prefix'));
+        session('user_sign',null,config('custom.session_prefix'));
+        session('backUrl',null,config('custom.session_prefix'));
+        session('returnUrl',null,config('custom.session_prefix'));
         header('Content-type: text/html; charset=utf-8');
         return successMsg('成功');
         return redirect('login');
@@ -81,7 +81,7 @@ class UserCenter extends \think\Controller{
             return errorMsg($response->Message);
         }
         //设置session
-        session('captcha_'.$mobilePhone,$captcha,Session::prefix(''));
+        session('captcha_'.$mobilePhone,$captcha,config('custom.session_prefix'));
         return successMsg($response->Message);
     }
 }

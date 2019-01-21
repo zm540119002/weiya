@@ -6,8 +6,8 @@ require __DIR__ . '/../../common/function/common.php';
 /**检查是否登录
  */
 function checkLogin(){
-    $user = session('user','',Session::prefix(''));
-    $user_sign = session('user_sign','',Session::prefix(''));
+    $user = session('user','',config('custom.session_prefix'));
+    $user_sign = session('user_sign','',config('custom.session_prefix'));
     if (!$user || !$user_sign) {
         return false;
     }
