@@ -25,7 +25,7 @@ $(function () {
                             loginDialog();
                         }
                     }else{
-                        location.href = da;
+                        location.href = jump_url;
                     }
                 }
             });
