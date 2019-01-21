@@ -14,7 +14,8 @@ class UserCenter extends Base {
 	public function __construct($data)
 	{
 		parent::__construct($data);
-		print_r($_POST);
+		$this->_session_prefix = $_POST['session_prefix'];
+		print_r($this->_session_prefix);
 		exit;
 	}
 
