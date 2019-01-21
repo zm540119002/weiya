@@ -131,7 +131,7 @@ function forgetWalletPasswordDialog(){
             var postForm = $('.forgetWalletPasswordLayer #ForgetWalletPassword');
             var content='';
             var postData = postForm.serializeObject();
-<<<<<<< HEAD
+
             var oLis=$('.forgetWalletPasswordLayer input.password_item');
             var password='';
             for(var i=0;i<oLis.length;i++){
@@ -144,14 +144,13 @@ function forgetWalletPasswordDialog(){
             }else if(!register.pswCheck(postData.password)){
                 content = "请输入4数字或字母的密码";
             }
-=======
             console.log(postData);
-            // if(!register.vfyCheck(postData.captcha)){
-            //     content = "请输入正确的验证码";
-            // }else if(!register.pswCheck(postData.password)){
-            //     content = "请输入4数字或字母的密码";
-            // }
->>>>>>> ddfb4ec2eeefd26fde86a8528b404c0592256b3e
+            if(!register.vfyCheck(postData.captcha)){
+                content = "请输入正确的验证码";
+            }else if(!register.pswCheck(postData.password)){
+                content = "请输入4数字或字母的密码";
+            }
+
             if(content){
                 dialog.error(content);
                 return false;
