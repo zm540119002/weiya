@@ -1,6 +1,4 @@
 {extend name="template/base.html" /}
-{block name="css-customize"}
-{/block}
 {block name="content"}
 <article class="f24">
 	<section class="slider_banner">
@@ -115,7 +113,7 @@
 <script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){
-		var id = {$info.id};
+		var id = '{$info.id}';
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 		//查看文本
