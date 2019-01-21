@@ -13,21 +13,11 @@ class Base extends \think\Controller{
                 && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
         $this->host = $http_type . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ''));
-        if(config('custom.module_type')==1){
-			session([
-				'prefix'     => 'index_',
-			]);
-		}elseif(config('custom.module_type')==2){
-			session([
-				'prefix'     => 'index_admin_',
-			]);
-		}
         //去到页面跟返回跳转一样，前端不用传参
-        session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
+        session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] :
+            $this->host . $_SERVER['HTTP_REFERER'],Session::prefix(''));
         //去到页面跟返回跳转不一样，前端传参returnUrl
-        session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
-        print_r(Session::prefix(''));
-        exit;
+        session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''),Session::prefix(''));
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){
