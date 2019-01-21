@@ -152,9 +152,7 @@ $(function(){
                     }else if(loginSign=='dialog'){
                          $('.layui-m-layer').remove();
                     }
-                    if(isEmptyObject(loginBackFunctionParameter)){
-                        loginBackFunctionParameter.jump_url = data.info;
-                    }
+                    loginBackFunctionParameter.jump_url = data.info;
                     loginBackFunction(loginBackFunctionParameter);
                 }
             });
