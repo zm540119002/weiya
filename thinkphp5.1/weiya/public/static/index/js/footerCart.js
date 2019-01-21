@@ -1,8 +1,12 @@
 
 function addCart(postData) {
-    console.log(postData)
+    //console.log(postData)
     var url = module + 'Cart/addCart';
-    postData.aa.addClass("nodisabled");//防止重复提交
+     var _this=postData._this;
+     var lis=postData.lis;
+    _this.addClass("nodisabled");//防止重复提交
+    delete postData._this;
+    delete postData.lis;
     $.ajax({
         url: url,
         data: postData,
@@ -16,7 +20,7 @@ function addCart(postData) {
         },
         success: function(data){
             $('.loading').hide();
-            // $(postData._this).removeClass("nodisabled");//防止重复提交
+            _this.removeClass("nodisabled");//防止重复提交
             if(data.status==0){
                 dialog.error(data.info);
             }
@@ -29,12 +33,13 @@ function addCart(postData) {
             else{
                 dialog.success(data.info);
                 var num = 0;
-                // $.each( postData.lis,function(index,val){
-                //     var buyType=$(this).data('buy_type');
-                //     if(buyType==1){
-                //         num += parseInt($(this).find('.gshopping_count').val());
-                //     }
-                // });
+               
+                $.each(lis,function(index,val){
+                    var buyType=$(this).data('buy_type');
+                    if(buyType==1){
+                        num += parseInt($(this).find('.gshopping_count').val());
+                    }
+                });
                 $('footer').find('.cart_num').addClass('cur');
                 $('footer').find('.add_num').text('+'+num).addClass('current');
                 setTimeout(function(){
@@ -156,20 +161,18 @@ $(function () {
         var lis = null;
         lis = $('ul.goods_list').find('li[data-buy_type="1"]');
         var postData = assemblyData(lis);
-        console.log(postData)
-        // var goodsList = postData.goodsList;
-        // console.log(goodsList);
-        // for(var i=0;i<goodsList.length;i++){
-        //     if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
-        //         dialog.error('请设置品牌');
-        //         return false;
-        //     }
-        // }
+        var goodsList = postData.goodsList;
+        for(var i=0;i<goodsList.length;i++){
+            if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
+                dialog.error('请设置品牌');
+                return false;
+            }
+        }
         if(!postData){
             return false;
         }
-        postData.aa = _this;
-        // postData.lis = lis;
+        postData._this = _this;
+        postData.lis = lis;
 
         addCart(postData);
     });
