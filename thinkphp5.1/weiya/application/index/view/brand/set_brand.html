@@ -58,7 +58,7 @@
 </section>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
-    function brandLayer(id) {
+    function brandLayer(obj) {
         var brand_list_layer=$('.brand_list_layer').html();
         layer.open({
             title:['设定品牌','border-bottom:1px solid #d9d9d9;'],
@@ -68,7 +68,6 @@
             content:brand_list_layer,
             btn:[''],
             success:function(){
-                //
                 var url = module + 'Brand/getList';
                 var postData = {};
                 $.ajax({
@@ -84,7 +83,7 @@
                     },
                     success: function(data){
                         $('.setBrandLayer').find('.list').html(data);
-                        $('.setBrandLayer').find('.list').attr('id',id);
+                        $('.setBrandLayer').find('.list').attr('id',obj.id);
                     }
                 });
             },
@@ -98,6 +97,7 @@
         $('body').on('click','.set_brand',function () {
             var url = module + 'Brand/index';
             var id=$(this).parents('li').attr('id');
+            var brand_li_id = {id:id};
             var postData = {};
             $.ajax({
                 url: url,
@@ -116,13 +116,14 @@
                         dialog.error(data.info);
                     }else if(data.code==1){
                         if(data.data == 'no_login'){
-                            loginDialog('brandLayer');
+                            loginDialog();
+                            loginBackFunctionParameter.id =id;
+                            loginBackFunction = brandLayer;
                         }
                     }else if(data.status==1){
 
                     }else{
-                        
-                        brandLayer(id);
+                        brandLayer(brand_li_id);
                     }
                 }
             });
