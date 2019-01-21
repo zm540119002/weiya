@@ -185,6 +185,7 @@ class UserCenter extends Base {
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
 		session('user', $user,config('custom.session_prefix'));
 		session('user_sign', data_auth_sign($user),config('custom.session_prefix'));
+		print_r(config('custom.session_prefix'));
 		//返回发起页或平台首页
 		$backUrl = session('backUrl','',config('custom.session_prefix'))?:session('returnUrl','',config('custom.session_prefix'));
 		$pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
