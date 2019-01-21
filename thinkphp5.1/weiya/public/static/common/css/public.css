@@ -1322,6 +1322,11 @@ background-position: 0 -27px;
 .login_item .columns_flex .hidden.active{
      background-position:15px -7px;
 }
+.forgetWalletPasswordLayer .columns_flex .hidden{
+    border:1px solid #d9d9d9;
+    margin:0 0 0 0.10rem;
+    border-radius:5px;
+}
 .use-item.hide{display: none;}
 .use-attention,.forget_password{
     color:#3FA9F5;
@@ -4123,7 +4128,7 @@ select[name="nodeIds"]{
     border-right: none;
 }
 .forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
-    top: -254px;
+    top: -246px;
     right: -286px;
 }
 .layui-m-layer-shareqrCodeLayer .layui-m-layerbtn span{
@@ -5480,7 +5485,7 @@ ul.info_list li{
     line-height: 0.5rem;
     border:1px solid #d9d9d9;
     border-right:none;
-}s
+}
 .payment_password_list li:last-child{
     border-right:1px solid #d9d9d9;
 }
@@ -5489,6 +5494,9 @@ ul.info_list li{
     width:100%;
     height:100%;
     text-align: center;
+}
+.forgetWalletPasswordLayer .payment_password_list li{
+    width:0.8rem;
 }
 .payPasswordLayer .payment_password{
     padding:0.25rem;
