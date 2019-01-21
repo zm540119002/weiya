@@ -1,6 +1,6 @@
 <?php
 namespace common\model;
-use think\facade\Session;
+
 class UserCenter extends Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'user';
@@ -8,6 +8,13 @@ class UserCenter extends Base {
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_common';
+	private $session_prefix = null;
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->session_prefix = $_POST['session_prefix'];
+	}
 
 	/**登录-账号检查
 	 */
@@ -182,13 +189,11 @@ class UserCenter extends Base {
 	/**设置登录session
 	 */
 	private function _setSession($user){
-		print_r(Session::prefix(''));
-		exit;
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
-		session('user', $user);
-		session('user_sign', data_auth_sign($user));
+		session('user',$user,$this->session_prefix);
+		session('user_sign',data_auth_sign($user),$this->session_prefix);
 		//返回发起页或平台首页
-		$backUrl = session('backUrl','')?:session('returnUrl','');
+		$backUrl = session('backUrl','',$this->session_prefix)?:session('returnUrl','',$this->session_prefix);
 		$pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
 		preg_match ($pattern,$backUrl,$matches);
 		return $backUrl?(is_ssl()?'https://':'http://').$backUrl:url('Index/index');
@@ -197,6 +202,6 @@ class UserCenter extends Base {
 	/**检查验证码
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
-		return session('captcha_' . $mobilePhone) == $captcha ;
+		return session('captcha_' . $mobilePhone,'',$this->session_prefix) == $captcha ;
 	}
 }

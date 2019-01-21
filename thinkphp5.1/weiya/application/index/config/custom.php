@@ -16,7 +16,6 @@
 return [
     'title' => '维雅药妆定制',
     'module_type' => 1,//模块类型
-    'session_prefix' => 'index_',//session前缀
     'default_page_size'=>10,
 ];
 

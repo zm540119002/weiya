@@ -6,6 +6,7 @@ class UserCenter extends \think\Controller{
     public function login(){
         if (request()->isAjax()) {
             $modelUser = new \common\model\UserCenter();
+            $_POST['session_prefix'] = 'index_';
             $postData = input('post.');
             return $modelUser->login($postData);
         } else {
@@ -17,6 +18,7 @@ class UserCenter extends \think\Controller{
      */
     public function login_admin(){
         if (request()->isAjax()) {
+            $_POST['session_prefix'] = 'index_admin_';
             $modelUser = new \common\model\UserCenter();
             $postData = input('post.');
             return $modelUser->login($postData);
