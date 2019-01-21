@@ -109,8 +109,7 @@ $(function(){
     });
     //忘记密码-弹窗事件
     $('body').on('click','.forget_dialog',function(){
-        var fn_name = $(this).siblings('input[name="fn_name"]').val();
-        forgetPasswordDialog(fn_name);
+        forgetPasswordDialog();
     });
 });
 $(function(){
