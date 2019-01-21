@@ -175,18 +175,12 @@ $(function(){
                         location.href = data.info;
                     }else if(loginSign=='dialog'){
                          $('.layui-m-layer').remove();
-                        console.log(loginBackFunctionParameter);
                         loginBackFunction(loginBackFunctionParameter);
-                        // dialogLoginDefaultCallBack(data);
                     }
                 }
             });
         }
     });
-    //弹框登录成功默认回调函数
-    function dialogLoginDefaultCallBack(data) {
-        location.href = data.info;
-    }
     //显示隐藏密码
     //var onOff = true;
     $('body').on('click','.view-password',function(){
