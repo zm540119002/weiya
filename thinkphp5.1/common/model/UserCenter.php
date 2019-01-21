@@ -128,7 +128,7 @@ class UserCenter extends Base {
 		}
 		//更新最后登录时间
 		$this->_setLastLoginTimeById($user['id']);
-		return successMsg($this->_setSession($user),['fn_name'=>$data['fn_name']]);
+		return successMsg($this->_setSession($user));
 	}
 
 	/**注册

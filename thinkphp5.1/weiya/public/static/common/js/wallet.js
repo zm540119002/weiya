@@ -114,17 +114,6 @@ function forgetWalletPasswordDialog(){
             var url = module+'Wallet/forgetPassword';
             $.post(url,postData,function (data) {
                 if(data.status){
-                    //直接去支付
-                    // var info =  JSON.parse(data.info);
-                    // var fn_name = info.fn_name;
-                    // if(fn_name){
-                    //     if(fn_name == 'orderPayment'){
-                    //         orderPayment(info);
-                    //     }
-                    //     return false;
-                    // }
-                    //
-
                     //成功后弹出登录框
                     layer.closeAll();
                     walletPayDialog();

@@ -1,29 +1,3 @@
-// //登录-弹窗触发
-// function loginDialog(fn_name){
-//     var content=$('#dialLogin').html();
-//     window.scrollTo(0,0);
-//     layer.open({
-//         className:'loginLayer',
-//         type:1,
-//         shadeClose:false,
-//         content:content,
-//         title:['登录','border-bottom:1px solid #d9d9d9;'],
-//         btn:[''],
-//         success:function(indexs,i){
-//             tab_down('.loginNav li','.loginTab .login_wrap','click');
-//             $('.layui-m-layershade').on('touchmove',function(e){
-//                 event.preventDefault();
-//             });
-//             $('input[name="fn_name"]').val(fn_name);
-//             fixedLayer();
-//         },
-//         yes:function(index){
-//             cancleFixedLayer();
-//             layer.close(index);
-//         }
-//     });
-// }
-
 //登录-弹窗触发
 function loginDialog(){
     var content=$('#dialLogin').html();
@@ -123,7 +97,7 @@ $(function(){
         var url = domain+'ucenter/UserCenter/'+method;
         var postForm = null;
         var loginSign = 'dialog';
-        if(method=='login'){//登录
+        if(method=='login' || method=='login_admin'){//登录
             if($('.loginLayer #formLogin').length){//弹框登录
                 postForm = $('.loginLayer #formLogin');
             }else{//页面登录
@@ -138,7 +112,6 @@ $(function(){
                 postForm = $('#formRegister');
             }
         }else if(method=='forgetPassword'){//重置密码
-            console.log($('.forgetPasswordLayer  #formForgetPassword').length);
             if($('.forgetPasswordLayer  #formForgetPassword').length){//弹框重置密码
                 postForm = $('.forgetPasswordLayer #formForgetPassword');
             }else{//页面重置密码
@@ -165,8 +138,9 @@ $(function(){
             errorTipc(content);
             return false;
         }else{
+            console.log(url);
             $.post(url,postData,function (data) {
-                console.log(data)
+                return;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
