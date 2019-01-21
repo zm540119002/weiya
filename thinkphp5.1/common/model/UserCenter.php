@@ -183,15 +183,6 @@ class UserCenter extends Base {
 	 */
 	private function _setSession($user){
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
-//		if(config('custom.module_type')==1){
-//			session([
-//				'prefix'     => 'index_',
-//			]);
-//		}elseif(config('custom.module_type')==2){
-//			session([
-//				'prefix'     => 'index_admin_',
-//			]);
-//		}
 		print_r(session());
 		exit;
 		session('user', $user);
