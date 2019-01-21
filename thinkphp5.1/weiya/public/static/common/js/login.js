@@ -78,7 +78,7 @@ function logoutDialog(){
     });
 }
 //忘记密码-弹窗触发
-function forgetPasswordDialog(fn_name){
+function forgetPasswordDialog(){
     var content = $('#sectionForgetPassword').html();
     layer.open({
         className:'forgetPasswordLayer',
@@ -89,7 +89,6 @@ function forgetPasswordDialog(fn_name){
         success:function(){
             $('.login_item .password').attr('type','password');
             $('.view-password').removeClass('active');
-            $('input[name="fn_name"]').val(fn_name);
             fixedLayer();
         },
         yes:function(index){
