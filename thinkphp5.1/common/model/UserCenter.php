@@ -8,12 +8,13 @@ class UserCenter extends Base {
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_common';
-	private $session_prefix = null;
+	// session 前缀
+	private $_session_prefix = null;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->session_prefix = $_POST['session_prefix'];
+		$this->_session_prefix = $_POST['session_prefix'];
 	}
 
 	/**登录-账号检查
@@ -190,11 +191,11 @@ class UserCenter extends Base {
 	 */
 	private function _setSession($user){
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
-		print_r($this->session_prefix);exit;
-		session('user',$user,$this->session_prefix);
-		session('user_sign',data_auth_sign($user),$this->session_prefix);
+		print_r($this->_session_prefix);exit;
+		session('user',$user,$this->_session_prefix);
+		session('user_sign',data_auth_sign($user),$this->_session_prefix);
 		//返回发起页或平台首页
-		$backUrl = session('backUrl','',$this->session_prefix)?:session('returnUrl','',$this->session_prefix);
+		$backUrl = session('backUrl','',$this->_session_prefix)?:session('returnUrl','',$this->_session_prefix);
 		$pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
 		preg_match ($pattern,$backUrl,$matches);
 		return $backUrl?(is_ssl()?'https://':'http://').$backUrl:url('Index/index');
@@ -203,6 +204,6 @@ class UserCenter extends Base {
 	/**检查验证码
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
-		return session('captcha_' . $mobilePhone,'',$this->session_prefix) == $captcha ;
+		return session('captcha_' . $mobilePhone,'',$this->_session_prefix) == $captcha ;
 	}
 }
