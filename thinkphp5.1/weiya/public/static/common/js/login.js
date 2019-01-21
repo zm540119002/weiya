@@ -154,7 +154,7 @@ $(function(){
                          $('.layui-m-layer').remove();
                     }
                     if(!loginBackFunctionParameter){
-                        loginBackFunctionParameter = data.info;
+                        loginBackFunctionParameter.jump_url = data.info;
                     }
                     loginBackFunction(loginBackFunctionParameter);
                 }
