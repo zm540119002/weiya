@@ -1,7 +1,13 @@
 <?php
 namespace app\index_admin\controller;
 
-class CustomClient extends \common\controller\UserBaseAdmin{
+class CustomClient extends \common\controller\Base{
+    protected $user = [];
+    public function __construct(){
+        parent::__construct();
+        $this->user['id'] = 17;
+    }
+
     /**售前
      */
     public function beforeSale(){
