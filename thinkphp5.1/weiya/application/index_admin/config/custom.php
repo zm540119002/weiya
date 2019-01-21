@@ -15,6 +15,7 @@
 
 return [
     'title' => '公共管理后台',
+    'module_type' => 2,//模块类型
     'on_off_line' =>[
         '1','2'
     ],

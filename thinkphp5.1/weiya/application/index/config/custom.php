@@ -15,6 +15,7 @@
 
 return [
     'title' => '维雅药妆定制',
+    'module_type' => 1,//模块类型
     'default_page_size'=>10,
 ];
 
