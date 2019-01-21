@@ -78,7 +78,7 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
-	var loginSign = '{$loginSign}';
+	var loginSign = '{$loginSign|default=""}';
 	function on_message_call_back(data) {
 		var chatListOtherTpl = $('#chatListOtherTpl');
 		chatListOtherTpl.find('.msg').text(data.content);
