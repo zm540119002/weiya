@@ -1,6 +1,5 @@
 <?php
 namespace app\ucenter\controller;
-
 class UserCenter extends \think\Controller{
     /**登录
      */
@@ -50,10 +49,10 @@ class UserCenter extends \think\Controller{
 
     //退出
     public function logout(){
-        session('user', null);
-        session('user_sign', null);
-        session('backUrl', null);
-        session('returnUrl', null);
+        session('user',null);
+        session('user_sign',null);
+        session('backUrl',null);
+        session('returnUrl',null);
         header('Content-type: text/html; charset=utf-8');
         return successMsg('成功');
         return redirect('login');

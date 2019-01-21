@@ -1,10 +1,11 @@
 <?php
 namespace common\controller;
 use \common\component\image\Image;
+use think\facade\Session;
 /**基于公共基础控制器
  */
 class Base extends \think\Controller{
-    protected $host;
+    protected $host = null;
     public function __construct(){
         parent::__construct();
         //登录验证后跳转回原验证发起页
@@ -13,7 +14,8 @@ class Base extends \think\Controller{
         $this->host = $http_type . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ''));
         //去到页面跟返回跳转一样，前端不用传参
-        session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
+        session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] :
+            $this->host . $_SERVER['HTTP_REFERER']);
         //去到页面跟返回跳转不一样，前端传参returnUrl
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
     }

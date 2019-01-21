@@ -139,17 +139,21 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
-                return;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
                 }else if(data.status==1){
                     if(loginSign=='page'){
-                        location.href = data.info;
+                        // location.href = data.info;
                     }else if(loginSign=='dialog'){
                          $('.layui-m-layer').remove();
-                        loginBackFunction(loginBackFunctionParameter);
                     }
+                    if(!loginBackFunctionParameter){
+                        loginBackFunctionParameter = data.info;
+                    }
+                    console.log(loginBackFunctionParameter);
+                    return;
+                    loginBackFunction(loginBackFunctionParameter);
                 }
             });
         }
