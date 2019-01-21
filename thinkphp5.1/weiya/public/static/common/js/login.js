@@ -98,7 +98,6 @@ $(function(){
         var postForm = null;
         var loginSign = 'dialog';
         if(method=='login' || method=='login_admin'){//登录
-            console.log(url);
             if($('.loginLayer #formLogin').length){//弹框登录
                 postForm = $('.loginLayer #formLogin');
             }else{//页面登录
@@ -139,6 +138,7 @@ $(function(){
             errorTipc(content);
             return false;
         }else{
+            console.log(url);
             $.post(url,postData,function (data) {
                 return;
                 if(data.status==0){
