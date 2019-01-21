@@ -125,6 +125,7 @@ $(function(){
             dialog.error('未知操作');
             return false;
         }
+        console.log(444);
         var postData = postForm.serializeObject();
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
