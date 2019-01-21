@@ -11,12 +11,6 @@ class UserCenter extends Base {
 	// session 前缀
 	private $_session_prefix = null;
 
-	public function __construct()
-	{
-		parent::__construct();
-		$this->_session_prefix = $_POST['session_prefix'];
-	}
-
 	/**登录-账号检查
 	 */
 	public function loginCheck($mobilePhone){
