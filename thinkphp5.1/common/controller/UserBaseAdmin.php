@@ -10,7 +10,6 @@ class UserBaseAdmin extends Base{
     
     public function __construct(){
         parent::__construct();
-        print_r(123);exit;
         //判断是否登录
         $this->user = checkLogin();
         if (!$this->user) {
