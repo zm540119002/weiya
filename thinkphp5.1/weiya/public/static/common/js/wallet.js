@@ -131,6 +131,7 @@ function forgetWalletPasswordDialog(){
             var postForm = $('.forgetWalletPasswordLayer #ForgetWalletPassword');
             var content='';
             var postData = postForm.serializeObject();
+            console.log(postData);
             // if(!register.vfyCheck(postData.captcha)){
             //     content = "请输入正确的验证码";
             // }else if(!register.pswCheck(postData.password)){
