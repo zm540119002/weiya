@@ -18,14 +18,19 @@ function walletPayDialog() {
                 $(obj).attr('readonly',true);
                 $(obj).on('keyup',function(){
                     var _this=$(this);
+                    var len=_this.val().length;
                     _this.val().replace(/^(.).*$/,'$1');
                     _this.attr('readonly',true);
                     var next=_this.data('index')+1;
                     if(next>oLis.length-1){
                         console.log('12345678');
                     }
-                    $(oLis[next]).removeAttr('readonly');
-                    $(oLis[next]).focus();
+                    if(len==1){
+                        _this.blur();
+                        $(oLis[next]).removeAttr('readonly');
+                        $(oLis[next]).focus();
+                    }
+                    
                 });
             }
             $(oLis[0]).removeAttr('readonly');
@@ -73,6 +78,25 @@ function forgetWalletPasswordDialog(){
         shadeClose:false,
         btn:['确定',''],
         success:function(){
+            //钱包密码
+            var oLis=$('.forgetWalletPasswordLayer input.password_item');
+            for(var i = 0;i<oLis.length;i++){
+                var obj=oLis[i];
+                $(obj).data('index',i);
+                $(obj).attr('readonly',true);
+                $(obj).on('keyup',function(){
+                    var _this=$(this);
+                    _this.val().replace(/^(.).*$/,'$1');
+                    _this.attr('readonly',true);
+                    var next=_this.data('index')+1;
+                    if(next>oLis.length-1){
+                        console.log('12345678');
+                    }
+                    $(oLis[next]).removeAttr('readonly');
+                    $(oLis[next]).focus();
+                });
+            }
+            $(oLis[0]).removeAttr('readonly');
         },
         yes:function(index){
             var postForm = $('.forgetWalletPasswordLayer #ForgetWalletPassword');
