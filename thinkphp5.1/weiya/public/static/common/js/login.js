@@ -133,9 +133,11 @@ $(function(){
         }
         console.log(123);
         if(method && content){
+            console.log(456);
             dialog.error(content);
             return false;
         }else if(content){
+            console.log(789);
             errorTipc(content);
             return false;
         }else{
