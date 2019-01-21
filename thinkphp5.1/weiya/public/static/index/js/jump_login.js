@@ -1,5 +1,5 @@
 $(function () {
-    $('body').on('click','.my_cart,.address_manage,.recharge,.order_manage,my_brand',
+    $('body').on('click','.my_cart,.address_manage,.recharge,.order_manage,.my_brand',
         function () {
             var jump_url = $(this).data('jump_url');
             loginBackFunctionParameter.jump_url = jump_url;
