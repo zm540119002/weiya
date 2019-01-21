@@ -3,7 +3,7 @@ $(function () {
         function () {
             var jump_url = $(this).data('jump_url');
             loginBackFunctionParameter.jump_url = jump_url;
-            var url = module + 'Cart/checkLogin';
+            var url = jump_url;
             var postData = {};
             $.ajax({
                 url: url,
@@ -25,11 +25,12 @@ $(function () {
                             loginDialog();
                         }
                     }else{
-                        location.href = jump_url;
+                        location.href = da;
                     }
                 }
             });
         });
+
 });
 
 
