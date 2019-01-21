@@ -126,7 +126,7 @@ $(function(){
         var content='';
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
-        }else if((method!='login' || method!='login_admin') && !register.vfyCheck(postData.captcha)){
+        }else if(method!='login' && method!='login_admin' && !register.vfyCheck(postData.captcha)){
             content = "请输入正确的验证码";
         }else if(!register.pswCheck(postData.password)){
             content = "请输入6-16数字或字母的密码";
