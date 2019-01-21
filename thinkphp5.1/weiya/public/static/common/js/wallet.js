@@ -141,16 +141,9 @@ function forgetWalletPasswordDialog(){
             console.log(postData)
             if(!register.vfyCheck(postData.captcha)){
                 content = "请输入正确的验证码";
-            }else if(!register.pswCheck(postData.password)){
-                content = "请输入4数字或字母的密码";
+            }else if(!postData.password&&postData.password.length<4){
+                content = "请输入4位数字的密码";
             }
-            console.log(postData);
-            if(!register.vfyCheck(postData.captcha)){
-                content = "请输入正确的验证码";
-            }else if(!register.pswCheck(postData.password)){
-                content = "请输入4数字或字母的密码";
-            }
-
             if(content){
                 dialog.error(content);
                 return false;
