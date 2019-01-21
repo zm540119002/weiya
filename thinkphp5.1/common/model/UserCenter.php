@@ -183,7 +183,7 @@ class UserCenter extends Base {
 	 */
 	private function _setSession($user){
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
-		print_r(session());
+		print_r(session(''));
 		exit;
 		session('user', $user);
 		session('user_sign', data_auth_sign($user));
