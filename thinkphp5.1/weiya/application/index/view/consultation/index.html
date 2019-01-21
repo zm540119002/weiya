@@ -104,7 +104,7 @@
 			var content='';
 			if(!postData.name){
 				content='请填写你的姓名';
-			}else if(!postData.mobile){
+			}else if(!register.phoneCheck(postData.mobile)){
 				content='请填写你手机号码';
 			}else if(!postData.message){
 				content='请填写你的留言';

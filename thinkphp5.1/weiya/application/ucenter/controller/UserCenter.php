@@ -14,6 +14,18 @@ class UserCenter extends \think\Controller{
         }
     }
 
+    /**后台登录
+     */
+    public function login_admin(){
+        if (request()->isAjax()) {
+            $modelUser = new \common\model\UserCenter();
+            $postData = input('post.');
+            return $modelUser->login($postData);
+        } else {
+            return $this->fetch();
+        }
+    }
+
     /**注册
      */
     public function register(){

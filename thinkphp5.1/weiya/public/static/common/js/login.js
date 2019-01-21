@@ -1,29 +1,3 @@
-// //登录-弹窗触发
-// function loginDialog(fn_name){
-//     var content=$('#dialLogin').html();
-//     window.scrollTo(0,0);
-//     layer.open({
-//         className:'loginLayer',
-//         type:1,
-//         shadeClose:false,
-//         content:content,
-//         title:['登录','border-bottom:1px solid #d9d9d9;'],
-//         btn:[''],
-//         success:function(indexs,i){
-//             tab_down('.loginNav li','.loginTab .login_wrap','click');
-//             $('.layui-m-layershade').on('touchmove',function(e){
-//                 event.preventDefault();
-//             });
-//             $('input[name="fn_name"]').val(fn_name);
-//             fixedLayer();
-//         },
-//         yes:function(index){
-//             cancleFixedLayer();
-//             layer.close(index);
-//         }
-//     });
-// }
-
 //登录-弹窗触发
 function loginDialog(){
     var content=$('#dialLogin').html();
@@ -166,7 +140,7 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
-                console.log(data)
+                return;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;

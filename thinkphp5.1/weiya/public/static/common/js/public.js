@@ -241,7 +241,12 @@ var maximumWord = function(obj,max){
 $.fn.tab = function(){
     $(this).addClass("current").siblings().removeClass("current");
 };
-
+//根据input的value值css控制宽度变化
+function changeInputLen(obj){
+    console.log(obj);
+    var textLength=obj.val().length;
+    obj.css('width',textLength*15+'px');
+}
 //选项卡切换
 function tab_down(tab_k, tab_con, tab_dz) {
     var $div_li = $(tab_k);
@@ -613,6 +618,7 @@ function dialogFormAddDefaultCallBack(config,data) {
         var container = config.container?config.container:$('ul.list');
         container.prepend(data);
         container.find('.no-data').remove();
+        changeInputLen($('.input_width'));
         layer.close(config.index);
     }
 }
@@ -646,6 +652,7 @@ function dialogFormEditDefaultCallBack(config,data) {
         dialog.error(data.info);
     }else{
         config.modifyObj.replaceWith(data);
+        changeInputLen($('.input_width'));
         layer.close(config.index);
     }
 }
@@ -702,15 +709,16 @@ function cartCheckedBox(obj){
     $('footer .checkall').prop('checked',sign);
 }
 //固定弹窗不滚动
+var winScrollTop;
 function fixedLayer(){
-    scrollTop = $(document).scrollTop();//获取当前滚动条位置
+    winScrollTop = $(document).scrollTop();//获取当前滚动条位置
     $("body").addClass("flexd");//设置绝对定位，此时不操作的话底层页面回到最初位置
-    $("body").css("top",-scrollTop);//设置top属性确保屏幕显示滚动条的当前位置
+    $("body").css("top",-winScrollTop);//设置top属性确保屏幕显示滚动条的当前位置
 }
 //取消弹窗不滚动
 function cancleFixedLayer(){
     $("body").removeClass("flexd");//取消绝对定位
-    $("body").scrollTop(scrollTop);//滚动条回到停留位置
+    $("body").scrollTop(winScrollTop);//滚动条回到停留位置
 }
 //文档就绪
 $(function(){
