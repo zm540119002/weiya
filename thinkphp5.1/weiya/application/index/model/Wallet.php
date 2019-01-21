@@ -88,10 +88,10 @@ class Wallet extends \common\model\Base {
 	/**重置密码
 	 */
 	public function resetPassword($data){
-//		$validateUser = new \common\validate\User();
-//		if(!$validateUser->scene('resetPassword')->check($data)){
-//			return errorMsg($validateUser->getError());
-//		}
+		$validate = new \common\validate\Wallet();
+		if(!$validate->scene('resetPassword')->check($data)){
+			return errorMsg($validate->getError());
+		}
 		if($data['user_id'] && $data['captcha']){
 			if(!$this->_checkCaptcha($data['user_id'],$data['captcha'])){
 				return errorMsg('验证码错误，请重新获取验证码！');
@@ -173,25 +173,11 @@ class Wallet extends \common\model\Base {
 		}
 		return $wallet->toArray();
 	}
-
-	/**设置登录session
-	 */
-	private function _setSession($wallet){
-		$wallet = array_merge($wallet,array('rand' => create_random_str(10, 0),));
-		session('user', $wallet);
-		session('user_sign', data_auth_sign($wallet));
-		return session('backUrl');
-		//返回发起页或平台首页
-		$backUrl = session('backUrl');
-		$pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
-		preg_match ($pattern,$backUrl,$matches);
-		return $backUrl?(is_ssl()?'https://':'http://').$backUrl:url('Index/index');
-	}
-
+	
 	/**检查验证码
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
-		return true;
+		print_r(session('captcha_' . $mobilePhone));exit;
 		return session('captcha_' . $mobilePhone) == $captcha ;
 	}
 }
