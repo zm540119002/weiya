@@ -52,6 +52,8 @@ class UserCenter extends \think\Controller{
     public function logout(){
         session('user', null);
         session('user_sign', null);
+        session('backUrl', null);
+        session('returnUrl', null);
         header('Content-type: text/html; charset=utf-8');
         return successMsg('成功');
         return redirect('login');
