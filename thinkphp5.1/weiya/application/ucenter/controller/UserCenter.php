@@ -1,6 +1,5 @@
 <?php
 namespace app\ucenter\controller;
-use think\facade\Session;
 class UserCenter extends \think\Controller{
     /**登录
      */
