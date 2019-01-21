@@ -131,7 +131,6 @@ $(function(){
         }else if(!register.pswCheck(postData.password)){
             content = "请输入6-16数字或字母的密码";
         }
-        console.log(content);
         if(method && content){
             dialog.error(content);
             return false;
