@@ -350,8 +350,27 @@ $(function () {
     });
 
     //再次购买
-    
-
+    $('body').on('click','.purchase_again',function () {
+        //再次购买跳转到提交订单位置
+        var _This=$(this);
+        var oLis=$(this).parents('li').find('.order_item');
+        var postData={};
+        var goodslist=[];
+        $.each(oLis,function () {
+            var _this=$(this);
+            var good_id=_this.data('id');
+            var buy_type=$(this).data('buy_type');
+            var num=$(this).find('span.num').text();
+            goodslist.push({
+                good_id:good_id,
+                buy_type:buy_type,
+                num:num
+            });
+        });
+        postData.goodslist=goodslist;
+        _This.addClass("disabled");//防止重复提交
+        generateOrder(postData,_This);
+    });
 
     //购物车弹窗 样品购买
     var goodsInfoLayer=$('#goodsInfoLayer').html();
