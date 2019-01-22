@@ -14,6 +14,14 @@
                         <p>{$goods_info.name}</p>
                         <p>￥<price>{$goods_info.price}</price></p>
                         <p>X<span class="num">{$goods_info.num}</span></p>
+                        <div class="commodity_purchaser f24">
+                            {if $goods_info.buy_type == 1}
+                            <div>购买类型：<span>批量</span></div>
+                            {elseif $goods_info.buy_type == 2}
+                            <div>购买类型：<span>样品</span></div>
+                            {else /}
+                            {/if}
+                        </div>
                     </div>
                 </div>
                 {/volist}
