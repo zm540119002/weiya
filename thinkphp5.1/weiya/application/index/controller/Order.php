@@ -5,20 +5,21 @@ class Order extends \common\controller\UserBase
     //生成订单
     public function generate()
     {
-        print_r(input());exit;
         if (!request()->isPost()) {
             return errorMsg('请求方式错误');
         }
         $modelOrder = new \app\index\model\Order();
         $modelOrderDetail = new \app\index\model\OrderDetail();
-        $cartIds = input('post.cartIds/a');
-        if (empty($cartIds)) {
+        $goodsList = input('post.goodList/a');
+        if (empty($goodsList)) {
             return errorMsg('请求数据不能为空');
         }
+        $goodsIds = array_column($goodsList,'goods_id');
+        print_r($goodsIds);exit;
         $config = [
             'where' => [
                 ['c.status', '=', 0],
-                ['c.id', 'in', $cartIds],
+                ['c.id', 'in', $goodsList],
             ], 'field' => [
                 'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity','g.sample_price',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.store_id','c.buy_type','c.num','c.brand_id','c.brand_name'
@@ -85,31 +86,6 @@ class Order extends \common\controller\UserBase
         $modelOrder->commit();
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
-//   //订单-结算页
-//    public function settlement()
-//    {
-//        $modelOrder = new \app\index\model\Order();
-//        $orderSn = input('order_sn');
-//        $config = [
-//            'where' => [
-//                ['o.status', '=', 0],
-//                ['o.sn', '=', $orderSn],
-//                ['o.user_id', '=', $this->user['id']],
-//            ],'join' => [
-//                ['order_detail od','od.father_order_id = o.id','left'],
-//                ['goods g','g.id = od.goods_id','left']
-//            ],'field' => [
-//                'o.id', 'o.sn', 'o.amount',
-//                'o.user_id', 'od.goods_id','od.num','od.price','od.brand_name','od_brand_id',
-//                'g.name','g.thumb_img',
-//            ],
-//        ];
-//        $orderInfo = $modelOrder->getList($config);
-//        $this ->assign('info',$orderInfo);
-//        $unlockingFooterCart = unlockingFooterCartConfig([3]);
-//        $this->assign('unlockingFooterCart', $unlockingFooterCart);
-//        return $this->fetch();
-//    }
 
     //确定订单 //订单-详情页
     public function confirmOrder()
@@ -237,8 +213,6 @@ class Order extends \common\controller\UserBase
         $walletInfo = $modelWallet->getInfo($config);
         $this->assign('walletInfo', $walletInfo);
         $this->assign('user',$this->user);
-//        $unlockingFooterCart = unlockingFooterCartConfig([5]);
-//        $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
     }
     //订单管理
@@ -281,7 +255,7 @@ class Order extends \common\controller\UserBase
                 ['od.father_order_id','=',$info['id']]
             ],
             'field'=>[
-                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                'od.goods_id', 'od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
                 'g.name','g.thumb_img','g.specification'
             ],
             'join'=>[
