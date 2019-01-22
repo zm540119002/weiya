@@ -167,7 +167,7 @@ class UserCenter extends Base {
 		);
 		$field = array(
 			'id','name','nickname','mobile_phone','status','type','password','avatar',
-			'sex','salt','birthday','last_login_time',
+			'sex','salt','birthday','last_login_time','role_id'
 		);
 		$user = $this->field($field)->where($where)->find();
 		if(!count($user)) {
