@@ -20,7 +20,7 @@ class Wallet extends \think\Validate
             'require', 'max' => 25,
         ],
         'password'  => [
-            'regex' => '/^[A-Za-z0-9]{6,16}$/',
+            'regex' => '^\d{4}$',
         ],
     ];
     
