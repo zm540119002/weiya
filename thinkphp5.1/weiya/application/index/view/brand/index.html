@@ -61,7 +61,7 @@
         {volist name="list" id="info"}
         <li data-id="{$info.id}">
             <div class="list_top_item">
-                <p>第<input class="brand_type" name="type" value="{$info.type}"/>类商标</p>
+                <p>第<input class="brand_type input_width" name="type" value="{$info.type}"/>类商标</p>
                 <div>
                     {empty name="info.logo"}
                     <img src="public_img/default/no_pic_40.jpg" alt="" class="left brand_logo" />
@@ -96,7 +96,7 @@
 {block name="script"}
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
-	
+$(function(){
     //增加商标
     var addBrandInfo=$('.add_brand_tpl').html();
     $('body').on('click','.add_brand',function () {
@@ -205,6 +205,9 @@
                 layer.close(index);
             }
         })
-    })
+    });
+    //设置样式
+    changeInputLen($('.input_width'));
+})
 </script>
 {/block}
