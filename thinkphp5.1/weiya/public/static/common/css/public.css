@@ -47,6 +47,11 @@ body{
 .right{
     float:right;
 }
+.input_width{
+    background:none;       
+    vertical-align:0;
+    text-align:center;
+}
 .input-filed{
     display: block;
     width:100%;
@@ -1667,7 +1672,11 @@ background-position: 0 -27px;
 }
 .payPasswordLayer .layui-m-layerbtn span,
 .forgetWalletPasswordLayer .layui-m-layerbtn span{
-    text-align:left;
+    text-align:center;
+}
+.payPasswordLayer .layui-m-layerbtn span[yes],
+.forgetWalletPasswordLayer .layui-m-layerbtn span[yes]{
+    margin:0 0 0 -82%;
 }
 .factoryListLayer .layui-m-layerbtn span[yes],
 .setRoleLayer .layui-m-layerbtn span[yes],
@@ -5399,9 +5408,11 @@ ul.info_list li{
     right:0;
     left:initial;
 }
+.brand_list{
+    padding:0.15rem;
+}
 .brand_list li{
     padding:0;
-
 }
 .brand_list .list_top_item{
     padding:0.15rem;
