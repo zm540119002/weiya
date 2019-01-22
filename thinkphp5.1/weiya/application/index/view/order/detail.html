@@ -105,7 +105,8 @@
             <ul>
                 <li>
                     {volist name="info.goods_list" id="goods_info"}
-                            <div class="columns_flex order_item" data-id="{$goods_info.goods_id}" data-buy_type="{$goods_info.buy_type}">
+                            <div class="columns_flex order_item" data-id="{$goods_info.goods_id}" data-buy_type="{$goods_info.buy_type}"
+                                 data-brand_id="{$goods_info.brand_id}" data-brand_name="{$goods_info.brand_name}">
                                 {empty name="goods_info.thumb_img"}
                                 <div class="list_left_img">
                                     <img src="public_img/default/no_pic_100.jpg" class="left">

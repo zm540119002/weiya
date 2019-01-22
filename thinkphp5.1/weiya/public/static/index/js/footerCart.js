@@ -149,11 +149,6 @@ $(function () {
         //计算购物车商品列表总价
         calculateCartTotalPrice();
     });
-    // //加入购物车
-    // $('body').on('click','.add_cart,.add_purchase_cart',function(){
-    //     var _this = $(this);
-    //     dialogLoginCallBack(_this);
-    // });
 
     //加入购物车
     $('body').on('click','.add_cart,.add_purchase_cart',function(){
@@ -264,13 +259,13 @@ $(function () {
         $.each(oLis,function () {
             var signcheck=$(this).find('.sign_checkitem');
             if(signcheck.prop('checked')){
-                var good_id=$(this).data('id');
+                var goods_id=$(this).data('id');
                 var buy_type=$(this).data('buy_type');
                 var brand_id=$(this).data('brand_id');
                 var brand_name=$(this).data('brand_name');
                 var num=$(this).find('.cart_gshopping_count').val();
-                goodsist.push({
-                    good_id:good_id,
+                goodsList.push({
+                    goods_id:goods_id,
                     buy_type:buy_type,
                     brand_id:brand_id,
                     brand_name:brand_name,
@@ -279,7 +274,6 @@ $(function () {
             }
         });
         postData.goodsList = goodsList;
-        console.log(postData);
         if($.isEmptyArray(goodsList)){
             dialog.error('请选择要结算的商品');
             return false
@@ -363,14 +357,22 @@ $(function () {
         $.each(oLis,function () {
             var _this=$(this);
             var goods_id=_this.data('id');
-            var buy_type=$(this).data('buy_type');
-            var num=$(this).find('span.num').text();
+            var buy_type=_this.data('buy_type');
+            var brand_id=_this.data('brand_id');
+            var brand_name=_this.data('brand_name');
+            var num=_this.find('span.num').text();
             goodsList.push({
                 goods_id:goods_id,
                 buy_type:buy_type,
-                num:num
+                num:num,
+                brand_id:brand_id,
+                brand_name:brand_name,
             });
         });
+        if($.isEmptyArray(goodsList)){
+            dialog.error('数据错误');
+            return false
+        }
         postData.goodsList=goodsList;
         console.log(postData);
         _This.addClass("disabled");//防止重复提交
