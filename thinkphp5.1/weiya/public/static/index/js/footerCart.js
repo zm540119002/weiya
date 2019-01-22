@@ -259,17 +259,24 @@ $(function () {
     //去结算 生成订单
     $('body').on('click','.settlement',function(){
         var postData = {};
-        var cartIds = [];
+        var goodslist = [];
         var oLis=$('.cart_goods_list li');
         $.each(oLis,function () {
             var signcheck=$(this).find('.sign_checkitem');
             if(signcheck.prop('checked')){
-                var cart_id=$(this).data('cart_id');
-                cartIds.push(cart_id);
+                var good_id=$(this).data('id');
+                var buy_type=$(this).data('buy_type');
+                var num=$(this).find('.cart_gshopping_count').val();
+                goodslist.push({
+                    good_id:good_id,
+                    buy_type:buy_type,
+                    num:num
+                });
             }
         });
-        postData.cartIds = cartIds;
-        if($.isEmptyArray(cartIds)){
+        postData.goodslist = goodslist;
+        console.log(postData);
+        if($.isEmptyArray(goodslist)){
             dialog.error('请选择要结算的商品');
             return false
         }
