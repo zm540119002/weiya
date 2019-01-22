@@ -120,7 +120,7 @@
 				data:postData,
 				success:function(data){
 					 if(data.status){
-						 dialog.success(data.info);
+						 dialog.success(data.info,flushPage());
 						 return false;
 					 }
 					dialog.error(data.info);
