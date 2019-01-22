@@ -103,7 +103,7 @@ class Cart extends \common\controller\UserBase{
              ],'join' => [
                  ['goods g','g.id = c.foreign_id','left']
              ],'field'=>[
-                 'c.id as cart_id','c.foreign_id','c.num','c.goods_type','c.buy_type','c.create_time',
+                 'c.id as cart_id','c.foreign_id','c.num','c.goods_type','c.buy_type','c.create_time','c.brand_id','c.brand_name',
                  'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
                  'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
              ],'order'=>[
