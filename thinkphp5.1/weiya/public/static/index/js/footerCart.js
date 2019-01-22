@@ -406,7 +406,12 @@ function generateOrder(postData,obj) {
         success: function(data){
             obj.removeClass("nodisabled");//防止重复提交
             $('.loading').hide();
-            location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
+            if(data.status){
+                location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
+            }else{
+                dialog.error(data.info);
+            }
+
         }
     });
 }

@@ -5,6 +5,7 @@ class Order extends \common\controller\UserBase
     //生成订单
     public function generate()
     {
+        print_r(input());exit;
         if (!request()->isPost()) {
             return errorMsg('请求方式错误');
         }
