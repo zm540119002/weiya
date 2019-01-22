@@ -26,7 +26,7 @@ class Consultation extends \common\controller\Base{
         if (!$result){
             return errorMsg('失败');
         }else{
-            return successMsg('成功');
+            return successMsg('已提交，等待电话回复，谢谢~');
         }
     }
 }

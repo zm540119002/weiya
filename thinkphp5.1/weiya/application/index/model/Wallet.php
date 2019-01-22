@@ -93,7 +93,7 @@ class Wallet extends \common\model\Base {
 			return errorMsg($validate->getError());
 		}
 		if($data['user_id'] && $data['captcha']){
-			if(!$this->_checkCaptcha($data['user_id'],$data['captcha'])){
+			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
 				return errorMsg('验证码错误，请重新获取验证码！');
 			}
 			$wallet = $this->loginCheck($data['user_id']);
@@ -177,7 +177,6 @@ class Wallet extends \common\model\Base {
 	/**检查验证码
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
-		print_r(session('captcha_' . $mobilePhone));exit;
 		return session('captcha_' . $mobilePhone) == $captcha ;
 	}
 }

@@ -10,39 +10,47 @@ class Order extends \common\controller\UserBase
         }
         $modelOrder = new \app\index\model\Order();
         $modelOrderDetail = new \app\index\model\OrderDetail();
-        $cartIds = input('post.cartIds/a');
-        if (empty($cartIds)) {
+        $goodsList = input('post.goodsList/a');
+        if (empty($goodsList)) {
             return errorMsg('请求数据不能为空');
         }
+        $goodsIds = array_column($goodsList,'goods_id');
         $config = [
             'where' => [
-                ['c.status', '=', 0],
-                ['c.id', 'in', $cartIds],
+                ['g.status', '=', 0],
+                ['g.id', 'in', $goodsIds],
             ], 'field' => [
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity','g.sample_price',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.store_id','c.buy_type','c.num','c.brand_id','c.brand_name'
-            ],'join'=>[
-                ['goods g','g.id = c.foreign_id','left']
+                'g.id as goods_id','g.headline','g.thumb_img','g.bulk_price','g.specification','g.sample_price',
+                'g.purchase_unit','g.store_id'
             ]
         ];
         //计算订单总价
-        $modeCart = new \app\index\model\Cart();
-        $goodsList = $modeCart->getList($config);
+        $modeGoods = new \app\index\model\Goods();
+        $goodsListNew = $modeGoods->getList($config);
         $amount = 0;
-
-        foreach ($goodsList as $k => &$goodsInfo) {
-            if($goodsInfo['buy_type'] == 2){
-                $goodsSalePrice = $goodsInfo['sample_price'];
-            }else{
-                $goodsSalePrice = $goodsInfo['bulk_price'];
+        foreach ($goodsList as $k1 => &$goodsInfo) {
+            foreach ($goodsListNew as $k2 => &$goodsInfoNew) {
+                if($goodsInfo['goods_id'] == $goodsInfoNew['goods_id']){
+                    $goodsList[$k1]['headline'] = $goodsInfoNew['headline'];
+                    $goodsList[$k1]['thumb_img'] = $goodsInfoNew['thumb_img'];
+                    $goodsList[$k1]['specification'] = $goodsInfoNew['specification'];
+                    $goodsList[$k1]['purchase_unit'] = $goodsInfoNew['purchase_unit'];
+                    $goodsList[$k1]['store_id'] = $goodsInfoNew['store_id'];
+                    switch ($goodsInfo['buy_type']){
+                        case 1:
+                            $goodsList[$k1]['price'] = $goodsInfoNew['bulk_price'];
+                            break;
+                        case 2:
+                            $goodsList[$k1]['price'] = $goodsInfoNew['sample_price'];
+                             break;
+                        default:
+                    }
+                    $totalPrices = $goodsInfo['num'] * $goodsList[$k1]['price'];
+                    $amount += number_format($totalPrices, 2, '.', '');
+                }
             }
-            $goodsList[$k]['price'] = $goodsSalePrice;
-            $goodsList[$k]['store_id'] = $goodsInfo['store_id'];
-            $goodsNum = intval($goodsInfo['num']);
-            $totalPrices = $goodsSalePrice * $goodsNum;
-            $amount += number_format($totalPrices, 2, '.', '');
         }
-//
+
         //开启事务
         $modelOrder->startTrans();
         //订单编号
@@ -68,7 +76,7 @@ class Order extends \common\controller\UserBase
             $dataDetail[$item]['father_order_id'] = $orderId;
             $dataDetail[$item]['price'] = $goodsInfo['price'];
             $dataDetail[$item]['num'] = $goodsInfo['num'];
-            $dataDetail[$item]['goods_id'] = $goodsInfo['id'];
+            $dataDetail[$item]['goods_id'] = $goodsInfo['goods_id'];
             $dataDetail[$item]['user_id'] = $this->user['id'];
             $dataDetail[$item]['store_id'] = $goodsInfo['store_id'];
             $dataDetail[$item]['buy_type'] = $goodsInfo['buy_type'];
@@ -84,31 +92,6 @@ class Order extends \common\controller\UserBase
         $modelOrder->commit();
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
-//   //订单-结算页
-//    public function settlement()
-//    {
-//        $modelOrder = new \app\index\model\Order();
-//        $orderSn = input('order_sn');
-//        $config = [
-//            'where' => [
-//                ['o.status', '=', 0],
-//                ['o.sn', '=', $orderSn],
-//                ['o.user_id', '=', $this->user['id']],
-//            ],'join' => [
-//                ['order_detail od','od.father_order_id = o.id','left'],
-//                ['goods g','g.id = od.goods_id','left']
-//            ],'field' => [
-//                'o.id', 'o.sn', 'o.amount',
-//                'o.user_id', 'od.goods_id','od.num','od.price','od.brand_name','od_brand_id',
-//                'g.name','g.thumb_img',
-//            ],
-//        ];
-//        $orderInfo = $modelOrder->getList($config);
-//        $this ->assign('info',$orderInfo);
-//        $unlockingFooterCart = unlockingFooterCartConfig([3]);
-//        $this->assign('unlockingFooterCart', $unlockingFooterCart);
-//        return $this->fetch();
-//    }
 
     //确定订单 //订单-详情页
     public function confirmOrder()
@@ -236,8 +219,6 @@ class Order extends \common\controller\UserBase
         $walletInfo = $modelWallet->getInfo($config);
         $this->assign('walletInfo', $walletInfo);
         $this->assign('user',$this->user);
-//        $unlockingFooterCart = unlockingFooterCartConfig([5]);
-//        $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
     }
     //订单管理
@@ -280,7 +261,7 @@ class Order extends \common\controller\UserBase
                 ['od.father_order_id','=',$info['id']]
             ],
             'field'=>[
-                'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                'od.goods_id', 'od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
                 'g.name','g.thumb_img','g.specification'
             ],
             'join'=>[
@@ -401,7 +382,7 @@ class Order extends \common\controller\UserBase
                     ['od.father_order_id','=',$item['id']]
                 ],
                 'field'=>[
-                    'od.goods_id', 'od.price', 'od.num', 'od.buy_type',
+                    'od.goods_id', 'od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
                     'g.name','g.thumb_img',
                 ],
                 'join'=>[

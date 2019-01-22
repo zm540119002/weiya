@@ -102,26 +102,30 @@
         </div>
         <div class="content-padding bottom_padding">
             <p class="content-label">维雅品牌定制</p>
-            {volist name="info.goods_list" id="goods_info"}
-                <div class="columns_flex">
-                    {empty name="goods_info.thumb_img"}
-                    <div class="list_left_img">
-                        <img src="public_img/default/no_pic_100.jpg" class="left">
-                    </div>
-                    {else /}
-                    <div class="list_left_img">
-                        <img src="public_uploads/{$goods_info.thumb_img}" class="left">
-                    </div>
-                    {/empty}
-                    <div>
-                        <p>{$goods_info.name}</p>
-                        <p>规格：<span>{$goods_info.specification}</span></p>
-                        <p>￥<price>{$goods_info.price}</price></p>
-                        <p>数量：<span>X{$goods_info.num}</span></p>
-                    </div>
-                </div>
-            {/volist}
-
+            <ul>
+                <li>
+                    {volist name="info.goods_list" id="goods_info"}
+                            <div class="columns_flex order_item" data-id="{$goods_info.goods_id}" data-buy_type="{$goods_info.buy_type}"
+                                 data-brand_id="{$goods_info.brand_id}" data-brand_name="{$goods_info.brand_name}">
+                                {empty name="goods_info.thumb_img"}
+                                <div class="list_left_img">
+                                    <img src="public_img/default/no_pic_100.jpg" class="left">
+                                </div>
+                                {else /}
+                                <div class="list_left_img">
+                                    <img src="public_uploads/{$goods_info.thumb_img}" class="left">
+                                </div>
+                                {/empty}
+                                <div>
+                                    <p>{$goods_info.name}</p>
+                                    <p>规格：<span>{$goods_info.specification}</span></p>
+                                    <p>￥<price>{$goods_info.price}</price></p>
+                                    <p>数量：<span>X{$goods_info.num}</span></p>
+                                </div>
+                            </div>
+                    {/volist}
+                </li>
+            </ul>
         </div>
     </div>
 </article>
