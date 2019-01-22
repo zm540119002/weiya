@@ -359,19 +359,20 @@ $(function () {
         var _This=$(this);
         var oLis=$(this).parents('li').find('.order_item');
         var postData={};
-        var goodslist=[];
+        var goodsList=[];
         $.each(oLis,function () {
             var _this=$(this);
-            var good_id=_this.data('id');
+            var goods_id=_this.data('id');
             var buy_type=$(this).data('buy_type');
             var num=$(this).find('span.num').text();
-            goodslist.push({
-                good_id:good_id,
+            goodsList.push({
+                goods_id:goods_id,
                 buy_type:buy_type,
                 num:num
             });
         });
-        postData.goodslist=goodslist;
+        postData.goodsList=goodsList;
+        console.log(postData);
         _This.addClass("disabled");//防止重复提交
         generateOrder(postData,_This);
     });
