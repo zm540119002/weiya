@@ -177,7 +177,8 @@ class Wallet extends \common\model\Base {
 	/**检查验证码
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
-		print_r(session('captcha_' . $mobilePhone));exit;
+		print_r(session('captcha_' . $mobilePhone));
+		print_r($captcha);exit;
 		return session('captcha_' . $mobilePhone) == $captcha ;
 	}
 }
