@@ -186,10 +186,10 @@ class UserCenter extends Base {
 		session('user',$user);
 		session('user_sign',data_auth_sign($user));
 		//返回发起页或平台首页
-		$backUrl = session('backUrl')?:session('returnUrl');
-		$pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
-		preg_match ($pattern,$backUrl,$matches);
-		return $backUrl?(is_ssl()?'https://':'http://').$backUrl:url('Index/index');
+		$jumpUrl = session('backUrl')?:session('returnUrl');
+		$pattern  =  '/index.php\/([A-Z][a-z]*)\//';
+		preg_match ($pattern,$jumpUrl,$matches);
+		return $jumpUrl?:url('index/Index/index');
 	}
 	
 	/**检查验证码

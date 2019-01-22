@@ -73,8 +73,6 @@ function forgetPasswordDialog(){
 }
 var loginBackFunctionParameter = {};
 var loginBackFunction = function(parameter){
-    console.log(parameter);
-    return;
     location.href = parameter.jump_url;
 };
 $(function(){
@@ -154,9 +152,7 @@ $(function(){
                     }else if(loginSign=='dialog'){
                          $('.layui-m-layer').remove();
                     }
-                    if(!loginBackFunctionParameter){
-                        loginBackFunctionParameter.jump_url = data.info;
-                    }
+                    loginBackFunctionParameter.jump_url = data.info;
                     loginBackFunction(loginBackFunctionParameter);
                 }
             });
