@@ -74,6 +74,17 @@ body{
     -webkit-box-orient: vertical;
     word-break:break-all;
 }
+.bottom_btn{
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: center;
+    background:#FF7BAC;
+    color: #fff;
+}
 .content-box,.content-padding{
     padding:0.20rem 0.15rem;
 }
@@ -5284,6 +5295,9 @@ ul.info_list li{
 }
 .list_left_img img{
     width:100%;
+}
+.list_right{
+    margin:0 0 0 0.15rem;
 }
 .order_main_wrapper{
     background: #f2f2f2;
