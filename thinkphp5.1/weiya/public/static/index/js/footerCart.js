@@ -374,8 +374,6 @@ $(function () {
             return false
         }
         postData.goodsList=goodsList;
-        console.log(postData);
-        return false;
         _This.addClass("disabled");//防止重复提交
         generateOrder(postData,_This);
     });
