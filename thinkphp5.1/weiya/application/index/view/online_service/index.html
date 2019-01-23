@@ -167,13 +167,10 @@
 <script type="text/javascript">
 	$(function () {
 		//页面初始化
-		var postData = {
-		};
 		var config = {
-			url: action,
-			postData: postData
+			url: action
 		};
-		getList(config);
+		getPagingList(config);
 		//发送文本获取焦点
 		$('body').on('focus','.send_out_text',function(){
 			//聊天框滚动条置底
