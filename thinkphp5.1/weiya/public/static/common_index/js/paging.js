@@ -30,6 +30,7 @@ function commonCallBack(config,data){
  * @param postData 提交数据
  */
 function getPagingList(config,postData) {
+    console.log(config);
     //容器
     config.container = config.container?config.container:$("#list");
     //提交路径
