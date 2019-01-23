@@ -116,14 +116,23 @@
                                     <img src="public_uploads/{$goods_info.thumb_img}" class="left">
                                 </div>
                                 {/empty}
-                                <div>
+                                <div class="list_right">
                                     <p>{$goods_info.name}</p>
                                     <p>规格：<span>{$goods_info.specification}</span></p>
                                     <p>￥<price>{$goods_info.price}</price></p>
-                                    <p>数量：<span>X{$goods_info.num}</span></p>
+                                    <p>数量：X<span class="num">{$goods_info.num}</span></p>
+                                    <div class="commodity_purchaser f24">
+                                        {if $goods_info.buy_type == 1}
+                                        <div>购买类型：<span>批量</span></div>
+                                        {elseif $goods_info.buy_type == 2}
+                                        <div>购买类型：<span>样品</span></div>
+                                        {else /}
+                                        {/if}
+                                    </div>
                                 </div>
                             </div>
                     {/volist}
+                    <a href="javascript:void(0);" class=" purchase_again bottom_btn"><span class="s_i"></span>再次购买</a>
                 </li>
             </ul>
         </div>
@@ -131,7 +140,7 @@
 </article>
 {/block}
 {block name="footer"}
-{include file="template/footer_menu.html" /}
+
 {/block}
 
 {block name="script"}
