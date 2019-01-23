@@ -2,7 +2,7 @@
 {block name="footer"}{/block}
 {block name="content"}
 <!--对话框列表模板-->
-<section id="msgListMeTpl" style="display:none;">
+<section id="msgListOtherTpl" style="display:none;">
     <li class="me">
         <div class="avatar">
             <img src="public_img/default/chat_head.jpg">
@@ -365,7 +365,6 @@
                 }
             });
         });
-
         //搜索聊天客户
         $('body').on('click','.search_btn', function() {
             var searchText=$(this).next().val();
