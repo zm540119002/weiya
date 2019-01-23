@@ -503,7 +503,7 @@ class Goods extends Base {
         imagecopyresized($im, $RMB_logo['obj'], 20, 710, 0, 0, 20, 20, $RMB_logo['width'], $RMB_logo['height'] );  //rem
         imagecopyresized($im, $logoImg['obj'], 10, 10, 0, 0, 90, 60, $logoImg['width'], $logoImg['height'] );  //平台logo
         imagecopyresized($im, $goodsImg['obj'], 10, 70, 0, 0, 500, 534, $goodsImg['width'], $goodsImg['height']);  //商品
-        imagecopyresized($im, $qrcode['obj'], 350, 630, 0, 0, 130, 130, $qrcode['width'], $qrcode['height'] );  //二维
+        imagecopyresized($im, $qrcode['obj'], 350, 630, 0, 0, 140, 140, $qrcode['width'], $qrcode['height'] );  //二维
         $dir = config('upload_dir.upload_path').'/'.$init['save_path'].'compose/';
         if(!is_dir($dir)){
             mkdir($dir, 0777, true);
