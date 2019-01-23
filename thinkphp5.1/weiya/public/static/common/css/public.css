@@ -5759,3 +5759,8 @@ ul.info_list li{
 .collection_main_content + .group_cart_nav{
     visibility:hidden;
 }
+li.no_data{
+    text-align:center;
+    border-bottom:none;
+    margin:0.25rem 0 0;
+}
