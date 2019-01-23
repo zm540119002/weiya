@@ -399,6 +399,7 @@ class Order extends \common\controller\UserBase
             $item['goods_num'] = $goodsNum;
             return $item;
         });
+        $this->assign('currentPage',$list->currentPage());
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             $pageType = $_GET['pageType'];
