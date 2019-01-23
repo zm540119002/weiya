@@ -42,7 +42,7 @@ return [
         'common_admin_js' => Request::domain() .'/static/common_admin/js',
         'common_admin_css' => Request::domain() .'/static/common_admin/css',
         'common_admin_img' => Request::domain() .'/static/common_admin/img',
-        //维雅    资源路径
+        //index     资源路径
         'index_js' => Request::domain() .'/static/index/js',
         'index_css' => Request::domain() .'/static/index/css',
         'index_img' => Request::domain() .'/static/index/img',
