@@ -186,6 +186,5 @@ class Cart extends \common\controller\UserBase{
         }else{
             return errorMsg('删除失败');
         }
-
     }
 }

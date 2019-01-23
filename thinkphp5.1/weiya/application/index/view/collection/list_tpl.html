@@ -1,28 +1,18 @@
 {notempty name="list"}
 {volist name="list" id="info"}
-<li>
-    <div class="columns_flex l-r-sides top_title">
-        <span>
-          <img class="left" src="index_img/wyyz_logo.png" alt="">
-          <span class="cpy_name">维雅生物科技</span>
-		</span>
-        <span>{$info.create_time}</span>
-    </div>
-    <div class="more-text-box">
-        <p class="more-text">{$info.content|raw}</p>
-    </div>
-    <div class="dynamic_img info_img">
-        {notempty name="list"}
-        {volist name="info.main_img" id="main_img"}
-            <a href="javascript:void(0);">
-                <img src="public_uploads/{$main_img}" alt="">
-            </a>
-        {/volist}
-        {/notempty}
-    </div>
-    <div class="browse_volume">
-        <span class="eyes"></span>
-        100人
+<li data-goods_id="{$info.goods_id}" data-id="{$info.id}">
+    <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
+    <a  href="{:url('Goods/detail',['id'=>$info.goods_id])}" class="cart_goods_img">
+        {empty name="info.thumb_img"}
+        <img src="public_img/default/no_pic_100.jpg" alt="" class="c_img">
+        {else /}
+        <img src="public_uploads/{$info.thumb_img}" alt="" class="c_img">
+        {/empty}
+    </a>
+    <div class="cart_list_r">
+        <p>{$info.headline}</p>
+        <div>商品规格：<span>50ml/瓶</span></div>
+        <p class="red">￥<price>{$info.bulk_price}</price></p>
     </div>
 </li>
 {/volist}

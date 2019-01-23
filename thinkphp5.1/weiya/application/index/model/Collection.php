@@ -9,8 +9,8 @@ class Collection extends \common\model\Base {
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_weiya';
 	//表的别名
-	protected $alias = 'c';
+	protected $alias = 'co';
 
-	
+
 	
 }
