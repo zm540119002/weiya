@@ -2,12 +2,6 @@
 namespace app\index_admin\controller;
 
 class CustomClient extends Base{
-//    protected $user = [];
-//    public function __construct(){
-//        parent::__construct();
-//        $this->user['id'] = 17;
-//    }
-
     /**售前
      */
     public function beforeSale(){
