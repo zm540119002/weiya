@@ -175,11 +175,9 @@
 	$(function () {
 		//页面初始化
 		var config = {
-			url: action,
-			callBack:getPagingListCallBack,
-			container:$('ul.list')
+			url: action
 		};
-		getPagingList(config);
+		getList(config);
 		//发送文本获取焦点
 		$('body').on('focus','.send_out_text',function(){
 			//聊天框滚动条置底
