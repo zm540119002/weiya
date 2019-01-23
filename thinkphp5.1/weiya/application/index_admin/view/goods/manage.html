@@ -150,6 +150,9 @@
                 }
             });
 
+
+
+
             //上下架
             $('body').on('click','.set-shelf-status',function(){
                 var _this = $(this);
@@ -226,19 +229,6 @@
 
             //查看二维码图片
             $('body').on('click','.ckQRcode',function(){
-//                var _this = $(this);
-//                var _thisTr = $(this).parents('tr');
-//                var postData = {};
-//                postData.id = _thisTr.data('id');
-//                var url =  controller + 'generateGoodsQRcode';
-//                _this.addClass("nodisabled");//防止重复提交
-//                $.post(url,postData,function(msg){
-//                    _this.removeClass("nodisabled");//防止重复提交
-//                    var imgSrc=uploads+msg.info
-//                    layer.open({
-//                        content:'<img src='+imgSrc+' />',
-//                    })
-//                });
                 var imgSrc = $(this).data('img-src');
                 if(imgSrc == 'null'){
                     dialog.error('没有生成二维码图片');
@@ -253,19 +243,65 @@
                 var _this = $(this);
                 var _thisTr = $(this).parents('tr');
                 var postData = {};
-                postData.id = _thisTr.data('id');
+                var id =  _thisTr.data('id');
+                ids = [];
+                ids.push(id);
+                postData.ids = ids;
                 var url =  controller + 'generateGoodsQRcode';
                 _this.addClass("nodisabled");//防止重复提交
                 $.post(url,postData,function(msg){
                     _this.removeClass("nodisabled");//防止重复提交
-                    var imgSrc=uploads+msg.info
-                    layer.open({
-                        content:'<img src='+imgSrc+' />',
-                    })
+                    if(msg.status){
+                        var imgSrc=uploads+msg.info;
+                        _this.siblings('.ckQRcode').data('img-src',msg.info);
+                        layer.open({
+                            content:'<img src='+imgSrc+' />',
+                        })
+                    }else{
+                        dialog.error(msg.info);
+                    }
                 });
 
             });
 
+            //批量生成二维码图片
+            $('body').on('click','.batchCreateQRcode',function(){
+                var _this = $(this);
+                _this.addClass("disabled");//防止重复提交
+                var postData = {};
+                ids = [];
+                $("input[name='checkbox']").each(function(){
+                    var _thisTr = $(this).parents('tr');
+                    if($(this).is(':checked')){
+                        ids.push(_thisTr.data('id'));
+                    }
+                });
+                postData.ids= ids;
+                var url =  controller + 'generateGoodsQRcode';
+                if(ids.length==0){
+                    layer.tips('你还没有选择任何内容！','.btn',{
+                        tips:[4,'#0d7eff'],
+                        time:1500
+                    });
+                    return false;
+                }else{
+                    layer.confirm('是否批量生成？', {
+                        btn: ['确定','取消'],//按钮
+                        yes:function (index) {
+
+                            $.post(url,postData,function(msg){
+                                _this.removeClass("nodisabled");//防止重复提交
+                                if(msg.status){
+                                    dialog.success(msg.info,flushPage())
+                                }else {
+                                    dialog.error(msg.info);
+                                }
+                            });
+                            layer.close(index);
+                        }
+                    })
+                }
+            });
 
 
         });
