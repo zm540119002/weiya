@@ -11,7 +11,14 @@
             </div>
         {elseif $unlockingFooterCart.count == 2 /}
             <div class="group_btn50 bottom_item">
+                {if $vo.class=='checked_all'}
+                <div class="select_checkbox_box {$vo.class}">
+                    <input type="checkbox" name="" value="" id="" class="item_checkbox checkall ">
+                    <label for="" class="left">全选</label>
+                </div>
+                {else /}
                 <a href="javascript:void(0);" class="{$vo.class}"><span class="s_i"></span>{$vo.name}</a>
+                {/if}
             </div>
         {elseif $unlockingFooterCart.count == 3 /}
             <div class="group_btn30 bottom_item">

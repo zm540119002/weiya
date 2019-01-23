@@ -1,6 +1,6 @@
 {notempty name="list"}
 {volist name="list" id="info"}
-    <li data-id="{$info.id}">
+    <li data-id="{$info.id}" data-order_sn="{$info.sn}">
             <a href="{:url('order/detail',['order_sn'=>$info.sn])}">
                 {volist name="info.goods_list" id="goods_info"}
                 <div class="order_item" data-id="{$goods_info.goods_id}" data-buy_type="{$goods_info.buy_type}"

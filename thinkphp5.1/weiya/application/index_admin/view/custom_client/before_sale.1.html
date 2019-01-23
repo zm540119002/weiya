@@ -1,15 +1,15 @@
-{extend name="template/admin_pc/base.html" /}
+{extend name="template/base.html" /}
 {block name="css-customize"}
 {/block}
 {block name="content"}
 <!--对话框列表模板-->
-<section id="msgListMeTpl" style="display:none;">
-    <li class="me">
+<section id="msgListOtherTpl" style="display:none;">
+    <li class="others">
         <div class="avatar">
             <img src="public_img/default/chat_head.jpg">
         </div>
         <div class="content">
-            <p class="author">阿三</p>
+            <p class="author"></p>
             <div class="msg"></div>
         </div>
     </li>
@@ -51,124 +51,14 @@
         </section>
     </li>
 </section>
-<section class="specific_type separation-line">
-    <div class="columns_flex f20 l-r-sides">
-        <a href="{:url('CustomerClient/beforeSale')}" class="current">售前</a>
-        <a href="{:url('Order/index')}">打单</a>
-        <a href="{:url('Order/out')}">出仓</a>
-        <a href="{:url('Order/delivery')}">发货/完成</a>
-        <a href="{:url('Order/bill')}">填单</a>
-        <a href="{:url('CustomerClient/afterSale')}">售后</a>
-    </div>
-</section>
-<section class="f24 chat_content_wrapper">
-    <div class="left chat_left">
-        <div class="left_top">
-            <div class="top_sign">
-                <img src="public_img/default/weiya_logo.png" alt="" class="left">
-                <span>维雅客服</span>
-            </div>
-            <div class="top_search">
-                <input type="button" class="left search_btn"/>
-                <input type="text" class="left search_text" placeholder="搜索联系人" />
-            </div>
-        </div>
-        <ul class="list">
-            <li class="chat_list current">
-                <a href="javascript:void(0);" class="detele_chat">删除</a>
-                <div class="avatar">
-                    <img src="public_img/default/chat_head.jpg">
-                    <span class="news_num"></span>
-                </div>
-                <div class="content">
-                    <p class="author">A客户</p>
-                </div>
-                <!--对话框弹窗-->
-                <section class="chatLayerContainer">
-                    <div class="ws_chatMsg-panel flex1">
-                        <div class="chatMsg-ct">
-                            <ul class="clearfix chat_item">
-                                <li>
-                                    <span class="create_time">2019-01-11 10:37</span>
-                                </li>
-                                <li class="others unread">
-                                    <div class="avatar">
-                                        <img src="public_img/default/chat_head.jpg">
-                                    </div>
-                                    <div class="content">
-                                        <p class="author">客服A</p>
-                                        <p class="create_time">我是阿娇的空间缩放都是东方的说法的</p>
-                                        <div class="msg"></div>
-                                    </div>
-                                </li>
-                                <li class="me read" data-id="356" data-from_id="19">
-                                    <div class="avatar">
-                                        <img src="http://msy.meishangyun.com/static/common/img/default/chat_head.jpg">
-                                    </div>
-                                    <div class="content">
-                                        <p class="author">阿三</p>
-                                        <div class="msg">dgdfg</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-            </li>
-            <li class="chat_list">
-                <a href="javascript:void(0);" class="detele_chat">删除</a>
-                <div class="avatar">
-                    <img src="public_img/default/chat_head.jpg">
-                    <span class="news_num"></span>
-                </div>
-                <div class="content">
-                    <p class="author">B客户</p>
-                </div>
-                <!--对话框弹窗-->
-                <section class="chatLayerContainer">
-                    <div class="ws_chatMsg-panel flex1">
-                        <div class="chatMsg-ct">
-                            <ul class="clearfix chat_item">
-                                <li>
-                                    <span class="create_time">2019-01-11 10:37</span>
-                                </li>
-                                <li class="others unread">
-                                    <div class="avatar">
-                                        <img src="public_img/default/chat_head.jpg">
-                                    </div>
-                                    <div class="content">
-                                        <p class="author">客服B</p>
-                                        <p class="create_time">曾经我们是好同学啊啊啊啊啊</p>
-                                        <div class="msg"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-            </li>
-        </ul>
-    </div>
-    <div class="chat_right chat_main_wrapper">
-        <div class="chatLayer chat_dialog_content">
-            <div class="ws_chatMsg-panel flex1">
-                <div class="chatMsg-ct">
-                    <ul class="clearfix chat_item">
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="bottom_nav_fixed">
-            <div class="bottom_flex">
-                <input class="send_out_text" type="text" name="" value="">
-                <input class="send_btn" type="button" value="发送">
-            </div>
-        </div>
-    </div>
+<section class="f24 account-content-wrapper order-content-wrapper">
+    <ul class="list"></ul>
 </section>
 </article>
 {/block}
 {block name="common"}
+{include file="template/footer_menu_msy_store.html" /}
+{include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
@@ -241,11 +131,6 @@
             $('ul.list').append(chatListTpl.html());
         }
     }
-    //聊天框滚动条置底
-	function chatDialogSetBottom() {
-        console.log($('.chat_item')[0].scrollHeight);
-		$('.chat_item').scrollTop(400);
-	}
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
 <script type="text/javascript">
@@ -254,39 +139,37 @@
         var config = {
             url: action
         };
-        //getList(config);
+        getList(config);
         //聊天对话框弹窗
         $('body').on('click','.list li',function(){
-            alert(1);
             var _this=$(this);
             var chatLayerContainer=_this.find('.chatLayerContainer');
-            // layer.open({
-            //     className:'chatLayer',
-            //     content:chatLayerContainer,
-            //     type:1,
-            //     anim:'up',
-            //     btn:['','关闭'],
-            //     success:function(){
-            //         var winH=$(document).height();
-            //         $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
-            //         //设置信息已读
-            //         setMessageRead(_this);
-            //         //聊天框滚动条置底
-            //         chatDialogSetBottom();
-            //         //下拉加载
-            //         $('.chatLayer .chat_item').on('scroll',function(){
-            //             if($('.chatLayer .chat_item').scrollTop()==0){
-            //                console.log(1);
-            //             }
-            //         });
-            //     },
-            //     no:function(){
-            //         chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
-            //         //设置信息已读
-            //         setMessageRead(_this);
-            //     }
-            //});
-            $('.chatLayer').html(chatLayerContainer.html());
+            layer.open({
+                className:'chatLayer',
+                content:chatLayerContainer,
+                type:1,
+                anim:'up',
+                btn:['','关闭'],
+                success:function(){
+                    var winH=$(document).height();
+                    $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
+                    //设置信息已读
+                    setMessageRead(_this);
+                    //聊天框滚动条置底
+                    chatDialogSetBottom();
+                    //下拉加载
+                    $('.chatLayer .chat_item').on('scroll',function(){
+                        if($('.chatLayer .chat_item').scrollTop()==0){
+                            console.log(1);
+                        }
+                    });
+                },
+                no:function(){
+                    chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
+                    //设置信息已读
+                    setMessageRead(_this);
+                }
+            });
         });
         //设置信息已读
         function setMessageRead(obj){
@@ -323,15 +206,13 @@
             });
         }
         //发送文本获取焦点
-        // $('body').on('focus','.send_out_text',function(){
-        //     //聊天框滚动条置底
-        //     chatDialogSetBottom();
-        // });
+        $('body').on('focus','.send_out_text',function(){
+            //聊天框滚动条置底
+            chatDialogSetBottom();
+        });
         //发送聊天内容
         $('body').on('click','.send_btn',function(){
             var _this=$(this).prev();
-            var text=$(this).prev().val();
-            var chatListTpl=$('#msgListMeTpl').html();
             if(!_this.val()){
                 dialog.error('不能发送空内容！');
                 return false;
@@ -339,32 +220,29 @@
             var to_user_id = _this.parents('.chatLayer').find('ul').data('from_id');
             var postData = {to_user_id:to_user_id,content:_this.val()};
             var url = domain + 'index/CustomerService/sendMessage';
-            $('.chatLayer .chat_item').append(chatListTpl);
-            $('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
-            chatDialogSetBottom();
-            // $.ajax({
-            //     url: url,
-            //     data: postData,
-            //     type: 'post',
-            //     beforeSend: function(xhr){
-            //         $('.loading').show();
-            //     },
-            //     error:function(xhr){
-            //         $('.loading').hide();
-            //         dialog.error('AJAX错误');
-            //     },
-            //     success: function(data){
-            //         $('.loading').hide();
-            //         if(data.status==0){
-            //             dialog.error(data.info);
-            //         }else{
-            //             $('.chatLayer .chat_item').append(data);
-            //             _this.val('');
-            //             //聊天框滚动条置底
-            //             chatDialogSetBottom();
-            //         }
-            //     }
-            // });
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else{
+                        $('.chatLayer .chat_item').append(data);
+                        _this.val('');
+                        //聊天框滚动条置底
+                        chatDialogSetBottom();
+                    }
+                }
+            });
         });
         //删除
         $('body').on('click','.detele_chat',function(e){

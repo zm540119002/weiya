@@ -2,7 +2,7 @@
 {block name="footer"}{/block}
 {block name="content"}
 <!--对话框列表模板-->
-<section id="msgListMeTpl" style="display:none;">
+<section id="msgListOtherTpl" style="display:none;">
     <li class="me">
         <div class="avatar">
             <img src="public_img/default/chat_head.jpg">
@@ -63,79 +63,7 @@
             </div>
         </div>
         <ul class="list">
-            <li class="chat_list current">
-                <a href="javascript:void(0);" class="detele_chat">删除</a>
-                <div class="avatar">
-                    <img src="public_img/default/chat_head.jpg" class="head_img">
-                    <span class="news_num"></span>
-                </div>
-                <div class="content">
-                    <p class="author customer_name">A客户</p>
-                </div>
-                <!--对话框弹窗-->
-                <section class="chatLayerContainer">
-                    <div class="ws_chatMsg-panel flex1">
-                        <div class="chatMsg-ct">
-                            <ul class="clearfix chat_item">
-                                <li>
-                                    <span class="create_time">2019-01-11 10:37</span>
-                                </li>
-                                <li class="others unread">
-                                    <div class="avatar">
-                                        <img src="public_img/default/chat_head.jpg">
-                                    </div>
-                                    <div class="content">
-                                        <p class="author">客服A</p>
-                                        <p class="create_time">我是阿娇的空间缩放都是东方的说法的</p>
-                                        <div class="msg"></div>
-                                    </div>
-                                </li>
-                                <li class="me read" data-id="356" data-from_id="19">
-                                    <div class="avatar">
-                                        <img src="public_img/default/chat_head.jpg">
-                                    </div>
-                                    <div class="content">
-                                        <p class="author">阿三</p>
-                                        <div class="msg">dgdfg</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-            </li>
-            <li class="chat_list">
-                <a href="javascript:void(0);" class="detele_chat">删除</a>
-                <div class="avatar">
-                    <img src="public_img/default/chat_head.jpg" class="head_img">
-                    <span class="news_num"></span>
-                </div>
-                <div class="content">
-                    <p class="author customer_name">B客户</p>
-                </div>
-                <!--对话框弹窗-->
-                <section class="chatLayerContainer">
-                    <div class="ws_chatMsg-panel flex1">
-                        <div class="chatMsg-ct">
-                            <ul class="clearfix chat_item">
-                                <li>
-                                    <span class="create_time">2019-01-11 10:37</span>
-                                </li>
-                                <li class="others unread">
-                                    <div class="avatar">
-                                        <img src="public_img/default/chat_head.jpg">
-                                    </div>
-                                    <div class="content">
-                                        <p class="author">客服B</p>
-                                        <p class="create_time">曾经我们是好同学啊啊啊啊啊</p>
-                                        <div class="msg"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-            </li>
+
         </ul>
     </div>
     <div class="chat_right chat_main_wrapper">
@@ -146,8 +74,7 @@
         <div class="chatLayer chat_dialog_content">
             <div class="ws_chatMsg-panel flex1">
                 <div class="chatMsg-ct">
-                    <ul class="clearfix chat_item">
-                    </ul>
+                    <ul class="clearfix chat_item"></ul>
                 </div>
             </div>
         </div>
@@ -159,7 +86,6 @@
         </div>
     </div>
 </section>
-</article>
 {/block}
 {block name="script"}
 <script type="text/javascript">
@@ -244,9 +170,11 @@
         var config = {
             url: action
         };
+        getList(config);
         //聊天对话框弹窗
         $('body').on('click','.list li',function(){
             var _this=$(this);
+            _this.addClass('current').siblings().removeClass('current');
             var customer_profile=_this.find('.head_img').attr('src');
             var customer_name=_this.find('.customer_name').text();
             var chatLayerContainer=_this.find('.chatLayerContainer');
@@ -365,7 +293,6 @@
                 }
             });
         });
-
         //搜索聊天客户
         $('body').on('click','.search_btn', function() {
             var searchText=$(this).next().val();

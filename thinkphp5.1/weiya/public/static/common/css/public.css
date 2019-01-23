@@ -466,9 +466,15 @@ price{
     color:#ff6482;
 }
 .header_title{
+    position:relative;
     padding:0.15rem 0;
     text-align:center;
     font-weight:normal;
+}
+.header_title .edit{
+    position:absolute;
+    right:10px;
+    top:10px;
 }
 .customer_service_bar{
     position:fixed;
@@ -5742,4 +5748,19 @@ ul.info_list li{
 }
 .fraction{
     margin:0 0 0 0.12rem;
+}
+/*收藏*/
+.collection_list li{
+    border:none;
+    border-radius:0;
+    border-bottom:1px solid #d9d9d9;
+}
+.collection_list .sign_checkitem,
+.collection_main_content + .group_cart_nav{
+    visibility:hidden;
+}
+li.no_data{
+    text-align:center;
+    border-bottom:none;
+    margin:0.25rem 0 0;
 }
