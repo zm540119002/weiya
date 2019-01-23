@@ -5761,6 +5761,6 @@ ul.info_list li{
 }
 li.no_data{
     text-align:center;
-    border-bottom:none;
+    border:none;
     margin:0.25rem 0 0;
 }
