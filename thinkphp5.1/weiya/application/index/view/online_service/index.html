@@ -1,6 +1,4 @@
 {extend name="template/base.html" /}
-{block name="css-customize"}
-{/block}
 {block name="content"}
 <section id="chatListOtherTpl" style="display:none;">
 	<li class="others unread">
@@ -164,16 +162,20 @@
 	function chatDialogSetBottom() {
 		$('.list').scrollTop($('.list')[0].scrollHeight);
 	}
+	function getPagingListCallBack(config,data){
+		if(data.status==0){
+			dialog.error(data.info);
+		}else{
+			config.container.empty().append(data);
+		}
+	}
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
 <script type="text/javascript">
 	$(function () {
 		//页面初始化
-		var postData = {
-		};
 		var config = {
-			url: action,
-			postData: postData
+			url: action
 		};
 		getList(config);
 		//发送文本获取焦点

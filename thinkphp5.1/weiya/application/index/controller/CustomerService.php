@@ -28,7 +28,7 @@ class CustomerService extends \common\controller\Base{
         if(request()->isAjax()){
             $postData = input('post.');
             $msgCreateTime = time();
-            $msgId = '';
+            $msgId = 0;
             if($this->user){//已登录
                 if($this->user['id']==$postData['to_user_id']){
                     return errorMsg('不能发给自己！');
