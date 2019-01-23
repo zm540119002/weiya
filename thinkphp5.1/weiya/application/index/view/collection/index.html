@@ -1,0 +1,77 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24 after_sale_wrapper">
+	<section class="header_title separation-line">
+		<h2 class="f24">商品收藏</h2>
+		<a href="javascript:void(0);" class="edit">编辑</a>
+	</section>
+	<section >
+		<ul class="collection_list list">
+			<li data-id="{$info.id}" data-cart_id="{$info.cart_id}" data-buy_type="{$info.buy_type}"  data-brand_id="{$info.brand_id}" data-brand_name="{$info.brand_name}">
+				<input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
+				<a  href="" class="cart_goods_img">
+					{empty name="info.thumb_img"}
+					<img src="public_img/default/no_pic_100.jpg" alt="" class="c_img">
+					{else /}
+					<img src="public_uploads/{$info.thumb_img}" alt="" class="c_img">
+					{/empty}
+				</a>
+				<div class="cart_list_r">
+					<p>美肤美肤</p>
+					<div>商品规格：<span>50ml/瓶</span></div>
+					<p class="red">￥<price>50.00</price></p>
+				</div>
+			</li>
+		</ul>
+	</section>
+</article>
+{/block}
+{block name="common"}
+{include file="template/footer_menu.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/uploadMultiImg.js"></script>
+<script type="text/javascript">
+	$(function(){
+		/*调起大图*/
+		var mySwiper = new Swiper('.swiper-container2', {
+			loop:true,
+			pagination: {
+				el: '.swiper-pagination2',
+				clickable: true
+			}
+		})
+		$("#list").on("click", ".info_img img", 
+		function() {
+			var imgBox = $(this).parents(".info_img").find("img");
+			var i = $(imgBox).index(this);
+			$(".big_img .swiper-wrapper").html("")
+
+			for(var j = 0 ,c = imgBox.length; j < c ;j++){
+			$(".big_img .swiper-wrapper").append('<div class="swiper-slide "><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
+			}
+			// mySwiper.updateSlidesSize();
+			// mySwiper.updatePagination();
+			$(".big_img").css({
+				"z-index": 1001,
+				"opacity": "1"
+			});
+			//mySwiper.slideTo(i, 0, false);
+			return false;
+		});
+	
+		$(".big_img").on("click", 
+		function() {
+			$(this).css({
+				"z-index": "-1",
+				"opacity": "0"
+			});
+
+		});  
+	});
+</script>
+{/block}

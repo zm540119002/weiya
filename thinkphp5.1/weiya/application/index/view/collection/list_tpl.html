@@ -1,0 +1,32 @@
+{notempty name="list"}
+{volist name="list" id="info"}
+<li>
+    <div class="columns_flex l-r-sides top_title">
+        <span>
+          <img class="left" src="index_img/wyyz_logo.png" alt="">
+          <span class="cpy_name">维雅生物科技</span>
+		</span>
+        <span>{$info.create_time}</span>
+    </div>
+    <div class="more-text-box">
+        <p class="more-text">{$info.content|raw}</p>
+    </div>
+    <div class="dynamic_img info_img">
+        {notempty name="list"}
+        {volist name="info.main_img" id="main_img"}
+            <a href="javascript:void(0);">
+                <img src="public_uploads/{$main_img}" alt="">
+            </a>
+        {/volist}
+        {/notempty}
+    </div>
+    <div class="browse_volume">
+        <span class="eyes"></span>
+        100人
+    </div>
+</li>
+{/volist}
+{/notempty}
+
+
+  
