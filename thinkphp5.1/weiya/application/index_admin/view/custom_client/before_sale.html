@@ -247,6 +247,7 @@
         //聊天对话框弹窗
         $('body').on('click','.list li',function(){
             var _this=$(this);
+            _this.addClass('current').siblings().removeClass('current');
             var customer_profile=_this.find('.head_img').attr('src');
             var customer_name=_this.find('.customer_name').text();
             var chatLayerContainer=_this.find('.chatLayerContainer');
