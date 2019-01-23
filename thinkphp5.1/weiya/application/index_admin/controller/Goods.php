@@ -469,7 +469,7 @@ class Goods extends Base {
             $info = $model -> getInfo($config);
             $oldQRCodes = $info['rq_code_url'];
             $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
-            $url = request()->domain().'/index.php/weiya_customization/Goods/detail/id/'.$id;
+            $url = request()->domain().'/index.php/Index/Goods/detail/id/'.$id;
             $newRelativePath = config('upload_dir.weiya_goods');
             $shareQRCodes = createLogoQRcode($url,$newRelativePath);
             if(mb_strlen( $info['headline'], 'utf-8')>20){
@@ -486,7 +486,7 @@ class Goods extends Base {
                 'name1'=> $name1,
                 'name2'=> $name2,
                 'specification'=> '规格：'.$info['specification'],
-                'money'=>'￥'.$info['bulk_price'].' 元',
+                'money'=>'¥'.$info['bulk_price'].' 元',
                 'logo_img'=> request()->domain().'/static/index/img/logo.png', // 460*534
                 'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
                 'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
