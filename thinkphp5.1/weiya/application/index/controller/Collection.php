@@ -79,6 +79,7 @@ class Collection extends \common\controller\UserBase{
             $config['where'][] = ['o.name', 'like', '%' . trim($keyword) . '%'];
         }
         $list = $model -> pageQuery($config);
+        $this->assign('currentPage',$list->currentPage());
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             $pageType = $_GET['pageType'];
