@@ -92,7 +92,7 @@ class Collection extends \common\controller\UserBase{
             return errorMsg(config('custom.not_ajax'));
         }
         $ids = input('post.ids/a');
-        $model = new \app\index\model\Cart();
+        $model = new \app\index\model\Collection();
         $condition = [
             ['user_id','=',$this->user['id']],
             ['id','in',$ids],
