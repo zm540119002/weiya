@@ -162,13 +162,22 @@
 	function chatDialogSetBottom() {
 		$('.list').scrollTop($('.list')[0].scrollHeight);
 	}
+	function getPagingListCallBack(config,data){
+		if(data.status==0){
+			dialog.error(data.info);
+		}else{
+			var container = config.container?config.container:$('ul.list');
+			container.empty().append(data);
+		}
+	}
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
 <script type="text/javascript">
 	$(function () {
 		//页面初始化
 		var config = {
-			url: action
+			url: action,
+			callBack:getPagingListCallBack
 		};
 		getPagingList(config);
 		//发送文本获取焦点
