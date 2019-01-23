@@ -166,8 +166,7 @@
 		if(data.status==0){
 			dialog.error(data.info);
 		}else{
-			var container = config.container?config.container:$('ul.list');
-			container.empty().append(data);
+			config.container.empty().append(data);
 		}
 	}
 </script>
@@ -177,7 +176,8 @@
 		//页面初始化
 		var config = {
 			url: action,
-			callBack:getPagingListCallBack
+			callBack:getPagingListCallBack,
+			container:$('ul.list')
 		};
 		getPagingList(config);
 		//发送文本获取焦点
