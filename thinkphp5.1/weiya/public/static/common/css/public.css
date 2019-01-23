@@ -5707,7 +5707,8 @@ ul.info_list li{
     background-position:0 -0.44rem;
 }
 .after_sale_wrapper,
-.person-center-wrapper{
+.person-center-wrapper,
+.article_main_content{
     padding:0 0 1.5rem 0;
 }
 /*图片放大样式*/
