@@ -33,6 +33,7 @@ return [
         ['name'   => '再次购买','class'=>' purchase_again '],//14
         ['name'   => '增加商标','class'=>' add_brand '],//15
         ['name'   => '立即提交','class'=>' submit '],//16
+        ['name'   => '删除','class'=>' delete '],//17
 
     ],
 

@@ -61,7 +61,7 @@
 								{/volist}
 							</div>
 							<div class="tags_item_r">
-								<a class="collection" href=""><span></span>收藏</a>
+								<a class="collection" href="javascript:;"><span></span>收藏</a>
 								<a class="share" href=""><span></span>分享</a>
 							</div>
 						</div>
@@ -354,6 +354,32 @@
 		//设置分数
 		var averageScore = {$averageScore};
 		$('.five_star').setStar(parseFloat(averageScore));
+		//收藏
+		$('body').on('click','.collection',function(){
+			var _this = $(this);
+			var goods_id=_this.parents('li').data('id');
+			var postData ={
+				goods_id:goods_id,
+			};
+			_this.addClass("nodisabled");//防止重复提交
+			var url = module + 'Collection/collect';
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(){
+					$('.loading').show();
+				},
+				error:function(){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					_this.removeClass("nodisabled");
+					dialog.success(data.info)
+				}
+			});
+		})
 	});
 </script>
 {/block}
