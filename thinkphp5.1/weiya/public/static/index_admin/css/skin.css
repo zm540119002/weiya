@@ -1615,6 +1615,7 @@ filter:alpha(opacity:0);
     width:14%;
 }
 .chat_content_wrapper{
+	position:relative;
 	width:1000px;
 	height:600px;
 	margin:0 auto;
