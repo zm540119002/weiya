@@ -26,13 +26,15 @@ class UserBase extends Base{
                 $payOpenId  = $tools->getOpenid();
                 session('pay_open_id',$payOpenId);
             }
-            $weiXinUserInfo =  session('ss','');
-            if(empty($weiXinUserInfo)){
-                $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
-                $weiXinUserInfo = $mineTools->get_user_info($mineTools->getOpenid());
-                session('weiXinUserInfo',$weiXinUserInfo);
-
-            }
+//            $weiXinUserInfo =  session('weiXinUserInfo','');
+//            if(empty($weiXinUserInfo)){
+//                $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
+//                $weiXinUserInfo = $mineTools->get_user_info($mineTools->getOpenid());
+//                session('weiXinUserInfo',$weiXinUserInfo);
+//
+//            }
+            $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
+            $weiXinUserInfo = $mineTools->get_user_info($mineTools->getOpenid());
             $this->assign('weiXinUserInfo',$weiXinUserInfo);
         }
 
