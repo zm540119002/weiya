@@ -172,7 +172,7 @@
         //聊天对话框弹窗
         $('body').on('click','.list li',function(){
             var _this=$(this);
-            //_this.addClass('current').siblings().removeClass('current');
+            
             var customer_profile=_this.find('.head_img').attr('src');
             var customer_name=_this.find('.customer_name').text();
             var chatLayerContainer=_this.find('.chatLayerContainer');
@@ -181,6 +181,7 @@
             if(_this.hasClass('current')){
                 _this.find('.chatLayerContainer ul').html($('.chat_dialog_content ul').html());
             }
+            _this.addClass('current').siblings().removeClass('current');
             $('.chatLayer').html(chatLayerContainer.html());
         });
         //设置信息已读
@@ -250,7 +251,8 @@
                      if(data.status==0){
                          dialog.error(data.info);
                      }else{
-                         _currentLi.find('ul').append(data);
+                         //_currentLi.find('ul').append(data);
+                         $('.chat_dialog_content').find('.chat_item').append(data);
                          _this.prev().val('');
                          //聊天框滚动条置底
                          chatDialogSetBottom();
