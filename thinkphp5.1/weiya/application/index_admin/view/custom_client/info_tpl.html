@@ -1,6 +1,6 @@
 {notempty name='info'}
 <li class="chat_list">
-	
+	<a href="javascript:void(0);" class="detele_chat">删除</a>
 	<div class="avatar">
 		{empty name="info.avatar"}
 		<img src="public_img/default/chat_head.jpg">
@@ -13,20 +13,19 @@
 		<p class="author">{$info.name}</p>
 		<div class="msg"></div>
 	</div>
-	<a href="javascript:void(0);" class="detele_chat">删除</a>
 	<!--对话框弹窗-->
 	<section class="chatLayerContainer">
-			<div class="ws_chatMsg-panel flex1">
-				<div class="chatMsg-ct">
-					<ul class="clearfix chat_item" data-from_id="{$info.from_id}">
-						{notempty name='info'}
-						{volist name="info.messages" id="message"}
-						{include file="custom_client/message_info_tpl" /}
-						{/volist}
-						{/notempty}
-					</ul>
-				</div>
+		<div class="ws_chatMsg-panel flex1">
+			<div class="chatMsg-ct">
+				<ul class="clearfix chat_item" data-from_id="{$info.from_id}">
+					{notempty name='info'}
+					{volist name="info.messages" id="message"}
+					{include file="custom_client/message_info_tpl" /}
+					{/volist}
+					{/notempty}
+				</ul>
 			</div>
+		</div>
 	</section>
 </li>
 {/notempty}

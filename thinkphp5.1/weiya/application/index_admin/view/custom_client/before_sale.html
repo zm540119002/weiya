@@ -25,22 +25,20 @@
         </div>
         <!--对话框弹窗-->
         <section class="chatLayerContainer">
-            <div class="chatLayer chat_dialog_content">
-                <div class="ws_chatMsg-panel flex1">
-                    <div class="chatMsg-ct">
-                        <ul class="clearfix chat_item">
-                            <li class="others unread">
-                                <div class="avatar">
-                                    <img src="public_img/default/chat_head.jpg">
-                                </div>
-                                <div class="content">
-                                    <p class="author"></p>
-                                    <p class="create_time"></p>
-                                    <div class="msg"></div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="ws_chatMsg-panel flex1">
+                <div class="chatMsg-ct">
+                    <ul class="clearfix chat_item">
+                        <li class="others unread">
+                            <div class="avatar">
+                                <img src="public_img/default/chat_head.jpg">
+                            </div>
+                            <div class="content">
+                                <p class="author"></p>
+                                <p class="create_time"></p>
+                                <div class="msg"></div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="bottom_nav_fixed">
@@ -72,11 +70,11 @@
             <span class="customer_name"></span>
         </div>
         <div class="chatLayer chat_dialog_content">
-            <!--<div class="ws_chatMsg-panel flex1">
+            <div class="ws_chatMsg-panel flex1">
                 <div class="chatMsg-ct">
                     <ul class="clearfix chat_item"></ul>
                 </div>
-            </div>-->
+            </div>
         </div>
         <div class="bottom_nav_fixed">
             <div class="bottom_flex">
@@ -180,12 +178,7 @@
             var chatLayerContainer=_this.find('.chatLayerContainer');
             $('.chat_client').find('.head_img').attr('src',customer_profile);
             $('.chat_client').find('.customer_name').text(customer_name);
-            if(_this.hasClass('current')){
-                _this.find('.chatLayerContainer').show();
-                _this.siblings().find('.chatLayerContainer').hide();
-                //$('.chatLayer').html(chatLayerContainer.html());
-            }
-            
+            $('.chatLayer').html(chatLayerContainer.html());
         });
         //设置信息已读
         function setMessageRead(obj){
