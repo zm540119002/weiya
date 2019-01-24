@@ -2,7 +2,8 @@
 {volist name="list" id="info"}
 <li data-id="{$info.id}">
     <div class="list_top_item">
-        <p>第<input class="brand_type input_width" name="type" value="{$info.type}" readonly="readonly" unselectable="on" onfocus="this.blur()"/>类商标</p>
+        <!--<p>第<input class="brand_type input_width" name="type" value="{$info.type}" readonly="readonly" unselectable="on" onfocus="this.blur()"/>类商标</p>-->
+        <p>第<input class="brand_type input_width" name="type" value="3" readonly="readonly" unselectable="on" onfocus="this.blur()"/>类商标</p>
         <div>
             {empty name="info.logo"}
             <img src="public_img/default/no_pic_40.jpg" alt="" class="left brand_logo" />
@@ -15,7 +16,7 @@
             <input type="hidden" class="" name="authorization" value="{$info.authorization}"/>
         </div>
     </div>
-    <div class="columns_flex l-r-sides list_bottom_item">
+    <!--<div class="columns_flex l-r-sides list_bottom_item">
         <div>
             <span></span>
             默认商标
@@ -24,7 +25,7 @@
             <a href="javascript:void(0);" class="edit_brand">修改</a>
             <a href="javascript:void(0);" class="delete_brand">删除</a>
         </div>
-    </div>
+    </div>-->
 </li>
 {/volist}
 {else /}
