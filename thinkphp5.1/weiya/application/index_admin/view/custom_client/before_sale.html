@@ -169,10 +169,9 @@
             url: action
         };
         getList(config);
-        //聊天对话框弹窗
+        //切换聊天对象
         $('body').on('click','.list li',function(){
             var _this=$(this);
-            
             var customer_profile=_this.find('.head_img').attr('src');
             var customer_name=_this.find('.customer_name').text();
             var chatLayerContainer=_this.find('.chatLayerContainer');
@@ -183,9 +182,11 @@
                  if(_This.hasClass('current')){
                     _This.find('.chatLayerContainer ul').html($('.chat_dialog_content ul').html());
                 }
-            })
+            });
             _this.addClass('current').siblings().removeClass('current');
             $('.chatLayer').html(chatLayerContainer.html());
+            //聊天框滚动条置底
+            messageSetBottom();
         });
         //设置信息已读
         function setMessageRead(obj){
