@@ -215,49 +215,46 @@
             });
         }
         //发送文本获取焦点
-        // $('body').on('focus','.send_out_text',function(){
-        //     //聊天框滚动条置底
-        //     chatDialogSetBottom();
-        // });
+        $('body').on('focus','.send_out_text',function(){
+             //聊天框滚动条置底
+             chatDialogSetBottom();
+         });
         //发送聊天内容
         $('body').on('click','.send_btn',function(){
-            var _this=$(this).prev();
-            var text=$(this).prev().val();
+            var _this = $(this);
+            var content = _this.prev().val();
             var chatListTpl=$('#msgListMeTpl').html();
-            if(!_this.val()){
+            if(!content){
                 dialog.error('不能发送空内容！');
                 return false;
             }
-            var to_user_id = _this.parents('.chatLayer').find('ul').data('from_id');
-            var postData = {to_user_id:to_user_id,content:_this.val()};
+            var _currentLi = $('ul.list').find('li.current');
+            var to_user_id = _currentLi.find('ul').data('from_id');
+            var postData = {to_user_id:to_user_id,content:content};
             var url = domain + 'index/CustomerService/sendMessage';
-            $('.chatLayer .chat_item').append(chatListTpl);
-            $('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
-            chatDialogSetBottom();
-            _this.val('');
-            // $.ajax({
-            //     url: url,
-            //     data: postData,
-            //     type: 'post',
-            //     beforeSend: function(xhr){
-            //         $('.loading').show();
-            //     },
-            //     error:function(xhr){
-            //         $('.loading').hide();
-            //         dialog.error('AJAX错误');
-            //     },
-            //     success: function(data){
-            //         $('.loading').hide();
-            //         if(data.status==0){
-            //             dialog.error(data.info);
-            //         }else{
-            //             $('.chatLayer .chat_item').append(data);
-            //             _this.val('');
-            //             //聊天框滚动条置底
-            //             chatDialogSetBottom();
-            //         }
-            //     }
-            // });
+             $.ajax({
+                 url: url,
+                 data: postData,
+                 type: 'post',
+                 beforeSend: function(xhr){
+                     $('.loading').show();
+                 },
+                 error:function(xhr){
+                     $('.loading').hide();
+                     dialog.error('AJAX错误');
+                 },
+                 success: function(data){
+                     $('.loading').hide();
+                     if(data.status==0){
+                         dialog.error(data.info);
+                     }else{
+                         _currentLi.find('ul').append(data);
+                         _this.val('');
+                         //聊天框滚动条置底
+                         chatDialogSetBottom();
+                     }
+                 }
+             });
         });
         //删除
         $('body').on('click','.detele_chat',function(e){
