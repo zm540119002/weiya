@@ -34,32 +34,4 @@
 		</div>
 	</section>
 </li>
-<li class="chat_list current">
-	<a href="javascript:void(0);" class="detele_chat">删除</a>
-	<div class="avatar">
-		{empty name="info.avatar"}
-		<img src="public_img/default/chat_head.jpg">
-		{else /}
-		<img src="public_uploads/{$info.avatar}">
-		{/empty}
-		<span class="news_num">{if $info.unreadCount}{$info.unreadCount}{/if}</span>
-	</div>
-	<div class="content">
-		<p class="author customer_name">{$info.name}</p>
-	</div>
-	<!--对话框弹窗-->
-	<section class="chatLayerContainer">
-		<div class="ws_chatMsg-panel flex1">
-			<div class="chatMsg-ct">
-				<ul class="clearfix chat_item" data-from_id="{$info.from_id}">
-					{notempty name='info'}
-					{volist name="info.messages" id="message"}
-					{include file="custom_client/message_info_tpl" /}
-					{/volist}
-					{/notempty}
-				</ul>
-			</div>
-		</div>
-	</section>
-</li>
 {/notempty}
