@@ -168,5 +168,5 @@ class Brand extends \common\controller\UserBase{
             return errorMsg('删除失败');
         }
     }
-}
+
 }
