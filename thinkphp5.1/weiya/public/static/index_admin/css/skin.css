@@ -1652,7 +1652,7 @@ filter:alpha(opacity:0);
 	max-width:40px;
 }
 .chat_dialog_content{
-	padding:0 25px 25px;
+	padding:0 0 25px 25px;
 }
 .left_top{
 	padding:25px;
