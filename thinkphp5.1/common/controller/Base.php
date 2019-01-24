@@ -18,17 +18,6 @@ class Base extends \think\Controller{
             $this->host . $_SERVER['HTTP_REFERER']);
         //去到页面跟返回跳转不一样，前端传参returnUrl
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $weiXinUserInfo =  session('weiXinUserInfo1','');
-            if(empty($weiXinUserInfo)){
-                $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
-                $weiXinUserInfo = $mineTools->getOauthUserInfo();
-                session('weiXinUserInfo1',$weiXinUserInfo);
-            }
-            $this -> assign('weiXinUserInfo1',$weiXinUserInfo);
-            print_r($weiXinUserInfo);exit;
-        }
-
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){
