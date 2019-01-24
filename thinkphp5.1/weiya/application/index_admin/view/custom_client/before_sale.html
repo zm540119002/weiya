@@ -180,6 +180,9 @@
             var chatLayerContainer=_this.find('.chatLayerContainer');
             $('.chat_client').find('.head_img').attr('src',customer_profile);
             $('.chat_client').find('.customer_name').text(customer_name);
+            if(_this.hasClass('current')){
+                _this.find('.chatLayerContainer').show().siblings().hide();
+            }
             //$('.chatLayer').html(chatLayerContainer.html());
         });
         //设置信息已读
