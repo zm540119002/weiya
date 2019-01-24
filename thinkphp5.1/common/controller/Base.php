@@ -18,6 +18,8 @@ class Base extends \think\Controller{
             $this->host . $_SERVER['HTTP_REFERER']);
         //去到页面跟返回跳转不一样，前端传参returnUrl
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
+
+       
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){
