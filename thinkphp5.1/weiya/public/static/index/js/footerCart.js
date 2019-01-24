@@ -210,7 +210,7 @@ $(function () {
                         num += parseInt($(this).find('.gshopping_count').val());
                     });
                     //parseInt($('footer').find('num').text())+parseInt(num)
-                    $('.goodsInfoLayer').find('.cart_num').text(num).addClass('cur');
+                    $('.goodsInfoLayer').find('.cart_num').addClass('cur');
                     $('.goodsInfoLayer').find('.add_num').text('+'+num).addClass('current');
                     setTimeout(function(){
                         $('.add_num').removeClass('current');
