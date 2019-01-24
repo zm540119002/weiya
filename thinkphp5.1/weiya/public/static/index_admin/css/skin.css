@@ -1684,10 +1684,10 @@ filter:alpha(opacity:0);
 	display:none;
 }
 .list li.current .chatLayerContainer{
-	position:absolute;
+	/*position:absolute;
 	left:294px;
 	top:0;
-	width:100%;
+	width:100%;*/
 }
 .top_search input{
 	background:none;
