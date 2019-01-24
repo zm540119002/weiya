@@ -36,7 +36,7 @@ class UserBase extends Base{
                 $uploadPath = config('upload_dir.upload_path');
                 //临时相对路径
                 $tempRelativePath = config('upload_dir.temp_path');
-                $newFile = $uploadPath.'/'.$tempRelativePath.generateSN(15)."png";
+                $newFileName = generateSN(15);
 
                 $header = array(
                     'User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:45.0) Gecko/20100101 Firefox/45.0',
@@ -58,12 +58,10 @@ class UserBase extends Base{
                 if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $img_content, $result))
                 {
                     $type = $result[2];//得到图片类型png?jpg?gif?
-                    $newFile = $uploadPath.'/'.$tempRelativePath.generateSN(15)."{$type}";
+                    $newFile = $uploadPath.'/'.$tempRelativePath.$newFileName.".{$type}";
                     if (file_put_contents($newFile, base64_decode(str_replace($result[1], '', $img_content))))
-                    {  echo '新文件保存成功：', $newFile; }}
-
-
-                print_r($newFile);exit;
+                    {  echo '新文件保存成功：', $tempRelativePath.$newFileName.".{$type}"; }}
+                ;exit;
                 $data = [
                     'id'=>$this->user['id'],
                     'name'=>$weiXinUserInfo['nickname'],
