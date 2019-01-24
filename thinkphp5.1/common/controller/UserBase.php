@@ -32,6 +32,13 @@ class UserBase extends Base{
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             if(!$this -> user['weiya_openid']){
                 $weiXinUserInfo = session('weiXinUserInfo');
+                //上传公共路径
+                $uploadPath = config('upload_dir.upload_path');
+                //临时相对路径
+                $tempRelativePath = config('upload_dir.temp_path');
+                $newFile = $uploadPath.$tempRelativePath.generateSN(15)."png";
+                $newFile = saveImageFromHttp($weiXinUserInfo['headimgurl'],$newFile);
+                print_r($newFile);exit;
                 $data = [
                     'id'=>$this->user['id'],
                     'name'=>$weiXinUserInfo['nickname'],
