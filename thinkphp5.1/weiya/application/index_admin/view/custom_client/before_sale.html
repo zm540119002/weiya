@@ -128,7 +128,7 @@
                                 msgListOtherTpl.find('li').attr('class','others read');
                                 $('.chatLayer .chat_item').append(msgListOtherTpl.html());
                                 //聊天框滚动条置底
-                                chatDialogSetBottom();
+                                messageSetBottom();
                             }
                         }
                     });
@@ -156,7 +156,7 @@
         }
     }
     //聊天框滚动条置底
-	function chatDialogSetBottom() {
+	function messageSetBottom() {
 		$('.chat_dialog_content .chat_item').scrollTop($('.chat_dialog_content .chat_item')[0].scrollHeight);
 	}
 </script>
@@ -221,11 +221,6 @@
                 }
             });
         }
-        //发送文本获取焦点
-        $('body').on('focus','.send_out_text',function(){
-             //聊天框滚动条置底
-             chatDialogSetBottom();
-         });
         //发送聊天内容
         $('body').on('click','.send_btn',function(){
             var _this = $(this);
@@ -254,11 +249,10 @@
                      if(data.status==0){
                          dialog.error(data.info);
                      }else{
-                         //_currentLi.find('ul').append(data);
                          $('.chat_dialog_content').find('.chat_item').append(data);
                          _this.prev().val('');
                          //聊天框滚动条置底
-                         chatDialogSetBottom();
+                         messageSetBottom();
                      }
                  }
              });
@@ -313,7 +307,7 @@
                 }else{
                     _this.hide();
                     $('.list .no_info').remove();
-                    $('.list').append('<li class="no_info">暂无此人</li>');
+                    $('.list').empty().append('<li class="no_info">暂无此人</li>');
                 }
             })
             

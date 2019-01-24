@@ -113,7 +113,7 @@
 						chatListOtherTpl.find('li').attr('class', 'others read');
 						$('.chatLayer .chat_item').append(chatListOtherTpl.html());
 						//聊天框滚动条置底
-						chatDialogSetBottom();
+						messageSetBottom();
 					}
 				}
 			});
@@ -159,7 +159,7 @@
 		});
 	}
 	//聊天框滚动条置底
-	function chatDialogSetBottom() {
+	function messageSetBottom() {
 		$('.list').scrollTop($('.list')[0].scrollHeight);
 	}
 	function getPagingListCallBack(config,data){
@@ -181,7 +181,7 @@
 		//发送文本获取焦点
 		$('body').on('focus','.send_out_text',function(){
 			//聊天框滚动条置底
-			chatDialogSetBottom();
+			messageSetBottom();
 		});
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
@@ -217,7 +217,7 @@
 					}else{
 						$('.list').append(data);
 						//聊天框滚动条置底
-						chatDialogSetBottom();
+						messageSetBottom();
 						_this.val('');
 					}
 				}
