@@ -18,18 +18,6 @@ class Base extends \think\Controller{
             $this->host . $_SERVER['HTTP_REFERER']);
         //去到页面跟返回跳转不一样，前端传参returnUrl
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
-
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-//            $payOpenId =  session('pay_open_id','');
-//            if(empty($payOpenId)){
-//                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-//                $payOpenId  = $tools->getOpenid();
-//                session('pay_open_id',$payOpenId);
-//            }
-            $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-            $weiXinUserInfo = $mineTools->get_user_info($mineTools->getOpenid());
-            print_r($weiXinUserInfo);exit;
-        }
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){
