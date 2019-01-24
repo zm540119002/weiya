@@ -27,13 +27,13 @@ class UserBase extends Base{
                 session('pay_open_id',$payOpenId);
             }
 
-            $weiXinUserInfo =  session('weiXinUserInfo','');
+            $weiXinUserInfo =  session('ss','');
             if(empty($weiXinUserInfo)){
                 $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
                 $weiXinUserInfo = $mineTools->getOauthUserInfo();
-                session('weiXinUserInfo',$weiXinUserInfo);
+                session('ss',$weiXinUserInfo);
             }
-            $this -> assign('weiXinUserInfo',$weiXinUserInfo);
+            $this -> assign('ss',$weiXinUserInfo);
             print_r($weiXinUserInfo);exit;
         }
 
