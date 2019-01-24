@@ -157,7 +157,7 @@
     }
     //聊天框滚动条置底
 	function chatDialogSetBottom() {
-		$('.chat_item').scrollTop(400);
+		$('.chat_dialog_content .chat_item').scrollTop($('.chat_dialog_content .chat_item')[0].scrollHeight);
 	}
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
@@ -184,7 +184,6 @@
                     _This.find('.chatLayerContainer ul').html($('.chat_dialog_content ul').html());
                 }
             })
-           
             _this.addClass('current').siblings().removeClass('current');
             $('.chatLayer').html(chatLayerContainer.html());
         });
