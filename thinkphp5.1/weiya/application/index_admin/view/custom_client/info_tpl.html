@@ -15,15 +15,17 @@
 	</div>
 	<!--对话框弹窗-->
 	<section class="chatLayerContainer">
-		<div class="ws_chatMsg-panel flex1">
-			<div class="chatMsg-ct">
-				<ul class="clearfix chat_item" data-from_id="{$info.from_id}">
-					{notempty name='info'}
-					{volist name="info.messages" id="message"}
-					{include file="custom_client/message_info_tpl" /}
-					{/volist}
-					{/notempty}
-				</ul>
+		<div class="chatLayer chat_dialog_content">
+			<div class="ws_chatMsg-panel flex1">
+				<div class="chatMsg-ct">
+					<ul class="clearfix chat_item" data-from_id="{$info.from_id}">
+						{notempty name='info'}
+						{volist name="info.messages" id="message"}
+						{include file="custom_client/message_info_tpl" /}
+						{/volist}
+						{/notempty}
+					</ul>
+				</div>
 			</div>
 		</div>
 	</section>
