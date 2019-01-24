@@ -10,7 +10,7 @@ class getPayOpenId {
     $this->appId = $appId;
     $this->appSecret = $appSecret;
     print_r($appId.'//////');
-    print_r($appSecret.'//////');
+    print_r($appSecret.'//////');exit;
     $data = json_decode($this->get_php_file("access_token.php"));
     if ($data->expire_time < time()) {
       // 如果是企业号用以下URL获取access_token
