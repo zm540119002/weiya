@@ -20,6 +20,7 @@ class Jssdk {
       $res = json_decode($this->httpGet($url));
       $access_token = $res->access_token;
       if ($access_token) {
+        print_r(0000);
         $data->expire_time = time() + 7000;
         $data->access_token = $access_token;
         $this->set_php_file("access_token.php", json_encode($data));
@@ -28,6 +29,7 @@ class Jssdk {
       print_r(111);
       $access_token = $data->access_token;
     }
+    print_r(222);
     $this -> access_token = $access_token;
     print_r( $this -> access_token);exit;
 
