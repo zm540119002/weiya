@@ -19,7 +19,8 @@ class UserBase extends Base{
                 $this->error(config('custom.error_login'),url($this->loginUrl));
             }
         }
-      
+        $userModel = new \common\model\User();
+        print_r(session('weiXinUserInfo'));exit;
 
     }
 }
