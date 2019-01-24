@@ -1483,7 +1483,11 @@ filter:alpha(opacity:0);
 .layui-m-layerchild.chatLayer{
     background:#f2f2f2;
 }
-
+.chat_item{
+	height:420px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
 .chat_item.hide{
     display:none;
 }
