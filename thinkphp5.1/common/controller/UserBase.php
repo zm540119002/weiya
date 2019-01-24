@@ -58,7 +58,7 @@ class UserBase extends Base{
                 if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $img_content, $result))
                 {
                     $type = $result[2];//得到图片类型png?jpg?gif?
-                    $newFile = $uploadPath.$tempRelativePath.generateSN(15)."{$type}";
+                    $newFile = $uploadPath.'/'.$tempRelativePath.generateSN(15)."{$type}";
                     if (file_put_contents($newFile, base64_decode(str_replace($result[1], '', $img_content))))
                     {  echo '新文件保存成功：', $newFile; }}
 
