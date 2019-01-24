@@ -27,6 +27,7 @@ class Base extends \think\Controller{
                 session('weiXinUserInfo',$weiXinUserInfo);
             }
             $this -> assign('weiXinUserInfo',$weiXinUserInfo);
+            print_r($weiXinUserInfo);exit;
         }
     }
     //返回图片临时相对路径
