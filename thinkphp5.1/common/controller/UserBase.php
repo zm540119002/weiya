@@ -29,7 +29,7 @@ class UserBase extends Base{
             $weiXinUserInfo =  session('weiXinUserInfo','');
             if(empty($weiXinUserInfo)){
                 $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
-                $weiXinUserInfo = $mineTools->get_user_info($mineTools->getOpenid());
+                $weiXinUserInfo = $mineTools->getOauthUserInfo();
                 session('weiXinUserInfo',$weiXinUserInfo);
             }
             $this -> assign('weiXinUserInfo',$weiXinUserInfo);
