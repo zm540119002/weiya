@@ -28,7 +28,6 @@ class UserBase extends Base{
             }
             $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
             $weiXinUserInfo = $mineTools->get_user_info($mineTools->getOpenid());
-            print_r($weiXinUserInfo);exit;
         }
 
     }
