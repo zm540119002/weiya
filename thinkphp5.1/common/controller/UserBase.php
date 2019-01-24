@@ -20,12 +20,12 @@ class UserBase extends Base{
             }
         }
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $payOpenId =  session('pay_open_id','');
-            if(empty($payOpenId)){
-                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $payOpenId  = $tools->getOpenid();
-                session('pay_open_id',$payOpenId);
-            }
+//            $payOpenId =  session('pay_open_id','');
+//            if(empty($payOpenId)){
+//                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+//                $payOpenId  = $tools->getOpenid();
+//                session('pay_open_id',$payOpenId);
+//            }
             $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
             $weiXinUserInfo = $mineTools->get_user_info($mineTools->getOpenid());
             print_r($weiXinUserInfo);exit;
