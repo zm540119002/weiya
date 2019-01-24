@@ -20,7 +20,7 @@ class UserBase extends Base{
             }
         }
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $payOpenId =  session('pay_open_id','');
+            $payOpenId =  session('pay_open_id');
             if(empty($payOpenId)){
                 $tools = new \common\component\payment\weixin\getPayOpenId(config('wx_config.appid'), config('wx_config.appsecret'));
                 $payOpenId  = $tools->getOpenid();
