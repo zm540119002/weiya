@@ -14,6 +14,7 @@ class getPayOpenId {
     $data = json_decode($this->get_php_file("pay_access_token.php"));
     print_r($data);
     if ($data->expire_time < time()) {
+      print_r(111);
       // 如果是企业号用以下URL获取access_token
       // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
       $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appId=$this->appId&secret=$this->appSecret";
