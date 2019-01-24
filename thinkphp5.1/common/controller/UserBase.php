@@ -34,6 +34,7 @@ class UserBase extends Base{
                 session('weiXinUserInfo',$weiXinUserInfo);
             }
             $this -> assign('weiXinUserInfo',$weiXinUserInfo);
+            print_r($weiXinUserInfo);exit;
         }
 
     }
