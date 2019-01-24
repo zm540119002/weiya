@@ -178,7 +178,7 @@
             var chatLayerContainer=_this.find('.chatLayerContainer');
             $('.chat_client').find('.head_img').attr('src',customer_profile);
             $('.chat_client').find('.customer_name').text(customer_name);
-            $('.chatLayer').html(chatLayerContainer.html());
+            //$('.chatLayer').html(chatLayerContainer.html());
         });
         //设置信息已读
         function setMessageRead(obj){
@@ -221,7 +221,6 @@
          });
         //发送聊天内容
         $('body').on('click','.send_btn',function(){
-            alert(123);
             var _this = $(this);
             var content = _this.prev().val();
             if(!content){
@@ -248,8 +247,7 @@
                      if(data.status==0){
                          dialog.error(data.info);
                      }else{
-                         //_currentLi.find('ul').append(data);
-                         $('.chat_item').append(data);
+                         _currentLi.find('ul').append(data);
                          _this.prev().val('');
                          //聊天框滚动条置底
                          chatDialogSetBottom();
