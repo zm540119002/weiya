@@ -4,13 +4,13 @@ namespace common\component\payment\weixin;
 class getPayOpenId {
   private $appId;
   private $appSecret;
+  private $path;
   private $access_token;
 
   public function __construct($appId, $appSecret) {
     $this->appId = $appId;
     $this->appSecret = $appSecret;
-    print_r($appId.'//////');
-    print_r($appSecret.'//////');exit;
+    $this->path = __DIR__ . 'Jssdk.php/';
     $data = json_decode($this->get_php_file("access_token.php"));
     if ($data->expire_time < time()) {
       // 如果是企业号用以下URL获取access_token
