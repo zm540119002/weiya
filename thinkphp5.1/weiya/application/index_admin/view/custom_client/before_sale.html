@@ -178,9 +178,13 @@
             var chatLayerContainer=_this.find('.chatLayerContainer');
             $('.chat_client').find('.head_img').attr('src',customer_profile);
             $('.chat_client').find('.customer_name').text(customer_name);
-            if(_this.hasClass('current')){
-                _this.find('.chatLayerContainer ul').html($('.chat_dialog_content ul').html());
-            }
+            $.each($('.list li'),function(){
+                var _This=$(this);
+                 if(_This.hasClass('current')){
+                    _This.find('.chatLayerContainer ul').html($('.chat_dialog_content ul').html());
+                }
+            })
+           
             _this.addClass('current').siblings().removeClass('current');
             $('.chatLayer').html(chatLayerContainer.html());
         });
