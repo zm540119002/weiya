@@ -36,7 +36,7 @@ class UserBase extends Base{
                 $uploadPath = config('upload_dir.upload_path');
                 //临时相对路径
                 $tempRelativePath = config('upload_dir.temp_path');
-                $newFile = $uploadPath.$tempRelativePath.generateSN(15)."png";
+                $newFile = $uploadPath.'/'.$tempRelativePath.generateSN(15)."png";
 
                 $header = array(
                     'User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:45.0) Gecko/20100101 Firefox/45.0',
