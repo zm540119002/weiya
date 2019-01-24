@@ -172,12 +172,15 @@
         //聊天对话框弹窗
         $('body').on('click','.list li',function(){
             var _this=$(this);
-            _this.addClass('current').siblings().removeClass('current');
+            //_this.addClass('current').siblings().removeClass('current');
             var customer_profile=_this.find('.head_img').attr('src');
             var customer_name=_this.find('.customer_name').text();
             var chatLayerContainer=_this.find('.chatLayerContainer');
             $('.chat_client').find('.head_img').attr('src',customer_profile);
             $('.chat_client').find('.customer_name').text(customer_name);
+            if(_this.hasClass('current')){
+                _this.find('.chatLayerContainer ul').html($('.chat_dialog_content ul').html());
+            }
             $('.chatLayer').html(chatLayerContainer.html());
         });
         //设置信息已读
