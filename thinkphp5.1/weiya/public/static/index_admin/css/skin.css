@@ -1588,13 +1588,14 @@ filter:alpha(opacity:0);
     
 }
 .chat_list{
-    position:relative;
+    /*position:relative;*/
 }
 .chat_list .detele_chat{
-    position:absolute;
+    /*position:absolute;
     right:12px;
-	top:34px;
+	top:34px;*/
     color:#EA5149;
+	margin:0 0 0 150px;
 }
 .bottom_flex{
     /*display:flex;
