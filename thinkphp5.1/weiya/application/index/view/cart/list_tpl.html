@@ -35,6 +35,12 @@
     </div>
 </li>
 {/volist}
+{else /}
+{if $currentPage ==1}
+<li class="no_data">
+    暂无商品
+</li>
+{/if}
 {/notempty}
 
 
