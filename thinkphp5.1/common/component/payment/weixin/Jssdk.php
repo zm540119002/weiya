@@ -6,10 +6,8 @@ class Jssdk {
   private $appSecret;
   private $path;
   private $access_token;
-  private $http_type;
+
   public function __construct($appId, $appSecret) {
-    $this->http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
-            && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
     $this->appId = $appId;
     $this->appSecret = $appSecret;
     $this->path = __DIR__ . 'Jssdk.php/';
@@ -42,8 +40,8 @@ class Jssdk {
     $jsapiTicket = $this->getJsApiTicket();
 
     // 注意 URL 一定要动态获取，不能 hardcode.
-//    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-    $url = "$this->http_type$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+    $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
     $timestamp = time();
     $nonceStr = $this->createNonceStr();
@@ -194,7 +192,7 @@ class Jssdk {
     $data = $this -> GetAccessTokenAndOpenid();
     $access_token = $data['access_token'];
     $openid =  $data['openid'];
-    $url = $this->http_type."api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
+    $url = "http://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
     $res = $this->http_request($url);
     return json_decode($res, true);
   }
@@ -228,7 +226,7 @@ class Jssdk {
     if (!isset($_GET['code'])){
       //触发微信返回code码
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
-      $baseUrl = urlencode($this->http_type.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+      $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateOauthUrlForCode($baseUrl);
       header("Location: $url");
       exit();
@@ -248,7 +246,7 @@ class Jssdk {
     if ( !isset($_GET['code'])){
       //触发微信返回code码
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
-      $baseUrl = urlencode($this->http_type.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+      $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateUrlForCode($baseUrl);
       Header("Location: $url");
       exit();
