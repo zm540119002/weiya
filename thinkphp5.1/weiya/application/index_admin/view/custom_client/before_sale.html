@@ -71,13 +71,13 @@
             <img src="" alt="" class="left head_img">
             <span class="customer_name"></span>
         </div>
-        <!--<div class="chatLayer chat_dialog_content">
-            <div class="ws_chatMsg-panel flex1">
+        <div class="chatLayer chat_dialog_content">
+            <!--<div class="ws_chatMsg-panel flex1">
                 <div class="chatMsg-ct">
                     <ul class="clearfix chat_item"></ul>
                 </div>
-            </div>
-        </div>-->
+            </div>-->
+        </div>
         <div class="bottom_nav_fixed">
             <div class="bottom_flex">
                 <input class="send_out_text" type="text" name="" value="">
@@ -181,10 +181,11 @@
             $('.chat_client').find('.head_img').attr('src',customer_profile);
             $('.chat_client').find('.customer_name').text(customer_name);
             if(_this.hasClass('current')){
-                _this.find('.chatLayerContainer').show();
+                _this.find('.chatLayerContainer').html();
                 _this.siblings().find('.chatLayerContainer').hide();
+                $('.chatLayer').html(chatLayerContainer.html());
             }
-            //$('.chatLayer').html(chatLayerContainer.html());
+            
         });
         //设置信息已读
         function setMessageRead(obj){
