@@ -20,23 +20,14 @@ class Base extends \think\Controller{
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
 
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-//            $payOpenId =  session('pay_open_id','');
-//            if(empty($payOpenId)){
-//                $tools = new \common\component\payment\weixin\getPayOpenId(config('wx_config.appid'), config('wx_config.appsecret'));
-//                $payOpenId  = $tools->getOpenid();
-//                session('pay_open_id',$payOpenId);
-//            }
-
-            $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
-            $weiXinUserInfo = $mineTools->getOauthUserInfo();
-//            $weiXinUserInfo =  session('weiXinUserInfo','');
-//            if(empty($weiXinUserInfo)){
-//                $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
-//                $weiXinUserInfo = $mineTools->getOauthUserInfo();
-//                session('weiXinUserInfo',$weiXinUserInfo);
-//            }
-//            $this -> assign('weiXinUserInfo',$weiXinUserInfo);
-            print_r($weiXinUserInfo);exit;
+            $weiXinUserInfo =  session('weiXinUserInfo','');
+            if(empty($weiXinUserInfo)){
+                print_r(22);exit;
+                $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
+                $weiXinUserInfo = $mineTools->getOauthUserInfo();
+                session('weiXinUserInfo',$weiXinUserInfo);
+            }
+            $this -> assign('weiXinUserInfo',$weiXinUserInfo);
         }
     }
     //返回图片临时相对路径
