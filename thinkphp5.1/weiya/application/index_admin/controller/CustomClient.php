@@ -6,6 +6,7 @@ class CustomClient extends Base{
      */
     public function beforeSale(){
         if(request()->isAjax()){
+            print_r($this->user);exit;
             $modelChatMessage = new \common\model\ChatMessage();
             $config = [
                 'field' => [
