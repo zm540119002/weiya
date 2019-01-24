@@ -33,7 +33,7 @@ class UserBase extends Base{
             if(!$this -> user['weiya_openid']){
                 $weiXinUserInfo = session('weiXinUserInfo');
                 //临时相对路径
-                $tempRelativePath = config('upload_dir.temp_path');
+                $tempRelativePath = config('upload_dir.user_avatar');
                 $weiXinAvatarUrl = $weiXinUserInfo['headimgurl'];
                 $avatar = saveImageFromHttp($weiXinAvatarUrl,$tempRelativePath);
                 $data = [
