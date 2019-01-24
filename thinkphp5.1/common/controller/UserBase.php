@@ -22,6 +22,7 @@ class UserBase extends Base{
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             $payOpenId =  session('pay_open_id','');
             print_r($payOpenId);
+            echo PHP_EOL;
             if(empty($payOpenId)){
                 $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $payOpenId  = $tools->getOpenid();
@@ -29,8 +30,9 @@ class UserBase extends Base{
             }
             $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
             print_r($mineTools->getOpenid());
+            echo PHP_EOL;exit;
             print_r(config('weiya_weixin.appid'));
-            print_r(config('weiya_weixin.appsecret'));exit;
+            print_r(config('weiya_weixin.appsecret'));
 
             $weiXinUserInfo = $mineTools->get_user_info($mineTools->getOpenid());
             print_r($weiXinUserInfo);exit;
