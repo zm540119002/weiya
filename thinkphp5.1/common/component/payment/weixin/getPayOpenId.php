@@ -1,7 +1,7 @@
 <?php
 
 namespace common\component\payment\weixin;
-class GetPayOpenId {
+class getPayOpenId {
   private $appId;
   private $appSecret;
   private $path;
