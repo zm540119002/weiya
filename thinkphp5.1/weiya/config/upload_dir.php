@@ -13,10 +13,11 @@ return [
     'factory_tweet' => 'factory_tweet/',//场景图片
     'pay_QRcode' => 'pay_QRcode/',//场景图片
     'shop_logo_img' => 'shop/logo_img/',//场景图片
-
+    'user_avatar' => 'user_avatar/',//用户头像目录
     'weiya_goods' => 'weiya_goods/',//维雅定制商品图片
     'weiya_project' => 'weiya_project/',//维雅定制项目图片
     'weiya_scene' => 'weiya_scene/',//维雅定制项目图片
     'weiya_information' => 'weiya_information/',//维雅定制项目图片
     'weiya_goods_gategory' => 'weiya_goods_gategory/',//维雅定制项目图片
+
 ];

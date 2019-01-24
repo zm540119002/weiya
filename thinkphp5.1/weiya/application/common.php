@@ -99,36 +99,49 @@ function getBrandType($num){
 /**
  * TODO PHP 从网络上获取图片 并保存
  * @param $imgFromUrl 图片的网络路径，支持本地。但是图片限制盗链的可能不行
- *                    本地举例：'Public/images/from.png'
- *                    网络图片示例：'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538199326261&di=1e0eec15686209c2d456d554690327c1&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201410%2F13%2F20141013110308_QtVC8.thumb.700_0.jpeg'
  * @param $newFileName 此为重命名并进行保存的图片地址
  * @return bool|string 如果$filename不为空，方可进行下载并返回新图片地址
- *
- * 使用 举例：
- *      $img = saveImageFromHttp('Public/images/from.png',"Public/images/save".time().".png");
- *      echo $img;
  */
-function saveImageFromHttp($imgFromUrl,$newFileName) {
-    //如果$imgFromUrl地址为空，直接退出即可
-    if ($imgFromUrl == "") {return false;}
-    //如果没有指定新的文件名
-    if ($newFileName == "") {
-        //得到 $imgFromUrl 的图片格式
-        $ext = strrchr($imgFromUrl, ".");
-        //如果图片格式不为.gif 或者.jpg .png，直接退出即可
-        if ($ext != ".gif" && $ext != ".jpg" && $ext != 'png'){
-            return false;
+function saveImageFromHttp($url,$savePath) {
+    $header = array(
+        'User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:45.0) Gecko/20100101 Firefox/45.0',
+        'Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+        'Accept-Encoding: gzip, deflate',);
+    //上传公共路径
+    $uploadPath = config('upload_dir.upload_path');
+    if(!is_dir($uploadPath)){
+        if(!mk_dir($uploadPath)){
+            return  errorMsg('创建Uploads目录失败');
         }
-        $newFileName = date("dMYHis") . $ext;
-        //用天月面时分秒来命名新的文件名
     }
-    ob_start();//打开输出
-    readfile($imgFromUrl);//输出图片文件
-    $img = ob_get_contents();//得到浏览器输出
-    ob_end_clean();//清除输出并关闭
-    //$size = strlen($img);//得到图片大小
-    $fp2 = @fopen($newFileName, "a");
-    fwrite($fp2, $img);//向当前目录写入图片文件，并重新命名
-    fclose($fp2);
-    return $newFileName;//返回新的文件名
+    $uploadPath = realpath($uploadPath);
+    if($uploadPath === false){
+        return  errorMsg('获取Uploads实际路径失败');
+    }
+    $uploadPath = $uploadPath . '/' ;
+    //存储路径
+    $storePath = $uploadPath . $savePath;
+    if(!mk_dir($storePath)){
+        return errorMsg('创建临时目录失败');
+    }
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($curl, CURLOPT_ENCODING, 'gzip');
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+    $newFileName = generateSN(15);
+    $data = curl_exec($curl);$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);curl_close($curl);
+    if ($code == 200) {//把URL格式的图片转成base64_encode格式的！
+        $imgBase64Code = "data:image/jpeg;base64," . base64_encode($data);
+    }
+    $img_content=$imgBase64Code;//图片内容
+    if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $img_content, $result))
+    {
+        $type = $result[2];//得到图片类型png?jpg?gif?
+        $newFile = $uploadPath.'/'.$savePath.$newFileName.".{$type}";
+        if (file_put_contents($newFile, base64_decode(str_replace($result[1], '', $img_content)))){
+            return $savePath.$newFileName.".{$type}";
+        }
+    }
 }
