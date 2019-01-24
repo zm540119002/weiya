@@ -1484,6 +1484,7 @@ filter:alpha(opacity:0);
     background:#f2f2f2;
 }
 .chat_item{
+	width:400px;
 	height:420px;
 	overflow-x:hidden;
 	overflow-y:auto;
@@ -1679,6 +1680,12 @@ filter:alpha(opacity:0);
 }
 .chatLayerContainer{
 	display:none;
+}
+.list li.current .chatLayerContainer{
+	position:absolute;
+	left:200px;
+	top:0;
+	width:100%;
 }
 .top_search input{
 	background:none;
