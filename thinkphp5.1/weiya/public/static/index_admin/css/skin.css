@@ -1483,7 +1483,12 @@ filter:alpha(opacity:0);
 .layui-m-layerchild.chatLayer{
     background:#f2f2f2;
 }
-
+.chat_item{
+	width:600px;
+	height:420px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
 .chat_item.hide{
     display:none;
 }
@@ -1590,6 +1595,7 @@ filter:alpha(opacity:0);
     right:12px;
 	top:34px;
     color:#EA5149;
+	/*margin:0 0 0 150px;*/
 }
 .bottom_flex{
     /*display:flex;
@@ -1609,6 +1615,7 @@ filter:alpha(opacity:0);
     width:14%;
 }
 .chat_content_wrapper{
+	position:relative;
 	width:1000px;
 	height:600px;
 	margin:0 auto;
@@ -1648,7 +1655,7 @@ filter:alpha(opacity:0);
 	max-width:40px;
 }
 .chat_dialog_content{
-	padding:0 25px 25px;
+	padding:0 0 25px 25px;
 }
 .left_top{
 	padding:25px;
@@ -1675,6 +1682,12 @@ filter:alpha(opacity:0);
 }
 .chatLayerContainer{
 	display:none;
+}
+.list li.current .chatLayerContainer{
+	/*position:absolute;
+	left:294px;
+	top:0;
+	width:100%;*/
 }
 .top_search input{
 	background:none;

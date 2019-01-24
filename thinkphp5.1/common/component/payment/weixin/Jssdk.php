@@ -27,14 +27,12 @@ class Jssdk {
       $access_token = $data->access_token;
     }
     $this -> access_token = $access_token;
-
-//    $this->getAccessToken();
   }
 
   /**
    * @return array
    * 获取接口调用的信息包
-   * 
+   *
    */
   public function getSignPackage() {
     $jsapiTicket = $this->getJsApiTicket();
@@ -226,7 +224,7 @@ class Jssdk {
     if (!isset($_GET['code'])){
       //触发微信返回code码
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
-      $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+      $baseUrl = urlencode('https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateOauthUrlForCode($baseUrl);
       header("Location: $url");
       exit();
@@ -246,7 +244,7 @@ class Jssdk {
     if ( !isset($_GET['code'])){
       //触发微信返回code码
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
-      $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+      $baseUrl = urlencode('https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateUrlForCode($baseUrl);
       Header("Location: $url");
       exit();
@@ -438,7 +436,7 @@ class Jssdk {
   //获取用户基本信息（OAuth2 授权的 Access Token 获取 未关注用户，Access Token为临时获取）
   public function oauth2_get_user_info($access_token, $openid)
   {
-    
+
     $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
     $res = $this->http_request($url);
     return json_decode($res, true);

@@ -1,3 +1,4 @@
+{notempty name="list"}
 {volist name="list" id="info"}
 <li data-id="{$info.id}">
     <div class="list_top_item">
@@ -26,3 +27,8 @@
     </div>
 </li>
 {/volist}
+{else /}
+<li class="no_data">
+    暂无可选商标
+</li>
+{/notempty}

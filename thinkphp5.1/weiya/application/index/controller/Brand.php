@@ -136,6 +136,7 @@ class Brand extends \common\controller\UserBase{
 
     }
 
+    //获取列表
     public function getList(){
         $model = new  \app\index\model\Brand();
         $config = [
@@ -148,4 +149,24 @@ class Brand extends \common\controller\UserBase{
         $this->assign('list',$list);
         return $this->fetch('list_tpl');
     }
+
+    //删除
+    public function del(){
+        if(!request()->isAjax()){
+            return errorMsg(config('custom.not_ajax'));
+        }
+        $ids = input('post.ids/a');
+        $model = new \app\index\model\Brand();
+        $condition = [
+            ['user_id','=',$this->user['id']],
+            ['id','in',$ids],
+        ];
+        $result = $model -> del($condition);
+        if($result['status']){
+            return successMsg('删除成功');
+        }else{
+            return errorMsg('删除失败');
+        }
+    }
+
 }
