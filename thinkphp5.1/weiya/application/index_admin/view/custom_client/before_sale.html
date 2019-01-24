@@ -248,7 +248,7 @@
                      if(data.status==0){
                          dialog.error(data.info);
                      }else{
-                         console.log(data);
+                         console.log(_currentLi.find('ul'));
                          _currentLi.find('ul').append(data);
                          _this.val('');
                          //聊天框滚动条置底
