@@ -20,7 +20,7 @@
 				<ul class="clearfix chat_item" data-from_id="{$info.from_id}">
 					{notempty name='info'}
 					{volist name="info.messages" id="message"}
-					{include file="customer_client/message_info_tpl" /}
+					{include file="custom_client/message_info_tpl" /}
 					{/volist}
 					{/notempty}
 				</ul>
@@ -54,7 +54,7 @@
 				<ul class="clearfix chat_item" data-from_id="{$info.from_id}">
 					{notempty name='info'}
 					{volist name="info.messages" id="message"}
-					{include file="customer_client/message_info_tpl" /}
+					{include file="custom_client/message_info_tpl" /}
 					{/volist}
 					{/notempty}
 				</ul>
