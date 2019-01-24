@@ -33,6 +33,12 @@ class UserBase extends Base{
                     'avatar'=>$avatar,
                     'weiya_openid'=>$weiXinUserInfo['openid'],
                 ];
+                if($this->user['avatar']){
+                    unset($data['avatar']);
+                }
+                if($this->user['name']){
+                    unset($data['name']);
+                }
                 $userModel = new \common\model\User();
                 $result = $userModel->isUpdate(true)->save($data);
                 if( false === $result){
