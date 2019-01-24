@@ -223,7 +223,6 @@
         $('body').on('click','.send_btn',function(){
             var _this = $(this);
             var content = _this.prev().val();
-            var chatListTpl=$('#msgListMeTpl').html();
             if(!content){
                 dialog.error('不能发送空内容！');
                 return false;
@@ -249,7 +248,7 @@
                          dialog.error(data.info);
                      }else{
                          _currentLi.find('ul').append(data);
-                         _this.val('');
+                         _this.prev().val('');
                          //聊天框滚动条置底
                          chatDialogSetBottom();
                      }

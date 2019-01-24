@@ -87,7 +87,7 @@ class Collection extends \common\controller\UserBase{
         }
     }
 
-    //删除地址
+    //删除
     public function del(){
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
