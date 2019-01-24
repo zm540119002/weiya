@@ -10,7 +10,7 @@ class Jssdk {
   public function __construct($appId, $appSecret) {
     $this->appId = $appId;
     $this->appSecret = $appSecret;
-    print_r($appId);exit;
+    
     echo '----';
     print_r($appSecret);
     echo '----';
@@ -36,8 +36,6 @@ class Jssdk {
     }
     print_r($access_token);
     $this -> access_token = $access_token;
-
-//    $this->getAccessToken();
   }
 
   /**
