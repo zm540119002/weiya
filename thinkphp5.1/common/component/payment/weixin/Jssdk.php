@@ -11,7 +11,7 @@ class Jssdk {
     $this->appId = $appId;
     $this->appSecret = $appSecret;
     $this->path = __DIR__ . 'Jssdk.php/';
-    $data = json_decode($this->get_php_file("access_token.php"));
+    $data = json_decode($this->get_php_file("a.php"));
     if ($data->expire_time < time()) {
       // 如果是企业号用以下URL获取access_token
       // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
@@ -22,7 +22,7 @@ class Jssdk {
         print_r(0000);
         $data->expire_time = time() + 7000;
         $data->access_token = $access_token;
-        $this->set_php_file("access_token.php", json_encode($data));
+        $this->set_php_file("a.php", json_encode($data));
       }
     } else {
       $access_token = $data->access_token;
