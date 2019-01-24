@@ -27,6 +27,7 @@ class UserBase extends Base{
 //                session('pay_open_id',$payOpenId);
 //            }
             print_r(config('weiya_weixin.appid'));
+            echo '-------------';
             print_r(config('weiya_weixin.appsecret'));
 exit;
             $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
