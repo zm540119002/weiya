@@ -22,6 +22,7 @@ class getPayOpenId {
       $data->access_token = $access_token;
       $this->set_php_file("pay_access_token.php", json_encode($data));
     }
+    $data = json_decode($this->get_php_file("pay_access_token.php"));
     print_r($data);exit;
     if ($data->expire_time < time()||empty($data)) {
 //      // 如果是企业号用以下URL获取access_token
