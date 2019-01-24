@@ -235,7 +235,7 @@
                 dialog.error('不能发送空内容！');
                 return false;
             }
-            //var _currentLi = $('ul.list').find('li.current');
+            var _currentLi = $('ul.list').find('li.current');
             var to_user_id = _currentLi.find('ul').data('from_id');
             var postData = {to_user_id:to_user_id,content:content};
             var url = domain + 'index/CustomerService/sendMessage';
