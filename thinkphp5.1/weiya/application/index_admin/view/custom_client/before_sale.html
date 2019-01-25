@@ -46,7 +46,7 @@
                 messageItemTpl.find('.author').text(data.from_name);
                 messageItemTpl.find('.create_time').text(data.create_time);
                 if(data.avatar){
-                    messageItemTpl.find('img').attr('src',data.avatar);
+                    messageItemTpl.find('img').attr('src',uploads+data.avatar);
                 }
                 //当前聊天框，则消息设置为已读
                 if(_thisUl.hasClass('current')){
