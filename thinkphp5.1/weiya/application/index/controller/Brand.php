@@ -104,6 +104,9 @@ class Brand extends \common\controller\UserBase{
         }
     }
 
+    /**
+     * @return array设置默认值
+     */
    public function setDefault(){
        if(!request()->isAjax()){
            return errorMsg('请求方式错误');
