@@ -484,7 +484,6 @@ function assemblyData(lis) {
     });
     if(postData.goodsList && postData.goodsList.length == 0){
         dialog.error('请选择商品');
-        return postData;
         return false;
     }
     if(!isInt){
