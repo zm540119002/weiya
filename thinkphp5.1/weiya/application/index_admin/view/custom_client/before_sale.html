@@ -50,8 +50,7 @@
         </section>
     </li>
 </section>
-<section class="f24 chat_content">
-</section>
+<section class="f24 chat_content"></section>
 {/block}
 {block name="script"}
 <script type="text/javascript">
@@ -213,7 +212,7 @@
                      if(data.status==0){
                          dialog.error(data.info);
                      }else{
-                         $('.chat_dialog_content').find('.message_list.current').append(data);
+                         $('.chat_content').find('.message_list.current').append(data);
                          _this.prev().val('');
                          //聊天框滚动条置底
                          messageSetBottom();
@@ -273,8 +272,7 @@
                     $('.list .no_info').remove();
                     $('.list').empty().append('<li class="no_info">暂无此人</li>');
                 }
-            })
-            
+            });
         });
         $('body').on('focus','.send_out_text', function() {
             messageSetBottom();
