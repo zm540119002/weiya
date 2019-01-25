@@ -1,9 +1,8 @@
 {notempty name='info'}
 <ul class="clearfix message_list" data-from_id="{$info.from_id}">
-	{notempty name='info'}
 	{volist name="info.messages" id="message"}
-	<li class="message_item"><span class="create_time">{$message.create_time|date='Y-m-d H:i'}</span></li>
-	<li class="{$message.who}{if $message.read} read{else /} unread{/if}" data-id="{$message.id}">
+	<li><span class="create_time">{$message.create_time|date='Y-m-d H:i'}</span></li>
+	<li class="message_item {$message.who}{if $message.read} read{else /} unread{/if}" data-id="{$message.id}">
 		<div class="avatar">
 			{empty name="message.avatar"}
 			<img src="public_img/default/chat_head.jpg">
@@ -17,6 +16,5 @@
 		</div>
 	</li>
 	{/volist}
-	{/notempty}
 </ul>
 {/notempty}

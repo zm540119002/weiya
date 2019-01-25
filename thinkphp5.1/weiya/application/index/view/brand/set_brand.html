@@ -70,7 +70,7 @@
             btn:['确定'],
             success:function(){
                 var winH=$(window).height();
-                $('.setBrandLayer .layui-m-layercont').css('height',winH+'px');
+                $('.setBrandLayer .layui-m-layercont').css('height',winH-100+'px');
                 var url = module + 'Brand/getList';
                 var postData = {};
                 $.ajax({
@@ -242,9 +242,9 @@
             var brand_id=$(this).data('id');
             var backId=$('.setBrandLayer').find('.list').attr('id');
             $('#'+backId).find('.brand_name').text(brandName).data('id',brand_id);
-            setTimeout(function(){
-                layer.closeAll();
-            },1000)
+            // setTimeout(function(){
+            //     layer.closeAll();
+            // },1000)
             return false;
         });
         //删除商标

@@ -98,9 +98,9 @@ function getBrandType($num){
 
 /**
  * TODO PHP 从网络上获取图片 并保存
- * @param $imgFromUrl 图片的网络路径，支持本地。但是图片限制盗链的可能不行
- * @param $newFileName 此为重命名并进行保存的图片地址
- * @return bool|string 如果$filename不为空，方可进行下载并返回新图片地址
+ * @param $url 图片的网络路径，支持本地。但是图片限制盗链的可能不行
+ * @param $savePath 此为重命名并进行保存的图片地址
+ * @return array|string 如果$filename不为空，方可进行下载并返回新图片地址
  */
 function saveImageFromHttp($url,$savePath) {
     $header = array(
@@ -108,7 +108,7 @@ function saveImageFromHttp($url,$savePath) {
         'Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
         'Accept-Encoding: gzip, deflate',);
     //上传公共路径
-    $uploadPath = config('upload_dir.upload_path');
+    $uploadPath = config('upload_dir.upload_path'). '/';
     if(!is_dir($uploadPath)){
         if(!mk_dir($uploadPath)){
             return  errorMsg('创建Uploads目录失败');
@@ -118,7 +118,6 @@ function saveImageFromHttp($url,$savePath) {
     if($uploadPath === false){
         return  errorMsg('获取Uploads实际路径失败');
     }
-    $uploadPath = $uploadPath . '/' ;
     //存储路径
     $storePath = $uploadPath . $savePath;
     if(!mk_dir($storePath)){
@@ -131,7 +130,9 @@ function saveImageFromHttp($url,$savePath) {
     curl_setopt($curl, CURLOPT_ENCODING, 'gzip');
     curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
     $newFileName = generateSN(15);
-    $data = curl_exec($curl);$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);curl_close($curl);
+    $data = curl_exec($curl);
+    $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    curl_close($curl);
     if ($code == 200) {//把URL格式的图片转成base64_encode格式的！
         $imgBase64Code = "data:image/jpeg;base64," . base64_encode($data);
     }
@@ -139,7 +140,7 @@ function saveImageFromHttp($url,$savePath) {
     if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $img_content, $result))
     {
         $type = $result[2];//得到图片类型png?jpg?gif?
-        $newFile = $uploadPath.'/'.$savePath.$newFileName.".{$type}";
+        $newFile = $storePath.$newFileName.".{$type}";
         if (file_put_contents($newFile, base64_decode(str_replace($result[1], '', $img_content)))){
             return $savePath.$newFileName.".{$type}";
         }

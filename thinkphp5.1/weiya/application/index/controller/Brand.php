@@ -158,6 +158,9 @@ class Brand extends \common\controller\UserBase{
             return errorMsg(config('custom.not_ajax'));
         }
         $ids = input('post.ids/a');
+        if(empty($ids)){
+            return errorMsg(config('请求参数错误'));
+        }
         $model = new \app\index\model\Brand();
         $condition = [
             ['user_id','=',$this->user['id']],

@@ -1572,7 +1572,8 @@ filter:alpha(opacity:0);
 .others,
 .me,
 .chat_list,
-.time{
+.time,
+.custom_item{
     display:flex;
 }
 .me{
@@ -1587,15 +1588,28 @@ filter:alpha(opacity:0);
 .content .msg{
     
 }
-.chat_list{
+.chat_list,.custom_item{
     position:relative;
 }
-.chat_list .detele_chat{
+.chat_list .detele_chat,
+.custom_item .detele_chat{
     position:absolute;
     right:12px;
 	top:34px;
     color:#EA5149;
 	/*margin:0 0 0 150px;*/
+}
+ul.message_list{
+	display: none;
+	height:464px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+/*ul.message_list:first-child{
+	display:block;
+}*/
+.message_list.current{
+	display:block;
 }
 .bottom_flex{
     /*display:flex;
@@ -1615,6 +1629,13 @@ filter:alpha(opacity:0);
     width:14%;
 }
 .chat_content_wrapper{
+	position:relative;
+	width:1000px;
+	height:600px;
+	margin:0 auto;
+	border:1px solid #d9d9d9;
+}
+.chat_content{
 	position:relative;
 	width:1000px;
 	height:600px;
@@ -1673,11 +1694,12 @@ filter:alpha(opacity:0);
 	background: #fff;
 	border-radius:5px;
 }
-.chat_list{
+.chat_list,.custom_item{
 	padding:20px;
 	border-bottom:1px solid #d9d9d9;
 }
-.chat_list.current{
+.chat_list.current,
+.custom_item.current{
 	background: #CFE3F5;
 }
 .chatLayerContainer{

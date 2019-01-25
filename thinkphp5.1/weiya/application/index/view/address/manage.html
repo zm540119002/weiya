@@ -9,6 +9,7 @@
 <article class="f24">
 	<section class="delivery_address">
 		<input type="hidden" value="{$orderId}" class="order_id">
+		{notempty name="addressList"}
 		{volist name="addressList" id="vo"}
 			<div class="item_addr">
 				<div class="ia-l"></div>
@@ -30,6 +31,11 @@
 				</a>
 			</div>
 		{/volist}
+		{else /}
+		<div class="no_data">
+			<img src="public_img/no-address.png" alt="">
+		</div>
+		{/notempty}
 	</section> 
 </article> 
 {/block}

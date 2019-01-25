@@ -4553,6 +4553,10 @@ a.sign_out{
 .tags_item_r .share span{
     background-position:0 -0.44rem;
 }
+.tags_item_r .collection span.selected{
+    background-image:url(../../common/img/icons/selected_star.png);
+    background-size:0.35rem 0.32rem;
+}
 /*个人中心*/
 .person-center-wrapper .flex_item{
     padding:.35rem .15rem;
@@ -5414,7 +5418,7 @@ ul.info_list li{
 }
 .layui-m-layer .setBrandLayer .layui-m-layercont{
     height:450px;
-    /*padding:0 0 2rem 0;*/
+    padding:0 0 2rem 0;
     background: #f2f2f2;
 }
 .addressLayer .layui-m-layerbtn,
@@ -5474,7 +5478,7 @@ ul.info_list li{
     padding:0.14rem 0;
     background-color:#0f9143;
     width: 50%;
-    margin:1rem auto 0;
+    margin:0 auto;
     text-align: center;
     border-radius:5px;
     color:#fff;
@@ -5770,9 +5774,13 @@ ul.info_list li{
 .collection_main_content + .group_cart_nav{
     visibility:hidden;
 }
-li.no_data{
+li.no_data,
+div.no_data{
     text-align:center;
     border:none;
     margin:0.25rem 0 0;
     background:none;
+}
+.no_data img{
+    width:50%;
 }

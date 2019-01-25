@@ -1,77 +1,53 @@
 {extend name="template/admin_pc/base.html" /}
 {block name="footer"}{/block}
 {block name="content"}
-<!--对话框列表模板-->
-<section id="msgListOtherTpl" style="display:none;">
-    <li class="me">
+<!--模板区 start-->
+<section id="messageItemTpl" style="display:none;">
+    <li><span class="create_time"></span></li>
+    <li class="message_item others unread" data-id="">
         <div class="avatar">
             <img src="public_img/default/chat_head.jpg">
         </div>
         <div class="content">
-            <p class="author">阿三</p>
+            <p class="author"></p>
             <div class="msg"></div>
         </div>
     </li>
 </section>
-<section id="chatListTpl" style="display:none">
-    <li class="chat_list">
+<section id="customItemTpl" style="display:none">
+    <li class="custom_item" data-from_id="">
         <a href="javascript:void(0);" class="detele_chat">删除</a>
         <div class="avatar">
             <img src="public_img/default/chat_head.jpg">
-            <span class="news_num">1</span>
+            <span class="news_num"></span>
         </div>
         <div class="content">
-            <p class="author customer_name"></p>
+            <p class="author"></p>
         </div>
-        <!--对话框弹窗-->
-        <section class="chatLayerContainer">
-            <div class="ws_chatMsg-panel flex1">
-                <div class="chatMsg-ct">
-                    <ul class="clearfix chat_item">
-                        <li class="others unread">
-                            <div class="avatar">
-                                <img src="public_img/default/chat_head.jpg">
-                            </div>
-                            <div class="content">
-                                <p class="author"></p>
-                                <p class="create_time"></p>
-                                <div class="msg"></div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="bottom_nav_fixed">
-                <div class="bottom_flex">
-                    <input class="send_out_text" type="text" name="" value="">
-                    <input class="send_btn" type="button" value="发送">
-                </div>
-            </div>
-        </section>
     </li>
 </section>
-<section class="f24 chat_content">
-</section>
+<!--模板 end-->
+<section class="f24 chat_content"></section>
 {/block}
 {block name="script"}
 <script type="text/javascript">
     function on_message_call_back(data) {
         //找到聊天列表标记
         var find_sign = false;
-        $.each($('.chatLayerContainer').find('ul'),function(){
-            var _this = $(this);
+        $.each($('ul.message_list'),function(){
+            var _thisUl = $(this);
             //找到聊天列表
-            if(_this.data('from_id')==data.from_id){
+            if(_thisUl.data('from_id')==data.from_id){
                 find_sign = true;
-                var msgListOtherTpl = $('#msgListOtherTpl');
-                msgListOtherTpl.find('.msg').text(data.content);
-                msgListOtherTpl.find('.author').text(data.from_name);
-                msgListOtherTpl.find('li').attr('data-id',data.id);
+                var messageItemLi = $('#messageItemTpl').find('li');
+                messageItemLi.attr('data-id',data.id);
+                messageItemLi.find('.msg').text(data.content);
+                messageItemLi.find('.author').text(data.from_name);
                 if(data.avatar){
-                    msgListOtherTpl.find('img').attr('src',data.avatar);
+                    messageItemLi.find('img').attr('src',data.avatar);
                 }
-                //已打开聊天框
-                if($('.chatLayer ').length){
+                //当前聊天框
+                if(_thisUl.hasClass('current')){
                     var postData = {};
                     postData.from_id = data.from_id;
                     postData.messageIds = [];
@@ -93,39 +69,44 @@
                             if(data.status==0){
                                 dialog.error(data.info);
                             }else{
-                                msgListOtherTpl.find('li').attr('class','others read');
-                                $('.chatLayer .chat_item').append(msgListOtherTpl.html());
                                 //聊天框滚动条置底
                                 messageSetBottom();
+                                messageItemLi.addClass('others').addClass('read');
+                                _thisUl.append(messageItemLi);
                             }
                         }
                     });
                 }else{
-                    //未打开聊天框
-                    var num = _this.parents('li').find('span.news_num').text();
-                    _this.parents('li').find('span.news_num').text(++num);
-                    msgListOtherTpl.find('li').attr('class','others unread');
-                    _this.append(msgListOtherTpl.html());
+                    //非当前聊天框
+                    $.each($('li.custom_item'),function(){
+                        var _thisLi = $(this);
+                        if(_thisLi.data('from_id')==data.from_id){
+                            var num = _thisLi.find('span.news_num').text();
+                            _thisLi.find('span.news_num').text(++num);
+                            messageItemLi.addClass('others').addClass('read');
+                            _thisUl.append(messageItemLi);
+                        }
+                    });
                 }
             }
         });
         if(!find_sign){
             //未找到聊天列表，则追加一个
-            var chatListTpl = $('#chatListTpl');
-            chatListTpl.find('.author').text(data.from_name);
-            chatListTpl.find('.msg').text(data.content);
-            chatListTpl.find('.create_time').text(data.create_time);
-            chatListTpl.find('ul').attr('data-from_id',data.from_id);
-            chatListTpl.find('ul li').attr('data-id',data.id);
+            var customItemLi = $('#customItemTpl').find('li');
+            customItemLi.find('.custom_item').attr('data-id',data.id);
+            customItemLi.find('.author').text(data.from_name);
+            customItemLi.find('.msg').text(data.content);
+            customItemLi.find('.create_time').text(data.create_time);
+            customItemLi.find('ul.message_list').attr('data-from_id',data.from_id);
             if(data.avatar){
-                msgListOtherTpl.find('img').attr('src',data.avatar);
+                customItemLi.find('img').attr('src',data.avatar);
             }
-            $('ul.list').append(chatListTpl.html());
+            $('ul.custom_list').append(customItemLi);
         }
     }
     //聊天框滚动条置底
 	function messageSetBottom() {
-		$('.chat_dialog_content .chat_item').scrollTop($('.chat_dialog_content .chat_item')[0].scrollHeight);
+		$('.message_list.current').scrollTop($('.message_list.current')[0].scrollHeight);
 	}
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
@@ -139,21 +120,15 @@
         };
         getList(config);
         //切换聊天对象
-        $('body').on('click','.list li',function(){
+        $('body').on('click','.custom_item',function(){
             var _this=$(this);
             var customer_profile=_this.find('.head_img').attr('src');
             var customer_name=_this.find('.customer_name').text();
             var chatLayerContainer=_this.find('.chatLayerContainer');
             $('.chat_client').find('.head_img').attr('src',customer_profile);
             $('.chat_client').find('.customer_name').text(customer_name);
-            $.each($('.list li'),function(){
-                var _This=$(this);
-                 if(_This.hasClass('current')){
-                    _This.find('.chatLayerContainer ul').html($('.chat_dialog_content ul').html());
-                }
-            });
             _this.addClass('current').siblings().removeClass('current');
-            $('.chatLayer').html(chatLayerContainer.html());
+            $('.message_list').removeClass('current').eq(_this.index()).addClass('current');
             //聊天框滚动条置底
             messageSetBottom();
         });
@@ -219,7 +194,7 @@
                      if(data.status==0){
                          dialog.error(data.info);
                      }else{
-                         $('.chat_dialog_content').find('.chat_item').append(data);
+                         $('.chat_content').find('.message_list.current').append(data);
                          _this.prev().val('');
                          //聊天框滚动条置底
                          messageSetBottom();
@@ -279,8 +254,7 @@
                     $('.list .no_info').remove();
                     $('.list').empty().append('<li class="no_info">暂无此人</li>');
                 }
-            })
-            
+            });
         });
     });
 </script>
