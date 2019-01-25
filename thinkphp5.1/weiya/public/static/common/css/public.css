@@ -1616,7 +1616,8 @@ background-position: 0 -27px;
 .layui-m-layerchild.storeListLayer,
 .layui-m-layerchild.chatLayer,
 .layui-m-layerchild.addressLayer,
-.layui-m-layerchild.setBrandLayer{
+.layui-m-layerchild.setBrandLayer,
+.layui-m-layerchild.userInfoLayer{
     position:fixed; 
     left:0; 
     top:0; 
@@ -4459,8 +4460,25 @@ select[name="nodeIds"]{
 .user_info_r{
     margin:0 0 0 1rem;
 }
-a.sign_out{
+a.customer_info{
     margin: 0.18rem 0.12rem 0 0;
+}
+.userInfoLayer li{
+    padding:0.20rem;
+    border-bottom:1px solid #d9d9d9;
+}
+.userInfoLayer li:first-child{
+    padding:0.12rem;
+}
+.userInfoLayer .upload-picture-module{
+    margin:0;
+}
+.userInfoLayer .upload-picture-module .picture-module{
+    width:1.5rem;
+    height:1.5rem;
+}
+.userInfoLayer .sign_out{
+    display:block;
 }
 /*订单客服售前*/
 .chat_content_wrapper{
