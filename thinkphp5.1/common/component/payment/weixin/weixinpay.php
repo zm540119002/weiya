@@ -64,7 +64,9 @@ class weixinpay{
                             if(res.err_msg == "get_brand_wcpay_request:ok"){
                                 dialog.success('支付成功！',"{$payInfo['return_url']}");
                             }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
-                                dialog.success('取消支付！',"{$payInfo['cancel_url']}");
+                                window.history.go(-1);
+                                return false;
+                                dialog.success('取消支付！', window.history.go(-1));
                             }else{
                                 dialog.success('支付失败！',"{$payInfo['fail_url']}");
                             }

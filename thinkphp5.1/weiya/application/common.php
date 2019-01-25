@@ -98,9 +98,9 @@ function getBrandType($num){
 
 /**
  * TODO PHP 从网络上获取图片 并保存
- * @param $imgFromUrl 图片的网络路径，支持本地。但是图片限制盗链的可能不行
- * @param $newFileName 此为重命名并进行保存的图片地址
- * @return bool|string 如果$filename不为空，方可进行下载并返回新图片地址
+ * @param $url 图片的网络路径，支持本地。但是图片限制盗链的可能不行
+ * @param $savePath 此为重命名并进行保存的图片地址
+ * @return array|string 如果$filename不为空，方可进行下载并返回新图片地址
  */
 function saveImageFromHttp($url,$savePath) {
     $header = array(
