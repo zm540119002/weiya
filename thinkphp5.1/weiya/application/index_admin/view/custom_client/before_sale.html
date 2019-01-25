@@ -41,13 +41,14 @@
             if(_thisUl.data('from_id')==data.from_id){
                 find_sign = true;
                 var messageItemLi = $('#messageItemTpl').find('li');
-                messageItemLi.attr('data-id',data.id);
+                messageItemLi.find('.message_item').attr('data-id',data.id);
                 messageItemLi.find('.msg').text(data.content);
                 messageItemLi.find('.author').text(data.from_name);
+                messageItemLi.find('.create_time').text(data.create_time);
                 if(data.avatar){
                     messageItemLi.find('img').attr('src',data.avatar);
                 }
-                //当前聊天框
+                //当前聊天框，则消息设置为已读
                 if(_thisUl.hasClass('current')){
                     var postData = {};
                     postData.from_id = data.from_id;
@@ -72,8 +73,7 @@
                             }else{
                                 //聊天框滚动条置底
                                 messageSetBottom();
-                                messageItemLi.find('message_item').addClass('others').addClass('read');
-                                console.log(_thisUl);
+                                messageItemLi.find('.message_item').removeClass('unread').addClass('read');
                                 _thisUl.append(messageItemLi);
                             }
                         }
