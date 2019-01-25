@@ -104,7 +104,6 @@ $(function(){
     //增加商标
     var addBrandInfo=$('.add_brand_tpl').html();
     $('body').on('click','.add_brand',function () {
-        alert(1);
         layer.open({
             title:['增加商标','border-bottom:1px solid #d9d9d9;'],
             type:1,
@@ -118,7 +117,6 @@ $(function(){
             yes:function(index){
                 var postData  = $(".setBrandLayer .brand_form").serializeObject();
                 var brandTpl=$('.brandListTpl').html();
-                console.log(postData);
                 postData.page_type='operate_btn';
                 var content='';
                 if(!postData.name){
@@ -167,13 +165,10 @@ $(function(){
             yes:function(index){
                 var postData  = $(".setBrandLayer .brand_form").serializeObject();
                 var brandTpl=$('.brandListTpl').html();
-                console.log(postData);
-            
+                postData.page_type='operate_btn';
                 var content='';
                 if(!postData.name){
                     content='请填写商标名称';
-                }else if(!postData.type){
-                    content='请选择商标类别';
                 }else if(!postData.logo){
                     content='请上传商标logo';
                 }else if(!postData.certificate){
@@ -197,14 +192,46 @@ $(function(){
         });
     });
     //删除商标
-    $('body').on('click','.delete_brand',function () {
-        var _this=$(this);
+    $('body').on('click','.delete_brand',function (){
+        var _This=$(this);
+        var postData = {};
+        var ids = [];
+        var id = _This.parents('li').data('id');
+        ids.push(id);
+        postData.ids =ids;
+        var url = module + 'Brand/del'
+        _This.addClass("nodisabled");//防止重复提交
         layer.open({
             title:['删除商标','border-bottom:1px solid #d9d9d9;'],
             content:'确定删除商标吗？',
             btn:['确定','取消'],
             yes:function(index){
-                _this.parents('li').remove();
+                $.ajax({
+						url: url,
+						data: postData,
+						type: 'post',
+						beforeSend: function(){
+							$('.loading').show();
+						},
+						error:function(){
+							$('.loading').hide();
+							dialog.error('AJAX错误');
+						},
+						success: function(data){
+							$('.loading').hide();
+							_This.removeClass("nodisabled");//防止重复提交
+							if(data.status==0){
+								dialog.error(data.info);
+							}else {
+								_This.parents('li').remove();
+								if(!$('.list li').length){
+									var html=$('.no_collection').html();
+									$('.list').append(html);
+								}
+							}
+						}
+					});
+                //_this.parents('li').remove();
                 layer.close(index);
             }
         })
