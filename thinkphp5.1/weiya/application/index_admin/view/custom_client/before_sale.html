@@ -41,7 +41,7 @@
             if(_thisUl.data('from_id')==data.from_id){
                 find_sign = true;
                 var messageItemLi = $('#messageItemTpl').find('li');
-                messageItemLi.attr('data-id',data.id);
+                messageItemLi.find('message_item').attr('data-id',data.id);
                 messageItemLi.find('.msg').text(data.content);
                 messageItemLi.find('.author').text(data.from_name);
                 if(data.avatar){
@@ -74,6 +74,7 @@
                                 messageSetBottom();
                                 messageItemLi.find('message_item').addClass('others').addClass('read');
                                 console.log(_thisUl);
+                                console.log(messageItemLi);
                                 _thisUl.append(messageItemLi);
                             }
                         }
