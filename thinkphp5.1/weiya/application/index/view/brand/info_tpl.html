@@ -15,11 +15,18 @@
     {notempty name="operate_btn"}
     <div class="columns_flex l-r-sides list_bottom_item">
         <div>
-            
+            {if $info.is_default}
+                <a href="javascript:void(0);" class="edit_default myswitched" data-default="">
+                    <span></span>
+                    默认商标
+                </a>
+            {else /}
             <a href="javascript:void(0);" class="edit_default" data-default="">
                 <span></span>
                 默认商标
             </a>
+            {/if}
+
         </div>
         <div>
             <a href="javascript:void(0);" class="edit_brand">修改</a>

@@ -75,10 +75,17 @@
             </div>
             <div class="columns_flex l-r-sides list_bottom_item">
                 <div>
+                    {if $info.is_default}
+                    <a href="javascript:void(0);" class="edit_default myswitched" data-default="">
+                        <span></span>
+                        默认商标
+                    </a>
+                    {else /}
                     <a href="javascript:void(0);" class="edit_default" data-default="">
                         <span></span>
                         默认商标
                     </a>
+                    {/if}
                 </div>
                 <div>
                     <a href="javascript:void(0);" class="edit_brand">修改</a>
@@ -250,9 +257,8 @@ $(function(){
                 id:id,
                 is_default:is_default
             };
-            console.log(postData);return false;
              _This.removeClass("nodisabled");//防止重复提交
-            var url = module + 'Brand/edit';
+            var url = module + 'Brand/setDefault';
             $.ajax({
                 url: url,
                 data: postData,
