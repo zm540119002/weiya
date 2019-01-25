@@ -50,7 +50,7 @@ body{
 .input_width{
     background:none;       
     vertical-align:0;
-    text-align:center;
+    /*text-align:center;*/
 }
 .input-filed{
     display: block;
@@ -4100,6 +4100,14 @@ select[name="nodeIds"]{
     width:100%;
     display:block;
 }
+.set_brand .brand_name{
+    display:inline-block;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width:66px;
+    vertical-align:-4px;
+}
 .sample_purchase::after,
 .set_brand::after{
     top:20%;
@@ -4640,8 +4648,12 @@ a.sign_out{
 .flex_item a span.presentation{
     background-position:0 -7.9rem;
 }
-.list li.current {
-    border: 1px solid #0066cc;
+.setBrandLayer .list li.current {
+    border: 1px solid #009A3E;
+    background-image:url(../../common/img/icons/selected_icon.png);
+    background-repeat:no-repeat;
+    background-position:95% center;
+    background-size:0.45rem 0.45rem;
 }
 .top_header{
     position: fixed;
@@ -5783,4 +5795,12 @@ div.no_data{
 }
 .no_data img{
     width:50%;
+}
+.edit_default.myswitched span{
+    display:inline-block;
+    width:0.18rem;
+    height:0.18rem;
+    margin:0 0.05rem 0 0;
+    background:#FF7BAC;
+    border-radius:100%;
 }

@@ -53,7 +53,6 @@ ws.onerror = function (e) {
 ws.onclose = function(e){
     console.log('close');
 };
-
 //获取列表
 function getList(config) {
     $.ajax({
@@ -77,6 +76,7 @@ function getList(config) {
         }
     });
 }
+//获取列表-默认回调函数
 function getListDefaultCallBack(config,data) {
     if(data.status==0){
         dialog.error(data.info);

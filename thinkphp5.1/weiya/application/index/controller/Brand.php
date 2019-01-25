@@ -50,21 +50,6 @@ class Brand extends \common\controller\UserBase{
                     $model ->rollback();
                     return errorMsg('失败');
                 }
-                //修改其他不为默认值
-                if($_POST['is_default'] == 1){
-                    $where = [
-                        ['status','=',0],
-                        ['id',"<>",$id],
-                        ['user_id','=',$userId],
-                    ];
-                    $result = $model->where($where)->setField('is_default',0);
-                    if(false === $result){
-                        $model ->rollback();
-                        return errorMsg('失败');
-                    }
-                }
-
-                //
                 $config = [
                     'where' => [
                         ['status','=',0],
@@ -86,8 +71,7 @@ class Brand extends \common\controller\UserBase{
                     delImgFromPaths($info['authorization'],$data['authorization']);
                 }
                 $model->commit();
-                $data['id'] = $id;
-                $this->assign('info',$data);
+                $this->assign('info',$info);
                 return $this->fetch('info_tpl');
             }else{
                 //增加
@@ -101,8 +85,6 @@ class Brand extends \common\controller\UserBase{
                 if(empty($list)){
                     $data['is_default'] = 1;
                 }
-                //开启事务
-                $model -> startTrans();
 
                 $data['user_id'] = $userId;
                 $data['create_time'] = time();
@@ -111,21 +93,6 @@ class Brand extends \common\controller\UserBase{
                     return errorMsg('失败');
                 }
                 $id = $result['id'];
-                //修改其他不为默认值
-                if($_POST['is_default'] == 1){
-                    $where = [
-                        ['status','=',0],
-                        ['id',"<>",$id],
-                        ['user_id','=',$userId],
-                    ];
-                    $result = $model->where($where)->setField('is_default',0);
-                    if(false === $result){
-                        $model ->rollback();
-                        return errorMsg('失败');
-                    }
-                }
-
-                $model->commit();
                 $data['id'] = $id;
                 $this -> assign('id',$id);
                 $this->assign('info',$data);
@@ -135,8 +102,47 @@ class Brand extends \common\controller\UserBase{
         }else{
             return $this->fetch();
         }
-
     }
+
+    /**
+     * @return array设置默认值
+     */
+   public function setDefault(){
+       if(!request()->isAjax()){
+           return errorMsg('请求方式错误');
+       }
+       $id = input('post.id');
+       $userId = $this->user['id'];
+       $data = input('post.');
+       $condition = [
+           ['status','=',0],
+           ['id','=',$id],
+           ['user_id','=',$userId],
+       ];
+       $model = new  \app\index\model\Brand();
+       $model -> startTrans();
+       $result = $model -> edit($data,$condition);
+       if( !$result['status'] ){
+           $model ->rollback();
+           return errorMsg('失败');
+       }
+       //修改其他不为默认值
+       if($_POST['is_default'] == 1){
+           $where = [
+               ['status','=',0],
+               ['id',"<>",$id],
+               ['user_id','=',$userId],
+           ];
+           $result = $model->where($where)->setField('is_default',0);
+           if(false === $result){
+               $model ->rollback();
+               return errorMsg('失败');
+           }
+       }
+       $model->commit();
+       return successMsg('成功');
+
+   }
 
     //获取列表
     public function getList(){
