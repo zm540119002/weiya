@@ -169,13 +169,18 @@
         //发送聊天内容
         $('body').on('click','.send_btn',function(){
             var _this = $(this);
+            //当前聊天对象
+            var _currentUl = $('Ul.message_list.current');
+            if(!_currentUl.length){
+                dialog.error('请选择聊天对象！');
+                return false;
+            }
             var content = _this.prev().val();
             if(!content){
                 dialog.error('不能发送空内容！');
                 return false;
             }
-            var _currentLi = $('ul.list').find('li.current');
-            var to_user_id = _currentLi.find('ul').data('from_id');
+            var to_user_id = _currentUl.data('from_id');
             var postData = {to_user_id:to_user_id,content:content};
             var url = domain + 'index/CustomerService/sendMessage';
              $.ajax({
@@ -194,7 +199,7 @@
                      if(data.status==0){
                          dialog.error(data.info);
                      }else{
-                         $('.chat_content').find('.message_list.current').append(data);
+                         _currentUl.append(data);
                          _this.prev().val('');
                          //聊天框滚动条置底
                          messageSetBottom();
