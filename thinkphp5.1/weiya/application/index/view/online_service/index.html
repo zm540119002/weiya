@@ -165,7 +165,8 @@
 	$(function () {
 		//页面初始化
 		var config = {
-			url: action
+			url: action,
+			container:$('ul.custom_list')
 		};
 		getList(config);
 		//发送聊天内容
