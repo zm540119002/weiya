@@ -1599,6 +1599,12 @@ filter:alpha(opacity:0);
     color:#EA5149;
 	/*margin:0 0 0 150px;*/
 }
+ul.message_list{
+	display: none;
+}
+ul.message_list:first-child{
+	display:block;
+}
 .bottom_flex{
     /*display:flex;
     display:-webkit-flex;
