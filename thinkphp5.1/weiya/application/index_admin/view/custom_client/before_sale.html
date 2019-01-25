@@ -41,6 +41,7 @@
             if(_thisUl.data('from_id')==data.from_id){
                 find_sign = true;
                 var messageItemLi = $('#messageItemTpl').html();
+                messageItemLi = $(messageItemLi);
                 messageItemLi.find('.message_item').attr('data-id',data.id);
                 messageItemLi.find('.msg').text(data.content);
                 messageItemLi.find('.author').text(data.from_name);
