@@ -1,0 +1,17 @@
+{notempty name='info'}
+<li class="chat_list" data-from_id="{$info.from_id}">
+	<a href="javascript:void(0);" class="detele_chat">删除</a>
+	<div class="avatar">
+		{empty name="info.avatar"}
+		<img src="public_img/default/chat_head.jpg">
+		{else /}
+		<img src="public_uploads/{$info.avatar}">
+		{/empty}
+		<span class="news_num">{if $info.unreadCount}{$info.unreadCount}{/if}</span>
+	</div>
+	<div class="content">
+		<p class="author">{$info.name}</p>
+		<div class="msg"></div>
+	</div>
+</li>
+{/notempty}
