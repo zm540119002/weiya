@@ -48,7 +48,7 @@
                 if(data.avatar){
                     messageItemLi.find('img').attr('src',data.avatar);
                 }
-                //当前聊天框
+                //当前聊天框，则消息设置为已读
                 if(_thisUl.hasClass('current')){
                     var postData = {};
                     postData.from_id = data.from_id;
@@ -73,9 +73,7 @@
                             }else{
                                 //聊天框滚动条置底
                                 messageSetBottom();
-                                messageItemLi.find('.message_item').addClass('others').addClass('read');
-                                console.log(_thisUl);
-                                console.log(messageItemLi);
+                                messageItemLi.find('.message_item').removeClass('unread').addClass('read');
                                 _thisUl.append(messageItemLi);
                             }
                         }
