@@ -2,52 +2,28 @@
 {block name="footer"}{/block}
 {block name="content"}
 <!--对话框列表模板-->
-<section id="msgListOtherTpl" style="display:none;">
-    <li class="me">
+<section id="messageItemTpl" style="display:none;">
+    <li class="message_item"><span class="create_time">2019-01-24 09:58</span></li>
+    <li class="others unread" data-id="378">
         <div class="avatar">
             <img src="public_img/default/chat_head.jpg">
         </div>
         <div class="content">
-            <p class="author">阿三</p>
-            <div class="msg"></div>
+            <p class="author">星晴</p>
+            <div class="msg">你好。</div>
         </div>
     </li>
 </section>
-<section id="chatListTpl" style="display:none">
-    <li class="chat_list">
+<section id="customItemTpl" style="display:none">
+    <li class="custom_item" data-from_id="16">
         <a href="javascript:void(0);" class="detele_chat">删除</a>
         <div class="avatar">
             <img src="public_img/default/chat_head.jpg">
-            <span class="news_num">1</span>
+            <span class="news_num">0</span>
         </div>
         <div class="content">
-            <p class="author customer_name"></p>
+            <p class="author"></p>
         </div>
-        <!--对话框弹窗-->
-        <section class="chatLayerContainer">
-            <div class="ws_chatMsg-panel flex1">
-                <div class="chatMsg-ct">
-                    <ul class="clearfix chat_item">
-                        <li class="others unread">
-                            <div class="avatar">
-                                <img src="public_img/default/chat_head.jpg">
-                            </div>
-                            <div class="content">
-                                <p class="author"></p>
-                                <p class="create_time"></p>
-                                <div class="msg"></div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="bottom_nav_fixed">
-                <div class="bottom_flex">
-                    <input class="send_out_text" type="text" name="" value="">
-                    <input class="send_btn" type="button" value="发送">
-                </div>
-            </div>
-        </section>
     </li>
 </section>
 <section class="f24 chat_content"></section>
@@ -57,20 +33,20 @@
     function on_message_call_back(data) {
         //找到聊天列表标记
         var find_sign = false;
-        $.each($('.chatLayerContainer').find('ul'),function(){
+        $.each($('ul.message_list'),function(){
             var _this = $(this);
             //找到聊天列表
             if(_this.data('from_id')==data.from_id){
                 find_sign = true;
-                var msgListOtherTpl = $('#msgListOtherTpl');
-                msgListOtherTpl.find('.msg').text(data.content);
-                msgListOtherTpl.find('.author').text(data.from_name);
-                msgListOtherTpl.find('li').attr('data-id',data.id);
+                var messageItemTpl = $('#messageItemTpl');
+                messageItemTpl.find('.msg').text(data.content);
+                messageItemTpl.find('.author').text(data.from_name);
+                messageItemTpl.find('li').attr('data-id',data.id);
                 if(data.avatar){
-                    msgListOtherTpl.find('img').attr('src',data.avatar);
+                    messageItemTpl.find('img').attr('src',data.avatar);
                 }
-                //已打开聊天框
-                if($('.chatLayer ').length){
+                //当前聊天框
+                if(_this.hasClass('current')){
                     var postData = {};
                     postData.from_id = data.from_id;
                     postData.messageIds = [];
@@ -92,34 +68,34 @@
                             if(data.status==0){
                                 dialog.error(data.info);
                             }else{
-                                msgListOtherTpl.find('li').attr('class','others read');
-                                $('.message_list.current').append(msgListOtherTpl.html());
+                                messageItemTpl.find('li').attr('class','others read');
+                                $('.message_list.current').append(messageItemTpl.html());
                                 //聊天框滚动条置底
                                 messageSetBottom();
                             }
                         }
                     });
                 }else{
-                    //未打开聊天框
+                    //非当前聊天框
                     var num = _this.parents('li').find('span.news_num').text();
                     _this.parents('li').find('span.news_num').text(++num);
-                    msgListOtherTpl.find('li').attr('class','others unread');
-                    _this.append(msgListOtherTpl.html());
+                    messageItemTpl.find('li').attr('class','others unread');
+                    _this.append(messageItemTpl.html());
                 }
             }
         });
         if(!find_sign){
             //未找到聊天列表，则追加一个
-            var chatListTpl = $('#chatListTpl');
-            chatListTpl.find('.author').text(data.from_name);
-            chatListTpl.find('.msg').text(data.content);
-            chatListTpl.find('.create_time').text(data.create_time);
-            chatListTpl.find('ul').attr('data-from_id',data.from_id);
-            chatListTpl.find('ul li').attr('data-id',data.id);
+            var customItemTpl = $('#customItemTpl');
+            customItemTpl.find('.author').text(data.from_name);
+            customItemTpl.find('.msg').text(data.content);
+            customItemTpl.find('.create_time').text(data.create_time);
+            customItemTpl.find('ul').attr('data-from_id',data.from_id);
+            customItemTpl.find('ul li').attr('data-id',data.id);
             if(data.avatar){
-                msgListOtherTpl.find('img').attr('src',data.avatar);
+                messageItemTpl.find('img').attr('src',data.avatar);
             }
-            $('ul.list').append(chatListTpl.html());
+            $('ul.list').append(customItemTpl.html());
         }
     }
     //聊天框滚动条置底
