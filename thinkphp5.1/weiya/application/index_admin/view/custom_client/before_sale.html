@@ -126,6 +126,7 @@
             var postData = {};
             postData.from_id = _thisLi.data('from_id');
             postData.messgaeIds = [];
+            console.log(postData.messgaeIds.length);
             $.each($('ul.message_list'),function(){
                 var _thisUl = $(this);
                 if(postData.from_id==_thisUl.data('from_id')){
@@ -134,6 +135,7 @@
                     });
                 }
             });
+            console.log(postData.messgaeIds.length);
             console.log(postData);return;
             var url = domain + 'index/CustomerService/setMessageRead';
             $.ajax({
