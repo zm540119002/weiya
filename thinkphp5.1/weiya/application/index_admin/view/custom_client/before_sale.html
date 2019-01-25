@@ -153,7 +153,7 @@
             //     }
             // });
             _this.addClass('current').siblings().removeClass('current');
-            $('.message_list').hide().eq(_this.index()).show();
+            $('.message_list').removeClass('current').eq(_this.index()).addClass('current');
             //聊天框滚动条置底
             messageSetBottom();
         });
@@ -221,7 +221,7 @@
                      }else{
                          alert(1);
                          console.log(data);
-                         $('.chat_dialog_content').find('ul[style="display:block"]').append(data);
+                         $('.chat_dialog_content').find('.message_list.current').append(data);
                          _this.prev().val('');
                          //聊天框滚动条置底
                          messageSetBottom();

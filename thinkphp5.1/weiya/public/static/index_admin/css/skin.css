@@ -1608,6 +1608,9 @@ ul.message_list{
 /*ul.message_list:first-child{
 	display:block;
 }*/
+.message_list.current{
+	display:block;
+}
 .bottom_flex{
     /*display:flex;
     display:-webkit-flex;
