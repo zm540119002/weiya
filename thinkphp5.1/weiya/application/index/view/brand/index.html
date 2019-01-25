@@ -196,7 +196,7 @@ $(function(){
         var _This=$(this);
         var postData = {};
         var ids = [];
-        var id = _This.data('id');
+        var id = _This.parents('li').data('id');
         ids.push(id);
         postData.ids =ids;
         var url = module + 'Brand/del'
