@@ -84,6 +84,7 @@ class CustomerService extends \common\controller\Base{
             $returnData['avatar'] = $this->user['avatar'];
             $returnData['create_time'] = $msgCreateTime;
             $returnData['read'] = 1;
+            $returnData['content'] = $postData['content'];
             $returnData['id'] = $msgId;
             $this->assign('info',$returnData);
             return view('online_service/info_tpl');
