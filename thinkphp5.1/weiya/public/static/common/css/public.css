@@ -50,7 +50,7 @@ body{
 .input_width{
     background:none;       
     vertical-align:0;
-    text-align:center;
+    /*text-align:center;*/
 }
 .input-filed{
     display: block;
@@ -5783,4 +5783,12 @@ div.no_data{
 }
 .no_data img{
     width:50%;
+}
+.edit_default.myswitched span{
+    display:inline-block;
+    width:0.18rem;
+    height:0.18rem;
+    margin:0 0.05rem 0 0;
+    background:#FF7BAC;
+    border-radius:100%;
 }

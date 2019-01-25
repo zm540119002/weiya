@@ -1,13 +1,12 @@
 <li data-id="{$info.id}">
     <div class="list_top_item">
-        <p>第<input class="brand_type input_width" name="type" value="{$info.type}"/>类商标</p>
         <div>
             {empty name="info.logo"}
             <img src="public_img/default/no_pic_40.jpg" alt="" class="left brand_logo" />
             {else /}
             <img src="public_uploads/{$info.logo}" alt="" class="left brand_logo" />
             {/empty}
-            <input type="text" class="brand_name" name="name" value="{$info.name}"/>
+            <input type="text" class="brand_name input_width" name="name" value="{$info.name}" unselectable="on" onfocus="this.blur()"/>
             <input type="hidden" class="brand_logo" name="logo" value="{$info.logo}"/>
             <input type="hidden" class="" name="certificate" value="{$info.certificate}"/>
             <input type="hidden" class="" name="authorization" value="{$info.authorization}"/>
@@ -16,8 +15,11 @@
     {notempty name="operate_btn"}
     <div class="columns_flex l-r-sides list_bottom_item">
         <div>
-            <span></span>
-            默认商标
+            
+            <a href="javascript:void(0);" class="edit_default" data-default="">
+                <span></span>
+                默认商标
+            </a>
         </div>
         <div>
             <a href="javascript:void(0);" class="edit_brand">修改</a>

@@ -61,14 +61,13 @@
         {volist name="list" id="info"}
         <li data-id="{$info.id}">
             <div class="list_top_item">
-                <p>第<input class="brand_type input_width" name="type" value="{$info.type}"/>类商标</p>
                 <div>
                     {empty name="info.logo"}
                     <img src="public_img/default/no_pic_40.jpg" alt="" class="left brand_logo" />
                     {else /}
                     <img src="public_uploads/{$info.logo}" alt="" class="left brand_logo" />
                     {/empty}
-                    <input type="text" class="brand_name" name="name" value="{$info.name}"/>
+                    <input type="text" class="brand_name input_width" name="name" value="{$info.name}" unselectable="on" onfocus="this.blur()"/>
                     <input type="hidden" class="brand_logo" name="logo" value="{$info.logo}"/>
                     <input type="hidden" class="" name="certificate" value="{$info.certificate}"/>
                     <input type="hidden" class="" name="authorization" value="{$info.authorization}"/>
@@ -76,7 +75,7 @@
             </div>
             <div class="columns_flex l-r-sides list_bottom_item">
                 <div>
-                    <a href="javascript:void(0);" class="edit_brand">
+                    <a href="javascript:void(0);" class="edit_default" data-default="">
                         <span></span>
                         默认商标
                     </a>
@@ -157,7 +156,6 @@ $(function(){
                 var brand_logo=_this.find('input[name="logo"]').val();
                 var trademark_certificate=_this.find('input[name="certificate"]').val();
                 var trademark_authorization=_this.find('input[name="authorization"]').val();
-                console.log(brand_logo)
                 $('.setBrandLayer').find('input[name="logo"]').prev().attr('src',uploads+brand_logo);
                 $('.setBrandLayer').find('input[name="certificate"]').prev().attr('src',uploads+trademark_certificate);
                 $('.setBrandLayer').find('input[name="authorization"]').prev().attr('src',uploads+trademark_authorization);
@@ -235,6 +233,47 @@ $(function(){
                 layer.close(index);
             }
         })
+    });
+    //设置默认商标
+    $('body').on('click','.edit_default',function (){
+        var _This=$(this);
+        if(_This.hasClass('myswitched')){
+            _This.removeClass('myswitched');
+            _This.attr('data-default',0);
+        }else{
+            _This.addClass('myswitched');
+            _This.parents('li').siblings().find('.edit_default').removeClass('myswitched');
+            _This.attr('data-default',1);
+            var id=_This.parents('li').data('id');
+            var is_default=_This.data('default');
+            var postData = {
+                id:id,
+                is_default:is_default
+            };
+            console.log(postData);return false;
+             _This.removeClass("nodisabled");//防止重复提交
+            var url = module + 'Brand/edit';
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(){
+                    $('.loading').show();
+                },
+                error:function(){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    _This.removeClass("nodisabled");//防止重复提交
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else {
+                    }
+                }
+            });
+        }
     });
     //设置样式
     changeInputLen($('.input_width'));
