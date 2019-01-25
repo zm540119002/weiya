@@ -51,10 +51,8 @@
             defaults.getFractionValue=options;
         }
         return this.each(function(){
-            //console.log($(this));
             var _this=$(this);
-            
-            var opts=$.extend({},defaults,options); 
+            var opts=$.extend({},defaults,options);
             var starBox = $(opts.mainCell,_this);
             var getFractionValue=opts.getFractionValue;
             var star=opts.star;
@@ -67,8 +65,6 @@
 				this.id=index;		//遍历img元素，设置单独的id
                 //console.log(this.id);
 				starBox.attr('src',star);//空心星
-				// _this.find('#'+getFractionValue).attr('src',starRed);		//当前的图片为实星
-				// _this.find('#'+getFractionValue).prevAll().attr('src',starRed);	//当前的前面星星为实星  prompt[getFractionValue]
                 _this.find('#'+(starValue-1)).attr('src',starRed);		//当前的图片为实星
 				_this.find('#'+(starValue-1)).prevAll().attr('src',starRed);	//当前的前面星星为实星  prompt[getFractionValue]
                 $(this).parent().next('span').text(getFractionValue+'分');
@@ -164,8 +160,6 @@
             var i=$(this).index();
             var _this=$(this);
             var floorId=$(this).data('floor');
-            //var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild).outerHeight(true)*i;
-            //console.log($('.'+settings.floorContentChild).outerHeight(true)*i);
             $.each($('.floor-label'),function(){
                 var floorScroll=$(this).attr('id');
                 var h=$(this).offset().top;
@@ -176,7 +170,6 @@
                     $('body,html').animate({'scrollTop':abc+'px'},800);
                 }
             });
-            //$('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
         })
     };
 
@@ -190,7 +183,7 @@
         var r
             = window.location.search.substr(1).match(reg);
         if (r!=null) return unescape(r[2]); return null;
-    }
+    };
     //楼层
     $.fn.scrollFloor=function(options){
         var defaults={
@@ -263,7 +256,6 @@ function tab_down(tab_k, tab_con, tab_dz) {
             timeout = setTimeout(function() {
                 ts.addClass("current").siblings().removeClass("current");
                 var index = ts.index();
-                // $(tab_con).eq(index).show().siblings().hide();
                 $(tab_con).hide().eq(index).show();
             }, 200)
         }, function() {
@@ -339,14 +331,12 @@ function swiper(elemObj){
 }
 //活动倒计时
 function countDown(time,id){
-    //console.log(time);
     var day_elem = id.find('.day');
     var hour_elem = id.find('.hour');
     var minute_elem = id.find('.minute');
     var second_elem = id.find('.second');
     var end_time = new Date(time).getTime(),//月份是实际月份-1
         sys_second = (end_time-new Date().getTime())/1000;
-        //console.log(sys_second);
     var timer = setInterval(function(){
         if (sys_second > 1) {
             sys_second -= 1;
@@ -371,11 +361,6 @@ function getWeek(i) {
     var nowTime=now.getTime();
     var day=now.getDay();
     var oneDayTime=24*60*60*1000;
-    //显示周一
-    //var firstDay=new Date(nowTime- (day- 4 )* oneDayTime);
-    //console.log(firstDay);
-    //显示周日
-    // var SundayTime =new Date(nowTime); 
     if(day==5){
          //显示周五
         var Friday =new Date(7*oneDayTime+now.getTime()); 
@@ -388,32 +373,6 @@ function getWeek(i) {
         return new Date(Friday.toLocaleDateString());
     }
     console.log(new Date(Friday.toLocaleDateString()));
-    //获取某天日期
-    //console.log(new Date().toLocaleDateString());
-    //获取某天00:00:00
-    //console.log(new Date(Friday.toLocaleDateString()));
-    //获取当天23:59:59
-    //console.log(new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1));
-
-    //firstDay.setDate(firstDay.getDate() + i);
-    
-   // console.log(firstDay.setDate(firstDay.getDate() + i));
-    //日期
-    //mon = Number(firstDay.getMonth())+1;
-    //准确年月日
-    //mon = Number(firstDay.getMonth());
-    //return now.getFullYear() + "/" + mon + "/" + firstDay.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
-    
-    // return new Date(now.getFullYear(),mon,firstDay.getDate());
-    
-   // return new Date(Friday.toLocaleDateString());
-    
-    //当天00：00：00
-    // var endYear=new Date().getFullYear();
-    // var endMonth=new Date().getMonth();
-    // var endDay=new Date().getDate();
-    // var endTime2=new Date(endYear,endMonth,endDay);
-	// console.log(endTime2);
 }
 var addTimer = function(){
     var list = [],callback,interval,opt,unix,iStartUp=0;
@@ -436,7 +395,6 @@ var addTimer = function(){
 
     function go(opt) {
         for (var i = 0; i < list.length; i++) {
-            //list[i].ele.innerHTML = changeTimeStamp(list[i].time);
             callback= changeTimeStamp(list[i].otime,opt);
             if(!callback){
                 list[i].ele.innerHTML='订单已取消';
@@ -447,8 +405,6 @@ var addTimer = function(){
                 .text('已取消')
                 .addClass('order_cancle');
                 $(list[i].ele).removeAttr('id');
-                //clearInterval(interval);
-                //interval=null;
             }else{
                 for(var k=0;k<callback.length;k++){
                     list[i].ele.children[k].innerHTML=callback[k];               
@@ -499,10 +455,6 @@ function errorTipc(info,time){
 function isRolling(container){
     // 移动端touch重写
     var startX, startY;
-    // var button=document.getElementById('formLogin');
-    // button.addEventListener('click',function(){
-    //    $('input').focus();
-    // });
     container.on('touchstart', function(e){
         startX = e.originalEvent.touches[0].pageX;
         startY = e.originalEvent.touches[0].pageY;
@@ -668,12 +620,6 @@ function cartCheckedBox(obj){
             sign = false;
         }
     });
-    //_this.parents('li').find('.cpy_checkitem').prop('checked',sign);
-    // $.each($('.cpy_checkitem'),function () {
-    //     if(!$(this).prop('checked')){
-    //         sign = false;
-    //     }
-    // });
     $('footer .checkall').prop('checked',sign);
 }
 //固定弹窗不滚动
@@ -711,27 +657,6 @@ $(function(){
             dialog.error('功能正在开发中,暂未上线,敬请期待');
         }
     });
-    // $('body').on('click','.cpy_checkitem',function () {
-    //     var _thisChecked = $(this).prop("checked");
-    //     var oItem =$(this).parent().siblings('.item');
-    //     $.each(oItem,function () {
-    //         var _this=$(this);
-    //         _this.find('.checkitem').prop('checked',_thisChecked);
-    //     });
-    // });
-    //根据公司反选
-    // $('body').on('click','.sign_checkitem',function () {
-    //     var sign = true;
-    //     var _this=$(this);
-    //     var oItem =$(this).parents('li').find('.sign_checkitem');
-    //     //一票否决
-    //     $.each(oItem,function () {
-    //         if(!$(this).prop('checked')){
-    //             sign = false;
-    //         }
-    //     });
-    //     _this.parents('li').find('.cpy_checkitem').prop('checked',sign);
-    // });
     //全选
     $('body').on('click','.checkall,.check_all_2',function () {
         var _thisChecked = $(this).prop("checked");

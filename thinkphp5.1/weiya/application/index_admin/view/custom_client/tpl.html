@@ -1,0 +1,36 @@
+<div class="left chat_left">
+	<div class="left_top">
+		<div class="top_sign">
+			<img src="public_img/default/weiya_logo.png" alt="" class="left">
+			<span>维雅客服</span>
+		</div>
+		<div class="top_search">
+			<input type="button" class="left search_btn"/>
+			<input type="text" class="left search_text" placeholder="搜索联系人" />
+		</div>
+	</div>
+	<ul class="custom_list">
+		{include file="custom_client/custom_list_tpl" /}
+	</ul>
+</div>
+<div class="chat_right chat_main_wrapper">
+	<div class="chat_client">
+		<img src="" alt="" class="left head_img">
+		<span class="customer_name"></span>
+	</div>
+	<div class="chatLayer chat_dialog_content">
+		<div class="ws_chatMsg-panel flex1">
+			<div class="chatMsg-ct">
+				<ul class="clearfix message_list" data-from_id="{$info.from_id}">
+					{include file="custom_client/message_list_tpl" /}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="bottom_nav_fixed">
+		<div class="bottom_flex">
+			<input class="send_out_text" type="text" name="" value="">
+			<input class="send_btn" type="button" value="发送">
+		</div>
+	</div>
+</div>
