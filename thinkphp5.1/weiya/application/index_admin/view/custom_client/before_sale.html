@@ -2,18 +2,6 @@
 {block name="footer"}{/block}
 {block name="content"}
 <!--模板区 start-->
-<section id="messageItemTpl" style="display:none;">
-    <li><span class="create_time"></span></li>
-    <li class="message_item others unread" data-id="">
-        <div class="avatar">
-            <img src="public_img/default/chat_head.jpg">
-        </div>
-        <div class="content">
-            <p class="author"></p>
-            <div class="msg"></div>
-        </div>
-    </li>
-</section>
 <section id="customItemTpl" style="display:none">
     <li class="custom_item" data-from_id="">
         <a href="javascript:void(0);" class="detele_chat">删除</a>
@@ -26,6 +14,18 @@
         </div>
     </li>
 </section>
+<section id="messageItemTpl" style="display:none;">
+    <li><span class="create_time"></span></li>
+    <li class="message_item others unread" data-id="">
+        <div class="avatar">
+            <img src="public_img/default/chat_head.jpg">
+        </div>
+        <div class="content">
+            <p class="author"></p>
+            <div class="msg"></div>
+        </div>
+    </li>
+</section>
 <!--模板 end-->
 <section class="f24 chat_content"></section>
 {/block}
@@ -33,7 +33,6 @@
 <script type="text/javascript">
     var loginSign = '{$loginSign|default=""}';
     function on_message_call_back(data) {
-        console.log(data);
         //找到聊天列表标记
         var find_sign = false;
         $.each($('ul.message_list'),function(){
@@ -73,7 +72,8 @@
                             }else{
                                 //聊天框滚动条置底
                                 messageSetBottom();
-                                messageItemLi.addClass('others').addClass('read');
+                                messageItemLi.find('message_item').addClass('others').addClass('read');
+                                console.log(_thisUl);
                                 _thisUl.append(messageItemLi);
                             }
                         }
