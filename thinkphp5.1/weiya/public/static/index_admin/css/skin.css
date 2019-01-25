@@ -1605,9 +1605,9 @@ ul.message_list{
 	overflow-x:hidden;
 	overflow-y:auto;
 }
-ul.message_list:first-child{
+/*ul.message_list:first-child{
 	display:block;
-}
+}*/
 .bottom_flex{
     /*display:flex;
     display:-webkit-flex;
