@@ -80,7 +80,7 @@ class Base extends \think\Controller{
     }
 
     //上传单个data64位文件
-    private function _uploadSingleFileToTemp($fileBase64,$uploadPath){
+    private function _uploadSingleFileToTemp($fileBase64,$upload){
         // 获取图片
         list($type, $data) = explode(',', $fileBase64);
         // 判断文件类型
@@ -133,7 +133,8 @@ class Base extends \think\Controller{
         }
         $uploadPath = $uploadPath . '/' ;
         //临时相对路径
-        $tempRelativePath = $uploadPath;
+        $tempRelativePath = $upload;
+
         //存储路径
         $storePath = $uploadPath . $tempRelativePath;
         if(!mk_dir($storePath)){
