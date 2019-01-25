@@ -1,12 +1,13 @@
 {extend name="template/base.html" /}
 {block name="content"}
-<section id="chatListOtherTpl" style="display:none;">
-	<li class="others unread">
+<section id="messageItemTpl" style="display:none;">
+	<li><span class="create_time"></span></li>
+	<li class="message_item others read" data-id="">
 		<div class="avatar">
 			<img src="public_img/default/chat_head.jpg">
 		</div>
 		<div class="content">
-			<p class="author">乔峰<span class="create_time">2019-01-07 17:37</span></p>
+			<p class="author"></p>
 			<div class="msg"></div>
 		</div>
 	</li>
@@ -25,7 +26,7 @@
 	<section id="chatLayerContainer">
 		<div class="ws_chatMsg-panel flex1">
 			<div class="chatMsg-ct">
-				<ul class="clearfix chat_item list"></ul>
+				<ul class="clearfix chat_item custom_list"></ul>
 			</div>
 		</div>
 		<div class="bottom_nav_fixed chat_bottom_fixed">
@@ -78,51 +79,41 @@
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
 	function on_message_call_back(data) {
-		var chatListOtherTpl = $('#chatListOtherTpl');
-		chatListOtherTpl.find('.msg').text(data.content);
-		chatListOtherTpl.find('.author').text(data.from_name);
-		chatListOtherTpl.find('.create_time').text(data.create_time);
-		chatListOtherTpl.find('li').attr('data-id',data.id);
-		chatListOtherTpl.find('li').attr('data-from_id',data.from_id);
+		var messageItemTpl = $('#messageItemTpl');
+		messageItemTpl.find('.message_item').attr('data-id',data.id);
+		messageItemTpl.find('.msg').text(data.content);
+		messageItemTpl.find('.author').text(data.from_name);
+		messageItemTpl.find('.create_time').text(data.create_time);
 		if(data.avatar){
-			chatListOtherTpl.find('img').attr('src',data.avatar);
+			messageItemTpl.find('img').attr('src',uploads+data.avatar);
 		}
-		//已打开聊天框
-		if($('.chatLayer ').length) {
-			var postData = {};
-			postData.from_id = data.from_id;
-			postData.messageIds = [];
-			postData.messageIds.push(data.id);
-			var url = domain + 'index/CustomerService/setMessageRead';
-			$.ajax({
-				url: url,
-				data: postData,
-				type: 'post',
-				beforeSend: function (xhr) {
-					$('.loading').show();
-				},
-				error: function (xhr) {
-					$('.loading').hide();
-					dialog.error('AJAX错误');
-				},
-				success: function (data) {
-					$('.loading').hide();
-					if (data.status == 0) {
-						dialog.error(data.info);
-					} else {
-						chatListOtherTpl.find('li').attr('class', 'others read');
-						$('.chatLayer .chat_item').append(chatListOtherTpl.html());
-						//聊天框滚动条置底
-						messageSetBottom();
-					}
+		var postData = {};
+		postData.from_id = data.from_id;
+		postData.messageIds = [];
+		postData.messageIds.push(data.id);
+		var url = domain + 'index/CustomerService/setMessageRead';
+		$.ajax({
+			url: url,
+			data: postData,
+			type: 'post',
+			beforeSend: function (xhr) {
+				$('.loading').show();
+			},
+			error: function (xhr) {
+				$('.loading').hide();
+				dialog.error('AJAX错误');
+			},
+			success: function (data) {
+				$('.loading').hide();
+				if (data.status == 0) {
+					dialog.error(data.info);
+				} else {
+					//聊天框滚动条置底
+					messageSetBottom();
+					$('ul.custom_list').append(messageItemTpl.html());
 				}
-			});
-		}else{
-			//未打开聊天框
-			var num = $('span.news_num').text();
-			$('span.news_num').text(++num);
-			$('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());
-		}
+			}
+		});
 	}
 	//设置信息已读
 	function setMessageRead(obj) {
@@ -151,23 +142,15 @@
 				$('.loading').hide();
 				if (data.status == 0) {
 					dialog.error(data.info);
-				} else {
+				}else{
 					$('span.news_num').text('');
-					$('.chatLayer li.others.unread').removeClass('unread').addClass('read');
 				}
 			}
 		});
 	}
 	//聊天框滚动条置底
 	function messageSetBottom() {
-		$('.list').scrollTop($('.list')[0].scrollHeight);
-	}
-	function getPagingListCallBack(config,data){
-		if(data.status==0){
-			dialog.error(data.info);
-		}else{
-			config.container.empty().append(data);
-		}
+		$('ul.custom_list').scrollTop($('ul.custom_list')[0].scrollHeight);
 	}
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
@@ -175,14 +158,10 @@
 	$(function () {
 		//页面初始化
 		var config = {
-			url: action
+			url: action,
+			container:$('ul.custom_list')
 		};
 		getList(config);
-		//发送文本获取焦点
-		$('body').on('focus','.send_out_text',function(){
-			//聊天框滚动条置底
-			messageSetBottom();
-		});
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
 			var chatListTpl = $('#chatListTpl');
@@ -215,10 +194,10 @@
 					if(data.status==0){
 						dialog.error(data.info);
 					}else{
-						$('.list').append(data);
 						//聊天框滚动条置底
 						messageSetBottom();
 						_this.val('');
+						$('ul.custom_list').append(data);
 					}
 				}
 			});
