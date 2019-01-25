@@ -1680,7 +1680,7 @@ filter:alpha(opacity:0);
 	background: #fff;
 	border-radius:5px;
 }
-.chat_list{
+.chat_list,.custom_item{
 	padding:20px;
 	border-bottom:1px solid #d9d9d9;
 }
