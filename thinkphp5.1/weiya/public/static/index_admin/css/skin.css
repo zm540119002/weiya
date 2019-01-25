@@ -1591,7 +1591,8 @@ filter:alpha(opacity:0);
 .chat_list,.custom_item{
     position:relative;
 }
-.chat_list .detele_chat{
+.chat_list .detele_chat,
+.custom_item .detele_chat{
     position:absolute;
     right:12px;
 	top:34px;
