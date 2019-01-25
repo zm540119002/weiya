@@ -32,6 +32,7 @@
 {block name="script"}
 <script type="text/javascript">
     function on_message_call_back(data) {
+        console.log(data);
         //找到聊天列表标记
         var find_sign = false;
         $.each($('ul.message_list'),function(){
