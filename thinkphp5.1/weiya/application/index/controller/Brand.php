@@ -21,6 +21,8 @@ class Brand extends \common\controller\UserBase{
 
     public function edit(){
         if(request()->isAjax()){
+            $pageTye = input('post.page_type');
+            $this->assign('operate_btn',$pageTye);
             $userId = $this->user['id'];
             $data = input('post.');
             $model = new  \app\index\model\Brand();
