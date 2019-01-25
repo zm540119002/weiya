@@ -6,14 +6,14 @@
 <section class="add_brand_tpl bg-eae pt-5" style="display:none;">
     <form method="post" class="bg-fff brand_form">
         <!--<input type="hidden" class="" name="address_id" value="" />-->
-        <div class="box-flex clearfixed">
+        <!--<div class="box-flex clearfixed">
             <select name="type" class="input-filed">
                 <option value="">商标类别</option>
                 {volist name="Think.config.custom.brand_type" id="brand_type"}
                 <option value="{$k}">{$brand_type}</option>
                 {/volist}
             </select>
-        </div>
+        </div>-->
         <div class="box-flex clearfixed">
             <input type="text" name="name" class="input-filed" placeholder="商标名称" value="">
         </div>
@@ -87,19 +87,22 @@
         </li>
         {/volist}
     </ul>
+    <a href="javascript:void(0);" class="add_brand">增加商标</a>
 </article>
 {/block}
 {block name="common"}
-{include file="template/footer_menu.html" /}
+
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
 $(function(){
+    var page_type='operate_btn';
     //增加商标
     var addBrandInfo=$('.add_brand_tpl').html();
     $('body').on('click','.add_brand',function () {
+        alert(1);
         layer.open({
             title:['增加商标','border-bottom:1px solid #d9d9d9;'],
             type:1,
@@ -114,12 +117,10 @@ $(function(){
                 var postData  = $(".setBrandLayer .brand_form").serializeObject();
                 var brandTpl=$('.brandListTpl').html();
                 console.log(postData);
-            
+                postData.page_type='operate_btn';
                 var content='';
                 if(!postData.name){
                     content='请填写商标名称';
-                }else if(!postData.type){
-                    content='请选择商标类别';
                 }else if(!postData.logo){
                     content='请上传商标logo';
                 }else if(!postData.certificate){

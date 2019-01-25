@@ -53,7 +53,7 @@ class CustomClient extends Base{
                 }
             }
             $this->assign('list',$fromUserList);
-            return view('list_tpl');
+            return view('tpl');
         }else{
             return $this->fetch();
         }

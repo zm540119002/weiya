@@ -13,6 +13,7 @@
             <input type="hidden" class="" name="authorization" value="{$info.authorization}"/>
         </div>
     </div>
+    {notempty name="operate_btn"}
     <div class="columns_flex l-r-sides list_bottom_item">
         <div>
             <span></span>
@@ -23,4 +24,6 @@
             <a href="javascript:void(0);" class="delete_brand">删除</a>
         </div>
     </div>
+    {else /}
+    {/notempty}
 </li>

@@ -157,12 +157,14 @@ $(function () {
         lis = $('ul.goods_list').find('li[data-buy_type="1"]');
         var postData = assemblyData(lis);
         var goodsList = postData.goodsList;
+        console.log(postData)
         for(var i=0;i<goodsList.length;i++){
             if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
                 dialog.error('请设置品牌');
                 return false;
             }
         }
+
         if(!postData){
             return false;
         }
@@ -482,7 +484,6 @@ function assemblyData(lis) {
     });
     if(postData.goodsList && postData.goodsList.length == 0){
         dialog.error('请选择商品');
-        return postData;
         return false;
     }
     if(!isInt){

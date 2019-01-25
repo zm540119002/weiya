@@ -53,7 +53,7 @@ class weixinpay{
         $html = <<<EOF
 			<script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
 			<script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
-			<script type="text/javascript" src="/static/common/js/dialog.js"></script>
+			<script type="text/javascript" src="/static/common_index/js/dialog.js"></script>
             <script type="text/javascript">
                 //调用微信JS api 支付
                 function jsApiCall()
@@ -64,7 +64,7 @@ class weixinpay{
                             if(res.err_msg == "get_brand_wcpay_request:ok"){
                                 dialog.success('支付成功！',"{$payInfo['return_url']}");
                             }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
-                                dialog.success('取消支付！',"{$payInfo['cancel_url']}");
+                                dialog.success('取消支付！', window.history.go(-1));
                             }else{
                                 dialog.success('支付失败！',"{$payInfo['fail_url']}");
                             }
