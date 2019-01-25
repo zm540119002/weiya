@@ -43,7 +43,7 @@
             </div>
             <div class="bottom_nav_fixed">
                 <div class="bottom_flex">
-                    <input class="send_out_text" type="text" name="" value="" onfocus="messageSetBottom()">
+                    <input class="send_out_text" type="text" name="" value="">
                     <input class="send_btn" type="button" value="发送">
                 </div>
             </div>
@@ -276,6 +276,11 @@
             })
             
         });
+        $('body').on('focus','.send_out_text', function() {
+            alert(123);
+
+        })
+        
     });
 </script>
 {/block}
