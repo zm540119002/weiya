@@ -219,6 +219,8 @@
                      if(data.status==0){
                          dialog.error(data.info);
                      }else{
+                         alert(1);
+                         console.log(data);
                          $('.chat_dialog_content').find('ul[style="display:block"]').append(data);
                          _this.prev().val('');
                          //聊天框滚动条置底
