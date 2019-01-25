@@ -19,4 +19,5 @@ return [
     'weiya_scene' => 'weiya_scene/',//维雅定制项目图片
     'weiya_information' => 'weiya_information/',//维雅定制项目图片
     'weiya_goods_gategory' => 'weiya_goods_gategory/',//维雅定制项目图片
+    'user_avatar' => 'user_avatar/',//用户头像目录
 ];
