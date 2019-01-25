@@ -164,8 +164,8 @@ $(function () {
                 return false;
             }
         }
-        if(isEmptyArray(goodsList)){
-            dialog.error('请选择商品');
+
+        if(!postData){
             return false;
         }
         postData._this = _this;
