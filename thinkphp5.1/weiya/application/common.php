@@ -131,7 +131,9 @@ function saveImageFromHttp($url,$savePath) {
     curl_setopt($curl, CURLOPT_ENCODING, 'gzip');
     curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
     $newFileName = generateSN(15);
-    $data = curl_exec($curl);$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);curl_close($curl);
+    $data = curl_exec($curl);
+    $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    curl_close($curl);
     if ($code == 200) {//把URL格式的图片转成base64_encode格式的！
         $imgBase64Code = "data:image/jpeg;base64," . base64_encode($data);
     }
