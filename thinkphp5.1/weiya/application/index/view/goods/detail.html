@@ -353,6 +353,11 @@
 		//收藏
 		$('body').on('click','.collection',function(){
 			var _this = $(this);
+			if(_this.find('span').hasClass('selected')){
+				dialog.error('已收藏过');
+				return false;
+			}
+			_this.find('span').addClass('selected');
 			var goods_id=_this.parents('li').data('id');
 			var postData ={
 				goods_id:goods_id

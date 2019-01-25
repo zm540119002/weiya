@@ -4553,6 +4553,10 @@ a.sign_out{
 .tags_item_r .share span{
     background-position:0 -0.44rem;
 }
+.tags_item_r .collection span.selected{
+    background-image:url(../../common/img/icons/selected_star.png);
+    background-size:0.35rem 0.32rem;
+}
 /*个人中心*/
 .person-center-wrapper .flex_item{
     padding:.35rem .15rem;
@@ -5770,9 +5774,13 @@ ul.info_list li{
 .collection_main_content + .group_cart_nav{
     visibility:hidden;
 }
-li.no_data{
+li.no_data,
+div.no_data{
     text-align:center;
     border:none;
     margin:0.25rem 0 0;
     background:none;
+}
+.no_data img{
+    width:50%;
 }
