@@ -16,7 +16,8 @@
             <input type="hidden" class="" name="authorization" value="{$info.authorization}"/>
         </div>
     </div>
-    <!--<div class="columns_flex l-r-sides list_bottom_item">
+    <!--{notempty name="operate_btn"}
+    <div class="columns_flex l-r-sides list_bottom_item">
         <div>
             <span></span>
             默认商标
@@ -25,7 +26,8 @@
             <a href="javascript:void(0);" class="edit_brand">修改</a>
             <a href="javascript:void(0);" class="delete_brand">删除</a>
         </div>
-    </div>-->
+    </div>
+    {/notempty}-->
 </li>
 {/volist}
 {else /}
