@@ -5414,7 +5414,7 @@ ul.info_list li{
 }
 .layui-m-layer .setBrandLayer .layui-m-layercont{
     height:450px;
-    /*padding:0 0 2rem 0;*/
+    padding:0 0 2rem 0;
     background: #f2f2f2;
 }
 .addressLayer .layui-m-layerbtn,
@@ -5474,7 +5474,7 @@ ul.info_list li{
     padding:0.14rem 0;
     background-color:#0f9143;
     width: 50%;
-    margin:1rem auto 0;
+    margin:0 auto;
     text-align: center;
     border-radius:5px;
     color:#fff;
