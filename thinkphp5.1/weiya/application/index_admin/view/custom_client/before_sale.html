@@ -100,7 +100,7 @@
             customItemLi.find('.create_time').text(data.create_time);
             customItemLi.find('ul.message_list').attr('data-from_id',data.from_id);
             if(data.avatar){
-                customItemLi.find('img').attr('src',data.avatar);
+                customItemLi.find('img').attr('src',uploads+data.avatar);
             }
             $('ul.custom_list').append(customItemLi);
         }
