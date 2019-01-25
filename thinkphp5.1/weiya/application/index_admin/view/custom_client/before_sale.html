@@ -74,6 +74,7 @@
                                 //聊天框滚动条置底
                                 messageSetBottom();
                                 messageItemLi.find('.message_item').removeClass('unread').addClass('read');
+                                console.log(messageItemLi);
                                 _thisUl.append(messageItemLi);
                             }
                         }
@@ -85,7 +86,6 @@
                         if(_thisLi.data('from_id')==data.from_id){
                             var num = _thisLi.find('span.news_num').text();
                             _thisLi.find('span.news_num').text(++num);
-                            messageItemLi.addClass('others').addClass('read');
                             _thisUl.append(messageItemLi);
                         }
                     });
