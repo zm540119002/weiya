@@ -40,7 +40,6 @@ class OnlineService extends \common\controller\Base{
                 return view('list_tpl');
             }
         }else{
-            $loginSign = false;
             if($this->user){
                 $modelChatMessage = new \common\model\ChatMessage();
                 $config = [
@@ -53,9 +52,8 @@ class OnlineService extends \common\controller\Base{
                 ];
                 $unreadCount = $modelChatMessage->getList($config);
                 $this->assign('unreadCount',$unreadCount[0]['num']);
-                $loginSign = true;
+                $this->assign('loginSign','login');
             }
-            $this->assign('loginSign',$loginSign);
             return $this->fetch();
         }
     }

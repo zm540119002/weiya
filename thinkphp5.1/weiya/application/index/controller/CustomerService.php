@@ -29,7 +29,7 @@ class CustomerService extends \common\controller\Base{
             $postData = input('post.');
             $msgCreateTime = time();
             $msgId = 0;
-            if($this->user){//已登录
+            if($this->user){//发送者-已登录
                 if($this->user['id']==$postData['to_user_id']){
                     return errorMsg('不能发给自己！');
                 }
@@ -40,7 +40,7 @@ class CustomerService extends \common\controller\Base{
                     'content' => $postData['content'],
                     'create_time' => $msgCreateTime,
                 ];
-                //目的UID在线，标记为已发送
+                //接收者-已登录
                 if(Gateway::isUidOnline($postData['to_user_id'])){
                     $saveData['send_sign'] = 1;
                 }
@@ -49,6 +49,7 @@ class CustomerService extends \common\controller\Base{
                     return errorMsg('保存失败！',$res);
                 }
                 $msgId = $res['id'];
+                //接收者-已登录
                 if(Gateway::isUidOnline($postData['to_user_id'])){
                     $msg = [
                         'type' => 'msg',
@@ -60,8 +61,10 @@ class CustomerService extends \common\controller\Base{
                         'id' => $msgId,
                     ];
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
+                }else{//接收者-未登录
+                    return errorMsg('暂无客服！');
                 }
-            }else{//未登录
+            }else{//发送者-未登录
                 if(Gateway::isUidOnline($postData['to_user_id'])){
                     $msg = [
                         'type' => 'msg',
