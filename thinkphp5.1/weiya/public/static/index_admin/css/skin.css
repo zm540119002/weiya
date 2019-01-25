@@ -1601,6 +1601,9 @@ filter:alpha(opacity:0);
 }
 ul.message_list{
 	display: none;
+	height:464px;
+	overflow-x:hidden;
+	overflow-y:auto;
 }
 ul.message_list:first-child{
 	display:block;
