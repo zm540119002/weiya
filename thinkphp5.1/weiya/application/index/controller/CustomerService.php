@@ -62,7 +62,6 @@ class CustomerService extends \common\controller\Base{
                     ];
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
                 }else{//接收者-未登录
-                    return errorMsg($postData['to_user_id']);
                     return errorMsg('暂无客服！');
                 }
             }else{//发送者-未登录

@@ -55,6 +55,7 @@ class CustomClient extends Base{
             $this->assign('list',$fromUserList);
             return view('tpl');
         }else{
+            $this->assign('loginSign','login');
             return $this->fetch();
         }
     }
