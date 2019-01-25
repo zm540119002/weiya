@@ -31,17 +31,13 @@
 {/block}
 {block name="script"}
 <script type="text/javascript">
-    console.log(123);
     function on_message_call_back(data) {
-        console.log(data);
         //找到聊天列表标记
         var find_sign = false;
         $.each($('ul.message_list'),function(){
-            console.log(1);
             var _thisUl = $(this);
             //找到聊天列表
             if(_thisUl.data('from_id')==data.from_id){
-                console.log(2);
                 find_sign = true;
                 var messageItemLi = $('#messageItemTpl').find('li');
                 messageItemLi.attr('data-id',data.id);
@@ -52,7 +48,6 @@
                 }
                 //当前聊天框
                 if(_thisUl.hasClass('current')){
-                    console.log(3);
                     var postData = {};
                     postData.from_id = data.from_id;
                     postData.messageIds = [];
