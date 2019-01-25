@@ -44,6 +44,7 @@
                 messageItemLi.find('message_item').attr('data-id',data.id);
                 messageItemLi.find('.msg').text(data.content);
                 messageItemLi.find('.author').text(data.from_name);
+                messageItemLi.find('.create_time').text(data.create_time);
                 if(data.avatar){
                     messageItemLi.find('img').attr('src',data.avatar);
                 }
