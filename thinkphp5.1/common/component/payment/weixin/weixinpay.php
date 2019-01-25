@@ -53,7 +53,7 @@ class weixinpay{
         $html = <<<EOF
 			<script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
 			<script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
-			<script type="text/javascript" src="/static/common/js/dialog.js"></script>
+			<script type="text/javascript" src="/static/common_index/js/dialog.js"></script>
             <script type="text/javascript">
                 //调用微信JS api 支付
                 function jsApiCall()
