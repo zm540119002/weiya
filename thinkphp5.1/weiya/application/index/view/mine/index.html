@@ -1,5 +1,6 @@
 {extend name="template/base.html" /}
 {block name="content"}
+<!--个人信息-->
 <section class="user_info_content" style="display:none;">
     <ul>
         <li class="columns_flex l-r-sides">
@@ -17,8 +18,10 @@
             </div>
         </li>
         <li>
-            <span >昵称</span>
-            <input class="user_name" type="text" name="" value="" />
+            <a href="javascript:;" class="right-arrow nick">
+                <span >昵称</span>
+                <span class="user_name"></span>
+            </a>
         </li>
         <li>
             <a href="javascript:;" id="logout_dialog" class="sign_out right-arrow">退出</a>
@@ -182,38 +185,15 @@
                 anim:'up',
                 className:'userInfoLayer',
                 content:user_info_content,
-                btn:['确定','取消'],
+                btn:['确定'],
                 success:function(){
                     var user_header=_this.prev().find('.user_header').attr('src');
                     var user_name=_this.prev().find('.user_name').text();
                     //$('.userInfoLayer .user_name').val(user_name);
-                    $('.userInfoLayer .user_name').val(user_name);
+                    $('.userInfoLayer .user_name').text(user_name);
                 },
                 yes:function(index){
-                    var postData  = $(".setBrandLayer .brand_form").serializeObject();
-                    var brandTpl=$('.brandListTpl').html();
-                    postData.page_type='operate_btn';
-                    var content='';
-                    if(!postData.name){
-                        content='请填写商标名称';
-                    }else if(!postData.logo){
-                        content='请上传商标logo';
-                    }else if(!postData.certificate){
-                        content='请上传商标证或受理通知书';
-                    }else if(!postData.authorization){
-                        content='请上传商标所有权者授权书';
-                    }
-                    if(content){
-                        dialog.error(content);
-                        return false;
-                    }
-                    var config = {
-                        url:module + 'Brand/edit',
-                        postData:postData,
-                        index:index
-                    };
-                    dialogFormAdd(config);
-                
+                  layer.close(index);
                 }
             });
         });
