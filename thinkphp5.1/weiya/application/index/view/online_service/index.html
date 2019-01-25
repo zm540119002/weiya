@@ -85,7 +85,7 @@
 		messageItemTpl.find('.author').text(data.from_name);
 		messageItemTpl.find('.create_time').text(data.create_time);
 		if(data.avatar){
-			messageItemTpl.find('img').attr('src',data.avatar);
+			messageItemTpl.find('img').attr('src',uploads+data.avatar);
 		}
 		var postData = {};
 		postData.from_id = data.from_id;
@@ -151,13 +151,6 @@
 	//聊天框滚动条置底
 	function messageSetBottom() {
 		$('ul.custom_list').scrollTop($('ul.custom_list')[0].scrollHeight);
-	}
-	function getPagingListCallBack(config,data){
-		if(data.status==0){
-			dialog.error(data.info);
-		}else{
-			config.container.empty().append(data);
-		}
 	}
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
