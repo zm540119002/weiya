@@ -1572,7 +1572,8 @@ filter:alpha(opacity:0);
 .others,
 .me,
 .chat_list,
-.time{
+.time,
+.custom_item{
     display:flex;
 }
 .me{
@@ -1587,7 +1588,7 @@ filter:alpha(opacity:0);
 .content .msg{
     
 }
-.chat_list{
+.chat_list,.custom_item{
     position:relative;
 }
 .chat_list .detele_chat{
