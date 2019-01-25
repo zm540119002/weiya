@@ -87,6 +87,13 @@
                     success: function(data){
                         $('.setBrandLayer').find('.list').html(data);
                         $('.setBrandLayer').find('.list').attr('id',obj.id);
+                         $.each($('.setBrandLayer li'),function(){
+                            var _this=$(this);
+                            var layer_brand_name=_this.find('.brand_name').val();
+                            if(layer_brand_name==obj.brand_name){
+                                _this.addClass('current').siblings().removeClass('current');
+                            }
+                        })
                         changeInputLen($('.input_width'));
                         cancleFixedLayer();
                     }
@@ -97,6 +104,15 @@
                
             },
             yes:function(index){
+                $.each($('.setBrandLayer li'),function(){
+                    var _this=$(this);
+                    if(_this.hasClass('current')){
+                        var brandName=_this.find('input[name="name"]').val();
+                        var brand_id=_this.data('id');
+                        var backId=$('.setBrandLayer').find('.list').attr('id');
+                        $('#'+backId).find('.brand_name').text(brandName).data('id',brand_id);
+                    }
+                })
                 layer.close(index);
             }
         })
@@ -106,7 +122,11 @@
         $('body').on('click','.set_brand',function () {
             var url = module + 'Brand/index';
             var id=$(this).parents('li').attr('id');
-            var brand_li_id = {id:id};
+            var brand_name=$(this).find('.brand_name').text();
+            var brand_li_id = {
+                id:id,
+                brand_name:brand_name
+            };
             var postData = {};
             $.ajax({
                 url: url,
@@ -238,10 +258,10 @@
         //设定品牌
         $('body').on('click','.setBrandLayer li',function(){
             $(this).addClass('current').siblings().removeClass('current');
-            var brandName=$(this).find('input[name="name"]').val();
-            var brand_id=$(this).data('id');
-            var backId=$('.setBrandLayer').find('.list').attr('id');
-            $('#'+backId).find('.brand_name').text(brandName).data('id',brand_id);
+            // var brandName=$(this).find('input[name="name"]').val();
+            // var brand_id=$(this).data('id');
+            // var backId=$('.setBrandLayer').find('.list').attr('id');
+            // $('#'+backId).find('.brand_name').text(brandName).data('id',brand_id);
             // setTimeout(function(){
             //     layer.closeAll();
             // },1000)

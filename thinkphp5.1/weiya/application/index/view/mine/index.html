@@ -1,5 +1,30 @@
 {extend name="template/base.html" /}
 {block name="content"}
+<section class="user_info_content" style="display:none;">
+    <ul>
+        <li class="columns_flex l-r-sides">
+            <div>
+            <span>头像</span>
+            </div>
+            <div class="upload-picture-module box-flex f24">
+                <div>
+                    <div class="picture-module">
+                        <input type="file" class="uploadImg uploadSingleImg" data-upload_path="{:config('upload_dir.user_avatar')}">
+                        <img class="upload_img" src="" alt="">
+                        <input type="hidden" name="logo" class="img" data-src="" value=""/>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <span >昵称</span>
+            <input class="user_name" type="text" name="" value="" />
+        </li>
+        <li>
+            <a href="javascript:;" id="logout_dialog" class="sign_out right-arrow">退出</a>
+        </li>
+    </ul>
+</section>
 <article class="person-center-wrapper f24">
     <section class="separation-line columns_flex l-r-sides flex_item">
         {empty name="user"}
@@ -10,21 +35,21 @@
            </a>
         </div>
         {else /}
-        <div class="user_top_item">
+        <div class="user_top_item user_info_list">
             {empty name="user.avatar"}
-            <img src="public_img/default/chat_head.jpg" class="left">
+            <img src="public_img/default/chat_head.jpg" class="left user_header">
             {else /}
-            <img src="public_uploads/{$user.avatar}" class="left">
+            <img src="public_uploads/{$user.avatar}" class="left user_headser">
             {/empty}
             <div class="user_info_r">
-                <p>{$user.name}</p>
-                <p>{$user.mobile_phone}</p>
+                <p class="user_name">{$user.name}</p>
+                <p class="user_mobile">{$user.mobile_phone}</p>
             </div>
         </div>
         <!--<a href="javascript:void(0);" id="logout_dialog" class="sign_out">
             退出>
         </a>-->
-        <a href="javascript:void(0);" id="logout_dialog" class="sign_out">
+        <a href="javascript:void(0);" class="customer_info">
             <img src="public_img/modify.png" alt="">
         </a>
         {/empty}
@@ -142,12 +167,56 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript" src="index_js/jump_login.js"></script>
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/api?v=2.0&ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv"></script>
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
     $(function () {
-
+        var user_info_content=$('.user_info_content').html();
+        $('body').on('click','.customer_info',function () {
+            var _this=$(this);
+            layer.open({
+                title:['个人信息','border-bottom:1px solid #d9d9d9;'],
+                type:1,
+                anim:'up',
+                className:'userInfoLayer',
+                content:user_info_content,
+                btn:['确定','取消'],
+                success:function(){
+                    var user_header=_this.prev().find('.user_header').attr('src');
+                    var user_name=_this.prev().find('.user_name').text();
+                    //$('.userInfoLayer .user_name').val(user_name);
+                    $('.userInfoLayer .user_name').val(user_name);
+                },
+                yes:function(index){
+                    var postData  = $(".setBrandLayer .brand_form").serializeObject();
+                    var brandTpl=$('.brandListTpl').html();
+                    postData.page_type='operate_btn';
+                    var content='';
+                    if(!postData.name){
+                        content='请填写商标名称';
+                    }else if(!postData.logo){
+                        content='请上传商标logo';
+                    }else if(!postData.certificate){
+                        content='请上传商标证或受理通知书';
+                    }else if(!postData.authorization){
+                        content='请上传商标所有权者授权书';
+                    }
+                    if(content){
+                        dialog.error(content);
+                        return false;
+                    }
+                    var config = {
+                        url:module + 'Brand/edit',
+                        postData:postData,
+                        index:index
+                    };
+                    dialogFormAdd(config);
+                
+                }
+            });
+        });
     })
 </script>
 {/block}

@@ -78,12 +78,15 @@ class CustomerService extends \common\controller\Base{
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
                 }
             }
-            $postData['who'] = 'me';
-            $postData['name'] = $this->user['name'];
-            $postData['avatar'] = $this->user['avatar'];
-            $postData['create_time'] = $msgCreateTime;
-            $postData['id'] = $msgId;
-            $this->assign('info',$postData);
+            //返回发送者信息
+            $returnData['who'] = 'me';
+            $returnData['name'] = $this->user['name'];
+            $returnData['avatar'] = $this->user['avatar'];
+            $returnData['create_time'] = $msgCreateTime;
+            $returnData['read'] = 1;
+            $returnData['content'] = $postData['content'];
+            $returnData['id'] = $msgId;
+            $this->assign('info',$returnData);
             return view('online_service/info_tpl');
         }
     }
