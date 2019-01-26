@@ -10,7 +10,6 @@ class OnlineService extends \common\controller\Base{
     }
     //首页
     public function index(){
-        print_r(config('upload_dir.temp_path'));exit;
         if(request()->isAjax()){
             if($this->user){
                 $modelChatMessage = new \common\model\ChatMessage();
