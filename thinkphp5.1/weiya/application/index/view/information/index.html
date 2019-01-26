@@ -79,12 +79,11 @@
 				clickable: true
 			}
 		})
-		$("#list").on("click", ".info_img img", 
-		function() {
+		$("#list").on("click", ".info_img img",function() {
 			var imgBox = $(this).parents(".info_img").find("img");
 			var i = $(imgBox).index(this);
-			$(".big_img .swiper-wrapper").html("")
-
+			$(".big_img .swiper-wrapper").html("");
+			console.log(imgBox.length);
 			for(var j = 0 ,c = imgBox.length; j < c ;j++){
 			$(".big_img .swiper-wrapper").append('<div class="swiper-slide swiper-slide-active"><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
 			}
