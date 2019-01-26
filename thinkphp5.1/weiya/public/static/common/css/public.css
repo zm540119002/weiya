@@ -4490,6 +4490,11 @@ a.customer_info{
 .chat_item.hide{
     display:none;
 }
+ul.message_list{
+    height:450px;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
 .chatMsg-ct li{
     margin:0 0 .5rem 0;
 }
