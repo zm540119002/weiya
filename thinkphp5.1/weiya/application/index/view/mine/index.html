@@ -241,12 +241,12 @@
                     return false;
                 }
                 //提交
-                $.post(module+"Mine/editAvatar",postData,function(msg){
-                    if(msg.status == 1){
+                $.post(module+"Mine/editAvatar",postData,function(data){
+                    if(data.status == 1){
                         uploadsSingleImgFlag = true;
-                        $(obj).find('.img').val(msg.avatar);
+                        $(obj).find('.img').val(data.avatar);
                     }else{
-                        dialog.error(msg.info)
+                        dialog.error(data.info)
                     }
                 })
             }
@@ -271,6 +271,19 @@
                 yes:function(index){
                   var user_name=  $('.nickInfoLayer .user_name').val();
                   $('.userInfoLayer').find('.user_name').text(user_name);
+                   var  postData = {
+                       name:user_name
+                   }
+                    //提交
+                    $.post(module+"Mine/editName",postData,function(data){
+                        console.log(data);
+                        if(data.status == 1){
+
+
+                        }else{
+                            dialog.error(data.info)
+                        }
+                    })
                   layer.close(index);
                 }
             });

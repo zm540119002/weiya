@@ -8,8 +8,11 @@ class Mine extends \common\controller\Base{
         return $this->fetch();
     }
 
-    //
+    //修改头像
     public function editAvatar(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
         $fileBase64 = input('post.fileBase64');
         $upload = config('upload_dir.user_avatar');
         $userAvatar = $this ->_uploadSingleFileToTemp($fileBase64,$upload);
@@ -30,5 +33,26 @@ class Mine extends \common\controller\Base{
             delImgFromPaths($user['avatar'],$userAvatar);
         }
         return successMsg('成功',['avatar'=>$userAvatar]);
+    }
+
+    //修改名字
+    public function editName(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $modelUser = new \common\model\User();
+        $user = session('user');
+        $name = input('post.name');
+        $data = [
+            'id'=>$user['id'],
+            'avatar'=>$name,
+        ];
+        $result = $modelUser -> isUpdate(true)->save($data);
+        if(false === $result){
+            return errorMsg('失败');
+        }
+        $user['name'] = $name;
+        session('user',$user);
+        return successMsg('成功',['name'=>$name]);
     }
 }
