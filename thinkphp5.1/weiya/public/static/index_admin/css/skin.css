@@ -1554,6 +1554,9 @@ filter:alpha(opacity:0);
     margin:0 0.20rem 0 0; 
     background:#CFE3F5;   
 }
+.custom_item .content{
+	margin:0 0 0 10px;
+}
 .chat_list.new_msg{
     border-color:#ff0000;
 }
