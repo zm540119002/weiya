@@ -128,17 +128,17 @@
             //聊天框滚动条置底
             messageSetBottom();
             var postData = {};
-            postData.messgaeIds = [];
+            postData.messageIds = [];
             postData.from_id = _thisLi.data('from_id');
             $.each($('ul.message_list'),function(){
                 var _thisUl = $(this);
                 if(postData.from_id==_thisUl.data('from_id')){
                     $.each(_thisUl.find('li.message_item.others.unread'),function(){
-                        postData.messgaeIds.push($(this).data('id'));
+                        postData.messageIds.push($(this).data('id'));
                     });
                 }
             });
-            if(!postData.messgaeIds.length){
+            if(!postData.messageIds.length){
                 return false;
             }
             var url = domain + 'index/CustomerService/setMessageRead';
