@@ -1561,7 +1561,7 @@ filter:alpha(opacity:0);
     margin:0 0.20rem 0 0; 
     background:#CFE3F5;   
 }
-.message_item .me .content{
+.message_item.me .content{
     margin:0 7px 0 0; 
     background:#CFE3F5;   
 }
