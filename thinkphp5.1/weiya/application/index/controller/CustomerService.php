@@ -37,7 +37,6 @@ class CustomerService extends \common\controller\Base{
             $returnData['read'] = 1;
             $returnData['content'] = $postData['content'];
             if($this->user){//发送者-已登录
-                $returnData['name'] = $this->user['name'];
                 $returnData['avatar'] = $this->user['avatar'];
                 if($this->user['id']==$postData['to_user_id']){
                     return errorMsg('不能发给自己！');
@@ -80,7 +79,6 @@ class CustomerService extends \common\controller\Base{
                         'content' => $postData['content'],
                         'from_id' => $postData['from_client_id'],
                         'from_name' => '游客',
-                        'avatar' => '',
                         'create_time' => date('Y-m-d H:i',$msgCreateTime),
                         'id' => $msgId,
                     ];
