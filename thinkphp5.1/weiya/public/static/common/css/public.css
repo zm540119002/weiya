@@ -1629,7 +1629,8 @@ background-position: 0 -27px;
     -webkit-animation-duration: .5s; 
     animation-duration: .5s;
 }
-.layui-m-layer .setBrandLayer h3{
+.layui-m-layer .setBrandLayer h3,
+.layui-m-layer .userInfoLayer h3{
     height:42px;
     line-height:42px;
 }
@@ -4141,7 +4142,8 @@ select[name="nodeIds"]{
 .goodsInfoLayer .layui-m-layerbtn,
 .loginLayer .layui-m-layerbtn,
 .forgetPasswordLayer .layui-m-layerbtn,
-.brandLayer .layui-m-layerbtn{
+.brandLayer .layui-m-layerbtn,
+.userInfoLayer .layui-m-layerbtn{
     width:0.5rem;
     height:0.5rem;
     line-height:0.5rem;
@@ -4487,6 +4489,11 @@ a.customer_info{
 }
 .chat_item.hide{
     display:none;
+}
+ul.message_list{
+    height:465px;
+    overflow-x:hidden;
+    overflow-y:auto;
 }
 .chatMsg-ct li{
     margin:0 0 .5rem 0;
@@ -5454,7 +5461,8 @@ ul.info_list li{
 }
 .addressLayer .layui-m-layerbtn,
 .setBrandLayer .layui-m-layerbtn,
-.projectDetailLayer .layui-m-layerbtn{
+.projectDetailLayer .layui-m-layerbtn,
+.userInfoLayer .layui-m-layerbtn{
     position:fixed;
     left:0;
     bottom:0;
@@ -5463,7 +5471,8 @@ ul.info_list li{
 /*.projectDetailLayer .layui-m-layerbtn{
     bottom:1rem;
 }*/
-.brandLayer .layui-m-layerbtn{
+.brandLayer .layui-m-layerbtn,
+.userInfoLayer .layui-m-layerbtn{
     /*background-image:url(../../common/img/icons/close_btn.png);*/
     background-repeat:no-repeat;
     background-size: 0.25rem auto;
@@ -5595,7 +5604,7 @@ ul.info_list li{
     display:none;
 }
 .chatMsg-ct{
-    padding:0 0 2rem 0;
+    /*padding:0 0 2rem 0;*/
 }
 .chatMsg-ct li{
     padding:0.10rem 0.15rem;
@@ -5822,4 +5831,33 @@ div.no_data{
     margin:0 0.05rem 0 0;
     background:#FF7BAC;
     border-radius:100%;
+}
+/*分享朋友圈*/
+.mcover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    z-index: 20000;
+}
+.mcover img {
+    position: fixed;
+    right: 18px;
+    top:40px;
+    width: 260px;
+    height: 180px;
+    z-index: 999;
+}
+.weixinShare_btn{
+    position: fixed;
+    right:6px;
+    top:-6px;
+    color:#fff;
+    font-size:0.62rem;
+    width: 20px;
+    height: 42px;
+    z-index: 999;
 }

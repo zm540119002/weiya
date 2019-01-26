@@ -62,7 +62,6 @@ class CustomerService extends \common\controller\Base{
                     ];
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
                 }else{//接收者-未登录
-                    return errorMsg('暂无客服！');
                 }
             }else{//发送者-未登录
                 if(Gateway::isUidOnline($postData['to_user_id'])){
@@ -100,8 +99,6 @@ class CustomerService extends \common\controller\Base{
                 $where =
                     '`status` = 0 and `read` = 0 and id in (' . implode (",",$postData['messageIds']) .
                     ') and from_id = ' . $postData['from_id'] . ' and to_id = ' . $this->user['id'];
-                print_r($postData);
-                exit;
                 $res = $modelChatMessage->where($where)->setField('read',1);
                 if($res==false){
                     return errorMsg('设置已读出错',$modelChatMessage->getError());

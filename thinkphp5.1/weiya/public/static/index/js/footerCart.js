@@ -419,7 +419,15 @@ $(function () {
     $('body').on('click','.pay',function () {
         var orderSn =  $('#order_sn').val();
         location.href = module + 'Order/toPay/order_sn/' + orderSn;
-    })
+    });
+    //一键分享转发 微信分享提示图
+    $('body').on('click','.share',function(){
+        $('.mcover').show();
+    });
+    //关闭微信分享提示图
+    $('body').on('click','.weixinShare_btn',function(){
+        $('.mcover').hide();
+    });
 
 });
 

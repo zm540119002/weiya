@@ -61,12 +61,13 @@ class Base extends \think\Controller{
     }
     //返回图片临时相对路,上传多张图片带描述
     public function uploadMultiFileToTempWithDes(){
+        $uploadPath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         $files = $_POST['imgsWithDes'];
         $filesNew = [];
         foreach ($files as $k=>$file){
             //判断是否为base64编码图片
             if(strpos($file['fileSrc'],'data:image') !==false || strpos($file['fileSrc'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc']);
+                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc'],$uploadPath);
                 if(isset($fileName['status'])&& $fileName['status'] == 0){
                     return $fileName;
                 }
@@ -80,7 +81,7 @@ class Base extends \think\Controller{
     }
 
     //上传单个data64位文件
-    private function _uploadSingleFileToTemp($fileBase64,$upload){
+    public function _uploadSingleFileToTemp($fileBase64,$upload){
         // 获取图片
         list($type, $data) = explode(',', $fileBase64);
         // 判断文件类型
