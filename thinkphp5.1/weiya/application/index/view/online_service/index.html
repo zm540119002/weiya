@@ -26,7 +26,7 @@
 	<section id="chatLayerContainer">
 		<div class="ws_chatMsg-panel flex1">
 			<div class="chatMsg-ct">
-				<ul class="clearfix chat_item custom_list"></ul>
+				<ul class="clearfix chat_item message_list"></ul>
 			</div>
 		</div>
 		<div class="bottom_nav_fixed chat_bottom_fixed">
@@ -108,7 +108,7 @@
 		//页面初始化
 		var config = {
 			url: action,
-			container:$('ul.custom_list')
+			container:$('ul.message_list')
 		};
 		getList(config);
 		//设置信息已读
@@ -117,9 +117,10 @@
 		$.each($('li.message_item.others.unread'),function(){
 			var _thisMessageLi = $(this);
 			postData.messageIds.push(_thisMessageLi.data('id'));
-			postData.from_id = _thisMessageLi.data('id');
+			postData.from_id = _thisMessageLi.data('from_id');
 		});
 		console.log(postData);
+		console.log($('li.message_item.others.unread'));
 		setMessageRead($('body'),postData);
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
