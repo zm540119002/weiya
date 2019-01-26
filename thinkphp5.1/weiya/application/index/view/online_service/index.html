@@ -90,11 +90,15 @@
 		//聊天框滚动条置底
 		messageSetBottom();
 		$('ul.custom_list').append(messageItemTpl.html());
+		//设置信息已读
 		var postData = {};
 		postData.from_id = data.from_id;
 		postData.messageIds = [];
-		postData.messageIds.push(data.id);
-		//设置信息已读
+		$.each($('li.message_item.others.unread'),function(){
+			var _thisMessageLi = $(this);
+			postData.messageIds.push(_thisMessageLi.data('id'));
+			postData.from_id = _thisMessageLi.data('id');
+		});
 		setMessageRead(messageItemTpl,postData);
 	}
 	//聊天框滚动条置底
@@ -111,6 +115,12 @@
 			container:$('ul.custom_list')
 		};
 		getList(config);
+		//设置信息已读
+		var postData = {};
+		postData.from_id = data.from_id;
+		postData.messageIds = [];
+		postData.messageIds.push(data.id);
+		setMessageRead(messageItemTpl,postData);
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
 			var chatListTpl = $('#chatListTpl');
