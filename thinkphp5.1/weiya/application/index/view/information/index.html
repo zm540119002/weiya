@@ -79,7 +79,7 @@
 			console.log(imgBox.length);
 			for(var j = 0 ,c = imgBox.length; j < c ;j++){
 				console.log(imgBox.eq(j).attr("src"));
-				$(".big_img .swiper-wrapper").append('<div class="swiper-slide "><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
+				$(".big_img .swiper-wrapper").append('<div class="swiper-slide"><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
 			}
 			$(".big_img .swiper-wrapper").find('.swiper-slide').eq(0).addClass('swiper-slide-active');
 			$(".big_img .swiper-wrapper").find('.swiper-slide').eq(1).addClass('swiper-slide-next');
