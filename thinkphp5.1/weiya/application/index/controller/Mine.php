@@ -7,4 +7,8 @@ class Mine extends \common\controller\Base{
         $this->assign('user',session('user'));
         return $this->fetch();
     }
+
+    public function editAvatar(){
+        print_r(session('user'));exit;
+    }
 }
