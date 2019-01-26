@@ -97,6 +97,12 @@
 		postData.messageIds.push(data.id);
 		setMessageRead($('body'),postData);
 	}
+	//聊天框滚动条置底
+	function messageSetBottom() {
+		console.log($('ul.message_list')[0].scrollHeight);
+		$('ul.message_list').scrollTop($('ul.message_list')[0].scrollHeight);
+
+	}
 	function getListCallBack(config,data){
 		if(data.status==0){
 			dialog.error(data.info);
@@ -157,20 +163,14 @@
 					if(data.status==0){
 						dialog.error(data.info);
 					}else{
-						//聊天框滚动条置底
-						messageSetBottom();
 						_this.val('');
 						$('ul.message_list').append(data);
+						//聊天框滚动条置底
+						messageSetBottom();
 					}
 				}
 			});
 		});
 	});
-	//聊天框滚动条置底
-	function messageSetBottom() {
-		console.log($('ul.message_list')[0].scrollHeight);
-		$('ul.message_list').scrollTop($('ul.message_list')[0].scrollHeight);
-
-	}
 </script>
 {/block}
