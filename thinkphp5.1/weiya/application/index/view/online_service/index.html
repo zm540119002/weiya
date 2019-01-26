@@ -88,9 +88,9 @@
 		if(data.avatar){
 			messageItemTpl.find('img').attr('src',uploads+data.avatar);
 		}
+		$('ul.message_list').append(messageItemTpl.html());
 		//聊天框滚动条置底
 		messageSetBottom();
-		$('ul.message_list').append(messageItemTpl.html());
 		//设置信息已读
 		var postData = {};
 		postData.from_id = data.from_id;
