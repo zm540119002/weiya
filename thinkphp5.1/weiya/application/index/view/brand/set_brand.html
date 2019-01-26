@@ -87,14 +87,13 @@
                     success: function(data){
                         $('.setBrandLayer').find('.list').html(data);
                         $('.setBrandLayer').find('.list').attr('id',obj.id);
-                         $.each($('.setBrandLayer li'),function(){
+                        $.each($('.setBrandLayer li'),function(){
                             var _this=$(this);
                             var layer_brand_name=_this.find('.brand_name').val();
                             if(layer_brand_name==obj.brand_name){
                                 _this.addClass('current').siblings().removeClass('current');
                             }
                         })
-                        changeInputLen($('.input_width'));
                         cancleFixedLayer();
                     }
                 });

@@ -80,7 +80,7 @@ class Base extends \think\Controller{
     }
 
     //上传单个data64位文件
-    private function _uploadSingleFileToTemp($fileBase64,$upload){
+    public function _uploadSingleFileToTemp($fileBase64,$upload){
         // 获取图片
         list($type, $data) = explode(',', $fileBase64);
         // 判断文件类型
