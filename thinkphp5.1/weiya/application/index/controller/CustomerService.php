@@ -102,8 +102,9 @@ class CustomerService extends \common\controller\Base{
                     '`status` = 0 and `read` = 0 and id in (' . implode (",",$postData['messageIds']) .
                     ') and from_id = ' . $postData['from_id'] . ' and to_id = ' . $this->user['id'];
                 $res = $modelChatMessage->where($where)->setField('read',1);
+                return errorMsg($modelChatMessage->getLastSql());
                 if($res==false){
-                    return errorMsg($modelChatMessage->getError());
+                    return errorMsg('设置已读出错',$modelChatMessage->getError());
                 }
                 return successMsg('成功！');
             }
