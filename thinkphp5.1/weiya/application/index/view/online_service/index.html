@@ -101,7 +101,13 @@
 	function messageSetBottom() {
 		$('ul.custom_list').scrollTop($('ul.custom_list')[0].scrollHeight);
 	}
-	function getListCallBack(){
+	function getListCallBack(config,data){
+		if(data.status==0){
+			dialog.error(data.info);
+		}else{
+			var container = config.container?config.container:$('ul.list');
+			container.empty().append(data);
+		}
 		//设置信息已读
 		var postData = {};
 		postData.messageIds = [];
