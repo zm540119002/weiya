@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class MessageCenter extends \common\controller\Base{
+class MessageCenter extends \common\controller\UserBase{
     /**首页
      */
     public function index(){
