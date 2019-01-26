@@ -101,7 +101,6 @@ class CustomerService extends \common\controller\Base{
                     '`status` = 0 and `read` = 0 and id in (' . implode (",",$postData['messageIds']) .
                     ') and from_id = ' . $postData['from_id'] . ' and to_id = ' . $this->user['id'];
                 print_r($postData['messageIds']);
-                print_r($where);
                 exit;
                 $res = $modelChatMessage->where($where)->setField('read',1);
                 if($res==false){
