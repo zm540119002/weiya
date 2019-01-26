@@ -117,7 +117,7 @@
 		$.each($('li.message_item.others.unread'),function(){
 			var _thisMessageLi = $(this);
 			postData.messageIds.push(_thisMessageLi.data('id'));
-			postData.from_id = _thisMessageLi.data('id');
+			postData.from_id = _thisMessageLi.data('from_id');
 		});
 		console.log(postData);
 		setMessageRead($('body'),postData);
