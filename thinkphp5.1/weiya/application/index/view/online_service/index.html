@@ -101,16 +101,7 @@
 	function messageSetBottom() {
 		$('ul.custom_list').scrollTop($('ul.custom_list')[0].scrollHeight);
 	}
-</script>
-<script type="text/javascript" src="public_js/web-socket.js"></script>
-<script type="text/javascript">
-	$(function () {
-		//页面初始化
-		var config = {
-			url: action,
-			container:$('ul.message_list')
-		};
-		getList(config);
+	function getListCallBack(){
 		//设置信息已读
 		var postData = {};
 		postData.messageIds = [];
@@ -123,6 +114,18 @@
 		console.log(postData);
 		console.log($('ul.message_list').find('li.message_item.others.unread'));
 		setMessageRead($('body'),postData);
+	}
+</script>
+<script type="text/javascript" src="public_js/web-socket.js"></script>
+<script type="text/javascript">
+	$(function () {
+		//页面初始化
+		var config = {
+			url: action,
+			container:$('ul.message_list'),
+			callBack:getListCallBack
+		};
+		getList(config);
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
 			var chatListTpl = $('#chatListTpl');
