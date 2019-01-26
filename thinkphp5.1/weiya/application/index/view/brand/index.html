@@ -59,6 +59,7 @@
 		<h2 class="f24">设定品牌</h2>
 	</section>
 	<ul class="brand_list list">
+        {notempty name="list"}
         {volist name="list" id="info"}
         <li data-id="{$info.id}">
             <div class="list_top_item">
@@ -95,6 +96,11 @@
             </div>
         </li>
         {/volist}
+        {else /}
+        <li class="no_data">
+            暂无可选商标
+        </li>
+        {/notempty}
     </ul>
     <a href="javascript:void(0);" class="add_brand">增加商标</a>
 </article>
