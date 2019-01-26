@@ -1550,9 +1550,23 @@ filter:alpha(opacity:0);
     color:#333;
     padding:0.08rem;
 }
+.message_item .content{
+    margin:0 0 0 7px;
+    background:#F2F2F2;
+    border-radius:5px;
+    color:#333;
+    padding:5px;
+}
 .chat_item .me .content{
     margin:0 0.20rem 0 0; 
     background:#CFE3F5;   
+}
+.message_item.me .content{
+    margin:0 7px 0 0; 
+    background:#CFE3F5;   
+}
+.custom_item .content{
+	margin:0 0 0 7px;
 }
 .chat_list.new_msg{
     border-color:#ff0000;
@@ -1601,7 +1615,7 @@ filter:alpha(opacity:0);
 }
 ul.message_list{
 	display: none;
-	height:464px;
+	height:527px;
 	overflow-x:hidden;
 	overflow-y:auto;
 }
