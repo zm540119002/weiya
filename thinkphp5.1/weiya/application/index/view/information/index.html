@@ -18,21 +18,27 @@
 	<section class="enlarge_img">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide swiper-slide-active">
-					<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564787676.jpg" alt="" class="common_default_img">
-				</div>
+				
 			</div>
-			<!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
 				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
 				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
 				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
 				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
-			</div>-->
+			</div>
 		</div>      
 	</section>
     <!--<div class="swiper-container2 swiper-container-horizontal">
       <div class="swiper-wrapper">
-       
+			<div class="swiper-slide swiper-slide-active">
+					<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564787676.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564723675.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564194474.jpg" alt="" class="common_default_img">
+				</div>
       </div>
     </div>
     <div class="swiper-pagination2 swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div>-->
@@ -72,44 +78,42 @@
 			openBtn:'显示全部>'
 		});
 		
-		// $("#list").on("click", ".info_img img",function() {
-		// 	var imgBox = $(this).parents(".info_img").find("img");
-		// 	var i = $(imgBox).index(this);
-		// 	$(".big_img .swiper-wrapper").html("");
-		// 	console.log(imgBox.length);
-		// 	for(var j = 0 ,c = imgBox.length; j < c ;j++){
-		// 		console.log(imgBox.eq(j).attr("src"));
-		// 		$(".big_img .swiper-wrapper").append('<div class="swiper-slide"><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
-		// 	}
-		// 	$(".big_img .swiper-wrapper").find('.swiper-slide').eq(0).addClass('swiper-slide-active');
-		// 	$(".big_img .swiper-wrapper").find('.swiper-slide').eq(1).addClass('swiper-slide-next');
-			
-		// 	// mySwiper.updateSlidesSize();swiper-slide-active
-		// 	// mySwiper.updatePagination();
-		// 	$(".big_img").css({
-		// 		"z-index": 1001,
-		// 		"opacity": "1"
-		// 	});
-		// 	//mySwiper.slideTo(i, 0, false);
-		// 	return false;
-		// });
+		$("#list").on("click", ".info_img img",function() {
+			var imgBox = $(this).parents(".info_img").find("img");
+			var i = $(imgBox).index(this);
+			$(".big_img .swiper-wrapper").html("");
+			console.log(imgBox.length);
+			for(var j = 0 ,c = imgBox.length; j < c ;j++){
+				console.log(imgBox.eq(j).attr("src"));
+				$(".big_img .swiper-wrapper").append('<div class="swiper-slide"><img src="' + imgBox.eq(j).attr("src") + '" / ></div>');
+			}
+			$(".big_img .swiper-wrapper").find('.swiper-slide').eq(0).addClass('swiper-slide-active');			
+			// mySwiper.updateSlidesSize();swiper-slide-active
+			// mySwiper.updatePagination();
+			$(".big_img").css({
+				"z-index": 1001,
+				"opacity": "1"
+			});
+			//mySwiper.slideTo(i, 0, false);
+			/*调起大图*/
+			var mySwiper = new Swiper('.swiper-container', {
+				loop:true,
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true
+				}
+			})
+			return false;
+		});
 	
-		$(".big_img").on("click", 
-		function() {
+		$(".big_img").on("click",function() {
 			$(this).css({
 				"z-index": "-1",
 				"opacity": "0"
 			});
 
 		});  
-		/*调起大图*/
-		var mySwiper = new Swiper('.swiper-container', {
-			loop:true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		})
+		
 	});
 </script>
 {/block}
