@@ -10,7 +10,7 @@ class Mine extends \common\controller\Base{
 
     //修改头像
     public function editAvatar(){
-        if(!request()->isGet()){
+        if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
         $fileBase64 = input('post.fileBase64');
@@ -37,7 +37,7 @@ class Mine extends \common\controller\Base{
 
     //修改名字
     public function editName(){
-        if(!request()->isGet()){
+        if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
         $modelUser = new \common\model\User();
