@@ -95,7 +95,7 @@
 		postData.from_id = data.from_id;
 		postData.messageIds = [];
 		postData.messageIds.push(data.id);
-		setMessageRead(messageItemTpl,postData);
+		setMessageRead($('body'),postData);
 	}
 	//聊天框滚动条置底
 	function messageSetBottom() {
@@ -119,7 +119,7 @@
 			postData.messageIds.push(_thisMessageLi.data('id'));
 			postData.from_id = _thisMessageLi.data('id');
 		});
-		setMessageRead($(html),postData);
+		setMessageRead($('body'),postData);
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
 			var chatListTpl = $('#chatListTpl');
