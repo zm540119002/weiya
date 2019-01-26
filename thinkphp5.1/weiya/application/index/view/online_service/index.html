@@ -119,6 +119,7 @@
 			postData.messageIds.push(_thisMessageLi.data('id'));
 			postData.from_id = _thisMessageLi.data('id');
 		});
+		console.log(postData);
 		setMessageRead($('body'),postData);
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
