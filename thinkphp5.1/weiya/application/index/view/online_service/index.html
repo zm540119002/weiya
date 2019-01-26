@@ -7,7 +7,6 @@
 			<img src="public_img/default/chat_head.jpg">
 		</div>
 		<div class="content">
-			<p class="author"></p>
 			<div class="msg"></div>
 		</div>
 	</li>
@@ -82,7 +81,6 @@
 		var messageItemTpl = $('#messageItemTpl');
 		messageItemTpl.find('.message_item').attr('data-id',data.id);
 		messageItemTpl.find('.msg').text(data.content);
-		messageItemTpl.find('.author').text(data.from_name);
 		messageItemTpl.find('.create_time').text(data.create_time);
 		if(data.avatar){
 			messageItemTpl.find('img').attr('src',uploads+data.avatar);
@@ -99,9 +97,7 @@
 	}
 	//聊天框滚动条置底
 	function messageSetBottom() {
-		console.log($('ul.message_list')[0].scrollHeight);
 		$('ul.message_list').scrollTop($('ul.message_list')[0].scrollHeight);
-
 	}
 	function getListCallBack(config,data){
 		if(data.status==0){

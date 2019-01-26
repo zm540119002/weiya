@@ -31,7 +31,7 @@
 				</a>
 			</li>
 			<li class="each_column ">
-				<a href="javascript:void(0)">
+				<a href="{:url('Company/index')}">
 					<span class="practitioners f_icon"></span>
 					<span class="f_txt">走进维雅</span>
 				</a>
@@ -43,7 +43,7 @@
 				</a>
 			</li>
 			<li class="each_column">
-				<a href="javascript:void(0)" class="my_cart">
+				<a href="javascript:void(0)" class="my_cart" data-jump_url="{:url('Cart/index')}">
 					<span class="cart f_icon"></span>
 					<span class="f_txt">采购车</span>
 				</a>
@@ -62,4 +62,5 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" src="index_js/jump_login.js"></script>
 {/block}
