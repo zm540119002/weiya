@@ -4490,6 +4490,11 @@ a.customer_info{
 .chat_item.hide{
     display:none;
 }
+ul.message_list{
+    height:465px;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
 .chatMsg-ct li{
     margin:0 0 .5rem 0;
 }
@@ -5599,7 +5604,7 @@ ul.info_list li{
     display:none;
 }
 .chatMsg-ct{
-    padding:0 0 2rem 0;
+    /*padding:0 0 2rem 0;*/
 }
 .chatMsg-ct li{
     padding:0.10rem 0.15rem;
@@ -5849,7 +5854,7 @@ div.no_data{
 .weixinShare_btn{
     position: fixed;
     right:6px;
-    top:-12px;
+    top:-6px;
     color:#fff;
     font-size:0.62rem;
     width: 20px;
