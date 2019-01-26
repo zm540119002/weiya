@@ -138,30 +138,8 @@
                     });
                 }
             });
-            if(!postData.messageIds.length){
-                return false;
-            }
-            var url = domain + 'index/CustomerService/setMessageRead';
-            $.ajax({
-                url: url,
-                data: postData,
-                type: 'post',
-                beforeSend: function(xhr){
-                    $('.loading').show();
-                },
-                error:function(xhr){
-                    $('.loading').hide();
-                    dialog.error('AJAX错误');
-                },
-                success: function(data){
-                    $('.loading').hide();
-                    if(data.status==0){
-                        dialog.error(data.info);
-                    }else{
-                        _thisCustomLi.find('span.news_num').text('');
-                    }
-                }
-            });
+            //设置信息已读
+            setMessageRead(_thisCustomLi,postData);
         });
         //发送聊天内容
         $('body').on('click','.send_btn',function(){
