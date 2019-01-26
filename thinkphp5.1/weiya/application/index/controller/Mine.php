@@ -45,7 +45,7 @@ class Mine extends \common\controller\Base{
         $name = input('post.name');
         $data = [
             'id'=>$user['id'],
-            'avatar'=>$name,
+            'name'=>$name,
         ];
         $result = $modelUser -> isUpdate(true)->save($data);
         if(false === $result){
