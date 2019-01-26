@@ -81,6 +81,11 @@ class Base extends \think\Controller{
     }
 
     //上传单个data64位文件
+    /**
+     * @param $fileBase64 上传文件的Base64字符源
+     * @param $savePath 保存路径
+     * @return array|string
+     */
     public function _uploadSingleFileToTemp($fileBase64,$savePath){
         // 获取图片
         list($type, $data) = explode(',', $fileBase64);
