@@ -115,39 +115,6 @@
 			}
 		});
 	}
-	//设置信息已读
-	function setMessageRead(obj) {
-		var postData = {};
-		postData.messageIds = [];
-		$.each(obj.find('li.others.unread'), function () {
-			postData.messageIds.push($(this).data('id'));
-			postData.from_id = $(this).data('from_id');
-		});
-		if (!postData.messageIds.length) {
-			return false;
-		}
-		var url = domain + 'index/CustomerService/setMessageRead';
-		$.ajax({
-			url: url,
-			data: postData,
-			type: 'post',
-			beforeSend: function (xhr) {
-				$('.loading').show();
-			},
-			error: function (xhr) {
-				$('.loading').hide();
-				dialog.error('AJAX错误');
-			},
-			success: function (data) {
-				$('.loading').hide();
-				if (data.status == 0) {
-					dialog.error(data.info);
-				}else{
-					$('span.news_num').text('');
-				}
-			}
-		});
-	}
 	//聊天框滚动条置底
 	function messageSetBottom() {
 		$('ul.custom_list').scrollTop($('ul.custom_list')[0].scrollHeight);
