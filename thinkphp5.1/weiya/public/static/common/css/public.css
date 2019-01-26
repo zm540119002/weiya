@@ -5774,7 +5774,7 @@ ul.info_list li{
 }
 /*图片放大样式*/
 .enlarge_img{
-    margin: 88% 0 0;
+    margin:35% 0 0;
     transform: translate3d(0,-50%,0);
 }
 .big_img{position: fixed;z-index: -1;opacity: 0;background: rgba(0,0,0,0.9);width: 100%;height: 100%;top:0;left:0;}
