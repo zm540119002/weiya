@@ -113,7 +113,6 @@
 		getList(config);
 		//设置信息已读
 		var postData = {};
-		postData.from_id = data.from_id;
 		postData.messageIds = [];
 		$.each($('li.message_item.others.unread'),function(){
 			var _thisMessageLi = $(this);
