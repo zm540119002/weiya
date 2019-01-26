@@ -213,6 +213,11 @@
             $('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
         })
     }
+    //返回上一页
+    $('body').on('click','.back_prev_page',function(){
+         window.history.back(-1);
+    })
+  
 
 })(jQuery);
 
