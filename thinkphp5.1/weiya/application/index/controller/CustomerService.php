@@ -27,6 +27,7 @@ class CustomerService extends \common\controller\Base{
     public function sendMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
+            $postData['content'] = trim($postData['content']);
             $msgCreateTime = time();
             $msgId = 0;
             //返回发送者信息
