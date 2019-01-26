@@ -88,6 +88,7 @@
 				console.log(imgBox.eq(j).attr("src"));
 				$(".big_img .swiper-wrapper").append('<div class="swiper-slide "><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
 			}
+			$(".big_img .swiper-wrapper").find('.swiper-slide').eq(0).addClass('swiper-slide-active');
 			// mySwiper.updateSlidesSize();swiper-slide-active
 			// mySwiper.updatePagination();
 			$(".big_img").css({
