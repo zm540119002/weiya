@@ -85,3 +85,30 @@ function getListDefaultCallBack(config,data) {
         container.empty().append(data);
     }
 }
+//设置消息已读
+function setMessageRead(obj,postData){
+    if(!postData.messageIds.length || !postData.from_id){
+        return false;
+    }
+    var url = domain + 'index/CustomerService/setMessageRead';
+    $.ajax({
+        url: url,
+        data: postData,
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(data.status==0){
+                dialog.error(data.info);
+            }else{
+                obj.find('span.news_num').text('');
+            }
+        }
+    });
+}
