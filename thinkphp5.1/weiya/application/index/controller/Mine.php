@@ -8,7 +8,27 @@ class Mine extends \common\controller\Base{
         return $this->fetch();
     }
 
+    //
     public function editAvatar(){
-        print_r(session('user'));exit;
+        $fileBase64 = input('post.fileBase64');
+        $upload = config('upload_dir.user_avatar');
+        $userAvatar = $this ->_uploadSingleFileToTemp($fileBase64,$upload);
+        $user = session('user');
+        $modelUser = new \common\model\User();
+        $data = [
+            'id'=>$user['id'],
+            'avatar'=>$userAvatar,
+        ];
+        $result = $modelUser -> isUpdate(true)->save($data);
+        if(false === $result){
+            return errorMsg('失败');
+        }
+        $user['avatar'] = $userAvatar;
+        session('user',$user);
+        if($user['avatar']){
+            //删除旧详情图
+            delImgFromPaths($user['avatar'],$userAvatar);
+        }
+        return successMsg('成功',['avatar'=>$userAvatar]);
     }
 }

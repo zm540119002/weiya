@@ -10,7 +10,7 @@
             <div class="upload-picture-module box-flex f24">
                 <div>
                     <div class="picture-module">
-                        <input type="file" class="uploadImg uploadSingleImg" data-upload_path="{:config('upload_dir.user_avatar')}">
+                        <input type="file" class="editAvatar uploadImg">
                         <img class="upload_img" src="" alt="">
                         <input type="hidden" name="logo" class="img" data-src="" value=""/>
                     </div>
@@ -18,7 +18,7 @@
             </div>
         </li>
         <li>
-            <a href="javascript:;" class="right-arrow nick">
+            <a href="javascript:;" class="right-arrow nick_btn">
                 <span >昵称</span>
                 <span class="user_name"></span>
             </a>
@@ -27,6 +27,12 @@
             <a href="javascript:;" id="logout_dialog" class="sign_out right-arrow">退出</a>
         </li>
     </ul>
+</section>
+<!--昵称信息-->
+<section class="nick_content" style="display:none;">
+    <div>
+        <input type="text" name="" class="input-filed user_name">
+    </div>
 </section>
 <article class="person-center-wrapper f24">
     <section class="separation-line columns_flex l-r-sides flex_item">
@@ -174,6 +180,7 @@
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
     $(function () {
+        //个人信息
         var user_info_content=$('.user_info_content').html();
         $('body').on('click','.customer_info',function () {
             var _this=$(this);
@@ -196,8 +203,9 @@
             });
         });
 
+        var uploadsSingleImgFlag = true; //上传单图片成功标识位
         // 选择单图片
-        $('body').on('change','.uploadSingleImg',function () {
+        $('body').on('change','.editAvatar',function () {
             var _this=$(this);
             uploadsSingleImgFlag = false;
             var img = event.target.files[0];
@@ -223,9 +231,6 @@
                 var imgUrl=e.target.result;
                 $(obj).addClass('active');
                 var postData = {fileBase64: e.target.result};
-                var uploadpath=$(obj).find('.uploadSingleImg').data('upload_path');
-                postData.uploadpath=uploadpath;
-                console.log(uploadpath);
                 // postData.imgWidth = 145;
                 // postData.imgHeight = 100;
                 $(obj).find('img').attr('src',imgUrl);
@@ -236,16 +241,42 @@
                     return false;
                 }
                 //提交
-                $.post(controller+"uploadFileToTemp",postData,function(msg){
+                $.post(module+"Mine/editAvatar",postData,function(msg){
                     if(msg.status == 1){
                         uploadsSingleImgFlag = true;
-                        $(obj).find('.img').val(msg.info);
+                        $(obj).find('.img').val(msg.avatar);
                     }else{
                         dialog.error(msg.info)
                     }
                 })
             }
         });
+
+        //昵称修改
+        
+        var nick_content=$('.nick_content').html();
+         $('body').on('click','.nick_btn',function () {
+            var _this=$(this);
+            layer.open({
+                title:['昵称','border-bottom:1px solid #d9d9d9;'],
+                type:1,
+                anim:'up',
+                className:'nickInfoLayer',
+                content:nick_content,
+                btn:['确定'],
+                success:function(){
+                    var user_name=_this.find('.user_name').text();
+                    $('.nickInfoLayer .user_name').val(user_name);
+                },
+                yes:function(index){
+                  var user_name=  $('.nickInfoLayer .user_name').val();
+                  $('.userInfoLayer').find('.user_name').text(user_name);
+                  layer.close(index);
+                }
+            });
+        });
+       
+
     })
 </script>
 {/block}
