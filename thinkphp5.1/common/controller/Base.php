@@ -32,10 +32,10 @@ class Base extends \think\Controller{
     //返回图片临时相对路径
     public function uploadFileToTemp(){
         $postData = $_POST;
-        $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
+        $uploadPath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         if(is_string($postData['fileBase64'])){
             if(strpos($postData['fileBase64'],'data:image') !==false || strpos($postData['fileBase64'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64'],$savePath);
+                $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64'],$uploadPath);
                 if(isset($fileName['status'])&& $fileName['status'] == 0){
                     return $fileName;
                 }
@@ -47,7 +47,7 @@ class Base extends \think\Controller{
             foreach ($postData['fileBase64'] as $k=>$file){
                 //判断是否为base64编码图片
                 if(strpos($file,'data:image') !==false || strpos($file,'data:video') !== false){
-                    $fileName = $this ->_uploadSingleFileToTemp($file,$savePath);
+                    $fileName = $this ->_uploadSingleFileToTemp($file,$uploadPath);
                     if(isset($fileName['status'])&& $fileName['status'] == 0){
                         return $fileName;
                     }
@@ -61,13 +61,13 @@ class Base extends \think\Controller{
     }
     //返回图片临时相对路,上传多张图片带描述
     public function uploadMultiFileToTempWithDes(){
-        $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
+        $uploadPath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         $files = $_POST['imgsWithDes'];
         $filesNew = [];
         foreach ($files as $k=>$file){
             //判断是否为base64编码图片
             if(strpos($file['fileSrc'],'data:image') !==false || strpos($file['fileSrc'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc'],$savePath);
+                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc'],$uploadPath);
                 if(isset($fileName['status'])&& $fileName['status'] == 0){
                     return $fileName;
                 }
@@ -81,12 +81,7 @@ class Base extends \think\Controller{
     }
 
     //上传单个data64位文件
-    /**
-     * @param $fileBase64
-     * @param $savePath 保存的相对路径
-     * @return array|string
-     */
-    public function _uploadSingleFileToTemp($fileBase64,$savePath){
+    public function _uploadSingleFileToTemp($fileBase64,$upload){
         // 获取图片
         list($type, $data) = explode(',', $fileBase64);
         // 判断文件类型
@@ -127,7 +122,7 @@ class Base extends \think\Controller{
             }
         }
         //上传公共路径
-        $uploadPath = config('upload_dir.upload_path').'/';
+        $uploadPath = config('upload_dir.upload_path');
         if(!is_dir($uploadPath)){
             if(!mk_dir($uploadPath)){
                 return  errorMsg('创建Uploads目录失败');
@@ -137,8 +132,9 @@ class Base extends \think\Controller{
         if($uploadPath === false){
             return  errorMsg('获取Uploads实际路径失败');
         }
+        $uploadPath = $uploadPath . '/' ;
         //临时相对路径
-        $tempRelativePath = $savePath;
+        $tempRelativePath = $upload;
 
         //存储路径
         $storePath = $uploadPath . $tempRelativePath;
