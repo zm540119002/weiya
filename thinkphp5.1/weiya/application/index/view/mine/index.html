@@ -194,17 +194,20 @@
                 success:function(){
                     var user_header=_this.prev().find('.user_header').attr('src');
                     var user_name=_this.prev().find('.user_name').text();
-                    //$('.userInfoLayer .user_name').val(user_name);
+                    $('.userInfoLayer').find('.upload_img').attr('src',user_header);
                     $('.userInfoLayer .user_name').text(user_name);
                 },
                 yes:function(index){
-                  layer.close(index);
+                    var user_header=$('.userInfoLayer').find('.img').val();
+                    console.log(user_header);
+                    $('.user_info_list').find('.user_header').attr('src',user_header);
+                    layer.close(index);
                 }
             });
         });
 
         var uploadsSingleImgFlag = true; //上传单图片成功标识位
-        // 选择单图片
+        // 选择头像图片
         $('body').on('change','.editAvatar',function () {
             var _this=$(this);
             uploadsSingleImgFlag = false;
@@ -233,11 +236,10 @@
                 var postData = {fileBase64: e.target.result};
                 // postData.imgWidth = 145;
                 // postData.imgHeight = 100;
-                $(obj).find('img').attr('src',imgUrl);
+                $(obj).find('.img').attr('src',imgUrl);
                 var type = _this.data('type');
                 if(type == 'notupload'){
                     $(obj).find('.img').val(imgUrl);
-                    console.log(1);
                     return false;
                 }
                 //提交
@@ -251,9 +253,7 @@
                 })
             }
         });
-
         //昵称修改
-        
         var nick_content=$('.nick_content').html();
          $('body').on('click','.nick_btn',function () {
             var _this=$(this);
@@ -288,8 +288,6 @@
                 }
             });
         });
-       
-
     })
 </script>
 {/block}
