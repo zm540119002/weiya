@@ -121,7 +121,7 @@ class CustomerService extends \common\controller\Base{
                     ') and ((from_id = ' . $postData['from_id'] . ' and to_id = ' . $this->user['id'] .') ' .
                     'or (from_id = ' . $this->user['id'] . ' and to_id = ' . $postData['from_id'] . '))';
                 $res = $modelChatMessage->where($where)->setField('status',2);
-                if($res==false){
+                if($res===false){
                     return errorMsg('删除失败！',$modelChatMessage->getError());
                 }
                 return successMsg('删除成功！');
