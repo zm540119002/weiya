@@ -95,6 +95,7 @@
             customItemLi.find('.custom_item').attr('data-id',data.id);
             customItemLi.find('.msg').text(data.content);
             customItemLi.find('.create_time').text(data.create_time);
+            customItemLi.find('.author').text(data.from_name);
             customItemLi.find('ul.message_list').attr('data-from_id',data.from_id);
             if(data.avatar){
                 customItemLi.find('img').attr('src',uploads+data.avatar);
