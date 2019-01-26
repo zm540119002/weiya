@@ -40,9 +40,9 @@ class CustomerService extends \common\controller\Base{
                     'content' => $postData['content'],
                     'create_time' => $msgCreateTime,
                 ];
-                //接收者-已登录
+                //接收者-已登录：表示接收者已接收消息
                 if(Gateway::isUidOnline($postData['to_user_id'])){
-                    $saveData['send_sign'] = 1;
+                    $saveData['to_accept'] = 1;
                 }
                 $res = $modelChatMessage->edit($saveData);
                 if($res['status']==0){
