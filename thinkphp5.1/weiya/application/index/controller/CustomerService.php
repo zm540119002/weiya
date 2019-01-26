@@ -27,9 +27,18 @@ class CustomerService extends \common\controller\Base{
     public function sendMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
+            $postData['content'] = trim($postData['content']);
             $msgCreateTime = time();
             $msgId = 0;
+            //返回发送者信息
+            $returnData = [];
+            $returnData['who'] = 'me';
+            $returnData['create_time'] = $msgCreateTime;
+            $returnData['read'] = 1;
+            $returnData['content'] = $postData['content'];
             if($this->user){//发送者-已登录
+                $returnData['name'] = $this->user['name'];
+                $returnData['avatar'] = $this->user['avatar'];
                 if($this->user['id']==$postData['to_user_id']){
                     return errorMsg('不能发给自己！');
                 }
@@ -40,9 +49,9 @@ class CustomerService extends \common\controller\Base{
                     'content' => $postData['content'],
                     'create_time' => $msgCreateTime,
                 ];
-                //接收者-已登录
+                //接收者-已登录：表示接收者已接收消息
                 if(Gateway::isUidOnline($postData['to_user_id'])){
-                    $saveData['send_sign'] = 1;
+                    $saveData['to_accept'] = 1;
                 }
                 $res = $modelChatMessage->edit($saveData);
                 if($res['status']==0){
@@ -64,6 +73,7 @@ class CustomerService extends \common\controller\Base{
                 }else{//接收者-未登录
                 }
             }else{//发送者-未登录
+                //接收者-已登录
                 if(Gateway::isUidOnline($postData['to_user_id'])){
                     $msg = [
                         'type' => 'msg',
@@ -75,15 +85,9 @@ class CustomerService extends \common\controller\Base{
                         'id' => $msgId,
                     ];
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
+                }else{//接收者-未登录
                 }
             }
-            //返回发送者信息
-            $returnData['who'] = 'me';
-            $returnData['name'] = $this->user['name'];
-            $returnData['avatar'] = $this->user['avatar'];
-            $returnData['create_time'] = $msgCreateTime;
-            $returnData['read'] = 1;
-            $returnData['content'] = $postData['content'];
             $returnData['id'] = $msgId;
             $this->assign('info',$returnData);
             return view('online_service/info_tpl');

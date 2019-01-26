@@ -4,6 +4,7 @@
 {block name="content"}
 <article class="f24">
 	<section class="header_title separation-line">
+		<a href="javascript:void(0);" class="back_prev_page"></a>
 		<h2 class="f24">维雅资讯</h2>
 	</section>
 	<section class="content_main weiya_content">
@@ -87,9 +88,7 @@
 				console.log(imgBox.eq(j).attr("src"));
 				$(".big_img .swiper-wrapper").append('<div class="swiper-slide"><img src="' + imgBox.eq(j).attr("src") + '" / ></div>');
 			}
-			$(".big_img .swiper-wrapper").find('.swiper-slide').eq(0).addClass('swiper-slide-active');
-			//$(".big_img .swiper-wrapper").find('.swiper-slide').eq(1).addClass('swiper-slide-next');
-			
+			$(".big_img .swiper-wrapper").find('.swiper-slide').eq(0).addClass('swiper-slide-active');			
 			// mySwiper.updateSlidesSize();swiper-slide-active
 			// mySwiper.updatePagination();
 			$(".big_img").css({
@@ -97,6 +96,14 @@
 				"opacity": "1"
 			});
 			//mySwiper.slideTo(i, 0, false);
+			/*调起大图*/
+			var mySwiper = new Swiper('.swiper-container', {
+				loop:true,
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true
+				}
+			})
 			return false;
 		});
 	
@@ -107,14 +114,7 @@
 			});
 
 		});  
-		/*调起大图*/
-		var mySwiper = new Swiper('.swiper-container', {
-			loop:true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		})
+		
 	});
 </script>
 {/block}

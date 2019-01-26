@@ -213,6 +213,11 @@
             $('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
         })
     }
+    //返回上一页
+    $('body').on('click','.back_prev_page',function(){
+         window.history.back(-1);
+    })
+  
 
 })(jQuery);
 
@@ -372,7 +377,6 @@ function getWeek(i) {
         var Friday =new Date((5-day)*oneDayTime+now.getTime()); 
         return new Date(Friday.toLocaleDateString());
     }
-    console.log(new Date(Friday.toLocaleDateString()));
 }
 var addTimer = function(){
     var list = [],callback,interval,opt,unix,iStartUp=0;
