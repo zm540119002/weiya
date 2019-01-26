@@ -48,7 +48,7 @@
             {empty name="user.avatar"}
             <img src="public_img/default/chat_head.jpg" class="left user_header">
             {else /}
-            <img src="public_uploads/{$user.avatar}" class="left user_headser">
+            <img src="public_uploads/{$user.avatar}" class="left user_header">
             {/empty}
             <div class="user_info_r">
                 <p class="user_name">{$user.name}</p>
@@ -198,9 +198,6 @@
                     $('.userInfoLayer .user_name').text(user_name);
                 },
                 yes:function(index){
-                    var user_header=$('.userInfoLayer').find('.img').val();
-                    console.log(user_header);
-                    $('.user_info_list').find('.user_header').attr('src',user_header);
                     layer.close(index);
                 }
             });
@@ -236,7 +233,7 @@
                 var postData = {fileBase64: e.target.result};
                 // postData.imgWidth = 145;
                 // postData.imgHeight = 100;
-                $(obj).find('.img').attr('src',imgUrl);
+                $(obj).find('img').attr('src',imgUrl);
                 var type = _this.data('type');
                 if(type == 'notupload'){
                     $(obj).find('.img').val(imgUrl);
@@ -247,6 +244,7 @@
                     if(data.status == 1){
                         uploadsSingleImgFlag = true;
                         $(obj).find('.img').val(data.avatar);
+                        $('.user_info_list').find('.user_header').attr('src',uploads+data.avatar);
                     }else{
                         dialog.error(data.info)
                     }
@@ -276,9 +274,8 @@
                    }
                     //提交
                     $.post(module+"Mine/editName",postData,function(data){
-                        console.log(data);
                         if(data.status == 1){
-
+                        $('.user_info_list').find('.user_name').text(data.name);
 
                         }else{
                             dialog.error(data.info)
