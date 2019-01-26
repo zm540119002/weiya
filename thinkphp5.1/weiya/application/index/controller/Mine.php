@@ -17,6 +17,7 @@ class Mine extends \common\controller\Base{
         $upload = config('upload_dir.user_avatar');
         $userAvatar = $this ->_uploadSingleFileToTemp($fileBase64,$upload);
         $user = session('user');
+        $oldAvatar = $user['avatar'];
         $modelUser = new \common\model\User();
         $data = [
             'id'=>$user['id'],
@@ -30,7 +31,7 @@ class Mine extends \common\controller\Base{
         session('user',$user);
         if($user['avatar']){
             //删除旧详情图
-            delImgFromPaths($user['avatar'],$userAvatar);
+            delImgFromPaths($oldAvatar,$userAvatar);
         }
         return successMsg('成功',['avatar'=>$userAvatar]);
     }
