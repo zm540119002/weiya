@@ -214,7 +214,7 @@
         })
     }
     //返回上一页
-    $('body').on('click','.back_prev_page',function(){s
+    $('body').on('click','.back_prev_page',function(){
         var url=$(this).data('jump_url');
         if(url){
             location.href=url;
