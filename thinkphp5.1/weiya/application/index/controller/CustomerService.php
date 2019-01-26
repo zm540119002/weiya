@@ -29,6 +29,7 @@ class CustomerService extends \common\controller\Base{
             $postData = input('post.');
             $msgCreateTime = time();
             $msgId = 0;
+            $returnData = [];
             if($this->user){//发送者-已登录
                 if($this->user['id']==$postData['to_user_id']){
                     return errorMsg('不能发给自己！');
@@ -63,6 +64,8 @@ class CustomerService extends \common\controller\Base{
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
                 }else{//接收者-未登录
                 }
+                $returnData['name'] = $this->user['name'];
+                $returnData['avatar'] = $this->user['avatar'];
             }else{//发送者-未登录
                 if(Gateway::isUidOnline($postData['to_user_id'])){
                     $msg = [
@@ -79,8 +82,6 @@ class CustomerService extends \common\controller\Base{
             }
             //返回发送者信息
             $returnData['who'] = 'me';
-            $returnData['name'] = $this->user['name'];
-            $returnData['avatar'] = $this->user['avatar'];
             $returnData['create_time'] = $msgCreateTime;
             $returnData['read'] = 1;
             $returnData['content'] = $postData['content'];
