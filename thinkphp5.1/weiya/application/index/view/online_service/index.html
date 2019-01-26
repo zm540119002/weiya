@@ -119,9 +119,9 @@
 			postData.messageIds.push(_thisMessageLi.data('id'));
 			postData.from_id = _thisMessageLi.data('from_id');
 		});
-		console.log($('ul.message_list'));
+		console.log($('ul.message_list').find('li'));
 		console.log(postData);
-		console.log($('li.message_item.others.unread'));
+		console.log($('ul.message_list').find('li.message_item.others.unread'));
 		setMessageRead($('body'),postData);
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
