@@ -81,7 +81,12 @@ class Base extends \think\Controller{
     }
 
     //上传单个data64位文件
-    public function _uploadSingleFileToTemp($fileBase64,$upload){
+    /**
+     * @param $fileBase64
+     * @param $upload
+     * @return array|string
+     */
+    public function _uploadSingleFileToTemp($fileBase64,$savePath){
         // 获取图片
         list($type, $data) = explode(',', $fileBase64);
         // 判断文件类型
@@ -122,7 +127,7 @@ class Base extends \think\Controller{
             }
         }
         //上传公共路径
-        $uploadPath = config('upload_dir.upload_path');
+        $uploadPath = config('upload_dir.upload_path').'/';
         if(!is_dir($uploadPath)){
             if(!mk_dir($uploadPath)){
                 return  errorMsg('创建Uploads目录失败');
@@ -132,9 +137,8 @@ class Base extends \think\Controller{
         if($uploadPath === false){
             return  errorMsg('获取Uploads实际路径失败');
         }
-        $uploadPath = $uploadPath . '/' ;
         //临时相对路径
-        $tempRelativePath = $upload;
+        $tempRelativePath = $savePath;
 
         //存储路径
         $storePath = $uploadPath . $tempRelativePath;
