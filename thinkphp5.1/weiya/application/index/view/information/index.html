@@ -97,6 +97,14 @@
 				"opacity": "1"
 			});
 			//mySwiper.slideTo(i, 0, false);
+			/*调起大图*/
+		var mySwiper = new Swiper('.swiper-container', {
+			loop:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		})
 			return false;
 		});
 	
@@ -107,14 +115,7 @@
 			});
 
 		});  
-		/*调起大图*/
-		var mySwiper = new Swiper('.swiper-container', {
-			loop:true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		})
+		
 	});
 </script>
 {/block}
