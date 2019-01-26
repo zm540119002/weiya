@@ -4674,6 +4674,9 @@ ul.message_list{
 .flex_item a span.presentation{
     background-position:0 -7.9rem;
 }
+.nickInfoLayer .user_name{
+    border:none;
+}
 .setBrandLayer .list li.current {
     border: 1px solid #009A3E;
     background-image:url(../../common/img/icons/selected_icon.png);
