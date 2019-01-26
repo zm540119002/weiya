@@ -9,7 +9,5 @@ class MessageCenter extends \common\controller\UserBase{
         return $this->fetch();
     }
 
-    public function MessageCenter(){
-        
-    }
+   
 }
