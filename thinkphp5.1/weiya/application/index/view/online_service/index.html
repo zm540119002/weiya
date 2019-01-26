@@ -120,6 +120,7 @@
 			postData.from_id = _thisMessageLi.data('from_id');
 		});
 		console.log(postData);
+		console.log($('li.message_item.others.unread'));
 		setMessageRead($('body'),postData);
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
