@@ -95,6 +95,7 @@
             customItemLi.find('.custom_item').attr('data-id',data.id);
             customItemLi.find('.msg').text(data.content);
             customItemLi.find('.create_time').text(data.create_time);
+            customItemLi.find('.author').text(data.from_name);
             customItemLi.find('ul.message_list').attr('data-from_id',data.from_id);
             if(data.avatar){
                 customItemLi.find('img').attr('src',uploads+data.avatar);
@@ -122,8 +123,11 @@
             var _thisCustomLi=$(this);
             _thisCustomLi.addClass('current').siblings().removeClass('current');
             $('.message_list').removeClass('current').eq(_thisCustomLi.index()).addClass('current');
-            //聊天框滚动条置底
-            messageSetBottom();
+            var curLength=$('ul.message_list.current').find('li').length;
+            if(curLength){
+                //聊天框滚动条置底
+                messageSetBottom();
+            }
             var postData = {};
             postData.messageIds = [];
             postData.from_id = _thisCustomLi.data('from_id');

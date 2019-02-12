@@ -99,10 +99,10 @@ class CustomerService extends \common\controller\Base{
             if($this->user){
                 $modelChatMessage = new \common\model\ChatMessage();
                 $where =
-                    '`status` = 0 and `read` = 0 and id in (' . implode (",",$postData['messageIds']) .
+                    '`status` = 0 and `read` = 0 and `id` in (' . implode (",",$postData['messageIds']) .
                     ') and from_id = ' . $postData['from_id'] . ' and to_id = ' . $this->user['id'];
                 $res = $modelChatMessage->where($where)->setField('read',1);
-                if($res==false){
+                if($res===false){
                     return errorMsg('设置已读出错',$modelChatMessage->getError());
                 }
                 return successMsg('成功！');
@@ -121,7 +121,7 @@ class CustomerService extends \common\controller\Base{
                     ') and ((from_id = ' . $postData['from_id'] . ' and to_id = ' . $this->user['id'] .') ' .
                     'or (from_id = ' . $this->user['id'] . ' and to_id = ' . $postData['from_id'] . '))';
                 $res = $modelChatMessage->where($where)->setField('status',2);
-                if($res==false){
+                if($res===false){
                     return errorMsg('删除失败！',$modelChatMessage->getError());
                 }
                 return successMsg('删除成功！');
