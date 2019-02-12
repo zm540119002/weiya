@@ -21,6 +21,7 @@
             <a href="javascript:;" class="right-arrow nick_btn">
                 <span >昵称</span>
                 <span class="user_name"></span>
+                <input type="hidden" class="old_name" value="{$user.name}">
             </a>
         </li>
         <li>
@@ -32,6 +33,7 @@
 <section class="nick_content" style="display:none;">
     <div>
         <input type="text" name="" class="input-filed user_name">
+
     </div>
 </section>
 <article class="person-center-wrapper f24">
@@ -273,16 +275,20 @@
                    var  postData = {
                        name:user_name
                    }
-                    //提交
-                    $.post(module+"Mine/editName",postData,function(data){
-                        if(data.status == 1){
-                            dialog.success(data.info);
-                           $('.user_info_list').find('.user_name').text(data.name);
+                    var old_name =   $('.userInfoLayer ').find('.old_name').val();
+                    if(old_name !== user_name){
+                        //提交
+                        $.post(module+"Mine/editName",postData,function(data){
+                            if(data.status == 1){
+                                dialog.success(data.info);
+                                $('.user_info_list').find('.user_name').text(data.name);
+                                $('.userInfoLayer ').find('.old_name').val(data.name);
+                            }else{
+                                dialog.error(data.info)
+                            }
+                        })
+                    }
 
-                        }else{
-                            dialog.error(data.info)
-                        }
-                    })
                   layer.close(index);
                 }
             });
