@@ -91,7 +91,6 @@
         });
         if(!find_sign){
             //未找到聊天列表，则追加一个
-            console.log(data);
             var customItemLi = $('#customItemTpl').find('li');
             customItemLi.find('.custom_item').attr('data-id',data.id).attr('data-from_id',data.from_id);
             customItemLi.find('.msg').text(data.content);
