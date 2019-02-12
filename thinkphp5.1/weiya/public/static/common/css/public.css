@@ -5538,7 +5538,8 @@ ul.info_list li{
     color:#fff;
 }
 .brand_logo{
-    max-width:40px;
+    max-width: 0.8rem;
+    min-height: 0.8rem;
 }
 .group_cart_nav a.add_brand{
     padding:0;
