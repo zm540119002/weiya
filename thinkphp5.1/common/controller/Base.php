@@ -23,7 +23,7 @@ class Base extends \think\Controller{
             $weiXinUserInfo =  session('weiXinUserInfo');
             if(empty($weiXinUserInfo)){
                 $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
-                $weiXinUserInfo = $mineTools->getOauthUserInfo();
+                $weiXinUserInfo = $mineTools->get_user_info();
                 session('weiXinUserInfo',$weiXinUserInfo);
             }
             $this -> assign('weiXinUserInfo',$weiXinUserInfo);
