@@ -4119,7 +4119,7 @@ select[name="nodeIds"]{
 }
 .sample_purchase::after,
 .set_brand::after{
-    top:20%;
+    top:28%;
     right:0;
 }
 .list_r .sample_purchase{
