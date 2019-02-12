@@ -85,11 +85,11 @@
 			console.log(i);
 			$(".big_img .swiper-wrapper").html("");
 			console.log(imgBox.length);
-			for(var j = 0 ,c = imgBox.length; j < c ;j++){
+			for(var j = i ,c = imgBox.length; j < c ;j++){
 				console.log(imgBox.eq(j).attr("src"));
 				$(".big_img .swiper-wrapper").append('<div class="swiper-slide"><img src="' + imgBox.eq(j).attr("src") + '" / ></div>');
 			}
-			$(".big_img .swiper-wrapper").find('.swiper-slide').eq(0).addClass('swiper-slide-active');			
+			$(".big_img .swiper-wrapper").find('.swiper-slide').eq(i).addClass('swiper-slide-active');			
 			// mySwiper.updateSlidesSize();swiper-slide-active
 			// mySwiper.updatePagination();
 			$(".big_img").css({
