@@ -58,6 +58,7 @@ $(function () {
         var incrementObj={};
         incrementObj.order_quantity=$(this).siblings('.minimum_order_quantity').val();
         incrementObj.increase_quantity=$(this).siblings('.increase_quantity').val();
+        console.log(incrementObj);
         //单个商品数量自加
         goodsNumPlus($(this),incrementObj);
         //计算商品列表总价
@@ -503,6 +504,7 @@ function assemblyData(lis) {
 
 //计算商品列表总价
 function calculateTotalPrice(obj){
+   
     var buyType=obj.data('type');
     
     if(!$('footer').find('price').length){
@@ -527,6 +529,7 @@ function calculateTotalPrice(obj){
         $.each(_thisLis,function(index,val){
             var _thisLi = $(this);
             var num = _thisLi.find('.gshopping_count').val();
+            //console.log(111);
             if(!isPosIntNumberOrZero(num)){
                 isInt = false;
                 return false;

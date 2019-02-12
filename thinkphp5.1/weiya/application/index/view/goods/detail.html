@@ -31,7 +31,7 @@
 	</section>
 	<section class="module-navigation ">
 		<div >
-			<ul class="goods_list">
+			<ul class="goods_list list">
 				<li data-id='{$info.id}' data-buy_type="1" id="li-id-{$info.id}">
 					<div class="top_radius f20 top_module">
 						<div class="columns_flex l-r-sides">
@@ -220,6 +220,8 @@
 <script type="text/javascript">
 	$(function(){
 		var id = '{$info.id}';
+		var price=$('.goods_list').find('price').text();
+		$('.amount').find('price').text(price);
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,

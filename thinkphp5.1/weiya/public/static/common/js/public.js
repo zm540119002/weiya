@@ -215,6 +215,11 @@
     }
     //返回上一页
     $('body').on('click','.back_prev_page',function(){
+        var url=$(this).data('jump_url');
+        if(url){
+            location.href=url;
+            return false;
+        }
          window.history.back(-1);
     })
   
