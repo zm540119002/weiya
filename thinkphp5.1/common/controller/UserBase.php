@@ -1,6 +1,5 @@
 <?php
 namespace common\controller;
-use think\facade\Session;
 /**用户信息验证控制器基类
  */
 class UserBase extends Base{
