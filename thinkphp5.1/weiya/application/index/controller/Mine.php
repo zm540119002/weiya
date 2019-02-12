@@ -43,7 +43,7 @@ class Mine extends \common\controller\Base{
         }
         $modelUser = new \common\model\User();
         $user = session('user');
-        $name = input('post.name');
+        $name = preg_replace('# #','',input('post.name'));
         $data = [
             'id'=>$user['id'],
             'name'=>$name,
