@@ -185,7 +185,7 @@ textarea.text_description{
 .back,.back_prev_page{
     position:absolute;
     left:0;
-    top:0.10rem;
+    top:0.06rem;
     width: 0.5rem;
     height: 0.5rem;
     display: block;
@@ -4467,7 +4467,7 @@ select[name="nodeIds"]{
     width:15%;
 }
 .user_info_r{
-    margin:0 0 0 1rem;
+    margin:0 0 0 0.90rem;
 }
 a.customer_info{
     margin: 0.18rem 0.12rem 0 0;
@@ -4616,7 +4616,7 @@ ul.message_list{
 .flex_item a img{
     display:block;
     width:0.8rem;
-    margin:0 auto;
+    margin:0 auto 0.05rem;
 }
 .flex_item a span{
     position:relative;
