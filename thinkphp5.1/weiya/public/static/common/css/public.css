@@ -5158,6 +5158,9 @@ ul.message_list{
 .goods_list .content-padding{
     border-bottom:6px solid #d9d9d9;
 }
+.goods_list li{
+    padding:0;
+}
 /*走进维雅介绍*/
 .notice_wrapper img{
     width:100%;
