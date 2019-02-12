@@ -434,10 +434,10 @@ class Jssdk {
   }
 
   //获取用户基本信息（OAuth2 授权的 Access Token 获取 未关注用户，Access Token为临时获取）
-  public function oauth2_get_user_info($openid)
+  public function oauth2_get_user_info($access_token, $openid)
   {
 
-    $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$this -> access_token."&openid=".$openid."&lang=zh_CN";
+    $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
     $res = $this->http_request($url);
     return json_decode($res, true);
   }
@@ -485,9 +485,8 @@ class Jssdk {
   $mysql_state2 = "INSERT INTO `wx_user` (`id`, `openid`, `nickname`, `sex`, `country`, `province`, `city`, `latitude`, `longitude`, `headimgurl`, `latest`) VALUES (NULL, '$openid', '".$userinfo['nickname']."', '".$userinfo['sex']."', '".$userinfo['country']."', '".$userinfo['province']."', '".$userinfo['city']."', '', '', '', '');";
   $db->execute($mysql_state2);
   */
-  public function get_user_info()
+  public function get_user_info($openid)
   {
-    $openid = $this->getOpenid();
     $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->access_token."&openid=".$openid."&lang=zh_CN";
     $res = $this->http_request($url);
     return json_decode($res, true);
