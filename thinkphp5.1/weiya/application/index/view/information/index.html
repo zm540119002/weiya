@@ -82,6 +82,7 @@
 		$("#list").on("click", ".info_img img",function() {
 			var imgBox = $(this).parents(".info_img").find("img");
 			var i = $(imgBox).index(this);
+			console.log(i);
 			$(".big_img .swiper-wrapper").html("");
 			console.log(imgBox.length);
 			for(var j = 0 ,c = imgBox.length; j < c ;j++){
