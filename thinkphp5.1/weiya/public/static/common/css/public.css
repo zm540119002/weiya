@@ -4119,7 +4119,7 @@ select[name="nodeIds"]{
 }
 .sample_purchase::after,
 .set_brand::after{
-    top:20%;
+    top:25%;
     right:0;
 }
 .list_r .sample_purchase{
@@ -5508,6 +5508,9 @@ ul.info_list li{
     padding:0.15rem;
     overflow:hidden;
 }
+.list_top_item .brand_name{
+    margin:0 0 0 0.12rem;
+}
 .list_bottom_item{
     padding:0.15rem;
 }
@@ -5538,7 +5541,8 @@ ul.info_list li{
     color:#fff;
 }
 .brand_logo{
-    max-width:40px;
+    max-width: 0.8rem;
+    min-height: 0.8rem;
 }
 .group_cart_nav a.add_brand{
     padding:0;

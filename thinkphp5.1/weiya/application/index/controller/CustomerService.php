@@ -77,8 +77,9 @@ class CustomerService extends \common\controller\Base{
                     $msg = [
                         'type' => 'msg',
                         'content' => $postData['content'],
-                        'from_id' => $postData['from_client_id'],
+                        'from_id' => '',
                         'from_name' => '游客',
+                        'from_client_id' => $postData['from_client_id'],
                         'create_time' => date('Y-m-d H:i',$msgCreateTime),
                         'id' => $msgId,
                     ];
