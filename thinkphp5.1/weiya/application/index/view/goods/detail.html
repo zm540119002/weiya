@@ -58,7 +58,11 @@
 								{/volist}
 							</div>
 							<div class="tags_item_r">
+								{notempty name="collected"}
+								<a class="collection" href="javascript:;"><span class="icon selected"></span><span class="text">已收藏</span></a>
+								{else /}
 								<a class="collection" href="javascript:;"><span class="icon"></span><span class="text">收藏</span></a>
+								{/notempty}
 								<a class="share" href="javascript:;"><span class="icon"></span>分享</a>
 							</div>
 						</div>
@@ -361,7 +365,6 @@
 		$('body').on('click','.collection',function(){
 			var _this = $(this);
 			if(_this.find('span.icon').hasClass('selected')){
-				dialog.error('已收藏过');
 				var postData = {};
 				var ids=[];
 				var id=_this.parents('li').data('id');

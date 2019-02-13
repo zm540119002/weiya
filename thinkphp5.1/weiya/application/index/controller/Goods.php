@@ -137,7 +137,7 @@ class Goods extends \common\controller\Base{
                         ['user_id','=',$user['id']],
                         ['goods_id','=',$id],
                         ['status','=',0]
-                    ],'filed'=>[
+                    ],'field'=>[
                         'id'
                     ]
                 ];
