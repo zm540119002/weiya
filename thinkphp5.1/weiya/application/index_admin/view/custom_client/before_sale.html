@@ -109,11 +109,9 @@
             customItemTpl.find('.custom_item').attr('data-from_id',data.from_id);
             customItemTpl.find('.custom_item').attr('data-from_client_id',data.from_client_id);
             $('ul.custom_list').append(customItemTpl.html());
-            var messageListTpl = $('#messageListTpl');
-            console.log(messageListTpl.html());
-            var messageUl = messageListTpl.find('ul');
-            console.log(messageUl);
+            var messageUl = $('#messageListTpl').find('ul');
             messageUl.attr('data-from_id',data.from_id);
+            messageUl.attr('data-from_client_id',data.from_client_id);
             messageUl.find('.message_item').attr('data-id',data.id);
             messageUl.find('.msg').text(data.content);
             messageUl.find('.create_time').text(data.create_time);
