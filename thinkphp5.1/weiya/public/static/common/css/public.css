@@ -1536,7 +1536,7 @@ background-position: 0 -27px;
 }
 .bomb_box{
     position:relative;
-    padding:0 .25rem;
+    /*padding:0 .25rem;*/
 }
 .bomb_box .layer_close{
     right: -22px;
