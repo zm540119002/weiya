@@ -54,14 +54,13 @@
                 <!--</li>-->
             </ul>
         </div>
-        <div class="bank_transfer">
+        <div class="bank_transfer_item">
             <span class="content-label">银行转账</span>
             <p>收款单位：广东美尚网络科技有限公司</p>
             <p>开户银行：广州市华景新城支行</p>
             <p>银行账户：XXXXXXXXXXXXXXXXXXXXXXXX</p>
-            <a href="javascript:;"></a>
+            <a href="javascript:;" class="bank_transfer right-arrow">银行转账支付后将凭证拍照发给平台客服</a>
         </div>
-        <p>*线下银行转账/现金支付需将证据拍照上传</p>
         <form action="{:url('Payment/rechargePayment')}" method="post" class="recharge_form">
             <input type="hidden" name="amount" value=""/>
             <input type="hidden" name="pay_code" value="" class="pay_code"/>
