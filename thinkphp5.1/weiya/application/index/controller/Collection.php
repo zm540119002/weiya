@@ -100,7 +100,7 @@ class Collection extends \common\controller\UserBase{
         $model = new \app\index\model\Collection();
         $condition = [
             ['user_id','=',$this->user['id']],
-            ['id','in',$ids],
+            ['goods_id','in',$ids],
         ];
         $result = $model -> del($condition);
         if($result['status']){
