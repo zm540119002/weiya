@@ -365,6 +365,7 @@
 				var postData = {};
 				var ids=_this.parents('li').data('id');
 				postData.ids=ids;
+				_this.addClass("nodisabled");//防止重复提交
 				$.ajax({
 					url: url,
 					data: postData,
@@ -378,16 +379,13 @@
 					},
 					success: function(data){
 						$('.loading').hide();
+						_this.removeClass("nodisabled");
 						if(data.status==0){
 							dialog.error(data.info);
 						}else {
 							dialog.success('取消收藏成功');
 							_this.find('span.icon').removeClass('selected');
 							_this.find('span.text').text('收藏');
-							if(!$('.list li').length){
-								var html=$('.no_collection').html();
-								$('.list').append(html);
-							}
 						}
 					}
 				});
