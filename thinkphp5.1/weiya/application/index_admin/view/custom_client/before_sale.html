@@ -1,7 +1,7 @@
 {extend name="template/admin_pc/base.html" /}
 {block name="footer"}{/block}
 {block name="content"}
-<!--模板区 start-->
+<!--模板 start-->
 <section id="customItemTpl" style="display:none">
     <li class="custom_item" data-from_id="">
         <a href="javascript:void(0);" class="detele_chat">删除</a>
@@ -95,12 +95,14 @@
             var customItemLi = $('#customItemTpl').find('li');
             customItemLi.find('.custom_item').attr('data-id',data.id);
             customItemLi.find('.custom_item').attr('data-from_id',data.from_id);
+            console.log(customItemLi);
             customItemLi.find('.msg').text(data.content);
             customItemLi.find('.create_time').text(data.create_time);
             customItemLi.find('.author').text(data.from_name);
             if(data.avatar){
                 customItemLi.find('img').attr('src',uploads+data.avatar);
             }
+            console.log(customItemLi);
             $('ul.custom_list').append(customItemLi);
         }
     }
