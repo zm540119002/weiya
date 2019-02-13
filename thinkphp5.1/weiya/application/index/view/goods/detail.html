@@ -363,7 +363,9 @@
 			if(_this.find('span.icon').hasClass('selected')){
 				dialog.error('已收藏过');
 				var postData = {};
-				var ids=_this.parents('li').data('id');
+				var ids=[];
+				var id=_this.parents('li').data('id');
+				ids.push(id);
 				postData.ids=ids;
 				_this.addClass("nodisabled");//防止重复提交
 				var url = module + 'Collection/del'
