@@ -58,7 +58,11 @@
 								{/volist}
 							</div>
 							<div class="tags_item_r">
+								{notempty name="collected"}
+								<a class="collection" href="javascript:;"><span class="icon selected"></span><span class="text">已收藏</span></a>
+								{else /}
 								<a class="collection" href="javascript:;"><span class="icon"></span><span class="text">收藏</span></a>
+								{/notempty}
 								<a class="share" href="javascript:;"><span class="icon"></span>分享</a>
 							</div>
 						</div>
@@ -362,7 +366,36 @@
 		$('body').on('click','.collection',function(){
 			var _this = $(this);
 			if(_this.find('span.icon').hasClass('selected')){
-				dialog.error('已收藏过');
+				var postData = {};
+				var ids=[];
+				var id=_this.parents('li').data('id');
+				ids.push(id);
+				postData.ids=ids;
+				_this.addClass("nodisabled");//防止重复提交
+				var url = module + 'Collection/del'
+				$.ajax({
+					url: url,
+					data: postData,
+					type: 'post',
+					beforeSend: function(){
+						$('.loading').show();
+					},
+					error:function(){
+						$('.loading').hide();
+						dialog.error('AJAX错误');
+					},
+					success: function(data){
+						$('.loading').hide();
+						_this.removeClass("nodisabled");
+						if(data.status==0){
+							dialog.error(data.info);
+						}else {
+							dialog.success('取消收藏成功');
+							_this.find('span.icon').removeClass('selected');
+							_this.find('span.text').text('收藏');
+						}
+					}
+				});
 				return false;
 			}
 			_this.find('span.icon').addClass('selected');
