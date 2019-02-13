@@ -34,23 +34,24 @@
         <nav>
             <ul class="menu_nav">
                 <li>
-                    <a href="{:url('order/manage')}">全部</a>
+                    <a href="{:url('order/manage')}" data-order_status="0">全部</a>
                 </li>
                 <li>
-                    <a href="{:url('order/manage',['order_status'=>1])}">待付款</a>
+                    <a href="{:url('order/manage',['order_status'=>1])}" data-order_status="1">待付款</a>
                 </li>
                 <li>
-                    <a href="{:url('order/manage',['order_status'=>2])}">待收货</a>
+                    <a href="{:url('order/manage',['order_status'=>2])}" data-order_status="2">待收货</a>
                 </li>
                 <li>
-                    <a href="{:url('order/manage',['order_status'=>3])}">待评价</a>
+                    <a href="{:url('order/manage',['order_status'=>3])}" data-order_status="3">待评价</a>
                 </li>
                 <li>
-                    <a href="{:url('order/manage',['order_status'=>4])}">已完成</a>
+                    <a href="{:url('order/manage',['order_status'=>6])}" data-order_status="6">售后</a>
                 </li>
                 <li>
-                    <a href="{:url('order/manage',['order_status'=>6])}">售后</a>
+                    <a href="{:url('order/manage',['order_status'=>4])}" data-order_status="4">已完成</a>
                 </li>
+
             </ul>
         </nav>
         <ul class="order_list list" id="list">
@@ -80,25 +81,33 @@
         $(function(){
             var order_status={:json_encode($order_status)};
             order_status=parseInt(order_status);
-            switch(order_status){
-                case 1:
-                $('.menu_nav li').eq(order_status).addClass('current');
-                break;
-                case 2:
-                $('.menu_nav li').eq(order_status).addClass('current');
-                break;
-                case 3:
-                $('.menu_nav li').eq(order_status).addClass('current');
-                break;
-                case 4:
-                $('.menu_nav li').eq(order_status).addClass('current');
-                break;
-                case 6:
-                    $('.menu_nav li').eq(order_status).addClass('current');
-                    break;
-                default:
-                    $('.menu_nav li').eq(0).addClass('current');
-            }
+            $.each($('.menu_nav li'),function () {
+                var li_order_status = $(this).find('a').data('order_status');
+                console.log(li_order_status)
+                console.log(order_status)
+                if(li_order_status==order_status){
+                    $(this).addClass('current');
+                }
+            })
+//            switch(order_status){
+//                case 1:
+//                $('.menu_nav li').eq(order_status).addClass('current');
+//                break;
+//                case 2:
+//                $('.menu_nav li').eq(order_status).addClass('current');
+//                break;
+//                case 3:
+//                $('.menu_nav li').eq(order_status).addClass('current');
+//                break;
+//                case 4:
+//                $('.menu_nav li').eq(order_status).addClass('current');
+//                break;
+//                case 6:
+//                    $('.menu_nav li').eq(order_status).addClass('current');
+//                    break;
+//                default:
+//                    $('.menu_nav li').eq(0).addClass('current');
+//            }
             if(order_status){
                 postData.order_status = order_status;
             }
