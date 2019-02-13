@@ -80,7 +80,7 @@
 <script type="text/javascript" src="index_js/jump_login.js"></script>
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
-	function on_message_call_back(data) {
+	function on_msg_call_back(data) {
 		var messageItemTpl = $('#messageItemTpl');
 		messageItemTpl.find('.message_item').attr('data-id',data.id);
 		messageItemTpl.find('.msg').text(data.content);
