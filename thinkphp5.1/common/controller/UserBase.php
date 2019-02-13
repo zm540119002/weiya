@@ -18,7 +18,7 @@ class UserBase extends Base{
                 $this->error(config('custom.error_login'),url($this->loginUrl));
             }
         }
-        //判断是否为微信浏览器 没有
+        //判断是否为微信浏览器
         if(isWxBrowser() && !request()->isAjax()) {
             if(!$this -> user['weiya_openid']){
                 $weiXinUserInfo = session('weiXinUserInfo');
