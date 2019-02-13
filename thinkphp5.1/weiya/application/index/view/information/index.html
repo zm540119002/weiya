@@ -21,12 +21,12 @@
 			<div class="swiper-wrapper">
 				
 			</div>
-			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+			<!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
 				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
 				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
 				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
 				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
-			</div>
+			</div>-->
 		</div>      
 	</section>
     <!--<div class="swiper-container2 swiper-container-horizontal">
@@ -85,11 +85,14 @@
 			console.log(i);
 			$(".big_img .swiper-wrapper").html("");
 			console.log(imgBox.length);
-			for(var j = i ,c = imgBox.length; j < c ;j++){
+			for(var j = 0 ,c = imgBox.length; j < c ;j++){
 				console.log(imgBox.eq(j).attr("src"));
 				$(".big_img .swiper-wrapper").append('<div class="swiper-slide"><img src="' + imgBox.eq(j).attr("src") + '" / ></div>');
 			}
-			$(".big_img .swiper-wrapper").find('.swiper-slide').eq(i).addClass('swiper-slide-active');			
+			//$(".big_img .swiper-wrapper").find('div').eq(i).addClass('swiper-slide-active');	
+			// for(var j = 0 ,c = i; j < c ;j++){
+			// 	$(".swiper-wrapper .swiper-slide-active").insertBefore('<div class="swiper-slide"><img src="' + imgBox.eq(i).attr("src") + '" / ></div>');
+			// }		
 			// mySwiper.updateSlidesSize();swiper-slide-active
 			// mySwiper.updatePagination();
 			$(".big_img").css({
