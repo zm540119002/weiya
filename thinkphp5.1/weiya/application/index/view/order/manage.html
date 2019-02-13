@@ -46,10 +46,10 @@
                     <a href="{:url('order/manage',['order_status'=>3])}">待评价</a>
                 </li>
                 <li>
-                    <a href="{:url('order/manage',['order_status'=>5])}">已完成</a>
+                    <a href="{:url('order/manage',['order_status'=>4])}">已完成</a>
                 </li>
                 <li>
-                    <a href="{:url('order/manage',['order_status'=>4])}">售后</a>
+                    <a href="{:url('order/manage',['order_status'=>6])}">售后</a>
                 </li>
             </ul>
         </nav>
@@ -90,10 +90,10 @@
                 case 3:
                 $('.menu_nav li').eq(order_status).addClass('current');
                 break;
-                case 5:
+                case 4:
                 $('.menu_nav li').eq(order_status).addClass('current');
                 break;
-                case 4:
+                case 6:
                     $('.menu_nav li').eq(order_status).addClass('current');
                     break;
                 default:
