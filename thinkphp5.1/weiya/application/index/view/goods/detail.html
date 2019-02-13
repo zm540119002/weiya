@@ -362,6 +362,34 @@
 			var _this = $(this);
 			if(_this.find('span.icon').hasClass('selected')){
 				dialog.error('已收藏过');
+				var postData = {};
+				var ids=_this.parents('li').data('id');
+				postData.ids=ids;
+				$.ajax({
+					url: url,
+					data: postData,
+					type: 'post',
+					beforeSend: function(){
+						$('.loading').show();
+					},
+					error:function(){
+						$('.loading').hide();
+						dialog.error('AJAX错误');
+					},
+					success: function(data){
+						$('.loading').hide();
+						if(data.status==0){
+							dialog.error(data.info);
+						}else {
+							dialog.success('取消收藏成功');
+
+							if(!$('.list li').length){
+								var html=$('.no_collection').html();
+								$('.list').append(html);
+							}
+						}
+					}
+				});
 				return false;
 			}
 			_this.find('span.icon').addClass('selected');
