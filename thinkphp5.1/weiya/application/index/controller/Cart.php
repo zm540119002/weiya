@@ -115,7 +115,8 @@ class Cart extends \common\controller\UserBase{
              $config['where'][] = ['g.name', 'like', '%' . trim($keyword) . '%'];
          }
          $list = $model -> pageQuery($config);
-        $this->assign('currentPage',$list->currentPage());
+        $currentPage = input('get.page/d');
+        $this->assign('currentPage',$currentPage);
          $this->assign('list',$list);
          if(isset($_GET['pageType'])){
              if($_GET['pageType'] == 'index' ){
