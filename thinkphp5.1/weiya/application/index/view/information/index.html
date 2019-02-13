@@ -88,11 +88,7 @@
 			for(var j = 0 ,c = imgBox.length; j < c ;j++){
 				console.log(imgBox.eq(j).attr("src"));
 				$(".big_img .swiper-wrapper").append('<div class="swiper-slide"><img src="' + imgBox.eq(j).attr("src") + '" / ></div>');
-			}
-			//$(".big_img .swiper-wrapper").find('div').eq(i).addClass('swiper-slide-active');	
-			// for(var j = 0 ,c = i; j < c ;j++){
-			// 	$(".swiper-wrapper .swiper-slide-active").insertBefore('<div class="swiper-slide"><img src="' + imgBox.eq(i).attr("src") + '" / ></div>');
-			// }		
+			}			
 			// mySwiper.updateSlidesSize();swiper-slide-active
 			// mySwiper.updatePagination();
 			$(".big_img").css({
@@ -102,12 +98,16 @@
 			//mySwiper.slideTo(i, 0, false);
 			/*调起大图*/
 			var mySwiper = new Swiper('.swiper-container', {
-				loop:true,
+				// loop:true,
 				pagination: {
 					el: '.swiper-pagination',
 					clickable: true
 				}
 			})
+			$(".big_img .swiper-wrapper").find('div').eq(0).removeClass('swiper-slide-active');
+			$(".big_img .swiper-wrapper").find('div').eq(1).removeClass('swiper-slide-next');
+			$(".big_img .swiper-wrapper").find('div').eq(i).addClass('swiper-slide-active');
+			$(".big_img .swiper-wrapper").find('div').eq(i+1).addClass('swiper-slide-next');
 			return false;
 		});
 	
