@@ -162,6 +162,7 @@
 	$(function(){
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
+		console.log(domain);
 		//预览项目详情
 		$('body').on('click','.project_details',function(){
 			var project_detail=$('.project_detail_preview').html();
