@@ -83,31 +83,10 @@
             order_status=parseInt(order_status);
             $.each($('.menu_nav li'),function () {
                 var li_order_status = $(this).find('a').data('order_status');
-                console.log(li_order_status)
-                console.log(order_status)
                 if(li_order_status==order_status){
                     $(this).addClass('current');
                 }
             })
-//            switch(order_status){
-//                case 1:
-//                $('.menu_nav li').eq(order_status).addClass('current');
-//                break;
-//                case 2:
-//                $('.menu_nav li').eq(order_status).addClass('current');
-//                break;
-//                case 3:
-//                $('.menu_nav li').eq(order_status).addClass('current');
-//                break;
-//                case 4:
-//                $('.menu_nav li').eq(order_status).addClass('current');
-//                break;
-//                case 6:
-//                    $('.menu_nav li').eq(order_status).addClass('current');
-//                    break;
-//                default:
-//                    $('.menu_nav li').eq(0).addClass('current');
-//            }
             if(order_status){
                 postData.order_status = order_status;
             }
