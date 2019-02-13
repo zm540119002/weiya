@@ -51,7 +51,7 @@
         $.each($('ul.message_list'),function(){
             var _thisMessageUl = $(this);
             //找到聊天列表
-            if(_thisMessageUl.data('from_id')==data.from_id){
+            if(data.from_id && _thisMessageUl.data('from_id')==data.from_id){
                 console.log(_thisMessageUl.data('from_id'));
                 console.log(data.from_id);
                 find_sign = true;
