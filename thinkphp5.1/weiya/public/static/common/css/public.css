@@ -5546,7 +5546,7 @@ ul.info_list li{
 }
 .brand_logo{
     display:block;
-    max-width: 0.8rem;
+    width: 20%;
     height: 0.68rem;
     overflow:hidden;
 }
