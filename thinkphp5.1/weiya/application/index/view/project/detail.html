@@ -41,13 +41,6 @@
 			<ul>
 				<li>
 					<div class="top_radius f20 top_module">
-						<!--<div class="title_name f28">
-							<span class="hot">
-								<img src="public_img/hot.png" alt="">
-							</span>
-							{$info.name}
-							<p class="title_name f28">{$info.name}</p>
-						</div>-->
 						<p class="product_intro">{$info.intro}</p>
 						<div class="tags_item columns_flex l-r-sides">
 							<div>
@@ -56,8 +49,7 @@
 								{/volist}
 							</div>
 							<div class="tags_item_r">
-								<!--<a class="collection" href=""><span></span>收藏</a>-->
-								<a class="share" href="javascript:;"><span></span>分享</a>
+								<a class="share" href="javascript:;"><span class="icon"></span>分享</a>
 							</div>
 						</div>
 					</div>
@@ -108,24 +100,15 @@
 				</a>
 				<div class="list_r">
 					<p class="goods_title">{$info.headline}</p>
-					<!--<div><span>{$info.specification}</span></div>-->
 					<div class="project_p_item">
 						<span class="red">￥<price>{$info.bulk_price}</price></span>
 					</div>
 					<div class="columns_flex l-r-sides project_p_item">
 						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
 						</div>
-						<!--<a href="javascript:void(0);" class="sample_purchase" >样品购买
-							<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
-						</a>-->
 					</div>
 					<div class="columns_flex l-r-sides separation_item">
-						<!--<div>
-							我的品牌定制：<span class="brand_name" data-id=""></span>
-						</div>
-						<div>
-							<a href="javascript:;" class="set_brand">设定></a>
-						</div>-->
+
 						<a href="javascript:;" class="set_brand right-arrow">设定我的品牌：<span class="brand_name" data-id=""></span></a>
 					</div>
 					<div class="quantity_wrapper selected-number">
