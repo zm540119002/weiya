@@ -5621,9 +5621,14 @@ ul.info_list li{
 .forget_wallet_password{
     color:#0066cc;
 }
-.bank_transfer{
+.bank_transfer_item{
     padding:0.15rem;
     background: #fff;
+}
+.bank_transfer{
+    padding:0.15rem 0 0;
+    margin:0.15rem 0 0;
+    border-top:1px solid #d9d9d9;
 }
 /*订单客服售前*/
 .layui-m-layerchild.chatLayer{
