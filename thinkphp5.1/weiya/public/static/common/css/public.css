@@ -4585,7 +4585,7 @@ ul.message_list{
 .wk_notice .more{
     color:#ff4745;
 }
-.tags_item_r a span{
+.tags_item_r a span.icon{
     display:inline-block;
     width:0.4rem;
     height:0.35rem;
@@ -4594,7 +4594,7 @@ ul.message_list{
     background-size:0.35rem 2.18rem;
     vertical-align: -6px;
 }
-.tags_item_r .collection span{
+.tags_item_r .collection span.icon{
     background-position:0 0;
 }
 .tags_item_r .share span{
@@ -5774,7 +5774,7 @@ ul.info_list li{
 .wk_notice{
     color:#1CAD99;
 }
-.tags_item_r a span{
+.tags_item_r a span.icon{
     display:inline-block;
     width:0.4rem;
     height:0.35rem;

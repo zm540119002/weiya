@@ -58,8 +58,8 @@
 								{/volist}
 							</div>
 							<div class="tags_item_r">
-								<a class="collection" href="javascript:;"><span></span>收藏</a>
-								<a class="share" href="javascript:;"><span></span>分享</a>
+								<a class="collection" href="javascript:;"><span class="icon"></span><span class="text">收藏</span></a>
+								<a class="share" href="javascript:;"><span class="icon"></span>分享</a>
 							</div>
 						</div>
 					</div>
@@ -364,7 +364,8 @@
 				dialog.error('已收藏过');
 				return false;
 			}
-			_this.find('span').addClass('selected');
+			_this.find('span.icon').addClass('selected');
+			_this.find('span.text').text('已收藏');
 			var goods_id=_this.parents('li').data('id');
 			var postData ={
 				goods_id:goods_id
