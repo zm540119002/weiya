@@ -1548,6 +1548,9 @@ background-position: 0 -27px;
     height: 45px;
     line-height: 45px;
 }
+.forgetWalletPasswordLayer .layui-m-layercont{
+    padding:0 0.25rem;
+}
 .invite_group_buy.group_buy_end{
     background: #727272;
 }
