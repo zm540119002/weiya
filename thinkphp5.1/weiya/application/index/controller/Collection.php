@@ -27,6 +27,8 @@ class Collection extends \common\controller\UserBase{
                 ['user_id','=',$this->user['id']],
                 ['goods_id','=',$goodsId],
                 ['status','=',0]
+            ] ,'field'=>[
+                'id'
             ]
         ];
         $info = $model -> getInfo($config);
@@ -78,8 +80,10 @@ class Collection extends \common\controller\UserBase{
         if($keyword) {
             $config['where'][] = ['o.name', 'like', '%' . trim($keyword) . '%'];
         }
+
         $list = $model -> pageQuery($config);
-        $this->assign('currentPage',$list->currentPage());
+        $currentPage = input('get.page/d');
+        $this->assign('currentPage',$currentPage);
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             $pageType = $_GET['pageType'];
@@ -96,7 +100,7 @@ class Collection extends \common\controller\UserBase{
         $model = new \app\index\model\Collection();
         $condition = [
             ['user_id','=',$this->user['id']],
-            ['id','in',$ids],
+            ['goods_id','in',$ids],
         ];
         $result = $model -> del($condition);
         if($result['status']){

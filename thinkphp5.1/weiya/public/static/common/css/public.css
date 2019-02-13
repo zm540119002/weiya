@@ -1698,6 +1698,7 @@ background-position: 0 -27px;
 .payPasswordLayer .layui-m-layerbtn,
 .forgetWalletPasswordLayer .layui-m-layerbtn{
     position:relative;
+    display:block;
 }
 .payPasswordLayer .layui-m-layerbtn span,
 .forgetWalletPasswordLayer .layui-m-layerbtn span{
@@ -1705,7 +1706,7 @@ background-position: 0 -27px;
 }
 .payPasswordLayer .layui-m-layerbtn span[yes],
 .forgetWalletPasswordLayer .layui-m-layerbtn span[yes]{
-    margin:0 0 0 -82%;
+    /*margin:0 0 0 -82%;*/
 }
 .factoryListLayer .layui-m-layerbtn span[yes],
 .setRoleLayer .layui-m-layerbtn span[yes],
@@ -4174,13 +4175,16 @@ select[name="nodeIds"]{
 .payPasswordLayer .layui-m-layerbtn span[type="0"],
 .forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
     top: -172px;
-    right: -248px;
-    width: 10px;
+    right: 0;
+    width: 20px;
     border-right: none;
+    position: absolute;
+    display: block;
+    height: 30px;
 }
 .forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
     top: -246px;
-    right: -286px;
+    /*right: -286px;*/
 }
 .layui-m-layer-shareqrCodeLayer .layui-m-layerbtn span{
     color:#575757;
@@ -4581,7 +4585,7 @@ ul.message_list{
 .wk_notice .more{
     color:#ff4745;
 }
-.tags_item_r a span{
+.tags_item_r a span.icon{
     display:inline-block;
     width:0.4rem;
     height:0.35rem;
@@ -4590,7 +4594,7 @@ ul.message_list{
     background-size:0.35rem 2.18rem;
     vertical-align: -6px;
 }
-.tags_item_r .collection span{
+.tags_item_r .collection span.icon{
     background-position:0 0;
 }
 .tags_item_r .share span{
@@ -5770,7 +5774,7 @@ ul.info_list li{
 .wk_notice{
     color:#1CAD99;
 }
-.tags_item_r a span{
+.tags_item_r a span.icon{
     display:inline-block;
     width:0.4rem;
     height:0.35rem;
