@@ -360,7 +360,7 @@
 		//收藏
 		$('body').on('click','.collection',function(){
 			var _this = $(this);
-			if(_this.find('span').hasClass('selected')){
+			if(_this.find('span.icon').hasClass('selected')){
 				dialog.error('已收藏过');
 				return false;
 			}
