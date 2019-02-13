@@ -10,7 +10,6 @@
 	<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		var domain = '{:request()->domain()}'+'/'+'index.php/';
-		console.log(domain);
 		var module = domain + '{:request()->module()}/';
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
