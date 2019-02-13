@@ -1407,7 +1407,7 @@ background-position: 0 -27px;
     color:#333;
 }
 .loginBtn ,.registerBtn,.forgetPasswordBtn,.entry-button{
-    margin:0.55rem 0 0.25rem;
+    margin:0.55rem 0.25rem 0.25rem;
     height: .45rem;
     line-height: .46rem;
     background-color: #FF7BAC;
