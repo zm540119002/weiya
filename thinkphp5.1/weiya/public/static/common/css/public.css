@@ -5547,7 +5547,7 @@ ul.info_list li{
 .brand_logo{
     display:block;
     min-width: 0.8rem;
-    height: 0.68rem;
+    min-height: 0.68rem;
     overflow:hidden;
 }
 .group_cart_nav a.add_brand{
