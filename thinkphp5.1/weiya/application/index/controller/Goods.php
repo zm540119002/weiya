@@ -128,6 +128,25 @@ class Goods extends \common\controller\Base{
             $total = $modelComment -> where($where)->count('user_id');
             $this ->assign('total',$total);
 
+            //登录判断是否已收藏
+            $user = session('user');
+            if(!empty($user)){
+                $modelCollection = new \app\index\model\Collection();
+                $config = [
+                    'where'=>[
+                        ['user_id','=',$user['id']],
+                        ['goods_id','=',$id],
+                        ['status','=',0]
+                    ],'filed'=>[
+                        'id'
+                    ]
+                ];
+                $info = $modelCollection -> getInfo($config);
+                if(count($info)){
+                    $this->assign('collected', 1);
+                }
+            }
+
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();

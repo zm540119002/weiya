@@ -27,6 +27,8 @@ class Collection extends \common\controller\UserBase{
                 ['user_id','=',$this->user['id']],
                 ['goods_id','=',$goodsId],
                 ['status','=',0]
+            ] ,'field'=>[
+                'id'
             ]
         ];
         $info = $model -> getInfo($config);
