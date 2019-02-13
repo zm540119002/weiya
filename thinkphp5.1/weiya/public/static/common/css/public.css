@@ -5545,8 +5545,9 @@ ul.info_list li{
     color:#fff;
 }
 .brand_logo{
+    display:block;
     max-width: 0.8rem;
-    height: 0.8rem;
+    height: 0.68rem;
 }
 .group_cart_nav a.add_brand{
     padding:0;
