@@ -26,11 +26,11 @@
                     <span class="selected"></span>
                     <span class="wx"></span>
                 </li>
-                <li data-paycode="3">银联支付
-                    <!--<input type="checkbox" class=""/>-->
-                    <span class="selected"></span>
-                    <span class="wx"></span>
-                </li>
+                <!--<li data-paycode="3">银联支付-->
+                    <!--&lt;!&ndash;<input type="checkbox" class=""/>&ndash;&gt;-->
+                    <!--<span class="selected"></span>-->
+                    <!--<span class="wx"></span>-->
+                <!--</li>-->
                 {if $walletInfo.amount >= $orderInfo.amount}
                 <li data-paycode="4" >
                 {else /}
@@ -90,10 +90,6 @@
         });
 
         $('body').on('click','.forget_wallet_password',function () {
-//            var pay_code = $('input[name=pay_code]').val();
-////            var data = $('#pay_info').serializeObject();
-//            var data = $('#pay_info').serialize();
-//            data.pay_code = pay_code;
             forgetWalletPasswordDialog()
         })
     });
