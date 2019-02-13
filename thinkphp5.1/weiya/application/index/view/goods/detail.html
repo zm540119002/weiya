@@ -389,7 +389,7 @@
 						if(data.status==0){
 							dialog.error(data.info);
 						}else {
-							dialog.success('取消收藏成功');
+							dialog.success(data.info);
 							_this.find('span.icon').removeClass('selected');
 							_this.find('span.text').text('收藏');
 						}

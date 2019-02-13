@@ -42,7 +42,7 @@ class Collection extends \common\controller\UserBase{
         ];
         $result = $model -> isUpdate(false) -> save($data);
         if($result){
-            return successMsg('收藏成功');
+            return successMsg('已成功收藏');
         }else{
             return errorMsg('收藏失败');
         }
@@ -104,7 +104,7 @@ class Collection extends \common\controller\UserBase{
         ];
         $result = $model -> del($condition);
         if($result['status']){
-            return successMsg('删除成功');
+            return successMsg('已取消收藏');
         }else{
             return errorMsg('删除失败');
         }
