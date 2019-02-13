@@ -5626,6 +5626,7 @@ ul.info_list li{
     background: #fff;
 }
 .bank_transfer{
+    padding:0.15rem 0 0;
     margin:0.15rem 0 0;
     border-top:1px solid #d9d9d9;
 }
