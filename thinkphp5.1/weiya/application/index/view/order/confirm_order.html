@@ -295,55 +295,6 @@
 					$(this).attr('data-off',1);
 				}
 			});
-            //删除地址
-//             $('body').on('click','.address_delete',function () {
-//                 var _this = $(this);
-//                 var postData = {};
-//                 postData.address_id = _this.siblings().find('.address_id').val();
-//                 layer.open({
-//                     content : '删除你选中的地址吗',
-//                     time:5,
-//                     btn : ['是','否'],
-//                     title: '提示',
-//                     yes : function(index){
-//                         _this.addClass("nodisabled");//防止重复提交
-//                         var url = module + '/Address/del';
-//                         $.ajax({
-//                             url: url,
-//                             data: postData,
-//                             type: 'post',
-//                             beforeSend: function(){
-//                                 $('.loading').show();
-//                             },
-//                             error:function(){
-//                                 $('.loading').hide();
-//                                 dialog.error('AJAX错误');
-//                             },
-//                             success: function(data){
-//                                 _this.removeClass("nodisabled");//删除防止重复提交
-//                                 $('.loading').hide();
-//                                 if(data.status == 1){
-//                                     _this.parents('.item_addr').remove();
-//                                     $.each($('.delivery_address .item_addr'),function(){
-//                                         var _thisId=$(this).find('.address_id').val();
-//                                         if(postData.address_id==_thisId){
-//                                             $(this).remove();
-//                                         }
-//                                     })
-//                                 }
-//                                 if(data.status == 0){
-//                                     dialog.error(data.info);
-//                                 }
-//                             }
-//                         });
-//                         layer.close(index);
-//                     }
-//                 });
-//
-//		     })
-
-
-
         })
         //新增和修改地址弹窗
         var addressInfo=$('.section-address').html();
