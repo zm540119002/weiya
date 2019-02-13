@@ -110,6 +110,7 @@
             customItemTpl.find('.custom_item').attr('data-from_client_id',data.from_client_id);
             $('ul.custom_list').append(customItemTpl.html());
             var messageListTpl = $('#messageListTpl');
+            console.log(messageListTpl.html());
             var messageUl = messageListTpl.find('ul');
             messageUl.attr('data-from_id',data.from_id);
             messageUl.find('.message_item').attr('data-id',data.id);
