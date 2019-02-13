@@ -52,8 +52,6 @@
             var _thisMessageUl = $(this);
             //找到聊天列表
             if(data.from_id && _thisMessageUl.data('from_id')==data.from_id){
-                console.log(_thisMessageUl.data('from_id'));
-                console.log(data.from_id);
                 find_sign = true;
                 var messageItemTpl = $('#messageItemTpl');
                 messageItemTpl.find('.message_item').attr('data-id',data.id);
@@ -114,6 +112,7 @@
             var messageListTpl = $('#messageListTpl');
             console.log(messageListTpl.html());
             var messageUl = messageListTpl.find('ul');
+            console.log(messageUl);
             messageUl.attr('data-from_id',data.from_id);
             messageUl.find('.message_item').attr('data-id',data.id);
             messageUl.find('.msg').text(data.content);
