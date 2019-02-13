@@ -382,7 +382,8 @@
 							dialog.error(data.info);
 						}else {
 							dialog.success('取消收藏成功');
-
+							_this.find('span.icon').removeClass('selected');
+							_this.find('span.text').text('收藏');
 							if(!$('.list li').length){
 								var html=$('.no_collection').html();
 								$('.list').append(html);
