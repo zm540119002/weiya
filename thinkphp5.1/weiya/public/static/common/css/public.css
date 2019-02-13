@@ -5546,7 +5546,7 @@ ul.info_list li{
 }
 .brand_logo{
     max-width: 0.8rem;
-    min-height: 0.8rem;
+    height: 0.8rem;
 }
 .group_cart_nav a.add_brand{
     padding:0;
@@ -5614,6 +5614,10 @@ ul.info_list li{
 }
 .forget_wallet_password{
     color:#0066cc;
+}
+.bank_transfer{
+    padding:0.15rem;
+    background: #fff;
 }
 /*订单客服售前*/
 .layui-m-layerchild.chatLayer{
