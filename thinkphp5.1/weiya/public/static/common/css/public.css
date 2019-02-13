@@ -1233,7 +1233,8 @@ background-position: 0 -27px;
 .layui-m-layer .loginLayer .layui-m-layercont,
 .layui-m-layer .registerLayer .layui-m-layercont,
 .layui-m-layer .forgetPasswdLayer .layui-m-layercont,
-.notesLayer .layui-m-layercont{padding:0 0.25rem;text-align:left;}
+.notesLayer .layui-m-layercont,
+.layui-m-layer .forgetPasswordLayer .layui-m-layercont{padding:0 0.25rem;text-align:left;}
 .loginLayer .layui-m-layerbtn,
 .registerLayer .layui-m-layerbtn
 .forgetPasswdLayer .layui-m-layerbtn{border-top:none;}
@@ -1535,7 +1536,7 @@ background-position: 0 -27px;
 }
 .bomb_box{
     position:relative;
-    padding:0 .25rem;
+    /*padding:0 .25rem;*/
 }
 .bomb_box .layer_close{
     right: -22px;
@@ -5545,8 +5546,10 @@ ul.info_list li{
     color:#fff;
 }
 .brand_logo{
-    max-width: 0.8rem;
-    min-height: 0.8rem;
+    display:block;
+    min-width: 0.8rem;
+    max-height: 0.68rem;
+    overflow:hidden;
 }
 .group_cart_nav a.add_brand{
     padding:0;
@@ -5614,6 +5617,10 @@ ul.info_list li{
 }
 .forget_wallet_password{
     color:#0066cc;
+}
+.bank_transfer{
+    padding:0.15rem;
+    background: #fff;
 }
 /*订单客服售前*/
 .layui-m-layerchild.chatLayer{
