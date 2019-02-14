@@ -2262,6 +2262,19 @@ background-position: 0 -27px;
     width:100%;
     height:2.6rem;
 }
+.delete-picture {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 5;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #ff7aab;
+    color: #fff;
+    cursor: pointer;
+}
 /*.upload-company-map .upload_img{
     width:100%;
     height:100%;
