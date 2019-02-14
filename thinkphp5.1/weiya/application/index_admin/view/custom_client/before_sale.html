@@ -49,8 +49,7 @@
                 if(data.avatar){
                     messageUl.find('img').attr('src',uploads+data.avatar);
                 }
-                //当前聊天框，则消息设置为已读
-                if(_thisMessageUl.hasClass('current')){
+                if(_thisMessageUl.hasClass('current')){//当前聊天框，则消息设置为已读
                     var postData = {};
                     postData.from_id = data.from_id;
                     postData.messageIds = [];
@@ -79,8 +78,7 @@
                             }
                         }
                     });
-                }else{
-                    //非当前聊天框
+                }else{//非当前聊天框
                     $.each($('li.custom_item'),function(){
                         var _thisCustomLi = $(this);
                         if(_thisCustomLi.data('from_id')==data.from_id){
@@ -90,6 +88,7 @@
                         }
                     });
                 }
+            }else if(){
             }
         });
         //未找到聊天列表
@@ -145,7 +144,9 @@
                 var _thisMessageUl = $(this);
                 if(postData.from_id==_thisMessageUl.data('from_id')){
                     $.each(_thisMessageUl.find('li.message_item.others.unread'),function(){
-                        postData.messageIds.push($(this).data('id'));
+                        if($(this).data('id')){
+                            postData.messageIds.push($(this).data('id'));
+                        }
                     });
                 }
             });
@@ -208,7 +209,9 @@
             postData.from_id = _thisCustomLi.find('ul').data('from_id');
             postData.messageIds = [];
             $.each(_thisCustomLi.find('li'),function(){
-                postData.messageIds.push($(this).data('id'));
+                if($(this).data('id')){
+                    postData.messageIds.push($(this).data('id'));
+                }
             });
             var url = domain + 'index/CustomerService/delCustomerMessage';
             $.ajax({

@@ -57,8 +57,7 @@ class CustomerService extends \common\controller\Base{
                     'create_time' => date('Y-m-d H:i',$msgCreateTime),
                     'id' => $msgId,
                 ];
-                //接收者-已登录
-                if(Gateway::isUidOnline($postData['to_user_id'])){
+                if(Gateway::isUidOnline($postData['to_user_id'])){//接收者-已登录
                     $saveData['to_accept'] = 1;
                     $res = $modelChatMessage->edit($saveData);
                     if($res['status']==0){
