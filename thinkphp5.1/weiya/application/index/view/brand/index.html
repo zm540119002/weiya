@@ -42,14 +42,14 @@
         <div class="upload-picture-module f24">
 			<div>
 				<div class="picture-module">
-					<input type="file" class="uploadImg uploadSingleImg">
-					<img class="upload_img" src="" alt="">
-					<input type="hidden" name="authorization" class="img" data-src="" value=""/>
+					<!--<input type="file" class="uploadImg uploadSingleImg">-->
+					<img class="upload_img" src="public_img/brand_template_img.jpg" alt="">
+					<!--<input type="hidden" name="authorization" class="img" data-src="" value=""/>-->
 				</div>
 			</div>
-            <div class="brand_txt">
-                如非自有商标需所有权者授权
-                <a href="javascript:;">商品授权书样板</a>
+            <div class="brand_txt example">
+                <p>如非自有商标需所有权者授权</p>
+                <a href="public_img/brand_template_img.jpg" download="brand_template_img.jpg" class="template_btn pink">商品授权书样板></a>
             </div>
 		</div>
     </form>
@@ -70,7 +70,7 @@
                     {else /}
                     <img src="public_uploads/{$info.logo}" alt="" class="left brand_logo" />
                     {/empty}
-                    <input type="text" class="brand_name" name="name" value="{$info.name}" unselectable="on" onfocus="this.blur()"/>
+                    <input type="text" class="brand_name input_width" name="name" value="{$info.name}" unselectable="on" onfocus="this.blur()"/>
                     <input type="hidden" class="brand_logo" name="logo" value="{$info.logo}"/>
                     <input type="hidden" class="" name="certificate" value="{$info.certificate}"/>
                     <input type="hidden" class="" name="authorization" value="{$info.authorization}"/>
@@ -139,8 +139,6 @@ $(function(){
                     content='请上传商标logo';
                 }else if(!postData.certificate){
                     content='请上传商标证或受理通知书';
-                }else if(!postData.authorization){
-                    content='请上传商标所有权者授权书';
                 }
                 if(content){
                     dialog.error(content);
@@ -186,8 +184,6 @@ $(function(){
                     content='请上传商标logo';
                 }else if(!postData.certificate){
                     content='请上传商标证或受理通知书';
-                }else if(!postData.authorization){
-                    content='请上传商标所有权者授权书';
                 }
                 if(content){
                     dialog.error(content);
@@ -290,7 +286,9 @@ $(function(){
         }
     });
     //设置样式
-    changeInputLen($('.input_width'));
+    if($('.input_width').length){
+        changeInputLen($('.input_width'));
+    }
 })
 </script>
 {/block}
