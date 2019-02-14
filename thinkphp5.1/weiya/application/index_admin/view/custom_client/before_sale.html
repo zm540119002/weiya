@@ -145,7 +145,9 @@
                 var _thisMessageUl = $(this);
                 if(postData.from_id==_thisMessageUl.data('from_id')){
                     $.each(_thisMessageUl.find('li.message_item.others.unread'),function(){
-                        postData.messageIds.push($(this).data('id'));
+                        if($(this).data('id')){
+                            postData.messageIds.push($(this).data('id'));
+                        }
                     });
                 }
             });
@@ -208,7 +210,9 @@
             postData.from_id = _thisCustomLi.find('ul').data('from_id');
             postData.messageIds = [];
             $.each(_thisCustomLi.find('li'),function(){
-                postData.messageIds.push($(this).data('id'));
+                if($(this).data('id')){
+                    postData.messageIds.push($(this).data('id'));
+                }
             });
             var url = domain + 'index/CustomerService/delCustomerMessage';
             $.ajax({
