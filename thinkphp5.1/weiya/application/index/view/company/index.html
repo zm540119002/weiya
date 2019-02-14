@@ -392,7 +392,7 @@
 				"z-index": 1001,
 				"opacity": "1"
 			});
-			//mySwiper.slideTo(i, 0, false);
+			
 			/*调起大图*/
 			var mySwiper = new Swiper('.swiper-container', {
 				// loop:true,
@@ -401,6 +401,7 @@
 					clickable: true
 				}
 			})
+			mySwiper.slideTo(i, 0, false);
 			return false;
 		});
 		$(".big_img").on("click",function() {
