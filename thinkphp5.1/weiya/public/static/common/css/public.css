@@ -2313,6 +2313,12 @@ background-position: 0 -27px;
 .multi-picture-module .picture-module{
     /*width:2.88rem;*/
 }
+.commodity_evaluation .upload-picture-module{
+    margin:0 0 0.15rem 0;
+}
+.commodity_evaluation .upload-picture-module li{
+    margin:0;
+}
 /*文字中间两边横向延伸线条*/
 .ctype-title {  
    height: 38px;  
