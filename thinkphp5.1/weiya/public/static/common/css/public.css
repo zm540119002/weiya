@@ -2262,6 +2262,19 @@ background-position: 0 -27px;
     width:100%;
     height:2.6rem;
 }
+.delete-picture {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 5;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #ff7aab;
+    color: #fff;
+    cursor: pointer;
+}
 /*.upload-company-map .upload_img{
     width:100%;
     height:100%;
@@ -2299,6 +2312,16 @@ background-position: 0 -27px;
 }
 .multi-picture-module .picture-module{
     /*width:2.88rem;*/
+}
+.commodity_evaluation .upload-picture-module{
+    margin:0 0 0.15rem 0;
+}
+.commodity_evaluation .upload-picture-module .picture-module{
+    width:2rem;
+    height:2rem;
+}
+.commodity_evaluation .upload-picture-module li{
+    margin:0;
 }
 /*文字中间两边横向延伸线条*/
 .ctype-title {  
