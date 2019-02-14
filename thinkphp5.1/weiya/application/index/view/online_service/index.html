@@ -137,9 +137,9 @@
 				to_user_id:17,
 				content:_this.val()
 			};
-			console.log(clientId);
+			console.log(init_client_id);
 			if(!loginSign){
-				postData.from_client_id = clientId;
+				postData.from_client_id = init_client_id;
 			}
 			var url = domain + 'index/CustomerService/sendMessage';
 			$.ajax({
