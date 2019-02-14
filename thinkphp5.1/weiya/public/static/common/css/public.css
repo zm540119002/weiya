@@ -5738,7 +5738,7 @@ ul.info_list li{
 .chat_list{
     position:relative;
 }
-.chat_list .detele_chat{
+.chat_list .delete_chat{
     position:absolute;
     right:0.15rem;
     color:#ff0000;
