@@ -2318,7 +2318,7 @@ background-position: 0 -27px;
     margin:0 0 0.15rem 0;
     overflow:inherit;
 }
-.commodity_evaluation .upload-picture-module .picture-module{
+.commodity_evaluation ul.upload-picture-module .picture-module{
     /*width:2rem;*/
     height:auto;
     overflow:inherit;
