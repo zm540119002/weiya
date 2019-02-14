@@ -174,7 +174,7 @@ class Goods extends \common\controller\Base{
                 ['goods g','g.id = rg.recommend_goods_id','left']
             ]
         ];
-        $list= $modelRecommendGoods->getList($config);
+        $list = $modelRecommendGoods->getList($config);
         $this->assign('list',$list);
         return view('goods/recommend_list_tpl');
     }
