@@ -17,11 +17,6 @@ class Consultation extends \common\controller\Base{
         }
         $data = input('post.');
         $model = new \app\index\model\NeedsMessage();
-//        $validate = new \app\index\validate\NeedsMessage();
-
-//        if (!$validate->check($data)) {
-//            dump($validate->getError());
-//        }
         $result = $model -> isUpdate(false)->save($data);
         if (!$result){
             return errorMsg('失败');
