@@ -401,10 +401,6 @@
 					clickable: true
 				}
 			})
-			$(".big_img .swiper-wrapper").find('div').eq(0).removeClass('swiper-slide-active');
-			$(".big_img .swiper-wrapper").find('div').eq(1).removeClass('swiper-slide-next');
-			$(".big_img .swiper-wrapper").find('div').eq(i).addClass('swiper-slide-active');
-			$(".big_img .swiper-wrapper").find('div').eq(i+1).addClass('swiper-slide-next');
 			return false;
 		});
 		$(".big_img").on("click",function() {
