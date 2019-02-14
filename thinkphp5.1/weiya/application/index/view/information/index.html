@@ -78,7 +78,7 @@
 			mainCell:".more-text",
 			openBtn:'显示全部>'
 		});
-		
+		//放大图片
 		$("#list").on("click", ".info_img img",function() {
 			var imgBox = $(this).parents(".info_img").find("img");
 			var i = $(imgBox).index(this);
@@ -110,7 +110,6 @@
 			$(".big_img .swiper-wrapper").find('div').eq(i+1).addClass('swiper-slide-next');
 			return false;
 		});
-	
 		$(".big_img").on("click",function() {
 			$(this).css({
 				"z-index": "-1",
@@ -118,7 +117,6 @@
 			});
 
 		});  
-		
 	});
 </script>
 {/block}
