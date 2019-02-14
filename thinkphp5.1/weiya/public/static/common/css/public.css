@@ -755,7 +755,7 @@ price{
     margin:0 0 0 .35rem;
 }
 .picture-tipc-box{
-    margin:0 0 0 .20rem;
+    /*margin:0 0 0 .20rem;*/
 }
 .resetpassword{
     display:block;
@@ -2315,7 +2315,7 @@ background-position: 0 -27px;
     /*width:2.88rem;*/
 }
 .commodity_evaluation .upload-picture-module{
-    margin:0 0 0.15rem 0;
+    margin:0 0 0.35rem 0;
     overflow:inherit;
 }
 
@@ -2329,7 +2329,7 @@ background-position: 0 -27px;
 }
 .commodity_evaluation .upload-picture-module li{
     width:auto;
-    margin:0 0 0.12rem 0;
+    margin:0 0 0.25rem 0;
 }
 /*文字中间两边横向延伸线条*/
 .ctype-title {  
