@@ -2316,6 +2316,10 @@ background-position: 0 -27px;
 .commodity_evaluation .upload-picture-module{
     margin:0 0 0.15rem 0;
 }
+.commodity_evaluation .upload-picture-module .picture-module{
+    width:2rem;
+    height:2rem;
+}
 .commodity_evaluation .upload-picture-module li{
     margin:0;
 }
