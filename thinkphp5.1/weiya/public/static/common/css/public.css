@@ -755,7 +755,7 @@ price{
     margin:0 0 0 .35rem;
 }
 .picture-tipc-box{
-    margin:0 0 0 .20rem;
+    /*margin:0 0 0 .20rem;*/
 }
 .resetpassword{
     display:block;
@@ -2262,6 +2262,20 @@ background-position: 0 -27px;
     width:100%;
     height:2.6rem;
 }
+.delete-picture {
+    position: absolute;
+    right: 0;
+    top: -10px;
+    z-index: 5;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    background: #ff7aab;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+}
 /*.upload-company-map .upload_img{
     width:100%;
     height:100%;
@@ -2299,6 +2313,23 @@ background-position: 0 -27px;
 }
 .multi-picture-module .picture-module{
     /*width:2.88rem;*/
+}
+.commodity_evaluation .upload-picture-module{
+    margin:0 0 0.35rem 0;
+    overflow:inherit;
+}
+
+.commodity_evaluation .upload-picture-module .picture-module:first-child{
+    height:2rem;
+}
+.commodity_evaluation ul.upload-picture-module .picture-module.active{
+    /*width:2rem;*/
+    height:auto;
+    overflow:inherit;
+}
+.commodity_evaluation .upload-picture-module li{
+    width:auto;
+    margin:0 0 0.25rem 0;
 }
 /*文字中间两边横向延伸线条*/
 .ctype-title {  
@@ -5535,6 +5566,9 @@ ul.info_list li{
     line-height:2.5rem;
     margin:0 0 0 0.20rem;
 }
+.brand_form .brand_txt.example{
+    line-height:26px;
+}
 .add_brand{
     /*position: fixed;
     left: 0;
@@ -5551,6 +5585,7 @@ ul.info_list li{
 .brand_logo{
     display:block;
     min-width: 0.8rem;
+    max-width: 0.8rem;
     max-height: 0.68rem;
     overflow:hidden;
 }
@@ -5738,7 +5773,7 @@ ul.info_list li{
 .chat_list{
     position:relative;
 }
-.chat_list .detele_chat{
+.chat_list .delete_chat{
     position:absolute;
     right:0.15rem;
     color:#ff0000;
