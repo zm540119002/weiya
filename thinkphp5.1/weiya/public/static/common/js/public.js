@@ -246,7 +246,6 @@ $.fn.tab = function(){
 };
 //根据input的value值css控制宽度变化
 function changeInputLen(obj){
-    console.log(obj);
     var textLength=obj.val().length;
     obj.css('width',textLength*15+'px');
 }
