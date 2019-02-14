@@ -2265,15 +2265,16 @@ background-position: 0 -27px;
 .delete-picture {
     position: absolute;
     right: 0;
-    top: 0;
+    top: -10px;
     z-index: 5;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
     text-align: center;
     background: #ff7aab;
     color: #fff;
     cursor: pointer;
+    display: block;
 }
 /*.upload-company-map .upload_img{
     width:100%;
@@ -2315,14 +2316,20 @@ background-position: 0 -27px;
 }
 .commodity_evaluation .upload-picture-module{
     margin:0 0 0.15rem 0;
+    overflow:inherit;
 }
-.commodity_evaluation .upload-picture-module .picture-module{
-    width:2rem;
+
+.commodity_evaluation .upload-picture-module .picture-module:first-child{
     height:2rem;
+}
+.commodity_evaluation ul.upload-picture-module .picture-module.active{
+    /*width:2rem;*/
+    height:auto;
+    overflow:inherit;
 }
 .commodity_evaluation .upload-picture-module li{
     width:auto;
-    margin:0;
+    margin:0 0 0.12rem 0;
 }
 /*文字中间两边横向延伸线条*/
 .ctype-title {  
