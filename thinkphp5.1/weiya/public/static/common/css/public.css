@@ -2321,6 +2321,7 @@ background-position: 0 -27px;
     height:2rem;
 }
 .commodity_evaluation .upload-picture-module li{
+    width:auto;
     margin:0;
 }
 /*文字中间两边横向延伸线条*/
