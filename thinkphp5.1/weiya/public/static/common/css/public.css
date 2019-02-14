@@ -2321,6 +2321,7 @@ background-position: 0 -27px;
 .commodity_evaluation .upload-picture-module .picture-module{
     /*width:2rem;*/
     height:auto;
+    overflow:inherit;
 }
 .commodity_evaluation .upload-picture-module li{
     width:auto;
