@@ -50,6 +50,7 @@
             //如果是已登录用户
             if(data.from_id && _thisMessageUl.data('from_id')==data.from_id){
                 find_sign = true;
+                console.log(messageUl.html());
                 if(_thisMessageUl.hasClass('current')){
                     //当前聊天框，设置消息为已读
                     if(!data.id){
@@ -96,7 +97,6 @@
                 }
             }else if(data.from_client_id && _thisMessageUl.data('from_client_id')==data.from_client_id){
                 console.log(messageUl.html());
-                console.log(123);
                 //如果是游客
                 find_sign = true;
                 //聊天框滚动条置底
