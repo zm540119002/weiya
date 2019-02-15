@@ -36,7 +36,7 @@ class CustomerService extends \common\controller\Base{
             $returnData['create_time'] = $msgCreateTime;
             $returnData['read'] = 1;
             $returnData['content'] = $postData['content'];
-            if($this->user){//发送者-已登录
+            if($this->user){//发送者为：注册用户
                 $returnData['avatar'] = $this->user['avatar'];
                 if($this->user['id']==$postData['to_user_id']){
                     return errorMsg('不能发给自己！');
@@ -57,20 +57,27 @@ class CustomerService extends \common\controller\Base{
                     'create_time' => date('Y-m-d H:i',$msgCreateTime),
                     'id' => $msgId,
                 ];
-                if(Gateway::isUidOnline($postData['to_user_id'])){//接收者-已登录
-                    $saveData['to_accept'] = 1;
+                if($postData['to_user_id']){//接收者为：注册用户
+                    if(Gateway::isUidOnline($postData['to_user_id'])){//在线
+                        $saveData['to_accept'] = 1;
+                    }else{//不在线
+                    }
                     $res = $modelChatMessage->edit($saveData);
                     if($res['status']==0){
                         return errorMsg('保存失败！',$res);
                     }
                     $msg['id'] = $res['id'];
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
-                }elseif(Gateway::isOnline($postData['to_client_id'])){//接收者-未登录
-                    Gateway::sendToClient($postData['to_client_id'],json_encode($msg));
-                }else{//接收者-未在线
-                    return errorMsg('对方未在线！');
+                }elseif($postData['to_client_id']){//接收者为：游客
+                    if(Gateway::isOnline($postData['to_client_id'])){//在线
+                        Gateway::sendToClient($postData['to_client_id'],json_encode($msg));
+                    }else{//不在线
+                        return errorMsg('对方未在线！');
+                    }
+                }else{
+                    return errorMsg('缺少参数');
                 }
-            }else{//发送者-未登录
+            }else{//发送者为：游客
                 $msg = [
                     'type' => 'msg',
                     'content' => $postData['content'],
@@ -80,12 +87,16 @@ class CustomerService extends \common\controller\Base{
                     'create_time' => date('Y-m-d H:i',$msgCreateTime),
                     'id' => $msgId,
                 ];
-                if(Gateway::isUidOnline($postData['to_user_id'])){//接收者-已登录
+                if($postData['to_user_id']){//接收者为：注册用户
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
-                }elseif(Gateway::isOnline($postData['to_client_id'])){//接收者-未登录
-                    Gateway::sendToClient($postData['to_client_id'],json_encode($msg));
-                }else{//接收者-未在线
-                    return errorMsg('对方未在线！');
+                }elseif($postData['to_client_id']){//接收者为：游客
+                    if(Gateway::isOnline($postData['to_client_id'])){//在线
+                        Gateway::sendToClient($postData['to_client_id'],json_encode($msg));
+                    }else{//不在线
+                        return errorMsg('对方未在线！');
+                    }
+                }else{
+                    return errorMsg('缺少参数');
                 }
             }
             $returnData['id'] = $msgId;

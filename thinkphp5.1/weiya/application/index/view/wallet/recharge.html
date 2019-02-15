@@ -1,18 +1,18 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <section class="bank_transfer_tpl" style="display:none;">
-    <form>
+    <form id="bankTransfer">
         <div class="upload-picture-module f24">
 			<div>
 				<div class="picture-module">
 					<input type="file" class="uploadImg uploadSingleImg" >
 					<img class="upload_img" src="" alt="">
-					<input type="hidden" name="logo" class="img" data-src="" value=""/>
+					<input type="hidden" name="voucher" class="img" data-src="" value=""/>
 				</div>
 			</div>
 		</div>
         <p>上传转账汇款凭证(截屏或拍照)，以便通知客服人员及时进行账户人工充值，以免影响采购结算</p>
-        <a href="javascript:;">确定</a>
+        <a href="javascript:;" class="entry_btn">确定</a>
     </form>
 </section>
 <article class="f24 pay_wrapper">
@@ -90,6 +90,7 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
     $(function(){
         $('.pay_nav li').on('click',function(){
@@ -122,10 +123,28 @@
         $('body').on('click','.bank_transfer',function () {
             layer.open({
                 title:['转账凭证','border-bottom:1px solid #d9d9d9;'],
+                type:1,
+                anim:'up',
                 className:'bankTransferLayer',
                 content:banksTransferTpl
             })
-        })
+        });
+        $('body').on('click','.entry_btn',function () {
+            var postData={};
+            var voucher=$('.bankTransferLayer').find('.img').val();
+            postData.voucher=voucher;
+            var content='';
+            console.log(voucher);
+            if(!postData.voucher){
+                content='请上传转账凭证';
+            }
+            if(content){
+                dialog.error(content);
+                return false;
+            }
+            var url =  module + 'Mine/index';
+            location.href = url;
+        });
     });
 </script>
 {/block}
