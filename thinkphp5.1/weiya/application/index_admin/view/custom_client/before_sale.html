@@ -154,7 +154,6 @@
         $('body').on('click','li.custom_item',function(){
             var _thisCustomLi=$(this);
             _thisCustomLi.addClass('current').siblings().removeClass('current');
-            alert(_thisCustomLi.index());
             $('.chat_main_wrapper .message_list').removeClass('current').eq(_thisCustomLi.index()).addClass('current');
             var curLength=$('ul.message_list.current').find('li').length;
             if(curLength){
