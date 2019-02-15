@@ -5666,7 +5666,7 @@ ul.info_list li{
     border-top:1px solid #d9d9d9;
 }
 .bank_transfer::after{
-    top:40%;
+    top:54%;
 }
 /*订单客服售前*/
 .layui-m-layerchild.chatLayer{
