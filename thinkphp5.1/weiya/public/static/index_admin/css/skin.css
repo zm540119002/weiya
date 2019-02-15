@@ -1602,6 +1602,11 @@ filter:alpha(opacity:0);
 .content .msg{
     
 }
+.custom_list{
+	height:454px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
 .chat_list,.custom_item{
     position:relative;
 }

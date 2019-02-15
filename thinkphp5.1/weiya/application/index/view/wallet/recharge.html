@@ -1,5 +1,20 @@
 {extend name="template/base.html" /}
 {block name="content"}
+<section class="bank_transfer_tpl" style="display:none;">
+    <form>
+        <div class="upload-picture-module box-flex f24">
+			<div>
+				<div class="picture-module">
+					<input type="file" class="uploadImg uploadSingleImg" >
+					<img class="upload_img" src="" alt="">
+					<input type="hidden" name="logo" class="img" data-src="" value=""/>
+				</div>
+			</div>
+		</div>
+        <p>上传转账汇款凭证(截屏或拍照)，以便通知客服人员及时进行账户人工充值，以免影响采购结算</p>
+        <a href="javascript:;">确定</a>
+    </form>
+</section>
 <article class="f24 pay_wrapper">
     <section class="header_title separation-line">
         <a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
@@ -89,7 +104,7 @@
             $('.recharge_form price').text(rechargeMoney);
             $('input[name="amount"]').val(rechargeMoney);
         });
-
+        //充值支付
         $('body').on('click','.pay_btn',function () {
             var pay_code = $('input[name=pay_code]').val();
             var rechargeMoney = $('input[name=amount]').val();
@@ -101,7 +116,13 @@
                 dialog.error('请选择支付方式');
                 return false;
             }
-
+        });
+        var banksTransferTpl=$('.bank_transfer_tpl').html();
+        $('body').on('click','.bank_transfer',function () {
+            layer.open({
+                title:['转账凭证','border-bottom:1px solid #d9d9d9;'],
+                content:banksTransferTpl
+            })
         })
     });
 </script>
