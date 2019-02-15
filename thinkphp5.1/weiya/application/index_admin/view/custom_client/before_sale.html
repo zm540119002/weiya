@@ -102,9 +102,9 @@
             }else if(data.from_client_id && _thisMessageUl.data('from_client_id')==data.from_client_id){
                 //如果是游客
                 find_sign = true;
-                //聊天框滚动条置底
-                messageSetBottom();
                 _thisMessageUl.append(messageUl.html());
+                 //聊天框滚动条置底
+                messageSetBottom();
                 if(!_thisMessageUl.hasClass('current')){
                     //非当前聊天框，提示有新消息
                     $.each($('li.custom_item'),function(){
