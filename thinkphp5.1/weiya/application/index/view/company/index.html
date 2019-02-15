@@ -5,7 +5,7 @@
 {block name="content"}
 <article class="f24">
     <section class="slider_banner">
-		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+		<div class="swiper-container1 swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide swiper-slide-active">
 					<img src="index_img/corporate_banner.jpg" alt="" class="common_default_img">
@@ -283,8 +283,8 @@
 </article>
 <div class="big_img">
 	<section class="enlarge_img">
-		<div class="swiper-big-container swiper-container-horizontal swiper-container-ios">
-			<div class="swiper-wrapper swiper-big-wrapper">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
 				
 			</div>
 			<!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
@@ -358,7 +358,7 @@
 <script type="text/javascript">
 	$(function(){
 		//轮播
-		var swiper = new Swiper('.swiper-container', {
+		var swiper = new Swiper('.swiper-container1',{
 			spaceBetween: 30,
 			autoplay:true,
 			pagination: {
@@ -380,11 +380,11 @@
 			var imgBox = $(this).parents(".info_img").find("img");
 			var i = $(imgBox).index(this);
 			console.log(i);
-			$(".big_img .swiper-big-wrapper").html("");
+			$(".big_img .swiper-wrapper").html("");
 			console.log(imgBox.length);
 			for(var j = 0 ,c = imgBox.length; j < c ;j++){
 				console.log(imgBox.eq(j).attr("src"));
-				$(".big_img .swiper-big-wrapper").append('<div class="swiper-slide"><img src="' + imgBox.eq(j).attr("src") + '" / ></div>');
+				$(".big_img .swiper-wrapper").append('<div class="swiper-slide"><img src="' + imgBox.eq(j).attr("src") + '" / ></div>');
 			}			
 			// mySwiper.updateSlidesSize();swiper-slide-active
 			// mySwiper.updatePagination();
@@ -394,7 +394,7 @@
 			});
 			//mySwiper.slideTo(i, 0, false);
 			/*调起大图*/
-			var mySwiper = new Swiper('swiper-big-container', {
+			var mySwiper = new Swiper('.swiper-container', {
 				// loop:true,
 				pagination: {
 					el: '.swiper-pagination',
