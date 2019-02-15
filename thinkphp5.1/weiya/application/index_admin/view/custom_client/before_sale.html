@@ -92,6 +92,11 @@
                             _thisCustomLi.find('span.news_num').text(++num);
                             _thisMessageUl.append(messageUl.html());
                         }
+                        if(_thisCustomLi.data('from_client_id')==data.from_client_id){
+                            var num = _thisCustomLi.find('span.news_num').text();
+                            _thisCustomLi.find('span.news_num').text(++num);
+                            _thisMessageUl.append(messageUl.html());
+                        }
                     });
                 }
             }else if(data.from_client_id && _thisMessageUl.data('from_client_id')==data.from_client_id){
@@ -118,6 +123,7 @@
             var customLi = $('#customItemTpl').find('li').clone();
             customLi.attr('data-from_client_id',data.from_client_id);
             customLi.find('.author').text(data.from_name);
+            customLi.find('span.news_num').text(1);
             $('ul.custom_list').append(customLi);
             //追加消息
             data.from_client_id && messageUl.attr('data-from_client_id',data.from_client_id);
