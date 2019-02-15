@@ -95,12 +95,12 @@
                     });
                 }
             }else if(data.from_client_id && _thisMessageUl.data('from_client_id')==data.from_client_id){
-                console.log(data.from_client_id);
-                console.log(_thisMessageUl.data('from_client_id'));
+                console.log(_thisMessageUl);
+                console.log(messageUl.html());
                 //如果是游客
                 find_sign = true;
                 //聊天框滚动条置底
-                messageSetBottom();
+//                messageSetBottom();
                 _thisMessageUl.append(messageUl.html());
                 if(!_thisMessageUl.hasClass('current')){
                     //非当前聊天框，提示有新消息
