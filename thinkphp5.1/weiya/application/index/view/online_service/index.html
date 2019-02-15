@@ -94,14 +94,21 @@
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
 	function on_msg_call_back(data) {
-		var messageItemTpl = $('#messageItemTpl');
-		messageItemTpl.find('.message_item').attr('data-id',data.id);
-		messageItemTpl.find('.msg').text(data.content);
-		messageItemTpl.find('.create_time').text(data.create_time);
+//		var messageItemTpl = $('#messageItemTpl');
+//		messageItemTpl.find('.message_item').attr('data-id',data.id);
+//		messageItemTpl.find('.msg').text(data.content);
+//		messageItemTpl.find('.create_time').text(data.create_time);
+//		if(data.avatar){
+//			messageItemTpl.find('img').attr('src',uploads+data.avatar);
+//		}
+		var messageUl = $('#messageListTpl').find('ul').clone();
+		messageUl.find('.message_item').attr('data-id',data.id);
+		messageUl.find('.msg').text(data.content);
+		messageUl.find('.create_time').text(data.create_time);
 		if(data.avatar){
-			messageItemTpl.find('img').attr('src',uploads+data.avatar);
+			messageUl.find('img').attr('src',uploads+data.avatar);
 		}
-		$('ul.message_list').append(messageItemTpl.html());
+		$('ul.message_list').append(messageUl.html());
 		//聊天框滚动条置底
 		messageSetBottom();
 		//设置信息已读
