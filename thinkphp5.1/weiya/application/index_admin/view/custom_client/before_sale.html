@@ -163,12 +163,12 @@
                 if(postData.from_id==_thisMessageUl.data('from_id')){
                     $.each(_thisMessageUl.find('li.message_item.others.unread'),function(){
                         if($(this).data('id')){
+                            $(this).removeClass('unread').addClass('read');
                             postData.messageIds.push($(this).data('id'));
                         }
                     });
                 }
             });
-            console.log(postData);
             //设置信息已读
             setMessageRead(_thisCustomLi,postData);
         });
