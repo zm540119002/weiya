@@ -35,7 +35,7 @@
     var loginSign = '{$loginSign|default=""}';
     function on_msg_call_back(data) {
         console.log(data);
-        var messageUl = $('#messageListTpl').find('ul');
+        var messageUl = $('#messageListTpl').find('ul').clone();
         messageUl.find('.message_item').attr('data-id',data.id);
         messageUl.find('.msg').text(data.content);
         messageUl.find('.create_time').text(data.create_time);
@@ -118,7 +118,7 @@
         //未找到聊天列表
         if(!find_sign){
             //追加客户
-            var customLi = $('#customItemTpl').find('li');
+            var customLi = $('#customItemTpl').find('li').clone();
             customLi.attr('data-from_client_id',data.from_client_id);
             customLi.find('.author').text(data.from_name);
             $('ul.custom_list').append(customLi);
