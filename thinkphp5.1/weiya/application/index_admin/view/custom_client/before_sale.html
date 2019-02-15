@@ -35,17 +35,17 @@
     var loginSign = '{$loginSign|default=""}';
     function on_msg_call_back(data) {
         console.log(data);
+        var messageUl = $('#messageListTpl').find('ul');
+        messageUl.find('.message_item').attr('data-id',data.id);
+        messageUl.find('.msg').text(data.content);
+        messageUl.find('.create_time').text(data.create_time);
+        if(data.avatar){
+            messageUl.find('img').attr('src',uploads+data.avatar);
+        }
         //找到聊天列表标记
         var find_sign = false;
         $.each($('ul.message_list'),function(){
             var _thisMessageUl = $(this);
-            var messageUl = $('#messageListTpl').find('ul');
-            messageUl.find('.message_item').attr('data-id',data.id);
-            messageUl.find('.msg').text(data.content);
-            messageUl.find('.create_time').text(data.create_time);
-            if(data.avatar){
-                messageUl.find('img').attr('src',uploads+data.avatar);
-            }
             //找聊天列表
             //如果是已登录用户
             if(data.from_id && _thisMessageUl.data('from_id')==data.from_id){
@@ -123,15 +123,8 @@
             customLi.find('.author').text(data.from_name);
             $('ul.custom_list').append(customLi);
             //追加消息
-            var messageUl = $('#messageListTpl').find('ul');
-            messageUl.attr('data-from_id',data.from_id);
-            messageUl.attr('data-from_client_id',data.from_client_id);
-            messageUl.find('.message_item').attr('data-id',data.id);
-            messageUl.find('.msg').text(data.content);
-            messageUl.find('.create_time').text(data.create_time);
-            if(data.avatar){
-                messageUl.find('img').attr('src',uploads+data.avatar);
-            }
+            data.from_id && messageUl.attr('data-from_id',data.from_id);
+            data.from_client_id && messageUl.attr('data-from_client_id',data.from_client_id);
             $('div.chatMsg-ct').append(messageUl);
         }
     }
