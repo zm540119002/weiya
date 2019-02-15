@@ -284,7 +284,7 @@
 <div class="big_img">
 	<section class="enlarge_img">
 		<div class="swiper-big-container swiper-container-horizontal swiper-container-ios">
-			<div class="swiper-wrapper">
+			<div class="swiper-wrapper swiper-big-wrapper">
 				
 			</div>
 			<!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
@@ -384,7 +384,7 @@
 			console.log(imgBox.length);
 			for(var j = 0 ,c = imgBox.length; j < c ;j++){
 				console.log(imgBox.eq(j).attr("src"));
-				$(".big_img .swiper-wrapper").append('<div class="swiper-slide"><img src="' + imgBox.eq(j).attr("src") + '" / ></div>');
+				$(".big_img .swiper-big-wrapper").append('<div class="swiper-slide"><img src="' + imgBox.eq(j).attr("src") + '" / ></div>');
 			}			
 			// mySwiper.updateSlidesSize();swiper-slide-active
 			// mySwiper.updatePagination();
