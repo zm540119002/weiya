@@ -2,7 +2,7 @@
 {block name="content"}
 <section class="bank_transfer_tpl" style="display:none;">
     <form>
-        <div class="upload-picture-module box-flex f24">
+        <div class="upload-picture-module f24">
 			<div>
 				<div class="picture-module">
 					<input type="file" class="uploadImg uploadSingleImg" >
@@ -117,10 +117,12 @@
                 return false;
             }
         });
+        //转账凭证
         var banksTransferTpl=$('.bank_transfer_tpl').html();
         $('body').on('click','.bank_transfer',function () {
             layer.open({
                 title:['转账凭证','border-bottom:1px solid #d9d9d9;'],
+                className:'bankTransferLayer',
                 content:banksTransferTpl
             })
         })
