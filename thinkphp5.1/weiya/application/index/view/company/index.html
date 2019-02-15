@@ -54,16 +54,16 @@
 					</div>
 					<div class="dynamic_img info_img">
 						<a href="javascript:void(0);">
-							<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564787676.jpg" alt="">
+							<img src="index_img/zjwy_cp01.jpg" alt="">
 						</a>
 						<a href="javascript:void(0);">
-							<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564723675.jpg" alt="">
+							<img src="index_img/zjwy_cp02.jpg" alt="">
 						</a>
 						<a href="javascript:void(0);">
-							<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564194474.jpg" alt="">
+							<img src="index_img/zjwy_cp03.jpg" alt="">
 						</a>
 						<a href="javascript:void(0);">
-							<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564700419.jpg" alt="">
+							<img src="index_img/zjwy_cp04.jpg" alt="">
 						</a>
 						<a href="javascript:void(0);">
 							<img src="index_img/zjwy_cp05.jpg" alt="">
@@ -118,7 +118,7 @@
 				</li>
 			</ul>
 		</div>
-		<!--<div class="weiya_item hide">
+		<div class="weiya_item hide">
 			<div class="content-padding">
 				<h4>广东维雅生物科技有限公司</h4>
 				<h4>美业领先的品牌定制（加工）厂商</h4>
@@ -278,15 +278,37 @@
 				<p>维雅工厂的导航定位</p>
 				<div id="allmap" class="weiya_map"></div>
 			</div>
-		</div>-->
+		</div>
     </section>
 </article>
 <div class="big_img">
 	<section class="enlarge_img">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
-			<div class="swiper-wrapper"></div>
+			<div class="swiper-wrapper">
+				
+			</div>
+			<!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>-->
 		</div>      
 	</section>
+    <!--<div class="swiper-container2 swiper-container-horizontal">
+      <div class="swiper-wrapper">
+			<div class="swiper-slide swiper-slide-active">
+					<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564787676.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564723675.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564194474.jpg" alt="" class="common_default_img">
+				</div>
+      </div>
+    </div>
+    <div class="swiper-pagination2 swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div>-->
 </div>
 <section class="bottom_nav_fixed bottom_white">
 	<nav class=" foot_nav_bar">
@@ -389,6 +411,74 @@
 
 		}); 
 	});
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");    // 创建Map实例
+	// 初始化地图,设置中心点坐标和地图级别
+	//map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  
 	
+	//map.centerAndZoom("广州",12); 
+	function setPlace(targetCity){
+		map.clearOverlays();    //清除地图上所有覆盖物
+		function myFun(){
+			var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+			map.centerAndZoom(pp,12);
+			//偏移中心居中
+			map.panBy(205,165);
+			//添加标注
+			map.addOverlay(new BMap.Marker(pp));    
+			//设置地图显示的城市 此项是必须设置的
+			//map.setCurrentCity("广州市经济技术开发区科学城开源大道206号"); 
+		}
+		
+
+		var local = new BMap.LocalSearch(map, { //智能搜索
+		onSearchComplete: myFun
+		});
+		local.search(targetCity);	
+	}
+	// var geolocation = new BMap.Geolocation(); 
+    // 	geolocation.getCurrentPosition(function(r){ 
+	// 		if(this.getStatus() == BMAP_STATUS_SUCCESS){ 
+	// 			var mk = new BMap.Marker(r.point); 
+	// 			map.addOverlay(mk); 
+	// 			//map.panTo(r.point);//地图中心点移到当前位置 
+	// 			var latCurrent = r.point.lat; 
+	// 			var lngCurrent = r.point.lng; 
+	// 			alert('我的位置：'+ latCurrent + ',' + lngCurrent);
+	
+	// 			location.href="{:request()->scheme()}://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination=39.89778,116.709684&mode=driving&region=广州市经济技术开发区科学城开源大道&output=html"; 
+	
+	// 		} 
+	// 		else { 
+	// 			alert('failed'+this.getStatus()); 
+	// 		}         
+	// 	},{enableHighAccuracy: true}) 
+
+	// 	map.addOverlay(marker);   
+	// 	var licontent="<b>健龙森羽毛球馆</b><br>";   
+	// 		licontent+="<span><strong>地址：</strong>北京市通州区滨河中路108号</span><br>";   
+	// 		licontent+="<span><strong>电话：</strong>(010)81556565 / 6969</span><br>";           
+	// 	var opts = {  
+	// 		width : 200, 
+	// 		height: 80, 
+	// 	};          
+	// 	var  infoWindow = new BMap.InfoWindow(licontent, opts);   
+	// 	marker.openInfoWindow(infoWindow);   
+	// 	marker.addEventListener('click',function(){ 
+	// 		marker.openInfoWindow(infoWindow); 
+	// 	});
+	//添加地图类型控件
+	map.addControl(new BMap.MapTypeControl({
+		mapTypes:[
+			BMAP_NORMAL_MAP,
+			BMAP_HYBRID_MAP
+		]}));	  
+	
+	//开启鼠标滚轮缩放
+	map.enableScrollWheelZoom(true); 
+	//window.onload=function(){
+	var addr="广州市经济技术开发区科学城开源大道206号";
+		setPlace(addr);
+	//}
 </script>
 {/block}
