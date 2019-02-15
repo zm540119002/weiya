@@ -42,6 +42,7 @@
         if(data.avatar){
             messageUl.find('img').attr('src',uploads+data.avatar);
         }
+        console.log(messageUl.html());
         //找到聊天列表标记
         var find_sign = false;
         $.each($('ul.message_list'),function(){
@@ -118,12 +119,10 @@
         if(!find_sign){
             //追加客户
             var customLi = $('#customItemTpl').find('li');
-            customLi.attr('data-from_id',data.from_id);
             customLi.attr('data-from_client_id',data.from_client_id);
             customLi.find('.author').text(data.from_name);
             $('ul.custom_list').append(customLi);
             //追加消息
-            data.from_id && messageUl.attr('data-from_id',data.from_id);
             data.from_client_id && messageUl.attr('data-from_client_id',data.from_client_id);
             $('div.chatMsg-ct').append(messageUl);
         }
