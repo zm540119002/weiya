@@ -67,6 +67,8 @@ class CustomerService extends \common\controller\Base{
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
                 }elseif(Gateway::isOnline($postData['to_client_id'])){//接收者-未登录
                     Gateway::sendToClient($postData['to_client_id'],json_encode($msg));
+                }else{//接收者-未在线
+                    return errorMsg('对方未在线！');
                 }
             }else{//发送者-未登录
                 $msg = [
