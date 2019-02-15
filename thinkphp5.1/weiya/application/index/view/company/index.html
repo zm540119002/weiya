@@ -353,41 +353,7 @@
 			$(this).addClass('current').siblings().removeClass('current');
 			$('.weiya_item').hide().eq($(this).index()).show();
 		}); 
-		//放大图片
-		$("#list").on("click", ".info_img img",function() {
-			var imgBox = $(this).parents(".info_img").find("img");
-			var i = $(imgBox).index(this);
-			console.log(i);
-			$(".big_img .swiper-wrapper").html("");
-			console.log(imgBox.length);
-			for(var j = 0 ,c = imgBox.length; j < c ;j++){
-				console.log(imgBox.eq(j).attr("src"));
-				$(".big_img .swiper-wrapper").append('<div class="swiper-slide"><img src="' + imgBox.eq(j).attr("src") + '" / ></div>');
-			}			
-			// mySwiper.updateSlidesSize();swiper-slide-active
-			// mySwiper.updatePagination();
-			$(".big_img").css({
-				"z-index": 1001,
-				"opacity": "1"
-			});
-			//mySwiper.slideTo(i, 0, false);
-			/*调起大图*/
-			var mySwiper = new Swiper('.swiper-container', {
-				// loop:true,
-				pagination: {
-					el: '.swiper-pagination',
-					clickable: true
-				}
-			})
-			return false;
-		});
-		$(".big_img").on("click",function() {
-			$(this).css({
-				"z-index": "-1",
-				"opacity": "0"
-			});
-
-		}); 
+		
 	});
 	// 百度地图API功能
 	var map = new BMap.Map("allmap");    // 创建Map实例
@@ -458,5 +424,42 @@
 	var addr="广州市经济技术开发区科学城开源大道206号";
 		setPlace(addr);
 	//}
+	window.onload=function(){
+		//放大图片
+		$("#list").on("click", ".info_img img",function() {
+			var imgBox = $(this).parents(".info_img").find("img");
+			var i = $(imgBox).index(this);
+			console.log(i);
+			$(".big_img .swiper-wrapper").html("");
+			console.log(imgBox.length);
+			for(var j = 0 ,c = imgBox.length; j < c ;j++){
+				console.log(imgBox.eq(j).attr("src"));
+				$(".big_img .swiper-wrapper").append('<div class="swiper-slide"><img src="' + imgBox.eq(j).attr("src") + '" / ></div>');
+			}			
+			// mySwiper.updateSlidesSize();swiper-slide-active
+			// mySwiper.updatePagination();
+			$(".big_img").css({
+				"z-index": 1001,
+				"opacity": "1"
+			});
+			//mySwiper.slideTo(i, 0, false);
+			/*调起大图*/
+			var mySwiper = new Swiper('.swiper-container', {
+				// loop:true,
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true
+				}
+			})
+			return false;
+		});
+		$(".big_img").on("click",function() {
+			$(this).css({
+				"z-index": "-1",
+				"opacity": "0"
+			});
+
+		}); 
+	}
 </script>
 {/block}
