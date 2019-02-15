@@ -1548,7 +1548,8 @@ background-position: 0 -27px;
     height: 45px;
     line-height: 45px;
 }
-.layui-m-layer .forgetWalletPasswordLayer .layui-m-layercont{
+.layui-m-layer .forgetWalletPasswordLayer .layui-m-layercont,
+.layui-m-layer .bankTransferLayer .layui-m-layercont{
     padding:0 0.25rem;
 }
 .invite_group_buy.group_buy_end{
@@ -1606,7 +1607,8 @@ background-position: 0 -27px;
 .rolePowerLayer .layui-m-layercont,
 .accountInfoLayer .layui-m-layercont,
 .databaseLayer .layui-m-layercont,
-.groupRole .layui-m-layercont{
+.groupRole .layui-m-layercont,
+.bankTransferLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }
@@ -5667,6 +5669,12 @@ ul.info_list li{
 }
 .bank_transfer::after{
     top:54%;
+}
+.bankTransferLayer .upload-picture-module{
+    display:block;
+}
+.bankTransferLayer .upload-picture-module .picture-module{
+    margin:0 auto;
 }
 /*订单客服售前*/
 .layui-m-layerchild.chatLayer{

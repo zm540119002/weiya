@@ -42,11 +42,10 @@
         if(data.avatar){
             messageUl.find('img').attr('src',uploads+data.avatar);
         }
-        //找到聊天列表标记
+        //在聊天列表里找到标记
         var find_sign = false;
         $.each($('ul.message_list'),function(){
             var _thisMessageUl = $(this);
-            //找聊天列表
             //如果是已登录用户
             if(data.from_id && _thisMessageUl.data('from_id')==data.from_id){
                 find_sign = true;
@@ -87,13 +86,12 @@
                     //非当前聊天框，提示有新消息
                     $.each($('li.custom_item'),function(){
                         var _thisCustomLi = $(this);
-                        if(_thisCustomLi.data('from_id')==data.from_id){
-                            var num = _thisCustomLi.find('span.news_num').text();
+                        var num = _thisCustomLi.find('span.news_num').text();
+                        if(data.from_id && _thisCustomLi.data('from_id')==data.from_id){
                             _thisCustomLi.find('span.news_num').text(++num);
                             _thisMessageUl.append(messageUl.html());
                         }
-                        if(_thisCustomLi.data('from_client_id')==data.from_client_id){
-                            var num = _thisCustomLi.find('span.news_num').text();
+                        if(data.from_client_id && _thisCustomLi.data('from_client_id')==data.from_client_id){
                             _thisCustomLi.find('span.news_num').text(++num);
                             _thisMessageUl.append(messageUl.html());
                         }
@@ -118,7 +116,7 @@
                 }
             }
         });
-        //未找到聊天列表
+        //聊天列表里未找到，则追加
         if(!find_sign){
             //追加客户
             var customLi = $('#customItemTpl').find('li').clone();
