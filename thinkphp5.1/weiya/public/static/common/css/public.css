@@ -2854,6 +2854,9 @@ input[type=text]::-webkit-focus-inner {
 .swiper_banner_wrapper .swiper-container{
     height:4.5rem;
 }
+.swiper-container1{
+    position:relative;
+}
  .swiper-container {
     position: relative;
     width: 100%;
