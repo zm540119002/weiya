@@ -87,12 +87,15 @@ class CustomerService extends \common\controller\Base{
                     'create_time' => date('Y-m-d H:i',$msgCreateTime),
                     'id' => $msgId,
                 ];
-                if(Gateway::isUidOnline($postData['to_user_id'])){//接收者-已登录
+                if($postData['to_user_id']){//接收者为：注册用户
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
-                }elseif(Gateway::isOnline($postData['to_client_id'])){//接收者-未登录
-                    Gateway::sendToClient($postData['to_client_id'],json_encode($msg));
-                }else{//接收者-未在线
-                    return errorMsg('对方未在线！');
+                }elseif($postData['to_client_id']){//接收者为：游客
+                    if(Gateway::isOnline($postData['to_client_id'])){//接收者-在线
+                    }else{//接收者-不在线
+                        return errorMsg('对方未在线！');
+                    }
+                }else{
+                    return errorMsg('缺少参数');
                 }
             }
             $returnData['id'] = $msgId;
