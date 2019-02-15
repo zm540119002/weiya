@@ -47,6 +47,7 @@
                 messageUl.find('img').attr('src',uploads+data.avatar);
             }
             //找聊天列表
+            //如果是已登录用户
             if(data.from_id && _thisMessageUl.data('from_id')==data.from_id){
                 find_sign = true;
                 if(_thisMessageUl.hasClass('current')){
@@ -94,9 +95,12 @@
                     });
                 }
             }else if(data.from_client_id && _thisMessageUl.data('from_client_id')==data.from_client_id){
+                console.log(messageUl.html());
+                console.log(123);
+                //如果是游客
                 find_sign = true;
                 //聊天框滚动条置底
-                messageSetBottom();
+//                messageSetBottom();
                 _thisMessageUl.append(messageUl.html());
                 if(!_thisMessageUl.hasClass('current')){
                     //非当前聊天框，提示有新消息
