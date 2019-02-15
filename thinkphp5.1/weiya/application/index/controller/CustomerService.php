@@ -58,9 +58,9 @@ class CustomerService extends \common\controller\Base{
                     'id' => $msgId,
                 ];
                 if($postData['to_user_id']){//接收者为：注册用户
-                    if(Gateway::isUidOnline($postData['to_user_id'])){//接收者-在线
+                    if(Gateway::isUidOnline($postData['to_user_id'])){//在线
                         $saveData['to_accept'] = 1;
-                    }else{//接收者-不在线
+                    }else{//不在线
                     }
                     $res = $modelChatMessage->edit($saveData);
                     if($res['status']==0){
@@ -69,9 +69,9 @@ class CustomerService extends \common\controller\Base{
                     $msg['id'] = $res['id'];
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
                 }elseif($postData['to_client_id']){//接收者为：游客
-                    if(Gateway::isOnline($postData['to_client_id'])){//接收者-在线
+                    if(Gateway::isOnline($postData['to_client_id'])){//在线
                         Gateway::sendToClient($postData['to_client_id'],json_encode($msg));
-                    }else{//接收者-不在线
+                    }else{//不在线
                         return errorMsg('对方未在线！');
                     }
                 }else{
@@ -90,8 +90,9 @@ class CustomerService extends \common\controller\Base{
                 if($postData['to_user_id']){//接收者为：注册用户
                     Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
                 }elseif($postData['to_client_id']){//接收者为：游客
-                    if(Gateway::isOnline($postData['to_client_id'])){//接收者-在线
-                    }else{//接收者-不在线
+                    if(Gateway::isOnline($postData['to_client_id'])){//在线
+                        Gateway::sendToClient($postData['to_client_id'],json_encode($msg));
+                    }else{//不在线
                         return errorMsg('对方未在线！');
                     }
                 }else{
