@@ -4194,7 +4194,7 @@ select[name="nodeIds"]{
     text-overflow:ellipsis;
     white-space: nowrap;
     width:66px;
-    vertical-align:-4px;
+    vertical-align:middle;
 }
 .sample_purchase::after,
 .set_brand::after{
