@@ -68,6 +68,7 @@
 		$('.option_list li').on('click',function(){
 			var type=$(this).parents('.option_list').data('option_type');
 			if(type==1){
+				$(this).toggleClass('current');
 				$(this).addClass('current').siblings().removeClass('current');
 			}else{
 				$(this).toggleClass('current');
