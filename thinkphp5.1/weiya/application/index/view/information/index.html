@@ -96,6 +96,7 @@
 		$(".big_img").on("click",function() {
 			$('.swiper-wrapper').find('.swiper-slide').remove();
 			$('.swiper-pagination').find('.swiper-pagination-bullet').remove();
+			$('.swiper-notification').remove();
 			$(this).css({
 				"z-index": "-1",
 				"opacity": "0"
