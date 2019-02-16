@@ -4251,7 +4251,7 @@ select[name="nodeIds"]{
 }
 .payPasswordLayer .layui-m-layerbtn span[type="0"],
 .forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
-    top: -2.9rem;
+    top: -2.82rem;
     right: 0;
     width: 20px;
     border-right: none;
