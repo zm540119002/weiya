@@ -94,6 +94,7 @@
 			return false;
 		});
 		$(".big_img").on("click",function() {
+			$('.swiper-wrapper').find('.swiper-slide').remove();
 			$(this).css({
 				"z-index": "-1",
 				"opacity": "0"
