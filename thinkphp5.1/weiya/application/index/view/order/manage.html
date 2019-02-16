@@ -80,12 +80,11 @@
         };
         $(function(){
             var order_status={:json_encode($order_status)};
+            con
             order_status=parseInt(order_status);
             $.each($('.menu_nav li'),function () {
                 var li_order_status = $(this).find('a').data('order_status');
                 if(li_order_status==order_status){
-                    $(this).addClass('current');
-                }else{
                     $(this).addClass('current');
                 }
             })
