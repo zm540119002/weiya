@@ -120,8 +120,12 @@
 				data:postData,
 				success:function(data){
 					 if(data.status){
-						 dialog.success(data.info,flushPage());
-						 return false;
+						 dialog.success(data.info);
+						 setTimeout(function(){
+							var url =  module + 'Consultation/index';
+							location.href = url;
+						 },3000);
+						 //return false;
 					 }
 					dialog.error(data.info);
 				},

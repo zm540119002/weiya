@@ -118,6 +118,10 @@ body{
     border-radius:5px;
     width:25%;
 }
+.option_list li.current{
+    background: #17933D;
+    color:#fff;
+}
 textarea.text_description{
     width:100%;
     height:2rem;
@@ -755,7 +759,7 @@ price{
     margin:0 0 0 .35rem;
 }
 .picture-tipc-box{
-    /*margin:0 0 0 .20rem;*/
+    margin:0 0 0.12rem 0;
 }
 .resetpassword{
     display:block;
@@ -2854,6 +2858,9 @@ input[type=text]::-webkit-focus-inner {
 .swiper_banner_wrapper .swiper-container{
     height:4.5rem;
 }
+.swiper-container1{
+    position:relative;
+}
  .swiper-container {
     position: relative;
     width: 100%;
@@ -2939,6 +2946,38 @@ input[type=text]::-webkit-focus-inner {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     font-size:.20rem;
+}
+.swiper-pagination {
+    position: absolute;
+    text-align: center;
+    -webkit-transition: .3s opacity;
+    -o-transition: .3s opacity;
+    transition: .3s opacity;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    z-index: 10;
+}
+.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+}
+
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 100%;
+    background: #000;
+    opacity: .5;
+}
+.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0 4px;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #0066cc;
 }
 /*账号授权*/
 .account-content-wrapper{

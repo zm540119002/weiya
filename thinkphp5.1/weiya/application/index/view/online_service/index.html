@@ -1,17 +1,6 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <!--模板区 start-->
-<section id="messageItemTpl" style="display:none;">
-	<li><span class="create_time"></span></li>
-	<li class="message_item others read" data-id="">
-		<div class="avatar">
-			<img src="public_img/default/chat_head.jpg">
-		</div>
-		<div class="content">
-			<div class="msg"></div>
-		</div>
-	</li>
-</section>
 <section id="messageListTpl" style="display:none;">
 	<ul class="clearfix message_list" data-from_id="">
 		<li><span class="create_time"></span></li>
@@ -94,13 +83,6 @@
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
 	function on_msg_call_back(data) {
-//		var messageItemTpl = $('#messageItemTpl');
-//		messageItemTpl.find('.message_item').attr('data-id',data.id);
-//		messageItemTpl.find('.msg').text(data.content);
-//		messageItemTpl.find('.create_time').text(data.create_time);
-//		if(data.avatar){
-//			messageItemTpl.find('img').attr('src',uploads+data.avatar);
-//		}
 		var messageUl = $('#messageListTpl').find('ul').clone();
 		messageUl.find('.message_item').attr('data-id',data.id);
 		messageUl.find('.msg').text(data.content);
@@ -120,8 +102,7 @@
 	}
 	//聊天框滚动条置底
 	function messageSetBottom() {
-		alert(1);
-		$('ul.message_list').scrollTop($('ul.message_list')[0].scrollHeight);
+		$('#chatLayerContainer ul.message_list').scrollTop($('#chatLayerContainer ul.message_list')[0].scrollHeight);
 	}
 	function getListCallBack(config,data){
 		getListDefaultCallBack(config,data);
@@ -158,7 +139,6 @@
 				to_user_id:17,
 				content:_this.val()
 			};
-			console.log(init_client_id);
 			if(!loginSign){
 				postData.from_client_id = init_client_id;
 			}

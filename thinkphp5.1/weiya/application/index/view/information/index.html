@@ -21,28 +21,11 @@
 			<div class="swiper-wrapper">
 				
 			</div>
-			<!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
-				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
-				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
-				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
-			</div>-->
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				
+			</div>
 		</div>      
 	</section>
-    <!--<div class="swiper-container2 swiper-container-horizontal">
-      <div class="swiper-wrapper">
-			<div class="swiper-slide swiper-slide-active">
-					<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564787676.jpg" alt="" class="common_default_img">
-				</div>
-				<div class="swiper-slide ">
-					<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564723675.jpg" alt="" class="common_default_img">
-				</div>
-				<div class="swiper-slide ">
-					<img src="https://www.worldview.com.cn/uploads/weiya_information/1546998564194474.jpg" alt="" class="common_default_img">
-				</div>
-      </div>
-    </div>
-    <div class="swiper-pagination2 swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div>-->
 </div>
 {/block}
 {block name="common"}
@@ -111,6 +94,9 @@
 			return false;
 		});
 		$(".big_img").on("click",function() {
+			$('.swiper-wrapper').find('.swiper-slide').remove();
+			$('.swiper-pagination').find('.swiper-pagination-bullet').remove();
+			$('.swiper-notification').remove();
 			$(this).css({
 				"z-index": "-1",
 				"opacity": "0"
