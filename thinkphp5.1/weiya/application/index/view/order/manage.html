@@ -82,7 +82,7 @@
             var order_status={:json_encode($order_status)};
             order_status=parseInt(order_status);
             console.log(order_status)
-            if(!isNaN(order_status)){
+            if(isNaN(order_status)){
                 $('.menu_nav li:first').addClass('current');
             }else {
                 $.each($('.menu_nav li'),function () {
