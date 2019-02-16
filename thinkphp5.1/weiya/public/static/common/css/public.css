@@ -1331,6 +1331,7 @@ background-position: 0 -27px;
 }
 .login_item .columns_flex .tel_code{
     width:65%;
+    margin-right:5%;
 }
 .login_item .columns_flex .send_sms{
     width:45%;
