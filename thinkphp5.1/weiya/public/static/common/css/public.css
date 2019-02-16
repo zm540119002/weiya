@@ -5585,6 +5585,7 @@ ul.info_list li{
 }
 .brand_list li{
     padding:0;
+    cursor: pointer;
 }
 .brand_list .list_top_item{
     padding:0.15rem;
