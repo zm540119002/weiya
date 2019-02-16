@@ -4260,7 +4260,7 @@ select[name="nodeIds"]{
     height: 30px;
 }
 .forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
-    top: -242px;
+    top:-4.2rem;
     /*right: -286px;*/
 }
 .layui-m-layer-shareqrCodeLayer .layui-m-layerbtn span{
