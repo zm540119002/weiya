@@ -83,7 +83,7 @@
             order_status=parseInt(order_status);
             console.log(order_status)
             if(!isNaN(order_status)){
-                ('.menu_nav li').eq(0).addClass('current');
+                ('.menu_nav li:eq(0)').addClass('current');
             }else {
                 $.each($('.menu_nav li'),function () {
                     var li_order_status = $(this).find('a').data('order_status');
