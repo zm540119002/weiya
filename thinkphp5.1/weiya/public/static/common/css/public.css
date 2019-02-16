@@ -4251,13 +4251,13 @@ select[name="nodeIds"]{
 }
 .payPasswordLayer .layui-m-layerbtn span[type="0"],
 .forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
-    top: -172px;
+    top: -2.9rem;
     right: 0;
     width: 20px;
     border-right: none;
     position: absolute;
     display: block;
-    height: 30px;
+    height:16px;
 }
 .forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
     top:-4.08rem;
