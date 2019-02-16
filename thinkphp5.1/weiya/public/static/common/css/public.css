@@ -4010,6 +4010,9 @@ input[type=text]::-webkit-focus-inner {
 }
 .set_default_item .myswitched{background-position: 2px -17px;}
 .delivery_address{padding:0 0 1.5rem;}
+.fill_order_wrapper{
+    padding:0 0 0.8rem 0;
+}
 .item_addr{padding:0.20rem 0.15rem;position:relative;overflow: hidden;border-bottom:1px solid #d9d9d9;}
 .item_addr .item_info{float:left;width:70%;}
 .item_addr.active .ia-l{
