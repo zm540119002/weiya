@@ -121,7 +121,9 @@
 				success:function(data){
 					 if(data.status){
 						 dialog.success(data.info);
-						 return false;
+						 var url =  module + 'Mine/index';
+						 location.href = url;
+						 //return false;
 					 }
 					dialog.error(data.info);
 				},
