@@ -118,6 +118,10 @@ body{
     border-radius:5px;
     width:25%;
 }
+.option_list li.current{
+    background: #17933D;
+    color:#fff;
+}
 textarea.text_description{
     width:100%;
     height:2rem;
