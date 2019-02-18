@@ -107,9 +107,7 @@ class Uploader
             $this->stateInfo = $this->getStateInfo("ERROR_TYPE_NOT_ALLOWED");
             return;
         }
-        $array = [
-            ".png", ".jpg", ".jpeg", ".gif", ".bmp"
-        ];
+
 
         //创建目录失败
         if (!file_exists($dirname) && !mkdir($dirname, 0777, true)) {
@@ -126,6 +124,10 @@ class Uploader
         } else { //移动成功
             $this->stateInfo = $this->stateMap[0];
         }
+
+        $array = [
+            ".png", ".jpg", ".jpeg", ".gif", ".bmp"
+        ];
         if(in_array($this->getFileExt(),$array)){
             if(!getimagesize( $this->filePath)){
                 unlink($this->filePath);
