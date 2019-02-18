@@ -48,6 +48,7 @@ switch (htmlspecialchars($_GET['action'])) {
 }
 
 /* 生成上传实例对象并完成上传 */
+
 $up = new Uploader($fieldName, $config, $base64);
 
 /**

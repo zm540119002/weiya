@@ -172,9 +172,36 @@
     <script src="https://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
-        var ueParam = UE.getEditor('param');
-        var ueDetail = UE.getEditor('detail_img');
-        var ueNotices = UE.getEditor('main_img');
+        var ueParam = UE.getEditor('param', {
+            toolbars: [
+                [  'fullscreen', 'source', '|', 'undo', 'redo', '|',
+                    'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+                    'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+                    'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+                    'directionalityltr', 'directionalityrtl', 'indent', '|',
+                    'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+                    'anchor', '|', 'emotion', 'scrawl',   'webapp', 'pagebreak', 'template', 'background', '|',
+                    'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+                    'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+                    'print', 'preview', 'searchreplace', 'drafts', 'help']
+            ],
+            autoHeightEnabled: true,
+            autoFloatEnabled: true
+        });
+        var ueDetail = UE.getEditor('detail_img', {
+            toolbars: [
+                ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
+            ],
+            autoHeightEnabled: true,
+            autoFloatEnabled: true
+        });
+        var ueNotices = UE.getEditor('main_img', {
+            toolbars: [
+                ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
+            ],
+            autoHeightEnabled: true,
+            autoFloatEnabled: true
+        });
     </script>
     <script type="text/javascript" src="index_admin_js/categoryLinkage.js"></script>
     <script type="text/javascript">
