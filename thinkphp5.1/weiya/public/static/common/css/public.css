@@ -2329,7 +2329,7 @@ background-position: 0 -27px;
 }
 
 .commodity_evaluation .upload-picture-module .picture-module:first-child{
-    height:2rem;
+    /*height:2rem;*/
 }
 .commodity_evaluation ul.upload-picture-module .picture-module.active{
     /*width:2rem;*/
