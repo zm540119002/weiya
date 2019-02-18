@@ -40,6 +40,7 @@ ws.onmessage = function(e){
             });
             break;
         case 'msg':
+            console.log(data);
             on_msg_call_back(data);
             break;
         default :

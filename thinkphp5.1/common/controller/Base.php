@@ -110,6 +110,12 @@ class Base extends \think\Controller{
             $ext = '.'.$ext[0];
         }
 
+        if($fileType == 'data:image'){
+            if(!getimagesize($fileBase64)){
+                return errorMsg('不是图片文件');
+            }
+        }
+
         if(!$ext){
             return errorMsg('不支持此文件格式');
         }
@@ -162,12 +168,6 @@ class Base extends \think\Controller{
             $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
             $image = Image::open($photo);
             $image->thumb($imgWidth, $imgHeight,Image::THUMB_SCALING)->save($photo);
-        }
-        if($fileType == 'data:image'){
-             if(!getimagesize($photo)){
-                 unlink($photo);
-                 return errorMsg('不是图片文件');
-             }
         }
         return $tempRelativePath . $fileName;
     }
