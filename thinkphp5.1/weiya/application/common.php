@@ -8,12 +8,12 @@ require __DIR__ . '/../../common/function/common.php';
 function checkLogin(){
     $user = session('user');
     $user_sign = session('user_sign');
-    print_r(data_auth_sign($user));
+    print_r(($user));
     echo '------------------------';
     if (!$user || !$user_sign) {
         return false;
     }
-    print_r($user_sign);
+    print_r($user);
     echo '------------------------';
     if ($user_sign != data_auth_sign($user)) {
         return false;
