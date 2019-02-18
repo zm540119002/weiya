@@ -8,6 +8,8 @@ require __DIR__ . '/../../common/function/common.php';
 function checkLogin(){
     $user = session('user');
     $user_sign = session('user_sign');
+    print_r($user);
+    print_r($user_sign);exit;
     if (!$user || !$user_sign) {
         return false;
     }
