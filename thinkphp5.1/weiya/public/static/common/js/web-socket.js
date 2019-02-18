@@ -16,7 +16,9 @@ ws.onmessage = function(e){
             break;
         case 'msg':
             // console.log(data);
-            on_msg_call_back(data);
+            if(typeof on_init_call_back === "function"){
+                on_msg_call_back(data);
+            }
             break;
         default :
             console.log('default');
