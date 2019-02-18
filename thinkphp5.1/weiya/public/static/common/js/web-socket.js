@@ -13,38 +13,9 @@ ws.onmessage = function(e){
             if(typeof on_init_call_back === "function"){
                 on_init_call_back(init_client_id);
             }
-            // $.isFunction(on_init_call_back) && on_init_call_back(init_client_id);
-            //未登录则返回
-            if(!loginSign){
-                return false;
-            }
-            // Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
-            // 利用jquery发起ajax请求，将client_id发给后端进行uid绑定
-            var postData = {client_id: init_client_id};
-            var url = domain + 'index/CustomerService/bindUid';
-            $.ajax({
-                url: url,
-                data: postData,
-                type: 'post',
-                beforeSend: function(xhr){
-                    $('.loading').show();
-                },
-                error:function(xhr){
-                    $('.loading').hide();
-                    dialog.error('AJAX错误');
-                },
-                success: function(msg){
-                    $('.loading').hide();
-                    if(msg.status==0){
-                        dialog.error(msg.info);
-                    }else if(msg.code==1){
-                        //已登录
-                    }
-                }
-            });
             break;
         case 'msg':
-            console.log(data);
+            // console.log(data);
             on_msg_call_back(data);
             break;
         default :
