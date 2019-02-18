@@ -83,8 +83,8 @@
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
 	function on_msg_call_back(data) {
+		console.log(data);
 		var messageUl = $('#messageListTpl').find('ul').clone();
-		console.log(messageUl.html());
 		messageUl.find('.message_item').attr('data-id',data.id);
 		messageUl.find('.msg').text(data.content);
 		messageUl.find('.create_time').text(data.create_time);
@@ -92,6 +92,7 @@
 			messageUl.find('img').attr('src',uploads+data.avatar);
 		}
 		$('ul.message_list').append(messageUl.html());
+		console.log(messageUl.html());
 		//聊天框滚动条置底
 		messageSetBottom();
 		//设置信息已读
