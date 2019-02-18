@@ -10,7 +10,10 @@ ws.onmessage = function(e){
     switch(type){
         case 'init':
             init_client_id = data.client_id;
-            $.isFunction(on_init_call_back) && on_init_call_back(init_client_id);
+            if(typeof on_init_call_back === "function"){
+                on_init_call_back(init_client_id);
+            }
+            // $.isFunction(on_init_call_back) && on_init_call_back(init_client_id);
             //未登录则返回
             if(!loginSign){
                 return false;
