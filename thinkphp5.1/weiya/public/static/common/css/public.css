@@ -2195,6 +2195,7 @@ background-position: 0 -27px;
     height:2.6rem;
     background: #e5e5e5;
     overflow: hidden;
+    box-sizing:content-box;
 }
 .upload-company-map .picture-module{
     position:relative;
@@ -2270,9 +2271,6 @@ background-position: 0 -27px;
     width:100%;
     height:2.6rem;
 }
-.picture-module input{
-    border:1px solid #0066cc;
-}
 .delete-picture {
     position: absolute;
     right: 0;
@@ -2331,7 +2329,7 @@ background-position: 0 -27px;
 }
 
 .commodity_evaluation .upload-picture-module .picture-module:first-child{
-    height:2rem;
+    /*height:2rem;*/
 }
 .commodity_evaluation ul.upload-picture-module .picture-module.active{
     /*width:2rem;*/
