@@ -2273,6 +2273,7 @@ background-position: 0 -27px;
 }
 .picture-module input[type="file"]{
     display:inline-block;
+    box-sizing: border-box;
     border:1px solid #0066cc;
 }
 .delete-picture {
