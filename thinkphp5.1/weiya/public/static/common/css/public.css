@@ -2270,6 +2270,9 @@ background-position: 0 -27px;
     width:100%;
     height:2.6rem;
 }
+.picture-module input{
+    border:none;
+}
 .delete-picture {
     position: absolute;
     right: 0;
