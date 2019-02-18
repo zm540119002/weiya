@@ -2193,8 +2193,8 @@ background-position: 0 -27px;
     position:relative;
     width:2.6rem;
     height:2.6rem;
-    /*background: #e5e5e5;*/
-    overflow: hidden;
+    /*background: #e5e5e5;
+    overflow: hidden;*/
 }
 .upload-company-map .picture-module{
     position:relative;
