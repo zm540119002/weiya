@@ -10,11 +10,12 @@ function checkLogin(){
     $user_sign = session('user_sign');
     print_r($user);
     echo '------------------------';
-    print_r($user_sign);exit;
+
     if (!$user || !$user_sign) {
         return false;
     }
     if ($user_sign != data_auth_sign($user)) {
+        print_r($user_sign);exit;
         return false;
     }
     return $user;
