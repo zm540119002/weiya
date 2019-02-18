@@ -34,7 +34,6 @@
 <script type="text/javascript">
     var loginSign = '{$loginSign|default=""}';
     function on_msg_call_back(data) {
-        console.log(data);
         var messageUl = $('#messageListTpl').find('ul').clone();
         messageUl.find('.message_item').attr('data-id',data.id);
         messageUl.find('.msg').text(data.content);
