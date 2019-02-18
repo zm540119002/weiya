@@ -14,8 +14,10 @@ function checkLogin(){
     if (!$user || !$user_sign) {
         return false;
     }
+    print_r($user_sign);
+    echo '------------------------';
     if ($user_sign != data_auth_sign($user)) {
-        print_r($user_sign);exit;
+        print_r(data_auth_sign($user));exit;
         return false;
     }
     return $user;
