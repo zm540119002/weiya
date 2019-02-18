@@ -182,7 +182,7 @@ class Cart extends \common\controller\UserBase{
             ['user_id','=',$this->user['id']],
             ['id','in',$ids],
         ];
-        $result = $model -> del($condition,false);
+        $result = $model -> del($condition,true);
         if($result['status']){
             return successMsg('删除成功');
         }else{
