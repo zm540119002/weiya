@@ -1,8 +1,8 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <!--模板区 start-->
-<section id="messageListTpl2" style="display:none;">
-	<ul class="clearfix message_list" data-from_id="">
+<section id="messageListTpl" style="display:none;">
+	<ul>
 		<li><span class="create_time"></span></li>
 		<li class="message_item others read" data-id="">
 			<div class="avatar">
@@ -83,7 +83,7 @@
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
 	function on_msg_call_back(data) {
-		var messageUl = $('#messageListTpl2').find('ul').clone();
+		var messageUl = $('#messageListTpl').find('ul').clone();
 		console.log(messageUl.html());
 //		messageUl.find('.message_item').attr('data-id',data.id);
 //		messageUl.find('.msg').text(data.content);
