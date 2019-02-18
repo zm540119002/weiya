@@ -4,6 +4,7 @@
 {block name="content"}
 <article class="f24 after_sale_wrapper">
 	<section class="header_title separation-line">
+		<a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
 		<h2 class="f24">商品评价</h2>
 	</section>
 	<section class="commodity_evaluation">
@@ -75,6 +76,20 @@
 			$(this).parent().next('.fraction').text(prompt[starId]);
 			$(this).parent().next('.fraction').attr('data-score',starId+1);
 		});
+		//提交评价
+		$('body').on('click','.submit',function () {
+            var postData={};
+            var content='';
+            // if(!postData.voucher){
+            //     content='请上传转账凭证';
+            // }
+            // if(content){
+            //     dialog.error(content);
+            //     return false;
+            // }
+            var url =  module + 'Mine/index';
+            location.href = url;
+        });
 	});
 </script>
 {/block}

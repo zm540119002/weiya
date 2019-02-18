@@ -16,6 +16,9 @@ class Mine extends \common\controller\Base{
         $fileBase64 = input('post.fileBase64');
         $upload = config('upload_dir.user_avatar');
         $userAvatar = $this ->_uploadSingleFileToTemp($fileBase64,$upload);
+        if(isset($userAvatar['status']) &&$userAvatar['status'] == 0){
+            return errorMsg('失败');
+        }
         $user = session('user');
         $oldAvatar = $user['avatar'];
         $modelUser = new \common\model\User();

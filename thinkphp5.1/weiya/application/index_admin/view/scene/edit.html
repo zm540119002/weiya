@@ -120,7 +120,13 @@
 <script src="https://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
-    var main_img = UE.getEditor('main_img');
+    var main_img = UE.getEditor('main_img', {
+        toolbars: [
+            ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
+        ],
+        autoHeightEnabled: true,
+        autoFloatEnabled: true
+    });
 </script>
     <script type="text/javascript">
         $(function(){

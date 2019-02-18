@@ -96,6 +96,10 @@ function delCart(postData,type,obj) {
                                 }
                             });
                         }
+                        if(!$('.cart_goods_list li').length){
+                            var no_cart_data=$('.no_cart_data').html();
+                            $('.cart_goods_list').append(no_cart_data);
+                        }
                         calculateCartTotalPrice();
                         dialog.success(data.info);
                     }
