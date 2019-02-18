@@ -398,14 +398,13 @@ $(function () {
                 var winHeight=$(window).height();
                 var goodsTitle=_this.parents('li').find('.goods_title').text();
                 var id=_this.parents('li').data('id');
-                var price=_this.parents('li').find('price').text();
+                var sample_price=_this.find('.sample_price').val();
                 var specification=_this.parents('li').find('.specification_text').text();
                 var goodsImg=_this.parents('body').find('.swiper-slide').eq(0).find('img').attr('src');
-                var minimum_sample_quantity=_this.find('input').val();
+                var minimum_sample_quantity=_this.find('.minimum_sample_quantity').val();
                 $('.goodsInfoLayer .goods_title').text(goodsTitle);
                 $('.goodsInfoLayer li').data('id',id);
-                console.log($('.goodsInfoLayer li').data('id'));
-                $('.goodsInfoLayer .sample_price').text(price);
+                $('.goodsInfoLayer .sample_price').text(sample_price);
                 $('.goodsInfoLayer .specification').text(specification);
                 $('.goodsInfoLayer .goods_img').attr('src',goodsImg);
                 $('.goodsInfoLayer .minimum_sample_quantity').text(minimum_sample_quantity);
