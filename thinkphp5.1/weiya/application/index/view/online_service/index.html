@@ -1,10 +1,10 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <!--模板区 start-->
-<section id="messageListTpl" style="display:none;">
+<section id="messageListTpl2" style="display:none;">
 	<ul class="clearfix message_list" data-from_id="">
 		<li><span class="create_time"></span></li>
-		<li class="message_item others2 read" data-id="">
+		<li class="message_item others read" data-id="">
 			<div class="avatar">
 				<img src="public_img/default/chat_head.jpg">
 			</div>
@@ -83,7 +83,8 @@
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
 	function on_msg_call_back(data) {
-		var messageUl = $('#messageListTpl').find('ul').clone();
+		var messageUl = $('#messageListTpl2').find('ul').clone();
+		console.log(messageUl.html());
 		messageUl.find('.message_item').attr('data-id',data.id);
 		messageUl.find('.msg').text(data.content);
 		messageUl.find('.create_time').text(data.create_time);
@@ -91,7 +92,6 @@
 			messageUl.find('img').attr('src',uploads+data.avatar);
 		}
 		$('ul.message_list').append(messageUl.html());
-		console.log(messageUl.html());
 		//聊天框滚动条置底
 		messageSetBottom();
 		//设置信息已读
