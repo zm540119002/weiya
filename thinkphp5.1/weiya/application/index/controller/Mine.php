@@ -31,7 +31,8 @@ class Mine extends \common\controller\Base{
             return errorMsg('失败');
         }
         $user['avatar'] = $userAvatar;
-        session('user',$user);
+        $modelUserCenter = new \common\model\UserCenter();
+        $modelUserCenter->_setSession($user);
         if($user['avatar']){
             //删除旧详情图
             delImgFromPaths($oldAvatar,$userAvatar);
@@ -55,8 +56,10 @@ class Mine extends \common\controller\Base{
         if(false === $result){
             return errorMsg('失败');
         }
+
+        $modelUserCenter = new \common\model\UserCenter();
         $user['name'] = $name;
-        session('user',$user);
+        $modelUserCenter->_setSession($user);
         return successMsg('成功',['name'=>$name]);
     }
 }
