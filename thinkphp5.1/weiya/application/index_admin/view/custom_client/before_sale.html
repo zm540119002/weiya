@@ -33,10 +33,10 @@
 {block name="script"}
 <script type="text/javascript">
     var loginSign = '{$loginSign|default=""}';
-    function on_init_call_back(init_client_id){
+    function on_init_call_back(data){
         // Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
         // 利用jquery发起ajax请求，将client_id发给后端进行uid绑定
-        var postData = {client_id: init_client_id};
+        var postData = {client_id: data.client_id};
         var url = domain + 'index/CustomerService/bindUid';
         $.ajax({
             url: url,
