@@ -83,13 +83,13 @@
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
 	var welcomeSpeech = '{$welcomeSpeech|default=""}';
-	var welcomeSpeechTime = '{$welcomeSpeechTime|default=""}';
+	var responseTime = '{$responseTime|default=""}';
 	function on_init_call_back(data){
 		//没有登录，初始化时显示欢迎词
 		if(!loginSign){
 			var messageUl = $('#messageListTpl').find('ul').clone();
 			messageUl.find('.msg').text(welcomeSpeech);
-			messageUl.find('.create_time').text(welcomeSpeechTime);
+			messageUl.find('.create_time').text(responseTime);
 			$('ul.message_list').empty().append(messageUl.html());
 		}
 	}
@@ -132,7 +132,7 @@
 			if(loginSign){
 				var messageUl = $('#messageListTpl').find('ul').clone();
 				messageUl.find('.msg').text(welcomeSpeech);
-				messageUl.find('.create_time').text(welcomeSpeechTime);
+				messageUl.find('.create_time').text(responseTime);
 				$('ul.message_list').empty().append(messageUl.html());
 			}
 		}
