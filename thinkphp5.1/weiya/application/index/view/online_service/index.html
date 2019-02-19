@@ -86,11 +86,9 @@
 		//没有登录，初始化时显示欢迎词
 		if(!loginSign){
 			var messageUl = $('#messageListTpl').find('ul').clone();
-			messageUl.find('.msg').text(data.welcome_speech);
-			messageUl.find('.create_time').text(data.create_time);
+			messageUl.find('.msg').text(welcome_speech);
+			messageUl.find('.create_time').text(create_time);
 			$('ul.message_list').append(messageUl.html());
-		}else{
-			//已登录，第一次聊天时显示欢迎词
 		}
 	}
 	function on_msg_call_back(data) {
@@ -116,7 +114,13 @@
 		$('#chatLayerContainer ul.message_list').scrollTop($('#chatLayerContainer ul.message_list')[0].scrollHeight);
 	}
 	function getListCallBack(config,data){
-		console.log($(data).length);
+		if(!$(data).length){
+			//无聊天记录
+			var messageUl = $('#messageListTpl').find('ul').clone();
+			messageUl.find('.msg').text(welcome_speech);
+			messageUl.find('.create_time').text(create_time);
+			$('ul.message_list').append(messageUl.html());
+		}
 		getListDefaultCallBack(config,data);
 		//设置信息已读
 		var postData = {};
