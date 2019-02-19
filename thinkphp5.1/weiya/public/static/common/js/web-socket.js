@@ -7,6 +7,7 @@ var init_client_id = 0;
 ws.onmessage = function(e){
     var data =  JSON.parse(e.data);
     var type = data.type || '';
+    console.log(data);
     switch(type){
         case 'init':
             init_client_id = data.client_id;
@@ -15,7 +16,6 @@ ws.onmessage = function(e){
             }
             break;
         case 'msg':
-            // console.log(data);
             if(typeof on_init_call_back === "function"){
                 on_msg_call_back(data);
             }
