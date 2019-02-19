@@ -83,7 +83,9 @@
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
 	function on_init_call_back(init_client_id){
-		console.log(init_client_id);
+		var messageUl = $('#messageListTpl').find('ul').clone();
+		messageUl.find('.msg').text(config('custom.welcome_speech'));
+		messageUl.find('.create_time').text('');
 	}
 	function on_msg_call_back(data) {
 		var messageUl = $('#messageListTpl').find('ul').clone();
