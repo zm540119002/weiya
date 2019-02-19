@@ -15,7 +15,7 @@ class CustomerService extends \common\controller\Base{
     public function bindUid(){
         if(request()->isAjax()){
             $postData = input('post.');
-            if($this->user){
+            if(!$this->user){
                 return errorMsg('绑定对象未登录！');
             }
             //首次聊天标记，默认true
