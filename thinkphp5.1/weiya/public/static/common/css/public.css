@@ -2333,7 +2333,7 @@ background-position: 0 -27px;
 }
 .commodity_evaluation ul.upload-picture-module .picture-module.active{
     /*width:2rem;*/
-    height:auto;
+    /*height:auto;*/
     overflow:inherit;
 }
 .commodity_evaluation .upload-picture-module li{
