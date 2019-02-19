@@ -40,7 +40,7 @@ class Events
             'type'      => 'init',
             'client_id' => $client_id,
             'msg' => 'Connect is success!',
-            'welcome_speech' => '您好，请问有什么可以帮到您的？',
+            'welcome_speech' => config('custom.welcome_speech'),
             'create_time' => date('Y-m-d H:i',time()),
         ];
         Gateway::sendToClient($client_id, json_encode($data));
