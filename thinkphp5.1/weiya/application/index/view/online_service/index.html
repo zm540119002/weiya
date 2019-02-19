@@ -86,6 +86,7 @@
 		var messageUl = $('#messageListTpl').find('ul').clone();
 		messageUl.find('.msg').text(data.welcome_speech);
 		messageUl.find('.create_time').text(data.create_time);
+		$('ul.message_list').append(messageUl.html());
 	}
 	function on_msg_call_back(data) {
 		var messageUl = $('#messageListTpl').find('ul').clone();
