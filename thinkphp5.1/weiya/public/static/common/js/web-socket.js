@@ -3,8 +3,6 @@ ws.onopen = function(e){
     console.log('open');
 };
 var init_client_id = 0;
-var welcome_speech = '';
-var create_time = 0;
 // 服务端主动推送消息时会触发这里的onmessage
 ws.onmessage = function(e){
     var data =  JSON.parse(e.data);
@@ -13,8 +11,6 @@ ws.onmessage = function(e){
     switch(type){
         case 'init':
             init_client_id = data.client_id;
-            welcome_speech = data.welcome_speech;
-            create_time = data.create_time;
             if(typeof on_init_call_back === "function"){
                 on_init_call_back(data);
             }
