@@ -33,6 +33,33 @@
 {block name="script"}
 <script type="text/javascript">
     var loginSign = '{$loginSign|default=""}';
+    function on_init_call_back(data){
+        // Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
+        // 利用jquery发起ajax请求，将client_id发给后端进行uid绑定
+        var postData = {client_id: data.client_id};
+        var url = domain + 'index/CustomerService/bindUid';
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'post',
+            beforeSend: function(xhr){
+                $('.loading').show();
+            },
+            error:function(xhr){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(msg){
+                $('.loading').hide();
+                console.log(msg);
+                if(msg.status==0){
+                    dialog.error(msg.info);
+                }else if(msg.code==1){
+                    //已登录
+                }
+            }
+        });
+    }
     function on_msg_call_back(data) {
         var messageUl = $('#messageListTpl').find('ul').clone();
         messageUl.find('.message_item').attr('data-id',data.id);
@@ -119,11 +146,13 @@
         if(!find_sign){
             //追加客户
             var customLi = $('#customItemTpl').find('li').clone();
-            customLi.attr('data-from_client_id',data.from_client_id);
+            data.from_id && customLi.attr('data-from_id',data.from_id);
+            data.from_client_id && customLi.attr('data-from_client_id',data.from_client_id);
             customLi.find('.author').text(data.from_name);
             customLi.find('span.news_num').text(1);
             $('ul.custom_list').append(customLi);
             //追加消息
+            data.from_id && messageUl.attr('data-from_id',data.from_id);
             data.from_client_id && messageUl.attr('data-from_client_id',data.from_client_id);
             $('div.chatMsg-ct').append(messageUl);
         }
@@ -135,7 +164,6 @@
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
 <script type="text/javascript">
-    var loginSign = '{$loginSign|default=""}';
     $(function () {
         //页面初始化
         var config = {

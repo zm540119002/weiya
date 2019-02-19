@@ -39,7 +39,7 @@ class Events
         $data = [
             'type'      => 'init',
             'client_id' => $client_id,
-            'msg' => 'Your ClientId is :' .$client_id . ',Connect is success!',
+            'msg' => 'Connect is success!',
         ];
         Gateway::sendToClient($client_id, json_encode($data));
     }
