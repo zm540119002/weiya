@@ -16,7 +16,7 @@
 return [
     'title' => '美尚云',
     'error_login' => '您还未登录平台，请先登录！',
-    'welcome_speech' => '您好，请问有什么可以帮到您的？',
+    'welcome_speech' => '您好，请问有什么可以帮到您呢？',
     'default_page_size' => 5,//默认每页显示记录数
     'not_ajax' => '请用AJAX方式访问！',//不是AJAX
     'not_post' => '请用POST方式访问！',//不是POST
