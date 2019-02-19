@@ -82,11 +82,8 @@
 <script type="text/javascript" src="index_js/jump_login.js"></script>
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
-	console.log(123);
 	var welcomeSpeech = '{$welcomeSpeech|default=""}';
-	console.log(welcomeSpeech);
 	var welcomeSpeechTime = '{$welcomeSpeechTime|default=""}';
-	console.log(welcomeSpeechTime);
 	function on_init_call_back(data){
 		//没有登录，初始化时显示欢迎词
 		if(!loginSign){
