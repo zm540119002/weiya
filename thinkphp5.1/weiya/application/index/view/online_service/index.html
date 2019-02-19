@@ -82,14 +82,14 @@
 <script type="text/javascript" src="index_js/jump_login.js"></script>
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
-	var welcome_speech = '您好，请问有什么可以帮到您呢？';
-	var welcome_speech_time = date('Y-m-d H:i');
+	var welcomeSpeech = '{$loginSign|default=""}';
+	var welcomeSpeechTime = '{$loginSign|default=""}';
 	function on_init_call_back(data){
 		//没有登录，初始化时显示欢迎词
 		if(!loginSign){
 			var messageUl = $('#messageListTpl').find('ul').clone();
-			messageUl.find('.msg').text(welcome_speech);
-			messageUl.find('.create_time').text(welcome_speech_time);
+			messageUl.find('.msg').text(welcomeSpeech);
+			messageUl.find('.create_time').text(welcomeSpeechTime);
 			$('ul.message_list').empty().append(messageUl.html());
 		}
 	}
@@ -131,8 +131,8 @@
 			//无聊天记录
 			if(loginSign){
 				var messageUl = $('#messageListTpl').find('ul').clone();
-				messageUl.find('.msg').text(welcome_speech);
-				messageUl.find('.create_time').text(welcome_speech_time);
+				messageUl.find('.msg').text(welcomeSpeech);
+				messageUl.find('.create_time').text(welcomeSpeechTime);
 				$('ul.message_list').empty().append(messageUl.html());
 			}
 		}
