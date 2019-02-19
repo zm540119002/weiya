@@ -86,8 +86,8 @@
 		//没有登录，初始化时显示欢迎词
 		if(!loginSign){
 			var messageUl = $('#messageListTpl').find('ul').clone();
-			messageUl.find('.msg').text(data.welcome_speech2);
-			messageUl.find('.create_time').text(data.create_time);
+			messageUl.find('.msg').text('您好，请问有什么可以帮到您呢？');
+			messageUl.find('.create_time').text(date('Y-m-d H:i'));
 			$('ul.message_list').empty().append(messageUl.html());
 		}
 	}
