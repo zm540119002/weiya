@@ -40,8 +40,6 @@ class Events
             'type'      => 'init',
             'client_id' => $client_id,
             'msg' => 'Connect is success!',
-            'welcome_speech' => config('custom.welcome_speech'),
-            'create_time' => date('Y-m-d H:i',time()),
         ];
         Gateway::sendToClient($client_id, json_encode($data));
     }
