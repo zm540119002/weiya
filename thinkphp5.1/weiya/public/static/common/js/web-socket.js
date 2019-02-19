@@ -46,6 +46,7 @@ function getList(config) {
         },
         success: function(data){
             $('.loading').hide();
+            console.log(data);
             if(config.callBack){
                 config.callBack(config,data);
             }else{

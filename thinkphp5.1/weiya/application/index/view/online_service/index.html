@@ -83,11 +83,14 @@
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
 	function on_init_call_back(data){
+		//没有登录，初始化时显示欢迎词
 		if(!loginSign){
 			var messageUl = $('#messageListTpl').find('ul').clone();
 			messageUl.find('.msg').text(data.welcome_speech);
 			messageUl.find('.create_time').text(data.create_time);
 			$('ul.message_list').append(messageUl.html());
+		}else{
+			//已登录，第一次聊天时显示欢迎词
 		}
 	}
 	function on_msg_call_back(data) {
