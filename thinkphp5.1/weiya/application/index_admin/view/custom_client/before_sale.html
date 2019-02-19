@@ -51,7 +51,6 @@
             },
             success: function(msg){
                 $('.loading').hide();
-                console.log(msg);
                 if(msg.status==0){
                     dialog.error(msg.info);
                 }else if(msg.code==1){
