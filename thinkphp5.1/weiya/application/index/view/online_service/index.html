@@ -114,6 +114,7 @@
 		$('#chatLayerContainer ul.message_list').scrollTop($('#chatLayerContainer ul.message_list')[0].scrollHeight);
 	}
 	function getListCallBack(config,data){
+		console.log(data);
 		if(!data){
 			//无聊天记录
 			var messageUl = $('#messageListTpl').find('ul').clone();
