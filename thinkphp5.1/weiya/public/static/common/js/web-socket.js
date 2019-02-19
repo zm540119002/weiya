@@ -12,7 +12,7 @@ ws.onmessage = function(e){
         case 'init':
             init_client_id = data.client_id;
             if(typeof on_init_call_back === "function"){
-                on_init_call_back(init_client_id);
+                on_init_call_back(data);
             }
             break;
         case 'msg':

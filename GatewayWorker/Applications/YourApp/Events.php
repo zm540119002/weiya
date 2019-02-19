@@ -40,6 +40,8 @@ class Events
             'type'      => 'init',
             'client_id' => $client_id,
             'msg' => 'Your ClientId is :' .$client_id . ',Connect is success!',
+            'welcome_speech' => '您好，请问有什么可以帮到您的？',
+            'create_time' => date('Y-m-d H:i',time()),
         ];
         Gateway::sendToClient($client_id, json_encode($data));
     }
