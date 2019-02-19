@@ -83,10 +83,13 @@
 <script type="text/javascript">
 	var loginSign = '{$loginSign|default=""}';
 	function on_init_call_back(data){
-		var messageUl = $('#messageListTpl').find('ul').clone();
-		messageUl.find('.msg').text(data.welcome_speech);
-		messageUl.find('.create_time').text(data.create_time);
-		$('ul.message_list').append(messageUl.html());
+		//没有登录，初始化时显示欢迎词
+		if(!loginSign){
+			var messageUl = $('#messageListTpl').find('ul').clone();
+			messageUl.find('.msg').text(data.welcome_speech);
+			messageUl.find('.create_time').text(data.create_time);
+			$('ul.message_list').append(messageUl.html());
+		}
 	}
 	function on_msg_call_back(data) {
 		var messageUl = $('#messageListTpl').find('ul').clone();
@@ -111,16 +114,24 @@
 		$('#chatLayerContainer ul.message_list').scrollTop($('#chatLayerContainer ul.message_list')[0].scrollHeight);
 	}
 	function getListCallBack(config,data){
-		getListDefaultCallBack(config,data);
-		//设置信息已读
-		var postData = {};
-		postData.messageIds = [];
-		$.each($('li.message_item.others.unread'),function(){
-			var _thisMessageLi = $(this);
-			postData.messageIds.push(_thisMessageLi.data('id'));
-			postData.from_id = _thisMessageLi.data('from_id');
-		});
-		setMessageRead($('body'),postData);
+		if(data){
+			getListDefaultCallBack(config,data);
+			//设置信息已读
+			var postData = {};
+			postData.messageIds = [];
+			$.each($('li.message_item.others.unread'),function(){
+				var _thisMessageLi = $(this);
+				postData.messageIds.push(_thisMessageLi.data('id'));
+				postData.from_id = _thisMessageLi.data('from_id');
+			});
+			setMessageRead($('body'),postData);
+		}else{
+			//无聊天记录
+			var messageUl = $('#messageListTpl').find('ul').clone();
+			messageUl.find('.msg').text('您好，请问有什么可以帮到您的？');
+			messageUl.find('.create_time').text(date('Y-m-d H:i'));
+			$('ul.message_list').append(messageUl.html());
+		}
 	}
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
@@ -132,6 +143,8 @@
 			container:$('ul.message_list'),
 			callBack:getListCallBack
 		};
+		//首次聊天标记，默认true
+		var first_chat = true;
 		getList(config);
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){

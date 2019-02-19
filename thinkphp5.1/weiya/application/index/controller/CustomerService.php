@@ -18,8 +18,6 @@ class CustomerService extends \common\controller\Base{
             if(!$this->user){
                 return errorMsg('绑定对象未登录！');
             }
-            //首次聊天标记，默认true
-            $first_chat = true;
             // client_id与uid绑定
             Gateway::bindUid($postData['client_id'], $this->user['id']);
             return successMsg('成功！');
