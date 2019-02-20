@@ -54,6 +54,8 @@ class OnlineService extends \common\controller\Base{
                 $this->assign('unreadCount',$unreadCount[0]['num']);
                 $this->assign('loginSign','login');
             }
+            $this->assign('welcomeSpeech',config('custom.welcome_speech'));
+            $this->assign('responseTime',date('Y-m-d H:i',time()));
             return $this->fetch();
         }
     }

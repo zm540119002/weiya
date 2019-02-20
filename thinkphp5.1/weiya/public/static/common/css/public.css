@@ -2195,6 +2195,7 @@ background-position: 0 -27px;
     height:2.6rem;
     background: #e5e5e5;
     overflow: hidden;
+    box-sizing:content-box;
 }
 .upload-company-map .picture-module{
     position:relative;
@@ -2328,11 +2329,11 @@ background-position: 0 -27px;
 }
 
 .commodity_evaluation .upload-picture-module .picture-module:first-child{
-    height:2rem;
+    /*height:2rem;*/
 }
 .commodity_evaluation ul.upload-picture-module .picture-module.active{
     /*width:2rem;*/
-    height:auto;
+    /*height:auto;*/
     overflow:inherit;
 }
 .commodity_evaluation .upload-picture-module li{
@@ -5679,7 +5680,7 @@ ul.info_list li{
 }
 .payment_password_list li{
     /*float:left;*/
-    width:1rem;
+    width:0.85rem;
     height: 0.5rem;
     line-height: 0.5rem;
     border:1px solid #d9d9d9;
