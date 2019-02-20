@@ -2274,7 +2274,7 @@ background-position: 0 -27px;
 .delete-picture {
     position: absolute;
     right: 0;
-    top: -10px;
+    top:0;
     z-index: 5;
     width: 20px;
     height: 20px;
@@ -2332,9 +2332,9 @@ background-position: 0 -27px;
     /*height:2rem;*/
 }
 .commodity_evaluation ul.upload-picture-module .picture-module.active{
-    /*width:2rem;*/
-    /*height:auto;*/
-    overflow:inherit;
+    /*width:2rem;
+    height:auto;
+    overflow:inherit;*/
 }
 .commodity_evaluation .upload-picture-module li{
     width:auto;
