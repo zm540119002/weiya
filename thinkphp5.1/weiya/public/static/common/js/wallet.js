@@ -53,8 +53,8 @@ function walletPayDialog() {
             for(var i=0;i<oLis.length;i++){
                 password=password+$(oLis[i]).val();
             }
-            if(password.length<4){
-                dialog.error('请输入正确4位数密码');
+            if(password.length<6){
+                dialog.error('请输入正确6位数密码');
                 return false;
             }
             var postData = {
