@@ -155,9 +155,10 @@ function forgetWalletPasswordDialog(opt){
                     if(opt=='set'){
                         layer.closeAll();
                         return false;
+                    }else{
+                        layer.closeAll();
+                        walletPayDialog();
                     }
-                    walletPayDialog();
-                    layer.closeAll();
                 }
                 if(!data.status){
                     dialog.success(data.info);
