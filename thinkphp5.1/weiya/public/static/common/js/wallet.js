@@ -79,8 +79,8 @@ $(function(){
    
 })
 
-//忘记密码-弹窗触发
-function forgetWalletPasswordDialog(){
+//忘记钱包支付密码-弹窗触发
+function forgetWalletPasswordDialog(opt){
     var content = $('#WalletPasswordHtml').html();
     layer.open({
         title:['重置/设置支付密码','border-bottom:1px solid #d9d9d9;'],
@@ -151,10 +151,13 @@ function forgetWalletPasswordDialog(){
             var url = module+'Wallet/forgetPassword';
             $.post(url,postData,function (data) {
                 if(data.status){
-                    //成功后弹出登录框
-                    layer.closeAll();
+                    //成功后弹出支付密码框
+                    if(opt=='set'){
+                        layer.closeAll();
+                        return false;
+                    }
                     walletPayDialog();
-
+                    layer.closeAll();
                 }
                 if(!data.status){
                     dialog.success(data.info);
