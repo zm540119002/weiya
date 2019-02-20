@@ -78,7 +78,7 @@ class Scene extends \common\controller\Base{
 
             //获取相关的商品
             $modelSceneGoods = new \app\index\model\SceneGoods();
-            $config =[
+            $config = [
                 'where' => [
                     ['sg.status', '=', 0],
                     ['sg.scene_id', '=', $id],
