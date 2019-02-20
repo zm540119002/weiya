@@ -25,6 +25,9 @@
             </a>
         </li>
         <li>
+            <a href="javascript:;" id="" class="set_wallet_psd right-arrow">设置钱包支付密码</a>
+        </li>
+        <li>
             <a href="javascript:;" id="logout_dialog" class="sign_out right-arrow">退出</a>
         </li>
     </ul>
@@ -172,9 +175,13 @@
 	</nav>
 </section>
 {/block}
+{block name="common"}
+{include file="template/wallet_pay_dialog.html" /}
+{/block}
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="index_js/jump_login.js"></script>
+<script type="text/javascript" src="public_js/wallet.js"></script>
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/api?v=2.0&ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv"></script>
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
@@ -289,6 +296,10 @@
                   layer.close(index);
                 }
             });
+        });
+        //设置钱包支付密码
+        $('body').on('click','.set_wallet_psd',function () {
+            forgetWalletPasswordDialog();
         });
     })
 </script>

@@ -5680,7 +5680,7 @@ ul.info_list li{
 }
 .payment_password_list li{
     /*float:left;*/
-    width:1rem;
+    width:0.85rem;
     height: 0.5rem;
     line-height: 0.5rem;
     border:1px solid #d9d9d9;

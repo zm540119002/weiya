@@ -53,8 +53,8 @@ function walletPayDialog() {
             for(var i=0;i<oLis.length;i++){
                 password=password+$(oLis[i]).val();
             }
-            if(password.length<4){
-                dialog.error('请输入正确4位数密码');
+            if(password.length<6){
+                dialog.error('请输入正确6位数密码');
                 return false;
             }
             var postData = {
@@ -141,8 +141,8 @@ function forgetWalletPasswordDialog(){
             console.log(postData)
             if(!register.vfyCheck(postData.captcha)){
                 content = "请输入正确的验证码";
-            }else if(!postData.password&&postData.password.length<4){
-                content = "请输入4位数字的密码";
+            }else if(!postData.password&&postData.password.length<6){
+                content = "请输入6位数字的密码";
             }
             if(content){
                 dialog.error(content);
