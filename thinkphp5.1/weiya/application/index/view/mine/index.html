@@ -25,7 +25,7 @@
             </a>
         </li>
         <li>
-            <a href="javascript:;" id="" class="set_wallet_psd right-arrow">设置钱包支付密码</a>
+            <a href="javascript:;" id="" class="set_wallet_psd right-arrow" data-type="set">设置钱包支付密码</a>
         </li>
         <li>
             <a href="javascript:;" id="logout_dialog" class="sign_out right-arrow">退出</a>
@@ -299,7 +299,8 @@
         });
         //设置钱包支付密码
         $('body').on('click','.set_wallet_psd',function () {
-            forgetWalletPasswordDialog();
+            var type=$(this).data('type');
+            forgetWalletPasswordDialog(type);
         });
     })
 </script>
