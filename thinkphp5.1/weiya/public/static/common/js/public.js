@@ -686,7 +686,7 @@ $(function(){
     
 });
 //手机号码中间4位用星号替换
-function mobileStar(param){
+function mobileNHide(param){
     var str;
     var reg = /^(\d{3})\d*(\d{4})$/;
     str=param.replace(reg,'$1****$2');
