@@ -186,10 +186,8 @@
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
     $(function () {
-        var reg = /^(\d{3})\d*(\d{4})$/;
         var mobile=$('.user_mobile').text();
-        var str= mobile.replace(reg,'$1****$2');
-        $('.user_mobile').text(str);
+        $('.user_mobile').text(mobileStar(mobile));
         //个人信息
         var user_info_content=$('.user_info_content').html();
         $('body').on('click','.customer_info',function () {
