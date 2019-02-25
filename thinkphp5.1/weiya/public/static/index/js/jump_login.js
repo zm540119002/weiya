@@ -1,5 +1,5 @@
 $(function () {
-    $('body').on('click','.my_cart,.address_manage,.recharge,.order_manage,.my_brand,.my_message,.my_collection',
+    $('body').on('click','.my_cart,.address_manage,.recharge,.order_manage,.my_brand,.my_message,.my_collection,.my_report',
         function () {
             var jump_url = $(this).data('jump_url');
             console.log(jump_url)
