@@ -188,9 +188,6 @@ class Jssdk {
   public function getOauthUserInfo()
   {
     $data = $this -> GetAccessTokenAndOpenid();
-    print_r(123);
-    print_r($data);
-    exit;
     $access_token = $data['access_token'];
     $openid =  $data['openid'];
     $url = "http://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
@@ -243,7 +240,8 @@ class Jssdk {
 
   //通过code换取网页授权access_token与openid
   public function GetAccessTokenAndOpenid(){
-
+    print_r(123);
+    exit;
     if ( !isset($_GET['code'])){
       //触发微信返回code码
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
