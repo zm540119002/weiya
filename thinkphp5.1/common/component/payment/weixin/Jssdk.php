@@ -242,7 +242,7 @@ class Jssdk {
   public function GetAccessTokenAndOpenid(){
     if (!isset($_GET['code'])){
       //触发微信返回code码
-      $baseUrl = urlencode(http_type().$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+      $baseUrl = http_type().urlencode($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateUrlForCode($baseUrl);
       Header("Location: $url");
       exit();
