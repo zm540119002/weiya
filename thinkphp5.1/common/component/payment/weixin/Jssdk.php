@@ -243,11 +243,7 @@ class Jssdk {
     if (!isset($_GET['code'])){
       //触发微信返回code码
       $baseUrl = urlencode('https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-      print_r($baseUrl);
-      echo "\n\r";
       $url = $this->__CreateUrlForCode($baseUrl);
-      print_r($url);
-      exit;
       Header("Location: $url");
       exit();
     } else {
