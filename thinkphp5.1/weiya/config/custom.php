@@ -29,6 +29,7 @@ return [
     'factory_cache_time' => 60 * 60 * 24,//供应商缓存时间
     'store_cache_time' => 60 * 60 * 24,//采购商缓存时间
     'current_store_cache_time' => 10 * 24,//当前店铺缓存时间
+    'db_name'=>'db_config_weiya',
     'system_type' => [
         '1000' => 'factory',
         '1001' => 'store',
