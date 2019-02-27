@@ -20,18 +20,18 @@ class Base extends \think\Controller{
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
         print_r(123);
         exit;
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $weiXinUserInfo =  session('weiXinUserInfo');
-            print_r(123);
-            print_r($weiXinUserInfo);
-            exit;
-            if(empty($weiXinUserInfo)){
-                $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
-                $weiXinUserInfo = $mineTools->getOauthUserInfo();
-                session('weiXinUserInfo',$weiXinUserInfo);
-            }
-            $this -> assign('weiXinUserInfo',$weiXinUserInfo);
-        }
+//        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+//            $weiXinUserInfo =  session('weiXinUserInfo');
+//            print_r(123);
+//            print_r($weiXinUserInfo);
+//            exit;
+//            if(empty($weiXinUserInfo)){
+//                $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
+//                $weiXinUserInfo = $mineTools->getOauthUserInfo();
+//                session('weiXinUserInfo',$weiXinUserInfo);
+//            }
+//            $this -> assign('weiXinUserInfo',$weiXinUserInfo);
+//        }
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){
