@@ -4,7 +4,7 @@ class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
-        print_r('代码调试中，请稍后。。。');
+        print_r('系统维护中，请稍后。。。');
         exit;
         //获取商品的分类
         $modelGoodsCategory = new \app\index\model\GoodsCategory();
