@@ -21,6 +21,7 @@ class Base extends \think\Controller{
 
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             $weiXinUserInfo =  session('weiXinUserInfo');
+            print_r($weiXinUserInfo);exit;
             if(empty($weiXinUserInfo)){
                 $mineTools = new \common\component\payment\weixin\Jssdk(config('weiya_weixin.appid'), config('weiya_weixin.appsecret'));
                 $weiXinUserInfo = $mineTools->getOauthUserInfo();
