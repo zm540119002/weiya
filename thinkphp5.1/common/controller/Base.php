@@ -18,7 +18,8 @@ class Base extends \think\Controller{
             $this->host . $_SERVER['HTTP_REFERER']);
         //去到页面跟返回跳转不一样，前端传参returnUrl
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
-
+        print_r(123);
+        exit;
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             $weiXinUserInfo =  session('weiXinUserInfo');
             print_r(123);
