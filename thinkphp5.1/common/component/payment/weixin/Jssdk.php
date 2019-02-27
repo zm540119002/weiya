@@ -244,6 +244,8 @@ class Jssdk {
       //触发微信返回code码
       $baseUrl = urlencode(http_type().$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateUrlForCode($baseUrl);
+
+      echo $url;exit;
       Header("Location: $url");
       exit();
     } else {
