@@ -188,6 +188,7 @@ class Jssdk {
   public function getOauthUserInfo()
   {
     $data = $this -> GetAccessTokenAndOpenid();
+    print_r(123);
     print_r($data);
     exit;
     $access_token = $data['access_token'];
