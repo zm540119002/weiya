@@ -190,7 +190,7 @@ class Jssdk {
     $data = $this -> GetAccessTokenAndOpenid();
     $access_token = $data['access_token'];
     $openid =  $data['openid'];
-    $url = "http://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
+    $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
     $res = $this->http_request($url);
     return json_decode($res, true);
   }
@@ -223,15 +223,13 @@ class Jssdk {
     //通过code获得openid
     if (!isset($_GET['code'])){
       //触发微信返回code码
-//			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
-      $baseUrl = urlencode('https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+      $baseUrl = http_type().urlencode($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateOauthUrlForCode($baseUrl);
       header("Location: $url");
       exit();
     } else {
       //获取code码，以获取openid
       $code = $_GET['code'];
-      session('code1',$code);
       $data = $this->GetOpenidFromMp($code);
       return $data['openid'];
     }
@@ -242,10 +240,8 @@ class Jssdk {
   public function GetAccessTokenAndOpenid(){
     if (!isset($_GET['code'])){
       //触发微信返回code码
-      $baseUrl = urlencode('https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+      $baseUrl = http_type().urlencode($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateUrlForCode($baseUrl);
-      print_r(session(''));
-      exit;
       Header("Location: $url");
       exit();
     } else {
