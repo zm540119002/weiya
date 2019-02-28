@@ -240,9 +240,6 @@ class Jssdk {
 
   //通过code换取网页授权access_token与openid
   public function GetAccessTokenAndOpenid(){
-    print_r(123);
-    print_r($_GET);
-    exit;
     if ( !isset($_GET['code'])){
       //触发微信返回code码
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
