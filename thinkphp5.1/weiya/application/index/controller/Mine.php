@@ -4,6 +4,8 @@ namespace app\index\controller;
 class Mine extends \common\controller\Base{
     //我的首页
     public function index(){
+        session('test','aa');
+        echo session('test');
         $this->assign('user',session('user'));
         return $this->fetch();
     }
