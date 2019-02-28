@@ -190,7 +190,7 @@ class Jssdk {
     $data = $this -> GetAccessTokenAndOpenid();
     $access_token = $data['access_token'];
     $openid =  $data['openid'];
-    $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
+    $url = "http://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
     $res = $this->http_request($url);
     return json_decode($res, true);
   }
@@ -223,13 +223,15 @@ class Jssdk {
     //通过code获得openid
     if (!isset($_GET['code'])){
       //触发微信返回code码
-      $baseUrl = http_type().urlencode($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+//			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
+      $baseUrl = urlencode('https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateOauthUrlForCode($baseUrl);
       header("Location: $url");
       exit();
     } else {
       //获取code码，以获取openid
       $code = $_GET['code'];
+      session('code1',$code);
       $data = $this->GetOpenidFromMp($code);
       return $data['openid'];
     }
@@ -238,9 +240,13 @@ class Jssdk {
 
   //通过code换取网页授权access_token与openid
   public function GetAccessTokenAndOpenid(){
-    if (!isset($_GET['code'])){
+    print_r(123);
+    print_r($_GET);
+    exit;
+    if ( !isset($_GET['code'])){
       //触发微信返回code码
-      $baseUrl = http_type().urlencode($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+//			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
+      $baseUrl = urlencode('https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateUrlForCode($baseUrl);
       Header("Location: $url");
       exit();
@@ -1179,8 +1185,8 @@ class Jssdk {
   {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER,TRUE);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, TRUE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
     if (!empty($data)){
       curl_setopt($curl, CURLOPT_POST, 1);
       curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
