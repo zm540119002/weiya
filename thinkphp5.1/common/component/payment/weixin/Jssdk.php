@@ -130,8 +130,8 @@ class Jssdk {
     curl_setopt($curl, CURLOPT_TIMEOUT, 500);
     // 为保证第三方服务器与微信服务器之间数据传输的安全性，所有微信接口采用https方式调用，必须使用下面2行代码打开ssl安全校验。
     // 如果在部署过程中代码在此处验证失败，请到 http://curl.haxx.se/ca/cacert.pem 下载新的证书判别文件。
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, true);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
     curl_setopt($curl, CURLOPT_URL, $url);
 
     $res = curl_exec($curl);
@@ -178,7 +178,6 @@ class Jssdk {
   public function getUserInfo()
   {
     $openid = $this->getOpenid();
-//    $access_token = $this->getAccessToken();
     $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->access_token."&openid=".$openid."&lang=zh_CN";
     $res = $this->http_request($url);
     return json_decode($res, true);
@@ -190,7 +189,7 @@ class Jssdk {
     $data = $this -> GetAccessTokenAndOpenid();
     $access_token = $data['access_token'];
     $openid =  $data['openid'];
-    $url = "http://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
+    $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
     $res = $this->http_request($url);
     return json_decode($res, true);
   }
@@ -223,7 +222,6 @@ class Jssdk {
     //通过code获得openid
     if (!isset($_GET['code'])){
       //触发微信返回code码
-//			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
       $baseUrl = urlencode('https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateOauthUrlForCode($baseUrl);
       header("Location: $url");
@@ -231,7 +229,6 @@ class Jssdk {
     } else {
       //获取code码，以获取openid
       $code = $_GET['code'];
-      session('code1',$code);
       $data = $this->GetOpenidFromMp($code);
       return $data['openid'];
     }
@@ -242,7 +239,6 @@ class Jssdk {
   public function GetAccessTokenAndOpenid(){
     if ( !isset($_GET['code'])){
       //触发微信返回code码
-//			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
       $baseUrl = urlencode('https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateUrlForCode($baseUrl);
       Header("Location: $url");
