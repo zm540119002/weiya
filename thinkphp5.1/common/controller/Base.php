@@ -7,6 +7,7 @@ use think\facade\Session;
 class Base extends \think\Controller{
     protected $http_type = null;
     protected $host = null;
+    protected $request_uri = null;
     public function __construct(){
         parent::__construct();
         //登录验证后跳转回原验证发起页
@@ -14,9 +15,9 @@ class Base extends \think\Controller{
                 && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
         $this->host = $this->http_type . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ''));
+        $this->request_uri = $_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] :$this->host . $_SERVER['HTTP_REFERER'];
         //去到页面跟返回跳转一样，前端不用传参
-        session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] :
-            $this->host . $_SERVER['HTTP_REFERER']);
+        session('backUrl',$this->request_uri);
         //去到页面跟返回跳转不一样，前端传参returnUrl
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
