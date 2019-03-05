@@ -26,7 +26,8 @@ class GoodsCategory extends Base
             }
             $list = $model->where($where)->select();
             $this->assign('list',$list->toArray());
-            return view('list_tpl');
+            $listTpl=$level?'list_tpl_1':'list_tpl';
+            return view($listTpl);
         }else{
             return $this->fetch();
         }

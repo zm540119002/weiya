@@ -1,0 +1,22 @@
+{notempty name='list'}
+{volist name="list" id="vo"}
+<tr class="hover" data-level="{$vo.level}" data-id="{$vo.id}" data-parent-id-1="{$vo.parent_id_1}">
+    <td class="w5">
+        <input type="checkbox" class="check_item_2">
+        {if condition="($vo.level eq 1) or ($vo.level eq 2)"}
+        <span class="folding" status="open"></span>
+        {/if}
+    </td>
+    <td class="w5">{$vo.sort|default=''}</td>
+    <td class="w5">{$vo.name|default=''}</td>
+    <td class="w5">{$vo.remark|default=''}</td>
+    <td class="w96">
+        <a class="a-edit" data-operate="edit" href="javascript:void(0);">编辑</a>
+        | <a class="a-del" href="javascript:void(0);">删除</a>
+        {if condition="($vo.level eq 1) or ($vo.level eq 2)"}
+        | <a class="a-add" data-operate="addLower" href="javascript:void(0);">新增下级</a>
+        {/if}
+    </td>
+</tr>
+{/volist}
+{/notempty}
