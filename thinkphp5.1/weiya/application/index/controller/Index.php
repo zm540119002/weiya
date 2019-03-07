@@ -30,7 +30,6 @@ class Index extends \common\controller\Base{
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'6'
-
         ];
         $sceneList  = $modelScene->getList($config);
         $this ->assign('sceneList',$sceneList);
