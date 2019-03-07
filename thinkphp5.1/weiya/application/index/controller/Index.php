@@ -11,7 +11,8 @@ class Index extends \common\controller\Base{
         $config =[
             'where' => [
                 ['status', '=', 0],
-                ['level','=',1]
+                ['level','=',1],
+                ['level','&',1]
             ], 'order'=>[
                 'sort'=>'desc',
                 'id'=>'desc'
