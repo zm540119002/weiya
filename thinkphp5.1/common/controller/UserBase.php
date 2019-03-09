@@ -46,5 +46,4 @@ class UserBase extends Base{
             }
         }
     }
-    
 }
