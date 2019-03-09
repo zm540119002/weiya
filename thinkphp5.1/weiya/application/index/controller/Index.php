@@ -4,14 +4,14 @@ class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
-        print_r('系统维护中，请稍后。。。');
-        exit;
+//        print_r('系统维护中，请稍后。。。');
+//        exit;
         //获取商品的分类
         $modelGoodsCategory = new \app\index\model\GoodsCategory();
         $config =[
             'where' => [
                 ['status', '=', 0],
-                ['level','=',1]
+                ['level','=',1],
             ], 'order'=>[
                 'sort'=>'desc',
                 'id'=>'desc'
@@ -30,7 +30,6 @@ class Index extends \common\controller\Base{
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'6'
-
         ];
         $sceneList  = $modelScene->getList($config);
         $this ->assign('sceneList',$sceneList);

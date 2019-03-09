@@ -228,19 +228,7 @@ class getPayOpenId {
     Header("Location: $url");
     exit();
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
 
   //长链接转短链接接口
   public function url_long2short($longurl)

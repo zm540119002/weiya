@@ -1,7 +1,6 @@
 {extend name="template/admin_pc/base.html" /}
 {block name="css-customize"}
-<link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
-<link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
+
 {/block}
 {block name="content"}
     <div class="page">
@@ -150,7 +149,7 @@
                                                                 {if condition="$vo.level eq 1"}
                                                                     {if condition="$vo['id'] eq $info['parent_id_1']"}
                                                                         <option value="{$vo.id}" selected="selected">{$vo.name}</option>
-                                                                        <else/>
+                                                                        {else/}
                                                                         <option value="{$vo.id}">{$vo.name}</option>
                                                                     {/if}
                                                                 {/if}
