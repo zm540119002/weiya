@@ -3,10 +3,11 @@ $(function () {
         function () {
             var jump_url = $(this).data('jump_url');
             loginBackFunctionParameter.jump_url = jump_url;
-            var url = jump_url;
+            var url = module+'Brand/index';
+            console.log(url);
             var postData = {};
             $.ajax({
-                url: module+'Brand/index',
+                url: url,
                 data: postData,
                 type: 'post',
                 beforeSend: function(xhr){
@@ -29,7 +30,8 @@ $(function () {
                     }
                 }
             });
-        });
+        }
+    );
 });
 
 
