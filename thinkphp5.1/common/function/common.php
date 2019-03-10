@@ -286,7 +286,7 @@ function is_ssl() {
  */
 function get_url_param($variableName)
 {
-    return urldecode(I($variableName));
+    return urldecode(input($variableName));
 }
 
 /*
