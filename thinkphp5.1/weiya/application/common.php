@@ -3,19 +3,6 @@
 error_reporting(E_ERROR | E_PARSE );
 require __DIR__ . '/../../common/function/common.php';
 
-/**检查是否登录
- */
-function checkLogin(){
-    $user = session('user');
-    $user_sign = session('user_sign');
-    if (!$user || !$user_sign) {
-        return false;
-    }
-    if ($user_sign != data_auth_sign($user)) {
-        return false;
-    }
-    return $user;
-}
 /**循环判断键值是否存在
  * @return bool
  */

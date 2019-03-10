@@ -33,7 +33,8 @@ class User extends \common\controller\UserBaseAdmin{
     public function edit(){
         $modelUser = new \common\model\User();
         if(request()->isPost()){
-            return $modelUser->edit($this->user);
+            $postData = input('post.');
+            return $modelUser->edit($postData,true);
         }else{
             $id = input('id',0);
             if($id){
