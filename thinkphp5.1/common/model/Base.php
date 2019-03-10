@@ -116,7 +116,7 @@ class Base extends \think\Model {
 
 	/**创建账号序列号
 	 */
-	protected function createUserSN(){
-		 return 'msy_' . create_random_str(9,3);
+	protected function createUserSN($prefix='msy_'){
+		 return $prefix . create_random_str(9,3);
 	}
 }
