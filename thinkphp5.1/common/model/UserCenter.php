@@ -128,7 +128,7 @@ class UserCenter extends Base {
 		}
 		//更新最后登录时间
 		$this->_setLastLoginTimeById($user['id']);
-		return successMsg($this->_setSession($user));
+		return successMsg(setSession($user));
 	}
 
 	/**注册
@@ -179,19 +179,6 @@ class UserCenter extends Base {
 		return $user->toArray();
 	}
 
-	/**设置登录session
-	 */
-	public function _setSession($user){
-		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
-		session('user',$user);
-		session('user_sign',data_auth_sign($user));
-		//返回发起页或平台首页
-		$jumpUrl = session('backUrl')?:session('returnUrl');
-		$pattern  =  '/index.php\/([A-Z][a-z]*)\//';
-		preg_match ($pattern,$jumpUrl,$matches);
-		return $jumpUrl?:url('index/Index/index');
-	}
-	
 	/**检查验证码
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){

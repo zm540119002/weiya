@@ -12,26 +12,26 @@ class User extends Base{
 	protected $connection = 'db_config_common';
 
 	//编辑
-	public function edit($user){
-		$postData = input('post.');
+	public function edit($data,$setSession=false){
 		$validateUser = new \common\validate\User();
-		if(!$validateUser->scene('edit')->check($postData)){
+		if(!$validateUser->scene('edit')->check($data)){
 			return errorMsg($validateUser->getError());
 		}
-		if($postData['id'] && intval($postData['id'])){
-			$postData['update_time'] = time();
-			$this->isUpdate(true)->save($postData);
+		if(isset($data['id']) && intval($data['id'])){
+			$data['update_time'] = time();
+			$this->isUpdate(true)->save($data);
 		}else{
-			unset($postData['id']);
-			if(isset($user['id']) && $user['id']){
-				$postData['type'] = 2;
+			unset($data['id']);
+			$data['create_time'] = time();
+			$this->isUpdate(false)->save($data);
+			$data['id'] = $this->getAttr('id');
+			if(!$this->getAttr('id')){
+				return errorMsg('失败',$this->getError());
 			}
-			$postData['create_time'] = time();
-			$this->save($postData);
 		}
-		if(!$this->getAttr('id')){
-			return errorMsg('失败',$this->getError());
+		if($setSession){
+			setSession($data);
 		}
-		return successMsg('成功！',array('id'=>$this->getAttr('id')));
+		return successMsg('成功！',$data);
 	}
 }

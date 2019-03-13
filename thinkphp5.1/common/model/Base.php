@@ -2,20 +2,6 @@
 namespace common\model;
 
 class Base extends \think\Model {
-	/**增加或修改
-	 */
-	public function edit($data,$condition=[]){
-		$res = $this->allowField(true)->save($data,$condition);
-		if($res === false){
-			return errorMsg('失败');
-		}
-		$returnArray = [];
-		if(empty($condition)){
-			$returnArray['id'] = $this->getAttr('id');
-		}
-		return successMsg('成功',$returnArray);
-	}
-
 	/**查询多条数据
 	 */
 	public function getList($config=[]){
@@ -130,7 +116,7 @@ class Base extends \think\Model {
 
 	/**创建账号序列号
 	 */
-	protected function createUserSN(){
-		 return 'msy_' . create_random_str(9,3);
+	protected function createUserSN($prefix='msy_'){
+		 return $prefix . create_random_str(9,3);
 	}
 }
