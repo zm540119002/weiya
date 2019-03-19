@@ -286,7 +286,7 @@ function is_ssl() {
  */
 function get_url_param($variableName)
 {
-    return urldecode(I($variableName));
+    return urldecode(input($variableName));
 }
 
 /*
@@ -927,6 +927,32 @@ function FetchRepeatMemberInArray($array) {
     return  $repeat_arr ? $repeat_arr : false;
 }
 
+/**检查是否登录
+ */
+function checkLogin(){
+    $user = session('user');
+    $user_sign = session('user_sign');
+    if (!$user || !$user_sign) {
+        return false;
+    }
+    if ($user_sign != data_auth_sign($user)) {
+        return false;
+    }
+    return $user;
+}
+
+/**设置登录session
+ */
+function setSession($user){
+    $user = array_merge($user,array('rand' => create_random_str(10, 0),));
+    session('user',$user);
+    session('user_sign',data_auth_sign($user));
+    //返回发起页或平台首页
+    $jumpUrl = session('backUrl')?:session('returnUrl');
+    $pattern  =  '/index.php\/([A-Z][a-z]*)\//';
+    preg_match ($pattern,$jumpUrl,$matches);
+    return $jumpUrl?:url('index/Index/index');
+}
 
 
 

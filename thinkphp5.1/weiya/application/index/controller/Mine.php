@@ -13,31 +13,26 @@ class Mine extends \common\controller\Base{
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
+        $user = session('user');
+        if(empty($user)){
+            return errorMsg('未登录');
+        }
+        $oldAvatar = $user['avatar'];
         $fileBase64 = input('post.fileBase64');
         $upload = config('upload_dir.user_avatar');
-        $userAvatar = $this ->_uploadSingleFileToTemp($fileBase64,$upload);
-        if(isset($userAvatar['status']) &&$userAvatar['status'] == 0){
+        $newAvatar = $this ->_uploadSingleFileToTemp($fileBase64,$upload);
+        if($newAvatar['status'] == 0 && !$newAvatar){
             return errorMsg('失败');
         }
-        $user = session('user');
-        $oldAvatar = $user['avatar'];
+        $user['avatar'] = $newAvatar;
         $modelUser = new \common\model\User();
-        $data = [
-            'id'=>$user['id'],
-            'avatar'=>$userAvatar,
-        ];
-        $result = $modelUser -> isUpdate(true)->save($data);
-        if(false === $result){
+        $result = $modelUser->edit($user,true);
+        if($result['status'] == 0){
             return errorMsg('失败');
         }
-        $user['avatar'] = $userAvatar;
-        $modelUserCenter = new \common\model\UserCenter();
-        $modelUserCenter->_setSession($user);
-        if($user['avatar']){
-            //删除旧详情图
-            delImgFromPaths($oldAvatar,$userAvatar);
-        }
-        return successMsg('成功',['avatar'=>$userAvatar]);
+        //删除旧详情图
+        delImgFromPaths($oldAvatar,$newAvatar);
+        return successMsg('成功',['avatar'=>$newAvatar]);
     }
 
     //修改名字
@@ -47,19 +42,12 @@ class Mine extends \common\controller\Base{
         }
         $modelUser = new \common\model\User();
         $user = session('user');
-        $name = preg_replace('# #','',input('post.name'));
-        $data = [
-            'id'=>$user['id'],
-            'name'=>$name,
-        ];
-        $result = $modelUser -> isUpdate(true)->save($data);
-        if(false === $result){
+        $newName = preg_replace('# #','',input('post.name'));
+        $user['avatar'] = $newName;
+        $result = $modelUser->edit($user,true);
+        if($result['status'] == 0){
             return errorMsg('失败');
         }
-
-        $modelUserCenter = new \common\model\UserCenter();
-        $user['name'] = $name;
-        $modelUserCenter->_setSession($user);
-        return successMsg('成功',['name'=>$name]);
+        return successMsg('成功',['name'=>$newName]);
     }
 }

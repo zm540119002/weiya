@@ -20,7 +20,7 @@ class Index extends \common\controller\Base{
         $config =[
             'where' => [
                 ['status', '=', 0],
-                ['level','=',1]
+                ['level','=',1],
             ], 'order'=>[
                 'sort'=>'desc',
                 'id'=>'desc'
@@ -39,7 +39,6 @@ class Index extends \common\controller\Base{
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'6'
-
         ];
         $sceneList  = $modelScene->getList($config);
         $this ->assign('sceneList',$sceneList);

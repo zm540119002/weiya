@@ -34,6 +34,10 @@ return [
         'public_js' => Request::domain() .'/static/common/js',
         'public_css' => Request::domain() .'/static/common/css',
         'public_img' => Request::domain() .'/static/common/img',
+        //api    资源路径
+        'api_common_js' => 'https://api.worldview.com.cn/static/common/js',
+        'api_common_css' => 'https://api.worldview.com.cn/static/common/css',
+        'api_common_img' => 'https://api.worldview.com.cn/static/common/img',
         //common_index  资源路径
         'common_index_js' => Request::domain() .'/static/common_index/js',
         'common_index_css' => Request::domain() .'/static/common_index/css',

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>{block name="title"}{$Think.config.custom.title}{/block}</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="stylesheet" href="public_css/base.css">
+	<link rel="stylesheet" href="public_css/public.css">
+	{block name="css-customize"}{/block}
+	<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="public_js/login.js"></script>
+	<script type="text/javascript">
+		var domain = '{:request()->domain()}'+'/'+'index.php/';
+		var module = domain + '{:request()->module()}/';
+		var controller = module + '{:request()->controller()}/';
+		var action = controller + '{:request()->action()}';
+		var uploads = '{:request()->domain()}'+'/uploads/';
+	</script>
+	<!--前置自定义js-->
+	{block name="pre-script"}{/block}
+</head>
+<body>
+<!-- 内容模块 -->
+{block name="content"}{/block}
+<!-- 公共模块-->
+{block name="common"}{/block}
+<!-- 页脚模块-->
+{block name="footer"}
+<footer class="f24">
+	<a href="http://www.miitbeian.gov.cn">
+		<span class="icp_icon">Copyright@广东美尚网络科技有限公司</span>
+		<span class="icp_icon">粤ICP备18130945号-1</span>
+	</a>
+</footer>
+{/block}
+<!--js基本插件-->
+<script type="text/javascript" src="public_js/layer.mobile/layer.js"></script>
+<script type="text/javascript" src="public_js/public.js"></script>
+<script type="text/javascript" src="public_js/forbidscroll.js"></script>
+<script type="text/javascript" src="public_js/common.js"></script>
+<script type="text/javascript" src="common_admin_js/dialog.js"></script>
+<script type="text/javascript" src="public_js/login.js"></script>
+<!--自定义js-->
+{block name="script"}{/block}
+</body></html>
