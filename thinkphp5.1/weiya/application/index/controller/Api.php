@@ -18,17 +18,17 @@ class Api extends \common\controller\Base{
         $accessToken = $res['data']['accessToken'];
 
 //        $uploadPath = config('upload_dir.upload_path').'/'. config('upload_dir.temp_path');
-//        $image   = $uploadPath."1.jpg"; //图片地址
+//        $image   = "static/common/img/ldh.jpg"; //图片地址
 //        $p_size = filesize($image);
 //        $img_binary = fread(fopen($image, "r"), $p_size);
-        //file_put_contents($uploadPath.time().'.jpg',$img_binary);exit;
+//        file_put_contents($uploadPath.time().'.jpg',$img_binary);exit;
         $url = 'https://open.api.clife.cn/apigateway/commons/clife-open-api-app/cloud/skinImageAnalysis/photograph/analysis';
 
         $data2 = [
             'appId'=>31316,
             'accessToken'=>$accessToken,
             'timestamp'=> time().'000',
-            'image'=>'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553057709087&di=d35a586624659c17692adf62938baeb3&imgtype=0&src=http%3A%2F%2Fimages10.m.china.com.cn%2Fnewschina%2F2018_11_19%2F04%2Fca15ca9c3b5472460fb783c0bf5718766ef09bd56178accb_600_9999.jpg',
+            'image'=>'static/common/img/ldh.jpg',
         ];
         $header2 =[
             "Content-type:multipart/form-data"
