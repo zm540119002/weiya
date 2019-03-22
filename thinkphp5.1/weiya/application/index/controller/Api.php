@@ -14,15 +14,16 @@ class Api extends \common\controller\Base{
             'timestamp'=> time().'000',
         ];
         //$res = $curl->get($urlToken, $data);
-        $res = json_decode($curl->get($urlToken, $data),true);
+        $curl->get($urlToken, $data);
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
             echo 'Response:' . "\n";
             var_dump($curl->response);exit;
         }
-        $accessToken = $res['data']['accessToken'];
-        print_r($accessToken) ;exit;
+        exit;
+        //$accessToken = $res['data']['accessToken'];
+        //print_r($accessToken) ;exit;
 //        $uploadPath = config('upload_dir.upload_path').'/'. config('upload_dir.temp_path');
 //        $image   = "static/common/img/ldh.jpg"; //图片地址
 //        $p_size = filesize($image);
