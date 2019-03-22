@@ -17,9 +17,10 @@ class Api extends \common\controller\Base{
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
-            print_r($curl->response);exit;
+            print_r($curl->response);
             $res = json_decode($curl->response,true);
             $accessToken = $res['data']['accessToken'];
+
         }
         print_r($accessToken) ;exit;
 //        $uploadPath = config('upload_dir.upload_path').'/'. config('upload_dir.temp_path');
