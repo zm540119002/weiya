@@ -13,8 +13,7 @@ class Api extends \common\controller\Base{
             'appSecret'=>'0ab242fc269f4119bc9f4ad9e6884332',
             'timestamp'=> time().'000',
         ];
-        //$res = $curl->get($urlToken, $data);
-        $res = json_decode($curl->get($urlToken, $data),true);
+        $curl->get($urlToken, $data);
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
