@@ -7,7 +7,6 @@ class Api extends \common\controller\Base{
      */
     public function index(){
         $curl = new Curl();
-        print_r($curl);exit;
         $urlToken = 'https://open.api.clife.cn/apigateway/commons/clife-open-api-app/cloud/token';
         $data = [
             'appId'=>31316,
@@ -22,8 +21,8 @@ class Api extends \common\controller\Base{
             echo 'Response:' . "\n";
             var_dump($curl->response);exit;
         }
-        $accessToken = $res['data']['accessToken'];
-        print_r($accessToken) ;exit;
+       // $accessToken = $res['data']['accessToken'];
+       // print_r($accessToken) ;exit;
 //        $uploadPath = config('upload_dir.upload_path').'/'. config('upload_dir.temp_path');
 //        $image   = "static/common/img/ldh.jpg"; //图片地址
 //        $p_size = filesize($image);
