@@ -1,9 +1,8 @@
 <?php
-namespace common\component\Curl;
+namespace common\component\curl;
 
-
-use Curl\ArrayUtil;
-use Curl\Decoder;
+use \common\component\curl\ArrayUtil;
+use \common\component\curl\Decoder;
 
 class Curl
 {

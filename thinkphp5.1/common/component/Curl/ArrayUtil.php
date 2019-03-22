@@ -1,6 +1,6 @@
 <?php
 
-namespace Curl;
+namespace common\component\curl;
 
 class ArrayUtil
 {
