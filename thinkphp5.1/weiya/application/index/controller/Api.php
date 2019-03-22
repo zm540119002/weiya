@@ -13,13 +13,15 @@ class Api extends \common\controller\Base{
             'appSecret'=>'0ab242fc269f4119bc9f4ad9e6884332',
             'timestamp'=> time().'000',
         ];
-        //$res = $curl->get($urlToken, $data);
-        $curl->get($urlToken, $data);
+
+        $curl->get($urlToken,$data);
+
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
             echo 'Response:' . "\n";
-            var_dump($curl->response);exit;
+            var_dump($curl->response);
+            exit;
         }
        // $accessToken = $res['data']['accessToken'];
        // print_r($accessToken) ;exit;
