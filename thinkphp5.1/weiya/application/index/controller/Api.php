@@ -24,16 +24,13 @@ class Api extends \common\controller\Base{
             'appId'=>31316,
             'accessToken'=>$accessToken,
             'timestamp'=> time().'000',
-            'image'=>'@static/common/img/ldh.jpg',
-        ];
-        $header2 =[
-            "Content-type:multipart/form-data"
+            'image'=>'@static/common/img/1.jpg',
         ];
         $curl->post($url, $data2);
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
-            var_dump($curl->response);exit;
+            var_dump($curl->response);
         }
     }
 
