@@ -151,7 +151,7 @@ class Curl
                     $data instanceof \JsonSerializable
                 )
             )) {
-            $data = \Curl\Encoder::encodeJson($data);
+            $data = \common\component\curl\Encoder::encodeJson($data);
         } elseif (is_array($data)) {
             // Manually build a single-dimensional array from a multi-dimensional array as using curl_setopt($ch,
             // CURLOPT_POSTFIELDS, $data) doesn't correctly handle multi-dimensional arrays when files are
@@ -859,7 +859,7 @@ class Curl
      */
     public function setDefaultJsonDecoder()
     {
-        $this->jsonDecoder = '\Curl\Decoder::decodeJson';
+        $this->jsonDecoder = '\common\component\curl\Decoder::decodeJson';
         $this->jsonDecoderArgs = func_get_args();
     }
 
@@ -874,7 +874,7 @@ class Curl
      */
     public function setDefaultXmlDecoder()
     {
-        $this->xmlDecoder = '\Curl\Decoder::decodeXml';
+        $this->xmlDecoder = '\common\component\curl\Decoder::decodeXml';
         $this->xmlDecoderArgs = func_get_args();
     }
 
@@ -892,9 +892,9 @@ class Curl
             $this->defaultDecoder = $mixed;
         } else {
             if ($mixed === 'json') {
-                $this->defaultDecoder = '\Curl\Decoder::decodeJson';
+                $this->defaultDecoder = '\common\component\curl\Decoder::decodeJson';
             } elseif ($mixed === 'xml') {
-                $this->defaultDecoder = '\Curl\Decoder::decodeXml';
+                $this->defaultDecoder = '\common\component\curl\Decoder::decodeXml';
             }
         }
     }
