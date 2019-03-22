@@ -13,8 +13,7 @@ class Api extends \common\controller\Base{
             'appSecret'=>'0ab242fc269f4119bc9f4ad9e6884332',
             'timestamp'=> time().'000',
         ];
-        //$curl->get($urlToken, $data);
-        $curl->get('https:www.baidu.com');
+        $curl->get($urlToken, $data);
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
