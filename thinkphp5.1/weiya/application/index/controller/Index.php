@@ -1,15 +1,11 @@
 <?php
 namespace app\index\controller;
-use \common\component\curl\Curl;
 class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
-        $curl = new Curl();
-        print_r($curl);
-
 //        print_r('系统维护中，请稍后。。。');
-        exit;
+//        exit;
         //获取商品的分类
         $modelGoodsCategory = new \app\index\model\GoodsCategory();
         $config =[
