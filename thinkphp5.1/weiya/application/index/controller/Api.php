@@ -7,6 +7,7 @@ class Api extends \common\controller\Base{
      */
     public function index(){
         $curl = new Curl();
+        print_r($curl);exit;
         $urlToken = 'https://open.api.clife.cn/apigateway/commons/clife-open-api-app/cloud/token';
         $data = [
             'appId'=>31316,
