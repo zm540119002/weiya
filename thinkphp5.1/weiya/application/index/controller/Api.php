@@ -18,6 +18,7 @@ class Api extends \common\controller\Base{
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
+            print_r($curl->response);exit;
             $res = json_decode($curl->response,true);
             $accessToken = $res['data']['accessToken'];
         }
