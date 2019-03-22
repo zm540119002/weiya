@@ -1,6 +1,6 @@
 <?php
 namespace app\index\controller;
-use \common\component\curl\Curl;
+use \common\component\Curl\Curl;
 
 class Api extends \common\controller\Base{
     /**首页
@@ -13,15 +13,15 @@ class Api extends \common\controller\Base{
             'appSecret'=>'0ab242fc269f4119bc9f4ad9e6884332',
             'timestamp'=> time().'000',
         ];
-        $curl->get($urlToken, $data);
+        //$res = $curl->get($urlToken, $data);
+        $res = json_decode($curl->get($urlToken, $data),true);
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
-            print_r($curl->response);
-            $res = json_decode($curl->response,true);
-            $accessToken = $res['data']['accessToken'];
-
+            echo 'Response:' . "\n";
+            var_dump($curl->response);exit;
         }
+        $accessToken = $res['data']['accessToken'];
         print_r($accessToken) ;exit;
 //        $uploadPath = config('upload_dir.upload_path').'/'. config('upload_dir.temp_path');
 //        $image   = "static/common/img/ldh.jpg"; //图片地址
