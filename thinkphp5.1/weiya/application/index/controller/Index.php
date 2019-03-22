@@ -4,7 +4,7 @@ class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
-        $curl = new \common\component\Curl\Curl();
+        $curl = new \common\component\curl\Curl();
         print_r($curl);
 
 //        print_r('系统维护中，请稍后。。。');
