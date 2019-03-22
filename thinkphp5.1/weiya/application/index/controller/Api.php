@@ -1,6 +1,6 @@
 <?php
 namespace app\index\controller;
-use \common\component\Curl\Curl;
+use \common\component\curl\Curl;
 
 class Api extends \common\controller\Base{
     /**首页
