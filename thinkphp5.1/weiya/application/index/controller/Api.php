@@ -13,14 +13,15 @@ class Api extends \common\controller\Base{
             'appSecret'=>'0ab242fc269f4119bc9f4ad9e6884332',
             'timestamp'=> time().'000',
         ];
-        $curl->get($urlToken, $data);
+        //$curl->get($urlToken, $data);
+        $curl->get('https:www.baidu.com');
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
             $accessToken =$curl->response->data->accessToken;
         }
 
-        print_r($accessToken);
+        print_r($curl->response);
         $url = 'https://open.api.clife.cn/apigateway/commons/clife-open-api-app/cloud/skinImageAnalysis/photograph/analysis';
         $data2 = [
             'appId'=>31316,
