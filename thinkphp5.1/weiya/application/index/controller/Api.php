@@ -21,6 +21,7 @@ class Api extends \common\controller\Base{
         }
 
         print_r($curl->response);
+
         $url = 'https://open.api.clife.cn/apigateway/commons/clife-open-api-app/cloud/skinImageAnalysis/photograph/analysis';
         $data2 = [
             'appId'=>31316,
@@ -31,7 +32,9 @@ class Api extends \common\controller\Base{
         $header2 =[
             "Content-type:multipart/form-data"
         ];
+        
         $curl->post($url, $data2);
+
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
