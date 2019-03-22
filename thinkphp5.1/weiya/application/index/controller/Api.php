@@ -1,22 +1,28 @@
 <?php
 namespace app\index\controller;
+use  \Curl\Curl;
 
 class Api extends \common\controller\Base{
     /**首页
      */
     public function index(){
+        $curl = new Curl();
         $urlToken = 'https://open.api.clife.cn/apigateway/commons/clife-open-api-app/cloud/token';
         $data = [
             'appId'=>31316,
             'appSecret'=>'0ab242fc269f4119bc9f4ad9e6884332',
             'timestamp'=> time().'000',
         ];
-        $header =[
-            "Content-type:application/x-www-form-urlencoded"
-        ];
-        $res = json_decode($this->httpGet($urlToken,$header,$data),true);
+        //$res = $curl->get($urlToken, $data);
+        $res = json_decode($curl->get($urlToken, $data),true);
+        if ($curl->error) {
+            echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
+        } else {
+            echo 'Response:' . "\n";
+            var_dump($curl->response);exit;
+        }
         $accessToken = $res['data']['accessToken'];
-
+        print_r($accessToken) ;exit;
 //        $uploadPath = config('upload_dir.upload_path').'/'. config('upload_dir.temp_path');
 //        $image   = "static/common/img/ldh.jpg"; //图片地址
 //        $p_size = filesize($image);
