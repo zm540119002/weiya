@@ -14,7 +14,7 @@ class Api extends \common\controller\Base{
             'timestamp'=> time().'000',
         ];
         //$res = $curl->get($urlToken, $data);
-        $res = json_decode($curl->get($urlToken, $data),true);
+        $curl->get($urlToken, $data);
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
