@@ -1,11 +1,11 @@
 <?php
 namespace app\index\controller;
-
+use \common\component\curl\Curl;
 class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
-        $curl = new \common\component\curl\Curl();
+        $curl = new Curl();
         print_r($curl);
 
 //        print_r('系统维护中，请稍后。。。');
