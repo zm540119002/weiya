@@ -66,6 +66,11 @@ class Api extends \common\controller\Base{
                             . '，数量：' . $v['number'];
                     }
                 }
+                //眉形
+                if($key === 'eyebrow'){
+                    $returnData['eyebrow']['left'] = '左眉形： ' . config('clife.eyebrow')[$val['left']];
+                    $returnData['eyebrow']['right'] = '左眉形： ' . config('clife.eyebrow')[$val['right']];
+                }
             }
             print_r($returnData);
         }
