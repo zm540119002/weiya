@@ -50,11 +50,11 @@ class Api extends \common\controller\Base{
                 }
                 //毛孔
                 if($key === 'pore'){
-                    $returnData[] = '毛孔： ' . config('clife.poreLevel')[$val['level']] . '，数量：' . $val['number'];
+                    $returnData['pore'] = '毛孔： ' . config('clife.poreLevel')[$val['level']] . '，数量：' . $val['number'];
                 }
                 //脸型
                 if($key === 'faceshape'){
-                    $returnData['pore'] = '脸型： ' . config('clife.faceshape')[$val[0]];
+                    $returnData['faceshape'] = '脸型： ' . config('clife.faceshape')[$val[0]];
                 }
                 //痘痘
                 if($key === 'acnes'){
