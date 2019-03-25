@@ -24,7 +24,7 @@ class Api extends \common\controller\Base{
             'appId'=>31316,
             'accessToken'=>$accessToken,
             'timestamp'=> time().'000',
-            'image'=>'@static/common/img/ldh.jpg',
+            'image'=>'@static/common/img/l.jpg',
         ];
         $curl->post($url, $data2);
         if ($curl->error) {
