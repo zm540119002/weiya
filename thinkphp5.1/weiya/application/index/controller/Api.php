@@ -54,6 +54,7 @@ class Api extends \common\controller\Base{
                 }
                 //脸型
                 if($key === 'faceshape'){
+                    print_r($val);
                     $returnData[] = '脸型： ' . config('clife.faceshape')[$val];
                 }
             }
