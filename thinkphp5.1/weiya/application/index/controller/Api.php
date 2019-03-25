@@ -32,7 +32,7 @@ class Api extends \common\controller\Base{
         } else {
             $res = json_encode($curl->response->data);
             foreach ($curl->response->data as $key=>$val){
-                print_r(json_encode($val));
+                print_r(($val));
             }
         }
     }
