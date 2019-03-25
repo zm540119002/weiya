@@ -69,7 +69,19 @@ class Api extends \common\controller\Base{
                 //眉形
                 if($key === 'eyebrow'){
                     $returnData['eyebrow']['left'] = '左眉形： ' . config('clife.eyebrow')[$val['left']];
-                    $returnData['eyebrow']['right'] = '左眉形： ' . config('clife.eyebrow')[$val['right']];
+                    $returnData['eyebrow']['right'] = '右眉形： ' . config('clife.eyebrow')[$val['right']];
+                }
+                //眼袋
+                if($key === 'pouch'){
+                    $returnData['pouch'] = '眼袋： ' . config('clife.pouchLevel')[$val['level']];
+                }
+                //皱纹
+                if($key === 'wrinkles'){
+                    foreach ($val as $v){
+                        $v = (array)$v;
+                        $returnData['wrinkles'][] = '类型：' . config('clife.wrinkleTypeId')[$v['wrinkleTypeId']]
+                            . '，严重等级：' . config('clife.acneLevel')[$v['level']];
+                    }
                 }
             }
             print_r($returnData);
