@@ -41,6 +41,9 @@ class Api extends \common\controller\Base{
                     }
                 }
                 //解析黑头
+                if($key === 'blackHead'){
+                    $returnData[] = '黑头： ' . config('clife.blackHeadLevel')[$val['level']] . '，数量：' . $val['number'];
+                }
             }
             print_r($returnData);
         }

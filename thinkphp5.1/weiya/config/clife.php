@@ -12,6 +12,13 @@ return [
         ['type' => ['eyelid'=>1,'narrow'=>3,'updown'=>1],'explain' => '狐媚眼',],
         ['type' => ['eyelid'=>1,'narrow'=>3,'updown'=>2],'explain' => '孔雀眼',],
     ],
+    'blackHeadLevel'=>[
+        1 => '无',
+        2 => '极少',
+        3 => '轻度',
+        4 => '中度',
+        5 => '重度',
+    ],
     'authentication' => [
         'store_operation' => [
             'id'=>10,
