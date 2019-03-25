@@ -30,21 +30,22 @@ class Api extends \common\controller\Base{
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
-            print_r(json_encode($curl->response->data));
-            exit;
+//            print_r(json_encode($curl->response->data));
+//            exit;
             $returnData = [];
             foreach ($curl->response->data as $key=>$val){
+                $val = (array)$val;
                 //解析眼型
                 if($key === 'eyeshape'){
                     foreach (config('clife.eyeshape') as $v){
-                        if($v['type'] == (array)($val)){
+                        if($v['type'] == $val){
                             $returnData[] = '眼型： ' . $v['explain'];
                         }
                     }
                 }
                 //解析黑头
                 if($key === 'blackHead'){
-                    $returnData[] = '黑头： ' . config('clife.blackHeadLevel')[(array)$val['level']] . '，数量：' . $val['number'];
+                    $returnData[] = '黑头： ' . config('clife.blackHeadLevel')[$val['level']] . '，数量：' . $val['number'];
                 }
             }
             print_r($returnData);
