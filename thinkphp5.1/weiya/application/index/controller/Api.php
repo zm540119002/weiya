@@ -101,6 +101,15 @@ class Api extends \common\controller\Base{
                             . '，严重等级：' . config('clife.acneLevel')[$v['level']];
                     }
                 }
+                //敏感度
+                if($key === 'sensitivity'){
+                    foreach ($val['sensitivityCategory'] as $v){
+                        $v = (array)$v;
+                        $returnData['sensitivity'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
+                            . '，严重等级：' . config('clife.acneLevel')[$v['level']]
+                            . '，敏感类型：' . config('clife.sensitivityTypeId')[$val['typeId']];
+                    }
+                }
             }
             print_r($returnData);
         }
