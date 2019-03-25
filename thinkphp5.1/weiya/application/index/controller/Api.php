@@ -36,7 +36,7 @@ class Api extends \common\controller\Base{
             foreach ($curl->response->data as $key=>$val){
                 if($key === 'eyeshape'){
                     foreach ($eyeshape as $v){
-                        print_r(array($val));
+                        print_r((array)($val));
                         print_r($v['type']);
                         if($v['type'] == $val){
                             print_r($v['explain']);
