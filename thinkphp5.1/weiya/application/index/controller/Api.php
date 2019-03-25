@@ -110,6 +110,36 @@ class Api extends \common\controller\Base{
                             . '，敏感类型：' . config('clife.sensitivityTypeId')[$val['typeId']];
                     }
                 }
+                //黑眼圈
+                if($key === 'darkCircle'){
+                    foreach ($val as $v){
+                        $v = (array)$v;
+                        $returnData['darkCircle'][] = '部位： ' . config('clife.darkCirclePosition')[$v['position']]
+                            . '，严重等级：' . config('clife.darkCircleLevel')[$v['level']]
+                            . '，类型：' . config('clife.darkCircleType')[$val['type']];
+                    }
+                }
+                //肌肤年龄
+                if($key === 'skinAge'){
+                    $returnData['skinAge'] = '肌肤年龄： ' . $val[0];
+                }
+                //油分
+                if($key === 'oil'){
+                    foreach ($val as $v){
+                        $v = (array)$v;
+                        $returnData['oil'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
+                            . '，严重等级：' . config('clife.darkCircleLevel')[$v['level']];
+                    }
+                }
+                //脂肪粒
+                if($key === 'fatGranule'){
+                    foreach ($val as $v) {
+                        $v = (array)$v;
+                        $returnData['fatGranule'][] = '类型：' . config('clife.fatGranuleTypeId')[$v['fatGranuleTypeId']]
+                            . '，严重等级：' . config('clife.darkCircleLevel')[$v['level']]
+                            . '，数量：' . $v['number'];
+                    }
+                }
             }
             print_r($returnData);
         }

@@ -75,5 +75,19 @@ return [
     ],'sensitivityTypeId'=>[
         1 => '耐受',
         2 => '敏感',
+    ],'darkCircleType'=>[
+        1 => '无',
+        2 => '血管型',
+        3 => '色素型',
+    ],'darkCircleLevel'=>[
+        1 => '无',
+        2 => '轻微',
+        3 => '严重',
+    ],'darkCirclePosition'=>[
+        1 => '左眼',
+        2 => '右眼',
+    ],'fatGranuleTypeId'=>[
+        1 => '汗管瘤',
+        2 => '栗丘疹',
     ],
 ];
