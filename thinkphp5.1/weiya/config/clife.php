@@ -1,16 +1,16 @@
 <?php
 return [
     'eyeshape' => [
-        ['type' => [1,1,1],'explain' => '铜铃眼',],
-        ['type' => [1,1,2],'explain' => '睡龙眼',],
-        ['type' => [2,2,1],'explain' => '丹凤眼',],
-        ['type' => [2,2,2],'explain' => '睡凤眼',],
-        ['type' => [1,2,1],'explain' => '瑞凤眼',],
-        ['type' => [1,2,2],'explain' => '月牙眼',],
-        ['type' => [2,3,1],'explain' => '桃花眼',],
-        ['type' => [2,3,2],'explain' => '柳叶眼',],
-        ['type' => [1,3,1],'explain' => '狐媚眼',],
-        ['type' => [1,3,2],'explain' => '孔雀眼',],
+        ['type' => ['eyelid'=>1,'narrow'=>1,'updown'=>1],'explain' => '铜铃眼',],
+        ['type' => ['eyelid'=>1,'narrow'=>1,'updown'=>2],'explain' => '睡龙眼',],
+        ['type' => ['eyelid'=>2,'narrow'=>2,'updown'=>1],'explain' => '丹凤眼',],
+        ['type' => ['eyelid'=>2,'narrow'=>2,'updown'=>2],'explain' => '睡凤眼',],
+        ['type' => ['eyelid'=>1,'narrow'=>2,'updown'=>1],'explain' => '瑞凤眼',],
+        ['type' => ['eyelid'=>1,'narrow'=>2,'updown'=>2],'explain' => '月牙眼',],
+        ['type' => ['eyelid'=>2,'narrow'=>3,'updown'=>1],'explain' => '桃花眼',],
+        ['type' => ['eyelid'=>2,'narrow'=>3,'updown'=>2],'explain' => '柳叶眼',],
+        ['type' => ['eyelid'=>1,'narrow'=>3,'updown'=>1],'explain' => '狐媚眼',],
+        ['type' => ['eyelid'=>1,'narrow'=>3,'updown'=>2],'explain' => '孔雀眼',],
     ],
     'authentication' => [
         'store_operation' => [
