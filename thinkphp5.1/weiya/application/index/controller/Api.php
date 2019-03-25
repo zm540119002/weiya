@@ -46,11 +46,11 @@ class Api extends \common\controller\Base{
                 }
                 //黑头
                 if($key === 'blackHead'){
-                    $returnData['黑头'] = '黑头： ' . config('clife.blackHeadLevel')[$val['level']] . '，数量：' . $val['number'];
+                    $returnData['黑头'] = '严重等级： ' . config('clife.blackHeadLevel')[$val['level']] . '，数量：' . $val['number'];
                 }
                 //毛孔
                 if($key === 'pore'){
-                    $returnData['毛孔'] = '毛孔： ' . config('clife.poreLevel')[$val['level']] . '，数量：' . $val['number'];
+                    $returnData['毛孔'] = '严重等级： ' . config('clife.poreLevel')[$val['level']] . '，数量：' . $val['number'];
                 }
                 //脸型
                 if($key === 'faceshape'){
