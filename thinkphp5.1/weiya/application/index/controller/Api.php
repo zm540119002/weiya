@@ -30,7 +30,8 @@ class Api extends \common\controller\Base{
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
-            print_r(json_encode($curl->response->data));
+            $res = json_encode($curl->response->data);
+            print_r($res);
         }
     }
 }
