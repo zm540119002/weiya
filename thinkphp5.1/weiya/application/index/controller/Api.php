@@ -39,8 +39,6 @@ class Api extends \common\controller\Base{
                     foreach ($eyeshape as $v){
                         if($v['type'] == (array)($val)){
                             $returnData[] = '眼型： ' . $v['explain'];
-                        }else{
-                            $returnData[] = '眼型： 未知';
                         }
                     }
                 }
