@@ -83,6 +83,24 @@ class Api extends \common\controller\Base{
                             . '，严重等级：' . config('clife.acneLevel')[$v['level']];
                     }
                 }
+                //色素斑
+                if($key === 'pigmentations'){
+                    foreach ($val as $v){
+                        $v = (array)$v;
+                        $returnData['pigmentations'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
+                            . '，类型：' . config('clife.pigmentationTypeId')[$v['pigmentationTypeId']]
+                            . '，严重等级：' . config('clife.acneLevel')[$v['level']];
+                    }
+                }
+                //水分
+                if($key === 'moisture'){
+                    foreach ($val as $v){
+                        $v = (array)$v;
+                        $returnData['moisture'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
+                            . '，类型：' . config('clife.className')[$v['className']]
+                            . '，严重等级：' . config('clife.acneLevel')[$v['level']];
+                    }
+                }
             }
             print_r($returnData);
         }
