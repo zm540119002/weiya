@@ -40,27 +40,27 @@ class Api extends \common\controller\Base{
                 if($key === 'eyeshape'){
                     foreach (config('clife.eyeshape') as $v){
                         if($v['type'] == $val){
-                            $returnData['eyeshape'] = '眼型： ' . $v['explain'];
+                            $returnData['眼型'] = '眼型： ' . $v['explain'];
                         }
                     }
                 }
                 //黑头
                 if($key === 'blackHead'){
-                    $returnData['blackHead'] = '黑头： ' . config('clife.blackHeadLevel')[$val['level']] . '，数量：' . $val['number'];
+                    $returnData['黑头'] = '黑头： ' . config('clife.blackHeadLevel')[$val['level']] . '，数量：' . $val['number'];
                 }
                 //毛孔
                 if($key === 'pore'){
-                    $returnData['pore'] = '毛孔： ' . config('clife.poreLevel')[$val['level']] . '，数量：' . $val['number'];
+                    $returnData['毛孔'] = '毛孔： ' . config('clife.poreLevel')[$val['level']] . '，数量：' . $val['number'];
                 }
                 //脸型
                 if($key === 'faceshape'){
-                    $returnData['faceshape'] = '脸型： ' . config('clife.faceshape')[$val[0]];
+                    $returnData['脸型'] = '脸型： ' . config('clife.faceshape')[$val[0]];
                 }
                 //痘痘
                 if($key === 'acnes'){
                     foreach ($val as $v){
                         $v = (array)$v;
-                        $returnData['acnes'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
+                        $returnData['痘痘'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
                             . '，痘痘类型：' . config('clife.acneTypeId')[$v['acneTypeId']]
                             . '，严重等级：' . config('clife.acneLevel')[$v['level']]
                             . '，数量：' . $v['number'];
@@ -68,18 +68,18 @@ class Api extends \common\controller\Base{
                 }
                 //眉形
                 if($key === 'eyebrow'){
-                    $returnData['eyebrow']['left'] = '左眉形： ' . config('clife.eyebrow')[$val['left']];
-                    $returnData['eyebrow']['right'] = '右眉形： ' . config('clife.eyebrow')[$val['right']];
+                    $returnData['眉形']['左'] = '左眉形： ' . config('clife.eyebrow')[$val['left']];
+                    $returnData['眉形']['右'] = '右眉形： ' . config('clife.eyebrow')[$val['right']];
                 }
                 //眼袋
                 if($key === 'pouch'){
-                    $returnData['pouch'] = '眼袋： ' . config('clife.pouchLevel')[$val['level']];
+                    $returnData['眼袋'] = '眼袋： ' . config('clife.pouchLevel')[$val['level']];
                 }
                 //皱纹
                 if($key === 'wrinkles'){
                     foreach ($val as $v){
                         $v = (array)$v;
-                        $returnData['wrinkles'][] = '类型：' . config('clife.wrinkleTypeId')[$v['wrinkleTypeId']]
+                        $returnData['皱纹'][] = '类型：' . config('clife.wrinkleTypeId')[$v['wrinkleTypeId']]
                             . '，严重等级：' . config('clife.acneLevel')[$v['level']];
                     }
                 }
@@ -87,7 +87,7 @@ class Api extends \common\controller\Base{
                 if($key === 'pigmentations'){
                     foreach ($val as $v){
                         $v = (array)$v;
-                        $returnData['pigmentations'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
+                        $returnData['色素斑'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
                             . '，类型：' . config('clife.pigmentationTypeId')[$v['pigmentationTypeId']]
                             . '，严重等级：' . config('clife.acneLevel')[$v['level']];
                     }
@@ -96,7 +96,7 @@ class Api extends \common\controller\Base{
                 if($key === 'moisture'){
                     foreach ($val as $v){
                         $v = (array)$v;
-                        $returnData['moisture'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
+                        $returnData['水分'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
                             . '，类型：' . config('clife.className')[$v['className']]
                             . '，严重等级：' . config('clife.acneLevel')[$v['level']];
                     }
@@ -105,7 +105,7 @@ class Api extends \common\controller\Base{
                 if($key === 'sensitivity'){
                     foreach ($val['sensitivityCategory'] as $v){
                         $v = (array)$v;
-                        $returnData['sensitivity'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
+                        $returnData['敏感度'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
                             . '，严重等级：' . config('clife.acneLevel')[$v['level']]
                             . '，敏感类型：' . config('clife.sensitivityTypeId')[$val['typeId']];
                     }
@@ -114,20 +114,20 @@ class Api extends \common\controller\Base{
                 if($key === 'darkCircle'){
                     foreach ($val as $v){
                         $v = (array)$v;
-                        $returnData['darkCircle'][] = '部位： ' . config('clife.darkCirclePosition')[$v['position']]
+                        $returnData['黑眼圈'][] = '部位： ' . config('clife.darkCirclePosition')[$v['position']]
                             . '，严重等级：' . config('clife.darkCircleLevel')[$v['level']]
                             . '，类型：' . config('clife.darkCircleType')[$val['type']];
                     }
                 }
                 //肌肤年龄
                 if($key === 'skinAge'){
-                    $returnData['skinAge'] = '肌肤年龄： ' . $val[0];
+                    $returnData['肌肤年龄'] = '肌肤年龄： ' . $val[0];
                 }
                 //油分
                 if($key === 'oil'){
                     foreach ($val as $v){
                         $v = (array)$v;
-                        $returnData['oil'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
+                        $returnData['油分'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
                             . '，严重等级：' . config('clife.darkCircleLevel')[$v['level']];
                     }
                 }
@@ -135,7 +135,7 @@ class Api extends \common\controller\Base{
                 if($key === 'fatGranule'){
                     foreach ($val as $v) {
                         $v = (array)$v;
-                        $returnData['fatGranule'][] = '类型：' . config('clife.fatGranuleTypeId')[$v['fatGranuleTypeId']]
+                        $returnData['脂肪粒'][] = '类型：' . config('clife.fatGranuleTypeId')[$v['fatGranuleTypeId']]
                             . '，严重等级：' . config('clife.darkCircleLevel')[$v['level']]
                             . '，数量：' . $v['number'];
                     }
