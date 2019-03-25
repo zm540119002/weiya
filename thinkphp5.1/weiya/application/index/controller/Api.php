@@ -32,18 +32,20 @@ class Api extends \common\controller\Base{
         } else {
             $res = json_encode($curl->response->data);
 //            print_r($res);
+            $returnData = [];
             $eyeshape = config('clife.eyeshape');
             foreach ($curl->response->data as $key=>$val){
                 if($key === 'eyeshape'){
                     foreach ($eyeshape as $v){
-//                        print_r((array)($val));
-//                        print_r($v['type']);
                         if($v['type'] == (array)($val)){
-                            print_r($v['explain']);
+                            $returnData[] = '眼型： ' . $v['explain'];
+                        }else{
+                            $returnData[] = '眼型： 未知';
                         }
                     }
                 }
             }
+            print_r($returnData);
         }
     }
 }
