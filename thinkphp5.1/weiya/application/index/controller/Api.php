@@ -35,6 +35,7 @@ class Api extends \common\controller\Base{
             $eyeshape = config('clife.eyeshape');
             foreach ($curl->response->data as $key=>$val){
                 if($key === 'eyeshape'){
+                    print_r($val);
                     foreach ($eyeshape as $v){
                         print_r($v['type']);
                         if($v['type'] == $val){
