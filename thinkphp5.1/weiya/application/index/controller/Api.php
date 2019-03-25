@@ -31,6 +31,7 @@ class Api extends \common\controller\Base{
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
             print_r($curl->response->data);
+            exit;
             $returnData = [];
             foreach ($curl->response->data as $key=>$val){
                 //解析眼型
