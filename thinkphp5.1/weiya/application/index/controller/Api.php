@@ -58,12 +58,13 @@ class Api extends \common\controller\Base{
                 }
                 //痘痘
                 if($key === 'acnes'){
-                    foreach ($val as $v){
-                        $returnData['acnes'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
-                            . '，痘痘类型：' . config('clife.acneTypeId')[$v['acneTypeId']]
-                            . '，严重等级：' . config('clife.acneLevel')[$v['level']]
-                            . '，数量：' . $v['number'];
-                    }
+                    print_r($val);
+//                    foreach ($val as $v){
+//                        $returnData['acnes'][] = '部位： ' . config('clife.facePart')[$v['facePart']]
+//                            . '，痘痘类型：' . config('clife.acneTypeId')[$v['acneTypeId']]
+//                            . '，严重等级：' . config('clife.acneLevel')[$v['level']]
+//                            . '，数量：' . $v['number'];
+//                    }
                 }
             }
             print_r($returnData);
