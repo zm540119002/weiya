@@ -30,6 +30,7 @@ class Api extends \common\controller\Base{
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
+            print_r($curl->response->data);
             $returnData = [];
             foreach ($curl->response->data as $key=>$val){
                 //解析眼型
@@ -42,7 +43,7 @@ class Api extends \common\controller\Base{
                 }
                 //解析黑头
                 if($key === 'blackHead'){
-                    $returnData[] = '黑头： ' . config('clife.blackHeadLevel')[$val['level']] . '，数量：' . $val['number'];
+                    $returnData[] = '黑头： ' . config('clife.blackHeadLevel')[(array)$val['level']] . '，数量：' . $val['number'];
                 }
             }
             print_r($returnData);
