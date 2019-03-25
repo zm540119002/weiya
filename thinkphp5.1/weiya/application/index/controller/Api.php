@@ -31,7 +31,7 @@ class Api extends \common\controller\Base{
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
             $res = json_encode($curl->response->data);
-            foreach ($res as $key=>$val){
+            foreach ($curl->response->data as $key=>$val){
                 echo "\r\n" . $key;
             }
         }
