@@ -33,9 +33,10 @@ class Api extends \common\controller\Base{
 //            print_r(json_encode($curl->response->data));
 //            exit;
             $returnData = [];
+            //解析
             foreach ($curl->response->data as $key=>$val){
                 $val = (array)$val;
-                //解析眼型
+                //眼型
                 if($key === 'eyeshape'){
                     foreach (config('clife.eyeshape') as $v){
                         if($v['type'] == $val){
@@ -43,9 +44,17 @@ class Api extends \common\controller\Base{
                         }
                     }
                 }
-                //解析黑头
+                //黑头
                 if($key === 'blackHead'){
                     $returnData[] = '黑头： ' . config('clife.blackHeadLevel')[$val['level']] . '，数量：' . $val['number'];
+                }
+                //毛孔
+                if($key === 'pore'){
+                    $returnData[] = '毛孔： ' . config('clife.poreLevel')[$val['level']] . '，数量：' . $val['number'];
+                }
+                //脸型
+                if($key === 'faceshape'){
+                    $returnData[] = '脸型： ' . config('clife.faceshape')[$val];
                 }
             }
             print_r($returnData);
