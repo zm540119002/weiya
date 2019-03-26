@@ -24,10 +24,9 @@ class Api extends \common\controller\Base{
             'appId'=>31316,
             'accessToken'=>$accessToken,
             'timestamp'=> time().'000',
-            'image'=>'@static/common/img/ldh.jpg',
+            'image'=>'@static/common/img/5.jpg',
         ];
         $curl->post($url, $data2);
-        print_r($curl->error);exit;
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
@@ -140,7 +139,7 @@ class Api extends \common\controller\Base{
                     }
                 }
             }
-            print_r(json_encode($returnData));
+            print_r(($returnData));
         }
     }
 }
