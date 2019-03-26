@@ -139,6 +139,7 @@ class Api extends \common\controller\Base{
                     }
                 }
             }
+            $returnData['time'] = time() .'000';
             print_r(($returnData));
         }
     }
