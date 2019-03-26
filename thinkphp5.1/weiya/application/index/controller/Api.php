@@ -27,7 +27,6 @@ class Api extends \common\controller\Base{
             'image'=>'@static/common/img/ldh.jpg',
         ];
         $curl->post($url, $data2);
-        print_r($curl->error);exit;
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
         } else {
