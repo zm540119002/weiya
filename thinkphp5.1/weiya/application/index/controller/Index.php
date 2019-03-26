@@ -50,7 +50,5 @@ class Index extends \common\controller\Base{
         $this ->assign('projectList',$projectList);
         return $this->fetch();
     }
-
-
 }
 
