@@ -139,7 +139,7 @@ class Api extends \common\controller\Base{
                     }
                 }
             }
-            print_r(json_encode($returnData));
+            print_r(($returnData));
         }
     }
 }
