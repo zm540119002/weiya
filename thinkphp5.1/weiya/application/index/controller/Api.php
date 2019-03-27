@@ -144,7 +144,7 @@ class Api extends \common\controller\Base{
                 print_r(($returnData));
             }
         }else{
-
+            return $this->fetch();
         }
     }
 }
