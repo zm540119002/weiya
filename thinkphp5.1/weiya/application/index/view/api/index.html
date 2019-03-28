@@ -3,7 +3,11 @@
 {/block}
 {block name="content"}
 <section>
-	aaaaaaaaaaaaaaaaaaaaaaaaa
+	<label>照相机</label>
+	<input type="file" id='image' accept="image/*" capture='camera'>
+	<br>
+	<label>摄像机</label>
+	<input type="file" id='video' accept="video/*" capture='camcorder'>
 </section>
 {/block}
 {block name="common"}
@@ -11,6 +15,20 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
+	$(function () {
+//		var file = document.querySelector('input');
+//		if (getIos()) {
+//			file.removeAttribute("capture");
+//		}
+//		function getIos() {
+//			var ua=navigator.userAgent.toLowerCase();
+//			if(ua.match(/iPhone\sOS/i) == "iphone os"){
+//				return true;
+//			} else {
+//				return false;
+//			}
+//		}
+	});
 	$(function(){
 		$('body').on('click','.my_cart',function () {
 			var url = action;
