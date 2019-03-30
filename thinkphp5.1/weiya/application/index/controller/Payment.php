@@ -15,7 +15,7 @@ class Payment extends \common\controller\Base{
         ];
 
         $modelOrder = new \app\index\model\Order();
-        print_r($orderSn);
+        print_r($systemId);
         print_r(config('custom.system_id'));exit;
         $modelOrder ->connection = config('custom.system_id')[$systemId];
         //维雅平台支付
