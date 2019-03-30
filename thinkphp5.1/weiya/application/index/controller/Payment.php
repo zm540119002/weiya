@@ -14,7 +14,7 @@ class Payment extends \common\controller\Base{
             'system_Id' =>$systemId,
         ];
         $modelOrder = new \app\index\model\Order();
-        
+
         $modelOrder ->connection = config('custom.system_id')[$systemId];
         //维雅平台支付
         if($systemId == 1){
@@ -33,9 +33,9 @@ class Payment extends \common\controller\Base{
             if($orderInfo['actually_amount']<=0){
                 $this -> error('支付不能为0');
             }
-            if ($orderInfo['order_status'] > 1) {
-                return errorMsg('订单支付',['code'=>1]);
-            }
+//            if ($orderInfo['order_status'] > 1) {
+//                return errorMsg('订单支付',['code'=>1]);
+//            }
             $attach = json_encode($attach);
             $payInfo = [
                 'sn'=>$orderInfo['sn'],
