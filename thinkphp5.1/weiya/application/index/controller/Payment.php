@@ -19,8 +19,6 @@ class Payment extends \think\Controller {
 
         $modelOrder ->connection = config('custom.system_id')[$systemId];
 
-        print_r($modelOrder->getList());
-        exit;
         $config = [
             'where' => [
                 ['o.status', '=', 0],
@@ -32,10 +30,12 @@ class Payment extends \think\Controller {
             ],
         ];
         $orderInfo = $modelOrder->getInfo($config);
-        if($orderInfo['actually_amount']<=0){
+/*        if($orderInfo['actually_amount']<=0){
             $this -> error('支付不能为0');
-        }
-
+        }*/
+        p($config);
+        p($orderInfo);
+        exit;
         //维雅平台支付
         if($systemId == 1){
 //            if ($orderInfo['order_status'] > 1) {
