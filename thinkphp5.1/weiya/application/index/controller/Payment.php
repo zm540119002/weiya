@@ -17,8 +17,11 @@ class Payment extends \think\Controller {
         ];
         $modelOrder = new \app\index\model\Order();
 
-        //$modelOrder ->connection = config('custom.system_id')[$systemId];
-        $modelOrder::connect(config('custom.system_id')[$systemId])->table('scene')->find();
+        $modelOrder ->connection = config('custom.system_id')[$systemId];
+
+        //$modelOrder->getList();
+
+        //$modelOrder::connect(config('custom.system_id')[$systemId])->table('scene')->find();
 
 
         print_r($modelOrder->getList());
