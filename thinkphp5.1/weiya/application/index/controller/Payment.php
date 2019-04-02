@@ -18,23 +18,24 @@ class Payment extends \think\Controller {
         $modelOrder = new \app\index\model\Order();
 
         $modelOrder ->connection = config('custom.system_id')[$systemId];
+
+        $config = [
+            'where' => [
+                ['o.status', '=', 0],
+                ['o.sn', '=', $orderSn],
+                //['o.user_id', '=', $this->user['id']],
+            ],'field' => [
+                'o.id', 'o.sn', 'o.amount','o.actually_amount',
+                'o.user_id','o.type'
+            ],
+        ];
+        $orderInfo = $modelOrder->getInfo($config);
+        if($orderInfo['actually_amount']<=0){
+            $this -> error('支付不能为0');
+        }
+
         //维雅平台支付
         if($systemId == 1){
-            $config = [
-                'where' => [
-                    ['o.status', '=', 0],
-                    ['o.sn', '=', $orderSn],
-                    //['o.user_id', '=', $this->user['id']],
-                ],'field' => [
-                    'o.id', 'o.sn', 'o.amount','o.actually_amount',
-                    'o.user_id','o.type'
-                ],
-            ];
-            $orderInfo = $modelOrder->getInfo($config);
-
-            if($orderInfo['actually_amount']<=0){
-                $this -> error('支付不能为0');
-            }
 //            if ($orderInfo['order_status'] > 1) {
 //                return errorMsg('订单支付',['code'=>1]);
 //            }
@@ -53,13 +54,6 @@ class Payment extends \think\Controller {
         $payCode = input('pay_code','0','int');
         //微信支付
         if($payCode == 1){
-            $payOpenId =  session('pay_open_id');
-            if(empty($payOpenId)){
-                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $payOpenId  = $tools->getOpenid();
-                session('pay_open_id',$payOpenId);
-            }
-
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/order";
             \common\component\payment\weixin\weixinPay::wxPay($payInfo);
         }

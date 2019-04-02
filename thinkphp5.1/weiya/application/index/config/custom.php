@@ -23,8 +23,7 @@ return [
      */
     'system_id'=>[
         '1'=>'db_config_weiya',
-        '2'=>'db_config_hss',
-        '3'=>'db_config_msy',
+        '2'=>'db_config_mcs',
     ]
 ];
 

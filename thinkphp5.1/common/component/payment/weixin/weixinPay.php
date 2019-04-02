@@ -34,6 +34,12 @@ class weixinPay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
+        $payOpenId =  session('pay_open_id');
+        if(empty($payOpenId)){
+            $tools = new \common\component\payment\weixin\getPayOpenId(config('wx_config.appid'), config('wx_config.appsecret'));
+            $payOpenId  = $tools->getOpenid();
+            session('pay_open_id',$payOpenId);
+        }
         $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
         $tools = new \JsApiPay();
         $openId =  session('pay_open_id');
