@@ -126,7 +126,6 @@ class UserCenter extends Base {
 	 */
 	private function _login($data){
 		$user = $this->_get($data);
-		print_r($user);exit;
 		if(!$user){
 			return errorMsg('密码错误,请重新输入！');
 		}
