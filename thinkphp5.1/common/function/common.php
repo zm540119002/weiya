@@ -946,8 +946,10 @@ function checkLogin(){
 function setSession($user){
     $user = array_merge($user,array('rand' => create_random_str(10, 0),));
     session('user',$user);
-    print_r(session('user'));exit;
+
     session('user_sign',data_auth_sign($user));
+    print_r(111);exit;
+    print_r(session('user_sign'));exit;
     //返回发起页或平台首页
     $jumpUrl = session('backUrl')?:session('returnUrl');
     $pattern  =  '/index.php\/([A-Z][a-z]*)\//';
