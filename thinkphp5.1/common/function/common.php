@@ -948,7 +948,7 @@ function setSession($user){
     session('user',$user);
 
     session('user_sign',data_auth_sign($user));
-    print_r(111);exit;
+    print_r(111);
     print_r(session('user_sign'));exit;
     //返回发起页或平台首页
     $jumpUrl = session('backUrl')?:session('returnUrl');
