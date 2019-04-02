@@ -19,6 +19,10 @@ class Payment extends \think\Controller {
 
         $modelOrder ->connection = config('custom.system_id')[$systemId];
 
+
+
+        print_r($modelOrder);
+        exit;
         $config = [
             'where' => [
                 ['o.status', '=', 0],
@@ -51,9 +55,6 @@ class Payment extends \think\Controller {
             ];
         }
 
-
-        print_r($modelOrder);
-        exit;
         $payCode = input('pay_code','0','int');
         //微信支付
         if($payCode == 1){
