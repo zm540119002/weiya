@@ -49,7 +49,8 @@ class Payment extends \think\Controller {
                 'attach'=>$attach
             ];
         }
-
+        print_r($modelOrder);
+        exit;
         $payCode = input('pay_code','0','int');
         //微信支付
         if($payCode == 1){
