@@ -52,7 +52,7 @@ class Payment extends \think\Controller {
         }
 
 
-        print_r($orderInfo);
+        print_r($modelOrder);
         exit;
         $payCode = input('pay_code','0','int');
         //微信支付
