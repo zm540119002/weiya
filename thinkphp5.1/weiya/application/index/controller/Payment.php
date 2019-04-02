@@ -17,7 +17,7 @@ class Payment extends \think\Controller {
         ];
         $modelOrder = new \app\index\model\Order();
 
-        $modelOrder ->connection = config('custom.system_id')[$systemId];
+        //$modelOrder ->connection = config('custom.system_id')[$systemId];
 
 
 
