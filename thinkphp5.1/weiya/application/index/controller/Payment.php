@@ -1,42 +1,70 @@
 <?php
 namespace app\index\controller;
-class Payment extends \common\controller\UserBase{
+//class Payment extends \common\controller\Base{
+
+class Payment extends \think\Controller {
     //订单-支付
     public function orderPayment(){
         //微信支付
         if( empty(input('order_sn')) || empty(input('?pay_code'))){
             $this -> error('参数错误');
         }
-        $modelOrder = new \app\index\model\Order();
         $orderSn = input('order_sn','','string');
-        $config = [
-            'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $orderSn],
-                ['o.user_id', '=', $this->user['id']],
-            ],'field' => [
-                'o.id', 'o.sn', 'o.amount','o.actually_amount',
-                'o.user_id','o.type'
-            ],
+        $systemId = input('system_id',0,'int');
+        //自定义参数，微信支付回调原样返回
+        $attach = [
+            'system_Id' =>$systemId,
         ];
-        $orderInfo = $modelOrder->getInfo($config);
-        if($orderInfo['actually_amount']<=0){
-            $this -> error('支付不能为0');
+        $modelOrder = new \app\index\model\Order();
+
+        $modelOrder ->connection = config('custom.system_id')[$systemId];
+        //维雅平台支付
+        if($systemId == 1){
+            $config = [
+                'where' => [
+                    ['o.status', '=', 0],
+                    ['o.sn', '=', $orderSn],
+                    //['o.user_id', '=', $this->user['id']],
+                ],'field' => [
+                    'o.id', 'o.sn', 'o.amount','o.actually_amount',
+                    'o.user_id','o.type'
+                ],
+            ];
+            $orderInfo = $modelOrder->getInfo($config);
+
+            if($orderInfo['actually_amount']<=0){
+                $this -> error('支付不能为0');
+            }
+//            if ($orderInfo['order_status'] > 1) {
+//                return errorMsg('订单支付',['code'=>1]);
+//            }
+            $attach = json_encode($attach);
+            $payInfo = [
+                'sn'=>$orderInfo['sn'],
+                'actually_amount'=>$orderInfo['actually_amount'],
+                'return_url' => $this->host.url('payComplete'),
+                'cancel_url' => $this->host.url('payCancel'),
+                'fail_url' => $this->host.url('payFail'),
+                'notify_url'=>$this->host."/index/".config('wx_config.call_back_url'),
+                'attach'=>$attach
+            ];
         }
-        $payInfo = [
-            'sn'=>$orderInfo['sn'],
-            'actually_amount'=>$orderInfo['actually_amount'],
-            'return_url' => $this->host.url('payComplete'),
-            'cancel_url' => $this->host.url('payCancel'),
-            'fail_url' => $this->host.url('payFail'),
-            'notify_url'=>$this->host."/index/".config('wx_config.call_back_url'),
-        ];
+
         $payCode = input('pay_code','0','int');
         //微信支付
         if($payCode == 1){
+            $payOpenId =  session('pay_open_id');
+            if(empty($payOpenId)){
+                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                $payOpenId  = $tools->getOpenid();
+                session('pay_open_id',$payOpenId);
+            }
+
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/order";
-            \common\component\payment\weixin\weixinpay::wxPay($payInfo);
+            \common\component\payment\weixin\weixinPay::wxPay($payInfo);
         }
+        echo 1111;
+        exit;
         //支付宝支付
         if($payCode == 2){
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/aliBack/type/order";
@@ -49,24 +77,11 @@ class Payment extends \common\controller\UserBase{
             $model = new \common\component\payment\unionpay\unionpay;
             $model->unionPay($payInfo);
         }
-        //银联支付
+        //钱包支付
         if($payCode == 4){
-            $modelOrder = new \app\index\model\Order();
-            $config = [
-                'where' => [
-                    ['o.status', '=', 0],
-                    ['o.sn', '=', $orderSn],
-                    ['o.user_id', '=', $this->user['id']],
-                ], 'field' => [
-                    'o.id', 'o.sn', 'o.amount',
-                    'o.user_id', 'o.actually_amount', 'o.order_status'
-                ],
-            ];
-            $orderInfo = $modelOrder->getInfo($config);
             if ($orderInfo['order_status'] > 1) {
                 return errorMsg('订单已处理',['code'=>1]);
             }
-
             $modelWallet = new \app\index\model\Wallet();
             $config = [
                 'where'=>[
@@ -140,7 +155,7 @@ class Payment extends \common\controller\UserBase{
         //微信支付
         if($payCode == 1){
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/recharge";
-            \common\component\payment\weixin\weixinpay::wxPay($payInfo);
+            \common\component\payment\weixin\weixinPay::wxPay($payInfo);
         }
         //支付宝支付
         if($payCode == 2){
