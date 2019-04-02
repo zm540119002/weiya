@@ -62,14 +62,14 @@ return [
         'charset'     => 'utf8',// 数据库编码默认采用utf8
     ],
     //数据库配置-商城
-//    'db_config_weiya' => [
-//        'type'        => 'mysql',// 数据库类型
-//        'hostname'    => '127.0.0.1',// 服务器地址
-//        'database'    => 'weiya',// 数据库名
-//        'username'    => 'root',// 数据库用户名
-//        'password'    => 'msy',// 数据库密码
-//        'charset'     => 'utf8',// 数据库编码默认采用utf8
-//    ],
+    'db_config_weiya' => [
+        'type'        => 'mysql',// 数据库类型
+        'hostname'    => '127.0.0.1',// 服务器地址
+        'database'    => 'weiya',// 数据库名
+        'username'    => 'root',// 数据库用户名
+        'password'    => 'msy',// 数据库密码
+        'charset'     => 'utf8',// 数据库编码默认采用utf8
+    ],
     'db_config_mcs' => [
         'type'        => 'mysql',// 数据库类型
         'hostname'    => '120.79.201.125',// 服务器地址
