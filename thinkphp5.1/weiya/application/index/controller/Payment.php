@@ -21,7 +21,7 @@ class Payment extends \think\Controller {
 
 
 
-        print_r($modelOrder);
+        print_r($modelOrder->connection);
         exit;
         $config = [
             'where' => [
