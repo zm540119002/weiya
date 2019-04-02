@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
-class Payment extends \common\controller\Base{
+//class Payment extends \common\controller\Base{
+class Payment {
     //订单-支付
     public function orderPayment(){
         //微信支付
