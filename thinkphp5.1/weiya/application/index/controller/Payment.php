@@ -1,7 +1,6 @@
 <?php
-/*namespace app\index\controller;
-class Payment extends \common\controller\Base{*/
-namespace common\controller;
+namespace app\index\controller;
+//class Payment extends \common\controller\Base{
 
 class Payment extends \think\Controller {
     //订单-支付
