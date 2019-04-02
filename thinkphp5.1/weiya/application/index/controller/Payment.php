@@ -1,7 +1,9 @@
 <?php
-namespace app\index\controller;
-//class Payment extends \common\controller\Base{
-class Payment {
+/*namespace app\index\controller;
+class Payment extends \common\controller\Base{*/
+namespace common\controller;
+
+class Payment extends \think\Controller {
     //订单-支付
     public function orderPayment(){
         //微信支付
