@@ -54,13 +54,6 @@ class Payment extends \think\Controller {
         $payCode = input('pay_code','0','int');
         //微信支付
         if($payCode == 1){
-            $payOpenId =  session('pay_open_id');
-            if(empty($payOpenId)){
-                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $payOpenId  = $tools->getOpenid();
-                session('pay_open_id',$payOpenId);
-            }
-
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/order";
             \common\component\payment\weixin\weixinPay::wxPay($payInfo);
         }
