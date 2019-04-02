@@ -62,6 +62,8 @@ class Payment {
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/order";
             \common\component\payment\weixin\weixinPay::wxPay($payInfo);
         }
+        echo 1111;
+        exit;
         //支付宝支付
         if($payCode == 2){
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/aliBack/type/order";
