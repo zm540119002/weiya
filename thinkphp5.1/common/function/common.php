@@ -948,7 +948,9 @@ function setSession($user){
     session('user',$user);
     session('user_sign',data_auth_sign($user));
     //返回发起页或平台首页
-    $jumpUrl = session('backUrl')?:session('returnUrl');
+    //$jumpUrl = session('backUrl')?:session('returnUrl');
+    return session('backUrl');
+
     $pattern  =  '/index.php\/([A-Z][a-z]*)\//';
     preg_match ($pattern,$jumpUrl,$matches);
     return $jumpUrl?:url('index/Index/index');
