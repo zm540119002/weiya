@@ -12,18 +12,18 @@ require_once(dirname(__FILE__)  . '/WxPay.JsApiPay.php');
 require_once(dirname(__FILE__)  . '/WxPay.NativePay.php');
 require_once(dirname(__FILE__)  . '/log.php');
 
-class weixinpay{
+class weixinPay{
     /**支付端判断
      * @param $payInfo
      * @param $backUrl
      */
     public static function wxPay($payInfo){
         if (!isPhoneSide()) {//pc端微信扫码支付
-            weixinpay::pc_pay($payInfo);
+            weixinPay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
-            weixinpay::h5_pay($payInfo);
+            weixinPay::h5_pay($payInfo);
         }else{//微信浏览器(手机端)
-            weixinpay::getJSAPI($payInfo);
+            weixinPay::getJSAPI($payInfo);
         }
     }
     /**微信公众号支付
@@ -101,7 +101,7 @@ EOF;
     {
         $input = new \WxPayUnifiedOrder();
         $input->SetBody("美尚云"); // 商品描述
-        $input->SetAttach("weixin"); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
+        $input->SetAttach($payInfo['attach']); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
         $input->SetOut_trade_no($payInfo['sn']); // 商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
         $input->SetTotal_fee($payInfo['actually_amount']*100); // 订单总金额，单位为分，详见支付金额
         $input->SetNotify_url($payInfo['notify_url']); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
@@ -145,7 +145,7 @@ EOF;
         //使用统一支付接口
         $input = new \WxPayUnifiedOrder();
         $input->SetBody('美尚云');					//商品名称
-        $input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
+        $input->SetAttach($payInfo['attach']);					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
         $input->SetOut_trade_no($payInfo['sn']);			//订单号
         $input->SetTotal_fee($payInfo['actually_amount'] *100);			//支付金额,单位:分
         $input->SetTime_start(date("YmdHis"));		//支付发起时间

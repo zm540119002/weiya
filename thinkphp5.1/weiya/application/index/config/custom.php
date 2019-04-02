@@ -17,5 +17,15 @@ return [
     'title' => '维雅药妆定制',
     'module_type' => 1,//模块类型
     'default_page_size'=>10,
+
+    /***
+     * 根据系统号连接不同数据库
+     */
+    'system_id'=>[
+        '1'=>'db_config_weiya',
+        '2'=>'db_config_hss',
+        '3'=>'db_config_msy',
+    ]
 ];
+
 
