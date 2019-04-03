@@ -189,47 +189,47 @@ class Order extends \common\controller\UserBase
 
 
     }
-    //支付
-    public function toPay()
-    {
-//        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-//            $payOpenId =  session('pay_open_id');
-//            if(empty($payOpenId)){
-//                $tools = new \common\component\payment\weixin\getPayOpenId(config('wx_config.appid'), config('wx_config.appsecret'));
-//                $payOpenId  = $tools->getOpenid();
-//                session('pay_open_id',$payOpenId);
-//            }
-//        }
-        $modelOrder = new \app\index\model\Order();
-        $orderSn = input('order_sn');
-        $config = [
-            'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $orderSn],
-                ['o.user_id', '=', $this->user['id']],
-            ],'field' => [
-                'o.id', 'o.sn', 'o.amount',
-                'o.user_id',
-            ],
-        ];
-        $orderInfo = $modelOrder->getInfo($config);
-        $this->assign('orderInfo', $orderInfo);
-        //钱包
-        $modelWallet = new \app\index\model\Wallet();
-        $config = [
-            'where' => [
-                ['status', '=', 0],
-                ['user_id', '=', $this->user['id']],
-            ],'field' => [
-                'id','amount',
-            ],
-        ];
-        $walletInfo = $modelWallet->getInfo($config);
-        $this->assign('walletInfo', $walletInfo);
-        $this->assign('user',$this->user);
-        $this->assign('system_id',1);
-        return $this->fetch();
-    }
+//    //支付
+//    public function toPay()
+//    {
+////        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+////            $payOpenId =  session('pay_open_id');
+////            if(empty($payOpenId)){
+////                $tools = new \common\component\payment\weixin\getPayOpenId(config('wx_config.appid'), config('wx_config.appsecret'));
+////                $payOpenId  = $tools->getOpenid();
+////                session('pay_open_id',$payOpenId);
+////            }
+////        }
+//        $modelOrder = new \app\index\model\Order();
+//        $orderSn = input('order_sn');
+//        $config = [
+//            'where' => [
+//                ['o.status', '=', 0],
+//                ['o.sn', '=', $orderSn],
+//                ['o.user_id', '=', $this->user['id']],
+//            ],'field' => [
+//                'o.id', 'o.sn', 'o.amount',
+//                'o.user_id',
+//            ],
+//        ];
+//        $orderInfo = $modelOrder->getInfo($config);
+//        $this->assign('orderInfo', $orderInfo);
+//        //钱包
+//        $modelWallet = new \app\index\model\Wallet();
+//        $config = [
+//            'where' => [
+//                ['status', '=', 0],
+//                ['user_id', '=', $this->user['id']],
+//            ],'field' => [
+//                'id','amount',
+//            ],
+//        ];
+//        $walletInfo = $modelWallet->getInfo($config);
+//        $this->assign('walletInfo', $walletInfo);
+//        $this->assign('user',$this->user);
+//        $this->assign('system_id',1);
+//        return $this->fetch();
+//    }
     //订单管理
     public function manage(){
         if(input('?order_status')){

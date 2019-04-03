@@ -343,7 +343,7 @@ $(function () {
                 if(data.status == 0){
 
                 }else if(data.status == 1){
-                    location.href = module + 'Order/toPay/order_sn/' + data.order_sn+'/system_id/1';
+                    location.href = 'https://msy.meishangyun.com/' + 'Payment/toPay/order_sn/' + data.order_sn+'/system_id/1';
 
                 }
             }
