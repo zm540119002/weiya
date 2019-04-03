@@ -287,7 +287,6 @@ $(function () {
     });
     //确认订单
     $('body').on('click','.confirm_order',function () {
-        alert(111);return
         _this = $(this);
         var consignee=$('.consigneeInfo input[name="layer_consignee"]').val();
         var mobile=$('.consigneeInfo input[name="layer_mobile"]').val();
