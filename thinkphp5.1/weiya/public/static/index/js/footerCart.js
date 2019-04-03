@@ -287,7 +287,6 @@ $(function () {
     });
     //确认订单
     $('body').on('click','.confirm_order',function () {
-        alert(1122);
         _this = $(this);
         var consignee=$('.consigneeInfo input[name="layer_consignee"]').val();
         var mobile=$('.consigneeInfo input[name="layer_mobile"]').val();
@@ -344,7 +343,6 @@ $(function () {
                 if(data.status == 0){
 
                 }else if(data.status == 1){
-                    alert(11);
                     location.href = 'https://msy.meishangyun.com/' + 'index/Payment/toPay/order_sn/' + data.order_sn+'/system_id/1';
 
                 }
