@@ -242,13 +242,12 @@ $(function(){
         });
     });
 
-    $('body').on('click','.my_cart,.address_manage,.recharge,.order_manage,.my_brand,.my_message,.my_collection,.my_bottom_cart',function () {
+    $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
         loginBackFunctionParameter.jump_url = jump_url;
-        var url = module+'Brand/index';
         var postData = {};
         $.ajax({
-            url: url,
+            url: jump_url,
             data: postData,
             type: 'post',
             beforeSend: function(xhr){
