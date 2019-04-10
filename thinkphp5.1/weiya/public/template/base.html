@@ -10,10 +10,10 @@
 	<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		var domain = '{:request()->domain()}/';
+		var uploads = domain + 'uploads/';
 		var module = domain + '{:request()->module()}/';
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
-		var uploads = '{:request()->domain()}'+'/uploads/';
 		var send_sms_url = '{:url("ucenter/UserCenter/sendSms")}';
 		var walletPayCallBackParameter = {};
 		var walletPayCallBack = function(parameter){
