@@ -9,19 +9,6 @@ class UserCenter extends Base {
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_common';
 
-	/**登录-账号检查
-	 */
-	public function loginCheck($mobilePhone){
-		$where = [
-			['mobile_phone','=',$mobilePhone],
-		];
-		$field = [
-			'status',
-		];
-		$user = $this->where($where)->field($field)->find();
-		return $user;
-	}
-
 	/**登录
 	 */
 	public function login($data){
@@ -32,27 +19,107 @@ class UserCenter extends Base {
 			if(!$validateUser->scene('login')->check($data)) {
 				return errorMsg($validateUser->getError());
 			}
-			$user = $this->loginCheck($data['mobile_phone']);
-			if(!$user){
-				return errorMsg('账号不存在！');
-			}elseif($user['status']==1){
-				return errorMsg('账号异常，请申诉！');
+			$user = $this->_accountStatusCheck($data['mobile_phone']);
+			if(empty($user)){
+				return errorMsg('账号不存在');
+			}elseif ($user['status'] ==1){
+				return errorMsg('账号已禁用');
+			}elseif ($user['status'] ==2){
+				return errorMsg('账号已删除');
 			}
-			return $this->_login($data);
-		}else{
-			return errorMsg('登录信息不完善！');
+			return $this->_login($data['mobile_phone'],$data['password']);
 		}
+	}
+
+	/**登录
+	 */
+	private function _login($mobilePhone,$password){
+		if(!$mobilePhone && !$password) {
+			return errorMsg('请填写手机号码及密码！');
+		}
+		if(!$mobilePhone && $password) {
+			return errorMsg('请填写手机号码！');
+		}
+		if(!$mobilePhone && !$password){
+			return errorMsg('请填写密码！');
+		}
+		$where = array(
+			'status' => 0,
+			'mobile_phone' => $mobilePhone,
+		);
+		$field = array(
+			'id','name','nickname','mobile_phone','status','type','password','avatar',
+			'sex','salt','birthday','last_login_time','role_id',
+		);
+		$user = $this->field($field)->where($where)->find();
+		$user = $user->toArray();
+		if(!count($user)) {
+			return errorMsg('账号不存在,请重新输入！');
+		}
+		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
+			return errorMsg('密码错误,请重新输入！');
+		}
+		//更新最后登录时间
+		$this->_setLastLoginTimeById($user['id']);
+		return successMsg($this->_setSession($user));
+	}
+
+	/**注册
+	 */
+	public function register($data){
+		$data['password'] = trim($data['password']);
+
+		$saveData['name'] = trim($data['name']);
+		$saveData['salt'] = create_random_str(10,0);//盐值;
+		$saveData['mobile_phone'] = trim($data['mobile_phone']);
+		$saveData['password'] = md5($saveData['salt'] . $data['password']);
+		$saveData['captcha'] = trim($data['captcha']);
+		if(!$this->_checkCaptcha($saveData['mobile_phone'],$saveData['captcha'])){
+			return errorMsg('验证码错误，请重新获取验证码！');
+		}
+		$user = $this->_registerCheck($saveData['mobile_phone']);
+		$validateUser = new \common\validate\User();
+		if(empty($user)){//未注册，则注册账号
+			if(!$validateUser->scene('register')->check($data)) {
+				return errorMsg($validateUser->getError());
+			}
+			if(!$this->_register($saveData)){
+				return errorMsg('注册失败');
+			}
+		}elseif ($user['status'] ==1){
+			return errorMsg('账号已禁用');
+		}elseif ($user['status'] ==2){
+			return errorMsg('账号已删除');
+		}else{//已注册，正常，则修改密码
+			if(!$validateUser->scene('resetPassword')->check($saveData)){
+				return errorMsg($validateUser->getError());
+			}
+			if(!$this->_resetPassword($saveData['mobile_phone'],$saveData['password'])){
+				return errorMsg('重置密码失败');
+			}
+		}
+		return $this->_login($saveData['mobile_phone'],$saveData['password']);
+	}
+
+	/**注册
+	 */
+	private function _register($saveData){
+		$saveData['create_time'] = time();
+		$res = $this->isUpdate(false)->save($saveData);
+		if(false === $res){
+			return false;
+		}
+		return true;
 	}
 
 	/**注册-账号检查
 	 */
-	public function registerCheck($mobilePhone){
+	private function _registerCheck($mobilePhone){
 		$where = [
 			['mobile_phone','=',$mobilePhone],
-			['status','<>',2],
 		];
 		$field = [
-			'id','name','nickname',
+			'id','name','nickname','status',
 		];
 		$user = $this->where($where)->field($field)->find();
 		if(!$user){
@@ -61,92 +128,31 @@ class UserCenter extends Base {
 		return $user;
 	}
 
-	/**注册
+	/**重置密码
 	 */
-	public function register($data){
-		$data['mobile_phone'] = trim($data['mobile_phone']);
-		$data['password'] = trim($data['password']);
-		$data['captcha'] = trim($data['captcha']);
-		if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
-			return errorMsg('验证码错误，请重新获取验证码！');
-		}
-		$user = $this->registerCheck($data['mobile_phone']);
-		if($user){
-			return errorMsg('该手机号码已被注册，请更换手机号码，谢谢！');
-		}
-		$validateUser = new \common\validate\User();
-		if(!$validateUser->scene('register')->check($data)) {
-			return errorMsg($validateUser->getError());
-		}
-		if(!$this->_register($data)){
-			return errorMsg('注册失败');
-		}
-		return $this->_login($data);
-	}
-
-    /**重置密码
-     */
-    public function resetPassword($data){
-        $validateUser = new \common\validate\User();
-        if(!$validateUser->scene('resetPassword')->check($data)){
-            return errorMsg($validateUser->getError());
-        }
-        if($data['mobile_phone'] && $data['captcha']){
-            if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
-                return errorMsg('验证码错误，请重新获取验证码！');
-            }
-            $user = $this->loginCheck($data['mobile_phone']);
-            if($user['status']==1){
-                return errorMsg('账号异常，请申诉');
-            }
-
-            if(empty($user)){
-                $saveData['salt'] = create_random_str(10,0);//盐值
-                $saveData['password'] = md5($saveData['salt'] . $data['password']);//加密
-                $saveData['mobile_phone'] = $data['mobile_phone'];
-                $response = $this->save($saveData);
-            }else{
-                $where = array(
-                    'status' => 0,
-                    'mobile_phone' => $data['mobile_phone'],
-                );
-                $updateData['salt'] = create_random_str(10,0);//盐值
-                $updateData['password'] = md5($updateData['salt'] . $data['password']);//加密
-                $response = $this->where($where)->update($updateData,$where);
-            }
-            if(!$response){
-                return errorMsg('失败！');
-            }
-            return $this->_login($data['mobile_phone'],$data['password']);
-        }
-        return errorMsg('资料缺失！');
-    }
-
-	/**登录
-	 */
-	private function _login($data){
-		$user = $this->_get($data);
-		if(!$user){
-			return errorMsg('密码错误,请重新输入！');
-		}
-		//更新最后登录时间
-		$this->_setLastLoginTimeById($user['id']);
-		return successMsg(setSession($user));
-	}
-
-	/**注册
-	 */
-	private function _register($data){
-		$salt = create_random_str(10,0);
-		$data['salt'] = $salt;//盐值;
-		$data['password'] = md5($salt . $data['password']);//加密;
-		$data['name'] = '游客';
-		$data['create_time'] = time();
-		$this->save($data);
-		if(!$this->getAttr('id')){
+	private function _resetPassword($mobilePhone,$saveData){
+		$where = array(
+			'mobile_phone' => $mobilePhone,
+		);
+		$saveData['update_time'] = time();
+		$res = $this->isUpdate(true)->where($where)->save($saveData);
+		if(false === $res){
 			return false;
 		}
 		return true;
+	}
+
+	/**账号状态检查
+	 */
+	private function _accountStatusCheck($mobilePhone){
+		$where = [
+			['mobile_phone','=',$mobilePhone],
+		];
+		$field = [
+			'status',
+		];
+		$user = $this->where($where)->field($field)->find();
+		return $user;
 	}
 
 	/**更新-最后登录时间
@@ -158,33 +164,24 @@ class UserCenter extends Base {
 		$this->where($where)->setField('last_login_time', time());
 	}
 
-	/**获取登录信息
+	/**设置登录session
 	 */
-	private function _get($data){
-		if(!$data['mobile_phone']) {
-			return false;
-		}
-		$where = array(
-			'status' => 0,
-			'mobile_phone' => $data['mobile_phone'],
-		);
-		$field = array(
-			'id','name','nickname','mobile_phone','status','type','password','avatar',
-			'sex','salt','birthday','last_login_time','role_id','weiya_openid'
-		);
-		$user = $this->field($field)->where($where)->find();
-		if(!count($user)) {
-			return false;
-		}
-		if($data['password'] && !slow_equals($user['password'],md5($user['salt'].$data['password']))){
-			return false;
-		}
-		return $user->toArray();
+	public function _setSession($user){
+		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
+		session('user', $user);
+		session('user_sign', data_auth_sign($user));
+		return session('backUrl');
+		//返回发起页或平台首页
+		$backUrl = session('backUrl');
+		$pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
+		preg_match ($pattern,$backUrl,$matches);
+		return $backUrl?(is_ssl()?'https://':'http://').$backUrl:url('Index/index');
 	}
 
 	/**检查验证码
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
+		return true;//上线后再验证
 		return session('captcha_' . $mobilePhone) == $captcha ;
 	}
 }
