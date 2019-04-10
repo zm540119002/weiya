@@ -15,10 +15,10 @@ class UserCenter extends Base {
 		$data['mobile_phone'] = trim($data['mobile_phone']);
 		$data['password'] = trim($data['password']);
 		$validateUser = new \common\validate\User();
+		if(!$validateUser->scene('login')->check($data)) {
+			return errorMsg($validateUser->getError());
+		}
 		if($data['mobile_phone'] && $data['password']){//账号密码登录
-			if(!$validateUser->scene('login')->check($data)) {
-				return errorMsg($validateUser->getError());
-			}
 			$user = $this->_accountStatusCheck($data['mobile_phone']);
 			if(empty($user)){
 				return errorMsg('账号不存在');
@@ -34,15 +34,6 @@ class UserCenter extends Base {
 	/**登录
 	 */
 	private function _login($mobilePhone,$password){
-		if(!$mobilePhone && !$password) {
-			return errorMsg('请填写手机号码及密码！');
-		}
-		if(!$mobilePhone && $password) {
-			return errorMsg('请填写手机号码！');
-		}
-		if(!$mobilePhone && !$password){
-			return errorMsg('请填写密码！');
-		}
 		$where = array(
 			'status' => 0,
 			'mobile_phone' => $mobilePhone,
