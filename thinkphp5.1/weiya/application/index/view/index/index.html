@@ -153,8 +153,8 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
-
 <script type="text/javascript">
+	console.log(123);
 	var config = {
 		url:module+'Goods/getList',
 		requestEnd:false,
@@ -227,7 +227,6 @@
 				$('.nav_menu').removeClass('top-fixed');
 			}
 		});
-
 		$('body').on('click','.my_cart',function () {
 			var url = module + 'Cart/index';
 			var postData = {};
