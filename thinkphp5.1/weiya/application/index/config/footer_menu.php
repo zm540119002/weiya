@@ -17,9 +17,9 @@ return [
     //底部购物车配置
     'menu' => [
         ['name'   => '总金额','class'=>'amount'],//0
-        ['name'   => '加入购物车','class'=>'add_cart'],//1
-        ['name'   => '购物车','class'=>'add_cart_icon'],//2
-        ['name'   => '立即购买','class'=>'buy_now'],//3
+        ['name'   => '加入购物车','class'=>'add_cart '],//1
+        ['name'   => '购物车','class'=>'add_cart_icon '],//2
+        ['name'   => '立即购买','class'=>'buy_now '],//3
         ['name'   => '提交订单','class'=>'confirm_order'],//4
         ['name'   => '支付','class'=>'pay'],//5
         ['name'   => '增加地址','class'=>'address_save'],//6
