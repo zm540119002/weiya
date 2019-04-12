@@ -133,7 +133,7 @@
 				</a>
 			</li>
 			<li class="each_column">
-				<a href="javascript:void(0)" class="my_cart">
+				<a href="javascript:void(0)" class="my_cart async_login" data-jump_url="{:url('Cart/index')}">
 					<span class="cart f_icon"></span>
 					<span class="f_txt">采购车</span>
 				</a>
@@ -226,37 +226,7 @@
 				$('.nav_menu').removeClass('top-fixed');
 			}
 		});
-		$('body').on('click','.my_cart',function () {
-			var url = module + 'Cart/index';
-			var postData = {};
-			$.ajax({
-				url: url,
-				data: postData,
-				type: 'post',
-				beforeSend: function(xhr){
-					$('.loading').show();
-				},
-				error:function(xhr){
-					$('.loading').hide();
-					dialog.error('AJAX错误！');
-				},
-				success: function(data){
 
-					$('.loading').hide();
-					if(data.status==0){
-						dialog.error(data.info);
-					}else if(data.code==1){
-						if(data.data == 'no_login'){
-							loginDialog();
-						}
-					}else if(data.status==1){
-
-					}else{
-						location.href = url;
-					}
-				}
-			});
-		});
 		/**
 		 *查看更多资讯
 		 */
