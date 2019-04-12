@@ -233,6 +233,9 @@ textarea.text_description{
     -ms-transform: translateY(0);
     transform: translateY(0);
 }
+.loginTab {
+    padding:0 0.25rem;
+}
 /******轮播样式***********/
 /*#slider,#slider1{
     width: 100%;
