@@ -4420,12 +4420,12 @@ select[name="nodeIds"]{
     width: .66667rem;
 }
 .mod-part-title .mod-part-title-wrap .icon-title.left {
-    background: url(../../common/img/icons/icon_left.png) 0 0 no-repeat;
+    background: url(../img/icons/icon_left.png) 0 0 no-repeat;
     background-size:0.5rem auto;
     background-position:center;
 }
 .mod-part-title .mod-part-title-wrap .icon-title.right {
-    background: url(../../common/img/icons/icon_right.png) 0 0 no-repeat;
+    background: url(../img/icons/icon_right.png) 0 0 no-repeat;
     background-size:0.5rem auto;
     background-position:center;
 }
