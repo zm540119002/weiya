@@ -1,4 +1,6 @@
-
+var walletPayCallBackParameter = {};
+var walletPayCallBack = function(parameter){
+};
 function walletPayDialog() {
     var content=$('#walletPay').html();
     window.scrollTo(0,0);
