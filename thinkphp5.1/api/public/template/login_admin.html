@@ -1,0 +1,66 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="Bookmark" href="/favicon.ico" >
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="hui_lib/html5shiv.js"></script>
+    <script type="text/javascript" src="hui_lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="hui_admin_css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="hui_admin_css/chat.css" />
+    <link rel="stylesheet" type="text/css" href="hui_css/H-ui.css" />
+    <link rel="stylesheet" type="text/css" href="hui_lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="hui_admin_skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="hui_admin_css/style.css" />
+    <link type="text/css" rel="stylesheet" href="index_admin_css/user.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="hui_lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>维雅后台登录</title>
+</head><body>
+<input type="hidden" id="TenantId" name="TenantId" value="" />
+<div class="header"></div>
+<div class="weiya_logo">
+    <img src="index_admin_img/weiya_logo.png" alt="">
+</div>
+<div class="loginWraper">
+    <div class="loginBox">
+        <h2 class="welcome">欢迎登录</h2>
+        {include file="../../api/public/template/login_dialog.html" /}
+    </div>
+</div>
+<footer class="f24 bottom_footer">
+    <a href="http://www.miitbeian.gov.cn">
+        <span class="icp_icon">Copyright@广东美尚网络科技有限公司</span>
+        <span class="icp_icon">粤ICP备18130945号-1</span>
+    </a>
+</footer>
+<script type="text/javascript" src="hui_lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="hui_lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="hui_js/H-ui.js"></script>
+<script type="text/javascript" src="hui_admin_js/H-ui.admin.js"></script>
+<script type="text/javascript" src="hui_lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+<!--自定义js-->
+<script type="text/javascript" src="public_js/login.js"></script>
+<script type="text/javascript" src="public_js/public.js"></script>
+<script type="text/javascript" src="public_js/common.js"></script>
+<script type="text/javascript" src="common_admin_js/dialog.js"></script>
+<script type="text/javascript">
+    var domain = '{:request()->domain()}/';
+    var uploads = domain + 'uploads/';
+    var module = domain + '{:request()->module()}/';
+    var controller = module + '{:request()->controller()}/';
+    var action = controller + '{:request()->action()}';
+    $(function(){
+        loginDialog();
+        //登录-弹窗事件
+        $('body').on('click','.login',function(){
+            loginDialog();
+        });
+    });
+</script>
+</body></html>
