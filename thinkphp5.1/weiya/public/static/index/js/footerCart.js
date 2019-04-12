@@ -1,11 +1,5 @@
 
 function addCart(postData) {
-    var url = module + 'Cart/addCart';
-     var _this=postData._this;
-     var lis=postData.lis;
-    _this.addClass("nodisabled");//防止重复提交
-    delete postData._this;
-    delete postData.lis;
     var goodsList = postData.goodsList;
     for(var i=0;i<goodsList.length;i++){
         if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
@@ -13,6 +7,13 @@ function addCart(postData) {
             return false;
         }
     }
+    var url = module + 'Cart/addCart';
+     var _this=postData._this;
+     var lis=postData.lis;
+    _this.addClass("nodisabled");//防止重复提交
+    delete postData._this;
+    delete postData.lis;
+
     $.ajax({
         url: url,
         data: postData,
