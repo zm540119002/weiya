@@ -1,0 +1,21 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<a href="javascript:void(0);" class="login">登录</a>
+{/block}
+{block name="common"}
+    {include file="../../api/public/template/login_dialog.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+    $(function(){
+        loginDialog();
+        //登录-弹窗事件
+        $('body').on('click','.login',function(){
+            loginDialog();
+        });
+    })
+</script>
+{/block}
