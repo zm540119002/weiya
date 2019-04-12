@@ -30,36 +30,14 @@ return [
     // 标签库标签结束标记
     'taglib_end'   => '}',
     'tpl_replace_string' => [
-        //common    资源路径
+        //common  资源路径，此处不能命名成common_js，与下面的api_common_js冲突
         'public_js' => Request::domain() .'/static/common/js',
         'public_css' => Request::domain() .'/static/common/css',
         'public_img' => Request::domain() .'/static/common/img',
-        //common_index  资源路径
-        'common_index_js' => Request::domain() .'/static/common_index/js',
-        'common_index_css' => Request::domain() .'/static/common_index/css',
-        'common_index_img' => Request::domain() .'/static/common_index/img',
-        //common_admin  资源路径
-        'common_admin_js' => Request::domain() .'/static/common_admin/js',
-        'common_admin_css' => Request::domain() .'/static/common_admin/css',
-        'common_admin_img' => Request::domain() .'/static/common_admin/img',
-        //index     资源路径
-        'index_js' => Request::domain() .'/static/index/js',
-        'index_css' => Request::domain() .'/static/index/css',
-        'index_img' => Request::domain() .'/static/index/img',
-        //index_admin   资源路径
-        'index_admin_js' => Request::domain() .'/static/index_admin/js',
-        'index_admin_css' => Request::domain() .'/static/index_admin/css',
-        'index_admin_img' => Request::domain() .'/static/index_admin/img',
-        //h-ui  资源路径
-        'hui_js' => Request::domain() .'/static/h-ui/js',
-        'hui_css' => Request::domain() .'/static/h-ui/css',
-        'hui_img' => Request::domain() .'/static/h-ui/images',
-        'hui_lib' => Request::domain() .'/static/h-ui.lib',
-        //h-ui.admin    资源路径
-        'hui_admin_js' => Request::domain() .'/static/h-ui.admin/js',
-        'hui_admin_css' => Request::domain() .'/static/h-ui.admin/css',
-        'hui_admin_img' => Request::domain() .'/static/h-ui.admin/images',
-        'hui_admin_skin' => Request::domain() .'/static/h-ui.admin/skin',
+        //api    资源路径
+        'api_common_js' => 'https://api.worldview.com.cn/static/common/js',
+        'api_common_css' => 'https://api.worldview.com.cn/static/common/css',
+        'api_common_img' => 'https://api.worldview.com.cn/static/common/img',
         //上传路径
         'public_uploads' => Request::domain() .'/uploads',
     ],

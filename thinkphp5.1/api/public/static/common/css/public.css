@@ -233,6 +233,9 @@ textarea.text_description{
     -ms-transform: translateY(0);
     transform: translateY(0);
 }
+.loginTab {
+    padding:0 0.25rem;
+}
 /******轮播样式***********/
 /*#slider,#slider1{
     width: 100%;
@@ -1147,7 +1150,7 @@ background-position: 0 -27px;
     /*height: 25px;*/
     height:0.42rem;
     margin:0 auto;
-    background-image: url(../../common/img/icons/public_icons.png);
+    background-image: url(../img/icons/public_icons.png);
     background-repeat: no-repeat;
     /*background-size: 30px 345px;*/
     background-size: 0.48rem 6.5rem;
@@ -4417,12 +4420,12 @@ select[name="nodeIds"]{
     width: .66667rem;
 }
 .mod-part-title .mod-part-title-wrap .icon-title.left {
-    background: url(../../common/img/icons/icon_left.png) 0 0 no-repeat;
+    background: url(../img/icons/icon_left.png) 0 0 no-repeat;
     background-size:0.5rem auto;
     background-position:center;
 }
 .mod-part-title .mod-part-title-wrap .icon-title.right {
-    background: url(../../common/img/icons/icon_right.png) 0 0 no-repeat;
+    background: url(../img/icons/icon_right.png) 0 0 no-repeat;
     background-size:0.5rem auto;
     background-position:center;
 }
@@ -4787,7 +4790,7 @@ ul.message_list{
     top: 0;
     z-index:99;
 }
-/*维雅药妆定制*/
+/*维雅品牌定制*/
 .weiya_content{
     background: #fff;
 }

@@ -1,16 +1,15 @@
 //登录-弹窗触发
 function loginDialog(){
-    var content=$('#dialLogin').html();
+    var content=$('.userInfoWrapper').html();
     window.scrollTo(0,0);
     layer.open({
         className:'loginLayer',
         type:1,
         shadeClose:false,
         content:content,
-        title:['登录','border-bottom:1px solid #d9d9d9;'],
         btn:[''],
         success:function(indexs,i){
-            tab_down('.loginNav li','.loginTab .login_wrap','click');
+            tab_down('.loginNav li','.loginTab','click');
             $('.layui-m-layershade').on('touchmove',function(e){
                 event.preventDefault();
             });
@@ -18,6 +17,7 @@ function loginDialog(){
         },
         yes:function(index){
             cancleFixedLayer();
+            $('.loginTab').eq(0).show();
             layer.close(index);
         }
     });
@@ -51,85 +51,31 @@ function logoutDialog(){
         }
     });
 }
-//忘记密码-弹窗触发
-function forgetPasswordDialog(){
-    var content = $('#sectionForgetPassword').html();
-    layer.open({
-        className:'forgetPasswordLayer',
-        content:content,
-        type:1,
-        shadeClose:false,
-        btn:[''],
-        success:function(){
-            $('.login_item .password').attr('type','password');
-            $('.view-password').removeClass('active');
-            fixedLayer();
-        },
-        yes:function(index){
-            cancleFixedLayer();
-            layer.close(index);
-        }
-    });
-}
+/**异步登录回调函数
+*/
 var loginBackFunctionParameter = {};
-var loginBackFunction = function(parameter){
-    location.href = parameter.jump_url;
+var loginBackFunction = function(){
+    loginBackFunctionParameter.jump_url ?
+        location.href = loginBackFunctionParameter.jump_url :
+        location.href = action;
 };
 $(function(){
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
-        loginBackFunction =flushPage;
+        loginBackFunction = flushPage;
         loginDialog();
     });
     //退出-弹窗事件
     $('body').on('click','#logout_dialog',function(){
         logoutDialog();
     });
-    //忘记密码-弹窗事件
-    $('body').on('click','.forget_dialog',function(){
-        forgetPasswordDialog();
-    });
-});
-$(function(){
-    //登录 / 注册-切换
-    tab_down('.loginNav li','.loginTab ','click');
     //登录 or 注册 or 重置密码
-    $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
+    tab_down('.loginNav li','.loginTab ','click');
+    $('body').on('click','.loginBtn,.registerBtn',function(){
         var _this = $(this);
-        var method = _this.data('method');
-        var url = domain+'ucenter/UserCenter/'+method;
-        // console.log(url);
-        // return false;
-        var postForm = null;
-        var loginSign = 'dialog';
-        if(method=='login' || method=='login_admin'){//登录
-            if($('.loginLayer #formLogin').length){//弹框登录
-                postForm = $('.loginLayer #formLogin');
-            }else{//页面登录
-                loginSign = 'page';
-                postForm = $('#formLogin');
-            }
-        }else if(method=='register'){//注册
-            if($('.loginLayer #formRegister').length){//弹框注册
-                postForm = $('.loginLayer #formRegister');
-            }else{//页面注册
-                loginSign = 'page';
-                postForm = $('#formRegister');
-            }
-        }else if(method=='forgetPassword'){//重置密码
-            if($('.forgetPasswordLayer  #formForgetPassword').length){//弹框重置密码
-                postForm = $('.forgetPasswordLayer #formForgetPassword');
-            }else{//页面重置密码
-                loginSign = 'page';
-                postForm = $('#formForgetPassword');
-            }
-        }
-        if(!postForm){
-            dialog.error('未知操作');
-            return false;
-        }
-        var postData = postForm.serializeObject();
+        var postData = _this.parents('form').serializeObject();
         var content='';
+        var method = _this.data('method');
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && method!='login_admin' && !register.vfyCheck(postData.captcha)){
@@ -144,28 +90,59 @@ $(function(){
             errorTipc(content);
             return false;
         }else{
+            var url = domain + 'ucenter/UserCenter/' + method;
             $.post(url,postData,function (data) {
                 // return false;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
                 }else if(data.status==1){
-                    if(loginSign=='page'){
-                        // location.href = data.info;
-                    }else if(loginSign=='dialog'){
-                         $('.layui-m-layer').remove();
-                    }
+                    $('.layui-m-layer').remove();
                     loginBackFunctionParameter.jump_url = data.info;
-                    loginBackFunction(loginBackFunctionParameter);
+                    loginBackFunction();
                 }
             });
         }
     });
+    //异步登录验证
+    $('body').on('click','.async_login',function () {
+        var jump_url = $(this).data('jump_url');
+        var postData = {};
+        $.ajax({
+            url: jump_url,
+            data: postData,
+            type: 'post',
+            beforeSend: function(xhr){
+                $('.loading').show();
+            },
+            error:function(xhr){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+                if(data.status==0){
+                    dialog.error(data.info);
+                }else if(data.code==1){
+                    if(data.data == 'no_login'){
+                        loginDialog();
+                    }
+                    if(data.data=='no_empower'){
+                        dialog.error(data.msg);
+                    }
+                    if(data.data=='no_factory_register'){
+                        location.href = data.url;
+                    }
+                }else{
+                    loginBackFunctionParameter.jump_url = jump_url;
+                    loginBackFunction();
+                }
+            }
+        });
+    });
     //显示隐藏密码
-    //var onOff = true;
     $('body').on('click','.view-password',function(){
         var _this=$(this);
-        //_this.toggleClass('active');
         if(_this.prev().attr('type')=='password'){
             $('.login_item .password').attr('type','text');
             $('.view-password').addClass('active');
@@ -239,36 +216,6 @@ $(function(){
             success:function(){
             },
             btn:['确定']
-        });
-    });
-
-    $('body').on('click','.async_login',function () {
-        var jump_url = $(this).data('jump_url');
-        loginBackFunctionParameter.jump_url = jump_url;
-        var postData = {};
-        $.ajax({
-            url: jump_url,
-            data: postData,
-            type: 'post',
-            beforeSend: function(xhr){
-                $('.loading').show();
-            },
-            error:function(xhr){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
-                $('.loading').hide();
-                if(data.status==0){
-                    dialog.error(data.info);
-                }else if(data.code==1){
-                    if(data.data == 'no_login'){
-                        loginDialog();
-                    }
-                }else{
-                    location.href = jump_url;
-                }
-            }
         });
     });
 });

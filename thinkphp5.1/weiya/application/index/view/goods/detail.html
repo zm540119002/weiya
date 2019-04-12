@@ -211,9 +211,10 @@
 	{include file="template/footer_menu.html" /}
 {/block}
 {block name="script"}
-<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
+	console.log(123);
 	$(function(){
 		var id = '{$info.id}';
 		var price=$('.goods_list').find('price').text();
