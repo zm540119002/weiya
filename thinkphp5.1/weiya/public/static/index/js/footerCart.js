@@ -212,6 +212,7 @@ $(function () {
     });
     //样品弹窗加入购物车
     $('body').on('click','.goodsInfoLayer .add_cart_layer',function(){
+        console.log(1111111);
         var lis = null;
         if($($(this).context).hasClass('add_purchase_cart')){
             lis = $(this).parents('li');
