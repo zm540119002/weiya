@@ -53,7 +53,8 @@ function addCart(postData) {
 
 //样品商品加入购物车
 function laryerAddCart(postData) {
-    alert(111);
+    var _this=postData._this;
+    var lis=postData.lis;
     var url = module + 'Cart/addCart';
     $.ajax({
         url: url,
@@ -231,7 +232,6 @@ $(function () {
         }
         postData._this = _this;
         postData.lis = lis;
-        console.log(postData);return false;
         laryerAddCart(postData);
 
     });
