@@ -153,8 +153,6 @@ $(function () {
         if(!postData){
             return false;
         }
-        console.log(postData);
-        return ;
         postData.obj = _this;
         postData.lis = lis;
         addCart(postData);
