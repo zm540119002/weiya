@@ -98,9 +98,9 @@ $(function(){
                     return false;
                 }else if(data.status==1){
                     $('.layui-m-layer').remove();
-                    var data = {};
-                    data.jump_url = data.info;
-                    loginBackFunction(data);
+                    var param = {};
+                    param.jump_url = data.info;
+                    loginBackFunction(param);
                 }
             });
         }
@@ -135,9 +135,9 @@ $(function(){
                         location.href = data.url;
                     }
                 }else{
-                    var data = {};
-                    data.jump_url = jump_url;
-                    loginBackFunction(data);
+                    var param = {};
+                    param.jump_url = jump_url;
+                    loginBackFunction(param);
                 }
             }
         });
