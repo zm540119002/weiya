@@ -38,7 +38,7 @@ function addCart(postData,container) {
                         num += parseInt($(this).find('.gshopping_count').val());
                     }
                 });
-                cosole.log(1111);
+                console.log(1111);
                 $('footer').find('.cart_num').addClass('cur');
                 $('footer').find('.add_num').text('+'+num).addClass('current');
                 setTimeout(function(){
