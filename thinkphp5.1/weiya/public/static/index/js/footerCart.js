@@ -223,6 +223,7 @@ $(function () {
     });
     //样品弹窗加入购物车
     $('body').on('click','.goodsInfoLayer .add_cart_layer',function(){
+        var _this = $(this);
         var lis = null;
         if($($(this).context).hasClass('add_purchase_cart')){
             lis = $(this).parents('li');
@@ -230,6 +231,7 @@ $(function () {
             lis = $('.goodsInfoLayer ul.goods_list').find('li');
         }
         var postData = assemblyData(lis);
+
         postData._this = _this;
         postData.lis = lis;
         if(!postData){
