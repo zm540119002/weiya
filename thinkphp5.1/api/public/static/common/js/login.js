@@ -54,9 +54,9 @@ function logoutDialog(){
 }
 /**异步登录回调函数
 */
-var loginBackFunction = function(data){
-    data.jump_url ?
-        location.href = data.jump_url :
+var loginBackFunction = function(param){
+    param.jump_url ?
+        location.href = param.jump_url :
         location.href = action;
 };
 $(function(){
