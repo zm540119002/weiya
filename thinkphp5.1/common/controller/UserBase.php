@@ -4,7 +4,6 @@ namespace common\controller;
  */
 class UserBase extends Base{
     protected $user = null;
-    protected $loginUrl = 'ucenter/UserCenter/login';//用户中心URL
     protected $indexUrl = 'index/Index/index';//首页URL
     
     public function __construct(){
@@ -12,10 +11,11 @@ class UserBase extends Base{
         //判断是否登录
         $this->user = checkLogin();
         if (!$this->user) {
-            if (request()->isAjax()) {
-                $this->success('异步登录失败',url($this->indexUrl),'no_login',0);
+            if(request()->isAjax()){
+                $this->success('您还未登录平台，请先登录！',url($this->indexUrl),'no_login',0);
             }else{
-                $this->error(config('custom.error_login'),url($this->loginUrl));
+                echo $this->fetch('../../api/public/template/login_page.html');
+                exit;
             }
         }
         //判断是否为微信浏览器
