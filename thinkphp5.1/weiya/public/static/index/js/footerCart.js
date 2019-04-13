@@ -4,12 +4,11 @@ function addCart(postData) {
      var _this=postData._this;
      var lis=postData.lis;
     _this.addClass("nodisabled");//防止重复提交
-    delete postData._this;
-    delete postData.lis;
-
+    var data2 = {};
+    data2.goodsList = postData.goodsList;
     $.ajax({
         url: url,
-        data: postData,
+        data: data2,
         type: 'post',
         beforeSend: function(){
             $('.loading').show();
@@ -27,7 +26,7 @@ function addCart(postData) {
             else if(data.code==1 && data.data=='no_login'){
                 loginDialog();
                 loginBackFunction = addCart;
-                loginBackFunctionParameter = postData;
+                loginBackFunctionParameter = data2;
                 return false;
             }
             else{
