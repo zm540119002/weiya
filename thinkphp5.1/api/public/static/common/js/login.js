@@ -1,7 +1,7 @@
 //登录-弹窗触发
 function loginDialog(){
+    console.log(loginBackFunctionParam);
     console.log(loginBackFunction);
-    return ;
     var content=$('.userInfoWrapper').html();
     window.scrollTo(0,0);
     layer.open({
@@ -55,10 +55,11 @@ function logoutDialog(){
 }
 /**异步登录回调函数
 */
-var loginBackFunction = function(param){
-    param.jump_url ?
-        location.href = param.jump_url :
-        location.href = action;
+var loginBackFunctionParam = {
+    'jump_url' : action
+};
+var loginBackFunction = function(loginBackFunctionParam){
+    location.href = param.jump_url;
 };
 $(function(){
     //登录-弹窗事件
