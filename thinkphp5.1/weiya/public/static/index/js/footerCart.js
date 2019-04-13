@@ -26,7 +26,7 @@ function addCart(postData) {
             else if(data.code==1 && data.data=='no_login'){
                 loginDialog();
                 loginBackFunction = addCart;
-                loginBackFunctionParameter = data2;
+                loginBackFunctionParameter = postData;
                 return false;
             }
             else{
