@@ -158,7 +158,7 @@ $(function () {
     });
 
     //加入购物车
-    $('body').on('click','.add_cart,.add_purchase_cart',function(){
+    $('body').on('click','.add_cart,.add_purchase_cart,.add_cart_layer',function(){
         var _this = $(this);
         var lis = null;
         lis = $('ul.goods_list').find('li[data-buy_type="1"]');
