@@ -1,14 +1,17 @@
 
-function addCart(postData,container) {
+function addCart(postData) {
+    console.log(123);
+    console.log(postData);
     var url = module + 'Cart/addCart';
-    console.log(container)
-     var _this=container._this;
-     var lis=container.lis;
+     var _this=postData._this;
+     console.log(_this);
+     var lis=postData.lis;
     _this.addClass("nodisabled");//防止重复提交
-
+    var data2 = {};
+    data2.goodsList = postData.goodsList;
     $.ajax({
         url: url,
-        data: postData,
+        data: data2,
         type: 'post',
         beforeSend: function(){
             $('.loading').show();
@@ -24,24 +27,24 @@ function addCart(postData,container) {
                 dialog.error(data.info);
             }
             else if(data.code==1 && data.data=='no_login'){
-                loginDialog();
                 loginBackFunction = addCart;
                 loginBackFunctionParameter = postData;
+                console.log(loginBackFunctionParameter);
+                loginDialog();
                 return false;
             }
             else{
-
+                dialog.success(data.info);
                 var num = 0;
+
                 $.each(lis,function(index,val){
                     var buyType=$(this).data('buy_type');
                     if(buyType==1){
                         num += parseInt($(this).find('.gshopping_count').val());
                     }
                 });
-
                 $('footer').find('.cart_num').addClass('cur');
                 $('footer').find('.add_num').text('+'+num).addClass('current');
-                dialog.success(data.info);
                 setTimeout(function(){
                     $('.add_num').removeClass('current');
                 },2000)
@@ -166,11 +169,9 @@ $(function () {
         if(!postData){
             return false;
         }
-        var container ={
-            _this:_this,
-            lis:lis
-        };
-        addCart(postData,container);
+        postData._this = _this;
+        postData.lis = lis;
+        addCart(postData);
     });
     //样品弹窗加入购物车
     $('body').on('click','.goodsInfoLayer .add_cart_layer',function(){
