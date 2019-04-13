@@ -17,9 +17,9 @@ return [
     //底部购物车配置
     'menu' => [
         ['name'   => '总金额','class'=>'amount'],//0
-        ['name'   => '加入购物车','class'=>'add_cart '],//1
+        ['name'   => '加入购物车','class'=>'add_cart'],//1
         ['name'   => '购物车','class'=>'add_cart_icon'],//2
-        ['name'   => '立即购买','class'=>'buy_now '],//3
+        ['name'   => '立即购买','class'=>'buy_now'],//3
         ['name'   => '提交订单','class'=>'confirm_order'],//4
         ['name'   => '支付','class'=>'pay'],//5
         ['name'   => '增加地址','class'=>'address_save'],//6
@@ -31,7 +31,7 @@ return [
         ['name'   => '确认收货','class'=>'confirm_receive'],//12
         ['name'   => '去评价','class'=>'to_evaluate '],//13
         ['name'   => '再次购买','class'=>'purchase_again '],//14
-        ['name'   => '增加商标','class'=>'add_brand '],//15
+        ['name'   => '增加商标','class'=>'add_brand'],//15
         ['name'   => '立即提交','class'=>'submit'],//16
         ['name'   => '删除','class'=>'delete']//17
 
