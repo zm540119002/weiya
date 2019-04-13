@@ -32,10 +32,10 @@ function addCart(postData) {
                 dialog.error(data.info);
             }
             else if(data.code==1 && data.data=='no_login'){
-                loginDialog();
                 loginBackFunction = addCart;
                 loginBackFunctionParameter = postData;
                 console.log(loginBackFunction);
+                loginDialog();
                 return false;
             }
             else{
