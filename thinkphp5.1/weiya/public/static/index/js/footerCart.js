@@ -228,6 +228,7 @@ $(function () {
         if(!postData){
             return false;
         }
+        console.log(postData);return false;
         laryerAddCart(postData);
 
     });
