@@ -54,10 +54,10 @@ function logoutDialog(){
 /**异步登录回调函数
 */
 var loginBackFunctionParam = {
-    'jump_url' : action
+    jump_url : action
 };
-var loginBackFunction = function(loginBackFunctionParam){
-    location.href = param.jump_url;
+var loginBackFunction = function(param){
+    location.href = loginBackFunctionParam.jump_url
 };
 $(function(){
     //登录-弹窗事件
@@ -99,7 +99,7 @@ $(function(){
                 }else if(data.status==1){
                     $('.layui-m-layer').remove();
                     loginBackFunctionParam.jump_url = data.info;
-                    loginBackFunction(data);
+                    loginBackFunction();
                 }
             });
         }
@@ -134,9 +134,8 @@ $(function(){
                         location.href = data.url;
                     }
                 }else{
-                    var param = {};
-                    param.jump_url = jump_url;
-                    loginBackFunction(param);
+                    loginBackFunctionParam.jump_url = jump_url;
+                    loginBackFunction();
                 }
             }
         });
