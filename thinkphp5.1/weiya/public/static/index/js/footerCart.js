@@ -1,7 +1,8 @@
 function addCart(postData) {
+    console.log(postData);
     var url = module + 'Cart/addCart';
-     var _this=postData._this;
-     var lis=postData.lis;
+    var _this= postData._this;
+    var lis = postData.lis;
     _this.addClass("nodisabled");//防止重复提交
     var data2 = {};
     data2.goodsList = postData.goodsList;
@@ -151,8 +152,7 @@ $(function () {
     //加入购物车
     $('body').on('click','.add_cart,.add_purchase_cart',function(){
         var _this = $(this);
-        var lis = null;
-        lis = $('ul.goods_list').find('li[data-buy_type="1"]');
+        var lis = $('ul.goods_list').find('li[data-buy_type="1"]');
         var postData = assemblyData(lis);
         // var goodsList = postData.goodsList;
         // for(var i=0;i<goodsList.length;i++){
