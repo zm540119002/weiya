@@ -1,6 +1,5 @@
 
 function addCart(postData) {
-    console.log(123);
     var goodsList = postData.goodsList;
     for(var i=0;i<goodsList.length;i++){
         if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
@@ -35,7 +34,6 @@ function addCart(postData) {
             else if(data.code==1 && data.data=='no_login'){
                 loginBackFunction = addCart;
                 loginBackFunctionParameter = postData;
-                console.log(loginBackFunction);
                 loginDialog();
                 return false;
             }
