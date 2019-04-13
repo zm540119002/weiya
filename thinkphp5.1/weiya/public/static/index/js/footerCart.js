@@ -4,6 +4,9 @@ function addCart(postData) {
      var _this=postData._this;
      var lis=postData.lis;
     _this.addClass("nodisabled");//防止重复提交
+    delete postData._this;
+    delete postData.lis;
+
     $.ajax({
         url: url,
         data: postData,
