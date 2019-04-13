@@ -1,5 +1,4 @@
 function addCart(param) {
-    console.log(param);
     var url = module + 'Cart/addCart';
     param.obj.addClass("nodisabled");//防止重复提交
     $.ajax({
@@ -22,13 +21,15 @@ function addCart(param) {
             else if(data.code==1 && data.data=='no_login'){
                 loginBackFunctionParam = param;
                 loginBackFunction = addCart;
+                console.log(param);
                 loginDialog();
                 return false;
             }
             else{
                 dialog.success(data.info);
                 var num = 0;
-
+                console.log(param);
+                return ;
                 $.each(param.lis,function(index,val){
                     var buyType=$(this).data('buy_type');
                     if(buyType==1){
