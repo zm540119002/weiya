@@ -1,12 +1,9 @@
 
-function addCart(postData) {
-    console.log(postData);return false;
+function addCart(postData,container) {
     var url = module + 'Cart/addCart';
-     var _this=postData._this;
-     var lis=postData.lis;
+     var _this=container._this;
+     var lis=container.lis;
     _this.addClass("nodisabled");//防止重复提交
-    delete postData._this;
-    delete postData.lis;
 
     $.ajax({
         url: url,
@@ -167,9 +164,11 @@ $(function () {
         if(!postData){
             return false;
         }
-        postData._this = _this;
-        postData.lis = lis;
-        addCart(postData);
+        var container ={
+            _this:_this,
+            lis:lis
+        };
+        addCart(postData,container);
     });
     //样品弹窗加入购物车
     $('body').on('click','.goodsInfoLayer .add_cart_layer',function(){
