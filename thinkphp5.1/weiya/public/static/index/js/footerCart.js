@@ -1,7 +1,8 @@
 function addCart(postData) {
     var url = module + 'Cart/addCart';
     postData.obj.addClass("nodisabled");//防止重复提交
-    
+    var goodsList = {};
+    goodsList.goodsList = postData.goodsList;
     $.ajax({
         url: url,
         data: postData.goodsList,
@@ -154,8 +155,6 @@ $(function () {
         if(!postData){
             return false;
         }
-        console.log(postData);
-        return ;
         postData.obj = _this;
         postData.lis = lis;
         addCart(postData);
