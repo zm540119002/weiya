@@ -17,12 +17,6 @@
 		var module = domain + '{:request()->module()}/';
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
-		var loginBackFunctionParameter = {};
-		var loginBackFunction = function(){
-			loginBackFunctionParameter.jump_url ?
-					location.href = loginBackFunctionParameter.jump_url :
-					location.href = action;
-		};
 	</script>
 	<!--前置自定义js-->
 	{block name="pre-script"}{/block}
