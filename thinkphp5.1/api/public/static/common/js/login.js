@@ -56,8 +56,13 @@ function logoutDialog(){
 var loginBackFunctionParam = {
     jump_url : action
 };
+<<<<<<< HEAD
 var loginBackFunction = function(param){
     location.href = loginBackFunctionParam.jump_url
+=======
+var loginBackFunction = function(loginBackFunctionParam){
+    location.href = loginBackFunctionParam.jump_url;
+>>>>>>> d46ebb5d95e3618f589648596a3b82788ed4556c
 };
 $(function(){
     //登录-弹窗事件
