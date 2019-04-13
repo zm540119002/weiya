@@ -31,6 +31,12 @@
 	<section class="content_main">
 		<div id="components-demo">
 			<button-counter></button-counter>
+			<button-counter></button-counter>
+			<button-counter></button-counter>
+			<button-counter></button-counter>
+		</div>
+		<div id="blog-post-demo">
+			<blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title"></blog-post>
 		</div>
 		<div class="content-padding">
 			<div>
@@ -159,6 +165,16 @@
 <script type="text/javascript" src="api_common_js/vue-component/cart.js"></script>
 <script type="text/javascript">
 	new Vue({ el: '#components-demo' });
+	new Vue({
+		el: '#blog-post-demo',
+		data: {
+			posts: [
+				{ id: 1, title: 'My journey with Vue' },
+				{ id: 2, title: 'Blogging with Vue' },
+				{ id: 3, title: 'Why Vue is so fun' }
+			]
+		}
+	});
 	var config = {
 		url:module+'Goods/getList',
 		requestEnd:false,
