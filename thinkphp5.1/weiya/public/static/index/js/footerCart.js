@@ -230,6 +230,8 @@ $(function () {
             lis = $('.goodsInfoLayer ul.goods_list').find('li');
         }
         var postData = assemblyData(lis);
+        postData._this = _this;
+        postData.lis = lis;
         if(!postData){
             return false;
         }
