@@ -1,10 +1,10 @@
-function addCart(postData) {
-    console.log(postData);
+function addCart(param) {
+    console.log(param);
     var url = module + 'Cart/addCart';
-    postData.obj.addClass("nodisabled");//防止重复提交
+    param.obj.addClass("nodisabled");//防止重复提交
     $.ajax({
         url: url,
-        data: postData.goodsList,
+        data: param.goodsList,
         type: 'post',
         beforeSend: function(){
             $('.loading').show();
@@ -15,12 +15,12 @@ function addCart(postData) {
         },
         success: function(data){
             $('.loading').hide();
-            postData.obj.removeClass("nodisabled");//防止重复提交
+            param.obj.removeClass("nodisabled");//防止重复提交
             if(data.status==0){
                 dialog.error(data.info);
             }
             else if(data.code==1 && data.data=='no_login'){
-                loginBackFunctionParam = postData;
+                loginBackFunctionParam = param;
                 loginBackFunction = addCart;
                 loginDialog();
                 return false;
@@ -29,7 +29,7 @@ function addCart(postData) {
                 dialog.success(data.info);
                 var num = 0;
 
-                $.each(postData.lis,function(index,val){
+                $.each(param.lis,function(index,val){
                     var buyType=$(this).data('buy_type');
                     if(buyType==1){
                         num += parseInt($(this).find('.gshopping_count').val());
