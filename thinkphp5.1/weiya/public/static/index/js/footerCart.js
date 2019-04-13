@@ -23,7 +23,7 @@ function addCart(postData) {
                 dialog.error(data.info);
             }
             else if(data.code==1 && data.data=='no_login'){
-                loginBackFunction = addCart(postData);
+                // loginBackFunction = addCart(postData);
                 loginDialog();
                 return false;
             }
