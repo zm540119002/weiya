@@ -1,6 +1,7 @@
 
 function addCart(postData,container) {
     var url = module + 'Cart/addCart';
+    console.log(container)
      var _this=container._this;
      var lis=container.lis;
     _this.addClass("nodisabled");//防止重复提交
