@@ -19,8 +19,7 @@ function addCart(postData) {
                 dialog.error(data.info);
             }
             else if(data.code==1 && data.data=='no_login'){
-                loginBackFunctionParam = postData;
-                loginBackFunction = addCart;
+                loginBackFunction = addCartCallBack;
                 loginDialog();
                 return false;
             }
@@ -42,6 +41,9 @@ function addCart(postData) {
         }
     });
 }
+function addCartCallBack(){
+    $('.add_cart,.add_purchase_cart').click();
+};
 $(function () {
     //计算商品列表总价
     //calculateTotalPrice();
