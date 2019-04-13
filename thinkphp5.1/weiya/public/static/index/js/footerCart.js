@@ -24,14 +24,8 @@ function addCart(postData) {
                 dialog.error(data.info);
             }
             else if(data.code==1 && data.data=='no_login'){
-<<<<<<< HEAD
                 loginBackFunctionParameter.postData = postData;
                 loginBackFunction = addCart;
-=======
-                loginBackFunction = addCart;
-                loginBackFunctionParameter = postData;
-                console.log(loginBackFunctionParameter);
->>>>>>> 183e8d5c05dc00f97181cc97442561835d8fa44d
                 loginDialog();
                 return false;
             }
