@@ -1,6 +1,6 @@
 function addCart(postData) {
     var url = module + 'Cart/addCart';
-    // postData.obj.addClass("nodisabled");//防止重复提交
+    postData.obj.addClass("nodisabled");//防止重复提交
     var data = {
         'goodsList' : postData.goodsList
     };
@@ -17,13 +17,12 @@ function addCart(postData) {
         },
         success: function(data){
             $('.loading').hide();
-            // postData.obj.removeClass("nodisabled");//防止重复提交
+            postData.obj.removeClass("nodisabled");//防止重复提交
             if(data.status==0){
                 dialog.error(data.info);
             }
             else if(data.code==1 && data.data=='no_login'){
-                loginBackFunctionParam = postData;
-                loginBackFunction = addCart;
+                loginBackFunction = addCartCallBack;
                 loginDialog();
                 return false;
             }
