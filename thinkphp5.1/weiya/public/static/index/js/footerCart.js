@@ -1,12 +1,10 @@
 
-function addCart(postData,container) {
+function addCart(postData) {
     console.log(postData);return false;
     var url = module + 'Cart/addCart';
      var _this=postData._this;
      var lis=postData.lis;
     _this.addClass("nodisabled");//防止重复提交
-   
-
     $.ajax({
         url: url,
         data: postData,
