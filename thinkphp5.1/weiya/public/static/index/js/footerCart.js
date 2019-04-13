@@ -2,7 +2,7 @@ function addCart(postData) {
     console.log(postData);
     var url = module + 'Cart/addCart';
     var lis = postData.lis;
-    _this.addClass("nodisabled");//防止重复提交
+    postData.obj.addClass("nodisabled");//防止重复提交
     var data2 = {};
     data2.goodsList = postData.goodsList;
     $.ajax({
