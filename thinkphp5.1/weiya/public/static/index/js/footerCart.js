@@ -1,5 +1,4 @@
 function addCart(postData) {
-    console.log(postData);
     var url = module + 'Cart/addCart';
     postData.obj.addClass("nodisabled");//防止重复提交
     $.ajax({
