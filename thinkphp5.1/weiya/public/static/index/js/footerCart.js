@@ -1,7 +1,6 @@
 function addCart(postData) {
     console.log(postData);
     var url = module + 'Cart/addCart';
-    var _this= postData._this;
     var lis = postData.lis;
     _this.addClass("nodisabled");//防止重复提交
     var data2 = {};
@@ -19,7 +18,7 @@ function addCart(postData) {
         },
         success: function(data){
             $('.loading').hide();
-            _this.removeClass("nodisabled");//防止重复提交
+            postData.obj.removeClass("nodisabled");//防止重复提交
             if(data.status==0){
                 dialog.error(data.info);
             }
@@ -154,17 +153,10 @@ $(function () {
         var _this = $(this);
         var lis = $('ul.goods_list').find('li[data-buy_type="1"]');
         var postData = assemblyData(lis);
-        // var goodsList = postData.goodsList;
-        // for(var i=0;i<goodsList.length;i++){
-        //     if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
-        //         dialog.error('请设置品牌');
-        //         return false;
-        //     }
-        // }
         if(!postData){
             return false;
         }
-        postData._this = _this;
+        postData.obj = _this;
         postData.lis = lis;
         addCart(postData);
     });
