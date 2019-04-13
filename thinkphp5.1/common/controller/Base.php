@@ -32,6 +32,7 @@ class Base extends \think\Controller{
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){
+        return 222;
         $postData = $_POST;
         $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         if(is_string($postData['fileBase64'])){
