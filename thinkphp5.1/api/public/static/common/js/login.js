@@ -57,7 +57,7 @@ var loginBackFunctionParam = {
     'jump_url' : action
 };
 var loginBackFunction = function(loginBackFunctionParam){
-    location.href = param.jump_url;
+    location.href = loginBackFunctionParam.jump_url;
 };
 $(function(){
     //登录-弹窗事件
