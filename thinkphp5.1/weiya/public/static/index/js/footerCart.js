@@ -1,6 +1,5 @@
 
 function addCart(postData) {
-    console.log(postData);return false;
     var url = module + 'Cart/addCart';
      var _this=postData._this;
      var lis=postData.lis;
