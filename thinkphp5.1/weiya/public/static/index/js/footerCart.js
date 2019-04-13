@@ -26,11 +26,12 @@ function addCart(postData,container) {
             else if(data.code==1 && data.data=='no_login'){
                 loginDialog();
                 loginBackFunction = addCart;
+                console.log(loginBackFunction);
                 loginBackFunctionParameter = postData;
                 return false;
             }
             else{
-
+                dialog.success(data.info);
                 var num = 0;
                 $.each(lis,function(index,val){
                     var buyType=$(this).data('buy_type');
@@ -38,10 +39,8 @@ function addCart(postData,container) {
                         num += parseInt($(this).find('.gshopping_count').val());
                     }
                 });
-
                 $('footer').find('.cart_num').addClass('cur');
                 $('footer').find('.add_num').text('+'+num).addClass('current');
-                dialog.success(data.info);
                 setTimeout(function(){
                     $('.add_num').removeClass('current');
                 },2000)
