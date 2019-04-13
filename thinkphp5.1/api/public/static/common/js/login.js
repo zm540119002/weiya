@@ -55,6 +55,7 @@ function logoutDialog(){
 */
 var loginBackFunctionParameter = {};
 var loginBackFunction = function(){
+    console.log(456);
     loginBackFunctionParameter.jump_url ?
         location.href = loginBackFunctionParameter.jump_url :
         location.href = action;
