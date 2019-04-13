@@ -1,9 +1,4 @@
-var loginBackFunctionParameter = {};
-var loginBackFunction = function(){
-    loginBackFunctionParameter.jump_url ?
-        location.href = loginBackFunctionParameter.jump_url :
-        location.href = action;
-};
+
 //登录-弹窗触发
 function loginDialog(){
     var content=$('.userInfoWrapper').html();
