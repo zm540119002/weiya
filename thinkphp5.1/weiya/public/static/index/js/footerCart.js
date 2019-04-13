@@ -35,6 +35,7 @@ function addCart(postData) {
                 loginDialog();
                 loginBackFunction = addCart;
                 loginBackFunctionParameter = postData;
+                console.log(loginBackFunction);
                 return false;
             }
             else{
