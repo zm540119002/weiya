@@ -54,7 +54,7 @@ function logoutDialog(){
 /**异步登录回调函数
 */
 var loginBackFunctionParam = {};
-var loginBackFunction = function(loginBackFunctionParam){
+var loginBackFunction = function(){
     loginBackFunctionParam.jump_url ?
         location.href = loginBackFunctionParam.jump_url :
         location.href = action;
