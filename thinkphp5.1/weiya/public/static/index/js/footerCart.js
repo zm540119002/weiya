@@ -1,5 +1,7 @@
 
 function addCart(postData) {
+    alert(1);
+    console.log(postData);return
     var goodsList = postData.goodsList;
     for(var i=0;i<goodsList.length;i++){
         if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
@@ -157,7 +159,7 @@ $(function () {
     });
 
     //加入购物车
-    $('body').on('click','.add_cart,.add_purchase_cart',function(){
+    $('body').on('click','.add_cart,.add_purchase_cart,.add_cart_layer',function(){
         var _this = $(this);
         var lis = null;
         lis = $('ul.goods_list').find('li[data-buy_type="1"]');
