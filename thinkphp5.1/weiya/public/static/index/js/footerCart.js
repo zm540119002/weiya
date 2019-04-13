@@ -1,10 +1,11 @@
 
 function addCart(postData,container) {
+    console.log(postData);return false;
     var url = module + 'Cart/addCart';
-    console.log(container)
-     var _this=container._this;
-     var lis=container.lis;
+     var _this=postData._this;
+     var lis=postData.lis;
     _this.addClass("nodisabled");//防止重复提交
+   
 
     $.ajax({
         url: url,
@@ -26,13 +27,13 @@ function addCart(postData,container) {
             else if(data.code==1 && data.data=='no_login'){
                 loginDialog();
                 loginBackFunction = addCart;
-                console.log(loginBackFunction);
                 loginBackFunctionParameter = postData;
                 return false;
             }
             else{
                 dialog.success(data.info);
                 var num = 0;
+
                 $.each(lis,function(index,val){
                     var buyType=$(this).data('buy_type');
                     if(buyType==1){
@@ -165,11 +166,9 @@ $(function () {
         if(!postData){
             return false;
         }
-        var container ={
-            _this:_this,
-            lis:lis
-        };
-        addCart(postData,container);
+        postData._this = _this;
+        postData.lis = lis;
+        addCart(postData);
     });
     //样品弹窗加入购物车
     $('body').on('click','.goodsInfoLayer .add_cart_layer',function(){
