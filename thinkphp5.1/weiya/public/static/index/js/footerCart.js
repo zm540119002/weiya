@@ -225,9 +225,12 @@ $(function () {
             lis = $('.goodsInfoLayer ul.goods_list').find('li');
         }
         var postData = assemblyData(lis);
+
         if(!postData){
             return false;
         }
+        postData._this = _this;
+        postData.lis = lis;
         console.log(postData);return false;
         laryerAddCart(postData);
 
