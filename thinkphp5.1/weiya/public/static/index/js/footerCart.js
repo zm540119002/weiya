@@ -156,14 +156,13 @@ $(function () {
         if(!postData){
             return false;
         }
-
         var goodsList = postData.goodsList;
-        // for(var i=0;i<goodsList.length;i++){
-        //     if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
-        //         dialog.error('请设置品牌');
-        //         return false;
-        //     }
-        // }
+        for(var i=0;i<goodsList.length;i++){
+            if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
+                dialog.error('请设置品牌');
+                return false;
+            }
+        }
         var url = module + 'Cart/addCart';
         _this.addClass("nodisabled");//防止重复提交
 
