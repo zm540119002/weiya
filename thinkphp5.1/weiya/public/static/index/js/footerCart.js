@@ -1,5 +1,6 @@
 
 function addCart(postData) {
+    console.log(123);
     var goodsList = postData.goodsList;
     for(var i=0;i<goodsList.length;i++){
         if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
@@ -65,7 +66,6 @@ $(function () {
         var incrementObj={};
         incrementObj.order_quantity=$(this).siblings('.minimum_order_quantity').val();
         incrementObj.increase_quantity=$(this).siblings('.increase_quantity').val();
-        console.log(incrementObj);
         //单个商品数量自加
         goodsNumPlus($(this),incrementObj);
         //计算商品列表总价
