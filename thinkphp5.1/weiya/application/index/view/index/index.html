@@ -37,7 +37,8 @@
 		</div>
 		<div id="blog-post-demo">
 			<blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title">
-				<button-counter></button-counter>
+				<blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title">
+				</blog-post>
 			</blog-post>
 		</div>
 		<div class="content-padding">
