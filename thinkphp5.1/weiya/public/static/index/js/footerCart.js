@@ -32,13 +32,13 @@ function addCart(postData,container) {
             else{
                 dialog.success(data.info);
                 var num = 0;
-
                 $.each(lis,function(index,val){
                     var buyType=$(this).data('buy_type');
                     if(buyType==1){
                         num += parseInt($(this).find('.gshopping_count').val());
                     }
                 });
+                cosole.log(1111);
                 $('footer').find('.cart_num').addClass('cur');
                 $('footer').find('.add_num').text('+'+num).addClass('current');
                 setTimeout(function(){
