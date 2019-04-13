@@ -32,9 +32,9 @@ function addCart(postData) {
                 dialog.error(data.info);
             }
             else if(data.code==1 && data.data=='no_login'){
-                loginDialog();
                 loginBackFunction = addCart;
                 loginBackFunctionParameter = postData;
+                loginDialog();
                 return false;
             }
             else{
@@ -64,7 +64,6 @@ $(function () {
         var incrementObj={};
         incrementObj.order_quantity=$(this).siblings('.minimum_order_quantity').val();
         incrementObj.increase_quantity=$(this).siblings('.increase_quantity').val();
-        console.log(incrementObj);
         //单个商品数量自加
         goodsNumPlus($(this),incrementObj);
         //计算商品列表总价
