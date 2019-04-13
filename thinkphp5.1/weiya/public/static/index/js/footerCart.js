@@ -1,13 +1,10 @@
 function addCart(postData) {
     console.log(postData);
     var url = module + 'Cart/addCart';
-    var lis = postData.lis;
     postData.obj.addClass("nodisabled");//防止重复提交
-    var data2 = {};
-    data2.goodsList = postData.goodsList;
     $.ajax({
         url: url,
-        data: data2,
+        data: postData.goodsList,
         type: 'post',
         beforeSend: function(){
             $('.loading').show();
@@ -32,7 +29,7 @@ function addCart(postData) {
                 dialog.success(data.info);
                 var num = 0;
 
-                $.each(lis,function(index,val){
+                $.each(postData.lis,function(index,val){
                     var buyType=$(this).data('buy_type');
                     if(buyType==1){
                         num += parseInt($(this).find('.gshopping_count').val());
