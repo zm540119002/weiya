@@ -45,10 +45,11 @@
 //     });
 // }
 function addCartCallBack(){
+
     $('.add_cart,.add_purchase_cart').click();
 };
 function addCart2CallBack(){
-    console.log(1232);
+
     $('.goodsInfoLayer .add_cart_layer').click();
 };
 $(function () {
@@ -154,6 +155,7 @@ $(function () {
 
     //加入购物车
     $('body').on('click','.add_cart,.add_purchase_cart',function(){
+        console.log(1232);
         var _this = $(this);
         var lis = $('ul.goods_list').find('li[data-buy_type="1"]');
         var postData = assemblyData(lis);
