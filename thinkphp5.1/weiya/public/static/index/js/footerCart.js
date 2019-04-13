@@ -1,10 +1,7 @@
 
 function addCart(postData) {
-    console.log(123);
-    console.log(postData);
     var url = module + 'Cart/addCart';
      var _this=postData._this;
-     console.log(_this);
      var lis=postData.lis;
     _this.addClass("nodisabled");//防止重复提交
     var data2 = {};
@@ -27,9 +24,8 @@ function addCart(postData) {
                 dialog.error(data.info);
             }
             else if(data.code==1 && data.data=='no_login'){
-                loginBackFunction = addCart;
                 loginBackFunctionParameter.postData = postData;
-                console.log(loginBackFunctionParameter);
+                loginBackFunction = addCart;
                 loginDialog();
                 return false;
             }
