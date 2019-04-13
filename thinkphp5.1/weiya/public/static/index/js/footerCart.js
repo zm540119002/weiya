@@ -45,11 +45,10 @@
 //     });
 // }
 function addCartCallBack(){
-
     $('.add_cart,.add_purchase_cart').click();
 };
 function addCart2CallBack(){
-
+    console.log($('.goodsInfoLayer .add_cart_layer'));
     $('.goodsInfoLayer .add_cart_layer').click();
 };
 $(function () {
