@@ -1,6 +1,6 @@
 function addCart(param) {
     var url = module + 'Cart/addCart';
-    param.obj.addClass("nodisabled");//防止重复提交
+    $(param.obj).addClass("nodisabled");//防止重复提交
     $.ajax({
         url: url,
         data: param.goodsList,
@@ -14,7 +14,7 @@ function addCart(param) {
         },
         success: function(data){
             $('.loading').hide();
-            param.obj.removeClass("nodisabled");//防止重复提交
+            $(param.obj).removeClass("nodisabled");//防止重复提交
             if(data.status==0){
                 dialog.error(data.info);
             }
