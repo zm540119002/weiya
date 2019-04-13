@@ -1,5 +1,6 @@
 
 function addCart(postData) {
+    alert(1);
     var goodsList = postData.goodsList;
     for(var i=0;i<goodsList.length;i++){
         if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
