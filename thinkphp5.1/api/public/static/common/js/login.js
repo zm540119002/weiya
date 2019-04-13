@@ -1,6 +1,5 @@
 //登录-弹窗触发
 function loginDialog(){
-    console.log(loginBackFunctionParameter);
     console.log(loginBackFunction);
     var content=$('.userInfoWrapper').html();
     window.scrollTo(0,0);
@@ -55,12 +54,9 @@ function logoutDialog(){
 }
 /**异步登录回调函数
 */
-var loginBackFunctionParameter = {};
-var loginBackFunction = function(){
-    console.log(loginBackFunctionParameter);
-    return ;
-    loginBackFunctionParameter.jump_url ?
-        location.href = loginBackFunctionParameter.jump_url :
+var loginBackFunction = function(data){
+    data.jump_url ?
+        location.href = data.jump_url :
         location.href = action;
 };
 $(function(){
@@ -102,8 +98,9 @@ $(function(){
                     return false;
                 }else if(data.status==1){
                     $('.layui-m-layer').remove();
-                    loginBackFunctionParameter.jump_url = data.info;
-                    loginBackFunction();
+                    var data = {};
+                    data.jump_url = data.info;
+                    loginBackFunction(data);
                 }
             });
         }
@@ -138,8 +135,9 @@ $(function(){
                         location.href = data.url;
                     }
                 }else{
-                    loginBackFunctionParameter.jump_url = jump_url;
-                    loginBackFunction();
+                    var data = {};
+                    data.jump_url = jump_url;
+                    loginBackFunction(data);
                 }
             }
         });
