@@ -1,13 +1,6 @@
 
 //批量商品加入购物车
 function addCart(postData) {
-    // var goodsList = postData.goodsList;
-    // for(var i=0;i<goodsList.length;i++){
-    //     if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
-    //         dialog.error('请设置品牌');
-    //         return false;
-    //     }
-    // }
     var url = module + 'Cart/addCart';
      var _this=postData._this;
      var lis=postData.lis;
@@ -60,6 +53,7 @@ function addCart(postData) {
 
 //样品商品加入购物车
 function laryerAddCart(postData) {
+    alert(111);
     var url = module + 'Cart/addCart';
     $.ajax({
         url: url,
@@ -231,9 +225,6 @@ $(function () {
             lis = $('.goodsInfoLayer ul.goods_list').find('li');
         }
         var postData = assemblyData(lis);
-
-        postData._this = _this;
-        postData.lis = lis;
         if(!postData){
             return false;
         }
