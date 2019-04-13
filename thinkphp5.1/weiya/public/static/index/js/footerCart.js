@@ -30,7 +30,7 @@ function addCart(postData,container) {
                 return false;
             }
             else{
-                dialog.success(data.info);
+
                 var num = 0;
                 $.each(lis,function(index,val){
                     var buyType=$(this).data('buy_type');
@@ -38,9 +38,10 @@ function addCart(postData,container) {
                         num += parseInt($(this).find('.gshopping_count').val());
                     }
                 });
-                cosole.log(1111);
+
                 $('footer').find('.cart_num').addClass('cur');
                 $('footer').find('.add_num').text('+'+num).addClass('current');
+                dialog.success(data.info);
                 setTimeout(function(){
                     $('.add_num').removeClass('current');
                 },2000)
