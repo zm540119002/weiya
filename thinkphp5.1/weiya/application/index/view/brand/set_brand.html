@@ -145,9 +145,8 @@
                         dialog.error(data.info);
                     }else if(data.code==1){
                         if(data.data == 'no_login'){
-                            var param = {};
-                            param.id =id;
-                            loginBackFunction = brandLayer(param);
+                            loginBackFunctionParam.id = id;
+                            loginBackFunction = brandLayer;
                             loginDialog();
                         }
                     }else if(data.status==1){

@@ -1,7 +1,5 @@
 //登录-弹窗触发
 function loginDialog(){
-    console.log(loginBackFunctionParam);
-    console.log(loginBackFunction);
     var content=$('.userInfoWrapper').html();
     window.scrollTo(0,0);
     layer.open({
@@ -100,9 +98,8 @@ $(function(){
                     return false;
                 }else if(data.status==1){
                     $('.layui-m-layer').remove();
-                    var param = {};
-                    param.jump_url = data.info;
-                    loginBackFunction(param);
+                    loginBackFunctionParam.jump_url = data.info;
+                    loginBackFunction(data);
                 }
             });
         }
