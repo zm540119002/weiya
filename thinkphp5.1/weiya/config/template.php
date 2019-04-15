@@ -38,14 +38,6 @@ return [
         'api_common_js' => 'https://api.worldview.com.cn/static/common/js',
         'api_common_css' => 'https://api.worldview.com.cn/static/common/css',
         'api_common_img' => 'https://api.worldview.com.cn/static/common/img',
-        //common_index  资源路径
-        'common_index_js' => Request::domain() .'/static/common_index/js',
-        'common_index_css' => Request::domain() .'/static/common_index/css',
-        'common_index_img' => Request::domain() .'/static/common_index/img',
-        //common_admin  资源路径
-        'common_admin_js' => Request::domain() .'/static/common_admin/js',
-        'common_admin_css' => Request::domain() .'/static/common_admin/css',
-        'common_admin_img' => Request::domain() .'/static/common_admin/img',
         //index     资源路径
         'index_js' => Request::domain() .'/static/index/js',
         'index_css' => Request::domain() .'/static/index/css',
