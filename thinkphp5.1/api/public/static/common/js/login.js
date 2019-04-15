@@ -98,7 +98,7 @@ $(function(){
                     dialog.error(data.info);
                     return false;
                 }else if(data.status==1){
-                    $('.layui-m-layer').remove();
+                    $('.loginLayer').parents('.layui-m-layer').remove();
                     loginBackFunctionParam.jump_url = data.info;
                     loginBackFunction();
                 }

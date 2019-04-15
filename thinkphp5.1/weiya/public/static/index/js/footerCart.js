@@ -1,54 +1,9 @@
-// function addCart(postData) {
-//     var url = module + 'Cart/addCart';
-//     postData.obj.addClass("nodisabled");//防止重复提交
-//     var data = {
-//         'goodsList' : postData.goodsList
-//     };
-//     $.ajax({
-//         url: url,
-//         data: data,
-//         type: 'post',
-//         beforeSend: function(){
-//             $('.loading').show();
-//         },
-//         error:function(){
-//             $('.loading').hide();
-//             dialog.error('AJAX错误');
-//         },
-//         success: function(data){
-//             $('.loading').hide();
-//             postData.obj.removeClass("nodisabled");//防止重复提交
-//             if(data.status==0){
-//                 dialog.error(data.info);
-//             }
-//             else if(data.code==1 && data.data=='no_login'){
-//                 loginBackFunction = addCartCallBack;
-//                 loginDialog();
-//                 return false;
-//             }
-//             else{
-//                 dialog.success(data.info);
-//                 var num = 0;
-//                 $.each(postData.lis,function(index,val){
-//                     var buyType=$(this).data('buy_type');
-//                     if(buyType==1){
-//                         num += parseInt($(this).find('.gshopping_count').val());
-//                     }
-//                 });
-//                 $('footer').find('.cart_num').addClass('cur');
-//                 $('footer').find('.add_num').text('+'+num).addClass('current');
-//                 setTimeout(function(){
-//                     $('.add_num').removeClass('current');
-//                 },2000)
-//             }
-//         }
-//     });
-// }
+//常规购物车按钮 登录后回调函数
 function addCartCallBack(){
     $('.add_cart,.add_purchase_cart').click();
 };
-function addCart2CallBack(){
-    console.log(1232);
+//弹框购物车按钮 登录后回调函数
+function addCartLayerCallBack(){
     $('.goodsInfoLayer .add_cart_layer').click();
 };
 $(function () {
@@ -59,7 +14,6 @@ $(function () {
         var incrementObj={};
         incrementObj.order_quantity=$(this).siblings('.minimum_order_quantity').val();
         incrementObj.increase_quantity=$(this).siblings('.increase_quantity').val();
-        console.log(incrementObj);
         //单个商品数量自加
         goodsNumPlus($(this),incrementObj);
         //计算商品列表总价
@@ -160,13 +114,13 @@ $(function () {
         if(!postData){
             return false;
         }
-        // var goodsList = postData.goodsList;
-        // for(var i=0;i<goodsList.length;i++){
-        //     if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
-        //         dialog.error('请设置品牌');
-        //         return false;
-        //     }
-        // }
+        var goodsList = postData.goodsList;
+        for(var i=0;i<goodsList.length;i++){
+            if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
+                dialog.error('请设置品牌');
+                return false;
+            }
+        }
         var url = module + 'Cart/addCart';
         _this.addClass("nodisabled");//防止重复提交
 
@@ -240,7 +194,7 @@ $(function () {
                     dialog.error(data.info);
                 }
                 else if(data.code==1 && data.data=='no_login'){
-                    loginBackFunction = addCart2CallBack;
+                    loginBackFunction = addCartLayerCallBack;
 					loginDialog();
                     return false
 				}else{
@@ -503,7 +457,6 @@ function assemblyData(lis) {
     var postData = {};
     postData.goodsList = [];
     var isInt = true;
-    //console.log(lis);
     $.each(lis,function(){
         var _this = $(this);
         var num = _this.find('.gshopping_count').val();
@@ -516,7 +469,6 @@ function assemblyData(lis) {
             return false;
         }
         var goodsId = _this.data('id');
-        //alert(goodsId);
         if(parseInt(num) && goodsId){
             var tmp = {};
             tmp.foreign_id = goodsId;
@@ -540,9 +492,7 @@ function assemblyData(lis) {
 
 //计算商品列表总价
 function calculateTotalPrice(obj){
-   
     var buyType=obj.data('type');
-    
     if(!$('footer').find('price').length){
         return false;
     }
@@ -565,7 +515,6 @@ function calculateTotalPrice(obj){
         $.each(_thisLis,function(index,val){
             var _thisLi = $(this);
             var num = _thisLi.find('.gshopping_count').val();
-            //console.log(111);
             if(!isPosIntNumberOrZero(num)){
                 isInt = false;
                 return false;
