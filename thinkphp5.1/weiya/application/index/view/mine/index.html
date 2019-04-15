@@ -238,7 +238,8 @@
             reader.onload = function(e){
                 var imgUrl=e.target.result;
                 $(obj).addClass('active');
-                var postData = {fileBase64: e.target.result};
+                //var postData = {fileBase64: e.target.result};
+                var postData = {fileBase64: 1111};
                 // postData.imgWidth = 145;
                 // postData.imgHeight = 100;
                 $(obj).find('img').attr('src',imgUrl);
