@@ -248,6 +248,8 @@
                 }
                 //提交
                 $.post(module+"Mine/editAvatar",postData,function(data){
+                    console.log(2222);
+                    return false;
                     if(data.status == 1){
                         uploadsSingleImgFlag = true;
                         $(obj).find('.img').val(data.avatar);
@@ -284,8 +286,6 @@
                     if(old_name !== user_name){
                         //提交
                         $.post(module+"Mine/editName",postData,function(data){
-                            console.log(2222);
-                            return false;
                             if(data.status == 1){
                                 dialog.success(data.info);
                                 $('.user_info_list').find('.user_name').text(data.name);
