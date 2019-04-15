@@ -232,8 +232,7 @@
                 dialog.error('图片大小不能超过1M');
                 return false;
             }
-            console.log(2222);
-            return false;
+
             var reader = new FileReader();
             reader.readAsDataURL(img);
             reader.onload = function(e){
@@ -248,7 +247,8 @@
                     $(obj).find('.img').val(imgUrl);
                     return false;
                 }
-
+                console.log(2222);
+                return false;
                 //提交
                 $.post(module+"Mine/editAvatar",postData,function(data){
 
