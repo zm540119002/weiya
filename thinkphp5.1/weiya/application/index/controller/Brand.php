@@ -45,8 +45,8 @@ class Brand extends \common\controller\UserBase{
                     ['id','=',$id],
                     ['user_id','=',$userId],
                 ];
-                $result = $model -> edit($data,$condition);
-                if( !$result['status'] ){
+                $result = $model -> isUpdate(false)->save($data,$condition);
+                if( false === $result ){
                     $model ->rollback();
                     return errorMsg('失败');
                 }
@@ -88,11 +88,11 @@ class Brand extends \common\controller\UserBase{
 
                 $data['user_id'] = $userId;
                 $data['create_time'] = time();
-                $result = $model->edit($data);
-                if(!$result['status']){
+                $result = $model->isUpdate(false)->save($data);
+                if(!$result){
                     return errorMsg('失败');
                 }
-                $id = $result['id'];
+                $id = $model->getAttr('id');
                 $data['id'] = $id;
                 $this -> assign('id',$id);
                 $this->assign('info',$data);
