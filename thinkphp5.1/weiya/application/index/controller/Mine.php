@@ -20,6 +20,7 @@ class Mine extends \common\controller\Base{
         $oldAvatar = $user['avatar'];
         $fileBase64 = input('post.fileBase64');
         $upload = config('upload_dir.user_avatar');
+        return $fileBase64.$upload;
         $newAvatar = $this ->_uploadSingleFileToTemp($fileBase64,$upload);
         if($newAvatar['status'] == 0 && !$newAvatar){
             return errorMsg('失败');
