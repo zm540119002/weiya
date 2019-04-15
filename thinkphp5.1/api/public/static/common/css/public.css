@@ -4471,6 +4471,9 @@ select[name="nodeIds"]{
     text-align:center;
     background-size:100% 100%;
 }
+.mod_selection_nav li.current{
+    color:#EC77A3;
+}
 .mod_selection_nav li.active{
     color:#ff0000;
 }
