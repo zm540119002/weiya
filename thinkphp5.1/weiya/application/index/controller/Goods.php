@@ -49,6 +49,7 @@ class Goods extends \common\controller\Base{
         $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         print_r($unlockingFooterCart);
+        exit;
         return $this->fetch();
     }
 
