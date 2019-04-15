@@ -1,0 +1,186 @@
+.msy-bg{
+    height:1000px;
+    background:url(../../common/img/login-bg.png) no-repeat;
+    overflow: hidden;
+}
+.userInfoWrapper{
+    width:400px;
+    margin:300px auto 0;
+}
+.msy-register{padding:0 0.3rem;}
+.msy-logo{width:35%;display: block;margin:0.35rem auto 0;}
+.msy-register li{border-bottom:1px solid #d5d5d5;}
+.msy-register h2{text-align:center;padding:0.2rem 0 0.5rem;}
+.msy_yzm{padding:0.28rem 0 0;}
+.area-code{display:block;padding:0 0 0.2rem 0;}
+.reg-item{width:100%;padding:0.28rem 0;display:block;}
+.verify{text-indent:10px;box-sizing:border-box;width:50%;padding:0.28rem 0;border:1px solid #d5d5d5;}
+.verify-btn{width:45%;padding:0.28rem 0;border-radius: 0.1rem;background-color:#F39800;color:#fff;}
+.short-message{color:#d5d5d5;padding:0.2rem 0.2rem 0.2rem 0;}
+.set-password{display:inline-block;padding:0.2rem 0;}
+.regis-password,.reset-password{display:inline-block;padding:0.2rem 0;text-indent:2%;width:70%;background:none;}
+.msy-register .no-border{border-bottom:none;}
+.agm-clause{padding:0.4rem 0;}
+.agm{width:0.32rem;height:0.32rem;margin-right:0.1rem;vertical-align: middle;}
+/*.agm-item span{color:#0066cc;}*/
+.register-btn{width:100%;margin:0.5rem auto 0.5rem;display:block;text-align:center;border-radius:0.15rem;
+    background: #F39800;border:none;padding:0.28rem 0;color:#fff;}
+.ftipc{padding:0.15rem;}
+
+.loginLayer .layui-m-layercont,
+.registerLayer .layui-m-layercont,
+.forgetPasswdLayer .layui-m-layercont{padding:0 0.15rem;text-align:left;}
+.loginLayer .layui-m-layerbtn,
+.registerLayer .layui-m-layerbtn
+.forgetPasswdLayer .layui-m-layerbtn{border-top:none;}
+.login_wrap.hide{display:none;}
+.loginNav {
+    height:32px;
+    line-height:32px;
+    border-bottom:1px solid #d9d9d9;
+}
+.loginNav li{width:50%;display:inline-block;float: left;text-align: center;}
+.loginNav li.current{border-bottom:2px solid #f23030;}
+.login_item,
+.register_item,
+.forgetPasswd_item{
+    position: relative;
+    width: 100%;
+    height: 32px;
+    line-height:32px;
+    overflow: hidden;
+    /*padding: 0 .15rem;*/
+    background-color: #fff;
+    border-bottom: 1px solid #d7d7d7;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.login_item>span,
+.register_item>span,
+.forgetPasswd_item>span{
+    /*position: absolute;*/
+    width: 34px;
+    display: inline-block;
+    font-family: PingFang-SC-Regular;
+    text-align: left;
+    float:left;
+}
+.forgetPasswd_item>span.txt3,.login_item>span.txt3{width:56px;}
+.register_item>span.new_password,.forgetPasswd_item>span.new_password{width:1.6rem;}
+.register_item .n_pass,.forgetPasswd_item .n_pass{padding-left:.8rem;}
+.register_item .cofirm_password,.forgetPasswd_item .cofirm_password{padding-left:1.2rem;}
+.username {
+    width: 364px;
+    /*padding: 6px 0;*/
+    height:30px;
+    float:left;
+}
+.forgetPasswd_item .input_txt3,.login_item .input_txt3{
+    /*padding-left:1rem;*/
+    width:338px;
+}
+.mesg_code {
+    position: absolute;
+    width: 50px;
+    height: 32px;
+    line-height: 32px;
+    right: 0;
+    top: 0;
+    background-color: #fff;
+    font-size: .24rem;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 0 0 1px #f23030;
+    box-shadow: 0 0 0 1px #f23030;
+}
+.login_item .mesg_code,
+.register_item .mesg_code,
+.forgetPasswd_item .mesg_code{
+    text-align: center;
+    width: 94px;
+    border-left: 1px solid #d7d7d7;
+    padding: 0;
+    color:#333;
+    /*height: .23rem;
+    line-height: .23rem;*/
+    top: .15rem;
+    outline: 0;
+    background-color: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+/*.login_item:last-child{border-bottom:none;}*/
+.loginBtn ,.registerBtn,.forgetPasswordBtn{
+    margin:0.55rem 0 0.25rem;
+    height: 45px;
+    line-height: 45px;
+    background-color: #36BCE4;
+    border-radius: 2px;
+    border: 0;
+    display: block;
+    text-align: center;
+    color:#fff;
+    padding:0.12rem 0;
+}
+.error_tipc{display:none;color:#ff0000;padding:0.12rem 0;}
+.friend_tipc{
+    height:0.45rem;
+    padding:0.12rem 0.15rem;
+    display: -webkit-flex;
+    justify-content: space-between;
+    position:relative;
+}
+.forgetPasswd_back,.register_back{display: block;position:absolute;right:0;}
+.register_dialog{}
+.userInfoWrapper .tc{
+    text-align: center;
+    margin:0.45rem 0;
+}
+.platformNoteText{padding:0 0 0 0.15rem;}
+.platform_title{
+    text-align: center;
+    font-size:0.28rem;
+    border-bottom:1px solid #d9d9d9;
+    padding:0.15rem 0;
+}
+.agreem_marquee a{color:#0066cc;text-decoration: underline;}
+.register_explain{padding-left:0.15rem;}
+/*后台登录*/
+.weiya_logo{
+    margin:35px 0 -65px 226px;
+}
+.weiya_logo img{
+    max-width:200px;
+}
+.loginWraper{
+    width:100%;
+    height:780px;
+    background:url(../img/weiya_bg.png) no-repeat center 0;
+}
+.loginBox{
+    width: 420px;
+    height: 660px;
+    padding:40px 0 0;
+    margin: 94px 0 0 1475px;
+    background:rgb(255,255,255,0.5);
+}
+.welcome{
+    text-align: center;
+    color:#36BCE4;
+}
+.row-item{
+    width:408px;
+    display:flex;
+    display:-webkit-flex;
+    margin:0 0 0 114px;
+    justify-content: space-between;
+}
+.bottom_footer{
+    margin:20px 0 0;
+    text-align: center;
+}
+.bottom_footer a{
+    font-size:16px;
+}
+
