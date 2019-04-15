@@ -1,35 +1,13 @@
-<!DOCTYPE HTML>
-<html><head>
-    {block name="css-customize"}{/block}
-    <link type="text/css" rel="stylesheet" href="index_admin_css/fenlei.css" />
-    <link type="text/css" rel="stylesheet" href="index_admin_css/skin.css" />
-    <!--前置自定义js-->
-    {block name="pre-script"}{/block}
-    <script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
-</head><body>
-{block name="content"}{/block}
-{block name="footer"}
-<footer class="f24">
-    <a href="http://www.miitbeian.gov.cn">
-        <span class="icp_icon">Copyright@广东维雅生物科技有限公司</span>
-        <span class="icp_icon">粤ICP备18130945号-1</span>
-    </a>
-</footer>
+{extend name="../../api/public/template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="api_common_css/fenlei_admin.css">
+<link rel="stylesheet" href="api_common_css/skin_admin.css">
+<link rel="stylesheet" href="api_common_css/user_admin.css">
 {/block}
-<script type="text/javascript" src="public_js/public.js"></script>
-<script type="text/javascript" src="public_js/common.js"></script>
-<script type="text/javascript" src="hui_lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="common_admin_js/dialog.js"></script>
-<script type="text/javascript" src="common_admin_js/paging.js"></script>
-<!--自定义js-->
-{block name="script"}{/block}
-<script type="text/javascript">
-    var domain = '{:request()->domain()}'+'/'+'index.php/';
-    var module = domain + '{:request()->module()}/';
-    var controller = module + '{:request()->controller()}/';
-    var action = controller + '{:request()->action()}';
-    var uploads = '{:request()->domain()}'+'/uploads/';
-    $(function(){
-    });
-</script>
-</body></html>
+<!-- 公共模块-->
+{block name="common"}{/block}
+<!-- 后置自定义js -->
+{block name="suffix-script"}
+<script type="text/javascript" src="api_common_js/dialog_admin.js"></script>
+<script type="text/javascript" src="api_common_js/paging_admin.js"></script>
+{/block}
