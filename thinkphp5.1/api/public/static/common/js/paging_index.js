@@ -78,6 +78,37 @@ var disableBtn=function disableBtn(){
     listUl.find('li:last').find('.down-btn').prop('disabled','disabled').addClass('disabled');
     listUl.find('li:last').find('.down-btn').addClass('down-disabled-icons');
 };
-
+//获取列表
+function getList(config) {
+    $.ajax({
+        url: config.url,
+        data: config.postData?config.postData:{},
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(config.callBack){
+                config.callBack(config,data);
+            }else{
+                getListDefaultCallBack(config,data)
+            }
+        }
+    });
+}
+//获取列表-默认回调函数
+function getListDefaultCallBack(config,data) {
+    if(data.status==0){
+        dialog.error(data.info);
+    }else{
+        var container = config.container?config.container:$('ul.list');
+        container.empty().append(data);
+    }
+}
 
 

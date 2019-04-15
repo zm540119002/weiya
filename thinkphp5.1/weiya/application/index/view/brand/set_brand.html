@@ -57,7 +57,7 @@
     </ul>
     <a href="javascript:void(0);" class="add_brand">增加商标</a>
 </section>
-<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript" src="api_common_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
     //设置品牌弹窗
     function brandLayer(obj) {
@@ -145,9 +145,9 @@
                         dialog.error(data.info);
                     }else if(data.code==1){
                         if(data.data == 'no_login'){
-                            loginDialog();
-                            loginBackFunctionParameter.id =id;
+                            loginBackFunctionParam.id = id;
                             loginBackFunction = brandLayer;
+                            loginDialog();
                         }
                     }else if(data.status==1){
 

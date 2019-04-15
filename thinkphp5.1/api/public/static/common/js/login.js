@@ -53,10 +53,11 @@ function logoutDialog(){
 }
 /**异步登录回调函数
 */
-var loginBackFunctionParameter = {};
+var loginBackFunctionParam = {};
 var loginBackFunction = function(){
-    loginBackFunctionParameter.jump_url ?
-        location.href = loginBackFunctionParameter.jump_url :
+    console.log(loginBackFunctionParam);
+    loginBackFunctionParam.jump_url ?
+        location.href = loginBackFunctionParam.jump_url :
         location.href = action;
 };
 $(function(){
@@ -97,8 +98,8 @@ $(function(){
                     dialog.error(data.info);
                     return false;
                 }else if(data.status==1){
-                    $('.layui-m-layer').remove();
-                    loginBackFunctionParameter.jump_url = data.info;
+                    $('.loginLayer').parents('.layui-m-layer').remove();
+                    loginBackFunctionParam.jump_url = data.info;
                     loginBackFunction();
                 }
             });
@@ -134,7 +135,7 @@ $(function(){
                         location.href = data.url;
                     }
                 }else{
-                    loginBackFunctionParameter.jump_url = jump_url;
+                    loginBackFunctionParam.jump_url = jump_url;
                     loginBackFunction();
                 }
             }
