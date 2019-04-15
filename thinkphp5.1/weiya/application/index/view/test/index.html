@@ -1,0 +1,41 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="content_main">
+		<div id="components-demo">
+			<button-counter></button-counter>
+			<button-counter></button-counter>
+			<button-counter></button-counter>
+			<button-counter></button-counter>
+		</div>
+		<div id="blog-post-demo">
+			<blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title">
+				<blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title">
+				</blog-post>
+			</blog-post>
+		</div>
+	</section>
+</article>
+{/block}
+{block name="common"}{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/vue-component/cart.js"></script>
+<script type="text/javascript">
+	$(function(){
+		new Vue({ el: '#components-demo' });
+		new Vue({
+			el: '#blog-post-demo',
+			data: {
+				posts: [
+					{ id: 1, title: 'My journey with Vue' },
+					{ id: 2, title: 'Blogging with Vue' },
+					{ id: 3, title: 'Why Vue is so fun' }
+				]
+			}
+		});
+	});
+</script>
+{/block}
