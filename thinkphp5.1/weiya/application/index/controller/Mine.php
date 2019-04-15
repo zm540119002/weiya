@@ -10,6 +10,7 @@ class Mine extends \common\controller\Base{
 
     //修改头像
     public function editAvatar(){
+        print_r(input());exit;
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
