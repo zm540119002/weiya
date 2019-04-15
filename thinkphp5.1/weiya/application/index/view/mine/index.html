@@ -232,6 +232,7 @@
                 dialog.error('图片大小不能超过1M');
                 return false;
             }
+
             var reader = new FileReader();
             reader.readAsDataURL(img);
             reader.onload = function(e){
