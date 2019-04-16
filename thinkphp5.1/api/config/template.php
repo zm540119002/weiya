@@ -34,7 +34,7 @@ return [
         'api_common_js' => 'https://api.worldview.com.cn/static/common/js',
         'api_common_css' => 'https://api.worldview.com.cn/static/common/css',
         'api_common_img' => 'https://api.worldview.com.cn/static/common/img',
-        
+
         //上传路径
         'public_uploads' => Request::domain() .'/uploads',
     ],
