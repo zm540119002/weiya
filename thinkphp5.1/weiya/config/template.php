@@ -42,11 +42,6 @@ return [
         'index_js' => Request::domain() .'/static/index/js',
         'index_css' => Request::domain() .'/static/index/css',
         'index_img' => Request::domain() .'/static/index/img',
-
-        //index_admin   资源路径
-        'index_admin_js' => 'https://api.worldview.com.cn/static/index_admin/js',
-        'index_admin_css' => 'https://api.worldview.com.cn/static/index_admin/css',
-        'index_admin_img' => 'https://api.worldview.com.cn/static/index_admin/img',
         //h-ui  资源路径
         'hui_js' => 'https://api.worldview.com.cn/static/h-ui/js',
         'hui_css' => 'https://api.worldview.com.cn/static/h-ui/css',
