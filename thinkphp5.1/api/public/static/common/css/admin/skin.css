@@ -232,7 +232,7 @@ h6 {
 	text-align: left;
 }
 .fixed-bar {
-	background: #FFF url(../img/fixed_bg.png) repeat-x scroll center bottom;
+	background: #FFF url(../../img/fixed_bg.png) repeat-x scroll center bottom;
 	width: 100%;
 	padding: 4px 0px 0px 0;
 	/*position: fixed;*/
@@ -891,7 +891,7 @@ h6 {
 	text-align: left;
 }
 .fixed-bar {
-	background: #FFF url(../img/fixed_bg.png) repeat-x scroll center bottom;
+	background: #FFF url(../../img/fixed_bg.png) repeat-x scroll center bottom;
 	width: 100%;
 	padding: 4px 0px 0px 0;
 	/*position: fixed;*/
