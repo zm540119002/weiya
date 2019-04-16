@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="hui_lib/Hui-iconfont/1.0.8/iconfont.css" />
     <link rel="stylesheet" type="text/css" href="hui_admin_skin/default/skin.css" id="skin" />
     <link rel="stylesheet" type="text/css" href="hui_admin_css/style.css" />
-    <link type="text/css" rel="stylesheet" href="index_admin_css/user.css" />
+    <link type="text/css" rel="stylesheet" href="api_common_css/user.css" />
     <!--[if IE 6]>
     <script type="text/javascript" src="hui_lib/DD_belatedPNG_0.0.8a-min.js" ></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -25,7 +25,7 @@
 <input type="hidden" id="TenantId" name="TenantId" value="" />
 <div class="header"></div>
 <div class="weiya_logo">
-    <img src="index_admin_img/weiya_logo.png" alt="">
+    <img src="api_common_img/weiya_logo.png" alt="">
 </div>
 <div class="loginWraper">
     <div class="loginBox">
@@ -33,9 +33,9 @@
         {include file="../../api/public/template/login_dialog.html" /}
     </div>
 </div>
-<footer class="f24 bottom_footer">
+<footer class="f24">
     <a href="http://www.miitbeian.gov.cn">
-        <span class="icp_icon">Copyright@广东美尚网络科技有限公司</span>
+        <span class="icp_icon">Copyright@广东维雅生物科技有限公司</span>
         <span class="icp_icon">粤ICP备18130945号-1</span>
     </a>
 </footer>
@@ -45,10 +45,10 @@
 <script type="text/javascript" src="hui_admin_js/H-ui.admin.js"></script>
 <script type="text/javascript" src="hui_lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
 <!--自定义js-->
-<script type="text/javascript" src="public_js/login.js"></script>
-<script type="text/javascript" src="public_js/public.js"></script>
-<script type="text/javascript" src="public_js/common.js"></script>
-<script type="text/javascript" src="common_admin_js/dialog.js"></script>
+<script type="text/javascript" src="api_common_js/login.js"></script>
+<script type="text/javascript" src="api_common_js/public.js"></script>
+<script type="text/javascript" src="api_common_js/common.js"></script>
+<script type="text/javascript" src="api_common_js/dialog_admin.js"></script>
 <script type="text/javascript">
     var domain = '{:request()->domain()}/';
     var uploads = domain + 'uploads/';
