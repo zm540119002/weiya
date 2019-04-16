@@ -42,20 +42,35 @@ return [
         'index_js' => Request::domain() .'/static/index/js',
         'index_css' => Request::domain() .'/static/index/css',
         'index_img' => Request::domain() .'/static/index/img',
+//        //index_admin   资源路径
+//        'index_admin_js' => Request::domain() .'/static/index_admin/js',
+//        'index_admin_css' => Request::domain() .'/static/index_admin/css',
+//        'index_admin_img' => Request::domain() .'/static/index_admin/img',
+//        //h-ui  资源路径
+//        'hui_js' => Request::domain() .'/static/h-ui/js',
+//        'hui_css' => Request::domain() .'/static/h-ui/css',
+//        'hui_img' => Request::domain() .'/static/h-ui/images',
+//        'hui_lib' => Request::domain() .'/static/h-ui.lib',
+//        //h-ui.admin    资源路径
+//        'hui_admin_js' => Request::domain() .'/static/h-ui.admin/js',
+//        'hui_admin_css' => Request::domain() .'/static/h-ui.admin/css',
+//        'hui_admin_img' => Request::domain() .'/static/h-ui.admin/images',
+//        'hui_admin_skin' => Request::domain() .'/static/h-ui.admin/skin',
+
         //index_admin   资源路径
-        'index_admin_js' => Request::domain() .'/static/index_admin/js',
-        'index_admin_css' => Request::domain() .'/static/index_admin/css',
-        'index_admin_img' => Request::domain() .'/static/index_admin/img',
+        'index_admin_js' => 'https://api.worldview.com.cn/static/index_admin/js',
+        'index_admin_css' => 'https://api.worldview.com.cn/static/index_admin/css',
+        'index_admin_img' => 'https://api.worldview.com.cn/static/index_admin/img',
         //h-ui  资源路径
-        'hui_js' => Request::domain() .'/static/h-ui/js',
-        'hui_css' => Request::domain() .'/static/h-ui/css',
-        'hui_img' => Request::domain() .'/static/h-ui/images',
-        'hui_lib' => Request::domain() .'/static/h-ui.lib',
+        'hui_js' => 'https://api.worldview.com.cn/static/h-ui/js',
+        'hui_css' => 'https://api.worldview.com.cn/static/h-ui/css',
+        'hui_img' => 'https://api.worldview.com.cn/static/h-ui/images',
+        'hui_lib' => 'https://api.worldview.com.cn/static/h-ui.lib',
         //h-ui.admin    资源路径
-        'hui_admin_js' => Request::domain() .'/static/h-ui.admin/js',
-        'hui_admin_css' => Request::domain() .'/static/h-ui.admin/css',
-        'hui_admin_img' => Request::domain() .'/static/h-ui.admin/images',
-        'hui_admin_skin' => Request::domain() .'/static/h-ui.admin/skin',
+        'hui_admin_js' =>'https://api.worldview.com.cn/static/h-ui.admin/js',
+        'hui_admin_css' => 'https://api.worldview.com.cn/static/h-ui.admin/css',
+        'hui_admin_img' => 'https://api.worldview.com.cn/static/h-ui.admin/images',
+        'hui_admin_skin' => 'https://api.worldview.com.cn/static/h-ui.admin/skin',
 
         //上传路径
         'public_uploads' => Request::domain() .'/uploads',
