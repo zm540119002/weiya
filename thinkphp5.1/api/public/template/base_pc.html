@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>{block name="title"}{$Think.config.custom.title}{/block}</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="stylesheet" href="api_common_css/base.css">
+	<link rel="stylesheet" href="api_common_css/public.css">
+	<link rel="stylesheet" href="api_common_css/admin/fenlei.css">
+	<link rel="stylesheet" href="api_common_css/admin/skin.css">
+	<link rel="stylesheet" href="api_common_css/admin/user.css">
+	{block name="css-customize"}{/block}
+	<script type="text/javascript" src="hui_lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="api_common_js/login.js"></script>
+	<script type="text/javascript">
+		var domain = window.location.protocol + '//' + document.domain + '/';
+		var uploads = domain + 'uploads/';
+		var module = domain + '{:request()->module()}/';
+		var controller = module + '{:request()->controller()}/';
+		var action = controller + '{:request()->action()}';
+	</script>
+	<!--前置自定义js-->
+	{block name="pre-script"}{/block}
+</head>
+<body>
+<!-- 内容模块 -->
+{block name="content"}{/block}
+<!-- 公共模块-->
+{block name="common"}{/block}
+{include file="../../api/public/template/login_dialog.html" /}
+<!-- 页脚模块-->
+{block name="footer"}
+<footer class="f24">
+	<a href="http://www.miitbeian.gov.cn">
+		<span class="icp_icon">Copyright@广东维雅生物科技有限公司</span>
+		<span class="icp_icon">粤ICP备18130945号-1</span>
+	</a>
+</footer>
+{/block}
+<!-- 自定义js -->
+{block name="script"}{/block}
+<!--js基本插件-->
+<script type="text/javascript" src="hui_lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="api_common_js/public.js"></script>
+<script type="text/javascript" src="api_common_js/common.js"></script>
+<script type="text/javascript" src="api_common_js/admin/dialog.js"></script>
+<script type="text/javascript" src="api_common_js/admin/paging.js"></script>
+<!-- 后置自定义js -->
+{block name="suffix-script"}{/block}
+</body></html>

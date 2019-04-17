@@ -316,15 +316,37 @@ function date(format, timestamp) {
  */
 $.fn.serializeObject = function() {
     var o = {};
-    var a = this.serializeArray();
-    $.each(a, function(index,val) {
+    var form = $(this)
+        .not('input[type=checkbox]')
+        .serializeArray();
+    $.each(form, function(index,val) {
         if (o[this.name]) {
             if (!o[this.name].push) {
-                o[this.name] = [ o[this.name] ];
+                o[this.name] = [o[this.name]];
             }
             o[this.name].push(this.value || '');
-        } else {
+        }else{
             o[this.name] = this.value || '';
+        }
+    });
+    //解决checkbox未选中时，没有序列化到对象中的代码
+    var checkboxes = $(this).find('input[type=checkbox]');
+    $.each(checkboxes, function () {
+        if (o[this.name]) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            if($(this).prop('checked')) {
+                o[this.name].push('1');
+            }else{
+                o[this.name].push('0');
+            }
+        }else{
+            if($(this).prop('checked')){
+                o[this.name] = '1';
+            }else{
+                o[this.name] = '0';
+            }
         }
     });
     return o;
@@ -440,5 +462,16 @@ function isWeiXin(){
         return true;
     }else{
         return false;
+    }
+}
+
+function sum(arr) {
+    var len = arr.length;
+    if(len == 0){
+        return 0;
+    } else if (len == 1){
+        return arr[0];
+    } else {
+        return arr[0] + sum(arr.slice(1));
     }
 }
