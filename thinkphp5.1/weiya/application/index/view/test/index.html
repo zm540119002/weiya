@@ -12,12 +12,13 @@
 			<blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title"></blog-post>
 		</div>
 	</section>
+	<div id="app"></div>
 </article>
 {/block}
 {block name="common"}{/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="api_common_js/vue-component/cart.js"></script>
+<script type="text/javascript" src="api_common_vue/index.js"></script>
 <script type="text/javascript">
 	$(function(){
 		new Vue({ el: '#components-demo' });
