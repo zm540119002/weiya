@@ -59,6 +59,7 @@ return [
         'hui_admin_img' => Request::domain() .'/static/h-ui.admin/images',
         'hui_admin_skin' => Request::domain() .'/static/h-ui.admin/skin',
 
+        
         //上传路径
         'public_uploads' => Request::domain() .'/uploads',
     ],
