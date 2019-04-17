@@ -19,6 +19,7 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_vue/cart.js"></script>
+<script src="api_common_vue/index.js" type="module"></script>
 <script type="text/javascript">
 	$(function(){
 		new Vue({ el: '#components-demo' });
@@ -32,6 +33,13 @@
 				]
 			}
 		});
+		graph.options = {
+			color:'blue',
+			thickness:'3px'
+		};
+		graph.draw();
+		console.log(cube(3)); // 27
+		console.log(foo);    // 4.555806215962888
 	});
 </script>
 {/block}
