@@ -110,8 +110,6 @@ class Uploader
 
 
         //创建目录失败
-/*        var_dump($dirname);
-        exit;*/
         if (!file_exists($dirname) && !mkdir($dirname, 0777, true)) {
             $this->stateInfo = $this->getStateInfo("ERROR_CREATE_DIR");
             return;
@@ -119,13 +117,6 @@ class Uploader
             $this->stateInfo = $this->getStateInfo("ERROR_DIR_NOT_WRITEABLE");
             return;
         }
-        //echo $this->filePath;
-
-        echo $file["tmp_name"];
-
-        //echo $this->filePath;
-
-        exit;
         //移动文件
         if (!(move_uploaded_file($file["tmp_name"], $this->filePath) && file_exists($this->filePath))) { //移动失败
             $this->stateInfo = $this->getStateInfo("ERROR_FILE_MOVE");
