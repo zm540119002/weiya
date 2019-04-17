@@ -10,7 +10,7 @@ Vue.component('blog-post', {
     props: ['title'],
     template: '<h3>{{ title }}</h3>'
 });
-console.log(123);
+<script type="module" src="./index.js"></script>
 import { cube, foo, graph } from 'index';
 graph.options = {
     color:'blue',
