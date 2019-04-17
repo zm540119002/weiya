@@ -10,5 +10,5 @@ var graph = {
     draw: function() {
         console.log('From graph draw function');
     }
-}
+};
 export { cube, foo, graph };

@@ -1,4 +1,3 @@
-import { cube, foo, graph } from 'index';
 graph.options = {
     color:'blue',
     thickness:'3px'
