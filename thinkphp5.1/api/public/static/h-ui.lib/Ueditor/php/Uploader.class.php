@@ -262,8 +262,7 @@ class Uploader
             $this->stateInfo = $this->getStateInfo("ERROR_DIR_NOT_WRITEABLE");
             return;
         }
-        var_dump(2222);
-        exit;
+ 
         //移动文件
         if (!(file_put_contents($this->filePath, $img) && file_exists($this->filePath))) { //移动失败
             $this->stateInfo = $this->getStateInfo("ERROR_WRITE_CONTENT");
@@ -350,8 +349,7 @@ class Uploader
         if (substr($fullname, 0, 1) != '/') {
             $fullname = '/' . $fullname;
         }
-        var_dump($rootPath . $fullname);
-        exit;
+
         return $rootPath . $fullname;
     }
 
