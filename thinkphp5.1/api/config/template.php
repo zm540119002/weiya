@@ -34,6 +34,7 @@ return [
         'api_common_js' => 'https://api.worldview.com.cn/static/common/js',
         'api_common_css' => 'https://api.worldview.com.cn/static/common/css',
         'api_common_img' => 'https://api.worldview.com.cn/static/common/img',
+        'api_common_uploads' => 'https://api.worldview.com.cn/uploads',
         //common  资源路径，此处不能命名成common_js，与下面的api_common_js冲突
         'public_js' => Request::domain() .'/static/common/js',
         'public_css' => Request::domain() .'/static/common/css',
