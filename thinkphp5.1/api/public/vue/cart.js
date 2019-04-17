@@ -8,5 +8,5 @@ Vue.component('button-counter', {
 });
 Vue.component('blog-post', {
     props: ['title'],
-    template: '<h3>{{ title }}</h3>'
+    template: '<h3>{{ title }}</h3><h1>{{ content }}</h1>'
 });
