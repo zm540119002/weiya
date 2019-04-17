@@ -9,7 +9,12 @@
 			<button-counter></button-counter>
 		</div>
 		<div id="blog-post-demo">
-			<blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title"></blog-post>
+			<blog-post
+					v-for="post in posts"
+					v-bind:key="post.id"
+					v-bind:title="post.title"
+					v-bind:content="post.content"
+			></blog-post>
 		</div>
 	</section>
 </article>
@@ -26,9 +31,9 @@
 			el: '#blog-post-demo',
 			data: {
 				posts: [
-					{ id: 1, title: 'My journey with Vue' },
-					{ id: 2, title: 'Blogging with Vue' },
-					{ id: 3, title: 'Why Vue is so fun' }
+					{ id: 1, title: 'My journey with Vue' ,content:'1111111111'},
+					{ id: 2, title: 'Blogging with Vue' ,content:'222222222'},
+					{ id: 3, title: 'Why Vue is so fun' ,content:'333333333'}
 				]
 			}
 		});
