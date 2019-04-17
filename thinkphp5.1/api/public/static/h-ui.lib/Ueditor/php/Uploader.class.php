@@ -262,15 +262,14 @@ class Uploader
             $this->stateInfo = $this->getStateInfo("ERROR_DIR_NOT_WRITEABLE");
             return;
         }
- 
+        echo $this->filePath;
+        echo 'hr';
+        echo $img;
+        exit;
         //移动文件
         if (!(file_put_contents($this->filePath, $img) && file_exists($this->filePath))) { //移动失败
             $this->stateInfo = $this->getStateInfo("ERROR_WRITE_CONTENT");
-            echo 1111;
-            exit;
         } else { //移动成功
-            echo 22222;
-            exit;
             $this->stateInfo = $this->stateMap[0];
         }
 
