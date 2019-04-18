@@ -82,7 +82,9 @@ function async_verify(data){
                 }
             }else{
                 loginBackFunctionParam.jump_url = jump_url;
-                loginBackFunction();
+                if(loginBackFunction && $.isFunction(loginBackFunction) ){
+                    loginBackFunction();
+                }
             }
         }
     });
@@ -127,7 +129,9 @@ $(function(){
                 }else if(data.status==1){
                     $('.loginLayer').parents('.layui-m-layer').remove();
                     loginBackFunctionParam.jump_url = data.info;
-                    loginBackFunction();
+                    if(loginBackFunction && $.isFunction(loginBackFunction) ){
+                        loginBackFunction();
+                    }
                 }
             });
         }
