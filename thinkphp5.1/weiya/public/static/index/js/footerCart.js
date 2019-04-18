@@ -110,7 +110,7 @@ $(function () {
         var _this = $(this);
         var lis = $('ul.goods_list').find('li[data-buy_type="1"]');
         var postData = assemblyData(lis);
-
+        
         return false;
         if(!postData){
             return false;
