@@ -101,6 +101,7 @@ $(function(){
         var jump_url = $(this).data('jump_url');
         var call_back = $(this).data('call_back');
         var postData = {};
+        console.log(11);
         $.ajax({
             url: jump_url,
             data: postData,
