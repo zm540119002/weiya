@@ -141,10 +141,7 @@ $(function(){
     });
 
     //异步验证
-    $('body').on('click','.async_login',function () {
-        var _this = $(this);
-        async_verify(_this);
-    });
+    $('body').on('click','.async_login',async_verify);
     //显示隐藏密码
     $('body').on('click','.view-password',function(){
         var _this=$(this);
