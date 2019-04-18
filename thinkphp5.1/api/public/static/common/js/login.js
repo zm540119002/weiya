@@ -53,6 +53,8 @@ function logoutDialog(){
 }
 //异步验证
 function async_verify(){
+    console.log($(this));
+    return ;
     var jump_url = $(this).data('jump_url');
     var call_back = $(this).data('call_back');
     var postData = {};
