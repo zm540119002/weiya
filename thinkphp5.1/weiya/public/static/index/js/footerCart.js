@@ -113,6 +113,7 @@ $(function () {
         if(!postData){
             return false;
         }
+        console.log(55);
         return false;
         var goodsList = postData.goodsList;
         for(var i=0;i<goodsList.length;i++){
