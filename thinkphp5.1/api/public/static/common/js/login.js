@@ -104,7 +104,7 @@ $(function(){
             });
         }
     });
-    //异步登录验证
+    //异步验证
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
         var call_back = $(this).data('call_back');
