@@ -1,18 +1,13 @@
 //常规购物车按钮 登录后回调函数
 function addCartCallBack(){
-    $('.add_cart,.add_purchase_cart').click();
-};
-//弹框购物车按钮 登录后回调函数
-function addCartLayerCallBack(){
-    $('.goodsInfoLayer .add_cart_layer').click();
-};
-function aaa(){
-    var url = module + 'Cart/addCart';
-    // _this.addClass("nodisabled");//防止重复提交
+    // var lis = postData.lis;
+    // var _this = postData._this;
+    // _this.addClass("nodisabled");
+    console.log(loginBackFunctionParam);
     var postData = {};
-    postData = loginBackFunctionParam;
+    postData.goodsList = loginBackFunctionParam.goodsList;
     $.ajax({
-        url: url,
+        url: loginBackFunctionParam.jump_url,
         data: postData,
         type: 'post',
         beforeSend: function(){
@@ -28,20 +23,15 @@ function aaa(){
             if(data.status==0){
                 dialog.error(data.info);
             }
-            else if(data.code==1 && data.data=='no_login'){
-                loginBackFunction = addCartCallBack;
-                loginDialog();
-                return false;
-            }
             else{
                 dialog.success(data.info);
                 var num = 0;
-                $.each(lis,function(index,val){
-                    var buyType=$(this).data('buy_type');
-                    if(buyType==1){
-                        num += parseInt($(this).find('.gshopping_count').val());
-                    }
-                });
+                // $.each(lis,function(index,val){
+                //     var buyType=$(this).data('buy_type');
+                //     if(buyType==1){
+                //         num += parseInt($(this).find('.gshopping_count').val());
+                //     }
+                // });
                 $('footer').find('.cart_num').addClass('cur');
                 $('footer').find('.add_num').text('+'+num).addClass('current');
                 setTimeout(function(){
@@ -50,7 +40,13 @@ function aaa(){
             }
         }
     });
-}
+   // $('.add_cart,.add_purchase_cart').click();
+};
+//弹框购物车按钮 登录后回调函数
+function addCartLayerCallBack(){
+    $('.goodsInfoLayer .add_cart_layer').click();
+};
+
 $(function () {
     //计算商品列表总价
     //calculateTotalPrice();
@@ -158,17 +154,22 @@ $(function () {
         if(!postData){
             return false;
         }
-        loginBackFunctionParam = postData;
-        console.log(55);
-        return false;
+        postData._this = _this;
+        postData.lis = lis;
         var goodsList = postData.goodsList;
-        for(var i=0;i<goodsList.length;i++){
-            if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
-                dialog.error('请设置品牌');
-                return false;
-            }
-        }
-
+        // for(var i=0;i<goodsList.length;i++){
+        //     if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
+        //         dialog.error('请设置品牌');
+        //         return false;
+        //     }
+        // }
+        loginBackFunctionParam = postData;
+        loginBackFunction = addCartCallBack;
+        var jump_url = _this.data('jump_url');
+        var data = {
+            jump_url:jump_url
+        };
+        async_verify(data);
     });
     //样品弹窗加入购物车
     $('body').on('click','.goodsInfoLayer .add_cart_layer',function(){

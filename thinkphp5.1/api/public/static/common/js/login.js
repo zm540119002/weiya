@@ -52,12 +52,11 @@ function logoutDialog(){
     });
 }
 //异步验证
-function async_verify(data){
-    var jump_url = data.jump_url;
-    var postData = {};
+function async_verify(param){
+    var jump_url = param.jump_url;
     $.ajax({
         url: jump_url,
-        data: postData,
+        data: {},
         type: 'post',
         beforeSend: function(xhr){
             $('.loading').show();
@@ -68,9 +67,7 @@ function async_verify(data){
         },
         success: function(data){
             $('.loading').hide();
-            if(data.status==0){
-                dialog.error(data.info);
-            }else if(data.code==1){
+            if(data.code==1){
                 if(data.data == 'no_login'){
                     loginDialog();
                 }
