@@ -136,6 +136,7 @@ $(function(){
                     }
                 }else{
                     loginBackFunctionParam.jump_url = jump_url;
+                    console.log(call_back);
                     if(call_back){
                         console.log(66);
                         console.log(loginBackFunctionParam);
