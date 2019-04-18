@@ -2,8 +2,8 @@
 function addCartCallBack(){
     var postData = {};
     postData = loginBackFunctionParam;
-    console.log(postData);
-    // console.log(postData);
+    console.log(5555);
+     console.log(postData);
     // var lis = postData.lis;
     // var _this = postData._this;
     var url = postData.jump_url;
@@ -167,6 +167,7 @@ $(function () {
         // }
         console.log(222)
         loginBackFunctionParam = postData;
+        console.log(loginBackFunctionParam)
         loginBackFunction = addCartCallBack;
         var jump_url = _this.data('jump_url');
         var data = {
