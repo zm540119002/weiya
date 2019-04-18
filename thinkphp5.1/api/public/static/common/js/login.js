@@ -59,7 +59,7 @@ function async_verify(param){
     console.log(111)
     $.ajax({
         url: jump_url,
-        data: postData,
+        data: {},
         type: 'post',
         beforeSend: function(xhr){
             $('.loading').show();
