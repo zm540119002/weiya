@@ -6,9 +6,6 @@ function addCartCallBack(){
 function addCartLayerCallBack(){
     $('.goodsInfoLayer .add_cart_layer').click();
 };
-var aaa = function (str){
-    console.log(144);
-}
 $(function () {
     //计算商品列表总价
     //calculateTotalPrice();
