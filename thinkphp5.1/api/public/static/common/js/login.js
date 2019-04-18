@@ -111,8 +111,6 @@ $(function(){
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
         var call_back = $(this).data('call_back');
-        console.log(call_back);
-        return ;
         var postData = {};
         $.ajax({
             url: jump_url,
