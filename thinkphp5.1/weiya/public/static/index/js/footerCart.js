@@ -7,10 +7,9 @@ function addCartLayerCallBack(){
     $('.goodsInfoLayer .add_cart_layer').click();
 };
 function aaa(){
-    console.log(loginBackFunctionParam);
     var url = module + 'Cart/addCart';
     // _this.addClass("nodisabled");//防止重复提交
-var postData = {};
+    var postData = {};
     postData = loginBackFunctionParam;
     $.ajax({
         url: url,

@@ -101,7 +101,6 @@ $(function(){
         var jump_url = $(this).data('jump_url');
         var call_back = $(this).data('call_back');
         var postData = {};
-        console.log(11);
         $.ajax({
             url: jump_url,
             data: postData,
@@ -115,22 +114,6 @@ $(function(){
             },
             success: function(data){
                 $('.loading').hide();
-                if(data.data == 'no_login'){
-                    loginDialog();
-                    return false;
-                }
-                if(data.data=='no_empower'){
-                    dialog.error(data.msg);
-                }
-                if(data.data=='no_factory_register'){
-                    location.href = data.url;
-                }
-                if(call_back){
-                    (new Function("return " + call_back))()();
-                }else{
-                    loginBackFunction();
-                }
-                return ;
                 if(data.status==0){
                     dialog.error(data.info);
                 }else if(data.code==1){
