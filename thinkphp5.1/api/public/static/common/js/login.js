@@ -52,8 +52,8 @@ function logoutDialog(){
     });
 }
 //异步验证
-function async_verify(data){
-    var jump_url = data.jump_url;
+function async_verify(param){
+    var jump_url = param.jump_url;
     var postData = {};
     postData = loginBackFunctionParam;
     console.log(111)
