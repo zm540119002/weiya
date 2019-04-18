@@ -7,7 +7,7 @@ function addCartCallBack(){
     // var lis = postData.lis;
     // var _this = postData._this;
     var url = postData.jump_url;
-    _this.addClass("nodisabled");
+    // _this.addClass("nodisabled");
     $.ajax({
         url: url,
         data: postData,
