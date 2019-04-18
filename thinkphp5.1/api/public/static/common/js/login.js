@@ -52,9 +52,9 @@ function logoutDialog(){
     });
 }
 //异步验证
-function async_verify(){
-    var jump_url = $(this).data('jump_url');
-    var call_back = $(this).data('call_back');
+function async_verify(obj){
+    var jump_url = obj.data('jump_url');
+    var call_back = obj.data('call_back');
     console.log(jump_url);
     return ;
     var postData = {};
@@ -143,7 +143,7 @@ $(function(){
     //异步验证
     $('body').on('click','.async_login',function () {
         var _this = $(this);
-        async_verify();
+        async_verify(_this);
     });
     //显示隐藏密码
     $('body').on('click','.view-password',function(){
