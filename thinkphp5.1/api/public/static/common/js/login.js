@@ -124,7 +124,6 @@ $(function(){
             },
             success: function(data){
                 $('.loading').hide();
-                return ;
                 if(data.status==0){
                     dialog.error(data.info);
                 }else if(data.code==1){
@@ -138,6 +137,7 @@ $(function(){
                         location.href = data.url;
                     }
                 }else{
+                    jump_url
                     loginBackFunctionParam.jump_url = jump_url;
                     callBack ?
                         callBack() :
