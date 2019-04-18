@@ -52,8 +52,8 @@ function logoutDialog(){
     });
 }
 //异步验证
-function async_verify(){
-    var jump_url = $(this).data('jump_url');
+function async_verify(obj){
+    var jump_url = obj.data('jump_url');
     var postData = {};
     $.ajax({
         url: jump_url,
@@ -133,9 +133,9 @@ $(function(){
         }
     });
     //异步验证
-    $('body').on('click','.async_login',$(this),function () {
+    $('body').on('click','.async_login',function () {
         var _this = $(this);
-        async_verify();
+        async_verify(_this);
     });
     //显示隐藏密码
     $('body').on('click','.view-password',function(){
