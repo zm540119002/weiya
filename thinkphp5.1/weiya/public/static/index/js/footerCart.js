@@ -10,7 +10,6 @@ function addCartCallBack(){
         url: loginBackFunctionParam.jump_url,
         data: postData,
         type: 'post',
-        // processData:false,
         beforeSend: function(){
             $('.loading').show();
         },
