@@ -55,7 +55,6 @@ function logoutDialog(){
 */
 var loginBackFunctionParam = {};
 var loginBackFunction = function(){
-    console.log(loginBackFunctionParam);
     loginBackFunctionParam.jump_url ?
         location.href = loginBackFunctionParam.jump_url :
         location.href = action;
@@ -105,19 +104,9 @@ $(function(){
             });
         }
     });
-    function aaa(){
-        console.log(123);
-    }
     //异步登录验证
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
-        var jump_url = module + 'Cart/addCart';
-        var call_back = $(this).data('call_back');
-        if(call_back){
-            loginBackFunction=aaa;
-        }
-        loginBackFunction();
-        return false;
         var postData = {};
         $.ajax({
             url: jump_url,
