@@ -141,6 +141,7 @@ $(function(){
                     loginBackFunctionParam.jump_url = jump_url;
                     if(call_back){
                         (new Function("return " + 'aaa'))()();
+                        return false;
                     }else{
                         loginBackFunction();
                     }
