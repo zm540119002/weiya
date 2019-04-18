@@ -11,6 +11,7 @@ function addCartCallBack(){
         url: url,
         data: postData,
         type: 'post',
+        dataType:'json',
         beforeSend: function(){
             $('.loading').show();
         },
