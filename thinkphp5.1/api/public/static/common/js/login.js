@@ -59,6 +59,11 @@ var loginBackFunction = function(){
         location.href = loginBackFunctionParam.jump_url :
         location.href = action;
 };
+
+function aaa(){
+    console.log(133);
+}
+
 $(function(){
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
@@ -104,6 +109,10 @@ $(function(){
             });
         }
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 533558cce2f6a88effece725bf9835f71081956f
     //异步登录验证
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
@@ -138,6 +147,7 @@ $(function(){
                     loginBackFunctionParam.jump_url = jump_url;
                     if(call_back){
                         (new Function("return " + 'aaa'))()();
+                        return false;
                     }else{
                         loginBackFunction();
                     }
