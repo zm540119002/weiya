@@ -112,8 +112,9 @@ $(function(){
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
         var jump_url = module + 'Cart/addCart';
-        var call_back = 'aaa';
+        var call_back = $(this).data('call_back');
         call_back();
+        return false;
         var postData = {};
         $.ajax({
             url: jump_url,
