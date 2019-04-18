@@ -104,9 +104,13 @@ $(function(){
             });
         }
     });
+    function aaa(){
+        console.log(133);
+    }
     //异步登录验证
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
+        var call_back = $(this).data('call_back');
         var postData = {};
         $.ajax({
             url: jump_url,
@@ -135,7 +139,11 @@ $(function(){
                     }
                 }else{
                     loginBackFunctionParam.jump_url = jump_url;
-                    loginBackFunction();
+                    if(call_back){
+                        (new Function(call_back))();
+                    }else{
+                        loginBackFunction();
+                    }
                 }
             }
         });
