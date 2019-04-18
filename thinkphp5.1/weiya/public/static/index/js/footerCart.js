@@ -6,6 +6,9 @@ function addCartCallBack(){
 function addCartLayerCallBack(){
     $('.goodsInfoLayer .add_cart_layer').click();
 };
+function aaa(){
+    console.log(loginBackFunctionParam);
+}
 $(function () {
     //计算商品列表总价
     //calculateTotalPrice();
@@ -113,6 +116,7 @@ $(function () {
         if(!postData){
             return false;
         }
+        loginBackFunctionParam = postData;
         console.log(55);
         return false;
         var goodsList = postData.goodsList;
