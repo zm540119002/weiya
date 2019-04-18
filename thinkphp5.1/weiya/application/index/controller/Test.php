@@ -9,6 +9,10 @@ class Test extends \common\controller\Base{
         return $this->fetch();
     }
 
+    public function test(){
+        return $this->fetch();
+    }
+
     public function test2(){
         return $this->fetch();
     }
