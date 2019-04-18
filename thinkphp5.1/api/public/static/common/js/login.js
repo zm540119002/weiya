@@ -109,7 +109,6 @@ $(function(){
         var jump_url = $(this).data('jump_url');
         var call_back = $(this).data('call_back');
         var postData = {};
-        console.log(11);
         $.ajax({
             url: jump_url,
             data: postData,
@@ -139,8 +138,6 @@ $(function(){
                     loginBackFunctionParam.jump_url = jump_url;
                     console.log(call_back);
                     if(call_back){
-                        console.log(66);
-                        console.log(loginBackFunctionParam);
                         (new Function("return " + call_back))()();
                     }else{
                         loginBackFunction();
