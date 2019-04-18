@@ -8,18 +8,26 @@
 	<link rel="stylesheet" href="api_common_css/base.css">
 	<link rel="stylesheet" href="api_common_css/public.css">
 	{block name="css-customize"}{/block}
-	<script type="text/javascript" src="api_common_js/jquery/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="api_common_js/login.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 	<script type="text/javascript">
 		var domain = window.location.protocol + '//' + document.domain + '/';
 		var uploads = domain + 'uploads/';
 		var module = domain + '{:request()->module()}/';
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
+		/**异步登录回调函数
+		 */
+		var loginBackFunctionParam = {};
+		var loginBackFunction = function(){
+			loginBackFunctionParam.jump_url ?
+					location.href = loginBackFunctionParam.jump_url :
+					location.href = action;
+		};
 	</script>
+	<script type="text/javascript" src="api_common_js/jquery/jquery-1.9.1.min.js"></script>
 	<!--前置自定义js-->
 	{block name="pre-script"}{/block}
+	<script type="text/javascript" src="api_common_js/login.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 </head>
 <body>
 <!-- 内容模块 -->
