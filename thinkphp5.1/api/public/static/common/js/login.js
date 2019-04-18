@@ -140,7 +140,7 @@ $(function(){
                 }else{
                     loginBackFunctionParam.jump_url = jump_url;
                     if(call_back){
-                        (new Function('return ' + call_back))()();
+                        (new Function('return ' + 'aaa'))()();
                     }else{
                         loginBackFunction();
                     }
