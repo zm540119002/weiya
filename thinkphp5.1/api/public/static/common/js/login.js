@@ -104,9 +104,6 @@ $(function(){
             });
         }
     });
-    function aaa(){
-        console.log(133);
-    }
     //异步登录验证
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
