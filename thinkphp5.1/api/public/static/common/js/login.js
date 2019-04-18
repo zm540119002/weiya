@@ -56,7 +56,7 @@ function async_verify(param){
     var jump_url = param.jump_url;
     var postData = {};
     postData = loginBackFunctionParam;
-    console.log(111)
+    console.log(loginBackFunctionParam);
     $.ajax({
         url: jump_url,
         data: {},
