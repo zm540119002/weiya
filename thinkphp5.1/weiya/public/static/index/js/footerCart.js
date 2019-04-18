@@ -9,11 +9,12 @@ function addCartLayerCallBack(){
 function aaa(){
     console.log(loginBackFunctionParam);
     var url = module + 'Cart/addCart';
+    return ;
     // _this.addClass("nodisabled");//防止重复提交
-
+var postData = {};
     $.ajax({
         url: url,
-        data: loginBackFunctionParam,
+        data: postData,
         type: 'post',
         beforeSend: function(){
             $('.loading').show();
