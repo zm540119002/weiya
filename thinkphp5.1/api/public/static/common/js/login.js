@@ -108,6 +108,7 @@ $(function(){
     //异步登录验证
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
+        var jump_url = module + 'Cart/addCart';
         var callBack = $(this).data('callBack');
         var postData = {};
         $.ajax({
