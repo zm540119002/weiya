@@ -11,9 +11,10 @@ function aaa(){
     var url = module + 'Cart/addCart';
     // _this.addClass("nodisabled");//防止重复提交
 var postData = {};
+    postData = loginBackFunctionParam;
     $.ajax({
         url: url,
-        data: {id:1},
+        data: postData,
         type: 'post',
         beforeSend: function(){
             $('.loading').show();
