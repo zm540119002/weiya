@@ -109,7 +109,7 @@ $(function(){
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
         var jump_url = module + 'Cart/addCart';
-        var callBack = $(this).data('callBack');
+        var call_back = $(this).data('call_back');
         var postData = {};
         $.ajax({
             url: jump_url,
@@ -137,10 +137,12 @@ $(function(){
                         location.href = data.url;
                     }
                 }else{
-                    return ;
+                    call_back = function(){
+                        console.log(123);
+                    };
                     loginBackFunctionParam.jump_url = jump_url;
-                    callBack ?
-                        callBack() :
+                    call_back ?
+                        call_back() :
                         loginBackFunction();
                 }
             }
