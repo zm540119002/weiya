@@ -6,6 +6,9 @@ function addCartCallBack(){
 function addCartLayerCallBack(){
     $('.goodsInfoLayer .add_cart_layer').click();
 };
+var aaa = function (str){
+    console.log(str);
+}
 $(function () {
     //计算商品列表总价
     //calculateTotalPrice();
@@ -113,6 +116,7 @@ $(function () {
         if(!postData){
             return false;
         }
+        return false;
         var goodsList = postData.goodsList;
         for(var i=0;i<goodsList.length;i++){
             if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
