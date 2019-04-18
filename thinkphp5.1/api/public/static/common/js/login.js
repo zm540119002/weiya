@@ -115,6 +115,16 @@ $(function(){
             },
             success: function(data){
                 $('.loading').hide();
+                if(data.data == 'no_login'){
+                    loginDialog();
+                    return false;
+                }
+                if(data.data=='no_empower'){
+                    dialog.error(data.msg);
+                }
+                if(data.data=='no_factory_register'){
+                    location.href = data.url;
+                }
                 if(call_back){
                     (new Function("return " + call_back))()();
                 }else{
