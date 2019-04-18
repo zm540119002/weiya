@@ -4,11 +4,13 @@ function addCartCallBack(){
     // var _this = postData._this;
     // _this.addClass("nodisabled");
     console.log(loginBackFunctionParam);
+    var postData = {};
+    postData.goodsList = loginBackFunctionParam.goodsList;
     $.ajax({
         url: loginBackFunctionParam.jump_url,
-        data: loginBackFunctionParam,
+        data: postData,
         type: 'post',
-        processData:false,
+        // processData:false,
         beforeSend: function(){
             $('.loading').show();
         },
