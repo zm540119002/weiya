@@ -113,7 +113,10 @@ $(function(){
         var jump_url = $(this).data('jump_url');
         var jump_url = module + 'Cart/addCart';
         var call_back = $(this).data('call_back');
-        call_back();
+        if(call_back){
+            loginBackFunction=call_back;
+        }
+        loginBackFunction();
         return false;
         var postData = {};
         $.ajax({
@@ -142,11 +145,8 @@ $(function(){
                         location.href = data.url;
                     }
                 }else{
-                    return ;
                     loginBackFunctionParam.jump_url = jump_url;
-                    call_back ?
-                        call_back() :
-                        loginBackFunction();
+                    loginBackFunction();
                 }
             }
         });
