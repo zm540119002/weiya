@@ -105,11 +105,14 @@ $(function(){
             });
         }
     });
+    function aaa(){
+        console.log(123);
+    }
     //异步登录验证
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
         var jump_url = module + 'Cart/addCart';
-        var call_back = $(this).data('call_back');
+        var call_back = 'aaa';
         var postData = {};
         $.ajax({
             url: jump_url,
@@ -137,9 +140,6 @@ $(function(){
                         location.href = data.url;
                     }
                 }else{
-                    call_back = function(){
-                        console.log(123);
-                    };
                     loginBackFunctionParam.jump_url = jump_url;
                     call_back ?
                         call_back() :
