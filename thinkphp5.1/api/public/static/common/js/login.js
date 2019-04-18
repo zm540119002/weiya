@@ -52,8 +52,8 @@ function logoutDialog(){
     });
 }
 //异步验证
-function async_verify(obj){
-    var jump_url = obj.data('jump_url');
+function async_verify(data){
+    var jump_url = data.jump_url;
     var postData = {};
     $.ajax({
         url: jump_url,
@@ -82,7 +82,9 @@ function async_verify(obj){
                 }
             }else{
                 loginBackFunctionParam.jump_url = jump_url;
-                loginBackFunction();
+                if(loginBackFunction && $.isFunction(loginBackFunction) ){
+                    loginBackFunction();
+                }
             }
         }
     });
@@ -127,15 +129,19 @@ $(function(){
                 }else if(data.status==1){
                     $('.loginLayer').parents('.layui-m-layer').remove();
                     loginBackFunctionParam.jump_url = data.info;
-                    loginBackFunction();
+                    if(loginBackFunction && $.isFunction(loginBackFunction) ){
+                        loginBackFunction();
+                    }
                 }
             });
         }
     });
     //异步验证
     $('body').on('click','.async_login',function () {
-        var _this = $(this);
-        async_verify(_this);
+        var jump_url = $(this).data('jump_url');
+        var data = {};
+        data.jump_url = jump_url;
+        async_verify(data);
     });
     //显示隐藏密码
     $('body').on('click','.view-password',function(){
