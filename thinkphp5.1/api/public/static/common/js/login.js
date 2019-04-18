@@ -123,6 +123,7 @@ $(function(){
             },
             success: function(data){
                 $('.loading').hide();
+                return ;
                 if(data.status==0){
                     dialog.error(data.info);
                 }else if(data.code==1){
