@@ -1,15 +1,12 @@
 //常规购物车按钮 登录后回调函数
 function addCartCallBack(){
-    var postData = {};
-    postData.aaa = loginBackFunctionParam;
     console.log(5555);
     // var lis = postData.lis;
     // var _this = postData._this;
-    var url = postData.jump_url;
     // _this.addClass("nodisabled");
     $.ajax({
-        url: url,
-        data: postData,
+        url: loginBackFunctionParam.jump_url,
+        data: loginBackFunctionParam,
         type: 'post',
         processData:false,
         beforeSend: function(){
