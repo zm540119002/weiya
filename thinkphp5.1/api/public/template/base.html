@@ -19,6 +19,14 @@
 		var module = domain + '{:request()->module()}/';
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
+		/**异步登录回调函数
+		 */
+		var loginBackFunctionParam = {};
+		var loginBackFunction = function(){
+			loginBackFunctionParam.jump_url ?
+					location.href = loginBackFunctionParam.jump_url :
+					location.href = action;
+		};
 	</script>
 </head>
 <body>

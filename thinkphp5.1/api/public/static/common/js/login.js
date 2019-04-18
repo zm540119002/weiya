@@ -51,14 +51,6 @@ function logoutDialog(){
         }
     });
 }
-/**异步登录回调函数
-*/
-var loginBackFunctionParam = {};
-var loginBackFunction = function(){
-    loginBackFunctionParam.jump_url ?
-        location.href = loginBackFunctionParam.jump_url :
-        location.href = action;
-};
 $(function(){
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
