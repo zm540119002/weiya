@@ -8,4 +8,12 @@ class Test extends \common\controller\Base{
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
     }
+
+    public function test(){
+        return $this->fetch();
+    }
+
+    public function test2(){
+        return $this->fetch();
+    }
 }

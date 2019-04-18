@@ -1,0 +1,53 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<article class="f24">
+	<section class="content_main">
+		<div id="app">
+			<com-1></com-1>
+		</div>
+		<script type="text/x-template" id="com-1">
+			<div>
+				<input type="button" @click="addCount" value="count++">
+				<com-2 v-bind:count="count"></com-2>
+			</div>
+		</script>
+		<script type="text/x-template" id="com-2">
+			<div>
+				count: {{count}}
+			</div>
+		</script>
+	</section>
+</article>
+{/block}
+{block name="common"}{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_vue/cart.js"></script>
+<script type="text/javascript">
+	$(function(){
+		Vue.component('com-1', {
+			template: '#com-1',
+			data: function () {
+				return {
+					count: 0
+				}
+			},
+			methods: {
+				addCount: function () {
+					this.count += 1;
+				}
+			}
+		});
+
+		Vue.component('com-2', {
+			template: '#com-2',
+			props: {
+				count: 0
+			}
+		});
+		var vm = new Vue({
+			el: '#app'
+		});
+	});
+</script>
+{/block}
