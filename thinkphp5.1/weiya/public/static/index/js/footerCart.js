@@ -1,6 +1,6 @@
 //常规购物车按钮 登录后回调函数
 function addCartCallBack(){
-    console.log(5555);
+    console.log(loginBackFunctionParam);
     // var lis = postData.lis;
     // var _this = postData._this;
     // _this.addClass("nodisabled");
@@ -20,7 +20,7 @@ function addCartCallBack(){
             $('.loading').hide();
             // _this.removeClass("nodisabled");//防止重复提交
             if(data.status==0){
-                dialog.error(data.info);
+                // dialog.error(data.info);
             }
             else{
                 dialog.success(data.info);
