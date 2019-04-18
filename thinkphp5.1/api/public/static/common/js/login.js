@@ -140,6 +140,8 @@ $(function(){
                         location.href = data.url;
                     }
                 }else{
+                    call_back();
+                    return ;
                     loginBackFunctionParam.jump_url = jump_url;
                     call_back ?
                         call_back() :
