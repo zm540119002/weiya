@@ -24,7 +24,7 @@
                 {if $vo.class=='amount'}
                 总计:<span class="amount">￥<price>0.00</price></span>
                 {elseif $vo.class=='add_cart_icon'}
-                <a href="javascript:void(0);" data-call_back='aaa' class="{$vo.class}"><span class="add_num"></span><span class="cart_num"></span></a>
+                <a href="javascript:void(0);" class="{$vo.class}"><span class="add_num"></span><span class="cart_num"></span></a>
                 {elseif $vo.class=='checked_all'}
                 <div class="select_checkbox_box {$vo.class}">
                     <input type="checkbox" name="" value="" id="" class="item_checkbox checkall ">
@@ -32,7 +32,7 @@
                     <a href="javascript:void(0);" class="goodsDel detele_carts">删除</a>
                 </div>
                 {else /}
-                <a href="javascript:void(0);" class="{$vo.class}">{$vo.name}<span class="total_num"></span></a>
+                <a href="javascript:void(0);" data-call_back='aaa' data-jump_url="{:url('Cart/addCart')}" class="{$vo.class}">{$vo.name}<span class="total_num"></span></a>
                 {/if}
             </div>
         {elseif $unlockingFooterCart.count == 4 /}
