@@ -133,7 +133,7 @@
 				</a>
 			</li>
 			<li class="each_column">
-				<a href="javascript:void(0)" class="my_cart async_login" data-call_back='aaa' data-jump_url="{:url('Cart/index')}">
+				<a href="javascript:void(0)" class="my_cart async_login" data-jump_url="{:url('Cart/index')}">
 					<span class="cart f_icon"></span>
 					<span class="f_txt">采购车</span>
 				</a>
@@ -154,9 +154,6 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-	var aaa = function (str){
-		console.log(144);
-	}
 	var config = {
 		url:module+'Goods/getList',
 		requestEnd:false,
