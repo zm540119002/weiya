@@ -51,6 +51,47 @@ function logoutDialog(){
         }
     });
 }
+//异步验证
+function async_verify(){
+    var jump_url = $(this).data('jump_url');
+    var call_back = $(this).data('call_back');
+    var postData = {};
+    $.ajax({
+        url: jump_url,
+        data: postData,
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(data.status==0){
+                dialog.error(data.info);
+            }else if(data.code==1){
+                if(data.data == 'no_login'){
+                    loginDialog();
+                }
+                if(data.data=='no_empower'){
+                    dialog.error(data.msg);
+                }
+                if(data.data=='no_factory_register'){
+                    location.href = data.url;
+                }
+            }else{
+                loginBackFunctionParam.jump_url = jump_url;
+                if(call_back){
+                    (new Function("return " + call_back))()();
+                }else{
+                    loginBackFunction();
+                }
+            }
+        }
+    });
+}
 $(function(){
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
@@ -96,46 +137,11 @@ $(function(){
             });
         }
     });
+
     //异步验证
     $('body').on('click','.async_login',function () {
-        var jump_url = $(this).data('jump_url');
-        var call_back = $(this).data('call_back');
-        var postData = {};
-        $.ajax({
-            url: jump_url,
-            data: postData,
-            type: 'post',
-            beforeSend: function(xhr){
-                $('.loading').show();
-            },
-            error:function(xhr){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
-                $('.loading').hide();
-                if(data.status==0){
-                    dialog.error(data.info);
-                }else if(data.code==1){
-                    if(data.data == 'no_login'){
-                        loginDialog();
-                    }
-                    if(data.data=='no_empower'){
-                        dialog.error(data.msg);
-                    }
-                    if(data.data=='no_factory_register'){
-                        location.href = data.url;
-                    }
-                }else{
-                    loginBackFunctionParam.jump_url = jump_url;
-                    if(call_back){
-                        (new Function("return " + call_back))()();
-                    }else{
-                        loginBackFunction();
-                    }
-                }
-            }
-        });
+        var _this = $(this);
+        async_verify();
     });
     //显示隐藏密码
     $('body').on('click','.view-password',function(){
