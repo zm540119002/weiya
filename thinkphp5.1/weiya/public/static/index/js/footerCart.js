@@ -1,9 +1,8 @@
 //常规购物车按钮 登录后回调函数
 function addCartCallBack(){
     var postData = {};
-    postData = loginBackFunctionParam;
+    postData.aaa = loginBackFunctionParam;
     console.log(5555);
-     console.log(postData);
     // var lis = postData.lis;
     // var _this = postData._this;
     var url = postData.jump_url;
