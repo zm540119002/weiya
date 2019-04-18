@@ -55,6 +55,8 @@ function logoutDialog(){
 function async_verify(data){
     var jump_url = data.jump_url;
     var postData = {};
+    postData = loginBackFunctionParam;
+    console.log(111)
     $.ajax({
         url: jump_url,
         data: postData,
