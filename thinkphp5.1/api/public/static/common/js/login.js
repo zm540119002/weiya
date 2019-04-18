@@ -142,8 +142,9 @@ $(function(){
                 }else{
                     loginBackFunctionParam.jump_url = jump_url;
                     if(call_back){
-                        (new Function("return " + call_back))()();
+                        call_back();
                         return false;
+                        (new Function("return " + call_back))()();
                     }else{
                         loginBackFunction();
                     }
