@@ -19,6 +19,7 @@ class Cart extends \common\controller\UserBase{
      *
      */
     public function addCart(){
+        return successMsg($_POST);
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
