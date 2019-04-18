@@ -113,6 +113,7 @@ $(function(){
         var jump_url = $(this).data('jump_url');
         var jump_url = module + 'Cart/addCart';
         var call_back = 'aaa';
+        call_back();
         var postData = {};
         $.ajax({
             url: jump_url,
@@ -140,7 +141,6 @@ $(function(){
                         location.href = data.url;
                     }
                 }else{
-                    call_back();
                     return ;
                     loginBackFunctionParam.jump_url = jump_url;
                     call_back ?
