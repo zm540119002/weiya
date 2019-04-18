@@ -108,6 +108,7 @@ $(function(){
     //异步登录验证
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
+        var callBack = $(this).data('callBack');
         var postData = {};
         $.ajax({
             url: jump_url,
@@ -136,7 +137,9 @@ $(function(){
                     }
                 }else{
                     loginBackFunctionParam.jump_url = jump_url;
-                    loginBackFunction();
+                    callBack ?
+                        callBack() :
+                        loginBackFunction();
                 }
             }
         });
