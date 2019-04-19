@@ -22,32 +22,29 @@
 {block name="common"}{/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="api_common_vue/cart.js"></script>
 <script type="text/javascript">
-	$(function(){
-		Vue.component('com-1', {
-			template: '#com-1',
-			data: function () {
-				return {
-					count: 0
-				}
-			},
-			methods: {
-				addCount: function () {
-					this.count += 1;
-				}
-			}
-		});
-
-		Vue.component('com-2', {
-			template: '#com-2',
-			props: {
+	Vue.component('com-1', {
+		template: '#com-1',
+		data: function () {
+			return {
 				count: 0
 			}
-		});
-		var vm = new Vue({
-			el: '#app'
-		});
+		},
+		methods: {
+			addCount: function () {
+				this.count += 1;
+			}
+		}
+	});
+
+	Vue.component('com-2', {
+		template: '#com-2',
+		props: {
+			count: 0
+		}
+	});
+	var vm = new Vue({
+		el: '#app'
 	});
 </script>
 {/block}
