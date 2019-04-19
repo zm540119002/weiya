@@ -2,20 +2,20 @@
 {block name="content"}
 <article class="f24">
 	<section class="content_main">
-		<div id="app">
-			<com-1></com-1>
+		<div id="components-demo">
+			<button-counter></button-counter>
+			<button-counter></button-counter>
+			<button-counter></button-counter>
+			<button-counter></button-counter>
 		</div>
-		<script type="text/x-template" id="com-1">
-			<div>
-				<input type="button" @click="addCount" value="count++">
-				<com-2 v-bind:count="count"></com-2>
-			</div>
-		</script>
-		<script type="text/x-template" id="com-2">
-			<div>
-				count: {{count}}
-			</div>
-		</script>
+		<div id="blog-post-demo">
+			<blog-post
+					v-for="post in posts"
+					v-bind:key="post.id"
+					v-bind:title="post.title"
+					v-bind:content="post.content"
+			></blog-post>
+		</div>
 	</section>
 </article>
 {/block}
@@ -25,28 +25,27 @@
 <script type="text/javascript" src="api_common_vue/cart.js"></script>
 <script type="text/javascript">
 	$(function(){
-		Vue.component('com-1', {
-			template: '#com-1',
+		Vue.component('button-counter', {
 			data: function () {
 				return {
 					count: 0
 				}
 			},
-			methods: {
-				addCount: function () {
-					this.count += 1;
-				}
-			}
+			template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
 		});
-
-		Vue.component('com-2', {
-			template: '#com-2',
-			props: {
-				count: 0
-			}
+		Vue.component('blog-post', {
+			props: ['title','content'],
+			template: '<h3>{{ title }}</h3><h1>{{ content }}</h1>'
 		});
-		var vm = new Vue({
-			el: '#app'
+		new Vue({
+			el: '#blog-post-demo',
+			data: {
+				posts: [
+					{ id: 1, title: 'My journey with Vue' ,content:'1111111111'},
+					{ id: 2, title: 'Blogging with Vue' ,content:'222222222'},
+					{ id: 3, title: 'Why Vue is so fun' ,content:'333333333'}
+				]
+			}
 		});
 	});
 </script>
