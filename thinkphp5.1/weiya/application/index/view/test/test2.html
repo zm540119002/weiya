@@ -2,15 +2,9 @@
 {block name="content"}
 <article class="f24">
 	<div id="app">
-		{{message}}
-	</div>
-	<div id="app-2">
-		<span v-bind:title="message">
-			鼠标悬停几秒钟查看此处动态绑定的提示信息！
-		</span>
-	</div>
-	<div id="app-3">
-		<p v-if="seen">现在你看到我了</p>
+		<component-a></component-a>
+		<component-b></component-b>
+		<component-c></component-c>
 	</div>
 </article>
 {/block}
@@ -18,25 +12,11 @@
 {block name="footer"}{/block}
 {block name="css-customize"}
 {/block}
-{block name="script"}
+{block name="suffix-script"}
 <script type="text/javascript">
-	var app = new Vue({
-		el: '#app',
-		data: {
-			message: 'Hello Vue!'
-		}
-	})
-	var app2 = new Vue({
-		el: '#app-2',
-		data: {
-			message: '页面加载于 ' + new Date().toLocaleString()
-		}
-	})
-	var app3 = new Vue({
-		el: '#app-3',
-		data: {
-			seen: true
-		}
-	})
+	Vue.component('component-a', { /* ... */ })
+	Vue.component('component-b', { /* ... */ })
+	Vue.component('component-c', { /* ... */ })
+	new Vue({ el: '#app' })
 </script>
 {/block}
