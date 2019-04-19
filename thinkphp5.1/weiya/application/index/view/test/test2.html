@@ -1,11 +1,7 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
-	<div id="app">
-		<p>{{ foo }}</p>
-		<!-- 这里的 `foo` 不会更新！ -->
-		<button v-on:click="foo = 'baz'">Change it</button>
-	</div>
+	<span>Message: {{ msg }}</span>
 </article>
 {/block}
 {block name="common"}{/block}
@@ -14,13 +10,5 @@
 {/block}
 {block name="script"}
 <script type="text/javascript">
-	var obj = {
-		foo: 'bar'
-	};
-	Object.freeze(obj);
-	new Vue({
-		el: '#app',
-		data: obj
-	})
 </script>
 {/block}
