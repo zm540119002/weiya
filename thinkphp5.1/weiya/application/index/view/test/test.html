@@ -6,9 +6,8 @@
 		<button v-on:click="showData">测试jquery加载数据</button>
 		<table border="1">
 			<tr v-for="menu in menus">
-				<td>{{menu.Name}}</td>
-				<td>{{menu.Url}}</td>
-				<td>{{menu.Country}}</td>
+				<td>{{menu.name}}</td>
+				<td>{{menu.class}}</td>
 			</tr>
 		</table>
 	</div>
@@ -40,7 +39,7 @@
 					},
 					success: function(data){
 						$('.loading').hide();
-//						vm.menus = data.sites;
+						vm.menus = data.menu;
 					}
 				});
 			}
