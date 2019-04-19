@@ -1,7 +1,8 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
-	<span>Message: {{ msg }}</span>
+	<p>Using mustaches: {{ rawHtml }}</p>
+	<p>Using v-html directive: <span v-html="rawHtml"></span></p>
 </article>
 {/block}
 {block name="common"}{/block}
