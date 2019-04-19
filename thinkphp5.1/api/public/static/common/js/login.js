@@ -188,6 +188,7 @@ $(function(){
             }
             time--;
         }
+        var send_sms_url = domain + 'ucenter/UserCenter/sendSms';
         $.post(send_sms_url,postData,function(msg){
             requestSign = true;
             if(msg.status == 0){
