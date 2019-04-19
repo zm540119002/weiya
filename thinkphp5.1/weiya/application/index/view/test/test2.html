@@ -14,9 +14,15 @@
 {/block}
 {block name="suffix-script"}
 <script type="text/javascript">
-	Vue.component('component-a', {});
-	Vue.component('component-b', {});
-	Vue.component('component-c', {});
+	Vue.component('component-a', {
+		template: '<div>A custom component!</div>'
+	});
+	Vue.component('component-b', {
+		template: '<div>A custom component!</div>'
+	});
+	Vue.component('component-c', {
+		template: '<div>A custom component!</div>'
+	});
 	new Vue({ el: '#app' });
 </script>
 {/block}
