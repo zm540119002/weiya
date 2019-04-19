@@ -14,6 +14,13 @@
 {/block}
 {block name="script"}
 <script type="text/javascript">
-
+	var obj = {
+		foo: 'bar'
+	};
+//	Object.freeze(obj);
+	new Vue({
+		el: '#app',
+		data: obj
+	})
 </script>
 {/block}
