@@ -34,7 +34,9 @@
 {block name="content"}{/block}
 <!-- 公共模块-->
 {block name="common"}{/block}
+{block name="login_dialog"}
 {include file="../../api/public/template/login_dialog.html" /}
+{/block}
 <!-- 页脚模块-->
 {block name="footer"}
 <footer class="f24">
@@ -51,8 +53,8 @@
 <script type="text/javascript" src="api_common_js/common.js"></script>
 <script type="text/javascript" src="api_common_js/forbidscroll.js"></script>
 <script type="text/javascript" src="api_common_js/layer.mobile/layer.js"></script>
-<script type="text/javascript" src="api_common_js/dialog_index.js"></script>
-<script type="text/javascript" src="api_common_js/paging_index.js"></script>
+<script type="text/javascript" src="api_common_js/dialog.js"></script>
+<script type="text/javascript" src="api_common_js/paging.js"></script>
 <!-- 后置自定义js -->
 {block name="suffix-script"}{/block}
 </body></html>
