@@ -1,8 +1,9 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
-	<p>Using mustaches: {{ rawHtml }}</p>
-	<p>Using v-html directive: <span v-html="rawHtml"></span></p>
+	<div id="app">
+		{{ message }}
+	</div>
 </article>
 {/block}
 {block name="common"}{/block}
@@ -11,5 +12,11 @@
 {/block}
 {block name="script"}
 <script type="text/javascript">
+	var app = new Vue({
+		el: '#app',
+		data: {
+			message: 'Hello Vue!'
+		}
+	})
 </script>
 {/block}
