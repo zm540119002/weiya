@@ -1,9 +1,16 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
-	<div id="app-6">
-		<p>{{ message }}</p>
-		<input v-model="message">
+	<div id="app">
+		{{message }}<br>
+		<button v-on:click="showData">测试jquery加载数据</button>
+		<table border="1">
+			<tr v-for="menu in menus">
+				<td>{{menu.Name}}</td>
+				<td>{{menu.Url}}</td>
+				<td>{{menu.Country}}</td>
+			</tr>
+		</table>
 	</div>
 </article>
 {/block}
@@ -11,11 +18,33 @@
 {block name="footer"}{/block}
 {block name="suffix-script"}
 <script type="text/javascript">
-	var app6 = new Vue({
-		el: '#app-6',
+	var vm = new Vue({
+		el: "#app",
 		data: {
-			message: 'Hello Vue!'
+			message: "",
+			menus: ""
+		},
+		methods:{
+			showData:function () {
+				var url = action;
+				$.ajax({
+					url: url,
+					data: {},
+					type: 'post',
+					beforeSend: function(xhr){
+						$('.loading').show();
+					},
+					error:function(xhr){
+						$('.loading').hide();
+						dialog.error('AJAX错误');
+					},
+					success: function(data){
+						$('.loading').hide();
+//						vm.menus = data.sites;
+					}
+				});
+			}
 		}
-	})
+	});
 </script>
 {/block}

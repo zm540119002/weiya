@@ -4,9 +4,12 @@ class Test extends \common\controller\Base{
     /**首页
      */
     public function test(){
-        $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
-        $this->assign('unlockingFooterCart', $unlockingFooterCart);
-        return $this->fetch();
+        if(request()->isAjax()){
+            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
+            return json($unlockingFooterCart);
+        }else{
+            return $this->fetch();
+        }
     }
 
     public function test1(){
