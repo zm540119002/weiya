@@ -1,11 +1,21 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
+	<div id="app-6">
+		<p>{{ message }}</p>
+		<input v-model="message">
+	</div>
 </article>
 {/block}
 {block name="common"}{/block}
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
+	var app6 = new Vue({
+		el: '#app-6',
+		data: {
+			message: 'Hello Vue!'
+		}
+	})
 </script>
 {/block}
