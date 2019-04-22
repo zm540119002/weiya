@@ -17,14 +17,15 @@
 {block name="footer"}{/block}
 {block name="suffix-script"}
 <script type="text/javascript">
-	var vm = new Vue({
-		el: "#app",
-		data: {
-			message: "",
-			menus: ""
-		},
-		methods:{
-			showData:function () {
+	$(function(){
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				message: "",
+				menus: ""
+			},
+			methods:{
+				showData:function () {
 //				var url = action;
 //				$.ajax({
 //					url: url,
@@ -42,11 +43,12 @@
 //						vm.menus = data.menu;
 //					}
 //				});
-				var menus = '{:json_encode($list)}';
-				console.log(menus);
-				vm.menus = menus;
+					var menus = '{:json_encode($list)}';
+					console.log(menus);
+					vm.menus = menus;
+				}
 			}
-		}
+		});
 	});
 </script>
 {/block}
