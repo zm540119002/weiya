@@ -6,9 +6,10 @@ class Test extends \common\controller\Base{
     public function test(){
         if(request()->isAjax()){
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
-            $this->assign('list',$unlockingFooterCart);
-//            return json($unlockingFooterCart);
+            return json($unlockingFooterCart);
         }else{
+            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
+            $this->assign('list',$unlockingFooterCart);
             return $this->fetch();
         }
     }
