@@ -18,11 +18,14 @@
 {block name="suffix-script"}
 <script type="text/javascript">
 	$(function(){
+		var unlockingFooterCart = '{$unlockingFooterCart|raw}';
+		console.log(unlockingFooterCart);
+		console.log(typeof unlockingFooterCart);
 		var vm = new Vue({
 			el: "#app",
 			data: {
 				message: "",
-				menus: JSON.parse('{$unlockingFooterCart|raw}')
+				menus: unlockingFooterCart
 			},
 			methods:{
 				showData:function () {
