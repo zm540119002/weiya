@@ -12,10 +12,15 @@
 	</div>
 </article>
 <div class="f24 group_cart_nav" id="foot_cart_menu"></div>
+<template v-for="menu in menus">
+	<a href="javascript:void(0);" data-jump_url="{:url('Cart/addCart')}" class="">{{menu.name}}<span class="total_num"></span></a>
+</template>
 {include file="../../api/public/vue/components/cart.html" /}
 {/block}
 {block name="common"}{/block}
 {block name="footer"}
+<footer class="f24 group_cart_nav">
+</footer>
 {/block}
 {block name="suffix-script"}
 <script type="text/javascript">

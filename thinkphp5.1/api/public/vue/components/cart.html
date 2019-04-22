@@ -1,10 +1,8 @@
-<script type="x-template" id="foot_cart_tpl">
-    <div>
+<template id="foot_cart_tpl">
     <div class="group_btn30 bottom_item" v-for="menu in menus">
         <a href="javascript:void(0);" data-jump_url="{:url('Cart/addCart')}" class="">{{menu.name}}<span class="total_num"></span></a>
     </div>
-    </div>
-</script>
+</template>
 <script type="text/javascript">
     $(function(){
         var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
