@@ -19,8 +19,8 @@
 <script type="text/javascript">
 	$(function(){
 		var menus = '{:json_encode($list)}';
-		console.log(menus);
-		console.log(JSON.parse(menus));
+		console.log(typeof menus);
+		console.log(typeof JSON.parse(menus));
 		var vm = new Vue({
 			el: "#app",
 			data: {
