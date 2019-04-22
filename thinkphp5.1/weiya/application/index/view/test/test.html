@@ -18,14 +18,14 @@
 {block name="suffix-script"}
 <script type="text/javascript">
 	$(function(){
-		var menus = '{:json_encode($list)}';
+		var menus = JSON.parse('{:json_encode($list)}');
+		console.log(menus);
 		console.log(typeof menus);
-		console.log(typeof JSON.parse(menus));
 		var vm = new Vue({
 			el: "#app",
 			data: {
 				message: "",
-				menus: JSON.parse(menus)
+				menus: menus
 			},
 			methods:{
 				showData:function () {
@@ -46,7 +46,7 @@
 //							vm.menus = data.menu;
 //						}
 //					});
-//					vm.menus = JSON.parse(menus);
+//					vm.menus = menus;
 				}
 			}
 		});
