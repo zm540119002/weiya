@@ -6,7 +6,8 @@ class Test extends \common\controller\Base{
     public function test(){
         if(request()->isAjax()){
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
-            return json($unlockingFooterCart);
+            $this->assign('list',$unlockingFooterCart);
+//            return json($unlockingFooterCart);
         }else{
             return $this->fetch();
         }

@@ -25,23 +25,24 @@
 		},
 		methods:{
 			showData:function () {
-				var url = action;
-				$.ajax({
-					url: url,
-					data: {},
-					type: 'post',
-					beforeSend: function(xhr){
-						$('.loading').show();
-					},
-					error:function(xhr){
-						$('.loading').hide();
-						dialog.error('AJAX错误');
-					},
-					success: function(data){
-						$('.loading').hide();
-						vm.menus = data.menu;
-					}
-				});
+//				var url = action;
+//				$.ajax({
+//					url: url,
+//					data: {},
+//					type: 'post',
+//					beforeSend: function(xhr){
+//						$('.loading').show();
+//					},
+//					error:function(xhr){
+//						$('.loading').hide();
+//						dialog.error('AJAX错误');
+//					},
+//					success: function(data){
+//						$('.loading').hide();
+//						vm.menus = data.menu;
+//					}
+//				});
+				vm.menus = '{:json_encode($list)}';
 			}
 		}
 	});
