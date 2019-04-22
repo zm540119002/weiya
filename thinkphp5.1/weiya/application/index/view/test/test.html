@@ -42,7 +42,9 @@
 //						vm.menus = data.menu;
 //					}
 //				});
-				vm.menus = '{:json_encode($list)}';
+				var menus = '{:json_encode($list)}';
+				console.log(menus);
+				vm.menus = menus;
 			}
 		}
 	});
