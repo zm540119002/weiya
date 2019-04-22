@@ -17,7 +17,7 @@
 {block name="suffix-script"}
 <script type="text/javascript">
 	$(function(){
-		var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
+		var unlockingFooterCart = JSON.parse('{$unlockingFooterCart}');
 		console.log(unlockingFooterCart.menu);
 		console.log(typeof unlockingFooterCart.menu);
 		var vm = new Vue({
