@@ -2,7 +2,6 @@
 {block name="content"}
 <article class="f24">
 	<div id="app">
-		{{message }}<br>
 		<button v-on:click="showData">测试jquery加载数据</button>
 		<table border="1">
 			<tr v-for="menu in menus">
@@ -19,13 +18,13 @@
 <script type="text/javascript">
 	$(function(){
 		var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
-		console.log(unlockingFooterCart);
-		console.log(typeof unlockingFooterCart);
+		console.log(unlockingFooterCart.menu);
+		console.log(typeof unlockingFooterCart.menu);
 		var vm = new Vue({
 			el: "#app",
 			data: {
 				message: "",
-				menus: unlockingFooterCart
+				menus: unlockingFooterCart.menus
 			},
 			methods:{
 				showData:function () {
