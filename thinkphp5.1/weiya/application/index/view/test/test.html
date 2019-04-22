@@ -18,6 +18,8 @@
 {block name="suffix-script"}
 <script type="text/javascript">
 	$(function(){
+		var menus = '{:json_encode($list)}';
+		console.log(menus);
 		var vm = new Vue({
 			el: "#app",
 			data: {
@@ -43,8 +45,6 @@
 //						vm.menus = data.menu;
 //					}
 //				});
-					var menus = '{:json_encode($list)}';
-					console.log(menus);
 					vm.menus = menus;
 				}
 			}
