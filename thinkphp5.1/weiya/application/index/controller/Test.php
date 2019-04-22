@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 class Test extends \common\controller\Base{
-    /**首页
+    /**测试
      */
     public function test(){
         if(request()->isAjax()){
@@ -15,10 +15,14 @@ class Test extends \common\controller\Base{
         }
     }
 
+    /**测试1
+     */
     public function test1(){
         return $this->fetch();
     }
 
+    /**测试2
+     */
     public function test2(){
         return $this->fetch();
     }
