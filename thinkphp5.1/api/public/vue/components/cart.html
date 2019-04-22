@@ -1,6 +1,8 @@
 <template id="foot_cart_tpl">
+    <div>
     <div class="group_btn30 bottom_item" v-for="menu in menus">
         <a href="javascript:void(0);" data-jump_url="{:url('Cart/addCart')}" class="">{{menu.name}}<span class="total_num"></span></a>
+    </div>
     </div>
 </template>
 <script type="text/javascript">
