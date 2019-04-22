@@ -30,14 +30,16 @@ return [
     // 标签库标签结束标记
     'taglib_end'   => '}',
     'tpl_replace_string' => [
-        //common    资源路径
-        'public_js' => Request::domain() .'/static/common/js',
-        'public_css' => Request::domain() .'/static/common/css',
-        'public_img' => Request::domain() .'/static/common/img',
         //api    资源路径
         'api_common_js' => 'https://api.worldview.com.cn/static/common/js',
         'api_common_css' => 'https://api.worldview.com.cn/static/common/css',
         'api_common_img' => 'https://api.worldview.com.cn/static/common/img',
+        'api_common_uploads' => 'https://api.worldview.com.cn/uploads',
+        'api_common_vue' => 'https://api.worldview.com.cn/vue',
+        //common  资源路径，此处不能命名成common_js，与下面的api_common_js冲突
+        'public_js' => Request::domain() .'/static/common/js',
+        'public_css' => Request::domain() .'/static/common/css',
+        'public_img' => Request::domain() .'/static/common/img',
         //index     资源路径
         'index_js' => Request::domain() .'/static/index/js',
         'index_css' => Request::domain() .'/static/index/css',
@@ -56,6 +58,8 @@ return [
         'hui_admin_css' => Request::domain() .'/static/h-ui.admin/css',
         'hui_admin_img' => Request::domain() .'/static/h-ui.admin/images',
         'hui_admin_skin' => Request::domain() .'/static/h-ui.admin/skin',
+
+
         //上传路径
         'public_uploads' => Request::domain() .'/uploads',
     ],

@@ -316,14 +316,16 @@ function date(format, timestamp) {
  */
 $.fn.serializeObject = function() {
     var o = {};
-    var a = this.serializeArray();
-    $.each(a, function(index,val) {
+    var form = $(this)
+        .not('input[type=checkbox]')
+        .serializeArray();
+    $.each(form, function(index,val) {
         if (o[this.name]) {
             if (!o[this.name].push) {
-                o[this.name] = [ o[this.name] ];
+                o[this.name] = [o[this.name]];
             }
             o[this.name].push(this.value || '');
-        } else {
+        }else{
             o[this.name] = this.value || '';
         }
     });

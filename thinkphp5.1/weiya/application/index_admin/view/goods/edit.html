@@ -1,9 +1,4 @@
 {extend name="template/admin_pc/base.html" /}
-{block name="css-customize"}
-    <link type="text/css" rel="stylesheet" href="index_admin_css/fenlei.css" />
-    <link type="text/css" rel="stylesheet" href="index_admin_css/skin.css" />
-{/block}
-
 {block name="content"}
     <div class="page">
         <div class="fixed-bar">
@@ -203,7 +198,7 @@
             autoFloatEnabled: true
         });
     </script>
-    <script type="text/javascript" src="index_admin_js/categoryLinkage.js"></script>
+    <script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function(){
             var parameters = '{$info.parameters|raw}';

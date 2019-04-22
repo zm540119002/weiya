@@ -1,0 +1,32 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<article class="f24">
+	<div id="app">
+		<component-a></component-a>
+		<component-b></component-b>
+		<component-c></component-c>
+	</div>
+</article>
+{/block}
+{block name="common"}
+<script type="x-template" id="demo4">
+	<h1 style="color:red">我是script标签模板4</h1>
+</script>
+{/block}
+{block name="footer"}{/block}
+{block name="css-customize"}
+{/block}
+{block name="suffix-script"}
+<script type="text/javascript">
+	Vue.component('component-a', {
+		template:'#demo4'
+	});
+	Vue.component('component-b', {
+		template:'#demo4'
+	});
+	Vue.component('component-c', {
+		template:'#demo4'
+	});
+	new Vue({ el: '#app' });
+</script>
+{/block}
