@@ -42,6 +42,9 @@
     {else /}
     {/if}
     {/volist}
+    <div class="group_btn30 bottom_item" v-for="menu in menus">
+        <a href="javascript:void(0);" data-jump_url="{:url('Cart/addCart')}" class="{{menu.class}}">{{menu.name}}<span class="total_num"></span></a>
+    </div>
 </script>
 <script type="text/javascript">
     $(function(){
