@@ -2,7 +2,6 @@
 {block name="content"}
 <article class="f24">
 	<div id="app">
-		{{message }}<br>
 		<button v-on:click="showData">测试jquery加载数据</button>
 		<table border="1">
 			<tr v-for="menu in menus">
@@ -17,33 +16,19 @@
 {block name="footer"}{/block}
 {block name="suffix-script"}
 <script type="text/javascript">
-	var vm = new Vue({
-		el: "#app",
-		data: {
-			message: "",
-			menus: ""
-		},
-		methods:{
-			showData:function () {
-				var url = action;
-				$.ajax({
-					url: url,
-					data: {},
-					type: 'post',
-					beforeSend: function(xhr){
-						$('.loading').show();
-					},
-					error:function(xhr){
-						$('.loading').hide();
-						dialog.error('AJAX错误');
-					},
-					success: function(data){
-						$('.loading').hide();
-						vm.menus = data.menu;
-					}
-				});
+	$(function(){
+		var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				message: "",
+				menus: unlockingFooterCart.menu
+			},
+			methods:{
+				showData:function () {
+				}
 			}
-		}
+		});
 	});
 </script>
 {/block}
