@@ -1,53 +1,49 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
-	<section class="content_main">
-		<div id="app">
-			<com-1></com-1>
-		</div>
-		<script type="text/x-template" id="com-1">
-			<div>
-				<input type="button" @click="addCount" value="count++">
-				<com-2 v-bind:count="count"></com-2>
-			</div>
-		</script>
-		<script type="text/x-template" id="com-2">
-			<div>
-				count: {{count}}
-			</div>
-		</script>
-	</section>
+	<div id="app">
+		{{message }}<br>
+		<button v-on:click="showData">测试jquery加载数据</button>
+		<table border="1">
+			<tr v-for="menu in menus">
+				<td>{{menu.name}}</td>
+				<td>{{menu.class}}</td>
+			</tr>
+		</table>
+	</div>
 </article>
 {/block}
 {block name="common"}{/block}
 {block name="footer"}{/block}
-{block name="script"}
-<script type="text/javascript" src="api_common_vue/cart.js"></script>
+{block name="suffix-script"}
 <script type="text/javascript">
-	$(function(){
-		Vue.component('com-1', {
-			template: '#com-1',
-			data: function () {
-				return {
-					count: 0
-				}
-			},
-			methods: {
-				addCount: function () {
-					this.count += 1;
-				}
+	var vm = new Vue({
+		el: "#app",
+		data: {
+			message: "",
+			menus: ""
+		},
+		methods:{
+			showData:function () {
+				var url = action;
+				$.ajax({
+					url: url,
+					data: {},
+					type: 'post',
+					beforeSend: function(xhr){
+						$('.loading').show();
+					},
+					error:function(xhr){
+						$('.loading').hide();
+						dialog.error('AJAX错误');
+					},
+					success: function(data){
+						$('.loading').hide();
+						vm.menus = data.menu;
+					}
+				});
 			}
-		});
-
-		Vue.component('com-2', {
-			template: '#com-2',
-			props: {
-				count: 0
-			}
-		});
-		var vm = new Vue({
-			el: '#app'
-		});
+		}
 	});
 </script>
 {/block}
