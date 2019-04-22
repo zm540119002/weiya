@@ -20,11 +20,12 @@
 	$(function(){
 		var menus = '{:json_encode($list)}';
 		console.log(menus);
+		console.log(JSON.parse(menus));
 		var vm = new Vue({
 			el: "#app",
 			data: {
 				message: "",
-				menus: ''
+				menus: JSON.parse(menus)
 			},
 			methods:{
 				showData:function () {
@@ -45,7 +46,7 @@
 //							vm.menus = data.menu;
 //						}
 //					});
-					vm.menus = JSON.parse(menus);
+//					vm.menus = JSON.parse(menus);
 				}
 			}
 		});
