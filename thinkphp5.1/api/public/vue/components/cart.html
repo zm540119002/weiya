@@ -1,6 +1,18 @@
 <template id="foot_cart_tpl">
     <footer class="f24 ">
-
+        <div class="group_cart_nav" v-if="menusCount===1">
+            <a href="javascript:void(0);" class="group_btn100 bottom_item"
+               v-for="menu in menus" v-bind:class="menu.class">{{menu.name}}
+                <span class="total_num" v-if="menu.class==='amount'">￥<span class="price">0.00</span></span>
+                <span class="s_i" v-else></span>
+            </a>
+        </div>
+        <div class="group_cart_nav" v-if="menusCount===2">
+            <a class="group_btn30 bottom_item" href="javascript:void(0);" data-jump_url="{:url('Cart/addCart')}"
+               v-for="menu in menus" v-bind:class="menu.class">{{menu.name}}
+                <span class="total_num" v-if="menu.class==='amount'">￥<span class="price">0.00</span></span>
+            </a>
+        </div>
         <div class="group_cart_nav" v-if="menusCount===3">
             <a class="group_btn30 bottom_item" href="javascript:void(0);" data-jump_url="{:url('Cart/addCart')}"
                v-for="menu in menus" v-bind:class="menu.class">{{menu.name}}
