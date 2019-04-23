@@ -1,22 +1,24 @@
 <template id="foot_cart_tpl">
-    <div class="group_btn30 bottom_item" v-for="menu in menus">
-        <a href="javascript:void(0);" data-jump_url="{:url('Cart/addCart')}" class="">{{menu.name}}<span class="total_num"></span></a>
-    </div>
+    <footer class="f24 group_cart_nav">
+        <div class="group_btn30 bottom_item" v-show="menusCount==2" v-for="menu in menus">
+            <a href="javascript:void(0);" data-jump_url="{:url('Cart/addCart')}" v-bind:class="menu.class">{{menu.name}}
+                <span class="total_num"></span>
+            </a>
+        </div>
+    </footer>
 </template>
 <script type="text/javascript">
     $(function(){
         var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
-        var vm = new Vue({
-            el: "#foot_cart_menu",
-            template:'#foot_cart_tpl',
-            data: {
-                message: "",
-                menus: unlockingFooterCart.menu
-            },
-            methods:{
-                showData:function () {
+        console.log(unlockingFooterCart);
+        Vue.component('footer-cart', {
+            data: function () {
+                return {
+                    menus: unlockingFooterCart.menu,
+                    menusCount: unlockingFooterCart.count
                 }
-            }
+            },
+            template:'#foot_cart_tpl'
         });
     });
 </script>
