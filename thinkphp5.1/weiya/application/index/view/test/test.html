@@ -1,37 +1,17 @@
 {extend name="template/base.html" /}
-{block name="content"}
-<article class="f24">
-	<div id="app">
-		<button v-on:click="showData">测试jquery加载数据</button>
-		<table border="1">
-			<tr v-for="menu in menus">
-				<td>{{menu.name}}</td>
-				<td>{{menu.class}}</td>
-			</tr>
-		</table>
-	</div>
-</article>
-{/block}
+{block name="content"}{/block}
 {block name="common"}
-{include file="../../api/public/vue/components/cart.html" /}{/block}
+	{include file="../../api/public/vue/components/cart.html" /}
+{/block}
 {block name="footer"}
-<footer class="f24 group_cart_nav" id="foot_cart_menu"></footer>
+	<div id="foot_cart_menu">
+		<footer-cart></footer-cart>
+	</div>
 {/block}
 {block name="suffix-script"}
 <script type="text/javascript">
 	$(function(){
-		var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
-		var vm = new Vue({
-			el: "#app",
-			data: {
-				message: "",
-				menus: unlockingFooterCart.menu
-			},
-			methods:{
-				showData:function () {
-				}
-			}
-		});
+		new Vue({ el: '#foot_cart_menu' });
 	});
 </script>
 {/block}
