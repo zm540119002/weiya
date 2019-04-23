@@ -8,18 +8,27 @@
 <script type="text/javascript">
     $(function(){
         var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
-        console.log(unlockingFooterCart);
-        var vm = new Vue({
-            el: "#foot_cart_menu",
-            template:'#foot_cart_tpl',
-            data: {
-                message: "",
-                menus: unlockingFooterCart.menu
-            },
-            methods:{
-                showData:function () {
+        Vue.component('footer-cart', {
+            data: function () {
+                return {
+                    menus: unlockingFooterCart.menu
                 }
-            }
+            },
+            template:'#foot_cart_tpl'
         });
+        new Vue({ el: '#foot_cart_menu' });
+//        var vm = new Vue({
+//            el: "#foot_cart_menu",
+//            template:'#foot_cart_tpl',
+//            data: {
+//                message: "",
+//                menus: unlockingFooterCart.menu
+//            },
+//            methods:{
+//                showData:function () {
+//                }
+//            }
+//        });
+
     });
 </script>
