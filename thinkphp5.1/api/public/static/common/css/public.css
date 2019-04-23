@@ -312,6 +312,9 @@ i{
 .group_cart_nav a.amount{
     color:#333;
 }
+.group_cart_nav .total_num{
+    color:#ff1d25;
+}
 .group_btn30{width:33.3%;box-sizing: border-box;}
 .group_btn50{width:50%;}
 .group_btn75{width:85%;}
