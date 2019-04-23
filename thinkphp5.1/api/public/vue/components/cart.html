@@ -13,13 +13,13 @@
         var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
         console.log(unlockingFooterCart);
         Vue.component('footer-cart', {
+            template:'#foot_cart_tpl',
             data: function () {
                 return {
                     menus: unlockingFooterCart.menu,
                     menusCount: unlockingFooterCart.count
                 }
-            },
-            template:'#foot_cart_tpl'
+            }
         });
     });
 </script>
