@@ -1,7 +1,8 @@
 <template id="foot_cart_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav" v-if="menusCount===3">
-            <a class="group_btn30 bottom_item" href="javascript:void(0);" data-jump_url="{:url('Cart/addCart')}" v-for="menu in menus" v-bind:class="menu.class">{{menu.name}}
+            <a class="group_btn30 bottom_item" href="javascript:void(0);" data-jump_url="{:url('Cart/addCart')}"
+               v-for="menu in menus" v-bind:class="menu.class">{{menu.name}}
                 <span class="total_num"></span>
             </a>
         </div>
@@ -9,7 +10,7 @@
 </template>
 <script type="text/javascript">
     $(function(){
-        var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');2
+        var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
         console.log(unlockingFooterCart);
         Vue.component('footer-cart', {
             data: function () {
