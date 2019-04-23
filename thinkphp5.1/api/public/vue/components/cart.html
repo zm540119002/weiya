@@ -1,7 +1,7 @@
 <template id="foot_cart_tpl">
     <footer class="f24 group_cart_nav">
-        <div class="group_btn30 bottom_item" v-if="(menusCount==3)" v-for="menu in menus">
-            <a href="javascript:void(0);" data-jump_url="{:url('Cart/addCart')}" v-bind:class="menu.class">{{menu.name}}
+        <div class="group_btn30 bottom_item" v-if="menusCount===3">
+            <a href="javascript:void(0);" data-jump_url="{:url('Cart/addCart')}" v-for="menu in menus" v-bind:class="menu.class">{{menu.name}}
                 <span class="total_num"></span>
             </a>
         </div>
