@@ -23,18 +23,7 @@
 {block name="suffix-script"}
 <script type="text/javascript">
 	$(function(){
-		var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
-		var vm = new Vue({
-			el: "#app",
-			data: {
-				message: "",
-				menus: unlockingFooterCart.menu
-			},
-			methods:{
-				showData:function () {
-				}
-			}
-		});
+		new Vue({ el: '#foot_cart_menu' });
 	});
 </script>
 {/block}
