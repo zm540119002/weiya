@@ -16,23 +16,132 @@
 return [
     //底部购物车配置
     'menu' => [
-        ['name'   => '总金额','class'=>'amount',],//0
-        ['name'   => '加入购物车','class'=>'add_cart','action'=>url('Cart/addCart'),],//1
-        ['name'   => '购物车','class'=>'add_cart_icon'],//2
-        ['name'   => '立即购买','class'=>'buy_now'],//3
-        ['name'   => '提交订单','class'=>'confirm_order'],//4
-        ['name'   => '支付','class'=>'pay'],//5
-        ['name'   => '增加地址','class'=>'address_save'],//6
-        ['name'   => '修改地址','class'=>'address_save'],//7
-        ['name'   => '新建地址','class'=>'address_create'],//8
-        ['name'   => '去结算','class'=>'settlement'],//9
-        ['name'   => '全选','class'=>'checked_all'],//10
-        ['name'   => '提交订单','class'=>'confirm_order'],//11
-        ['name'   => '确认收货','class'=>'confirm_receive'],//12
-        ['name'   => '去评价','class'=>'to_evaluate '],//13
-        ['name'   => '再次购买','class'=>'purchase_again '],//14
-        ['name'   => '增加商标','class'=>'add_brand'],//15
-        ['name'   => '立即提交','class'=>'submit'],//16
-        ['name'   => '删除','class'=>'delete']//17
+        [
+            'name'   => '总金额',
+            'class'=>[
+                'bottom_item',
+                'amount',
+            ],
+        ],//0
+        [
+            'name'   => '加入购物车',
+            'class'=>[
+                'bottom_item',
+                'add_cart',
+            ],
+            'action'=>url('Cart/addCart'),
+        ],//1
+        [
+            'name'   => '购物车',
+            'class'=>[
+                'bottom_item',
+                'add_cart_icon',
+            ],
+        ],//2
+        [
+            'name'   => '立即购买',
+            'class'=>[
+                'bottom_item',
+                'buy_now',
+            ],
+        ],//3
+        [
+            'name'   => '提交订单',
+            'class'=>[
+                'bottom_item',
+                'confirm_order',
+            ],
+        ],//4
+        [
+            'name'   => '支付',
+            'class'=>[
+                'bottom_item',
+                'pay',
+            ],
+        ],//5
+        [
+            'name'   => '增加地址',
+            'class'=>[
+                'bottom_item',
+                'address_save',
+            ],
+        ],//6
+        [
+            'name'   => '修改地址',
+            'class'=>[
+                'bottom_item',
+                'address_save',
+            ],
+        ],//7
+        [
+            'name'   => '新建地址',
+            'class'=>[
+                'bottom_item',
+                'address_create',
+            ],
+        ],//8
+        [
+            'name'   => '去结算',
+            'class'=>[
+                'bottom_item',
+                'settlement',
+            ],
+        ],//9
+        [
+            'name'   => '全选',
+            'class'=>[
+                'bottom_item',
+                'checked_all',
+            ],
+        ],//10
+        [
+            'name'   => '提交订单',
+            'class'=>[
+                'bottom_item',
+                'confirm_order',
+            ],
+        ],//11
+        [
+            'name'   => '确认收货',
+            'class'=>[
+                'bottom_item',
+                'confirm_receive',
+            ],
+        ],//12
+        [
+            'name'   => '去评价',
+            'class'=>[
+                'bottom_item',
+                'to_evaluate',
+            ],
+        ],//13
+        [
+            'name'   => '再次购买',
+            'class'=>[
+                'bottom_item',
+                'purchase_again',
+            ],
+        ],//14
+        [
+            'name'   => '增加商标',
+            'class'=>[
+                'bottom_item',
+                'add_brand',
+            ],
+        ],//15
+        [
+            'name'   => '立即提交',
+            'class'=>[
+                'bottom_item',
+                'submit',
+            ],
+        ],//16
+        [
+            'name'   => '删除',
+            'class'=>[
+                'bottom_item',
+                'delete',
+            ],
+        ]//17
     ],
 ];
