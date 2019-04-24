@@ -62,6 +62,7 @@ function getUnit($num){
 function unlockingFooterCartConfig($arr){
     $footerCartConfig = config('footer_menu.menu');
     $tempArr = array();
+    $tempArr['count'] = count($arr);
     foreach ($arr as $val) {
         $tempArr['menu'][] = $footerCartConfig[$val];
     }
