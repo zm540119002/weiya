@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="group_cart_nav" v-else-if="menusCount===2">
-            <a class="group_btn50 bottom_item" href="javascript:void(0);" v-for="menu in menus"
+            <a href="javascript:void(0);" class="group_btn50 bottom_item" v-for="menu in menus"
                :data-jump_url="menu.action" :class="menu.class">{{menu.name}}
                 <div class="select_checkbox_box" v-if="menu.class==='checked_all'">
                     <input type="checkbox" class="item_checkbox checkall ">
@@ -17,7 +17,7 @@
             </a>
         </div>
         <div class="group_cart_nav" v-else-if="menusCount===3">
-            <a class="group_btn30 bottom_item" href="javascript:void(0);" v-for="menu in menus"
+            <a href="javascript:void(0);" class="group_btn30 bottom_item" v-for="menu in menus"
                :data-jump_url="menu.action" :class="menu.class">{{menu.name}}
                 <span class="total_num" v-if="menu.class==='amount'">￥<span class="price">0.00</span></span>
                 <span class="s_i" v-else></span>
