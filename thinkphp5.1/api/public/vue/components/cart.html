@@ -1,26 +1,18 @@
 <template id="foot_cart_tpl">
     <footer class="f24 ">
-        <div class="group_cart_nav" v-if="menusCount===1">
-            <a href="javascript:void(0);" class="group_btn100 bottom_item" v-for="menu in menus"
-               :data-jump_url="menu.action" :class="menu.class">{{menu.name}}
-                <span class="total_num" v-if="menu.class==='amount'">￥<span class="price">0.00</span></span>
-                <span class="s_i" v-else></span>
-            </a>
-        </div>
-        <div class="group_cart_nav" v-else-if="menusCount===2">
+        <div class="group_cart_nav">
             <a href="javascript:void(0);" class="group_btn50 bottom_item" v-for="menu in menus"
                :data-jump_url="menu.action" :class="menu.class">{{menu.name}}
-                <div class="select_checkbox_box" v-if="menu.class==='checked_all'">
-                    <input type="checkbox" class="item_checkbox checkall ">
+                <div class="" v-if="menu.class==='checked_all'">
+                    <input type="checkbox" class="item_checkbox check-all ">
                     <label for="" class="left">全选</label>
                 </div>
-            </a>
-        </div>
-        <div class="group_cart_nav" v-else-if="menusCount===3">
-            <a href="javascript:void(0);" class="group_btn30 bottom_item" v-for="menu in menus"
-               :data-jump_url="menu.action" :class="menu.class">{{menu.name}}
-                <span class="total_num" v-if="menu.class==='amount'">￥<span class="price">0.00</span></span>
-                <span class="s_i" v-else></span>
+                <div class="" v-else-if="menu.class==='amount'">
+                    <span class="total_num" v-if="menu.class==='amount'">￥<span class="price">0.00</span></span>
+                </div>
+                <div class="" v-else>
+                    <span class="s_i"></span>
+                </div>
             </a>
         </div>
     </footer>
