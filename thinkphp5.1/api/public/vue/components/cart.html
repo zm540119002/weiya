@@ -1,7 +1,7 @@
 <template id="foot_cart_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" class="group_btn50 bottom_item" v-for="menu in menus"
+            <a href="javascript:void(0);" class="bottom_item" v-for="menu in menus"
                :data-jump_url="menu.action" :class="menu.class">{{menu.name}}
                 <div class="" v-if="menu.class==='checked_all'">
                     <input type="checkbox" class="item_checkbox check-all ">

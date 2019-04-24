@@ -12,7 +12,6 @@ class Test extends \common\controller\Base{
             $unlockingFooterCart['menu'][0]['class'] .= ' group_btn50';
             $unlockingFooterCart['menu'][1]['class'] .= ' group_btn30';
             $unlockingFooterCart['menu'][2]['class'] .= ' group_btn30';
-            print_r($unlockingFooterCart);
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             return $this->fetch();
         }
