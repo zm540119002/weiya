@@ -267,7 +267,7 @@
                                 $('#address_info').find('.address_edit').hide();
                                 setTimeout(function(){
                                     layer.closeAll();
-                                },1000)
+                                },1000);
                                 return false;
                             })
                         });
@@ -295,7 +295,7 @@
 					$(this).attr('data-off',1);
 				}
 			});
-        })
+        });
         //新增和修改地址弹窗
         var addressInfo=$('.section-address').html();
         function addressLayer(title,data){
