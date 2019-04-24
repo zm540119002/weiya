@@ -22,6 +22,7 @@
                     <span class="s_i"></span>
                 </div>
             </a>
+            <button @click="doThis"></button>
         </div>
     </footer>
 </template>
@@ -35,6 +36,11 @@
             data: function () {
                 return {
                     menus: unlockingFooterCart.menu
+                }
+            },
+            methods: {
+                doThis: function () {
+                    console.log(this);
                 }
             }
         });
