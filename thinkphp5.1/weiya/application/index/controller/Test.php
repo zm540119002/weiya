@@ -9,7 +9,7 @@ class Test extends \common\controller\Base{
             return json_encode($unlockingFooterCart);
         }else{
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
-            $unlockingFooterCart['menu'][0]['class'] .= ' group_btn50';
+            $unlockingFooterCart['menu'][0]['class'] .= ' group_btn30';
             $unlockingFooterCart['menu'][1]['class'] .= ' group_btn30';
             $unlockingFooterCart['menu'][2]['class'] .= ' group_btn30';
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
