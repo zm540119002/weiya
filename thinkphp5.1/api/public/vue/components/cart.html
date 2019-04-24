@@ -3,8 +3,8 @@
         <div class="group_cart_nav">
             <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
-                <div class="" v-if="menu.class.indexOf('checked_all')!=-1">
-                    <input type="checkbox" class="item_checkbox check-all ">
+                <div v-if="menu.class.indexOf('checked_all')!=-1">
+                    <input type="checkbox" class="check-all">
                     <label for="" class="left">全选</label>
                 </div>
                 <span class="total_num" v-else-if="menu.class.indexOf('amount')!=-1" class="amount">￥<span class="price">0.00</span></span>
