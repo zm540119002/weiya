@@ -28,6 +28,7 @@
 <script type="text/javascript">
     $(function(){
         var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
+        console.log(unlockingFooterCart);
         Vue.component('footer-cart', {
             template:'#foot_cart_tpl',
             data: function () {
