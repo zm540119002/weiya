@@ -8,9 +8,10 @@ class Test extends \common\controller\Base{
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             return json_encode($unlockingFooterCart);
         }else{
-            $unlockingFooterCart = json_encode(unlockingFooterCartConfig([0,2,1]));
-            $this->assign('unlockingFooterCart',$unlockingFooterCart);
+            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             print_r($unlockingFooterCart);
+            $unlockingFooterCart = json_encode($unlockingFooterCart);
+            $this->assign('unlockingFooterCart',$unlockingFooterCart);
             return $this->fetch();
         }
     }
