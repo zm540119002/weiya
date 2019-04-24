@@ -1,59 +1,9 @@
 {extend name="template/base.html" /}
 {block name="nav">提交订单{/block}
 {block name="content"}
-<!--结算方式模板-->
-<section class="settlementMethod" style="display:none;">
-    <div class="f24 pay_wrapper">
-        <section class="header_title separation-line">
-            <a href="javascript:void(0);" class="back_prev_page"></a>
-            <h2 class="f24">选择结算方式</h2>
-        </section>
-        <section>
-            <div>
-                <ul class="pay_nav">
-                    <!-- 待优化 -->
-                    {if !empty($walletInfo) && $walletInfo.amount>0}
-                    <li data-paycode="4">
-                        <span class="selected"></span>
-                        钱包支付
-                        <span class="wx">余额：￥<price>{$walletInfo.amount|default=0}</price></span>
-                    </li>
-                    {else /}
-                    <li data-paycode="4" class="disabled">
-                        <span class="selected"></span>
-                        钱包支付
-                        <span class="wx">余额：￥<price>{$walletInfo.amount|default=0}</price></span>
-                    </li>
-                    {/if}
-
-                    <li data-paycode="1">
-                        微信支付
-                        <span class="selected"></span>
-                        <span class="wx"></span>
-                    </li>
-                    <li data-paycode="2" id="alipay">
-                        支付宝支付
-                        <span class="selected"></span>
-                        <span class="wx"></span>
-                    </li>
-                    <li data-paycode="3">
-                        银联支付
-                        <span class="selected"></span>
-                        <span class="wx"></span>
-                    </li>
-                </ul>
-            </div>
-            <form  method="post" class="pay_form" id="pay_info">
-                <input type="hidden" name="order_sn" value="{$orderGoodsList[0]['sn']}"/>
-                <input type="hidden" name="pay_code" value="" class="pay_code"/>
-                <input type="button" value="立即结算" class="submit_btn"/>
-            </form>
-        </section>
-    </div>
-</section>
     <article class="f24 fill_order_wrapper">
         <section class="header_title separation-line">
-            <a href="javascript:void(0);" class="back_prev_page"></a>
+            <a href="javascript:void(0);" class="back_prev_page async_login" data-jump_url="{:url('Mine/index')}"></a>
             <h2 class="f24">提交订单</h2>
         </section>
         <div id="address_info">
@@ -62,7 +12,7 @@
                 <div class="item_addr address_info" >
                     <div class="ia-l"></div>
                     <div class="item_info">
-                        <input type="hidden" value=" {$defaultAddress.id}" class="address_id">
+                        <input type="hidden" value=" {$defaultAddress.id}" class="address_id"> 
                         <div class="mt_new">
                             <span class="consignee">{$defaultAddress.consignee}</span>
                             <span class="mobile">{$defaultAddress.mobile}</span>
@@ -81,7 +31,7 @@
                             <input type="hidden" class="" name="layer_mobile" value="{$defaultAddress.mobile}" />
                             <input type="hidden" class="" name="layer_detail_address" value="{$defaultAddress.detail_address}" />
                             <input type="hidden" class="" name="is_default" value="{$defaultAddress.is_default}" />
-                        </form>
+                        </form>    
                     </div>
                     <div class="edit_operate">
                         <a href="javascript:void(0);" class="select_address">选择地址></a>
@@ -94,7 +44,7 @@
                 <div class="item_addr address_info">
                     <div class="ia-l"></div>
                     <div class="item_info">
-                        <input type="hidden" value=" {$addressList[0]['id']}" class="address_id">
+                        <input type="hidden" value=" {$addressList[0]['id']}" class="address_id"> 
                         <div class="mt_new">
                             <span class="consignee">{$addressList[0]['consignee']}</span>
                             <span class="mobile">{$addressList[0]['mobile']}</span>
@@ -121,9 +71,9 @@
                         </a>
                     </div>
                 </div>
-
+                        
                 {/notempty}
-
+                
                 {else /}
                 <a href="javascript:void(0);" class="add_address"><span>+</span>添加收货地址</a>
             {/notempty}
@@ -138,7 +88,11 @@
                 {volist name="orderGoodsList" id="info"}
                 <li id="li-id-{$key}" data-order_detail_id="{$info.order_detail_id}">
                     <a href="{:url('Goods/detail',['id'=>$info.goods_id])}">
-                        <img data-img="" data-isloaded="" src="{:show_img_handle($info.thumb_img)}" alt="" class="c_img left" />
+                        {notempty name="info.thumb_img"}
+                        <img data-img="" data-isloaded="" src="public_uploads/{$info.thumb_img}" alt="" class="c_img left" />
+                        {else /}
+
+                        {/notempty}
                     </a>
                     <div class="g_order_r">
                         <p class="headline">{$info.headline}</p>
@@ -153,6 +107,12 @@
                         <div class="">购买类型：<span>样品购买</span></div>
                         {else /}
                         {/if}
+                        <div class="columns_flex">
+                            已设定品牌：<span class="brand_name" data-id="{$info.brand_id}">{$info.brand_name}</span>
+                        </div>
+                        <div>
+                             <a href="javascript:;" class="set_brand">设定品牌></a>
+                        </div>
                     </div>
                 </li>
                 {/volist}
@@ -206,7 +166,7 @@
 			<div class="item_addr">
 				<div class="ia-l"></div>
 				<div class="item_info">
-					<input type="hidden" value="{$vo.id}" class="address_id">
+					<input type="hidden" value="{$vo.id}" class="address_id"> 
 					<div class="mt_new">
 						<span>{$vo.consignee}</span>
 						<span>{$vo.mobile}</span>
@@ -235,7 +195,7 @@
                 </div>
 			</div>
 		{/volist}
-	</section>
+	</section> 
      <!--选择地区弹层-->
     <section id="areaLayer" class="express-area-box" style="display:none;">
         <header>
@@ -258,20 +218,10 @@
 {/block}
 {block name="script"}
     <script src="api_common_js/jquery.area.js"></script>
-
+    <script type="text/javascript" src="index_js/footerCart.js"></script>
     <script type="text/javascript">
         var addressList={:json_encode($addressList)};
         $(function(){
-
-
-            // 做到这里
-            $('body').on('click','.settlementmethod .pay_nav li',function(){
-                $(this).addClass('current').siblings().removeClass('current');
-                var pay_code = $(this).data('paycode');
-                $(this).find('input[type="checkbox"]').prop('checked',true);
-                $('.pay_code').val(pay_code);
-            });
-
             $('.edit_operate').find('.address_edit').hide();
             if(!$.isEmptyObject(addressList)){
                 var data=$('.address_info .consigneeInfo').serializeObject();
@@ -317,7 +267,7 @@
                                 $('#address_info').find('.address_edit').hide();
                                 setTimeout(function(){
                                     layer.closeAll();
-                                },1000)
+                                },1000);
                                 return false;
                             })
                         });
@@ -345,52 +295,7 @@
 					$(this).attr('data-off',1);
 				}
 			});
-            //结算
-            var settlementMethod=$('.settlementMethod').html();
-            $('body').on('click','.confirm_order',function(){
-/*                layer.open({
-                    title:['选择结算方式','border-bottom:1px solid #d9d9d9;'],
-                    type:1,
-                    anim:'up',
-                    className:'settlementmethod bankTransferLayer',
-                    content:settlementMethod
-                })*/
-                layer.open({
-                    type: 1
-                    ,anim: 'up'
-                    ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
-                    className:'settlementmethod bankTransferLayer',
-                    content: settlementMethod
-                });
-            })
-
-            // 提交订单 增加支付方式
-            var url   =  module + 'Order/confirmOrderPay';
-            $('body').on('click','.submit_btn',function () {
-                var pay_code = $('input[name=pay_code]').val();
-                var sn = $('input[name=order_sn]').val();
-                if(!pay_code){
-                    dialog.error('请选择支付方式');
-                    return false;
-                }
-
-                var postData = {};
-                postData.pay_code = pay_code;
-                postData.sn       = sn;
-
-                $.post(url,postData,function(data){
-                    if(data.status){
-                        location.href = data.info;
-
-                    }else{
-                        dialog.error('结算提交失败!');
-                    }
-                });
-
-            });
-            
         });
-
         //新增和修改地址弹窗
         var addressInfo=$('.section-address').html();
         function addressLayer(title,data){
@@ -417,7 +322,7 @@
 					        $('.addressLayer .myswitch').attr('data-off',1);
                         }
                     }
-
+                    
                 },
                 yes:function(index){
                     var area_address =$('.addressLayer .area-address-name').getArea();
@@ -470,19 +375,19 @@
                                     $('.item_addr .area_address').setArea(region);
                                     $('.edit_operate').find('.address_edit').hide();
                                     var len=$('.delivery_address .item_addr').length;
-
+                                    
                                     if(!postData.address_id){
                                         if(!len){
                                             $('.delivery_address ').append(data);
                                         }else{
                                             $('.delivery_address div:first').before(data);
                                         }
-
+                                         
                                     }else{
                                         $.each($('.delivery_address .item_addr'),function(index,val){
                                             var _thisId=$(this).find('.address_id').val();
                                             if(postData.address_id==_thisId){
-
+                                               
                                                 $(this).after(data);
                                                  $(this).remove();
                                             }
