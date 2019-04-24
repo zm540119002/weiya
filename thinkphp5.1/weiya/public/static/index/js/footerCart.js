@@ -309,7 +309,6 @@ $(function () {
 
                 }else if(data.status == 1){
                     location.href = 'https://msy.meishangyun.com/' + 'index/Payment/toPay/order_sn/' + data.order_sn+'/system_id/1';
-
                 }
             }
         });
