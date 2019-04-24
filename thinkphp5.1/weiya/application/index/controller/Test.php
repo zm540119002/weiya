@@ -10,6 +10,7 @@ class Test extends \common\controller\Base{
         }else{
             $unlockingFooterCart = json_encode(unlockingFooterCartConfig([0,2,1]));
             $this->assign('unlockingFooterCart',$unlockingFooterCart);
+            print_r($unlockingFooterCart);
             return $this->fetch();
         }
     }
