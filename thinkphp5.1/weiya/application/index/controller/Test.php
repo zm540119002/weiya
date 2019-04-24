@@ -8,10 +8,10 @@ class Test extends \common\controller\Base{
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             return json_encode($unlockingFooterCart);
         }else{
-            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
-            $unlockingFooterCart['menu'][0]['class'] .= ' group_btn30';
-            $unlockingFooterCart['menu'][1]['class'] .= ' group_btn30';
-            $unlockingFooterCart['menu'][2]['class'] .= ' group_btn30';
+            $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1]);
+            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
+            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
+            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             return $this->fetch();
         }

@@ -1,8 +1,8 @@
 <template id="foot_cart_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" class="bottom_item" v-for="menu in menus"
-               :data-jump_url="menu.action" :class="menu.class">{{menu.name}}
+            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
+                {{menu.name}}
                 <div class="" v-if="menu.class==='checked_all'">
                     <input type="checkbox" class="item_checkbox check-all ">
                     <label for="" class="left">全选</label>
@@ -10,9 +10,7 @@
                 <div class="" v-else-if="menu.class==='amount'">
                     <span class="total_num" v-if="menu.class==='amount'">￥<span class="price">0.00</span></span>
                 </div>
-                <div class="" v-else>
-                    <span class="s_i"></span>
-                </div>
+                <span class="s_i" v-else></span>
             </a>
         </div>
     </footer>
@@ -25,8 +23,7 @@
             template:'#foot_cart_tpl',
             data: function () {
                 return {
-                    menus: unlockingFooterCart.menu,
-                    menusCount: unlockingFooterCart.count
+                    menus: unlockingFooterCart.menu
                 }
             }
         });
