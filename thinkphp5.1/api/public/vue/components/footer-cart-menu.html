@@ -44,7 +44,7 @@
 </script>
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
-        <div class="group_cart_nav">
+        <div class="group_cart_nav" @click="doThis">
             <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
@@ -82,7 +82,12 @@
             },
             methods: {
                 doThis: function () {
-                    console.log(this);
+                    console.log(1);
+                }
+            },
+            computed: {
+                doThis: function () {
+                    console.log(2);
                 }
             }
         });
