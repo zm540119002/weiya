@@ -1,27 +1,28 @@
 <template id="product-counter-tpl">
     <div class="columns_flex l-r-sides">
         <div>
-            <p>{{param.buy_named}}(单位:{{param.minimum_unit}})</p>
+            <p>{{param.buy_named}}(单位:{{param.unit}})</p>
             <p>
                 <span class="minimum-named">{{param.minimum_named}}</span>:
                 <span class="minimum-quantity">{{param.minimum_quantity}}</span>
-                <span class="minimum-unit">{{param.minimum_unit}}</span>
+                <span class="unit">{{param.unit}}</span>
             </p>
         </div>
         <div class="quantity_wrapper selected-number">
-            <a href="javascript:void(0);" class="reduce">-</a>
+            <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
             <input type="text" value="1" class="f24 product_count">
-            <a href="javascript:void(0);" class="plus">+</a>
+            <a href="javascript:void(0);" class="plus" @click="plus">+</a>
         </div>
     </div>
 </template>
 <script type="text/javascript">
     $(function(){
         var data = {
+            'quantity':1,
             'buy_named':'采购数量',
             'minimum_named':'起订数量',
             'minimum_quantity':'1',
-            'minimum_unit':'盒'
+            'unit':'盒'
         };
         Vue.component('product-counter', {
             template:'#product-counter-tpl',
@@ -31,8 +32,11 @@
                 }
             },
             methods: {
-                doThis: function () {
-                    console.log(this);
+                reduce: function () {
+                    param.quantity--;
+                },
+                plus: function () {
+                    param.quantity++;
                 }
             }
         });
