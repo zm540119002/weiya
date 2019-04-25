@@ -75,13 +75,15 @@
 </template>
 <script type="text/javascript">
     $(function(){
-        var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
+        var unlockingFooterCart = '{$unlockingFooterCart|raw}';
+        console.log(unlockingFooterCart);
+//        var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
         Vue.component('footer-cart-menu', {
             template:'#footer-cart-menu_tpl',
             data: function () {
                 return {
                     total_amount:0,
-                    menus: unlockingFooterCart.menu
+//                    menus: unlockingFooterCart.menu
                 }
             },
             methods: {
