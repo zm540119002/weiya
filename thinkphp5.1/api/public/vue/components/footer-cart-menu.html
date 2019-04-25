@@ -33,6 +33,9 @@
             },
             methods: {
                 reduce: function () {
+                    if(this.param.quantity<=1){
+                        return false;
+                    }
                     this.param.quantity -= 1;
                 },
                 plus: function () {
