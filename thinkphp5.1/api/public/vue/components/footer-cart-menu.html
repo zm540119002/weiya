@@ -10,7 +10,7 @@
         </div>
         <div class="quantity_wrapper selected-number">
             <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-            <input type="text" value="1" class="f24 product_count">
+            <input type="text" :value="param.quantity" class="f24 product_count">
             <a href="javascript:void(0);" class="plus" @click="plus">+</a>
         </div>
     </div>
@@ -33,9 +33,10 @@
             },
             methods: {
                 reduce: function () {
-                    this.param.minimum_quantity -= 1;
+                    this.param.quantity -= 1;
                 },
                 plus: function () {
+                    this.param.quantity += 1;
                 }
             }
         });
