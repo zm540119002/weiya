@@ -5665,6 +5665,18 @@ ul.info_list li{
 .pay_wrapper{
     background: #f2f2f2;
 }
+.pay_money_wrapper{
+    background:#f2f2f2;
+}
+.pay_money_wrapper .pay{
+    display: block;
+    padding:0.12rem 0;
+    margin:0.25rem 0 0;
+    background: #22AC38;
+    color:#fff;
+    text-align:center;
+    border-radius:4px;
+}
 .recharge_amount_item{
     background: #f2f2f2;
 }
