@@ -8,11 +8,14 @@
                 <span class="unit">{{unit}}</span>
             </p>
         </div>
-        <div class="quantity_wrapper selected-number">
-            <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-            <input type="text" :value="quantity" class="f24 product_count">
-            <a href="javascript:void(0);" class="plus" @click="plus">+</a>
-        </div>
+        <slot name="counter"></slot>
+    </div>
+</template>
+<template slot="counter">
+    <div class="quantity_wrapper selected-number">
+        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+        <input type="text" :value="quantity" class="f24 product_count">
+        <a href="javascript:void(0);" class="plus" @click="plus">+</a>
     </div>
 </template>
 <script type="text/javascript">
