@@ -1,23 +1,23 @@
 <template id="product-counter-tpl">
     <div class="columns_flex l-r-sides">
         <div>
-            <p>{{param.buy_named}}(单位:{{param.unit}})</p>
+            <p>{{buy_named}}(单位:{{unit}})</p>
             <p>
-                <span class="minimum-named">{{param.minimum_named}}</span>:
-                <span class="minimum-quantity">{{param.minimum_quantity}}</span>
-                <span class="unit">{{param.unit}}</span>
+                <span class="minimum-named">{{minimum_named}}</span>:
+                <span class="minimum-quantity">{{minimum_quantity}}</span>
+                <span class="unit">{{unit}}</span>
             </p>
         </div>
         <div class="quantity_wrapper selected-number">
             <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-            <input type="text" :value="param.quantity" class="f24 product_count">
+            <input type="text" :value="quantity" class="f24 product_count">
             <a href="javascript:void(0);" class="plus" @click="plus">+</a>
         </div>
     </div>
 </template>
 <script type="text/javascript">
     $(function(){
-        var data = {
+        var param = {
             'quantity':1,
             'buy_named':'采购数量',
             'minimum_named':'起订数量',
@@ -27,18 +27,16 @@
         Vue.component('product-counter', {
             template:'#product-counter-tpl',
             data: function () {
-                return {
-                    param:data
-                }
+                return param;
             },
             methods: {
                 reduce: function () {
-                    if(this.param.quantity>1){
-                        this.param.quantity -= 1;
+                    if(this.quantity>1){
+                        this.quantity -= 1;
                     }
                 },
                 plus: function () {
-                    this.param.quantity += 1;
+                    this.quantity += 1;
                 }
             }
         });
@@ -70,7 +68,6 @@
                 </div>
             </a>
         </div>
-        <button @click="doThis">aaa</button>
     </footer>
 </template>
 <script type="text/javascript">
