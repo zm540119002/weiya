@@ -54,7 +54,7 @@
                 </div>
                 <!-- 总金额 -->
                 <div v-else-if="menu.class.indexOf('amount')!=-1">
-                    <span class="total_num" class="amount">￥<span class="price">0.00</span></span>
+                    <span class="total_num" class="amount">￥{{total_amount}}</span>
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!=-1">
@@ -77,6 +77,7 @@
             template:'#footer-cart-menu_tpl',
             data: function () {
                 return {
+                    total_amount:0.00,
                     menus: unlockingFooterCart.menu
                 }
             },
