@@ -1,0 +1,52 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<article class="f24">
+	<div id="app">
+		<child-component>
+			<template slot="girl">
+				漂亮、美丽、购物、逛街
+			</template>
+			<template slot="boy">
+				帅气、才实
+			</template>
+			<div>
+				我是一类人，
+				我是默认的插槽
+			</div>
+		</child-component>
+	</div>
+</article>
+{/block}
+{block name="common"}
+<template id="child-component-tpl">
+	<div>
+		<h4>这个世界不仅有男人和女人</h4>
+
+		<slot name="girl"></slot>
+
+		<div style="height:1px;background-color:red;"></div>
+
+		<slot name="boy"></slot>
+
+		<div style="height:1px;background-color:red;"></div>
+
+		<slot></slot>
+	</div>
+</template>
+{/block}
+{block name="footer"}{/block}
+{block name="css-customize"}
+{/block}
+{block name="suffix-script"}
+<script type="text/javascript">
+	Vue.component('child-component',{
+		template:'#child-component-tpl'
+	});
+	let vm = new Vue({
+		el:'#app',
+		data:{
+
+		}
+	})
+</script>
+{/block}
