@@ -76,8 +76,7 @@
 <script type="text/javascript">
     $(function(){
         var unlockingFooterCart = '{$unlockingFooterCart|raw}';
-        console.log(JSON.parse(unlockingFooterCart));
-        if(0 && unlockingFooterCart){
+        if(unlockingFooterCart){
             unlockingFooterCart = JSON.parse(unlockingFooterCart);
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',

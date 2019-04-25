@@ -12,8 +12,7 @@ class Test extends \common\controller\Base{
             array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
             array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
             array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
-//            $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
-            $this->assign('unlockingFooterCart',123);
+            $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
 
             $id = intval(input('id'));
             if(!$id){
