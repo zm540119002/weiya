@@ -23,6 +23,8 @@
 {block name="footer"}{/block}
 {block name="suffix-script"}
 <script type="text/javascript">
+	var arr = '{$arr|raw}';
+	console.log(arr);
 	Vue.component('com-1', {
 		template: '#com-1',
 		data: function () {

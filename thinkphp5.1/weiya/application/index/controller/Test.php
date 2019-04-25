@@ -72,6 +72,10 @@ class Test extends \common\controller\Base{
     /**测试1
      */
     public function test1(){
+        $arr = [
+            'url'=> url('index'),
+        ];
+        $this->assign('arr',json_encode($arr));
         return $this->fetch();
     }
 
