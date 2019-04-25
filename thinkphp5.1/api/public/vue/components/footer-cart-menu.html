@@ -1,4 +1,4 @@
-<template id="foot_cart_tpl">
+<template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
             <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
@@ -31,8 +31,8 @@
     $(function(){
         var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
         console.log(unlockingFooterCart);
-        Vue.component('footer-cart', {
-            template:'#foot_cart_tpl',
+        Vue.component('footer-cart-menu', {
+            template:'#footer-cart-menu_tpl',
             data: function () {
                 return {
                     menus: unlockingFooterCart.menu

@@ -66,19 +66,8 @@
 					<div class="columns_flex l-r-sides separation_item">
 						<a href="javascript:;" class="set_brand right-arrow">设定我的品牌：<span class="brand_name" data-id=""></span></a>
 					</div>
-					<div class="columns_flex l-r-sides">
-						<div>
-							<p>采购数量(单位:盒)</p>
-							<p>起订数量:<span class="order_quantity">1盒</span>
-							</p>
-						</div>
-						<div class="quantity_wrapper selected-number">
-							<a href="javascript:void(0);" class="greduce">-</a>
-							<input type="text" value="1" class="f24 gshopping_count">
-							<input type="hidden" class="minimum_order_quantity" value="1">
-							<input type="hidden" class="increase_quantity" value="1">
-							<a href="javascript:void(0);" class="gplus">+</a>
-						</div>
+					<div id="product-counter">
+						<product-counter></product-counter>
 					</div>
 				</div>
 			</li>
@@ -89,16 +78,18 @@
 {/block}
 {block name="common"}
 	{include file="../../api/public/vue/components/footer-cart-menu.html" /}
+	{include file="../../api/public/vue/components/product-counter.html" /}
 {/block}
 {block name="footer"}
 	<div id="foot_cart_menu">
-		<footer-cart></footer-cart>
+		<footer-cart-menu></footer-cart-menu>
 	</div>
 {/block}
 {block name="suffix-script"}
 <script type="text/javascript">
 	$(function(){
 		new Vue({ el: '#foot_cart_menu' });
+		new Vue({ el: '#product-counter' });
 	});
 </script>
 {/block}
