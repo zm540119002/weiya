@@ -7,12 +7,12 @@
 </template>
 <script type="text/javascript">
     $(function(){
-        let quantity = '{$quantity|default=1}';
         Vue.component('quantity-edit', {
             template:'#quantity_edit_tpl',
+            props: ['init_quantity'],
             data: function () {
                 return {
-                    'quantity':quantity
+                    'quantity':this.init_quantity
                 };
             },
             methods: {
@@ -42,20 +42,22 @@
                 <span class="unit">{{unit}}</span>
             </p>
         </div>
-        <quantity-edit></quantity-edit>
+        <quantity-edit :init_quantity="quantity"></quantity-edit>
     </div>
 </template>
 <script type="text/javascript">
     $(function(){
         let minimum_quantity = '{$minimum_quantity|default=1}';
+        let quantity = '{$quantity|default=1}';
         Vue.component('product-quantity-edit', {
             template:'#product_quantity_edit_tpl',
             data: function () {
                 return {
                     'buy_named':'采购数量',
                     'minimum_named':'起订数量',
+                    'unit':'盒',
                     'minimum_quantity':minimum_quantity,
-                    'unit':'盒'
+                    'quantity':quantity
                 };
             },
             methods: {
