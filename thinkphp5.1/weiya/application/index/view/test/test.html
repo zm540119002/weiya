@@ -38,7 +38,7 @@
 						</a>
 					</div>
 					<div id="product-select">
-						<product-select></product-select>
+						<product-select :buy_named="buy_named" :step_named="step_named"></product-select>
 					</div>
 				</div>
 			</li>
@@ -62,6 +62,12 @@
 			el: '#foot_cart_menu'
 		});
 		new Vue({
+			data:function(){
+				return {
+					'buy_named':'啊啊啊',
+					'step_named':'多对多'
+				};
+			},
 			el: '#product-select'
 		});
 		new Vue({

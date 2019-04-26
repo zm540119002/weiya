@@ -68,10 +68,19 @@
         }
         Vue.component('product-select', {
             template:'#product_select_tpl',
+            props: {
+                buy_named: {
+                    type: String,
+                    default: '采购数量'
+                },step_named: {
+                    type: String,
+                    default: '起订数量'
+                }
+            },
             data: function () {
                 return {
-                    'buy_named':productSelectParam.buy_named?productSelectParam.buy_named:'采购数量',
-                    'step_named':productSelectParam.step_named?productSelectParam.step_named:'起订数量',
+                    'buy_named':this.buy_named,
+                    'step_named':this.step_named,
                     'unit':productSelectParam.unit?productSelectParam.unit:'盒',
                     'deal_price':parseInt(productSelectParam.deal_price)>1?productSelectParam.deal_price:1,
                     'subtotal_amount':0,
