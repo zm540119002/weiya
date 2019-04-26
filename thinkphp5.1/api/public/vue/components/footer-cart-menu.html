@@ -49,7 +49,7 @@
 </template>
 <script type="text/javascript">
     $(function(){
-        var productQuantityEditParam = '{$productQuantityEditParam|raw}';
+        var productQuantityEditParam = '{$productQuantityEditParam}';
         console.log(productQuantityEditParam);
         console.log(parseInt(productQuantityEditParam.minimum_quantity));
         console.log(parseInt(productQuantityEditParam.minimum_quantity)>1);
