@@ -18,7 +18,7 @@
             methods: {
                 reduce: function () {
                     if(this.quantity>1){
-                        this.quantity = parseInt(this.quantity) - 1;
+                        this.quantity = parseInt(this.quantity) - parseInt(this.$parent.minimum_quantity);
                     }
                 },
                 plus: function () {
