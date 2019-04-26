@@ -93,28 +93,24 @@ class Order extends \common\controller\UserBase
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
 
-    //确定订单 //订单-详情页
+    // 订单确认页
     public function confirmOrder()
     {
         if (request()->isPost()) {
-            $fatherOrderId = input('post.father_order_id',0,'int');
+            $fatherOrderId = input('post.order_id',0,'int');
             $modelOrder = new \app\index\model\Order();
             $modelOrder ->startTrans();
             $data = input('post.');
             $data['order_status'] = 1;
+            $data['payment_code'] = $data['pay_code'];
             $condition = [
                 ['user_id','=',$this->user['id']],
                 ['id','=',$fatherOrderId],
             ];
             $res = $modelOrder -> allowField(true) -> save($data,$condition);
+
             if(false === $res){
                 $modelOrder ->rollback();
-                return errorMsg('失败');
-            }
-            $modelOrderDetail = new \app\index\model\OrderDetail();
-            $res = $modelOrderDetail -> isUpdate(true)-> saveAll($data['orderDetail']);
-            if (!count($res)) {
-                $modelOrder->rollback();
                 return errorMsg('失败');
             }
             //根据订单号查询关联的购物车的商品 删除
@@ -143,7 +139,9 @@ class Order extends \common\controller\UserBase
             }
             $modelOrder -> commit();
             $orderSn = input('post.order_sn','','string');
-            return successMsg('成功',array('order_sn'=>$orderSn));
+            $url = config('custom.pay_gateway').$orderSn;
+            return successMsg($url);
+
         }else{
             $modelOrder = new \app\index\model\Order();
             $orderSn = input('order_sn');
@@ -162,8 +160,10 @@ class Order extends \common\controller\UserBase
                 ],
             ];
             $orderGoodsList = $modelOrder->getList($config);
+            if(empty($orderGoodsList)){
+                $this ->error('没有此订单信息');
+            }
             $this ->assign('orderGoodsList',$orderGoodsList);
-
             //地址
             $modelAddress =  new \common\model\Address();
             $config = [
@@ -180,13 +180,30 @@ class Order extends \common\controller\UserBase
                     break;
                 }
             }
+            if(empty($defaultAddress)){
+                $defaultAddress = reset($addressList);
+            }
+
             $this->assign('defaultAddress', $defaultAddress);
             $this->assign('addressList', $addressList);
-            $unlockingFooterCart = unlockingFooterCartConfig([11]);
+
+            $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+
+            //钱包
+            $modelWallet = new \app\index\model\Wallet();
+            $config = [
+                'where' => [
+                    ['status', '=', 0],
+                    ['user_id', '=', $this->user['id']],
+                ],'field' => [
+                    'id','amount',
+                ],
+            ];
+            $walletInfo = $modelWallet->getInfo($config);
+            $this->assign('walletInfo', $walletInfo);
             return $this->fetch();
         }
-
 
     }
 
