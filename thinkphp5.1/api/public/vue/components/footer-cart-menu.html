@@ -50,6 +50,7 @@
 <script type="text/javascript">
     $(function(){
         var productQuantityEditParam = '{$productQuantityEditParam|raw}';
+        console.log(parseInt(productQuantityEditParam.minimum_quantity)>1);
 //        productQuantityEditParam.minimum_quantity = parseInt(productQuantityEditParam.minimum_quantity)>1?productQuantityEditParam.minimum_quantity:1;
 //        productQuantityEditParam.quantity = parseInt(productQuantityEditParam.quantity)>1?productQuantityEditParam.quantity:1;
         console.log(productQuantityEditParam);
