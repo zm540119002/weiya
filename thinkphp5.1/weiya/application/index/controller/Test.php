@@ -67,7 +67,7 @@ class Test extends \common\controller\Base{
             $productQuantityEditParam = [
                 'minimum_quantity' => 10,
             ];
-            $this->assign('productQuantityEditParam', $productQuantityEditParam);
+            $this->assign('productQuantityEditParam',json_encode($productQuantityEditParam));
             return $this->fetch();
         }
     }
