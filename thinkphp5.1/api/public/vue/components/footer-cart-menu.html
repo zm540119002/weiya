@@ -1,4 +1,55 @@
-<template id="foot_cart_tpl">
+<template id="product-counter-tpl">
+    <div class="columns_flex l-r-sides">
+        <div>
+            <p>{{buy_named}}(单位:{{unit}})</p>
+            <p>
+                <span class="minimum-named">{{minimum_named}}</span>:
+                <span class="minimum-quantity">{{minimum_quantity}}</span>
+                <span class="unit">{{unit}}</span>
+            </p>
+        </div>
+        <slot name="counter"></slot>
+    </div>
+</template>
+<template slot="counter">
+    <div class="quantity_wrapper selected-number">
+        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+        <input type="text" :value="quantity" class="f24 product_count">
+        <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+    </div>
+</template>
+<script type="text/javascript">
+    $(function(){
+        var param = {
+            'quantity':1,
+            'buy_named':'采购数量',
+            'minimum_named':'起订数量',
+            'minimum_quantity':1,
+            'unit':'盒'
+        };
+        Vue.component('product-counter', {
+            template:'#product-counter-tpl',
+            data: function () {
+                return param;
+            },
+            methods: {
+                reduce: function () {
+                    if(this.quantity>1){
+                        this.quantity -= 1;
+                    }
+                },
+                plus: function () {
+                    this.quantity += 1;
+                }
+            },computed: {
+                doThis: function () {
+                    console.log(this);
+                }
+            }
+        });
+    });
+</script>
+<template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
             <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
@@ -10,7 +61,7 @@
                 </div>
                 <!-- 总金额 -->
                 <div v-else-if="menu.class.indexOf('amount')!=-1">
-                    <span class="total_num" class="amount">￥<span class="price">0.00</span></span>
+                    <span class="total_num" class="amount">￥{{total_amount}}</span>
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!=-1">
@@ -23,25 +74,31 @@
                 </div>
             </a>
         </div>
-        <button @click="doThis">aaa</button>
     </footer>
 </template>
 <script type="text/javascript">
     $(function(){
-        var unlockingFooterCart = JSON.parse('{$unlockingFooterCart|raw}');
-        console.log(unlockingFooterCart);
-        Vue.component('footer-cart', {
-            template:'#foot_cart_tpl',
-            data: function () {
-                return {
-                    menus: unlockingFooterCart.menu
+        var unlockingFooterCart = '{$unlockingFooterCart|raw}';
+        if(unlockingFooterCart){
+            unlockingFooterCart = JSON.parse(unlockingFooterCart);
+            Vue.component('footer-cart-menu', {
+                template:'#footer-cart-menu_tpl',
+                data: function () {
+                    return {
+                        total_amount:0,
+                        menus: unlockingFooterCart.menu
+                    }
+                },
+                methods: {
+                    test: function () {
+                        console.log(this);
+                    }
+                },computed: {
+                    doThis: function () {
+                        console.log(this);
+                    }
                 }
-            },
-            methods: {
-                doThis: function () {
-                    console.log(this);
-                }
-            }
-        });
+            });
+        }
     });
 </script>

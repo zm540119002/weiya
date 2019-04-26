@@ -80,4 +80,10 @@ class Test extends \common\controller\Base{
     public function test2(){
         return $this->fetch();
     }
+
+    /**测试3
+     */
+    public function test3(){
+        return $this->fetch();
+    }
 }
