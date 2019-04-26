@@ -69,13 +69,6 @@
         if(productSelectParam){
             productSelectParam = JSON.parse(productSelectParam)
         }
-        var aaa = {
-            'unit':productSelectParam.unit?productSelectParam.unit:'盒',
-            'deal_price':parseInt(productSelectParam.deal_price)>1?productSelectParam.deal_price:1,
-            'subtotal_amount':0,
-            'init_quantity':parseInt(productSelectParam.init_quantity)>1?productSelectParam.init_quantity:0,
-            'step_quantity':parseInt(productSelectParam.step_quantity)>1?productSelectParam.step_quantity:1
-        };
         Vue.component('product-select', {
             template:'#product_select_tpl',
             props: {
@@ -88,7 +81,13 @@
                 }
             },
             data: function () {
-                return aaa;
+                return {
+                    'unit':productSelectParam.unit?productSelectParam.unit:'盒',
+                    'deal_price':parseInt(productSelectParam.deal_price)>1?productSelectParam.deal_price:1,
+                    'subtotal_amount':0,
+                    'init_quantity':parseInt(productSelectParam.init_quantity)>1?productSelectParam.init_quantity:0,
+                    'step_quantity':parseInt(productSelectParam.step_quantity)>1?productSelectParam.step_quantity:1
+                };
             },
             methods: {
                 reduce: function () {
