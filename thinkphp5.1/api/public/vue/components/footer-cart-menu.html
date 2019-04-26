@@ -38,7 +38,7 @@
         <div>
             <p>{{buy_named}}(单位:{{unit}})</p>
             <p>
-                <span class="minimum-named">{{minimum_named}}</span>:
+                <span class="step-named">{{step_named}}</span>:
                 <span class="step-quantity">{{step_quantity}}</span>
                 <span class="unit">{{unit}}</span>
             </p>
@@ -56,9 +56,9 @@
             template:'#product_quantity_edit_tpl',
             data: function () {
                 return {
-                    'buy_named':'采购数量',
-                    'minimum_named':'起订数量',
-                    'unit':'盒',
+                    'buy_named':productQuantityEditParam.buy_named?productQuantityEditParam.buy_named:'采购数量',
+                    'step_named':productQuantityEditParam.step_named?productQuantityEditParam.step_named:'起订数量',
+                    'unit':productQuantityEditParam.unit?productQuantityEditParam.unit:'盒',
                     'init_quantity':parseInt(productQuantityEditParam.init_quantity)>1?productQuantityEditParam.init_quantity:1,
                     'step_quantity':parseInt(productQuantityEditParam.step_quantity)>1?productQuantityEditParam.step_quantity:1
                 };
