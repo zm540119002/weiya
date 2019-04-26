@@ -64,8 +64,10 @@ class Test extends \common\controller\Base{
                     $this->assign('collected', 1);
                 }
             }
-
-            $this->assign('minimum_quantity', 5);
+            $productQuantityEditParam = [
+                'minimum_quantity' => 10,
+            ];
+            $this->assign('productQuantityEditParam', $productQuantityEditParam);
             return $this->fetch();
         }
     }

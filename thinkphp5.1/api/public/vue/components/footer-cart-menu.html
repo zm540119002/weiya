@@ -47,8 +47,7 @@
 </template>
 <script type="text/javascript">
     $(function(){
-        let minimum_quantity = '{$minimum_quantity|default=1}';
-        let quantity = '{$quantity|default=1}';
+        let productQuantityEditParam = '{$productQuantityEditParam|raw}';
         Vue.component('product-quantity-edit', {
             template:'#product_quantity_edit_tpl',
             data: function () {
@@ -56,8 +55,8 @@
                     'buy_named':'采购数量',
                     'minimum_named':'起订数量',
                     'unit':'盒',
-                    'minimum_quantity':minimum_quantity,
-                    'quantity':quantity
+                    'minimum_quantity':parseInt(productQuantityEditParam.minimum_quantity)>1?productQuantityEditParam.minimum_quantity:1,
+                    'quantity':parseInt(productQuantityEditParam.quantity)>1?productQuantityEditParam.quantity:1
                 };
             },
             methods: {
