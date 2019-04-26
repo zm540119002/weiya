@@ -44,6 +44,7 @@
 </script>
 <!-- 产品选择器 -->
 <template id="product_select_tpl">
+    <p><span class="red subtotal_amount">￥{{subtotal_amount}}</span></p>
     <div class="columns_flex l-r-sides">
         <div>
             <p>{{buy_named}}(单位:{{unit}})</p>
@@ -53,7 +54,6 @@
                 <span class="unit">{{unit}}</span>
             </p>
             <p>样品购买限额：<span class="quota">1</span></p>
-            <p><span class="red subtotal_amount">￥{{subtotal_amount}}</span></p>
         </div>
         <div><span class="red deal_price">￥{{deal_price}}</span></div>
         <quantity-edit :init_quantity="init_quantity" :step_quantity="step_quantity" ></quantity-edit>
