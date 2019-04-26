@@ -12,7 +12,8 @@
             props: ['step_quantity'],
             data: function () {
                 return {
-                    'quantity':this.step_quantity?this.step_quantity:1
+                    'step_quantity':this.step_quantity?this.step_quantity:1,
+                    'quantity':this.init_quantity?this.init_quantity:1
                 };
             },
             methods: {
@@ -42,7 +43,7 @@
                 <span class="unit">{{unit}}</span>
             </p>
         </div>
-        <quantity-edit :step_quantity="step_quantity"></quantity-edit>
+        <quantity-edit :step_quantity="step_quantity" :init_quantity="init_quantity"></quantity-edit>
     </div>
 </template>
 <script type="text/javascript">
@@ -58,7 +59,7 @@
                     'buy_named':'采购数量',
                     'minimum_named':'起订数量',
                     'unit':'盒',
-                    'init_quantity':parseInt(productQuantityEditParam.minimum_quantity)>1?productQuantityEditParam.minimum_quantity:1,
+                    'init_quantity':parseInt(productQuantityEditParam.init_quantity)>1?productQuantityEditParam.init_quantity:1,
                     'step_quantity':parseInt(productQuantityEditParam.step_quantity)>1?productQuantityEditParam.step_quantity:1
                 };
             },
