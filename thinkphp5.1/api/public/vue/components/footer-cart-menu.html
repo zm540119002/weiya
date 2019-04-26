@@ -7,9 +7,6 @@
 </template>
 <script type="text/javascript">
     $(function(){
-        var param = {
-            'quantity':1
-        };
         Vue.component('quantity-edit', {
             template:'#quantity_edit_tpl',
             data: function () {
@@ -49,16 +46,15 @@
 </template>
 <script type="text/javascript">
     $(function(){
-        var param = {
-            'buy_named':'采购数量',
-            'minimum_named':'起订数量',
-            'minimum_quantity':1,
-            'unit':'盒'
-        };
         Vue.component('product-quantity-edit', {
             template:'#product_quantity_edit_tpl',
             data: function () {
-                return param;
+                return {
+                    'buy_named':'采购数量',
+                    'minimum_named':'起订数量',
+                    'minimum_quantity':1,
+                    'unit':'盒'
+                };
             },
             methods: {
                 reduce: function () {
