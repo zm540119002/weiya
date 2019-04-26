@@ -49,12 +49,10 @@
 </template>
 <script type="text/javascript">
     $(function(){
-        var productQuantityEditParam = '{$productQuantityEditParam}';
-        console.log(productQuantityEditParam);
-        console.log(parseInt(productQuantityEditParam.minimum_quantity));
-        console.log(parseInt(productQuantityEditParam.minimum_quantity)>1);
-//        productQuantityEditParam.minimum_quantity = parseInt(productQuantityEditParam.minimum_quantity)>1?productQuantityEditParam.minimum_quantity:1;
-//        productQuantityEditParam.quantity = parseInt(productQuantityEditParam.quantity)>1?productQuantityEditParam.quantity:1;
+        var productQuantityEditParam = '{$productQuantityEditParam|raw}';
+        if(productQuantityEditParam){
+            productQuantityEditParam = JSON.parse(productQuantityEditParam);
+        }
         Vue.component('product-quantity-edit', {
             template:'#product_quantity_edit_tpl',
             data: function () {
@@ -62,8 +60,8 @@
                     'buy_named':'采购数量',
                     'minimum_named':'起订数量',
                     'unit':'盒',
-                    'minimum_quantity':productQuantityEditParam.minimum_quantity,
-                    'quantity':productQuantityEditParam.quantity
+                    'minimum_quantity':parseInt(productQuantityEditParam.minimum_quantity)>1?productQuantityEditParam.minimum_quantity:1,
+                    'quantity':parseInt(productQuantityEditParam.quantity)>1?productQuantityEditParam.quantity:1
                 };
             },
             methods: {
