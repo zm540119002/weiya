@@ -18,11 +18,11 @@
             methods: {
                 reduce: function () {
                     if(this.quantity>1){
-                        this.quantity -= 1;
+                        this.quantity = parseInt(this.quantity) - 1;
                     }
                 },
                 plus: function () {
-                    this.quantity += 1;
+                    this.quantity = parseInt(this.quantity) + 1;
                 }
             },computed: {
                 doThis: function () {
