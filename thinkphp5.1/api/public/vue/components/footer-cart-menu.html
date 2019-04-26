@@ -1,8 +1,6 @@
 <!-- 成交价格展示 -->
 <template id="price_tpl">
-    <div>
-        <span class="red">￥1.00</span>
-    </div>
+    <div><span class="red">￥1.00</span></div>
 </template>
 <script type="text/javascript">
     $(function(){
@@ -100,9 +98,9 @@
             template:'#product_select_tpl',
             data: function () {
                 return {
-                    'buy_named':productSelectParam.buy_named?productSelectParam.buy_named:'采购数量',
-                    'step_named':productSelectParam.step_named?productSelectParam.step_named:'起订数量',
-                    'unit':productSelectParam.unit?productSelectParam.unit:'盒',
+                    'buy_named':productSelectParam.buy_named?productSelectParam.buy_named:'',
+                    'step_named':productSelectParam.step_named?productSelectParam.step_named:'',
+                    'unit':productSelectParam.unit?productSelectParam.unit:'',
                     'init_quantity':parseInt(productSelectParam.init_quantity)>1?productSelectParam.init_quantity:1,
                     'step_quantity':parseInt(productSelectParam.step_quantity)>1?productSelectParam.step_quantity:1
                 };
