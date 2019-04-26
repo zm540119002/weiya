@@ -26,12 +26,12 @@
             },
             methods: {
                 reduce: function () {
-                    if(parseInt(this.quantity)>parseInt(this.step_quantity)){
-                        this.quantity = parseInt(this.quantity) - this.step_quantity;
+                    if(this.quantity>this.step_quantity){
+                        this.quantity -= this.step_quantity;
                     }
                 },
                 plus: function () {
-                    this.quantity = parseInt(this.quantity) + parseInt(this.step_quantity);
+                    this.quantity += this.step_quantity;
                 }
             },computed: {
                 doThis: function () {
