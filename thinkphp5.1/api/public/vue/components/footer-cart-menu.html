@@ -12,9 +12,7 @@
         };
         Vue.component('quantity-edit', {
             template:'#quantity_edit_tpl',
-            data: function () {
-                return param;
-            },
+            props: ['quantity'],
             methods: {
                 reduce: function () {
                     if(this.quantity>1){
@@ -42,7 +40,7 @@
                 <span class="unit">{{unit}}</span>
             </p>
         </div>
-        <quantity-edit></quantity-edit>
+        <quantity-edit :quantity="quantity"></quantity-edit>
     </div>
 </template>
 <script type="text/javascript">
