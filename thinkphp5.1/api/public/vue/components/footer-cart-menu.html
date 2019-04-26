@@ -17,12 +17,11 @@
             },
             methods: {
                 reduce: function () {
-                    if(this.quantity>parseInt(this.quantity)){
+                    if(parseInt(this.quantity)>=parseInt(this.$parent.minimum_quantity)){
                         this.quantity = parseInt(this.quantity) - parseInt(this.$parent.minimum_quantity);
                     }
                 },
                 plus: function () {
-                    console.log(this);
                     this.quantity = parseInt(this.quantity) + parseInt(this.$parent.minimum_quantity);
                 }
             },computed: {
