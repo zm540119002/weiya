@@ -12,18 +12,18 @@
             template:'#quantity_edit_tpl',
             data: function () {
                 return {
-                    'quantity':quantity
+                    'quantity':parseInt(quantity)
                 };
             },
             methods: {
                 reduce: function () {
-                    if(this.quantity>1){
-                        this.quantity = parseInt(this.quantity) - parseInt(this.$parent.minimum_quantity);
+                    if(this.quantity>this.quantity){
+                        this.quantity = this.quantity - this.$parent.minimum_quantity;
                     }
                 },
                 plus: function () {
                     console.log(this);
-                    this.quantity = parseInt(this.quantity) + parseInt(this.$parent.minimum_quantity);
+                    this.quantity = this.quantity + this.$parent.minimum_quantity;
                 }
             },computed: {
                 doThis: function () {
