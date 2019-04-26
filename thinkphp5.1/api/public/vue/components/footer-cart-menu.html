@@ -22,6 +22,8 @@
                     }
                 },
                 plus: function () {
+                    console.log(this.$parent.$data);
+                    console.log(parseInt(this.$parent.minimum_quantity));
                     this.quantity = parseInt(this.quantity) + parseInt(this.$parent.minimum_quantity);
                 }
             },computed: {
@@ -62,8 +64,6 @@
             },
             methods: {
                 reduce: function () {
-                    console.log(this.$data);
-                    console.log(parseInt(this.minimum_quantity));
                 },
                 plus: function () {
                 }
