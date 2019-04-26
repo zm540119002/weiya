@@ -64,11 +64,11 @@ class Test extends \common\controller\Base{
                     $this->assign('collected', 1);
                 }
             }
-            $productQuantityEditParam = [
+            $productSelectParam = [
                 'step_quantity' => 10,
                 'init_quantity' => 10,
             ];
-            $this->assign('productQuantityEditParam',json_encode($productQuantityEditParam));
+            $this->assign('productQuantityEditParam',json_encode($productSelectParam));
             return $this->fetch();
         }
     }

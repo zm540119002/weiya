@@ -74,7 +74,7 @@
         });
     });
 </script>
-<template id="product_quantity_edit_tpl">
+<template id="product_select_tpl">
     <div class="columns_flex l-r-sides">
         <div>
             <p>{{buy_named}}(单位:{{unit}})</p>
@@ -89,19 +89,19 @@
 </template>
 <script type="text/javascript">
     $(function(){
-        var productQuantityEditParam = '{$productQuantityEditParam|raw}';
-        if(productQuantityEditParam){
-            productQuantityEditParam = JSON.parse(productQuantityEditParam);
+        var productSelectParam = '{$productSelectParam|raw}';
+        if(productSelectParam){
+            productSelectParam = JSON.parse(productSelectParam);
         }
-        Vue.component('product-quantity-edit', {
-            template:'#product_quantity_edit_tpl',
+        Vue.component('product-select', {
+            template:'#product_select_tpl',
             data: function () {
                 return {
-                    'buy_named':productQuantityEditParam.buy_named?productQuantityEditParam.buy_named:'采购数量',
-                    'step_named':productQuantityEditParam.step_named?productQuantityEditParam.step_named:'起订数量',
-                    'unit':productQuantityEditParam.unit?productQuantityEditParam.unit:'盒',
-                    'init_quantity':parseInt(productQuantityEditParam.init_quantity)>1?productQuantityEditParam.init_quantity:1,
-                    'step_quantity':parseInt(productQuantityEditParam.step_quantity)>1?productQuantityEditParam.step_quantity:1
+                    'buy_named':productSelectParam.buy_named?productSelectParam.buy_named:'采购数量',
+                    'step_named':productSelectParam.step_named?productSelectParam.step_named:'起订数量',
+                    'unit':productSelectParam.unit?productSelectParam.unit:'盒',
+                    'init_quantity':parseInt(productSelectParam.init_quantity)>1?productSelectParam.init_quantity:1,
+                    'step_quantity':parseInt(productSelectParam.step_quantity)>1?productSelectParam.step_quantity:1
                 };
             },
             methods: {
