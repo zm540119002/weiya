@@ -17,6 +17,7 @@
             },
             methods: {
                 reduce: function () {
+                    console.log(parseInt(this.quantity)>=parseInt(this.step_quantity));
                     if(parseInt(this.quantity)>=parseInt(this.step_quantity)){
                         this.quantity = parseInt(this.quantity) - parseInt(this.step_quantity);
                     }
