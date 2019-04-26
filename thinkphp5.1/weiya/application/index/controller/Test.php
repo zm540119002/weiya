@@ -65,6 +65,7 @@ class Test extends \common\controller\Base{
                 }
             }
             $productSelectParam = [
+                'buy_named' => '啊啊',
                 'step_quantity' => 10,
 //                'init_quantity' => 2,
             ];
