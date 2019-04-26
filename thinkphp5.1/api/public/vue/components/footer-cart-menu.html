@@ -13,7 +13,9 @@
         Vue.component('quantity-edit', {
             template:'#quantity_edit_tpl',
             data: function () {
-                return param;
+                return {
+                    'quantity':1
+                };
             },
             methods: {
                 reduce: function () {
@@ -48,7 +50,6 @@
 <script type="text/javascript">
     $(function(){
         var param = {
-            'quantity':1,
             'buy_named':'采购数量',
             'minimum_named':'起订数量',
             'minimum_quantity':1,
