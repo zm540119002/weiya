@@ -54,7 +54,7 @@
             </p>
             <p><span class="red deal_price">￥{{deal_price}}</span></p>
             <p>样品购买限额：<span class="quota">1</span></p>
-            <p><span class="red subtotal_price">￥{{deal_price}}</span></p>
+            <p><span class="red subtotal_amount">￥{{subtotal_amount}}</span></p>
         </div>
         <quantity-edit :init_quantity="init_quantity" :step_quantity="step_quantity" ></quantity-edit>
     </div>
@@ -72,8 +72,9 @@
                     'buy_named':productSelectParam.buy_named?productSelectParam.buy_named:'采购数量',
                     'step_named':productSelectParam.step_named?productSelectParam.step_named:'起订数量',
                     'unit':productSelectParam.unit?productSelectParam.unit:'盒',
-                    'init_quantity':parseInt(productSelectParam.init_quantity)>1?productSelectParam.init_quantity:1,
                     'deal_price':parseInt(productSelectParam.deal_price)>1?productSelectParam.deal_price:1,
+                    'subtotal_amount':0,
+                    'init_quantity':parseInt(productSelectParam.init_quantity)>1?productSelectParam.init_quantity:0,
                     'step_quantity':parseInt(productSelectParam.step_quantity)>1?productSelectParam.step_quantity:1
                 };
             },
