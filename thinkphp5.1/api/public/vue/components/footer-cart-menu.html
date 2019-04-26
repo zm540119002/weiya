@@ -18,12 +18,12 @@
             },
             methods: {
                 reduce: function () {
-                    if(parseInt(this.quantity)>parseInt(this.step_quantity)){
-                        this.quantity = parseInt(this.quantity) - parseInt(this.step_quantity);
+                    if(parseInt(this.quantity)>parseInt(this.step)){
+                        this.quantity = parseInt(this.quantity) - parseInt(this.step);
                     }
                 },
                 plus: function () {
-                    this.quantity = parseInt(this.quantity) + parseInt(this.step_quantity);
+                    this.quantity = parseInt(this.quantity) + parseInt(this.step);
                 }
             },computed: {
                 doThis: function () {
@@ -43,7 +43,7 @@
                 <span class="unit">{{unit}}</span>
             </p>
         </div>
-        <quantity-edit :init_quantity="init_quantity" ></quantity-edit>
+        <quantity-edit :init_quantity="init_quantity" :step_quantity="step_quantity" ></quantity-edit>
     </div>
 </template>
 <script type="text/javascript">
