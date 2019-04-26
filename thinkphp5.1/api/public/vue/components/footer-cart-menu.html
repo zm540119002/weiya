@@ -24,6 +24,7 @@
                 plus: function () {
                     console.log(this.$parent.$data);
                     console.log(parseInt(this.$parent.minimum_quantity));
+                    console.log(productQuantityEditParam);
                     this.quantity = parseInt(this.quantity) + parseInt(this.$parent.minimum_quantity);
                 }
             },computed: {
@@ -119,7 +120,7 @@
                         console.log(this);
                     }
                 },computed: {
-                    doThis: function () {
+                    test1: function () {
                         console.log(this);
                     }
                 }
