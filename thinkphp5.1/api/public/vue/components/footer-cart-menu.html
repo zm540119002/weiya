@@ -52,8 +52,9 @@
                 <span class="step-quantity">{{init_quantity}}</span>
                 <span class="unit">{{unit}}</span>
             </p>
-            <p><span class="red">￥{{deal_price}}</span></p>
+            <p><span class="red deal_price">￥{{deal_price}}</span></p>
             <p>样品购买限额：<span class="quota">1</span></p>
+            <p><span class="red subtotal_price">￥{{deal_price}}</span></p>
         </div>
         <quantity-edit :init_quantity="init_quantity" :step_quantity="step_quantity" ></quantity-edit>
     </div>
@@ -101,7 +102,7 @@
                 </div>
                 <!-- 总金额 -->
                 <div v-else-if="menu.class.indexOf('amount')!=-1">
-                    <span class="total_num" class="amount">￥{{total_amount}}</span>
+                    <span class="total_amount">￥{{total_amount}}</span>
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!=-1">
