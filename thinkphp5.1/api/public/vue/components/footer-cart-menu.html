@@ -63,7 +63,7 @@
     $(function(){
         var productSelectParam = '{$productSelectParam|raw}';
         if(productSelectParam){
-            productSelectParam = JSON.parse(productSelectParam);
+            productSelectParam = JSON.parse(productSelectParam)
         }
         Vue.component('product-select', {
             template:'#product_select_tpl',
