@@ -68,7 +68,7 @@ class Test extends \common\controller\Base{
                 'step_quantity' => 10,
                 'init_quantity' => 10,
             ];
-            $this->assign('productQuantityEditParam',json_encode($productSelectParam));
+            $this->assign('productSelectParam',json_encode($productSelectParam));
             return $this->fetch();
         }
     }
