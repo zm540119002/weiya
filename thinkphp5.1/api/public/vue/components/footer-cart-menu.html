@@ -9,22 +9,21 @@
     $(function(){
         Vue.component('quantity-edit', {
             template:'#quantity_edit_tpl',
-            props: ['init_quantity'],
+            props: ['step_quantity'],
             data: function () {
                 return {
-                    'quantity':this.init_quantity
+                    'quantity':this.step_quantity?this.step_quantity:1
                 };
             },
             methods: {
                 reduce: function () {
-                    if(parseInt(this.quantity)>=parseInt(this.$parent.minimum_quantity)){
-                        this.quantity = parseInt(this.quantity) - parseInt(this.$parent.minimum_quantity);
+                    if(parseInt(this.quantity)>=parseInt(this.step_quantity)){
+                        this.quantity = parseInt(this.quantity) - parseInt(this.step_quantity);
                     }
                 },
                 plus: function () {
                     console.log(this.$parent.$data);
-                    console.log(parseInt(this.$parent.minimum_quantity));
-                    this.quantity = parseInt(this.quantity) + parseInt(this.$parent.minimum_quantity);
+                    this.quantity = parseInt(this.quantity) + parseInt(this.step_quantity);
                 }
             },computed: {
                 doThis: function () {
@@ -40,11 +39,11 @@
             <p>{{buy_named}}(单位:{{unit}})</p>
             <p>
                 <span class="minimum-named">{{minimum_named}}</span>:
-                <span class="minimum-quantity">{{minimum_quantity}}</span>
+                <span class="step-quantity">{{step_quantity}}</span>
                 <span class="unit">{{unit}}</span>
             </p>
         </div>
-        <quantity-edit :init_quantity="quantity"></quantity-edit>
+        <quantity-edit :step_quantity="step_quantity"></quantity-edit>
     </div>
 </template>
 <script type="text/javascript">
@@ -60,8 +59,8 @@
                     'buy_named':'采购数量',
                     'minimum_named':'起订数量',
                     'unit':'盒',
-                    'minimum_quantity':parseInt(productQuantityEditParam.minimum_quantity)>1?productQuantityEditParam.minimum_quantity:1,
-                    'quantity':parseInt(productQuantityEditParam.quantity)>1?productQuantityEditParam.quantity:1
+                    'init_quantity':parseInt(productQuantityEditParam.minimum_quantity)>1?productQuantityEditParam.minimum_quantity:1,
+                    'step_quantity':parseInt(productQuantityEditParam.step_quantity)>1?productQuantityEditParam.step_quantity:1
                 };
             },
             methods: {
