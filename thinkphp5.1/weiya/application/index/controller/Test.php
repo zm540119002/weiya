@@ -65,7 +65,7 @@ class Test extends \common\controller\Base{
                 }
             }
             $productQuantityEditParam = [
-                'step_quantity' => 10,
+//                'step_quantity' => 10,
                 'init_quantity' => 1,
             ];
             $this->assign('productQuantityEditParam',json_encode($productQuantityEditParam));
