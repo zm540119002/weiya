@@ -17,7 +17,7 @@ return [
     'title' => '维雅品牌定制',
     'module_type' => 1,//模块类型
     'default_page_size'=>10,
-    // 支付链接
+    // 支付链接 system_id 系统平台id 请去msy index config文件查询 payment_type 支付方式 1：订单支付 2：充值支付
     'pay_gateway' => 'https://msy.meishangyun.com/index/Payment/toPay?system_id=1&payment_type=1&sn=',
     'pay_recharge'=> 'https://msy.meishangyun.com/index/Payment/toPay?system_id=1&payment_type=2&sn=',
 ];
