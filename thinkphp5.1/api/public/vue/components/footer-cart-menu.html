@@ -12,6 +12,9 @@
         };
         Vue.component('quantity-edit', {
             template:'#quantity_edit_tpl',
+            data: function () {
+                return param;
+            },
             methods: {
                 reduce: function () {
                     if(this.quantity>1){
