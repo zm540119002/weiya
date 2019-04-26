@@ -440,6 +440,9 @@ price{
 .group_btn30:first-child{
     padding:0 0 0 0.12rem;
 }
+.group_btn30:first-child div{
+    display:inline-block;
+}
 .goodsInfoLayer .group_btn30:first-child{
     text-align: left;
 }
@@ -5664,6 +5667,31 @@ ul.info_list li{
 }
 .pay_wrapper{
     background: #f2f2f2;
+}
+.pay_money_wrapper{
+    background:#f2f2f2;
+}
+.pay_money_wrapper .pay{
+    display: block;
+    padding:0.12rem 0;
+    margin:0.25rem 0 0;
+    background: #22AC38;
+    color:#fff;
+    text-align:center;
+    border-radius:4px;
+}
+.money-box{
+    margin:0.15rem 0 0;
+    padding:0.15rem;
+    background: #fff;
+}
+.msy-logo img{
+    display:block;
+    width:50%;
+    margin:0 auto;
+}
+.msy-logo p{
+    text-align: center;
 }
 .recharge_amount_item{
     background: #f2f2f2;

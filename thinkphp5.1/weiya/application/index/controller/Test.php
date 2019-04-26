@@ -64,7 +64,11 @@ class Test extends \common\controller\Base{
                     $this->assign('collected', 1);
                 }
             }
-
+            $productQuantityEditParam = [
+                'step_quantity' => 10,
+                'init_quantity' => 10,
+            ];
+            $this->assign('productQuantityEditParam',json_encode($productQuantityEditParam));
             return $this->fetch();
         }
     }
@@ -78,6 +82,12 @@ class Test extends \common\controller\Base{
     /**测试2
      */
     public function test2(){
+        return $this->fetch();
+    }
+
+    /**测试3
+     */
+    public function test3(){
         return $this->fetch();
     }
 }
