@@ -1,35 +1,3 @@
-<!-- 成交价格展示 -->
-<template id="price_tpl">
-    <div><span class="red">￥1.00</span></div>
-</template>
-<script type="text/javascript">
-    $(function(){
-        Vue.component('price', {
-            template:'#price_tpl',
-            props: {
-                init_price: {
-                    type: Number,
-                    default: 1
-                }
-            },
-            data: function () {
-                return {
-                    'deal_price':this.init_price
-                };
-            },
-            methods: {
-                reduce: function () {
-                },
-                plus: function () {
-                }
-            },computed: {
-                doThis: function () {
-                    console.log(this);
-                }
-            }
-        });
-    });
-</script>
 <!-- 数量编辑器 -->
 <template id="quantity_edit_tpl">
     <div class="quantity_wrapper selected-number">
@@ -84,6 +52,7 @@
                 <span class="step-quantity">{{init_quantity}}</span>
                 <span class="unit">{{unit}}</span>
             </p>
+            <p><span class="red">￥1.00</span></p>
         </div>
         <quantity-edit :init_quantity="init_quantity" :step_quantity="step_quantity" ></quantity-edit>
     </div>
@@ -98,9 +67,9 @@
             template:'#product_select_tpl',
             data: function () {
                 return {
-                    'buy_named':productSelectParam.buy_named?productSelectParam.buy_named:'',
-                    'step_named':productSelectParam.step_named?productSelectParam.step_named:'',
-                    'unit':productSelectParam.unit?productSelectParam.unit:'',
+                    'buy_named':productSelectParam.buy_named?productSelectParam.buy_named:'采购数量',
+                    'step_named':productSelectParam.step_named?productSelectParam.step_named:'起订数量',
+                    'unit':productSelectParam.unit?productSelectParam.unit:'盒',
                     'init_quantity':parseInt(productSelectParam.init_quantity)>1?productSelectParam.init_quantity:1,
                     'step_quantity':parseInt(productSelectParam.step_quantity)>1?productSelectParam.step_quantity:1
                 };
