@@ -78,8 +78,6 @@
             },
             data: function () {
                 return {
-                    'buy_named':this.buy_named,
-                    'step_named':this.step_named,
                     'unit':productSelectParam.unit?productSelectParam.unit:'盒',
                     'deal_price':parseInt(productSelectParam.deal_price)>1?productSelectParam.deal_price:1,
                     'subtotal_amount':0,
@@ -103,27 +101,27 @@
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <!--<a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">-->
-                <!--{{menu.name}}-->
-                <!--&lt;!&ndash; 全选 &ndash;&gt;-->
-                <!--<div v-if="menu.class.indexOf('checked_all')!=-1">-->
-                    <!--<input type="checkbox" class="check-all">-->
-                    <!--<label for="" class="left">全选</label>-->
-                <!--</div>-->
-                <!--&lt;!&ndash; 总金额 &ndash;&gt;-->
-                <!--<div v-else-if="menu.class.indexOf('amount')!=-1">-->
-                    <!--<span class="total_amount">￥{{total_amount}}</span>-->
-                <!--</div>-->
-                <!--&lt;!&ndash; 购物篮 &ndash;&gt;-->
-                <!--<div v-else-if="menu.class.indexOf('add_cart_icon')!=-1">-->
-                    <!--<span class="add_num"></span>-->
-                    <!--<span class="cart_num"></span>-->
-                <!--</div>-->
-                <!--&lt;!&ndash; 默认 &ndash;&gt;-->
-                <!--<div v-else>-->
-                    <!--<span class="s_i"></span>-->
-                <!--</div>-->
-            <!--</a>-->
+            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
+                {{menu.name}}
+                <!-- 全选 -->
+                <div v-if="menu.class.indexOf('checked_all')!=-1">
+                    <input type="checkbox" class="check-all">
+                    <label for="" class="left">全选</label>
+                </div>
+                <!-- 总金额 -->
+                <div v-else-if="menu.class.indexOf('amount')!=-1">
+                    <span class="total_amount">￥{{total_amount}}</span>
+                </div>
+                <!-- 购物篮 -->
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!=-1">
+                    <span class="add_num"></span>
+                    <span class="cart_num"></span>
+                </div>
+                <!-- 默认 -->
+                <div v-else>
+                    <span class="s_i"></span>
+                </div>
+            </a>
         </div>
     </footer>
 </template>
