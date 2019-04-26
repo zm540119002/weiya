@@ -9,7 +9,7 @@
     $(function(){
         Vue.component('quantity-edit', {
             template:'#quantity_edit_tpl',
-            props: ['step_quantity'],
+            props: ['step_quantity','init_quantity'],
             data: function () {
                 return {
                     'step_quantity':this.step_quantity?this.step_quantity:1,
