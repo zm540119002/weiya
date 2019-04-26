@@ -65,7 +65,7 @@ class Test extends \common\controller\Base{
                 }
             }
 
-            $this->assign('quantity', 2);
+            $this->assign('minimum_quantity', 5);
             return $this->fetch();
         }
     }
