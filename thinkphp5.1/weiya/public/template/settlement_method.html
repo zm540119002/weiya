@@ -1,0 +1,51 @@
+<!--结算方式模板-->
+<section class="settlementMethod" style="display:none;">
+    <div class="f24 pay_wrapper">
+        <section class="header_title separation-line">
+            <a href="javascript:void(0);" class="back_prev_page"></a>
+            <h2 class="f24">选择结算方式</h2>
+        </section>
+        <section>
+            <div>
+                <ul class="pay_nav">
+                    <!-- 待优化 -->
+                    {if !empty($walletInfo) && $walletInfo.amount>0}
+                    <li data-paycode="4">
+                        <span class="selected"></span>
+                        钱包支付
+                        <span class="wx">余额：￥<price>{$walletInfo.amount|default=0}</price></span>
+                    </li>
+                    {else /}
+                    <li data-paycode="4" class="disabled">
+                        <span class="selected"></span>
+                        钱包支付
+                        <span class="wx">余额：￥<price>{$walletInfo.amount|default=0}</price></span>
+                    </li>
+                    {/if}
+
+                    <li data-paycode="1">
+                        微信支付
+                        <span class="selected"></span>
+                        <span class="wx"></span>
+                    </li>
+                    <li data-paycode="2" id="alipay">
+                        支付宝支付
+                        <span class="selected"></span>
+                        <span class="wx"></span>
+                    </li>
+                    <li data-paycode="3">
+                        银联支付
+                        <span class="selected"></span>
+                        <span class="wx"></span>
+                    </li>
+                </ul>
+            </div>
+            <form  method="post" class="pay_form" id="pay_info">
+                <input type="hidden" name="order_id" value="{$orderGoodsList[0]['id']}"/>
+                <input type="hidden" name="order_sn" value="{$orderGoodsList[0]['sn']}"/>
+                <input type="hidden" name="pay_code" value="" class="pay_code"/>
+                <input type="button" value="立即结算" class="settlement_btn"/>
+            </form>
+        </section>
+    </div>
+</section>
