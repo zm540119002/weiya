@@ -1,17 +1,4 @@
-<template id="product-counter-tpl">
-    <div class="columns_flex l-r-sides">
-        <div>
-            <p>{{buy_named}}(单位:{{unit}})</p>
-            <p>
-                <span class="minimum-named">{{minimum_named}}</span>:
-                <span class="minimum-quantity">{{minimum_quantity}}</span>
-                <span class="unit">{{unit}}</span>
-            </p>
-        </div>
-        <slot name="counter"></slot>
-    </div>
-</template>
-<template slot="counter">
+<template id="quantity_edit_tpl">
     <div class="quantity_wrapper selected-number">
         <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
         <input type="text" :value="quantity" class="f24 product_count">
@@ -21,14 +8,10 @@
 <script type="text/javascript">
     $(function(){
         var param = {
-            'quantity':1,
-            'buy_named':'采购数量',
-            'minimum_named':'起订数量',
-            'minimum_quantity':1,
-            'unit':'盒'
+            'quantity':1
         };
-        Vue.component('product-counter', {
-            template:'#product-counter-tpl',
+        Vue.component('quantity-edit', {
+            template:'#quantity_edit_tpl',
             data: function () {
                 return param;
             },
@@ -44,6 +27,45 @@
             },computed: {
                 doThis: function () {
                     console.log(this);
+                }
+            }
+        });
+    });
+</script>
+<template id="product_quantity_edit_tpl">
+    <div class="columns_flex l-r-sides">
+        <div>
+            <p>{{buy_named}}(单位:{{unit}})</p>
+            <p>
+                <span class="minimum-named">{{minimum_named}}</span>:
+                <span class="minimum-quantity">{{minimum_quantity}}</span>
+                <span class="unit">{{unit}}</span>
+            </p>
+        </div>
+        <quantity-edit></quantity-edit>
+    </div>
+</template>
+<script type="text/javascript">
+    $(function(){
+        var param = {
+            'quantity':1,
+            'buy_named':'采购数量',
+            'minimum_named':'起订数量',
+            'minimum_quantity':1,
+            'unit':'盒'
+        };
+        Vue.component('product-quantity-edit', {
+            template:'#product_quantity_edit_tpl',
+            data: function () {
+                return param;
+            },
+            methods: {
+                reduce: function () {
+                },
+                plus: function () {
+                }
+            },computed: {
+                doThis: function () {
                 }
             }
         });
