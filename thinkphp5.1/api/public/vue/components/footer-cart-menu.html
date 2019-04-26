@@ -24,7 +24,6 @@
                 plus: function () {
                     console.log(this.$parent.$data);
                     console.log(parseInt(this.$parent.minimum_quantity));
-                    console.log(productQuantityEditParam);
                     this.quantity = parseInt(this.quantity) + parseInt(this.$parent.minimum_quantity);
                 }
             },computed: {
@@ -50,7 +49,7 @@
 </template>
 <script type="text/javascript">
     $(function(){
-        let productQuantityEditParam = '{$productQuantityEditParam|raw}';
+        var productQuantityEditParam = '{$productQuantityEditParam|raw}';
         productQuantityEditParam.minimum_quantity = parseInt(productQuantityEditParam.minimum_quantity)>1?productQuantityEditParam.minimum_quantity:1;
         productQuantityEditParam.quantity = parseInt(productQuantityEditParam.quantity)>1?productQuantityEditParam.quantity:1;
         console.log(productQuantityEditParam);
