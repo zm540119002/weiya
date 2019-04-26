@@ -18,8 +18,7 @@ return [
     'module_type' => 1,//模块类型
     'default_page_size'=>10,
     // 支付链接
-    'pay_gateway' => 'https://msy.meishangyun.com/index/Payment/toPay?system_id=3&order_sn=',
-    'pay_recharge'=> 'https://msy.meishangyun.com/index/Payment/toPay?system_id=3&order_sn=',
+    'pay_gateway' => 'https://msy.meishangyun.com/index/Payment/toPay?system_id=1&sn=',
 ];
 
 
