@@ -38,7 +38,11 @@
 						</a>
 					</div>
 					<div id="product-select">
-						<product-select></product-select>
+						<product-select
+								:buy_named="buy_named"
+								:buy_named_isDisplay="buy_named_isDisplay"
+								:step_named_isDisplay="step_named_isDisplay"
+						></product-select>
 					</div>
 				</div>
 			</li>
@@ -64,8 +68,9 @@
 		new Vue({
 			data:function(){
 				return {
-					'buy_named':'啊啊啊',
-					'step_named':'多对多'
+					'buy_named':'采购数量',
+					'buy_named_isDisplay':true,
+					'step_named_isDisplay':false
 				};
 			},
 			el: '#product-select'

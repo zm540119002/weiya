@@ -46,8 +46,8 @@
 <template id="product_select_tpl">
     <div class="columns_flex l-r-sides">
         <div>
-            <p>{{buy_named}}(单位:{{unit}})</p>
-            <p>
+            <p v-if="buy_named_isDisplay">{{buy_named}}(单位:{{unit}})</p>
+            <p v-if="step_named_isDisplay">
                 <span class="step-named">{{step_named}}</span>:
                 <span class="step-quantity">{{init_quantity}}</span>
                 <span class="unit">{{unit}}</span>
@@ -71,7 +71,7 @@
             props: {
                 buy_named: {
                     type: String,
-                    default: '采购数量'
+                    default: '购买数量'
                 },step_named: {
                     type: String,
                     default: '起订数量'
