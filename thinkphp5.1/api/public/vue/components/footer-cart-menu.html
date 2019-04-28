@@ -61,7 +61,7 @@
                         this.figure_up_subtotal_amount();
                         let param = {
                             deal_price:this.deal_price,
-                            buy_quantity:this.buy_quantity
+                            step_quantity:this.step_quantity
                         };
                         bus.$emit('reduce_total_amount',param);
                     }
@@ -71,7 +71,7 @@
                     this.figure_up_subtotal_amount();
                     let param = {
                         deal_price:this.deal_price,
-                        buy_quantity:this.buy_quantity
+                        step_quantity:this.step_quantity
                     };
                     bus.$emit('plus_total_amount',param);
                 }
@@ -123,11 +123,11 @@
                     }
                 },
                 methods: {
-                    reduce: function () {
-                        console.log(1);
+                    reduce: function (param) {
+                        this.total_amount -= param.deal_price * param.step_quantity;
                     },
-                    plus: function () {
-                        console.log(2);
+                    plus: function (param) {
+                        this.total_amount += param.deal_price * param.step_quantity;
                     }
                 },created:function(){
                     var _this = this;
