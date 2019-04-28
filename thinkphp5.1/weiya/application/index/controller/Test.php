@@ -64,7 +64,11 @@ class Test extends \common\controller\Base{
                     $this->assign('collected', 1);
                 }
             }
-
+            $productSelectParam = [
+                'step_quantity' => 10,
+                'init_quantity' => 2,
+            ];
+            $this->assign('productSelectParam',json_encode($productSelectParam));
             return $this->fetch();
         }
     }

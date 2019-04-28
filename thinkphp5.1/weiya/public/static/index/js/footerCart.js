@@ -250,69 +250,69 @@ $(function () {
         _this.addClass("nodisabled");//防止重复提交
         generateOrder(postData,_this);
     });
-    //确认订单
-    $('body').on('click','.confirm_order',function () {
-        _this = $(this);
-        var consignee=$('.consigneeInfo input[name="layer_consignee"]').val();
-        var mobile=$('.consigneeInfo input[name="layer_mobile"]').val();
-        var province=$('.consigneeInfo input[name="province"]').val();
-        var city=$('.consigneeInfo input[name="city"]').val();
-        var area=$('.consigneeInfo input[name="area"]').val();
-        var detail_address=$('.consigneeInfo input[name="layer_detail_address"]').val();
-        var orderId = $('.order_id').val();
-        var orderSn = $('.order_sn').val();
-        var addressId = $('.address_id').val();
-        var orderArr =[];
-        $.each($('.goods_order_item li'),function () {
-            _this = $(this);
-            var order_detail_id = _this.data('order_detail_id');
-            var brand_id = _this.find('.brand_name').data('id');
-            var brand_name = _this.find('.brand_name').text();
-            orderArr.push({
-                id:order_detail_id,
-                brand_id:brand_id,
-                brand_name:brand_name,
-            });
-        })
-        if(!addressId){
-            dialog.error('请选择收货地址');
-            return false;
-        }
-        var postData ={
-            father_order_id:orderId,
-            order_sn:orderSn,
-            consignee:consignee,
-            mobile:mobile,
-            province:province,
-            city:city,
-            area:area,
-            detail_address:detail_address,
-            orderDetail:orderArr
-        };
-        _this.addClass("nodisabled");//防止重复提交
-        var url = module + 'Order/confirmOrder';
-        $.ajax({
-            url: url,
-            data: postData,
-            type: 'post',
-            beforeSend: function(){
-                $('.loading').show();
-            },
-            error:function(){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
-                _this.removeClass("nodisabled");//删除防止重复提交
-                $('.loading').hide();
-                if(data.status == 0){
-
-                }else if(data.status == 1){
-                    location.href = 'https://msy.meishangyun.com/' + 'index/Payment/toPay/order_sn/' + data.order_sn+'/system_id/1';
-                }
-            }
-        });
-    });
+    // //确认订单
+    // $('body').on('click','.confirm_order',function () {
+    //     _this = $(this);
+    //     var consignee=$('.consigneeInfo input[name="layer_consignee"]').val();
+    //     var mobile=$('.consigneeInfo input[name="layer_mobile"]').val();
+    //     var province=$('.consigneeInfo input[name="province"]').val();
+    //     var city=$('.consigneeInfo input[name="city"]').val();
+    //     var area=$('.consigneeInfo input[name="area"]').val();
+    //     var detail_address=$('.consigneeInfo input[name="layer_detail_address"]').val();
+    //     var orderId = $('.order_id').val();
+    //     var orderSn = $('.order_sn').val();
+    //     var addressId = $('.address_id').val();
+    //     var orderArr =[];
+    //     $.each($('.goods_order_item li'),function () {
+    //         _this = $(this);
+    //         var order_detail_id = _this.data('order_detail_id');
+    //         var brand_id = _this.find('.brand_name').data('id');
+    //         var brand_name = _this.find('.brand_name').text();
+    //         orderArr.push({
+    //             id:order_detail_id,
+    //             brand_id:brand_id,
+    //             brand_name:brand_name,
+    //         });
+    //     })
+    //     if(!addressId){
+    //         dialog.error('请选择收货地址');
+    //         return false;
+    //     }
+    //     var postData ={
+    //         father_order_id:orderId,
+    //         order_sn:orderSn,
+    //         consignee:consignee,
+    //         mobile:mobile,
+    //         province:province,
+    //         city:city,
+    //         area:area,
+    //         detail_address:detail_address,
+    //         orderDetail:orderArr
+    //     };
+    //     _this.addClass("nodisabled");//防止重复提交
+    //     var url = module + 'Order/confirmOrder';
+    //     $.ajax({
+    //         url: url,
+    //         data: postData,
+    //         type: 'post',
+    //         beforeSend: function(){
+    //             $('.loading').show();
+    //         },
+    //         error:function(){
+    //             $('.loading').hide();
+    //             dialog.error('AJAX错误');
+    //         },
+    //         success: function(data){
+    //             _this.removeClass("nodisabled");//删除防止重复提交
+    //             $('.loading').hide();
+    //             if(data.status == 0){
+    //
+    //             }else if(data.status == 1){
+    //                 location.href = 'https://msy.meishangyun.com/' + 'index/Payment/toPay/order_sn/' + data.order_sn+'/system_id/1';
+    //             }
+    //         }
+    //     });
+    // });
 
     //再次购买
     $('body').on('click','.purchase_again',function () {
