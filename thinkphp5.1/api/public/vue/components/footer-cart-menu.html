@@ -79,6 +79,8 @@
             },created: function(){
                 this.subtotal_amount_figure_up();
                 let param = {
+                    goods_id:this.goods_id,
+                    buy_quantity:this.buy_quantity,
                     subtotal_amount:this.subtotal_amount
                 };
                 //触发产品小计初始化事件
@@ -125,12 +127,18 @@
                 data: function () {
                     return {
                         total_amount:0,
+                        goodsList:{},
                         menus: unlockingFooterCart.menu
                     }
                 },
                 methods: {
                     total_amount_init:function (param) {
                         this.total_amount += param.subtotal_amount;
+                        let arr = [];
+                        arr['id'] = param.id;
+                        arr['buy_quantity'] = param.buy_quantity;
+                        this.goodsList.push(arr);
+                        console.log(this.goodsList);
                     },
                     reduce: function (param) {
                         this.total_amount -= param.deal_price * param.step_quantity;
