@@ -133,9 +133,8 @@
                     }
                 },created:function(){
                     bus.$on('figure_up_total_amount', function (param) {
-                        this.callback = param.callback;
-                        this.(this.callback)();
-                        console.log(this.callback);
+                        this.(param.callback)();
+                        console.log(param.callback);
                     });
                 }
             });
