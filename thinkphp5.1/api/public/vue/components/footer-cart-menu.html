@@ -52,14 +52,14 @@
                 };
             },
             methods: {
-                figure_up_total_amount:function(){
-                },figure_up_subtotal_amount:function(){
+                figure_up_subtotal_amount:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
-                    let msg = {
+                    let param = {
                         deal_price:this.deal_price,
-                        buy_quantity:this.buy_quantity
+                        buy_quantity:this.buy_quantity,
+                        subtotal_amount:this.subtotal_amount
                     };
-                    bus.$emit('test', msg);
+                    bus.$emit('figure_up_total_amount',param);
                 },
                 reduce: function () {
                     if(this.buy_quantity>this.init_quantity){
@@ -120,8 +120,8 @@
                 },
                 methods: {
                 },created:function(){
-                    bus.$on('test', function (data) {
-                        console.log(data);
+                    bus.$on('figure_up_total_amount', function (param) {
+                        this.total_amount += param.subtotal_amount;
                     });
                 }
             });
