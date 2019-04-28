@@ -55,6 +55,7 @@
                 figure_up_total_amount:function(){
                 },figure_up_subtotal_amount:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
+                    bus.$emit('test', 'hi');
                 },
                 reduce: function () {
                     if(this.buy_quantity>this.init_quantity){
@@ -66,7 +67,6 @@
                     this.buy_quantity += this.step_quantity;
                     this.figure_up_subtotal_amount();
                 }
-            },computed: {
             },created: function(){
                 this.figure_up_subtotal_amount();
             }
@@ -116,12 +116,12 @@
                 },
                 methods: {
                     test: function () {
-                        console.log(this);
+                        console.log(1234);
                     }
-                },computed: {
-                    test1: function () {
-                        console.log(this);
-                    }
+                },created:function(){
+                    bus.$on('test', function (data) {
+                        console.log(data);
+                    });
                 }
             });
         }
