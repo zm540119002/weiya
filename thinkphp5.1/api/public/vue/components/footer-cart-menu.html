@@ -140,7 +140,7 @@
                         this.total_amount += param.deal_price * param.step_quantity;
                     }
                 },created:function(){
-                    var _this = this;
+                    let _this = this;
                     //监听产品小计初始化
                     bus.$on('subtotal_amount_init', function(param){
                         //产品总计初始化
