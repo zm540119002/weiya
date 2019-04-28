@@ -68,16 +68,12 @@
 		new Vue({
 			el: '#foot_cart_menu'
 		});
-		var productSelectParam = '{$productSelectParam|raw}';
-		if(productSelectParam){
-			productSelectParam = JSON.parse(productSelectParam)
-		}
 		new Vue({
 			data:function(){
 				return {
 					'buy_named':'采购数量',
-					'init_quantity':productSelectParam.init_quantity,
-					'step_quantity':productSelectParam.step_quantity,
+					'init_quantity':productSelectParam.init_quantity?productSelectParam.init_quantity:1,
+					'step_quantity':productSelectParam.step_quantity?productSelectParam.step_quantity:1,
 					'deal_price':168,
 					'buy_named_display':true,
 					'step_named_display':true
