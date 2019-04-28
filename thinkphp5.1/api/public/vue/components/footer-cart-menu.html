@@ -64,16 +64,16 @@
             <div>
                 <span class="red subtotal_amount">￥{{subtotal_amount}}</span>
             </div>
-            <quantity-edit :init_quantity="init_quantity" :step_quantity="step_quantity" ></quantity-edit>
+            <div class="quantity_wrapper selected-number">
+                <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+                <input type="text" :value="buy_quantity" class="f24 product_count">
+                <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+            </div>
         </div>
     </div>
 </template>
 <script type="text/javascript">
     $(function(){
-        var productSelectParam = '{$productSelectParam|raw}';
-        if(productSelectParam){
-            productSelectParam = JSON.parse(productSelectParam)
-        }
         Vue.component('product-select', {
             template:'#product_select_tpl',
             props: {
@@ -98,18 +98,35 @@
                 },quota_quantity: {
                     type: Number,
                     default: 1
+                },unit: {
+                    type: String,
+                    default: '盒'
+                },deal_price: {
+                    type: Number,
+                    default: 1
+                },init_quantity: {
+                    type: Number,
+                    default: 1
+                },step_quantity: {
+                    type: Number,
+                    default: 1
                 }
             },
             data: function () {
                 return {
-                    'unit':productSelectParam.unit?productSelectParam.unit:'盒',
-                    'deal_price':parseInt(productSelectParam.deal_price)>1?productSelectParam.deal_price:1,
-                    'subtotal_amount':0,
-                    'init_quantity':parseInt(productSelectParam.init_quantity)>1?productSelectParam.init_quantity:0,
-                    'step_quantity':parseInt(productSelectParam.step_quantity)>1?productSelectParam.step_quantity:1
+                    'buy_quantity':this.init_quantity,
+                    'subtotal_amount':0
                 };
             },
             methods: {
+                reduce: function () {
+                    if(this.buy_quantity>this.step_quantity){
+                        this.buy_quantity -= this.step_quantity;
+                    }
+                },
+                plus: function () {
+                    this.buy_quantity += this.step_quantity;
+                }
             },computed: {
             },created: function(){
                 this.subtotal_amount = this.deal_price * this.init_quantity;

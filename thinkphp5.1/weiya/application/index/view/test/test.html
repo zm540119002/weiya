@@ -65,6 +65,10 @@
 		new Vue({
 			el: '#foot_cart_menu'
 		});
+		var productSelectParam = '{$productSelectParam|raw}';
+		if(productSelectParam){
+			productSelectParam = JSON.parse(productSelectParam)
+		}
 		new Vue({
 			data:function(){
 				return {
