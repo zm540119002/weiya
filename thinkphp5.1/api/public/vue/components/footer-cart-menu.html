@@ -78,9 +78,15 @@
                 buy_named: {
                     type: String,
                     default: '购买数量'
+                },buy_named_display: {
+                    type: Boolean,
+                    default: false
                 },step_named: {
                     type: String,
                     default: '起订数量'
+                },step_named_display: {
+                    type: Boolean,
+                    default: false
                 }
             },
             data: function () {
@@ -93,13 +99,7 @@
                 };
             },
             methods: {
-                reduce: function () {
-                },
-                plus: function () {
-                }
             },computed: {
-                doThis: function () {
-                }
             }
         });
     });
@@ -111,16 +111,16 @@
             <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
-                <div v-if="menu.class.indexOf('checked_all')!=-1">
+                <div v-if="menu.class.indexOf('checked_all')!==-1">
                     <input type="checkbox" class="check-all">
                     <label for="" class="left">全选</label>
                 </div>
                 <!-- 总金额 -->
-                <div v-else-if="menu.class.indexOf('amount')!=-1">
+                <div v-else-if="menu.class.indexOf('amount')!==-1">
                     <span class="total_amount">￥{{total_amount}}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!=-1">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
                     <span class="add_num"></span>
                     <span class="cart_num"></span>
                 </div>
