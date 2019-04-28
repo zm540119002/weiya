@@ -52,31 +52,32 @@
                 };
             },
             methods: {
-                figure_up_subtotal_amount:function(){
+                subtotal_amount_figure_up:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },
                 reduce: function () {
                     if(this.buy_quantity>this.init_quantity){
                         this.buy_quantity -= this.step_quantity;
-                        this.figure_up_subtotal_amount();
+                        this.subtotal_amount_figure_up();
                         let param = {
                             deal_price:this.deal_price,
                             step_quantity:this.step_quantity
                         };
-                        bus.$emit('reduce_total_amount',param);
+                        bus.$emit('subtotal_amount_reduce',param);
                     }
                 },
                 plus: function () {
                     this.buy_quantity += this.step_quantity;
-                    this.figure_up_subtotal_amount();
+                    this.subtotal_amount_figure_up();
                     let param = {
                         deal_price:this.deal_price,
                         step_quantity:this.step_quantity
                     };
-                    bus.$emit('plus_total_amount',param);
+                    bus.$emit('subtotal_amount_plus',param);
                 }
             },created: function(){
-                this.figure_up_subtotal_amount();
+                this.subtotal_amount_figure_up();
+                bus.$emit('subtotal_amount_init',this.subtotal_amount);
             }
         });
     });
@@ -123,6 +124,9 @@
                     }
                 },
                 methods: {
+                    total_amount_init:function () {
+                        this.total_amount += param;
+                    },
                     reduce: function (param) {
                         this.total_amount -= param.deal_price * param.step_quantity;
                     },
@@ -131,10 +135,17 @@
                     }
                 },created:function(){
                     var _this = this;
-                    bus.$on('reduce_total_amount', function(param){
+                    //监听产品小计初始化计算
+                    bus.$on('subtotal_amount_init', function(param){
+                        //产品总计初始化
+                        _this.total_amount_init(param);
+                    });
+                    //监听产品增加
+                    bus.$on('subtotal_amount_reduce', function(param){
                         _this.reduce(param);
                     });
-                    bus.$on('plus_total_amount', function(param){
+                    //监听产品减少
+                    bus.$on('subtotal_amount_plus', function(param){
                         _this.plus(param);
                     });
                 }
