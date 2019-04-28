@@ -93,6 +93,7 @@ class Order extends \common\controller\UserBase
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
 
+
     // 订单确认页
     public function confirmOrder()
     {
@@ -107,12 +108,19 @@ class Order extends \common\controller\UserBase
                 ['user_id','=',$this->user['id']],
                 ['id','=',$fatherOrderId],
             ];
+
             $res = $modelOrder -> allowField(true) -> save($data,$condition);
 
             if(false === $res){
                 $modelOrder ->rollback();
                 return errorMsg('失败');
             }
+            /*            $modelOrderDetail = new \app\index\model\OrderDetail();
+                        $res = $modelOrderDetail -> isUpdate(true)-> saveAll($data['orderDetail']);
+                        if (!count($res)) {
+                            $modelOrder->rollback();
+                            return errorMsg('失败');
+                        }*/
             //根据订单号查询关联的购物车的商品 删除
             $modelOrderDetail = new \app\index\model\OrderDetail();
             $config = [
@@ -139,6 +147,7 @@ class Order extends \common\controller\UserBase
             }
             $modelOrder -> commit();
             $orderSn = input('post.order_sn','','string');
+
             $url = config('custom.pay_gateway').$orderSn;
             return successMsg($url);
 
@@ -154,38 +163,17 @@ class Order extends \common\controller\UserBase
                     ['order_detail od','od.father_order_id = o.id','left'],
                     ['goods g','g.id = od.goods_id','left']
                 ],'field' => [
-                    'o.id', 'o.sn', 'o.amount',
+                    'o.id', 'o.sn', 'o.amount','o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address',
                     'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type','od.brand_id','od.brand_name','od.id as order_detail_id',
                     'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
                 ],
             ];
             $orderGoodsList = $modelOrder->getList($config);
-            if(empty($orderGoodsList)){
-                $this ->error('没有此订单信息');
-            }
             $this ->assign('orderGoodsList',$orderGoodsList);
-            //地址
-            $modelAddress =  new \common\model\Address();
-            $config = [
-                'where' => [
-                    ['a.status', '=', 0],
-                    ['a.user_id', '=', $this->user['id']],
-                ],
-            ];
-            $addressList = $modelAddress ->getList($config);
-            $defaultAddress = [];
-            foreach ($addressList as &$addressInfo){
-                if($addressInfo['is_default'] == 1){
-                    $defaultAddress = $addressInfo;
-                    break;
-                }
-            }
-            if(empty($defaultAddress)){
-                $defaultAddress = reset($addressList);
-            }
 
-            $this->assign('defaultAddress', $defaultAddress);
-            $this->assign('addressList', $addressList);
+            $orderInfo = reset($orderGoodsList);
+            // 显示地址
+            $this->getOrderAddressInfo($orderInfo);
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
@@ -202,6 +190,7 @@ class Order extends \common\controller\UserBase
             ];
             $walletInfo = $modelWallet->getInfo($config);
             $this->assign('walletInfo', $walletInfo);
+
             return $this->fetch();
         }
 
@@ -395,5 +384,24 @@ class Order extends \common\controller\UserBase
         return $this->fetch('list_tpl');
     }
 
+    // 获取订单地址的默认值
+    private function getOrderAddressInfo($orderInfo){
 
+        // 显示地址
+        if( !empty($orderInfo['mobile']) && !empty($orderInfo['consignee']) ){
+            $addressInfo = $orderInfo;
+
+        }else{
+            $modelAddress =  new \common\model\Address();
+
+            $condition = [
+                'where' => [
+                    ['a.user_id','=',$this->user['id']],
+                    ['a.is_default','=',1]
+                ]
+            ];
+            $addressInfo = $modelAddress->getAddressDataList($condition,'info');
+        }
+        $this->assign('addressInfo', $addressInfo);
+    }
 }

@@ -1,0 +1,85 @@
+<div id="address_info">
+    {notempty name="addressInfo"}
+    <div class="item_addr address_info" >
+        <div class="ia-l"></div>
+        <div class="item_info">
+            <input type="hidden" value=" {$addressInfo.id}" class="address_id">
+            <div class="mt_new">
+                <span class="consignee">{$addressInfo.consignee}</span>
+                <span class="mobile">{$addressInfo.mobile}</span>
+            </div>
+            <p class=""><span class="list_area_address"></span><span class="detail_address">{$addressInfo.detail_address}</span></p>
+            <!--<input type="hidden" class="area-address-name" value="" data-province=" {$addressInfo.province}" data-city="{$addressInfo.city}" data-area="{$addressInfo.area}">-->
+            <form style="display:none;" class="consigneeInfo">
+                <input type="hidden" class="" name="province" value="{$addressInfo.province}" />
+                <input type="hidden" class="" name="city" value="{$addressInfo.city}" />
+                <input type="hidden" class="" name="area" value="{$addressInfo.area}" />
+                <input type="hidden" class="" name="layer_id" value="{$addressInfo.id}" />
+                <input type="hidden" class="" name="layer_consignee" value="{$addressInfo.consignee}" />
+                <input type="hidden" class="" name="layer_mobile" value="{$addressInfo.mobile}" />
+                <input type="hidden" class="" name="layer_detail_address" value="{$addressInfo.detail_address}" />
+                <input type="hidden" class="" name="is_default" value="{$addressInfo.is_default}" />
+            </form>
+        </div>
+        <div class="edit_operate">
+            <a href="javascript:void(0);" class="select_address">选择地址></a>
+            <a href="javascript:void(0);" class="ia-r address_edit">
+                <span class="iar-icon"></span>
+            </a>
+        </div>
+    </div>
+    {else /}
+    <a href="javascript:void(0);" class="add_address"><span>+</span>添加收货地址</a>
+    {/notempty}
+</div>
+
+<!--添加收货人信息-->
+<section class="section-address bg-eae pt-5" style="display:none;">
+    <form action='#' method="post" class="bg-fff address_form">
+        <input type="hidden" class="" name="address_id" value="" />
+        <div class="form-group box-flex clearfixed">
+            <label class="form-label">收件人：</label>
+            <input type="text" name="consignee" class="input-flex recipient_name " placeholder="请输入姓名" value="">
+        </div>
+        <div class="form-group box-flex clearfixed">
+            <label class="form-label">联系电话：</label>
+            <input type="text" name="mobile" class="input-flex recipient_mobile" placeholder="请输入收件人电话" value="">
+        </div>
+        <div class="express-area ">
+            <a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+                <label class="form-label">选择地区：</label>
+                {empty name="address"}
+                <div class="area_address">省 &gt; 市 &gt; 区/县</div>
+                {else /}
+                <div class="area_address"></div>
+                {/empty}
+                <input type="hidden" class="district_address" value="">
+            </a>
+        </div>
+        <div class="form-group box-flex">
+            <label class="form-label">详细地址：</label>
+            <input type="text" name="detail_address" class="input-flex recipient_detail_address" placeholder="请填写详细地址" value="">
+        </div>
+        <div class="set_default_item f24">
+            <div>
+                <span>设为默认地址</span>
+                <p>注：每次下单时会使用该地址</p>
+            </div>
+            <div class="myswitch"  data-off="0"></div>
+        </div>
+    </form>
+</section>
+
+<!--选择地区弹层-->
+<section id="areaLayer" class="express-area-box" style="display:none;">
+    <header>
+        <h3>选择地区</h3>
+        <a id="backUp" class="back" href="javascript:void(0)" title="返回" style="display: none;"></a>
+        <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+    </header>
+    <article id="areaBox">
+        <ul id="areaList" class="area-list"></ul>
+    </article>
+</section>
+<!--遮罩层-->
+<div id="areaMask" class="address_mask"></div>
