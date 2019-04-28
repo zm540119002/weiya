@@ -83,16 +83,6 @@
                 };
                 //触发产品小计初始化事件
                 bus.$emit('subtotal_amount_init',param);
-                param = {
-                    goods_id:this.goods_id,
-                    buy_quantity:this.buy_quantity
-                };
-                var _this = this;
-                //监听加入购物车
-                bus.$on('add_cart', function(param){
-                    //产品总计初始化
-//                    _this.add_cart(param);
-                });
             }
         });
     });
@@ -148,9 +138,7 @@
                     plus: function (param) {
                         this.total_amount += param.deal_price * param.step_quantity;
                     },
-                    add_cart:function(param){
-                        //触发加入购物车
-                        bus.$emit('add_cart',param);
+                    add_cart:function(){
                     }
                 },created:function(){
                     let _this = this;
