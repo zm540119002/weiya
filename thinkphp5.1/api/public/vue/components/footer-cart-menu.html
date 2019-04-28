@@ -32,6 +32,7 @@
         Vue.component('product-select', {
             template:'#product_select_tpl',
             props: {
+                goods_id: {type: Number,default: 0,required: true},
                 buy_named: {type: String,default: '购买数量'},
                 buy_named_display: {type: Boolean,default: false},
                 step_named: {type: String,default: '起订数量'},
