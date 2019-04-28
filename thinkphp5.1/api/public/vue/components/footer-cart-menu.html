@@ -112,7 +112,7 @@
             methods: {
             },computed: {
             },created: function(){
-                console.log(this);
+                this.subtotal_amount = this.deal_price * this.init_quantity;
             }
         });
     });
