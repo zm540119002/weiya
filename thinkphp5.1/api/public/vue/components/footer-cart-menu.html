@@ -63,6 +63,7 @@
                             deal_price:this.deal_price,
                             step_quantity:this.step_quantity
                         };
+                        //触发产品减少事件
                         bus.$emit('subtotal_amount_reduce',param);
                     }
                 },
@@ -73,6 +74,7 @@
                         deal_price:this.deal_price,
                         step_quantity:this.step_quantity
                     };
+                    //触发产品增加事件
                     bus.$emit('subtotal_amount_plus',param);
                 }
             },created: function(){
@@ -80,6 +82,7 @@
                 let param = {
                     subtotal_amount:this.subtotal_amount
                 };
+                //触发产品小计初始化事件
                 bus.$emit('subtotal_amount_init',param);
             }
         });
@@ -138,7 +141,7 @@
                     }
                 },created:function(){
                     var _this = this;
-                    //监听产品小计初始化计算
+                    //监听产品小计初始化
                     bus.$on('subtotal_amount_init', function(param){
                         //产品总计初始化
                         _this.total_amount_init(param);
