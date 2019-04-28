@@ -47,7 +47,7 @@
     <div>
         <div class="columns_flex l-r-sides">
             <p>
-                <span class="red subtotal_amount">￥{{subtotal_amount}}</span>
+                <span class="red deal_price">￥{{deal_price}}</span>
             </p>
             <p v-if="quota_named_display">{{quota_named}}：<span class="quota">{{quota_quantity}}</span></p>
         </div>
@@ -61,7 +61,9 @@
                 </p>
                 
             </div>
-            <div><span class="red deal_price">￥{{deal_price}}</span></div>
+            <div>
+                <span class="red subtotal_amount">￥{{subtotal_amount}}</span>
+            </div>
             <quantity-edit :init_quantity="init_quantity" :step_quantity="step_quantity" ></quantity-edit>
         </div>
     </div>
