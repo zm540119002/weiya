@@ -133,7 +133,11 @@
                     }
                 },created:function(){
                     bus.$on('figure_up_total_amount', function (param) {
-                        console.log(param.callback);
+                        if(param.callback==='reduce'){
+                            this.reduce();
+                        }else if(param.callback==='plus'){
+                            this.plus();
+                        }
                     });
                 }
             });
