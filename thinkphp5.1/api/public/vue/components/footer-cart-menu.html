@@ -134,13 +134,13 @@
                 },
                 methods: {
                     total_amount_init:function (param) {
+                        //初始化总计
                         this.total_amount += param.subtotal_amount;
                         let arr = [];
                         arr['goods_id'] = param.goods_id;
                         arr['buy_quantity'] = param.buy_quantity;
 //                        [].push.apply(this.goodsList,arr);
                         console.log(arr);
-                        console.log(this.goodsList);
                     },
                     reduce: function (param) {
                         this.total_amount -= param.deal_price * param.step_quantity;
