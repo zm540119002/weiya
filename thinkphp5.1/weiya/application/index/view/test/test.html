@@ -41,7 +41,6 @@
 						<product-select
 								:buy_named="buy_named"
 								:buy_named_display="buy_named_display"
-								:step_named_display="step_named_display"
 						></product-select>
 					</div>
 				</div>
@@ -69,7 +68,8 @@
 			data:function(){
 				return {
 					'buy_named':'采购数量',
-					'buy_named_display':true
+					'buy_named_display':true,
+					'step_named_display':true
 				};
 			},
 			el: '#product-select'
