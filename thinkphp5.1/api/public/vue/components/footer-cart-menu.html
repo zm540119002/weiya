@@ -15,14 +15,13 @@
                     <span class="step-quantity">{{init_quantity}}</span>
                     <span class="unit">{{unit}}</span>
                 </p>
-                
             </div>
             <div>
                 <span class="red subtotal_amount">￥{{subtotal_amount}}</span>
             </div>
             <div class="quantity_wrapper selected-number">
                 <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-                <input type="text" :value="buy_quantity" class="f24 product_count">
+                <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                 <a href="javascript:void(0);" class="plus" @click="plus">+</a>
             </div>
         </div>
