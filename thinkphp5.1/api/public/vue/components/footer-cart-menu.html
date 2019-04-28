@@ -49,7 +49,7 @@
             <p>
                 <span class="red subtotal_amount">￥{{subtotal_amount}}</span>
             </p>
-            <p>{{quota_named}}：<span class="quota">{{quota_quantity}}</span></p>
+            <p v-if="quota_named_display">{{quota_named}}：<span class="quota">{{quota_quantity}}</span></p>
         </div>
         <div class="columns_flex l-r-sides">
             <div>
