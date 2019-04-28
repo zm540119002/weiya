@@ -88,30 +88,19 @@
 		if(productSelectParam){
 			productSelectParam = JSON.parse(productSelectParam)
 		}
+		let param = {
+			'buy_named':'采购数量',
+			'init_quantity':productSelectParam.init_quantity,
+			'step_quantity':productSelectParam.step_quantity,
+			'deal_price':168,
+			'buy_named_display':true,
+			'step_named_display':true
+		};
 		new Vue({
 			data:function(){
-				return {
-					'buy_named':'采购数量',
-					'init_quantity':productSelectParam.init_quantity,
-					'step_quantity':productSelectParam.step_quantity,
-					'deal_price':168,
-					'buy_named_display':true,
-					'step_named_display':true
-				};
+				return param;
 			},
 			el: '#product-select'
-		});new Vue({
-			data:function(){
-				return {
-					'buy_named':'采购数量',
-					'init_quantity':productSelectParam.init_quantity,
-					'step_quantity':productSelectParam.step_quantity,
-					'deal_price':188,
-					'buy_named_display':true,
-					'step_named_display':true
-				};
-			},
-			el: '#product-select2'
 		});
 	});
 </script>
