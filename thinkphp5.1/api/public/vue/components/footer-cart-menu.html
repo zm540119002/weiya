@@ -66,6 +66,9 @@
                 plus: function () {
                     this.buy_quantity += this.step_quantity;
                     this.figure_up_subtotal_amount();
+                },
+                test: function () {
+                    console.log(1234);
                 }
             },created: function(){
                 this.figure_up_subtotal_amount();
@@ -115,9 +118,6 @@
                     }
                 },
                 methods: {
-//                    test: function () {
-//                        console.log(1234);
-//                    }
                 },created:function(){
                     bus.$on('test', function (data) {
                         console.log(data);
