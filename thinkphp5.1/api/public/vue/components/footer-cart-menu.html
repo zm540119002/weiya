@@ -122,6 +122,7 @@
                 },created:function(){
                     bus.$on('figure_up_total_amount', function (param) {
                         this.total_amount += param.subtotal_amount;
+                        console.log(param);
                     });
                 }
             });
