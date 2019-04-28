@@ -124,13 +124,12 @@
                         this.buy_quantity -= this.step_quantity;
                         this.subtotal_amount = this.deal_price * this.buy_quantity;
                     }
-                }
-
-            },computed: {
+                },
                 plus: function () {
                     this.buy_quantity += this.step_quantity;
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 }
+            },computed: {
             },created: function(){
                 this.subtotal_amount = this.deal_price * this.buy_quantity;
             }
