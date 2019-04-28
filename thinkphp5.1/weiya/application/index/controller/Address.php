@@ -17,8 +17,8 @@ class Address extends \common\controller\UserBase {
                     ['id','=',$addressId],
                     ['user_id','=',$userId],
                 ];
-                $result = $model -> edit($data,$condition);
-                if( !$result['status'] ){
+                $result = $model->allowField(true)->save($data,$condition);
+                if( false === $result ){
                     $model ->rollback();
                     return errorMsg('失败');
                 }
@@ -54,11 +54,11 @@ class Address extends \common\controller\UserBase {
                 //开启事务
                 $model -> startTrans();
                 $data['user_id'] = $userId;
-                $result = $model->edit($data);
-                if(!$result['status']){
+                $result = $model->allowField(true)->save($data);
+                if(!$result){
                     return errorMsg('失败');
                 }
-                $addressId = $result['id'];
+                $addressId = $model->getAttr('id');
                 //修改其他地址不为默认值
                 if($_POST['is_default'] == 1){
                     $where = [
@@ -88,6 +88,9 @@ class Address extends \common\controller\UserBase {
                     ['status','=',0],
                     ['id','=',$id],
                     ['user_id','=',$userId],
+                ], 'field'=>[
+                    'id','user_id', 'consignee', 'detail_address','mobile','is_default',
+                    'tel_phone','province', 'city', 'area','status',
                 ],
             ];
             $address = $model -> getInfo($config);
@@ -107,6 +110,9 @@ class Address extends \common\controller\UserBase {
             'where'=>[
                 ['status','=',0],
                 ['user_id','=',$this->user['id']]
+            ], 'field'=>[
+                'id','user_id', 'consignee', 'detail_address','mobile','is_default',
+                'tel_phone','province', 'city', 'area','status',
             ],
         ];
         $addressList = $model -> getList($config);
@@ -133,7 +139,28 @@ class Address extends \common\controller\UserBase {
         }else{
             return errorMsg('删除失败');
         }
+    }
 
+    /**
+     * 获取地址列表  弹窗
+     */
+    public function _popGetList(){
+
+        $model= new \common\model\Address();
+
+        $condition = [
+            'where' => [
+                ['a.user_id','=',$this->user['id']],
+            ],'field'=>[
+            'id','user_id', 'consignee', 'detail_address','mobile','is_default',
+            'tel_phone','province', 'city', 'area','status',
+            ]
+        ];
+        $data = $model->getAddressDataList($condition);
+
+        $this->assign('addressList',$data);
+
+        return $this->fetch('pop_list');
     }
 
 }
