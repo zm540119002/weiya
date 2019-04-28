@@ -32,7 +32,8 @@
                     {if $info.order_status == 1}
                     <!--1:待付款-->
                     <a href="javascript:void(0);" class="cancel_order">取消订单</a>
-                    <a href="{:url('Order/toPay',['order_sn'=>$info.sn])}">去支付</a>
+                    <!--<a href="{:config('custom.pay_gateway')}{$info.sn}">去支付</a>-->
+                    <a href="{:url('Order/confirmOrder',['order_sn'=>$info.sn])}">去支付</a>
                     {elseif $info.order_status == 2 }
                     <!--2:待收货-->
                     <a href="javascript:void(0);" class="confirm_receive">确认收货</a>
