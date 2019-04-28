@@ -40,6 +40,7 @@
 					<div id="product-select">
 						<product-select
 								:buy_named="buy_named"
+								:init_quantity="init_quantity"
 								:buy_named_display="buy_named_display"
 								:step_named_display="step_named_display"
 						></product-select>
@@ -73,6 +74,7 @@
 			data:function(){
 				return {
 					'buy_named':'采购数量',
+					'init_quantity':productSelectParam.init_quantity,
 					'buy_named_display':true,
 					'step_named_display':true
 				};
