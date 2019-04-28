@@ -54,22 +54,28 @@
             methods: {
                 figure_up_subtotal_amount:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
-                    let param = {
-                        deal_price:this.deal_price,
-                        buy_quantity:this.buy_quantity,
-                        subtotal_amount:this.subtotal_amount
-                    };
-                    bus.$emit('figure_up_total_amount',param);
                 },
                 reduce: function () {
                     if(this.buy_quantity>this.init_quantity){
                         this.buy_quantity -= this.step_quantity;
                         this.figure_up_subtotal_amount();
+                        let param = {
+                            deal_price:this.deal_price,
+                            buy_quantity:this.buy_quantity,
+                            callback:'reduce'
+                        };
+                        bus.$emit('figure_up_total_amount',param);
                     }
                 },
                 plus: function () {
                     this.buy_quantity += this.step_quantity;
                     this.figure_up_subtotal_amount();
+                    let param = {
+                        deal_price:this.deal_price,
+                        buy_quantity:this.buy_quantity,
+                        callback:'plus'
+                    };
+                    bus.$emit('figure_up_total_amount',param);
                 }
             },created: function(){
                 this.figure_up_subtotal_amount();
@@ -119,11 +125,16 @@
                     }
                 },
                 methods: {
+                    reduce: function () {
+                        console.log(1);
+                    },
+                    plus: function () {
+                        console.log(2);
+                    }
                 },created:function(){
                     bus.$on('figure_up_total_amount', function (param) {
-                        this.total_amount = param.subtotal_amount;
-                        console.log(param);
-                        console.log(this.total_amount);
+                        this.callback = param.callback;
+                        this.callback();
                     });
                 }
             });
