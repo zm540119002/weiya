@@ -21,10 +21,7 @@
             </div>
             <div class="quantity_wrapper selected-number">
                 <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-                <form id="form1">
-                <input type="text" name='aa' :value="buy_quantity" class="f24 product_count">
-                <input type="text" name='aa2' :value="buy_quantity" class="f24 product_count">
-                </form>
+                <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                 <a href="javascript:void(0);" class="plus" @click="plus">+</a>
             </div>
         </div>
@@ -143,7 +140,7 @@
                         arr['goods_id'] = param.goods_id;
                         arr['buy_quantity'] = param.buy_quantity;
 //                        [].push.apply(this.goodsList,arr);
-                        console.log($('#form1').serializeObject());
+                        console.log(arr);
                     },
                     reduce: function (param) {
                         this.total_amount -= param.deal_price * param.step_quantity;
