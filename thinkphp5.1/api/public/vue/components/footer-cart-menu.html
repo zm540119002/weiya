@@ -122,14 +122,12 @@
                 reduce: function () {
                     if(this.buy_quantity>this.step_quantity){
                         this.buy_quantity -= this.step_quantity;
-                        this.$el.test();
+                        this.subtotal_amount = this.deal_price * this.buy_quantity;
                     }
                 },
                 plus: function () {
                     this.buy_quantity += this.step_quantity;
-                    this.$el.test();
-                },test:function (){
-                    console.log('test');
+                    this.subtotal_amount = this.deal_price * this.buy_quantity;
                 }
             },computed: {
             },created: function(){
