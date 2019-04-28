@@ -119,19 +119,20 @@
                 };
             },
             methods: {
+                figure_up_subtotal_amount:function(){
+                    this.subtotal_amount = this.deal_price * this.buy_quantity;
+                },
                 reduce: function () {
                     if(this.buy_quantity>this.step_quantity){
                         this.buy_quantity -= this.step_quantity;
-                        this.subtotal_amount = this.deal_price * this.buy_quantity;
                     }
                 },
                 plus: function () {
                     this.buy_quantity += this.step_quantity;
-                    this.subtotal_amount = this.deal_price * this.buy_quantity;
                 }
             },computed: {
             },created: function(){
-                this.subtotal_amount = this.deal_price * this.buy_quantity;
+                this.figure_up_subtotal_amount();
             }
         });
     });
