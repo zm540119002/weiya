@@ -75,13 +75,15 @@
                     };
                     //触发产品增加事件
                     bus.$emit('subtotal_amount_plus',param);
-                },
-                add_cart:function(param){
-                    console.log(param);
                 }
             },created: function(){
                 this.subtotal_amount_figure_up();
                 let param = {
+                    subtotal_amount:this.subtotal_amount
+                };
+                //触发产品小计初始化事件
+                bus.$emit('subtotal_amount_init',param);
+                param = {
                     goods_id:this.goods_id,
                     buy_quantity:this.buy_quantity
                 };
@@ -89,13 +91,8 @@
                 //监听加入购物车
                 bus.$on('add_cart', function(param){
                     //产品总计初始化
-                    _this.add_cart(param);
+//                    _this.add_cart(param);
                 });
-                param = {
-                    subtotal_amount:this.subtotal_amount
-                };
-                //触发产品小计初始化事件
-                bus.$emit('subtotal_amount_init',param);
             }
         });
     });
