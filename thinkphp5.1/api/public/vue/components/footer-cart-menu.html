@@ -128,7 +128,7 @@
                 data: function () {
                     return {
                         total_amount:0,
-                        goodsList:{},
+                        postData:{},
                         menus: unlockingFooterCart.menu
                     }
                 },
@@ -136,11 +136,14 @@
                     total_amount_init:function (param) {
                         //初始化总计
                         this.total_amount += param.subtotal_amount;
-                        let arr = [];
-                        arr['goods_id'] = param.goods_id;
-                        arr['buy_quantity'] = param.buy_quantity;
-//                        [].push.apply(this.goodsList,arr);
-                        console.log(arr);
+                        let goodsList = [];
+                        let obj = {
+                            'goods_id':param.goods_id,
+                            'buy_quantity':param.buy_quantity
+                        };
+                        goodsList.push(obj);
+                        this.postData.goodsList = goodsList;
+                        console.log(this.postData);
                     },
                     reduce: function (param) {
                         this.total_amount -= param.deal_price * param.step_quantity;
