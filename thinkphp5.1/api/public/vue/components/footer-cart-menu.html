@@ -137,7 +137,8 @@
                         let arr = [];
                         arr['id'] = param.id;
                         arr['buy_quantity'] = param.buy_quantity;
-                        [].push.apply(this.goodsList,arr);
+//                        [].push.apply(this.goodsList,arr);
+                        console.log(arr);
                         console.log(this.goodsList);
                     },
                     reduce: function (param) {
