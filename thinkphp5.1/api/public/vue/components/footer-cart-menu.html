@@ -133,7 +133,6 @@
                     }
                 },created:function(){
                     bus.$on('figure_up_total_amount', function (param) {
-                        this.(param.callback)();
                         console.log(param.callback);
                     });
                 }
