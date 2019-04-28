@@ -77,7 +77,10 @@
                 }
             },created: function(){
                 this.subtotal_amount_figure_up();
-                bus.$emit('subtotal_amount_init',this.subtotal_amount);
+                let param = {
+                    subtotal_amount:this.subtotal_amount
+                };
+                bus.$emit('subtotal_amount_init',param);
             }
         });
     });
@@ -125,7 +128,7 @@
                 },
                 methods: {
                     total_amount_init:function () {
-                        this.total_amount += param;
+                        this.total_amount += param.subtotal_amount;
                     },
                     reduce: function (param) {
                         this.total_amount -= param.deal_price * param.step_quantity;
