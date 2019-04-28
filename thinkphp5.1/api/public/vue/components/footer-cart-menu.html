@@ -143,7 +143,7 @@
                         arr['goods_id'] = param.goods_id;
                         arr['buy_quantity'] = param.buy_quantity;
 //                        [].push.apply(this.goodsList,arr);
-                        console.log($('#form1').serializeArray());
+                        console.log($('#form1').serializeObject());
                     },
                     reduce: function (param) {
                         this.total_amount -= param.deal_price * param.step_quantity;
