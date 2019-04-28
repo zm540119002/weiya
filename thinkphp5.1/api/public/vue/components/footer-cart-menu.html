@@ -55,7 +55,11 @@
                 figure_up_total_amount:function(){
                 },figure_up_subtotal_amount:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
-                    bus.$emit('test', 'hi');
+                    let msg = {
+                        deal_price:this.deal_price,
+                        buy_quantity:this.buy_quantity
+                    };
+                    bus.$emit('test', msg);
                 },
                 reduce: function () {
                     if(this.buy_quantity>this.init_quantity){
@@ -66,9 +70,6 @@
                 plus: function () {
                     this.buy_quantity += this.step_quantity;
                     this.figure_up_subtotal_amount();
-                },
-                test: function () {
-                    console.log(1234);
                 }
             },created: function(){
                 this.figure_up_subtotal_amount();
