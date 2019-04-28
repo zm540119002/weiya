@@ -28,6 +28,15 @@
 	{block name="pre-script"}{/block}
 	<script type="text/javascript" src="api_common_js/login.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+	<!-- 用于组件通信 -->
+	<script type="text/javascript">
+		var bus = new Vue();
+		// 触发组件 A 中的事件
+		//    bus.$emit('id-selected', 1);
+		// 在组件 B 创建的钩子中监听事件
+		//    bus.$on('id-selected', function (id) {
+		//    });
+	</script>
 </head>
 <body>
 <!-- 内容模块 -->

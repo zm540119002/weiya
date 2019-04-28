@@ -1,0 +1,43 @@
+
+<!--地址列表-->
+<section class="delivery_address">
+    <section class="header_title separation-line">
+        <a href="javascript:void(0);" class="back_prev_page"></a>
+        <span class="f24">收货地址</span>
+        <span class="f24 add_address_1">新增收货地址</span>
+    </section>
+
+    {volist name="addressList" id="vo"}
+    <div class="item_addr">
+        <div class="ia-l"></div>
+        <div class="item_info">
+            <input type="hidden" value="{$vo.id}" class="address_id">
+            <div class="mt_new">
+                <span>{$vo.consignee}</span>
+                <span>{$vo.mobile}</span>
+                {if $vo.is_default eq 1 }
+                <i class="default_tipc">默认</i>
+                {/if}
+            </div>
+            <p class=""><span class="area_address" id="{$vo.id}"></span>{$vo.detail_address}</p>
+            <form style="display:none;" class="consigneeInfo">
+                <input type="hidden" class="" name="province" value="{$vo.province}" />
+                <input type="hidden" class="" name="city" value="{$vo.city}" />
+                <input type="hidden" class="" name="area" value="{$vo.area}" />
+                <input type="hidden" class="" name="layer_id" value="{$vo.id}" />
+                <input type="hidden" class="" name="layer_consignee" value="{$vo.consignee}" />
+                <input type="hidden" class="" name="layer_mobile" value="{$vo.mobile}" />
+                <input type="hidden" class="" name="layer_detail_address" value="{$vo.detail_address}" />
+                <input type="hidden" class="" name="is_default" value="{$vo.is_default}" />
+            </form>
+        </div>
+        <div class="edit_operate">
+            <!--<a href="javascript:void(0)" class="address_delete">删除</a>-->
+            <a href="javascript:void(0);" class="ia-r address_edit">
+                <span class="iar-icon"></span>
+            </a>
+        </div>
+    </div>
+    {/volist}
+</section>
+

@@ -1,102 +1,101 @@
-<!-- 数量编辑器 -->
-<template id="quantity_edit_tpl">
-    <div class="quantity_wrapper selected-number">
-        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-        <input type="text" :value="quantity" class="f24 product_count">
-        <a href="javascript:void(0);" class="plus" @click="plus">+</a>
-    </div>
-</template>
-<script type="text/javascript">
-    $(function(){
-        Vue.component('quantity-edit', {
-            template:'#quantity_edit_tpl',
-            props: {
-                step_quantity: {
-                    type: Number,
-                    default: 1
-                },
-                init_quantity: {
-                    type: Number,
-                    default: 1
-                }
-            },
-            data: function () {
-                return {
-                    'quantity':this.init_quantity
-                };
-            },
-            methods: {
-                reduce: function () {
-                    if(this.quantity>this.step_quantity){
-                        this.quantity -= this.step_quantity;
-                    }
-                },
-                plus: function () {
-                    this.quantity += this.step_quantity;
-                }
-            },computed: {
-                doThis: function () {
-                    console.log(this);
-                }
-            }
-        });
-    });
-</script>
 <!-- 产品选择器 -->
 <template id="product_select_tpl">
-    <div class="columns_flex l-r-sides">
-        <div>
+    <div>
+        <div class="columns_flex l-r-sides">
             <p>
+                <span class="red deal_price">￥{{deal_price}}</span>
+            </p>
+            <p v-if="quota_named_display">{{quota_named}}：<span class="quota">{{quota_quantity}}</span></p>
+        </div>
+        <div class="columns_flex l-r-sides">
+            <div>
+                <p v-if="buy_named_display">{{buy_named}}：(单位:{{unit}})</p>
+                <p v-if="step_named_display">
+                    <span class="step-named">{{step_named}}：</span>
+                    <span class="step-quantity">{{init_quantity}}</span>
+                    <span class="unit">{{unit}}</span>
+                </p>
+            </div>
+            <div>
                 <span class="red subtotal_amount">￥{{subtotal_amount}}</span>
-            </p>
+            </div>
+            <div class="quantity_wrapper selected-number">
+                <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+                <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
+                <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+            </div>
         </div>
-        <div>
-            <p>{{buy_named}}(单位:{{unit}})</p>
-            <p>
-                <span class="step-named">{{step_named}}</span>:
-                <span class="step-quantity">{{init_quantity}}</span>
-                <span class="unit">{{unit}}</span>
-            </p>
-            <p>样品购买限额：<span class="quota">1</span></p>
-        </div>
-        <div><span class="red deal_price">￥{{deal_price}}</span></div>
-        <quantity-edit :init_quantity="init_quantity" :step_quantity="step_quantity" ></quantity-edit>
     </div>
 </template>
 <script type="text/javascript">
     $(function(){
-        var productSelectParam = '{$productSelectParam|raw}';
-        if(productSelectParam){
-            productSelectParam = JSON.parse(productSelectParam)
-        }
         Vue.component('product-select', {
             template:'#product_select_tpl',
             props: {
-                buy_named: {
-                    type: String,
-                    default: '购买数量'
-                },step_named: {
-                    type: String,
-                    default: '起订数量'
-                }
+                buy_named: {type: String,default: '购买数量'},
+                buy_named_display: {type: Boolean,default: false},
+                step_named: {type: String,default: '起订数量'},
+                step_named_display: {type: Boolean,default: false},
+                quota_named: {type: String,default: '样品购买限额'},
+                quota_named_display: {type: Boolean,default: false},
+                quota_quantity: {type: Number,default: 1},
+                unit: {type: String,default: '盒'},
+                deal_price: {type: Number,default: 0.01},
+                init_quantity: {type: Number,default: 1},
+                step_quantity: {type: Number,default: 1}
             },
             data: function () {
                 return {
-                    'unit':productSelectParam.unit?productSelectParam.unit:'盒',
-                    'deal_price':parseInt(productSelectParam.deal_price)>1?productSelectParam.deal_price:1,
-                    'subtotal_amount':0,
-                    'init_quantity':parseInt(productSelectParam.init_quantity)>1?productSelectParam.init_quantity:0,
-                    'step_quantity':parseInt(productSelectParam.step_quantity)>1?productSelectParam.step_quantity:1
+                    'buy_quantity':this.init_quantity,
+                    'subtotal_amount':0
                 };
             },
             methods: {
+                subtotal_amount_figure_up:function(){
+                    this.subtotal_amount = this.deal_price * this.buy_quantity;
+                },
                 reduce: function () {
+                    if(this.buy_quantity>this.init_quantity){
+                        this.buy_quantity -= this.step_quantity;
+                        this.subtotal_amount_figure_up();
+                        let param = {
+                            deal_price:this.deal_price,
+                            step_quantity:this.step_quantity
+                        };
+                        //触发产品减少事件
+                        bus.$emit('subtotal_amount_reduce',param);
+                    }
                 },
                 plus: function () {
+                    this.buy_quantity += this.step_quantity;
+                    this.subtotal_amount_figure_up();
+                    let param = {
+                        deal_price:this.deal_price,
+                        step_quantity:this.step_quantity
+                    };
+                    //触发产品增加事件
+                    bus.$emit('subtotal_amount_plus',param);
+                },
+                add_cart:function(param){
+                    console.log(param);
                 }
-            },computed: {
-                doThis: function () {
-                }
+            },created: function(){
+                this.subtotal_amount_figure_up();
+                let param = {
+                    goods_id:this.goods_id,
+                    buy_quantity:this.buy_quantity
+                };
+                var _this = this;
+                //监听加入购物车
+                bus.$on('add_cart', function(param){
+                    //产品总计初始化
+                    _this.add_cart(param);
+                });
+                param = {
+                    subtotal_amount:this.subtotal_amount
+                };
+                //触发产品小计初始化事件
+                bus.$emit('subtotal_amount_init',param);
             }
         });
     });
@@ -105,19 +104,19 @@
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
+            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class" @click="add_cart">
                 {{menu.name}}
                 <!-- 全选 -->
-                <div v-if="menu.class.indexOf('checked_all')!=-1">
+                <div v-if="menu.class.indexOf('checked_all')!==-1">
                     <input type="checkbox" class="check-all">
                     <label for="" class="left">全选</label>
                 </div>
                 <!-- 总金额 -->
-                <div v-else-if="menu.class.indexOf('amount')!=-1">
+                <div v-else-if="menu.class.indexOf('amount')!==-1">
                     <span class="total_amount">￥{{total_amount}}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!=-1">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
                     <span class="add_num"></span>
                     <span class="cart_num"></span>
                 </div>
@@ -143,13 +142,34 @@
                     }
                 },
                 methods: {
-                    test: function () {
-                        console.log(this);
+                    total_amount_init:function (param) {
+                        this.total_amount += param.subtotal_amount;
+                    },
+                    reduce: function (param) {
+                        this.total_amount -= param.deal_price * param.step_quantity;
+                    },
+                    plus: function (param) {
+                        this.total_amount += param.deal_price * param.step_quantity;
+                    },
+                    add_cart:function(param){
+                        //触发加入购物车
+                        bus.$emit('add_cart',param);
                     }
-                },computed: {
-                    test1: function () {
-                        console.log(this);
-                    }
+                },created:function(){
+                    let _this = this;
+                    //监听产品小计初始化
+                    bus.$on('subtotal_amount_init', function(param){
+                        //产品总计初始化
+                        _this.total_amount_init(param);
+                    });
+                    //监听产品增加
+                    bus.$on('subtotal_amount_reduce', function(param){
+                        _this.reduce(param);
+                    });
+                    //监听产品减少
+                    bus.$on('subtotal_amount_plus', function(param){
+                        _this.plus(param);
+                    });
                 }
             });
         }

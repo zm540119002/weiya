@@ -39,9 +39,13 @@
 					</div>
 					<div id="product-select">
 						<product-select
+								:goods_id="goods_id"
 								:buy_named="buy_named"
-								:buy_named_isDisplay="buy_named_isDisplay"
-								:step_named_isDisplay="step_named_isDisplay"
+								:init_quantity="init_quantity"
+								:step_quantity="step_quantity"
+								:deal_price="deal_price"
+								:buy_named_display="buy_named_display"
+								:step_named_display="step_named_display"
 						></product-select>
 					</div>
 				</div>
@@ -65,13 +69,22 @@
 		new Vue({
 			el: '#foot_cart_menu'
 		});
+		let productSelectParam = '{$productSelectParam|raw}';
+		if(productSelectParam){
+			productSelectParam = JSON.parse(productSelectParam);
+		}
+		let param = {
+			'goods_id':1,
+			'buy_named':'采购数量',
+			'init_quantity':productSelectParam.init_quantity,
+			'step_quantity':productSelectParam.step_quantity,
+			'deal_price':168,
+			'buy_named_display':true,
+			'step_named_display':true
+		};
 		new Vue({
 			data:function(){
-				return {
-					'buy_named':'采购数量',
-					'buy_named_isDisplay':true,
-					'step_named_isDisplay':true
-				};
+				return param;
 			},
 			el: '#product-select'
 		});

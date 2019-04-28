@@ -2,51 +2,14 @@
 {block name="nav">提交订单{/block}
 {block name="content"}
 
-{include file="template/settlement_method.html" /}
-
     <article class="f24 fill_order_wrapper">
         <section class="header_title separation-line">
             <a href="javascript:void(0);" class="back_prev_page"></a>
             <h2 class="f24">提交订单</h2>
         </section>
 
-        <div id="address_info">
-            {notempty name="defaultAddress"}
-            <div class="item_addr address_info" >
-                <div class="ia-l"></div>
-                <div class="item_info">
-                    <input type="hidden" value=" {$defaultAddress.id}" class="address_id">
-                    <div class="mt_new">
-                        <span class="consignee">{$defaultAddress.consignee}</span>
-                        <span class="mobile">{$defaultAddress.mobile}</span>
-                        {if $vo.is_default eq 1 }
-                        <i class="default_tipc">默认</i>
-                        {/if}
-                    </div>
-                    <p class=""><span class="list_area_address"></span><span class="detail_address">{$defaultAddress.detail_address}</span></p>
-                    <!--<input type="hidden" class="area-address-name" value="" data-province=" {$defaultAddress.province}" data-city="{$defaultAddress.city}" data-area="{$defaultAddress.area}">-->
-                    <form style="display:none;" class="consigneeInfo">
-                        <input type="hidden" class="" name="province" value="{$defaultAddress.province}" />
-                        <input type="hidden" class="" name="city" value="{$defaultAddress.city}" />
-                        <input type="hidden" class="" name="area" value="{$defaultAddress.area}" />
-                        <input type="hidden" class="" name="layer_id" value="{$defaultAddress.id}" />
-                        <input type="hidden" class="" name="layer_consignee" value="{$defaultAddress.consignee}" />
-                        <input type="hidden" class="" name="layer_mobile" value="{$defaultAddress.mobile}" />
-                        <input type="hidden" class="" name="layer_detail_address" value="{$defaultAddress.detail_address}" />
-                        <input type="hidden" class="" name="is_default" value="{$defaultAddress.is_default}" />
-                    </form>
-                </div>
-                <div class="edit_operate">
-                    <a href="javascript:void(0);" class="select_address">选择地址></a>
-                    <a href="javascript:void(0);" class="ia-r address_edit">
-                        <span class="iar-icon"></span>
-                    </a>
-                </div>
-            </div>
-            {else /}
-            <a href="javascript:void(0);" class="add_address"><span>+</span>添加收货地址</a>
-            {/notempty}
-        </div>
+        {include file="template/settlement_method.html" /}
+        {include file="template/address_info.html" /}
 
         <section class="goods_order_form">
             <input type="hidden" value="{$orderGoodsList[0]['id']}" class="order_id">
@@ -78,19 +41,6 @@
         </div>
 
     </article>
-    <!--选择地区弹层-->
-    <section id="areaLayer" class="express-area-box" style="display:none;">
-        <header>
-            <h3>选择地区</h3>
-            <a id="backUp" class="back" href="javascript:void(0)" title="返回" style="display: none;"></a>
-            <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
-        </header>
-        <article id="areaBox">
-            <ul id="areaList" class="area-list"></ul>
-        </article>
-    </section>
-    <!--遮罩层-->
-    <div id="areaMask" class="address_mask"></div>
 
 {/block}
 {block name="common"}
@@ -101,6 +51,6 @@
 {/block}
 {block name="script"}
     <script type="text/javascript" src="index_js/order.js"></script>
-    <script src="public_js/jquery.area.js"></script>
+    <script src="api_common_js/jquery.area.js"></script>
     <script type="text/javascript" src="index_js/address.js"></script>
 {/block}
