@@ -61,10 +61,9 @@
                         this.figure_up_subtotal_amount();
                         let param = {
                             deal_price:this.deal_price,
-                            buy_quantity:this.buy_quantity,
-                            callback:'reduce'
+                            buy_quantity:this.buy_quantity
                         };
-                        bus.$emit('figure_up_total_amount',param);
+                        bus.$emit('reduce_total_amount',param);
                     }
                 },
                 plus: function () {
@@ -72,10 +71,9 @@
                     this.figure_up_subtotal_amount();
                     let param = {
                         deal_price:this.deal_price,
-                        buy_quantity:this.buy_quantity,
-                        callback:'plus'
+                        buy_quantity:this.buy_quantity
                     };
-                    bus.$emit('figure_up_total_amount',param);
+                    bus.$emit('plus_total_amount',param);
                 }
             },created: function(){
                 this.figure_up_subtotal_amount();
@@ -132,12 +130,12 @@
                         console.log(2);
                     }
                 },created:function(){
-                    bus.$on('figure_up_total_amount', function (param) {
-                        if(param.callback==='reduce'){
-                            this.reduce();
-                        }else if(param.callback==='plus'){
-                            this.plus();
-                        }
+                    var _this = this;
+                    bus.$on('reduce_total_amount', function(param){
+                        _this.reduce(param);
+                    });
+                    bus.$on('plus_total_amount', function(param){
+                        _this.plus(param);
                     });
                 }
             });
