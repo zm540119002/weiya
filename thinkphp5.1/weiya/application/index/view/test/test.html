@@ -41,6 +41,8 @@
 						<product-select
 								:buy_named="buy_named"
 								:init_quantity="init_quantity"
+								:step_quantity="step_quantity"
+								:deal_price="deal_price"
 								:buy_named_display="buy_named_display"
 								:step_named_display="step_named_display"
 						></product-select>
@@ -75,6 +77,8 @@
 				return {
 					'buy_named':'采购数量',
 					'init_quantity':productSelectParam.init_quantity,
+					'step_quantity':productSelectParam.step_quantity,
+					'deal_price':168,
 					'buy_named_display':true,
 					'step_named_display':true
 				};
