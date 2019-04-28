@@ -75,10 +75,23 @@
                     };
                     //触发产品增加事件
                     bus.$emit('subtotal_amount_plus',param);
+                },
+                add_cart:function(param){
+                    console.log(param);
                 }
             },created: function(){
                 this.subtotal_amount_figure_up();
                 let param = {
+                    goods_id:this.goods_id,
+                    buy_quantity:this.buy_quantity
+                };
+                var _this = this;
+                //监听加入购物车
+                bus.$on('add_cart', function(param){
+                    //产品总计初始化
+                    _this.add_cart(param);
+                });
+                param = {
                     subtotal_amount:this.subtotal_amount
                 };
                 //触发产品小计初始化事件
@@ -91,7 +104,7 @@
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
+            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class" @click="add_cart">
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1">
@@ -137,6 +150,10 @@
                     },
                     plus: function (param) {
                         this.total_amount += param.deal_price * param.step_quantity;
+                    },
+                    add_cart:function(param){
+                        //触发加入购物车
+                        bus.$emit('add_cart',param);
                     }
                 },created:function(){
                     let _this = this;
