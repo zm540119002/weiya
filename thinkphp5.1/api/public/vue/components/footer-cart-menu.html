@@ -172,7 +172,9 @@
                         //更新产品列表
                         for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
                             if(this.postData.goodsList[i] == param.goods_id){
+                                console.log(this.postData.goodsList[i]['buy_quantity']);
                                 this.postData.goodsList[i]['buy_quantity'] = param.buy_quantity;
+                                console.log(this.postData.goodsList[i]['buy_quantity']);
                                 break;
                             }
                         }
