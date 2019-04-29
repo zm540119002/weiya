@@ -106,6 +106,14 @@
                 };
                 //触发产品小计初始化事件
                 bus.$emit('subtotal_amount_init',param);
+            },watch: {
+                buy_quantity: {
+                    handler(newVal, oldVal) {
+                        console.log(newVal);
+                        console.log(oldVal);
+                    },
+                    immediate: true
+                }
             }
         });
     });
