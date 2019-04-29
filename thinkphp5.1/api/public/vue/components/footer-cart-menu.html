@@ -93,7 +93,6 @@
                 buy_quantity: {
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
-                        let increment_buy_quantity = (parseInt(newVal) - parseInt(oldVal?oldVal:0));
                         let param = {
                             goods_id:this.goods_id,
                             buy_quantity:this.buy_quantity,
@@ -174,7 +173,7 @@
                             this.addGoodsList(goodsInfo);
                         }
                     },total_amount_calculate:function (param) {
-                        console.log(param);
+                        this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },reduce: function (param) {
                         this.total_amount -= param.deal_price * param.step_quantity;
                         //更新产品列表
