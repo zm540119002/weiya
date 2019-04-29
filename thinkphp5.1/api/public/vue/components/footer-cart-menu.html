@@ -98,6 +98,7 @@
                             buy_quantity:this.buy_quantity,
                             new_buy_quantity:newVal,
                             old_buy_quantity:oldVal,
+                            increment_buy_quantity:newVal - oldVal,
                             deal_price:this.deal_price,
                             step_quantity:this.step_quantity
                         };
@@ -173,11 +174,6 @@
                         }
                     },total_amount_calculate:function (param) {
                         console.log(param);
-                        if(param.new_buy_quantity){
-                            console.log(1);
-                        }if(param.old_buy_quantity){
-                            console.log(2);
-                        }
                     },reduce: function (param) {
                         this.total_amount -= param.deal_price * param.step_quantity;
                         //更新产品列表
