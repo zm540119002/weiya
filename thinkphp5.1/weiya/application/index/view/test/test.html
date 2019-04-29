@@ -40,11 +40,11 @@
 					<div id="product-select">
 						<product-select
 								v-for="goodsInfo in goodsList"
-								:goods_id="goods_id"
+								:goods_id="goodsInfo.goods_id"
+								:deal_price="goodsInfo.deal_price"
 								:buy_named="buy_named"
 								:init_quantity="init_quantity"
 								:step_quantity="step_quantity"
-								:deal_price="deal_price"
 								:buy_named_display="buy_named_display"
 								:step_named_display="step_named_display"
 						></product-select>
