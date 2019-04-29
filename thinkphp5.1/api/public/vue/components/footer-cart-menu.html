@@ -78,15 +78,7 @@
                     }else{
                         this.buy_quantity += this.step_quantity;
                     }
-                    this.subtotal_amount_calculate();
-                    let param = {
-                        goods_id:this.goods_id,
-                        buy_quantity:this.buy_quantity,
-                        deal_price:this.deal_price,
-                        step_quantity:this.step_quantity
-                    };
-                    //触发产品增加事件
-                    bus.$emit('subtotal_amount_plus',param);
+
                 }
             },created: function(){
                 this.subtotal_amount_calculate();
@@ -100,9 +92,6 @@
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
-                        console.log(newVal);
-                        console.log(oldVal);
-                        console.log(this.buy_quantity);
                         this.subtotal_amount_calculate();
                         let param = {
                             goods_id:this.goods_id,
@@ -111,7 +100,9 @@
                             step_quantity:this.step_quantity
                         };
                         //触发产品减少事件
-                        bus.$emit('subtotal_amount_reduce',param);
+//                        bus.$emit('subtotal_amount_reduce',param);
+                        //触发产品增加事件
+//                        bus.$emit('subtotal_amount_plus',param);
                     },
                     immediate: true
                 }
