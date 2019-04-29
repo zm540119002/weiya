@@ -160,10 +160,11 @@
                 methods: {
                     total_amount_init:function (param) {
                         this.total_amount += param.subtotal_amount;
-                        this.total_num +=param.subtotal_num;
+                       
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
-                    },addCart:function(){
+                    },addCart:function(param){
+                        this.total_num +=param.subtotal_num;
                         console.log(this.postData.productList);
                     },editProductList:function(param){
                         let productInfo = {
