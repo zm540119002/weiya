@@ -48,12 +48,15 @@
             data: function () {
                 return {
                     'buy_quantity':this.init_quantity,
-                    'subtotal_amount':0
+                    'subtotal_amount':0,
+                    'subtotal_num':0
                 };
             },
             methods: {
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
+                    this.subtotal_num +=buy_quantity;
+                    console.log(subtotal_num);
                 },
                 reduce: function () {
                     //如果开启了样品购买限额
