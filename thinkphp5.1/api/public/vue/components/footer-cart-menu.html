@@ -64,19 +64,18 @@
                             this.buy_quantity -= this.step_quantity;
                         }
                         return false;
-                    }
-                    if(this.buy_quantity>this.init_quantity){
+                    }else if(this.buy_quantity>this.init_quantity){
                         this.buy_quantity -= this.step_quantity;
-                        this.subtotal_amount_figure_up();
-                        let param = {
-                            goods_id:this.goods_id,
-                            buy_quantity:this.buy_quantity,
-                            deal_price:this.deal_price,
-                            step_quantity:this.step_quantity
-                        };
-                        //触发产品减少事件
-                        bus.$emit('subtotal_amount_reduce',param);
                     }
+                    this.subtotal_amount_figure_up();
+                    let param = {
+                        goods_id:this.goods_id,
+                        buy_quantity:this.buy_quantity,
+                        deal_price:this.deal_price,
+                        step_quantity:this.step_quantity
+                    };
+                    //触发产品减少事件
+                    bus.$emit('subtotal_amount_reduce',param);
                 },
                 plus: function () {
                     //如果开启了样品购买限额
@@ -86,9 +85,9 @@
                         }else{
                             this.buy_quantity += this.step_quantity;
                         }
-                        return false;
+                    }else{
+                        this.buy_quantity += this.step_quantity;
                     }
-                    this.buy_quantity += this.step_quantity;
                     this.subtotal_amount_figure_up();
                     let param = {
                         goods_id:this.goods_id,
