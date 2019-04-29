@@ -176,35 +176,35 @@
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },reduce: function (param) {
                         //更新产品列表
-                        for(var i = 0,len = this.postData.productList.length; i < len; i++){
-                            if(this.postData.productList[i]['product_id'] == param.product_id){
-                                if(param.buy_quantity==0){
-                                    Vue.delete(this.postData.productList,i);
-                                }else{
-                                    this.postData.productList[i]['buy_quantity'] = param.buy_quantity;
-                                }
-                                break;
-                            }
-                        }
+//                        for(var i = 0,len = this.postData.productList.length; i < len; i++){
+//                            if(this.postData.productList[i]['product_id'] == param.product_id){
+//                                if(param.buy_quantity==0){
+//                                    Vue.delete(this.postData.productList,i);
+//                                }else{
+//                                    this.postData.productList[i]['buy_quantity'] = param.buy_quantity;
+//                                }
+//                                break;
+//                            }
+//                        }
                     },plus: function (param) {
                         //更新产品列表
                         //产品是否存在产品列表，默认不存在
-                        let existSign = false;
-                        for(var i = 0,len = this.postData.productList.length; i < len; i++){
-                            if(this.postData.productList[i]['product_id'] == param.product_id){
-                                this.postData.productList[i]['buy_quantity'] = param.buy_quantity;
-                                existSign = true;
-                                break;
-                            }
-                        }
-                        //如果不存在产品列表，则添加
-                        if(!existSign && param.buy_quantity>0){
-                            let productInfo = {
-                                'product_id':param.product_id,
-                                'buy_quantity':param.buy_quantity
-                            };
-                            this.editProductList(productInfo);
-                        }
+//                        let existSign = false;
+//                        for(var i = 0,len = this.postData.productList.length; i < len; i++){
+//                            if(this.postData.productList[i]['product_id'] == param.product_id){
+//                                this.postData.productList[i]['buy_quantity'] = param.buy_quantity;
+//                                existSign = true;
+//                                break;
+//                            }
+//                        }
+//                        //如果不存在产品列表，则添加
+//                        if(!existSign && param.buy_quantity>0){
+//                            let productInfo = {
+//                                'product_id':param.product_id,
+//                                'buy_quantity':param.buy_quantity
+//                            };
+//                            this.editProductList(productInfo);
+//                        }
                     },addCart:function(){
                         console.log(this.postData);
                     },editProductList:function(param){
