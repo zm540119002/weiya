@@ -124,12 +124,12 @@
                     <span class="total_amount">￥{{total_amount}}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="addCart">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
                     <span class="add_num"></span>
                     <span class="cart_num"></span>
                 </div>
                 <!-- 默认 -->
-                <div v-else>
+                <div v-else @click="addCart">
                     <span class="s_i"></span>
                 </div>
             </a>
