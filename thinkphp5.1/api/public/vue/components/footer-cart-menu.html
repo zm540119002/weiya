@@ -168,8 +168,8 @@
                         //产品是否存在产品列表，默认不存在
                         let existSign = false;
                         for(var i = 0,len = this.postData.productList.length; i < len; i++){
+                            //产品已存在产品列表，则修改或删除
                             if(this.postData.productList[i]['product_id'] == param.product_id){
-                                //产品已存在选择列表
                                 if(param.buy_quantity<=0){
                                     Vue.delete(this.postData.productList,i);
                                 }else{
@@ -179,7 +179,7 @@
                                 break;
                             }
                         }
-                        //如果不存在产品列表，则添加
+                        //产品不存在产品列表，则添加
                         if(!existSign && param.buy_quantity>0){
                             this.postData.productList.push(productInfo);
                         }
