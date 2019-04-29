@@ -112,7 +112,7 @@
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class" @click="addCart">
+            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1">
@@ -124,7 +124,7 @@
                     <span class="total_amount">￥{{total_amount}}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="addCart">
                     <span class="add_num"></span>
                     <span class="cart_num"></span>
                 </div>
