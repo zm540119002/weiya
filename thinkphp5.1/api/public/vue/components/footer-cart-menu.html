@@ -169,12 +169,12 @@
                         this.total_amount += param.subtotal_amount;
                         //初始化产品列表
                         if(param.buy_quantity>0){
-                            let goodsInfo = {
+                            let productInfo = {
                                 'product_id':param.product_id,
                                 'buy_quantity':param.buy_quantity,
                                 'increment_buy_quantity':param.increment_buy_quantity
                             };
-                            this.editProductList(goodsInfo);
+                            this.editProductList(productInfo);
                         }
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
@@ -203,16 +203,16 @@
                         }
                         //如果不存在产品列表，则添加
                         if(!existSign && param.buy_quantity>0){
-                            let goodsInfo = {
+                            let productInfo = {
                                 'product_id':param.product_id,
                                 'buy_quantity':param.buy_quantity
                             };
-                            this.editProductList(goodsInfo);
+                            this.editProductList(productInfo);
                         }
                     },addCart:function(){
                         console.log(this.postData);
                     },editProductList:function(param){
-                        let goodsInfo = {
+                        let productInfo = {
                             'product_id':param.product_id,
                             'buy_quantity':param.buy_quantity
                         };
@@ -225,7 +225,7 @@
                                 }
                                 break;
                             }else{
-                                this.postData.productList.push(goodsInfo);
+                                this.postData.productList.push(productInfo);
                                 break;
                             }
                         }
