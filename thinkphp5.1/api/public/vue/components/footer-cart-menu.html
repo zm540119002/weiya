@@ -166,17 +166,10 @@
                 },
                 methods: {
                     total_amount_init:function (param) {
-                        //初始化总计
+                        //总金额初始化
                         this.total_amount += param.subtotal_amount;
-                        //初始化产品列表
-                        if(param.buy_quantity>0){
-                            let productInfo = {
-                                'product_id':param.product_id,
-                                'buy_quantity':param.buy_quantity,
-                                'increment_buy_quantity':param.increment_buy_quantity
-                            };
-                            this.editProductList(productInfo);
-                        }
+                        //产品列表初始化
+                        this.editProductList(param);
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },reduce: function (param) {
@@ -214,6 +207,7 @@
                         console.log(this.postData);
                     },editProductList:function(param){
                         console.log(param);
+                        console.log(this.postData);
                         let productInfo = {
                             'product_id':param.product_id,
                             'buy_quantity':param.buy_quantity
