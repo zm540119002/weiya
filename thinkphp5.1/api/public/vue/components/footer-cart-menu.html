@@ -87,7 +87,8 @@
                 let param = {
                     product_id:this.product_id,
                     buy_quantity:this.buy_quantity,
-                    subtotal_amount:this.subtotal_amount
+                    subtotal_amount:this.subtotal_amount,
+                    subtotal_num:this.subtotal_num
                 };
                 //触发-产品选择器初始化-事件
                 bus.$emit('product_select_init',param);
@@ -129,7 +130,7 @@
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
                     <span class="add_num"></span>
-                    <span class="cart_num"></span>
+                    <span class="cart_num">{{total_num}}</span>
                 </div>
                 <!-- 默认 -->
                 <div v-else @click="addCart">
@@ -149,6 +150,7 @@
                 data: function () {
                     return {
                         total_amount:0,
+                        total_num:0,
                         menus: unlockingFooterCart.menu,
                         postData:{
                             productList:[]
@@ -158,6 +160,7 @@
                 methods: {
                     total_amount_init:function (param) {
                         this.total_amount += param.subtotal_amount;
+                        this.total_num +=param.subtotal_num;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },addCart:function(){
