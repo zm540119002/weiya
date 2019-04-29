@@ -39,7 +39,8 @@
 					</div>
 					<div id="product-select">
 						<product-select
-								v-for="goodsInfo in goodsList" :key="goodsInfo.goods_id"
+								v-for="goodsInfo in goodsList"
+								:key="goodsInfo.goods_id"
 								:goods_id="goodsInfo.goods_id"
 								:deal_price="goodsInfo.deal_price"
 								:buy_named="buy_named"
