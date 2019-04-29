@@ -70,7 +70,11 @@
                     }
                 },
                 plus: function () {
-                    if(this.quota_named_display && this.buy_quantity>this.quota_quantity){
+                    //如果开启了样品购买限额
+                    if(this.quota_named_display){
+                        if(this.buy_quantity<this.quota_quantity){
+                            this.buy_quantity += this.quota_quantity;
+                        }
                         return false;
                     }
                     this.buy_quantity += this.step_quantity;
