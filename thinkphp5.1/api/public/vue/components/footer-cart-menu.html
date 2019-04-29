@@ -52,7 +52,7 @@
                 };
             },
             methods: {
-                subtotal_amount_figure_up:function(){
+                subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },
                 reduce: function () {
@@ -66,7 +66,7 @@
                     }else if(this.buy_quantity>this.init_quantity){
                         this.buy_quantity -= this.step_quantity;
                     }
-                    this.subtotal_amount_figure_up();
+                    this.subtotal_amount_calculate();
                     let param = {
                         goods_id:this.goods_id,
                         buy_quantity:this.buy_quantity,
@@ -74,7 +74,7 @@
                         step_quantity:this.step_quantity
                     };
                     //触发产品减少事件
-                    bus.$emit('subtotal_amount_reduce',param);
+                    bus.$emit('total_amount_reduce',param);
                 },
                 plus: function () {
                     //如果开启了样品购买限额
@@ -87,7 +87,7 @@
                     }else{
                         this.buy_quantity += this.step_quantity;
                     }
-                    this.subtotal_amount_figure_up();
+                    this.subtotal_amount_calculate();
                     let param = {
                         goods_id:this.goods_id,
                         buy_quantity:this.buy_quantity,
@@ -95,17 +95,17 @@
                         step_quantity:this.step_quantity
                     };
                     //触发产品增加事件
-                    bus.$emit('subtotal_amount_plus',param);
+                    bus.$emit('total_amount_plus',param);
                 }
             },created: function(){
-                this.subtotal_amount_figure_up();
+                this.subtotal_amount_calculate();
                 let param = {
                     goods_id:this.goods_id,
                     buy_quantity:this.buy_quantity,
                     subtotal_amount:this.subtotal_amount
                 };
                 //触发产品小计初始化事件
-                bus.$emit('subtotal_amount_init',param);
+                bus.$emit('total_amount_init',param);
             }
         });
     });
@@ -211,16 +211,16 @@
                 },created:function(){
                     let _this = this;
                     //监听产品小计初始化
-                    bus.$on('subtotal_amount_init', function(param){
+                    bus.$on('total_amount_init', function(param){
                         //产品总计初始化
                         _this.total_amount_init(param);
                     });
                     //监听产品增加
-                    bus.$on('subtotal_amount_reduce', function(param){
+                    bus.$on('total_amount_reduce', function(param){
                         _this.reduce(param);
                     });
                     //监听产品减少
-                    bus.$on('subtotal_amount_plus', function(param){
+                    bus.$on('total_amount_plus', function(param){
                         _this.plus(param);
                     });
                 }
