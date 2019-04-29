@@ -74,7 +74,7 @@
                         step_quantity:this.step_quantity
                     };
                     //触发产品减少事件
-                    bus.$emit('total_amount_reduce',param);
+                    bus.$emit('subtotal_amount_reduce',param);
                 },
                 plus: function () {
                     //如果开启了样品购买限额
@@ -95,7 +95,7 @@
                         step_quantity:this.step_quantity
                     };
                     //触发产品增加事件
-                    bus.$emit('total_amount_plus',param);
+                    bus.$emit('subtotal_amount_plus',param);
                 }
             },created: function(){
                 this.subtotal_amount_calculate();
@@ -105,7 +105,7 @@
                     subtotal_amount:this.subtotal_amount
                 };
                 //触发产品小计初始化事件
-                bus.$emit('total_amount_init',param);
+                bus.$emit('subtotal_amount_init',param);
             }
         });
     });
@@ -211,16 +211,16 @@
                 },created:function(){
                     let _this = this;
                     //监听产品小计初始化
-                    bus.$on('total_amount_init', function(param){
+                    bus.$on('subtotal_amount_init', function(param){
                         //产品总计初始化
                         _this.total_amount_init(param);
                     });
                     //监听产品增加
-                    bus.$on('total_amount_reduce', function(param){
+                    bus.$on('subtotal_amount_reduce', function(param){
                         _this.reduce(param);
                     });
                     //监听产品减少
-                    bus.$on('total_amount_plus', function(param){
+                    bus.$on('subtotal_amount_plus', function(param){
                         _this.plus(param);
                     });
                 }
