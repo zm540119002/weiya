@@ -69,8 +69,7 @@
                     //触发产品减少事件
                     let param = {
                         goods_id:this.goods_id,
-                        buy_quantity:this.buy_quantity,
-                        subtotal_amount:this.subtotal_amount
+                        buy_quantity:this.buy_quantity
                     };
                     bus.$emit('subtotal_amount_reduce',param);
                 },
@@ -88,8 +87,7 @@
                     //触发产品增加事件
                     let param = {
                         goods_id:this.goods_id,
-                        buy_quantity:this.buy_quantity,
-                        subtotal_amount:this.subtotal_amount
+                        buy_quantity:this.buy_quantity
                     };
                     bus.$emit('subtotal_amount_plus',param);
                 }
@@ -182,7 +180,6 @@
                             this.total_amount += param.deal_price * param.increment_buy_quantity;
                         }
                     },reduce: function (param) {
-                        this.total_amount -= param.deal_price * param.step_quantity;
                         //更新产品列表
                         for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
                             if(this.postData.goodsList[i]['goods_id'] == param.goods_id){
@@ -195,7 +192,6 @@
                             }
                         }
                     },plus: function (param) {
-                        this.total_amount += param.deal_price * param.step_quantity;
                         //更新产品列表
                         //产品是否存在产品列表，默认不存在
                         let existSign = false;
@@ -231,11 +227,11 @@
                     });
                     //监听产品增加
                     bus.$on('subtotal_amount_reduce', function(param){
-//                        _this.reduce(param);
+                        _this.reduce(param);
                     });
                     //监听产品减少
                     bus.$on('subtotal_amount_plus', function(param){
-//                        _this.plus(param);
+                        _this.plus(param);
                     });
                 }
             });
