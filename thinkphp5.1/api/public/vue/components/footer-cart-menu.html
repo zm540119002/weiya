@@ -32,7 +32,7 @@
         Vue.component('product-select', {
             template:'#product_select_tpl',
             props: {
-                goods_id: {type: Number,default: 0,required: true},
+                product_id: {type: Number,default: 0,required: true},
                 buy_named: {type: String,default: '购买数量'},
                 buy_named_display: {type: Boolean,default: false},
                 step_named: {type: String,default: '起订数量'},
@@ -68,7 +68,7 @@
                     }
                     //触发产品减少事件
                     let param = {
-                        goods_id:this.goods_id,
+                        product_id:this.product_id,
                         buy_quantity:this.buy_quantity
                     };
 //                    bus.$emit('subtotal_amount_reduce',param);
@@ -86,7 +86,7 @@
                     }
                     //触发产品增加事件
                     let param = {
-                        goods_id:this.goods_id,
+                        product_id:this.product_id,
                         buy_quantity:this.buy_quantity
                     };
 //                    bus.$emit('subtotal_amount_plus',param);
@@ -94,7 +94,7 @@
             },created: function(){
                 this.subtotal_amount_calculate();
                 let param = {
-                    goods_id:this.goods_id,
+                    product_id:this.product_id,
                     buy_quantity:this.buy_quantity,
                     subtotal_amount:this.subtotal_amount
                 };
@@ -105,7 +105,7 @@
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
                         let param = {
-                            goods_id:this.goods_id,
+                            product_id:this.product_id,
                             increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
                             deal_price:this.deal_price
                         };
@@ -159,7 +159,7 @@
                         total_amount:0,
                         menus: unlockingFooterCart.menu,
                         postData:{
-                            goodsList:[]
+                            productList:[]
                         }
                     }
                 },
@@ -170,7 +170,7 @@
                         //初始化产品列表
                         if(param.buy_quantity>0){
                             let goodsInfo = {
-                                'goods_id':param.goods_id,
+                                'product_id':param.product_id,
                                 'buy_quantity':param.buy_quantity,
                                 'increment_buy_quantity':param.increment_buy_quantity
                             };
@@ -180,12 +180,12 @@
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },reduce: function (param) {
                         //更新产品列表
-                        for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
-                            if(this.postData.goodsList[i]['goods_id'] == param.goods_id){
+                        for(var i = 0,len = this.postData.productList.length; i < len; i++){
+                            if(this.postData.productList[i]['product_id'] == param.product_id){
                                 if(param.buy_quantity==0){
-                                    Vue.delete(this.postData.goodsList,i);
+                                    Vue.delete(this.postData.productList,i);
                                 }else{
-                                    this.postData.goodsList[i]['buy_quantity'] = param.buy_quantity;
+                                    this.postData.productList[i]['buy_quantity'] = param.buy_quantity;
                                 }
                                 break;
                             }
@@ -194,9 +194,9 @@
                         //更新产品列表
                         //产品是否存在产品列表，默认不存在
                         let existSign = false;
-                        for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
-                            if(this.postData.goodsList[i]['goods_id'] == param.goods_id){
-                                this.postData.goodsList[i]['buy_quantity'] = param.buy_quantity;
+                        for(var i = 0,len = this.postData.productList.length; i < len; i++){
+                            if(this.postData.productList[i]['product_id'] == param.product_id){
+                                this.postData.productList[i]['buy_quantity'] = param.buy_quantity;
                                 existSign = true;
                                 break;
                             }
@@ -204,7 +204,7 @@
                         //如果不存在产品列表，则添加
                         if(!existSign && param.buy_quantity>0){
                             let goodsInfo = {
-                                'goods_id':param.goods_id,
+                                'product_id':param.product_id,
                                 'buy_quantity':param.buy_quantity
                             };
                             this.editProductList(goodsInfo);
@@ -213,19 +213,19 @@
                         console.log(this.postData);
                     },editProductList:function(param){
                         let goodsInfo = {
-                            'goods_id':param.goods_id,
+                            'product_id':param.product_id,
                             'buy_quantity':param.buy_quantity
                         };
-                        for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
-                            if(this.postData.goodsList[i]['goods_id'] == param.goods_id){
+                        for(var i = 0,len = this.postData.productList.length; i < len; i++){
+                            if(this.postData.productList[i]['product_id'] == param.product_id){//产品已存在
                                 if(param.buy_quantity<=0){
-                                    Vue.delete(this.postData.goodsList,i);
+                                    Vue.delete(this.postData.productList,i);
                                 }else{
-                                    this.postData.goodsList[i]['buy_quantity'] = param.buy_quantity;
+                                    this.postData.productList[i]['buy_quantity'] = param.buy_quantity;
                                 }
                                 break;
                             }else{
-                                this.postData.goodsList.push(goodsInfo);
+                                this.postData.productList.push(goodsInfo);
                                 break;
                             }
                         }
