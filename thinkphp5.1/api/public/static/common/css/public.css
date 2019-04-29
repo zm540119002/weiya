@@ -440,7 +440,8 @@ price{
 .group_btn30:first-child{
     padding:0 0 0 0.12rem;
 }
-.group_btn30:first-child div{
+.group_btn30:first-child div,
+.group_btn30:last-child div{
     display:inline-block;
 }
 .goodsInfoLayer .group_btn30:first-child{
