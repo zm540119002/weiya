@@ -48,8 +48,7 @@
             data: function () {
                 return {
                     'buy_quantity':this.init_quantity,
-                    'subtotal_amount':0,
-                    'subtotal_num':0
+                    'subtotal_amount':0
                 };
             },
             methods: {
@@ -85,8 +84,7 @@
                 let param = {
                     product_id:this.product_id,
                     buy_quantity:this.buy_quantity,
-                    subtotal_amount:this.subtotal_amount,
-                    subtotal_num:this.subtotal_num
+                    subtotal_amount:this.subtotal_amount
                 };
                 //触发-产品选择器初始化-事件
                 bus.$emit('product_select_init',param);
