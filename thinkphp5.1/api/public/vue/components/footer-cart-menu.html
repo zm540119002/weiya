@@ -99,7 +99,7 @@
                             buy_quantity:this.buy_quantity,
                             new_buy_quantity:newVal,
                             old_buy_quantity:oldVal,
-                            increment_buy_quantity:increment_buy_quantity,
+                            increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
                             deal_price:this.deal_price,
                             step_quantity:this.step_quantity
                         };
