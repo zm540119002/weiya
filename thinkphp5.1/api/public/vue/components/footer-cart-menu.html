@@ -42,7 +42,7 @@
                 quota_quantity: {type: Number,default: 1},
                 unit: {type: String,default: '盒'},
                 deal_price: {type: Number,default: 0.01},
-                init_quantity: {type: Number,default: 1},
+                init_quantity: {type: Number,default: 0},
                 step_quantity: {type: Number,default: 1}
             },
             data: function () {
@@ -70,6 +70,9 @@
                     }
                 },
                 plus: function () {
+                    if(this.quota_named_display && this.buy_quantity>this.quota_quantity){
+                        return false;
+                    }
                     this.buy_quantity += this.step_quantity;
                     this.subtotal_amount_figure_up();
                     let param = {
