@@ -173,10 +173,9 @@
                             this.addGoodsList(goodsInfo);
                         }
                     },total_amount_calculate:function (param) {
-                        if(-1){
-                            console.log('ture');
+                        if(param.increment_buy_quantity){
+                            this.total_amount += param.deal_price * param.increment_buy_quantity;
                         }
-                        this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },reduce: function (param) {
                         this.total_amount -= param.deal_price * param.step_quantity;
                         //更新产品列表
