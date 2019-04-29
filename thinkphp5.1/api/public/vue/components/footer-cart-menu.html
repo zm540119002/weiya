@@ -149,6 +149,9 @@
                                 'buy_quantity':param.buy_quantity
                             };
                             this.postData.goodsList.push(obj);
+                            console.log(this.postData.goodsList);
+                            Vue.delete(this.postData.goodsList,1);
+                            console.log(this.postData.goodsList);
                         }
                     },
                     reduce: function (param) {
@@ -156,9 +159,6 @@
                         //更新产品列表
                         if(param.buy_quantity>0){
                         }
-                        console.log(this.postData.goodsList);
-                        Vue.delete(this.postData.goodsList,1);
-                        console.log(this.postData.goodsList);
                     },
                     plus: function (param) {
                         this.total_amount += param.deal_price * param.step_quantity;
