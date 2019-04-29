@@ -39,6 +39,7 @@
 					</div>
 					<div id="product-select">
 						<product-select
+								v-for="goodsInfo in goodsList"
 								:goods_id="goods_id"
 								:buy_named="buy_named"
 								:init_quantity="init_quantity"
@@ -74,13 +75,23 @@
 			productSelectParam = JSON.parse(productSelectParam);
 		}
 		let param = {
-			'goods_id':1,
 			'buy_named':'采购数量',
+			'buy_named_display':true,
+			'step_named_display':true,
 			'init_quantity':productSelectParam.init_quantity,
 			'step_quantity':productSelectParam.step_quantity,
-			'deal_price':168,
-			'buy_named_display':true,
-			'step_named_display':true
+			'goodsList':[
+				{
+					'goods_id':1,
+					'deal_price':168
+				},{
+					'goods_id':2,
+					'deal_price':188
+				},{
+					'goods_id':3,
+					'deal_price':888
+				}
+			]
 		};
 		new Vue({
 			data:function(){
