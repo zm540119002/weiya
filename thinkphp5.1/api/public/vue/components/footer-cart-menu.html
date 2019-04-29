@@ -149,11 +149,7 @@
                                 'buy_quantity':param.buy_quantity
                             };
                             this.postData.goodsList.push(obj);
-                            console.log(this.postData.goodsList);
-                            Vue.delete(this.postData.goodsList,1);
-                            console.log(this.postData.goodsList);
                         }
-                        console.log(this.postData.goodsList);
                     },
                     reduce: function (param) {
                         this.total_amount -= param.deal_price * param.step_quantity;
