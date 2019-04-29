@@ -86,8 +86,8 @@
                     buy_quantity:this.buy_quantity,
                     subtotal_amount:this.subtotal_amount
                 };
-                //触发产品小计初始化事件
-                bus.$emit('subtotal_amount_init',param);
+                //触发-产品选择器初始化-事件
+                bus.$emit('product_select_init',param);
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
@@ -98,7 +98,7 @@
                             increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
                             deal_price:this.deal_price
                         };
-                        //触发产品改变
+                        //触发-产品改变-事件
                         bus.$emit('buy_quantity_change',param);
                     },
                     deep: false,
@@ -186,11 +186,11 @@
                     }
                 },created:function(){
                     let _this = this;
-                    //监听产品小计初始化
-                    bus.$on('subtotal_amount_init', function(param){
+                    //监听-产品选择器初始化-事件
+                    bus.$on('product_select_init', function(param){
                         _this.total_amount_init(param);
                     });
-                    //监听产品改变
+                    //监听-产品改变-事件
                     bus.$on('buy_quantity_change', function(param){
                         _this.total_amount_calculate(param);
                         _this.editProductList(param);
