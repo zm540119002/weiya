@@ -144,15 +144,14 @@
                         this.total_amount += param.subtotal_amount;
                         //初始化产品列表
                         if(param.buy_quantity>0){
-                            let obj = {
+                            let goodsInfo = {
                                 'goods_id':param.goods_id,
                                 'buy_quantity':param.buy_quantity
                             };
-                            this.postData.goodsList.push(obj);
+                            this.addGoodsList(goodsInfo);
                         }
                     },
                     reduce: function (param) {
-                        console.log(param);
                         this.total_amount -= param.deal_price * param.step_quantity;
                         //更新产品列表
                         for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
@@ -167,18 +166,31 @@
                         }
                     },
                     plus: function (param) {
-                        console.log(param);
                         this.total_amount += param.deal_price * param.step_quantity;
                         //更新产品列表
+                        //产品是否存在产品列表，默认不存在
+                        let existSign = false;
                         for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
                             if(this.postData.goodsList[i]['goods_id'] == param.goods_id){
                                 this.postData.goodsList[i]['buy_quantity'] = param.buy_quantity;
+                                existSign = true;
                                 break;
                             }
+                        }
+                        //如果不存在产品列表，则添加
+                        if(!existSign && param.buy_quantity>0){
+                            let goodsInfo = {
+                                'goods_id':param.goods_id,
+                                'buy_quantity':param.buy_quantity
+                            };
+                            this.addGoodsList(goodsInfo);
                         }
                     },
                     addCart:function(){
                         console.log(this.postData);
+                    },
+                    addGoodsList:function(goodsInfo){
+                        this.postData.goodsList.push(goodsInfo);
                     }
                 },created:function(){
                     let _this = this;
