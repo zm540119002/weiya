@@ -66,6 +66,8 @@
                     }else if(this.buy_quantity>this.init_quantity){
                         this.buy_quantity -= this.step_quantity;
                     }
+                    //触发产品减少事件
+                    bus.$emit('subtotal_amount_reduce',param);
                 },
                 plus: function () {
                     //如果开启了样品购买限额
@@ -78,7 +80,8 @@
                     }else{
                         this.buy_quantity += this.step_quantity;
                     }
-
+                    //触发产品增加事件
+                    bus.$emit('subtotal_amount_plus',param);
                 }
             },created: function(){
                 this.subtotal_amount_calculate();
@@ -95,19 +98,11 @@
                         this.subtotal_amount_calculate();
                         let param = {
                             goods_id:this.goods_id,
-                            buy_quantity:this.buy_quantity,
-                            new_buy_quantity:newVal,
-                            old_buy_quantity:oldVal,
                             increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
-                            deal_price:this.deal_price,
-                            step_quantity:this.step_quantity
+                            deal_price:this.deal_price
                         };
                         //触发产品价格计算
                         bus.$emit('subtotal_amount_calculate',param);
-                        //触发产品减少事件
-//                        bus.$emit('subtotal_amount_reduce',param);
-                        //触发产品增加事件
-//                        bus.$emit('subtotal_amount_plus',param);
                     },
                     deep: false,
                     immediate: true
@@ -226,11 +221,11 @@
                     });
                     //监听产品增加
                     bus.$on('subtotal_amount_reduce', function(param){
-                        _this.reduce(param);
+//                        _this.reduce(param);
                     });
                     //监听产品减少
                     bus.$on('subtotal_amount_plus', function(param){
-                        _this.plus(param);
+//                        _this.plus(param);
                     });
                 }
             });
