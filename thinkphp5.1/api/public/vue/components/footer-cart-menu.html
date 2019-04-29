@@ -54,6 +54,14 @@
             methods: {
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
+                    //触发产品减少事件
+                    let param = {
+                        goods_id:this.goods_id,
+                        buy_quantity:this.buy_quantity,
+                        deal_price:this.deal_price,
+                        step_quantity:this.step_quantity
+                    };
+                    bus.$emit('subtotal_amount_calculate',param);
                 },
                 reduce: function () {
                     //如果开启了样品购买限额
@@ -104,6 +112,7 @@
                         //触发产品增加事件
 //                        bus.$emit('subtotal_amount_plus',param);
                     },
+                    deep: false,
                     immediate: true
                 }
             }
@@ -166,8 +175,9 @@
                             };
                             this.addGoodsList(goodsInfo);
                         }
-                    },
-                    reduce: function (param) {
+                    },total_amount_calculate:function (param) {
+                        console.log(param);
+                    },reduce: function (param) {
                         this.total_amount -= param.deal_price * param.step_quantity;
                         //更新产品列表
                         for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
@@ -180,8 +190,7 @@
                                 break;
                             }
                         }
-                    },
-                    plus: function (param) {
+                    },plus: function (param) {
                         this.total_amount += param.deal_price * param.step_quantity;
                         //更新产品列表
                         //产品是否存在产品列表，默认不存在
@@ -201,11 +210,9 @@
                             };
                             this.addGoodsList(goodsInfo);
                         }
-                    },
-                    addCart:function(){
+                    },addCart:function(){
                         console.log(this.postData);
-                    },
-                    addGoodsList:function(goodsInfo){
+                    },addGoodsList:function(goodsInfo){
                         this.postData.goodsList.push(goodsInfo);
                     }
                 },created:function(){
@@ -214,6 +221,11 @@
                     bus.$on('subtotal_amount_init', function(param){
                         //产品总计初始化
                         _this.total_amount_init(param);
+                    });
+                    //监听产品价格计算
+                    bus.$on('subtotal_amount_calculate', function(param){
+                        //产品总计初始化
+                        _this.total_amount_calculate(param);
                     });
                     //监听产品增加
                     bus.$on('subtotal_amount_reduce', function(param){
