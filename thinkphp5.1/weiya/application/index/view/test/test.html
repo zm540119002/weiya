@@ -8,7 +8,7 @@
 <article class="f24">
 <section class="module-navigation ">
 	<div>
-		<ul class="product_list list">
+		<ul class="goods_list list">
 			<li data-id="73" data-buy_type="1" id="li-id-73">
 				<div class="content-padding">
 					<p class="top_b_text wk_notice separation">[品牌定制须知] 品牌定制利润为王！</p>
@@ -39,10 +39,10 @@
 					</div>
 					<div id="product-select">
 						<product-select
-								v-for="productInfo in productList"
-								:key="productInfo.product_id"
-								:product_id="productInfo.product_id"
-								:deal_price="productInfo.deal_price"
+								v-for="goodsInfo in goodsList"
+								:key="goodsInfo.goods_id"
+								:goods_id="goodsInfo.goods_id"
+								:deal_price="goodsInfo.deal_price"
 								:buy_named="buy_named"
 								:init_quantity="init_quantity"
 								:step_quantity="step_quantity"
@@ -81,15 +81,15 @@
 			'step_named_display':true,
 			'init_quantity':productSelectParam.init_quantity,
 			'step_quantity':productSelectParam.step_quantity,
-			'productList':[
+			'goodsList':[
 				{
-					'product_id':1,
+					'goods_id':1,
 					'deal_price':168
 				},{
-					'product_id':2,
+					'goods_id':2,
 					'deal_price':188
 				},{
-					'product_id':3,
+					'goods_id':3,
 					'deal_price':888
 				}
 			]
