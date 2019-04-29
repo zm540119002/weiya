@@ -81,8 +81,9 @@
 		if(productSelectParam){
 			productSelectParam = JSON.parse(productSelectParam);
 		}
+		var aa = 1;
 		let param = {
-			'goods_id':1,
+			'goods_id':aa++,
 			'buy_named':'采购数量',
 			'init_quantity':productSelectParam.init_quantity,
 			'step_quantity':productSelectParam.step_quantity,
