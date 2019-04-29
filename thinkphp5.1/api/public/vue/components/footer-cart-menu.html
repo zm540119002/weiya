@@ -212,14 +212,13 @@
                     },addCart:function(){
                         console.log(this.postData);
                     },editProductList:function(param){
-                        console.log(param);
-                        return false;
                         let productInfo = {
                             'product_id':param.product_id,
                             'buy_quantity':param.buy_quantity
                         };
                         for(var i = 0,len = this.postData.productList.length; i < len; i++){
-                            if(this.postData.productList[i]['product_id'] == param.product_id){//产品已存在
+                            if(this.postData.productList[i]['product_id'] == param.product_id){
+                                //产品已存在选择列表
                                 if(param.buy_quantity<=0){
                                     Vue.delete(this.postData.productList,i);
                                 }else{
@@ -227,6 +226,7 @@
                                 }
                                 break;
                             }else{
+                                //产品不存在选择列表
                                 this.postData.productList.push(productInfo);
                                 break;
                             }
