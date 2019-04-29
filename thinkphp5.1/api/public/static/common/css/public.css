@@ -324,6 +324,7 @@ i{
 .bff6482{background: #ff6482;}
 .bff1d25{background:#ff1d25;}
 .bottom_item:last-child{
+    position:relative;
     background: #FF7BAC;
 }
 .bottom_item:last-child a{
@@ -443,6 +444,12 @@ price{
 .group_btn30:first-child div,
 .group_btn30:last-child div{
     display:inline-block;
+}
+.group_btn30:last-child div{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
 }
 .goodsInfoLayer .group_btn30:first-child{
     text-align: left;
