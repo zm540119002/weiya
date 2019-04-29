@@ -106,6 +106,7 @@
                         this.subtotal_amount_calculate();
                         let param = {
                             product_id:this.product_id,
+                            buy_quantity:this.buy_quantity,
                             increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
                             deal_price:this.deal_price
                         };
