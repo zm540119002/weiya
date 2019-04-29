@@ -152,6 +152,7 @@
                         }
                     },
                     reduce: function (param) {
+                        console.log(param);
                         this.total_amount -= param.deal_price * param.step_quantity;
                         //更新产品列表
                         for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
@@ -166,6 +167,7 @@
                         }
                     },
                     plus: function (param) {
+                        console.log(param);
                         this.total_amount += param.deal_price * param.step_quantity;
                         //更新产品列表
                         for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
