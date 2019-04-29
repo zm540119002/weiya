@@ -58,7 +58,7 @@
                 reduce: function () {
                     //如果开启了样品购买限额
                     if(this.quota_named_display){
-                        if((this.buy_quantity-this.step_quantity)>this.init_quantity){
+                        if((this.buy_quantity-this.step_quantity)<this.init_quantity){
                             this.buy_quantity = this.init_quantity;
                         }else{
                             this.buy_quantity -= this.step_quantity;
