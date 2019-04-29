@@ -156,7 +156,7 @@
                         this.total_amount -= param.deal_price * param.step_quantity;
                         //更新产品列表
                         for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
-                            if(this.postData.goodsList[i] == param.goods_id){
+                            if(this.postData.goodsList[i]['goods_id'] == param.goods_id){
                                 if(param.buy_quantity==0){
                                     Vue.delete(this.postData.goodsList,i);
                                 }else{
@@ -171,10 +171,8 @@
                         this.total_amount += param.deal_price * param.step_quantity;
                         //更新产品列表
                         for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
-                            if(this.postData.goodsList[i] == param.goods_id){
-                                console.log(this.postData.goodsList[i]['buy_quantity']);
+                            if(this.postData.goodsList[i]['goods_id'] == param.goods_id){
                                 this.postData.goodsList[i]['buy_quantity'] = param.buy_quantity;
-                                console.log(this.postData.goodsList[i]['buy_quantity']);
                                 break;
                             }
                         }
