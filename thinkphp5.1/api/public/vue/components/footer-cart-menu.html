@@ -164,9 +164,8 @@
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },addCart:function(){
-                        //console.log(param);
-                        this.total_num +=this.subtotal_num;
-                        
+                        console.log(this.postData);
+
                     },editProductList:function(param){
                         let productInfo = {
                             'product_id':param.product_id,
