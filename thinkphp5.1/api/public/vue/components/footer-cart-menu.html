@@ -163,8 +163,6 @@
                        
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
-                    },default_add_cart_call_back:function () {
-                        console.log('default_add_cart_call_back');
                     },addCart:function(){
                         let _this = this;
                         let jump_url = $(this.$refs.addCart).parent().data('jump_url');
