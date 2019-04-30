@@ -48,7 +48,6 @@
 								:step_quantity="step_quantity"
 								:buy_named_display="buy_named_display"
 								:step_named_display="step_named_display"
-								:addCartCallBack="addCartCallBack"
 						></product-select>
 					</div>
 				</div>
@@ -107,21 +106,26 @@
 		});
 	}
 	$(function(){
+		let param = {
+			'add_cart_call_back':addCartCallBack
+		};
 		new Vue({
-			el: '#foot_cart_menu'
+			el: '#foot_cart_menu',
+			data:function(){
+				return param;
+			}
 		});
 		let productSelectParam = '{$productSelectParam|raw}';
 		if(productSelectParam){
 			productSelectParam = JSON.parse(productSelectParam);
 		}
-		let param = {
+		param = {
 			'buy_named':'采购数量',
 			'buy_named_display':true,
 			'step_named_display':true,
 			'quota_named_display':true,
 			'init_quantity':productSelectParam.init_quantity,
 			'step_quantity':productSelectParam.step_quantity,
-			'addCartCallBack':addCartCallBack,
 			'productList':[
 				{
 					'product_id':1,
@@ -142,10 +146,10 @@
 			]
 		};
 		new Vue({
+			el: '#product-select',
 			data:function(){
 				return param;
-			},
-			el: '#product-select'
+			}
 		});
 	});
 </script>

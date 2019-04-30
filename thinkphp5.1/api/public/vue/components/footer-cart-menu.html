@@ -43,8 +43,7 @@
                 unit: {type: String,default: '盒'},
                 deal_price: {type: Number,default: 0.01},
                 init_quantity: {type: Number,default: 0},
-                step_quantity: {type: Number,default: 1},
-                addCartCallBack: {type: Function,default: function(){}}
+                step_quantity: {type: Number,default: 1}
             },
             data: function () {
                 return {
@@ -179,7 +178,7 @@
                             success: function(data){
                                 $('.loading').hide();
                                 if(async_verify_judge(data)){
-                                    this.addCartCallBack();
+                                    this.add_cart_call_back();
                                 }
                             }
                         });
