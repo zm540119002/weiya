@@ -129,7 +129,8 @@
                     <span class="cart_num"></span>
                 </div>
                 <!-- 默认 -->
-                <div v-else @click="addCart" ref="addCart" >
+                <div v-else @click="addCart">
+                    <span ref="addCart">{{menu.action}}</span>
                     <span class="s_i"></span>
                 </div>
             </a>
