@@ -123,7 +123,7 @@ function vue_async_verify(param){
     });
 }
 //异步验证判断
-function async_verify_judge(msg){
+function async_verify_judge(data){
     if(data.code==1){
         if(data.data == 'no_login'){
             loginDialog();
