@@ -164,6 +164,7 @@
                     },default_add_cart_call_back:function (param) {
                         console.log('default_add_cart_call_back');
                     },addCart:function(){
+                        let _this = this;
                         let jump_url = $(this.$refs.addCart).parent().data('jump_url');
                         $.ajax({
                             url: jump_url,
@@ -179,7 +180,7 @@
                             success: function(data){
                                 $('.loading').hide();
                                 if(async_verify_judge(data)){
-                                    console.log(this.add_cart_call_back);
+                                    console.log(_this.add_cart_call_back);
                                 }
                             }
                         });
