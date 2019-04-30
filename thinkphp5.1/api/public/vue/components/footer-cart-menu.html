@@ -32,7 +32,7 @@
         Vue.component('product-select', {
             template:'#product_select_tpl',
             props: {
-                goods_id: {type: Number,default: 0,required: true},
+                product_id: {type: Number,default: 0,required: true},
                 buy_named: {type: String,default: '购买数量'},
                 buy_named_display: {type: Boolean,default: false},
                 step_named: {type: String,default: '起订数量'},
@@ -42,7 +42,7 @@
                 quota_quantity: {type: Number,default: 1},
                 unit: {type: String,default: '盒'},
                 deal_price: {type: Number,default: 0.01},
-                init_quantity: {type: Number,default: 1},
+                init_quantity: {type: Number,default: 0},
                 step_quantity: {type: Number,default: 1}
             },
             data: function () {
@@ -52,40 +52,58 @@
                 };
             },
             methods: {
-                subtotal_amount_figure_up:function(){
+                subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },
                 reduce: function () {
-                    if(this.buy_quantity>this.init_quantity){
+                    //如果开启了样品购买限额
+                    if(this.quota_named_display){
+                        if((this.buy_quantity-this.step_quantity)<this.init_quantity){
+                            this.buy_quantity = this.init_quantity;
+                        }else{
+                            this.buy_quantity -= this.step_quantity;
+                        }
+                    }else if(this.buy_quantity>this.init_quantity){
                         this.buy_quantity -= this.step_quantity;
-                        this.subtotal_amount_figure_up();
-                        let param = {
-                            deal_price:this.deal_price,
-                            step_quantity:this.step_quantity
-                        };
-                        //触发产品减少事件
-                        bus.$emit('subtotal_amount_reduce',param);
                     }
                 },
                 plus: function () {
-                    this.buy_quantity += this.step_quantity;
-                    this.subtotal_amount_figure_up();
-                    let param = {
-                        deal_price:this.deal_price,
-                        step_quantity:this.step_quantity
-                    };
-                    //触发产品增加事件
-                    bus.$emit('subtotal_amount_plus',param);
+                    //如果开启了样品购买限额
+                    if(this.quota_named_display){
+                        if((this.buy_quantity+this.step_quantity)>this.quota_quantity){
+                            this.buy_quantity = this.quota_quantity;
+                        }else{
+                            this.buy_quantity += this.step_quantity;
+                        }
+                    }else{
+                        this.buy_quantity += this.step_quantity;
+                    }
                 }
             },created: function(){
-                this.subtotal_amount_figure_up();
+                this.subtotal_amount_calculate();
                 let param = {
-                    goods_id:this.goods_id,
+                    product_id:this.product_id,
                     buy_quantity:this.buy_quantity,
                     subtotal_amount:this.subtotal_amount
                 };
-                //触发产品小计初始化事件
-                bus.$emit('subtotal_amount_init',param);
+                //触发-产品选择器初始化-事件
+                bus.$emit('product_select_init',param);
+            },watch: {
+                buy_quantity: {
+                    handler(newVal, oldVal) {
+                        this.subtotal_amount_calculate();
+                        let param = {
+                            product_id:this.product_id,
+                            buy_quantity:this.buy_quantity,
+                            increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
+                            deal_price:this.deal_price
+                        };
+                        //触发-产品改变-事件
+                        bus.$emit('buy_quantity_change',param);
+                    },
+                    deep: false,
+                    immediate: true
+                }
             }
         });
     });
@@ -94,7 +112,7 @@
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class" @click="add_cart">
+            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1">
@@ -107,11 +125,11 @@
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
-                    <span class="add_num"></span>
+                    <span class="add_num">{{total_num}}</span>
                     <span class="cart_num"></span>
                 </div>
                 <!-- 默认 -->
-                <div v-else>
+                <div v-else @click="addCart">
                     <span class="s_i"></span>
                 </div>
             </a>
@@ -128,46 +146,55 @@
                 data: function () {
                     return {
                         total_amount:0,
+                        total_num:0,
+                        menus: unlockingFooterCart.menu,
                         postData:{
-                            goodsList:[]
-                        },
-                        menus: unlockingFooterCart.menu
+                            productList:[]
+                        }
                     }
                 },
                 methods: {
                     total_amount_init:function (param) {
-                        //初始化总计
                         this.total_amount += param.subtotal_amount;
-                        //初始化产品列表
-                        let obj = {
-                            'goods_id':param.goods_id,
+                       
+                    },total_amount_calculate:function (param) {
+                        this.total_amount += param.deal_price * param.increment_buy_quantity;
+                    },addCart:function(){
+                        console.log(this.postData);
+                    },editProductList:function(param){
+                        let productInfo = {
+                            'product_id':param.product_id,
                             'buy_quantity':param.buy_quantity
                         };
-                        this.postData.goodsList.push(obj);
-                        console.log(this.postData);
-                    },
-                    reduce: function (param) {
-                        this.total_amount -= param.deal_price * param.step_quantity;
-                    },
-                    plus: function (param) {
-                        this.total_amount += param.deal_price * param.step_quantity;
-                    },
-                    add_cart:function(){
+                        //产品是否存在产品列表，默认不存在
+                        let existSign = false;
+                        for(var i = 0,len = this.postData.productList.length; i < len; i++){
+                            //产品已存在产品列表，则修改或删除
+                            if(this.postData.productList[i]['product_id'] == param.product_id){
+                                if(param.buy_quantity<=0){
+                                    Vue.delete(this.postData.productList,i);
+                                }else{
+                                    this.postData.productList[i]['buy_quantity'] = param.buy_quantity;
+                                }
+                                existSign = true;
+                                break;
+                            }
+                        }
+                        //产品不存在产品列表，则添加
+                        if(!existSign && param.buy_quantity>0){
+                            this.postData.productList.push(productInfo);
+                        }
                     }
                 },created:function(){
                     let _this = this;
-                    //监听产品小计初始化
-                    bus.$on('subtotal_amount_init', function(param){
-                        //产品总计初始化
+                    //监听-产品选择器初始化-事件
+                    bus.$on('product_select_init', function(param){
                         _this.total_amount_init(param);
                     });
-                    //监听产品增加
-                    bus.$on('subtotal_amount_reduce', function(param){
-                        _this.reduce(param);
-                    });
-                    //监听产品减少
-                    bus.$on('subtotal_amount_plus', function(param){
-                        _this.plus(param);
+                    //监听-产品改变-事件
+                    bus.$on('buy_quantity_change', function(param){
+                        _this.total_amount_calculate(param);
+                        _this.editProductList(param);
                     });
                 }
             });
