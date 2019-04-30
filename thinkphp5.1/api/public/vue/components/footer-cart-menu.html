@@ -43,7 +43,8 @@
                 unit: {type: String,default: '盒'},
                 deal_price: {type: Number,default: 0.01},
                 init_quantity: {type: Number,default: 0},
-                step_quantity: {type: Number,default: 1}
+                step_quantity: {type: Number,default: 1},
+                addCartCallBack: {type: Function,default: function(){}}
             },
             data: function () {
                 return {
