@@ -180,13 +180,9 @@
                             success: function(data){
                                 $('.loading').hide();
                                 //异步验证判断
-                                let param = {
-                                    'jump_url':jump_url,
-                                    'postData':this.postData
-                                };
-                                console.log(param);
+                                this.postData.jump_url = jump_url;
                                 if(async_verify_judge(data)){
-                                    _this.add_cart_call_back(param);
+                                    _this.add_cart_call_back(this.postData);
                                 }
                             }
                         });
