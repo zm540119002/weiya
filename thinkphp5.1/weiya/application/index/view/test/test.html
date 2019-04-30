@@ -48,6 +48,7 @@
 								:step_quantity="step_quantity"
 								:buy_named_display="buy_named_display"
 								:step_named_display="step_named_display"
+								:addCartCallBack="addCartCallBack"
 						></product-select>
 					</div>
 				</div>
@@ -67,6 +68,44 @@
 {/block}
 {block name="suffix-script"}
 <script type="text/javascript">
+	//购物车按钮 回调函数
+	function addCartCallBack(param){
+		console.log(111);return ;
+		var lis = loginBackFunctionParam.lis;
+		var _this = loginBackFunctionParam._this;
+		var postData = {};
+		postData.goodsList = loginBackFunctionParam.goodsList;
+		$.ajax({
+			url: loginBackFunctionParam.jump_url,
+			data: postData,
+			type: 'post',
+			beforeSend: function(){
+				$('.loading').show();
+			},
+			error:function(){
+				$('.loading').hide();
+				dialog.error('AJAX错误');
+			},
+			success: function(data){
+				$('.loading').hide();
+				if(data.status==0){
+					dialog.error(data.info);
+				}
+				else{
+					dialog.success(data.info);
+					var num = 0;
+					$.each(lis,function(index,val){
+						num += parseInt($(this).find('.gshopping_count').val());
+					});
+					$('footer').find('.cart_num').addClass('cur');
+					$('footer').find('.add_num').text('+'+num).addClass('current');
+					setTimeout(function(){
+						$('.add_num').removeClass('current');
+					},2000)
+				}
+			}
+		});
+	}
 	$(function(){
 		new Vue({
 			el: '#foot_cart_menu'
@@ -82,6 +121,7 @@
 			'quota_named_display':true,
 			'init_quantity':productSelectParam.init_quantity,
 			'step_quantity':productSelectParam.step_quantity,
+			'addCartCallBack':addCartCallBack,
 			'productList':[
 				{
 					'product_id':1,

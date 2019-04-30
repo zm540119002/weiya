@@ -163,7 +163,25 @@
                         let param = {
                             'jump_url':$(this.$refs.addCart).parent().data('jump_url')
                         };
-                        vue_async_verify(param);
+                        let jump_url = $(this.$refs.addCart).parent().data('jump_url');
+                        $.ajax({
+                            url: jump_url,
+                            data: {},
+                            type: 'post',
+                            beforeSend: function(xhr){
+                                $('.loading').show();
+                            },
+                            error:function(xhr){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                $('.loading').hide();
+                                if(async_verify_judge(data)){
+                                    this.addCartCallBack();
+                                }
+                            }
+                        });
                     },editProductList:function(param){
                         let productInfo = {
                             'product_id':param.product_id,
