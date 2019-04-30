@@ -86,6 +86,41 @@ function async_verify(param){
         }
     });
 }
+//vue版异步验证
+function vue_async_verify(param){
+    var jump_url = param.jump_url;
+    $.ajax({
+        url: jump_url,
+        data: {},
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(data.code==1){
+                if(data.data == 'no_login'){
+                    loginDialog();
+                }
+                if(data.data=='no_empower'){
+                    dialog.error(data.msg);
+                }
+                if(data.data=='no_factory_register'){
+                    location.href = data.url;
+                }
+            }else{
+                // loginBackFunctionParam.jump_url = jump_url;
+                // if(loginBackFunction && $.isFunction(loginBackFunction) ){
+                //     loginBackFunction();
+                // }
+            }
+        }
+    });
+}
 $(function(){
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
