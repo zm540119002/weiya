@@ -1,3 +1,10 @@
+//设置钱包支付密码
+$('body').on('click','.set_wallet',function () {
+    var data = {jump_url:$(this).data('jump_url')};
+    loginBackFunction = forgetWalletPasswordDialog(data);
+    async_verify(data);
+});
+
 var walletPayCallBackParameter = {};
 var walletPayCallBack = function(parameter){
 };
