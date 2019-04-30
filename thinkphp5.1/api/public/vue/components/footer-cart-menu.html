@@ -144,8 +144,8 @@
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
                 props: {
-                    add_cart_call_back: {type: Function,default: function(){
-                        console.log('default_add_cart_call_back');
+                    add_cart_call_back: {type: Function,default: function(param){
+                        console.log(param);
                     }}
                 },
                 data: function () {
