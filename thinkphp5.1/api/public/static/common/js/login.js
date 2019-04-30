@@ -86,6 +86,21 @@ function async_verify(param){
         }
     });
 }
+//异步验证判断
+function async_verify_judge(data){
+    if(data.code==1){
+        if(data.data == 'no_login'){
+            loginDialog();
+        }
+        if(data.data=='no_empower'){
+            dialog.error(data.msg);
+        }
+        if(data.data=='no_factory_register'){
+            location.href = data.url;
+        }
+    }
+    return true;
+}
 $(function(){
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){

@@ -39,11 +39,13 @@
 					</div>
 					<div id="product-select">
 						<product-select
-								:goods_id="goods_id"
+								v-for="productInfo in productList"
+								:key="productInfo.product_id"
+								:product_id="productInfo.product_id"
+								:deal_price="productInfo.deal_price"
 								:buy_named="buy_named"
 								:init_quantity="init_quantity"
 								:step_quantity="step_quantity"
-								:deal_price="deal_price"
 								:buy_named_display="buy_named_display"
 								:step_named_display="step_named_display"
 						></product-select>
@@ -60,33 +62,61 @@
 {/block}
 {block name="footer"}
 	<div id="foot_cart_menu">
-		<footer-cart-menu></footer-cart-menu>
+		<footer-cart-menu
+				:add_cart_call_back="add_cart_call_back"
+		></footer-cart-menu>
 	</div>
 {/block}
 {block name="suffix-script"}
 <script type="text/javascript">
 	$(function(){
-		new Vue({
-			el: '#foot_cart_menu'
-		});
-		var productSelectParam = '{$productSelectParam|raw}';
-		if(productSelectParam){
-			productSelectParam = JSON.parse(productSelectParam)
-		}
 		let param = {
-			'goods_id':1,
-			'buy_named':'采购数量',
-			'init_quantity':productSelectParam.init_quantity,
-			'step_quantity':productSelectParam.step_quantity,
-			'deal_price':168,
-			'buy_named_display':true,
-			'step_named_display':true
 		};
 		new Vue({
+			el: '#foot_cart_menu',
 			data:function(){
 				return param;
-			},
-			el: '#product-select'
+			},methods: {
+				add_cart_call_back:function () {
+					console.log('add_cart_call_back');
+				}
+			}
+		});
+		let productSelectParam = '{$productSelectParam|raw}';
+		if(productSelectParam){
+			productSelectParam = JSON.parse(productSelectParam);
+		}
+		param = {
+			'buy_named':'采购数量',
+			'buy_named_display':true,
+			'step_named_display':true,
+			'quota_named_display':true,
+			'init_quantity':productSelectParam.init_quantity,
+			'step_quantity':productSelectParam.step_quantity,
+			'productList':[
+				{
+					'product_id':1,
+					'deal_price':168
+				},{
+					'product_id':2,
+					'deal_price':188
+				},{
+					'product_id':3,
+					'deal_price':888
+				},{
+					'product_id':4,
+					'deal_price':128
+				},{
+					'product_id':5,
+					'deal_price':680
+				}
+			]
+		};
+		new Vue({
+			el: '#product-select',
+			data:function(){
+				return param;
+			}
 		});
 	});
 </script>
