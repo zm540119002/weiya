@@ -108,15 +108,15 @@
 		});
 	}
 	$(function(){
-		let param = {
+		let param1 = {
 			add_cart_call_back:this.add_cart_call_back
 		};
 		new Vue({
 			el: '#foot_cart_menu',
 			data:function(){
-				return param;
+				return param1;
 			},methods: {
-				add_cart_call_back:function (param) {
+				add_cart_call_back:function () {
 					console.log('add_cart_call_back');
 				}
 			}
@@ -125,7 +125,7 @@
 		if(productSelectParam){
 			productSelectParam = JSON.parse(productSelectParam);
 		}
-		param = {
+		let param2 = {
 			'buy_named':'采购数量',
 			'buy_named_display':true,
 			'step_named_display':true,
@@ -154,7 +154,7 @@
 		new Vue({
 			el: '#product-select',
 			data:function(){
-				return param;
+				return param2;
 			}
 		});
 	});
