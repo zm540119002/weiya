@@ -143,6 +143,9 @@
             unlockingFooterCart = JSON.parse(unlockingFooterCart);
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
+                props: {
+                    add_cart_call_back: {type: Function,function(){}}
+                },
                 data: function () {
                     return {
                         total_amount:0,
@@ -160,9 +163,6 @@
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },addCart:function(){
-                        let param = {
-                            'jump_url':$(this.$refs.addCart).parent().data('jump_url')
-                        };
                         let jump_url = $(this.$refs.addCart).parent().data('jump_url');
                         $.ajax({
                             url: jump_url,

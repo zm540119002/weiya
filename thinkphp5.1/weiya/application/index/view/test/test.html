@@ -62,7 +62,9 @@
 {/block}
 {block name="footer"}
 	<div id="foot_cart_menu">
-		<footer-cart-menu></footer-cart-menu>
+		<footer-cart-menu
+				:add_cart_call_back="add_cart_call_back"
+		></footer-cart-menu>
 	</div>
 {/block}
 {block name="suffix-script"}
@@ -107,14 +109,16 @@
 	}
 	$(function(){
 		let param = {
-			'add_cart_call_back':function(){
-				console.log('add_cart_call_back');
-			}
+			'jump_url':''
 		};
 		new Vue({
 			el: '#foot_cart_menu',
 			data:function(){
 				return param;
+			}, methods: {
+				add_cart_call_back:function (param) {
+					console.log('add_cart_call_back');
+				}
 			}
 		});
 		let productSelectParam = '{$productSelectParam|raw}';
