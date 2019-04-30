@@ -1,6 +1,8 @@
 
 $(function () {
-
+    $('body').on('click','.forget_wallet_password',function () {
+        forgetWalletPasswordDialog()
+    });
     // 弹出支付方式
     $('body').on('click','.confirm_order',function(){
         var settlementMethod=$('.settlementMethod').html();
@@ -93,7 +95,6 @@ function submitOrders(_this,postData){
     postData.pay_code = $('.pay_code').val();
 
     var url = module + 'Order/confirmOrder';
-
     $.ajax({
         url: url,
         data: postData,
@@ -109,6 +110,12 @@ function submitOrders(_this,postData){
             _this.removeClass("nodisabled");//删除防止重复提交
             $('.loading').hide();
             if(data.status){
+                if(postData.pay_code == 4){
+                    walletPayCallBack = orderPayment;
+                    walletPayCallBackParameter = postData;
+                    walletPayDialog();
+                    return false;
+                }
                 location.href = data.info;
 
             }else{

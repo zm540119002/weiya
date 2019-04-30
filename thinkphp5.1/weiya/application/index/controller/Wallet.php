@@ -51,4 +51,61 @@ class Wallet extends \common\controller\UserBase{
             return $this->fetch();
         }
     }
+
+    function orderPayment(){
+        print_r(input());exit;
+        $modelOrder = new \app\index\model\Order();
+        $config = [
+            'where' => [
+                ['o.status', '=', 0],
+                ['o.sn', '=', $orderSn],
+                ['o.user_id', '=', $this->user['id']],
+            ], 'field' => [
+                'o.id', 'o.sn', 'o.amount',
+                'o.user_id', 'o.actually_amount', 'o.order_status'
+            ],
+        ];
+        $orderInfo = $modelOrder->getInfo($config);
+        if ($orderInfo['order_status'] > 1) {
+            return errorMsg('订单已处理',['code'=>1]);
+        }
+
+        $modelWallet = new \app\index\model\Wallet();
+        $config = [
+            'where'=>[
+                ['status', '=', 0],
+                ['user_id', '=', $this->user['id']],
+            ]
+        ];
+        $walletInfo = $modelWallet->getInfo($config);
+        if($walletInfo['amount'] < $orderInfo['actually_amount']){
+            $modelOrder->rollback();
+            //返回状态
+            return errorMsg('余额不足，请先充值',['code'=>2]);
+        }
+        $modelOrder ->startTrans();
+        $modelWalletDetail = new \app\index\model\WalletDetail();
+        $orderInfo['pay_sn'] = generateSN();
+        $orderInfo['payment_time'] = time();
+        $res = $modelWalletDetail->walletPaymentHandle($orderInfo);
+        if(!$res['status'] ){
+            $modelOrder->rollback();
+            //返回状态
+            return errorMsg('失败');
+        }
+        $data = [
+            'payment_code'=>4,
+            'pay_sn'=> $orderInfo['pay_sn'],
+            'payment_time'=> $orderInfo['payment_time'],
+            'order_sn'=> $orderInfo['sn'],
+        ];
+        $res = $modelOrder->orderHandle($data, $orderInfo);
+        if(!$res['status']){
+            $modelOrder->rollback();
+            //返回状态
+            return errorMsg('失败');
+        }
+        $modelOrder->commit();
+        return successMsg('成功');
+    }
 }
