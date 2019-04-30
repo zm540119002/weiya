@@ -53,7 +53,7 @@ class Wallet extends \common\controller\UserBase{
     }
 
     function orderPayment(){
-        print_r(input());exit;
+        $orderSn = input('post.order_sn');
         $modelOrder = new \app\index\model\Order();
         $config = [
             'where' => [
