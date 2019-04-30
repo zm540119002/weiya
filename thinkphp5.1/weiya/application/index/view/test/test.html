@@ -63,49 +63,12 @@
 {block name="footer"}
 	<div id="foot_cart_menu">
 		<footer-cart-menu
+				:add_cart_call_back="add_cart_call_back"
 		></footer-cart-menu>
 	</div>
 {/block}
 {block name="suffix-script"}
 <script type="text/javascript">
-	//购物车按钮 回调函数
-	function addCartCallBack(param){
-		console.log(111);return ;
-		var lis = loginBackFunctionParam.lis;
-		var _this = loginBackFunctionParam._this;
-		var postData = {};
-		postData.goodsList = loginBackFunctionParam.goodsList;
-		$.ajax({
-			url: loginBackFunctionParam.jump_url,
-			data: postData,
-			type: 'post',
-			beforeSend: function(){
-				$('.loading').show();
-			},
-			error:function(){
-				$('.loading').hide();
-				dialog.error('AJAX错误');
-			},
-			success: function(data){
-				$('.loading').hide();
-				if(data.status==0){
-					dialog.error(data.info);
-				}
-				else{
-					dialog.success(data.info);
-					var num = 0;
-					$.each(lis,function(index,val){
-						num += parseInt($(this).find('.gshopping_count').val());
-					});
-					$('footer').find('.cart_num').addClass('cur');
-					$('footer').find('.add_num').text('+'+num).addClass('current');
-					setTimeout(function(){
-						$('.add_num').removeClass('current');
-					},2000)
-				}
-			}
-		});
-	}
 	$(function(){
 		let param = {
 		};
