@@ -475,3 +475,19 @@ function sum(arr) {
         return arr[0] + sum(arr.slice(1));
     }
 }
+
+//异步验证判断
+function async_verify_judge(data){
+    if(data.code==1){
+        if(data.data == 'no_login'){
+            loginDialog();
+        }
+        if(data.data=='no_empower'){
+            dialog.error(data.msg);
+        }
+        if(data.data=='no_factory_register'){
+            location.href = data.url;
+        }
+    }
+    return true;
+}
