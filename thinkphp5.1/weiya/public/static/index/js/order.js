@@ -1,5 +1,7 @@
 
 $(function () {
+
+
     $('body').on('click','.forget_wallet_password',function () {
         forgetWalletPasswordDialog()
     });
