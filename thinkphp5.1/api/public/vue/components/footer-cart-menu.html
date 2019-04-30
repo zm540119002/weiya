@@ -144,7 +144,7 @@
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
                 props: {
-                    add_cart_call_back: {type: Function,default: function(){}}
+                    add_cart_call_back: {type: Function,default: this.default_add_cart_call_back}
                 },
                 data: function () {
                     return {
@@ -161,6 +161,8 @@
                        
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
+                    },default_add_cart_call_back:function (param) {
+                        console.log('default_add_cart_call_back');
                     },addCart:function(){
                         let jump_url = $(this.$refs.addCart).parent().data('jump_url');
                         $.ajax({
