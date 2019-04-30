@@ -3661,7 +3661,8 @@ input[type=text]::-webkit-focus-inner {
 .pay_amount_item{
     background:#fff;
 }
-.pay_form input[type="submit"]{
+.pay_form input[type="submit"],
+.pay_form input[type="button"]{
     width:100%;
     display: block;
     padding:0.20rem 0;
