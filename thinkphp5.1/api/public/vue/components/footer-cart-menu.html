@@ -112,7 +112,7 @@
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
+            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1">
@@ -162,6 +162,7 @@
                     },addCart:function(){
 //                        console.log(this.postData);
                         console.log($(this.$refs.addCart).parent().data('jump_url'));
+                        console.log(this.$attrs);
                     },editProductList:function(param){
                         let productInfo = {
                             'product_id':param.product_id,
