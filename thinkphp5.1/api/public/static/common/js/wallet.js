@@ -170,7 +170,7 @@ function forgetWalletPasswordDialog(opt){
 }
 //订单支付
  function orderPayment(postData) {
-    var url = module + 'Wallet/orderPayment';
+    var url = module + 'Payment/orderPayment';
      postData.pay_code=4;
     $.ajax({
         url: url,
@@ -186,7 +186,7 @@ function forgetWalletPasswordDialog(opt){
         success: function(data){
             $('.loading').hide();
             if(data.status){
-                dialog.success(data.info,module + 'Payment/payComplete');
+                dialog.confirm(data.info,module + 'Order/manage');
             }
             if(!data.status){
                 if(data.code == 1){
