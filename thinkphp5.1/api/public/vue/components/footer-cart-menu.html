@@ -179,6 +179,7 @@
                             },
                             success: function(data){
                                 $('.loading').hide();
+                                //异步验证判断
                                 if(async_verify_judge(data)){
                                     _this.add_cart_call_back();
                                 }
