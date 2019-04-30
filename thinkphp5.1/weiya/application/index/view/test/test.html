@@ -107,7 +107,9 @@
 	}
 	$(function(){
 		let param = {
-			'add_cart_call_back':addCartCallBack
+			'add_cart_call_back':function(){
+				console.log('add_cart_call_back');
+			}
 		};
 		new Vue({
 			el: '#foot_cart_menu',
