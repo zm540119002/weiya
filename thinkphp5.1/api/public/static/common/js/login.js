@@ -113,6 +113,7 @@ function vue_async_verify(param){
                     location.href = data.url;
                 }
             }else{
+                console.log(123);
                 // loginBackFunctionParam.jump_url = jump_url;
                 // if(loginBackFunction && $.isFunction(loginBackFunction) ){
                 //     loginBackFunction();
