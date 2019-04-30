@@ -171,7 +171,7 @@ function forgetWalletPasswordDialog(opt){
 //订单支付
  function orderPayment(postData) {
     var url = module + 'Wallet/orderPayment';
-     postData.pay_code=4;
+     // postData.pay_code=4;
     $.ajax({
         url: url,
         data: postData,
