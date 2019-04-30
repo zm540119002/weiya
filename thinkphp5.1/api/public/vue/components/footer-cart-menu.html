@@ -180,7 +180,7 @@
                             success: function(data){
                                 $('.loading').hide();
                                 if(async_verify_judge(data)){
-                                    console.log(_this.add_cart_call_back);
+                                    _this.add_cart_call_back();
                                 }
                             }
                         });
