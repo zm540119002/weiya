@@ -52,6 +52,7 @@ class Wallet extends \common\controller\UserBase{
         }
     }
 
+    //订单支付
     function orderPayment(){
         $orderSn = input('post.order_sn');
         $modelOrder = new \app\index\model\Order();
@@ -79,7 +80,6 @@ class Wallet extends \common\controller\UserBase{
         ];
         $walletInfo = $modelWallet->getInfo($config);
         if($walletInfo['amount'] < $orderInfo['actually_amount']){
-            $modelOrder->rollback();
             //返回状态
             return errorMsg('余额不足，请先充值',['code'=>2]);
         }
