@@ -112,7 +112,7 @@
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" ref="box" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
+            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1">
@@ -129,7 +129,7 @@
                     <span class="cart_num"></span>
                 </div>
                 <!-- 默认 -->
-                <div v-else @click="addCart">
+                <div v-else @click="addCart" ref="addCart" >
                     <span class="s_i"></span>
                 </div>
             </a>
@@ -161,7 +161,7 @@
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },addCart:function(){
 //                        console.log(this.postData);
-                        console.log(this.$refs.box.innerHTML);
+                        console.log(this.$refs.addCart);
                     },editProductList:function(param){
                         let productInfo = {
                             'product_id':param.product_id,
