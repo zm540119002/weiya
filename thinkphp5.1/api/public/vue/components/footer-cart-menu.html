@@ -144,8 +144,8 @@
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
                 props: {
-                    add_cart_call_back: {type: Function,default: function(){
-                        console.log('default_add_cart_call_back');
+                    add_cart_call_back: {type: Function,default: function(param){
+                        console.log(param);
                     }}
                 },
                 data: function () {
@@ -180,8 +180,12 @@
                             success: function(data){
                                 $('.loading').hide();
                                 //异步验证判断
+                                let param = {
+                                    'jump_url':jump_url,
+                                    'postData':_this.postData
+                                };
                                 if(async_verify_judge(data)){
-                                    _this.add_cart_call_back();
+                                    _this.add_cart_call_back(param);
                                 }
                             }
                         });
