@@ -140,7 +140,6 @@ function forgetWalletPasswordDialog(opt){
                 password=password+$(oLis[i]).val();
             }
             postData.password = password;
-            console.log(postData)
             if(!register.vfyCheck(postData.captcha)){
                 content = "请输入正确的验证码";
             }else if(!postData.password&&postData.password.length<6){
@@ -171,7 +170,7 @@ function forgetWalletPasswordDialog(opt){
 }
 //订单支付
  function orderPayment(postData) {
-    var url = module + 'Payment/orderPayment';
+    var url = module + 'Wallet/orderPayment';
      postData.pay_code=4;
     $.ajax({
         url: url,

@@ -190,7 +190,7 @@ class Order extends \common\controller\UserBase
             ];
             $walletInfo = $modelWallet->getInfo($config);
             $this->assign('walletInfo', $walletInfo);
-
+            $this->assign('user',$this->user);
             return $this->fetch();
         }
 
