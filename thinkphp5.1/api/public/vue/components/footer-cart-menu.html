@@ -180,8 +180,12 @@
                             success: function(data){
                                 $('.loading').hide();
                                 //异步验证判断
+                                let param = {
+                                    'jump_url':jump_url,
+                                    'postData':this.postData
+                                };
                                 if(async_verify_judge(data)){
-                                    _this.add_cart_call_back();
+                                    _this.add_cart_call_back(param);
                                 }
                             }
                         });
