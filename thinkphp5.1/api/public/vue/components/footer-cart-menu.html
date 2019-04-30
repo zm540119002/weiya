@@ -129,8 +129,7 @@
                     <span class="cart_num"></span>
                 </div>
                 <!-- 默认 -->
-                <div v-else @click="addCart">
-                    <span ref="addCart">{{menu.action}}</span>
+                <div v-else @click="addCart" ref="addCart">
                     <span class="s_i"></span>
                 </div>
             </a>
@@ -162,7 +161,7 @@
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },addCart:function(){
 //                        console.log(this.postData);
-                        console.log(this.$refs.addCart);
+                        console.log($(this.$refs.addCart).parent().data('jump_url'));
                     },editProductList:function(param){
                         let productInfo = {
                             'product_id':param.product_id,
