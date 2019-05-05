@@ -2,6 +2,55 @@
 namespace app\index\controller;
 
 class Wallet extends \common\controller\UserBase{
+    protected $wallet = null;
+    public function __construct(){
+        parent::__construct();
+        // 平台初始化
+//        if (!$wallet = session(config('app.app_name'))) {
+//            // 自动开通钱包
+//            $model = new \app\index\model\Wallet();
+//            $config = [
+//                'where' => [
+//                    ['status', '=', 0],
+//                    ['user_id', '=', $this->user['id']],
+//                ], 'field' => [
+//                    'id','user_id','status','amount','password'
+//                ],
+//            ];
+//            $wallet = $model->getInfo($config);
+//            if(!empty($wallet)){
+//                $model->isUpdate(false)->save(['user_id'=>$this->user['id']]);
+//                $wallet = $model->getInfo($config);
+//            }
+//            session(config('app.app_name'), $wallet);
+//
+//        }
+        echo config('app.app_name');
+        $model = new \app\index\model\Wallet();
+        $config = [
+            'where' => [
+                ['status', '=', 0],
+                ['user_id', '=', $this->user['id']],
+            ], 'field' => [
+                'id','user_id','status','amount','password'
+            ],
+        ];
+        $wallet = $model->getInfo($config);
+        if(empty($wallet)){
+            $model->isUpdate(false)->save(['user_id'=>$this->user['id']]);
+            $wallet = $model->getInfo($config);
+        }
+        $this->wallet = $wallet;
+        // 判断是否已开通钱包,后面改进此方法
+        if( in_array(request()->action(),['recharge']) ){
+            if(empty($this->wallet['password'])){
+                $this->assign('user',$this->user);
+                echo $this->fetch('wallet_opening');
+                exit;
+            }
+        }
+    }
+
     /**首页
      */
     public function index(){
