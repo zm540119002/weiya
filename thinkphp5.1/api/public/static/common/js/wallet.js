@@ -21,6 +21,7 @@ function walletPayDialog() {
         success:function(indexs,i){
             //钱包密码
             var oLis=$('.payPasswordLayer input.password_item');
+            $('.payPasswordLayer li').eq(0).find('input[type="password"]').focus();
             for(var i = 0;i<oLis.length;i++){
                 var obj=oLis[i];
                 $(obj).data('index',i);
