@@ -91,11 +91,9 @@ function addAddress(postData) {
 
 // 提交订单
 function submitOrders(_this,postData){
-
     postData.order_id = $('.order_id').val();
     postData.order_sn = $('.order_sn').val();
     postData.pay_code = $('.pay_code').val();
-
     var url = module + 'Order/confirmOrder';
     $.ajax({
         url: url,
@@ -119,7 +117,6 @@ function submitOrders(_this,postData){
                     return false;
                 }
                 location.href = data.info;
-
             }else{
                 dialog.error('结算提交失败!');
             }

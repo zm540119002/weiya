@@ -28,7 +28,7 @@
         </div>
         <ul class="recharge_m_list">
             <li>
-                <span>1000</span>元
+                <span>0.01</span>元
             </li>
             <li>
                 <span>5000</span>元
@@ -77,12 +77,13 @@
             <p>银行账户：XXXXXXXXXXXXXXXXXXXXXXXX</p>
             <a href="javascript:;" class="bank_transfer right-arrow ">银行转账支付后将凭证拍照发给平台客服</a>
         </div>
-        <form action="{:url('Payment/rechargePayment')}" method="post" class="recharge_form">
+        <form  class="recharge_form">
             <input type="hidden" name="amount" value=""/>
             <input type="hidden" name="pay_code" value="" class="pay_code"/>
             <span class="red">￥<price>0.00</price></span>
-            <input type="submit" value="充值支付" class="pay_btn"/>
+            <input type="button" value="充值支付" class="pay_btn"/>
         </form>
+
     </section>
 </article>
 {/block}
@@ -109,8 +110,8 @@
         //充值支付
         $('body').on('click','.pay_btn',function () {
             var pay_code = $('input[name=pay_code]').val();
-            var rechargeMoney = $('input[name=amount]').val();
-            if(!rechargeMoney){
+            var amount = $('input[name=amount]').val();
+            if(!amount){
                 dialog.error('充值金额不能为0');
                 return false;
             }
@@ -118,6 +119,31 @@
                 dialog.error('请选择支付方式');
                 return false;
             }
+            var postData = {
+                pay_code:pay_code,
+                amount:amount,
+            };
+            var _this = $(this);
+            _this.addClass("nodisabled");//防止重复提交
+            var url = module + 'Wallet/recharge';
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(){
+                    $('.loading').show();
+                },
+                error:function(){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    _this.remove("nodisabled");//防止重复提交
+                    if(data.status){
+                        location.href = data.info;
+                    }
+                }
+            });
         });
         //转账凭证
         var banksTransferTpl=$('.bank_transfer_tpl').html();
