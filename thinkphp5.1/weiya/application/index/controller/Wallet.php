@@ -39,6 +39,48 @@ class Wallet extends \common\controller\UserBase{
      */
     public function recharge(){
         if (request()->isAjax()) {
+            $amount = input('post.amount/f');
+            $payCode= input('post.pay_code/d');
+            if( !$amount || !$payCode ){
+                return errorMsg('参数错误');
+            }
+            //生成充值明细
+            $walletDetailSn = generateSN();
+            $data = [
+                'sn'=>$walletDetailSn,
+                'user_id'=>$this->user['id'],
+                'amount'=>$amount,
+                'actually_amount'=>$amount, // 还没有其它的业务 暂时先用$amount
+                'create_time'=>time(),
+                'payment_code'=>$payCode,
+            ];
+            // 线下汇款凭证
+            if( isset($_POST['voucher']) && $_POST['voucher'] ){
+                $data['voucher_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['voucher']);
+            }
+
+            $model= new \app\index\model\WalletDetail();
+            $res  = $model->isUpdate(false)->save($data);
+            if(!$res){
+                return errorMsg('充值失败');
+
+            }
+            // 各充值方式的处理
+            switch($payCode){
+                case config('custom.recharge_code.WeChatPay.code') :
+                case config('custom.recharge_code.Alipay.code') :
+                case config('custom.recharge_code.UnionPay.code') :
+                    $url = config('custom.pay_recharge').$walletDetailSn;
+                    return successMsg($url);
+                    break;
+
+                case config('custom.recharge_code.OfflinePay.code') :
+                    // 更新状态
+                    $model->edit(['recharge_status'=>1],['sn'=>$walletDetailSn]);
+                    return successMsg('成功');
+                    break;
+            }
+
         } else {
 //            if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
 //                $payOpenId =  session('pay_open_id');
