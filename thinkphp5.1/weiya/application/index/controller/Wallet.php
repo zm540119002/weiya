@@ -6,41 +6,24 @@ class Wallet extends \common\controller\UserBase{
     public function __construct(){
         parent::__construct();
         // 平台初始化
-//        if (!$wallet = session(config('app.app_name'))) {
-//            // 自动开通钱包
-//            $model = new \app\index\model\Wallet();
-//            $config = [
-//                'where' => [
-//                    ['status', '=', 0],
-//                    ['user_id', '=', $this->user['id']],
-//                ], 'field' => [
-//                    'id','user_id','status','amount','password'
-//                ],
-//            ];
-//            $wallet = $model->getInfo($config);
-//            if(!empty($wallet)){
-//                $model->isUpdate(false)->save(['user_id'=>$this->user['id']]);
-//                $wallet = $model->getInfo($config);
-//            }
-//            session(config('app.app_name'), $wallet);
-//
-//        }
-        echo config('app.app_name');
-        $model = new \app\index\model\Wallet();
-        $config = [
-            'where' => [
-                ['status', '=', 0],
-                ['user_id', '=', $this->user['id']],
-            ], 'field' => [
-                'id','user_id','status','amount','password'
-            ],
-        ];
-        $wallet = $model->getInfo($config);
-        if(empty($wallet)){
-            $model->isUpdate(false)->save(['user_id'=>$this->user['id']]);
-            $wallet = $model->getInfo($config);
+        $this->wallet = session('wallet'.$this->user['id']);
+        if (empty( $this->wallet)){
+            $model = new \app\index\model\Wallet();
+            $config = [
+                'where' => [
+                    ['status', '=', 0],
+                    ['user_id', '=', $this->user['id']],
+                ], 'field' => [
+                    'id','user_id','status','amount','password'
+                ],
+            ];
+            $this->wallet = $model->getInfo($config);
+            if(empty( $this->wallet)){
+                $model->isUpdate(false)->save(['user_id'=>$this->user['id']]);
+                $this->wallet = $model->getInfo($config);
+            }
+            session('wallet'.$this->user['id'],$this->wallet->toArray());
         }
-        $this->wallet = $wallet;
         // 判断是否已开通钱包,后面改进此方法
         if( in_array(request()->action(),['recharge']) ){
             if(empty($this->wallet['password'])){
@@ -161,16 +144,7 @@ class Wallet extends \common\controller\UserBase{
         if ($orderInfo['order_status'] > 1) {
             return errorMsg('订单已处理',['code'=>1]);
         }
-
-        $modelWallet = new \app\index\model\Wallet();
-        $config = [
-            'where'=>[
-                ['status', '=', 0],
-                ['user_id', '=', $this->user['id']],
-            ]
-        ];
-        $walletInfo = $modelWallet->getInfo($config);
-        if($walletInfo['amount'] < $orderInfo['actually_amount']){
+        if($this->wallet['amount'] < $orderInfo['actually_amount']){
             //返回状态
             return errorMsg('余额不足，请先充值',['code'=>2]);
         }
