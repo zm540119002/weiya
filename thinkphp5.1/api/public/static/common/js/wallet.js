@@ -5,9 +5,6 @@ $('body').on('click','.set_wallet',function () {
     async_verify(data);
 });
 
-var walletPayCallBackParameter = {};
-var walletPayCallBack = function(parameter){
-};
 function walletPayDialog() {
     var content=$('#walletPay').html();
     window.scrollTo(0,0);
@@ -84,10 +81,6 @@ function walletPayDialog() {
         }
     });
 }
-
-$(function(){
-   
-})
 
 //忘记钱包支付密码-弹窗触发
 function forgetWalletPasswordDialog(opt){
@@ -173,43 +166,6 @@ function forgetWalletPasswordDialog(opt){
                     dialog.success(data.info);
                 }
             },'JSON')
-        }
-    });
-}
-//订单支付
- function orderPayment(postData) {
-    var url = module + 'Wallet/orderPayment';
-     // postData.pay_code=4;
-    $.ajax({
-        url: url,
-        data: postData,
-        type: 'post',
-        beforeSend: function(){
-            $('.loading').show();
-        },
-        error:function(){
-            $('.loading').hide();
-            dialog.error('AJAX错误');
-        },
-        success: function(data){
-            $('.loading').hide();
-            if(data.status){
-                dialog.confirm(data.info,module + 'Order/manage');
-            }
-            if(!data.status){
-                if(data.code == 1){
-                    dialog.success(data.info,module+'Order/manage');
-                }else if(data.code == 2){
-                    //余额不足
-                    dialog.success(data.info);
-                }else{
-                    dialog.error('失败');
-                }
-
-            }
-            // obj.removeClass("nodisabled");//防止重复提交
-
-            // location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
         }
     });
 }
