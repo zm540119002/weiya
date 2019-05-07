@@ -31,14 +31,14 @@ $(function(){
             var postData = {fileBase64: e.target.result};
             var uploadpath=$(obj).find('.uploadSingleImg').data('upload_path');
             postData.uploadpath=uploadpath;
-            console.log(uploadpath);
+            //console.log(uploadpath);
             // postData.imgWidth = 145;
             // postData.imgHeight = 100;
             $(obj).find('img').attr('src',imgUrl);
             var type = _this.data('type');
             if(type == 'notupload'){
                 $(obj).find('.img').val(imgUrl);
-                console.log(1);
+                //console.log(1);
                 return false;
             }
             //提交

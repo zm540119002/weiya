@@ -79,7 +79,7 @@ class WalletDetail extends \common\model\Base {
 		//生成钱包明细
 		$data2 = [];
 		$data2['recharge_status'] = 2;
-		$data2['payment_code'] = 4;
+		$data2['type'] = 2;
 		$data2['pay_sn'] = $data['sn'];
 		$data2['payment_time'] = $data['payment_time'];
 		$data2['user_id'] = $data['user_id'];
@@ -100,7 +100,7 @@ class WalletDetail extends \common\model\Base {
 		if($res === false){
 			$modelWallet->rollback();
 			//返回状态给微信服务器
-			return errorMsg('失败');
+			return errorMsg('支付失败');
 		}
 		$modelWalletDetail->commit();//提交事务
 		//返回状态给微信服务器

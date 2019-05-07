@@ -1,6 +1,10 @@
-var walletPayCallBackParameter = {};
-var walletPayCallBack = function(parameter){
-};
+//设置钱包支付密码
+$('body').on('click','.set_wallet',function () {
+    var data = {jump_url:$(this).data('jump_url')};
+    loginBackFunction = forgetWalletPasswordDialog(data);
+    async_verify(data);
+});
+
 function walletPayDialog() {
     var content=$('#walletPay').html();
     window.scrollTo(0,0);
@@ -14,6 +18,7 @@ function walletPayDialog() {
         success:function(indexs,i){
             //钱包密码
             var oLis=$('.payPasswordLayer input.password_item');
+            $('.payPasswordLayer li').eq(0).find('input[type="password"]').focus();
             for(var i = 0;i<oLis.length;i++){
                 var obj=oLis[i];
                 $(obj).data('index',i);
@@ -77,10 +82,6 @@ function walletPayDialog() {
     });
 }
 
-$(function(){
-   
-})
-
 //忘记钱包支付密码-弹窗触发
 function forgetWalletPasswordDialog(opt){
     var content = $('#WalletPasswordHtml').html();
@@ -140,7 +141,6 @@ function forgetWalletPasswordDialog(opt){
                 password=password+$(oLis[i]).val();
             }
             postData.password = password;
-            console.log(postData)
             if(!register.vfyCheck(postData.captcha)){
                 content = "请输入正确的验证码";
             }else if(!postData.password&&postData.password.length<6){
@@ -166,43 +166,6 @@ function forgetWalletPasswordDialog(opt){
                     dialog.success(data.info);
                 }
             },'JSON')
-        }
-    });
-}
-//订单支付
- function orderPayment(postData) {
-    var url = module + 'Payment/orderPayment';
-     postData.pay_code=4;
-    $.ajax({
-        url: url,
-        data: postData,
-        type: 'post',
-        beforeSend: function(){
-            $('.loading').show();
-        },
-        error:function(){
-            $('.loading').hide();
-            dialog.error('AJAX错误');
-        },
-        success: function(data){
-            $('.loading').hide();
-            if(data.status){
-                dialog.success(data.info,module + 'Payment/payComplete');
-            }
-            if(!data.status){
-                if(data.code == 1){
-                    dialog.success(data.info,module+'Order/manage');
-                }else if(data.code == 2){
-                    //余额不足
-                    dialog.success(data.info);
-                }else{
-                    dialog.error('失败');
-                }
-
-            }
-            // obj.removeClass("nodisabled");//防止重复提交
-
-            // location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
         }
     });
 }

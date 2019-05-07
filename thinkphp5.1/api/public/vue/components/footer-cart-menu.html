@@ -112,7 +112,7 @@
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
+            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1">
@@ -129,7 +129,7 @@
                     <span class="cart_num"></span>
                 </div>
                 <!-- 默认 -->
-                <div v-else @click="addCart">
+                <div v-else @click="addCart" ref="addCart">
                     <span class="s_i"></span>
                 </div>
             </a>
@@ -143,6 +143,11 @@
             unlockingFooterCart = JSON.parse(unlockingFooterCart);
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
+                props: {
+                    add_cart_call_back: {type: Function,default: function(param){
+                        console.log(param);
+                    }}
+                },
                 data: function () {
                     return {
                         total_amount:0,
@@ -152,15 +157,38 @@
                             productList:[]
                         }
                     }
-                },
-                methods: {
+                },methods: {
                     total_amount_init:function (param) {
                         this.total_amount += param.subtotal_amount;
                        
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },addCart:function(){
-                        console.log(this.postData);
+                        let _this = this;
+                        let jump_url = $(this.$refs.addCart).parent().data('jump_url');
+                        $.ajax({
+                            url: jump_url,
+                            data: {},
+                            type: 'post',
+                            beforeSend: function(xhr){
+                                $('.loading').show();
+                            },
+                            error:function(xhr){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                $('.loading').hide();
+                                //异步验证判断
+                                let param = {
+                                    'jump_url':jump_url,
+                                    'postData':_this.postData
+                                };
+                                if(async_verify_judge(data)){
+                                    _this.add_cart_call_back(param);
+                                }
+                            }
+                        });
                     },editProductList:function(param){
                         let productInfo = {
                             'product_id':param.product_id,
