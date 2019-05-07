@@ -308,7 +308,7 @@ i{
 }
 .icp_icon{text-align: center;display: block;padding:0 0 0.15rem 0;font-size:0.20rem;color:#999;}
 .group_cart_nav{height:0.8rem;line-height:0.8rem;position:fixed;left:0;bottom:0;width:100%;display:flex;display:-webkit-flex;}
-.group_cart_nav a{color:#fff;text-align: center;display: block;}
+.group_cart_nav a{color:#333;text-align: center;display: block;}
 .group_cart_nav a.amount{
     color:#333;
 }
@@ -326,6 +326,7 @@ i{
 .bottom_item:last-child{
     position:relative;
     background: #FF7BAC;
+    color:#fff;
 }
 .bottom_item:first-child{
     position:relative;
@@ -434,7 +435,7 @@ price{
 }
 .group_cart_nav a{
     position:relative;
-    color:#fff;
+    color:#333;
     text-align: center;
     display: block;
 }
@@ -449,8 +450,7 @@ price{
 .group_btn30:last-child div{
     display:inline-block;
 }
-.group_btn30:last-child div,
-.group_btn30:first-child div{
+.group_btn30:last-child div{
     position:absolute;
     left:0;
     top:0;
