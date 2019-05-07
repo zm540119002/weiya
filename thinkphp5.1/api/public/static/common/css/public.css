@@ -308,7 +308,7 @@ i{
 }
 .icp_icon{text-align: center;display: block;padding:0 0 0.15rem 0;font-size:0.20rem;color:#999;}
 .group_cart_nav{height:0.8rem;line-height:0.8rem;position:fixed;left:0;bottom:0;width:100%;display:flex;display:-webkit-flex;}
-.group_cart_nav a{color:#fff;text-align: center;display: block;}
+.group_cart_nav a{color:#333;text-align: center;display: block;}
 .group_cart_nav a.amount{
     color:#333;
 }
@@ -434,7 +434,7 @@ price{
 }
 .group_cart_nav a{
     position:relative;
-    color:#fff;
+    color:#333;
     text-align: center;
     display: block;
 }
