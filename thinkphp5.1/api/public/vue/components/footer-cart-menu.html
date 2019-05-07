@@ -108,7 +108,7 @@
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :jump_url="menu.action" :class="menu.class">
+            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1">
@@ -128,7 +128,7 @@
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1"  @click="addCart">
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1"  @click="buyNow">
                     <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->
@@ -190,6 +190,8 @@
                                 }
                             }
                         });
+                    },buyNow:function(){
+                        console.log('buyNow');
                     },editProductList:function(param){
                         let productInfo = {
                             'product_id':param.product_id,
