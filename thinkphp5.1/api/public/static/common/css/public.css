@@ -326,6 +326,7 @@ i{
 .bottom_item:last-child{
     position:relative;
     background: #FF7BAC;
+    color:#333;
 }
 .bottom_item:first-child{
     position:relative;
