@@ -121,7 +121,6 @@
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
-                    <span class="add_num">{{total_num}}</span>
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
@@ -155,7 +154,6 @@
                 data: function () {
                     return {
                         total_amount:0,
-                        total_num:0,
                         menus: unlockingFooterCart.menu,
                         postData:{
                             productList:[]
