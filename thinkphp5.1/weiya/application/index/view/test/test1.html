@@ -2,12 +2,19 @@
 {block name="content"}
 <article class="f24">
 	<section class="content_main">
-		<template>
+		<template id="com-1">
 			<ul class="list-page">
 				<li v-for="item in list" :key="item.id" :id="item.id" @click="goDetail">{{item.name}}</li>
 			</ul>
 		</template>
 	</section>
+	<div id="dynamic-component-demo" class="demo"><button class="dynamic-component-demo-tab-button">
+		Home
+	</button><button class="dynamic-component-demo-tab-button dynamic-component-demo-tab-button-active">
+		Posts
+	</button><button class="dynamic-component-demo-tab-button">
+		Archive
+	</button> <div class="dynamic-component-demo-tab">Posts component</div></div>
 </article>
 {/block}
 {block name="common"}{/block}
@@ -25,12 +32,6 @@
 			addCount: function () {
 				this.count += 1;
 			}
-		}
-	});
-	Vue.component('com-2', {
-		template: '#com-2',
-		props: {
-			count: 0
 		}
 	});
 	var vm = new Vue({
