@@ -1,22 +1,11 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
-	<section class="content_main">
-	</section>
-	<div id="dynamic-component-demo" class="demo"><button class="dynamic-component-demo-tab-button">
-		Home
-	</button><button class="dynamic-component-demo-tab-button dynamic-component-demo-tab-button-active">
-		Posts
-	</button><button class="dynamic-component-demo-tab-button">
-		Archive
-	</button> <div class="dynamic-component-demo-tab">Posts component</div></div>
+	<section class="content_main"></section>
 </article>
 {/block}
 {block name="common"}
 <template id="com-1">
-	<ul class="list-page">
-		<li v-for="item in list" :key="item.id" :id="item.id" @click="goDetail">{{item.name}}</li>
-	</ul>
 </template>
 {/block}
 {block name="footer"}{/block}
