@@ -69,12 +69,8 @@
                 },
                 plus: function () {
                     //如果开启了样品购买限额
-                    if(this.quota_named_display){
-                        if((this.buy_quantity+this.step_quantity)>this.quota_quantity){
-                            this.buy_quantity = this.quota_quantity;
-                        }else{
-                            this.buy_quantity += this.step_quantity;
-                        }
+                    if(this.quota_named_display && (this.buy_quantity+this.step_quantity)>this.quota_quantity){
+                        this.buy_quantity = this.quota_quantity;
                     }else{
                         this.buy_quantity += this.step_quantity;
                     }
@@ -128,8 +124,16 @@
                     <span class="add_num">{{total_num}}</span>
                     <span class="cart_num"></span>
                 </div>
+                <!-- 加入购物车 -->
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart" ref="addCart">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 立即购买 -->
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1"  @click="addCart">
+                    <span class="s_i"></span>
+                </div>
                 <!-- 默认 -->
-                <div v-else @click="addCart" ref="addCart">
+                <div v-else>
                     <span class="s_i"></span>
                 </div>
             </a>
@@ -160,7 +164,6 @@
                 },methods: {
                     total_amount_init:function (param) {
                         this.total_amount += param.subtotal_amount;
-                       
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },addCart:function(){

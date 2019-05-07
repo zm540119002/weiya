@@ -30,8 +30,11 @@ class Cart extends \common\controller\UserBase{
         $model = new \app\index\model\Cart();
         $config = [
           'where' => [
-              ['user_id','=',$userId]
-          ]
+              ['user_id','=',$userId],
+              ['status','=',0]
+          ],'field'=>[
+              'id','user_id','foreign_id','num','create_time','goods_type','buy_type','brand_name','brand_id'
+            ]
         ];
         $cartList = $model->getList($config);
         $addData = [];

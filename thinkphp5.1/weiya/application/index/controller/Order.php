@@ -100,6 +100,19 @@ class Order extends \common\controller\UserBase
         if (request()->isPost()) {
             $fatherOrderId = input('post.order_id',0,'int');
             $modelOrder = new \app\index\model\Order();
+            $config = [
+                'where' => [
+                    ['o.status', '=', 0],
+                    ['o.id', '=', $fatherOrderId],
+                    ['o.user_id', '=', $this->user['id']],
+                ],'field' => [
+                    'o.id', 'o.sn', 'o.order_status'
+                ],
+            ];
+            $orderInfo = $modelOrder -> getInfo($config);
+            if($orderInfo['order_status']>1){
+                return errorMsg('此订单已提交过');
+            }
             $modelOrder ->startTrans();
             $data = input('post.');
             $data['order_status'] = 1;
@@ -163,7 +176,7 @@ class Order extends \common\controller\UserBase
                     ['order_detail od','od.father_order_id = o.id','left'],
                     ['goods g','g.id = od.goods_id','left']
                 ],'field' => [
-                    'o.id', 'o.sn', 'o.amount','o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address',
+                    'o.id', 'o.sn', 'o.amount','o.actually_amount','o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address',
                     'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type','od.brand_id','od.brand_name','od.id as order_detail_id',
                     'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
                 ],
