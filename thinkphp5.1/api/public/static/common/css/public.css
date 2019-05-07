@@ -327,6 +327,10 @@ i{
     position:relative;
     background: #FF7BAC;
 }
+.bottom_item:first-child{
+    position:relative;
+   
+}
 .bottom_item:last-child a{
     color:#fff;
 }
