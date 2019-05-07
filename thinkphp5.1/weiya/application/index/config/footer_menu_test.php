@@ -17,7 +17,7 @@ return [
     //底部购物车配置
     'menu' => [
         [//0
-            'name'   => '￥',
+            'name'   => '',
             'class'=>[
                 'bottom_item',
                 'amount',
