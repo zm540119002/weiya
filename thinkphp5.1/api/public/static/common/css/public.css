@@ -323,11 +323,12 @@ i{
 .bottom_item{background:#fff;}
 .bff6482{background: #ff6482;}
 .bff1d25{background:#ff1d25;}
-.bottom_item:last-child{
+.bottom_item.buy_now,
+.bottom_item.add_cart{
     position:relative;
     background: #FF7BAC;
     color:#fff;
-}
+}.bottom_item:last-child
 .bottom_item:first-child{
     position:relative;
    
