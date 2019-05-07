@@ -333,6 +333,9 @@ i{
     position:relative;
    
 }
+.bottom_item:last-child{
+    border-left:1px solid #d9d9d9;
+}
 .bottom_item:last-child a{
     color:#fff;
 }
