@@ -323,14 +323,18 @@ i{
 .bottom_item{background:#fff;}
 .bff6482{background: #ff6482;}
 .bff1d25{background:#ff1d25;}
-.bottom_item:last-child{
+.bottom_item.buy_now,
+.bottom_item.add_cart{
     position:relative;
     background: #FF7BAC;
     color:#fff;
-}
+}.bottom_item:last-child
 .bottom_item:first-child{
     position:relative;
    
+}
+.bottom_item:last-child{
+    border-left:1px solid #fff;
 }
 .bottom_item:last-child a{
     color:#fff;
@@ -444,7 +448,6 @@ price{
     box-sizing: border-box;
 }
 .group_btn30:first-child{
-    padding:0 0 0 0.12rem;
 }
 .group_btn30:first-child div,
 .group_btn30:last-child div{
