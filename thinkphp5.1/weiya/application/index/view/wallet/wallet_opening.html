@@ -1,0 +1,25 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<article class="person-center-wrapper f24">
+    <section class="separation-line">
+        <div class="flex_item">
+            <a href="{:url('Mine/index')}" class="person-td">
+                <span class="brand"></span>
+                返回
+            </a>
+            <a href="javascript:void(0)" class="person-td set_wallet" data-jump_url="{:url('Wallet/recharge')}">
+                <span class="charge"></span>
+                设置
+            </a>
+        </div>
+    </section>
+</article>
+{/block}
+{block name="common"}
+{include file="template/wallet_pay_dialog.html" /}
+{/block}
+{block name="footer"}
+{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/wallet.js"></script>
+{/block}

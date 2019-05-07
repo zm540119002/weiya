@@ -100,6 +100,19 @@ class Order extends \common\controller\UserBase
         if (request()->isPost()) {
             $fatherOrderId = input('post.order_id',0,'int');
             $modelOrder = new \app\index\model\Order();
+            $config = [
+                'where' => [
+                    ['o.status', '=', 0],
+                    ['o.id', '=', $fatherOrderId],
+                    ['o.user_id', '=', $this->user['id']],
+                ],'field' => [
+                    'o.id', 'o.sn', 'o.order_status'
+                ],
+            ];
+            $orderInfo = $modelOrder -> getInfo($config);
+            if($orderInfo['order_status']>1){
+                return errorMsg('此订单已提交过');
+            }
             $modelOrder ->startTrans();
             $data = input('post.');
             $data['order_status'] = 1;
