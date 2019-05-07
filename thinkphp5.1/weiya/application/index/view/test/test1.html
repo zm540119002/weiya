@@ -2,20 +2,11 @@
 {block name="content"}
 <article class="f24">
 	<section class="content_main">
-		<div id="app">
-			<com-1></com-1>
-		</div>
-		<script type="text/x-template" id="com-1">
-			<div>
-				<input type="button" @click="addCount" value="count++">
-				<com-2 v-bind:count="count"></com-2>
-			</div>
-		</script>
-		<script type="text/x-template" id="com-2">
-			<div>
-				count: {{count}}
-			</div>
-		</script>
+		<template>
+			<ul class="list-page">
+				<li v-for="item in list" :key="item.id" :id="item.id" @click="goDetail">{{item.name}}</li>
+			</ul>
+		</template>
 	</section>
 </article>
 {/block}
