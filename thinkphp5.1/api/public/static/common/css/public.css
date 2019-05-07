@@ -334,7 +334,7 @@ i{
    
 }
 .bottom_item:last-child{
-    border-left:1px solid #d9d9d9;
+    border-left:1px solid #fff;
 }
 .bottom_item:last-child a{
     color:#fff;
