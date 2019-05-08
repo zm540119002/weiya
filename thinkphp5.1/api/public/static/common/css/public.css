@@ -334,7 +334,7 @@ i{
     position:relative;
    
 }
-.bottom_item.recharge_money{
+.bottom_item .recharge_money{
     position:relative;
     background: #0066cc;
     color:#fff;
