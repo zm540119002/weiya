@@ -328,10 +328,16 @@ i{
     position:relative;
     background: #FF7BAC;
     color:#fff;
-}.bottom_item:last-child
+}
+.bottom_item:last-child
 .bottom_item:first-child{
     position:relative;
    
+}
+.bottom_item .recharge_money{
+    position:relative;
+    background: #0066cc;
+    color:#fff;
 }
 .bottom_item:last-child{
     border-left:1px solid #fff;
