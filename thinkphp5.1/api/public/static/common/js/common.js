@@ -509,7 +509,7 @@ function getJsonList(config,postData){
     $.ajax({
         url: config.url,
         data: postData,
-        type: 'post',
+        type: 'get',
         beforeSend: function(){
             $('.loading').show();
         },
