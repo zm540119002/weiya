@@ -494,6 +494,9 @@ function async_verify_judge(data){
 
 /**获取json格式列表数据
  */
+function getJsonListDefaultCallBack(data){
+    return data;
+}
 function getJsonList(config,postData){
     //提交路径
     config.url = config.url?config.url:action;
@@ -524,6 +527,7 @@ function getJsonList(config,postData){
             }
             config.currentPage ++;
             config.loadTrigger = true;
+            config.callBack?config.callBack(data):getJsonListDefaultCallBack(data);
         }
     });
 }
