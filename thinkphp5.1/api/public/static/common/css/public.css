@@ -1899,7 +1899,14 @@ background-position: 0 -27px;
     background-size:40px auto;
 }
 .weui-flex-item .certify_s_info{background:#fff url(../../common/img/certify_s_info.png) no-repeat center 0;background-size:40px auto;}
-
+.weui-flex-item .base_money{
+    background:#fff url(../../common/img/base_money.png) no-repeat center 0;
+    background-size:40px auto;
+}
+.weui-flex-item.current .base_money{
+    background:#fff url(../../common/img/base_s_money.png) no-repeat center 0;
+    background-size:40px auto;
+}
 .weui-flex-item em{position: absolute;
     background: url(../../common/img/icons/sign-icons.png) repeat-x;
     left: 76%;
