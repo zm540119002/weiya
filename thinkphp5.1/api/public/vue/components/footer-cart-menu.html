@@ -24,10 +24,15 @@
             <div class="middle">
                 <span class="red subtotal_amount">￥{{subtotal_amount}}</span>
             </div>
-            <div class="quantity_wrapper selected-number right">
-                <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-                <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
-                <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+            <div  class="right">
+                <div  v-if="display_pic" class="product_name">
+                    <p class="text-intro">玻尿酸活性肽修护冻干组12组 补水舒敏祛痘淡印修护晒后术后肌肤冻干粉</p>
+                </div>
+                <div class="quantity_wrapper selected-number">
+                    <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+                    <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
+                    <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+                </div>
             </div>
         </div>
     </div>
