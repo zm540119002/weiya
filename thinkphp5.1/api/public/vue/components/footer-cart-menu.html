@@ -8,12 +8,12 @@
             <p v-if="quota_named_display">{{quota_named}}：<span class="quota">{{quota_quantity}}</span></p>
         </div>
         <div class="columns_flex l-r-sides">
-            <div  v-if="display_pic">
+            <div  v-if="display_pic" class="left">
                 <a class="p_img" href="/index/Goods/detail/id/347.html">
                     <img class="left" src="https://hss.meishangyun.com/uploads/mcs_scheme/1553151958833045.jpg" alt="">
                 </a>
             </div>
-            <div  v-else>
+            <div  v-else class="left">
                 <p>{{buy_named}}：(单位:{{unit}})</p>
                 <p>
                     <span class="step-named">{{step_named}}：</span>
@@ -21,10 +21,10 @@
                     <span class="unit">{{unit}}</span>
                 </p>
             </div>
-            <div>
+            <div class="middle">
                 <span class="red subtotal_amount">￥{{subtotal_amount}}</span>
             </div>
-            <div class="quantity_wrapper selected-number">
+            <div class="quantity_wrapper selected-number right">
                 <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
                 <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                 <a href="javascript:void(0);" class="plus" @click="plus">+</a>
