@@ -5,7 +5,7 @@
             <p>
                 <span class="red deal_price">￥{{deal_price}}</span>
             </p>
-            <p v-if="quota_named_display">{{quota_named}}：<span class="quota">{{quota_quantity}}</span></p>
+            <p v-if="display_quota">{{quota_named}}：<span class="quota">{{quota_quantity}}</span></p>
         </div>
         <div class="columns_flex l-r-sides">
             <div  v-if="display_pic" class="left">
@@ -48,13 +48,13 @@
                 buy_named: {type: String,default: '购买数量'},
                 step_named: {type: String,default: '起订数量'},
                 quota_named: {type: String,default: '样品购买限额'},
-                display_quota_named: {type: Boolean,default: false},
-                display_pic: {type: Boolean,default: true},
-                quota_quantity: {type: Number,default: 1},
                 unit: {type: String,default: '盒'},
+                quota_quantity: {type: Number,default: 1},
                 deal_price: {type: Number,default: 0.01},
                 init_quantity: {type: Number,default: 0},
-                step_quantity: {type: Number,default: 1}
+                step_quantity: {type: Number,default: 1},
+                display_quota: {type: Boolean,default: false},
+                display_pic: {type: Boolean,default: true}
             },
             data: function () {
                 return {
@@ -68,7 +68,7 @@
                 },
                 reduce: function () {
                     //如果开启了样品购买限额
-                    if(this.quota_named_display){
+                    if(this.display_quota){
                         if((this.buy_quantity-this.step_quantity)<this.init_quantity){
                             this.buy_quantity = this.init_quantity;
                         }else{
@@ -80,7 +80,7 @@
                 },
                 plus: function () {
                     //如果开启了样品购买限额
-                    if(this.quota_named_display){
+                    if(this.display_quota){
                         if((this.buy_quantity+this.step_quantity)>this.quota_quantity){
                             this.buy_quantity = this.quota_quantity;
                         }else{
