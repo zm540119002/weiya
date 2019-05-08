@@ -1,7 +1,25 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
 <style>
-
+.product-select{
+	border-bottom:5px solid #F2F2F2;
+	padding:0.12rem;
+	margin:0.12rem;
+}
+.product-select	div.left{
+	width:40%;
+}.product-select div.middle{
+	width:20%;
+}.product-select div.right{
+	width:40%;
+}.product-select div.right div:last-child{
+	height: 20%;
+}.product-select div.middle div{
+	height: 50%;
+}
+.product-select	img.left{
+	width:100%;
+}
 </style>
 {/block}
 {block name="content"}
@@ -46,8 +64,7 @@
 								:buy_named="buy_named"
 								:init_quantity="init_quantity"
 								:step_quantity="step_quantity"
-								:buy_named_display="buy_named_display"
-								:step_named_display="step_named_display"
+								:display_pic="display_pic"
 						></product-select>
 					</div>
 				</div>
@@ -88,9 +105,8 @@
 		}
 		param = {
 			'buy_named':'采购数量',
-			'buy_named_display':true,
-			'step_named_display':true,
-			'quota_named_display':true,
+			'display_quota':true,
+			'display_pic':true,
 			'init_quantity':productSelectParam.init_quantity,
 			'step_quantity':productSelectParam.step_quantity,
 			'productList':[
