@@ -65,6 +65,23 @@
 {/block}
 {block name="suffix-script"}
 <script type="text/javascript">
+	// 获取该场景下的商品
+	var config = {
+		url:module+'Goods/getRelationGoods',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:10,
+		relation:'{$relation}'
+	};
+
+	$(function(){
+		//初始化场景商品页面
+		postData.id = '{$info.id}';
+		getJsonList(config,postData);
+	});
 	$(function(){
 		let param = {
 		};
