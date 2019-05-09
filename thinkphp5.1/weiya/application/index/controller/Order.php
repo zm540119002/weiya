@@ -116,7 +116,7 @@ class Order extends \common\controller\UserBase
             $modelOrder ->startTrans();
             $data = input('post.');
             $data['order_status'] = 1;
-            $data['payment_code'] = $data['pay_code'];
+            $data['pay_code'] = $data['pay_code'];
             $condition = [
                 ['user_id','=',$this->user['id']],
                 ['id','=',$fatherOrderId],
@@ -301,7 +301,7 @@ class Order extends \common\controller\UserBase
                 ['o.sn', '=', $orderSn],
             ],
             'field'=>[
-                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
+                'o.id','o.pay_sn','o.sn','o.order_status','o.pay_code','o.amount','o.actually_amount','o.remark',
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
                 'o.finished_time',
                 'u.name','u.mobile_phone'
@@ -412,7 +412,7 @@ class Order extends \common\controller\UserBase
                 ['o.user_id', '=', $this->user['id']],
             ],
             'field'=>[
-                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
+                'o.id','o.pay_sn','o.sn','o.order_status','o.pay_code','o.amount','o.actually_amount','o.remark',
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
                 'o.finished_time',
             ],'order'=>[

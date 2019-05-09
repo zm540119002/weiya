@@ -84,7 +84,7 @@ class Wallet extends \common\controller\UserBase{
                 'amount'=>$amount,
                 'actually_amount'=>$amount, // 还没有其它的业务 暂时先用$amount
                 'create_time'=>time(),
-                'payment_code'=>$payCode,
+                'pay_code'=>$payCode,
             ];
             // 线下汇款凭证
             if( isset($_POST['voucher']) && $_POST['voucher'] ){
@@ -159,7 +159,7 @@ class Wallet extends \common\controller\UserBase{
             return errorMsg('失败');
         }
         $data = [
-            'payment_code'=>4,
+            'pay_code'=>4,
             'pay_sn'=> $orderInfo['pay_sn'],
             'payment_time'=> $orderInfo['payment_time'],
             'order_sn'=> $orderInfo['sn'],

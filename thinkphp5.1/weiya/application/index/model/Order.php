@@ -18,7 +18,7 @@ class Order extends \common\model\Base {
 		//更新订单状态
 		$data2 = [];
 		$data2['order_status'] = 2;
-		$data2['payment_code'] = $data['payment_code'];
+		$data2['pay_code'] = $data['pay_code'];
 		$data2['pay_sn'] = $data['pay_sn'];
 		$data2['payment_time'] = $data['payment_time'];
 		$condition = [
