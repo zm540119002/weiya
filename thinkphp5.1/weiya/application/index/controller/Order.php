@@ -116,7 +116,6 @@ class Order extends \common\controller\UserBase
             $modelOrder ->startTrans();
             $data = input('post.');
             $data['order_status'] = 1;
-            $data['pay_code'] = $data['pay_code'];
             $condition = [
                 ['user_id','=',$this->user['id']],
                 ['id','=',$fatherOrderId],
