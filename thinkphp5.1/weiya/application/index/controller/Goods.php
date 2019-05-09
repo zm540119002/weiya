@@ -176,6 +176,7 @@ class Goods extends \common\controller\Base{
         ];
         $list = $modelRecommendGoods->getList($config);
         $this->assign('list',$list);
+        $this->assign('goodsList',json_encode($list));
         return view('goods/recommend_list_tpl');
     }
 }
