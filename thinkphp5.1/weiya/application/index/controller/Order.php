@@ -275,7 +275,6 @@ class Order extends \common\controller\UserBase
                 $url = config('custom.pay_gateway').$orderInfo['sn'];
                 break;
         }
-        echo $url;exit;
         return successMsg( '成功',['url'=>$url]);
 
     }
