@@ -97,6 +97,21 @@ class Wallet extends \common\controller\UserBase{
                 return errorMsg('充值失败');
 
             }
+            //生成支付表的数据
+            $modelPay = new \app\index\model\Pay();
+            //增加
+            $data = [
+                'sn' => $walletDetailSn,
+                'actually_amount' =>$amount,
+                'user_id' => $this->user['id'],
+                'pay_code' => $payCode,
+                'type' => config('custom.pay_type')['rechargePay']['code'],
+            ];
+            $result  = $modelPay->isUpdate(false)->save($data);
+            if(!$result){
+                $model->rollback();
+                return errorMsg('失败');
+            }
             // 各充值方式的处理
             switch($payCode){
                 case config('custom.recharge_code.WeChatPay.code') :
@@ -108,7 +123,7 @@ class Wallet extends \common\controller\UserBase{
 
                 case config('custom.recharge_code.OfflinePay.code') :
                     // 更新状态
-                    $model->edit(['recharge_status'=>1],['sn'=>$walletDetailSn]);
+                    $result  = $model->isUpdate(false)->save(['sn'=>$walletDetailSn]);
                     return successMsg('成功');
                     break;
             }
