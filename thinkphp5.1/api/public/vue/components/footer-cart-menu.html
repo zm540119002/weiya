@@ -1,49 +1,88 @@
+<style>
+    .product-select{
+        border-bottom:none;
+        padding:0.12rem;
+        margin:0.12rem;
+        background-color: #ffffff;
+    }
+    .product-select	div.left{
+        width:40%;
+    }
+    .product-select div.middle{
+        width:20%;
+    }
+    .product-select div.right{
+        width:40%;
+    }
+    .product-select div.right div:last-child{
+        height:20%;
+    }
+    .product-select div.middle div{
+        height:50%;
+    }
+    .product-select	img.left{
+        width:100%;
+    }
+</style>
 <!-- 产品选择器 -->
 <template id="product_select_tpl">
-    <div>
-        <div class="columns_flex l-r-sides">
-            <p>
-                <span class="red deal_price">￥{{deal_price}}</span>
-            </p>
-            <p v-if="quota_named_display">{{quota_named}}：<span class="quota">{{quota_quantity}}</span></p>
-        </div>
-        <div class="columns_flex l-r-sides">
-            <div>
-                <p v-if="buy_named_display">{{buy_named}}：(单位:{{unit}})</p>
-                <p v-if="step_named_display">
-                    <span class="step-named">{{step_named}}：</span>
-                    <span class="step-quantity">{{init_quantity}}</span>
-                    <span class="unit">{{unit}}</span>
+    <li>
+        <div class="product-select">
+            <div class="columns_flex l-r-sides">
+                <p>
+                    <span class="red deal_price">￥{{deal_price}}</span>
                 </p>
+                <p v-if="display_quota">{{quota_named}}：<span class="quota">{{quota_quantity}}</span></p>
             </div>
-            <div>
-                <span class="red subtotal_amount">￥{{subtotal_amount}}</span>
-            </div>
-            <div class="quantity_wrapper selected-number">
-                <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-                <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
-                <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+            <div class="columns_flex l-r-sides">
+                <div  v-if="display_pic" class="left">
+                    <a class="p_img" href="/index/Goods/detail/id/347.html">
+                        <img class="left" src="https://hss.meishangyun.com/uploads/mcs_scheme/1553151958833045.jpg" alt="">
+                    </a>
+                </div>
+                <div  v-else class="left">
+                    <p>{{buy_named}}：(单位:{{unit}})</p>
+                    <p>
+                        <span class="step-named">{{step_named}}：</span>
+                        <span class="step-quantity">{{init_quantity}}</span>
+                        <span class="unit">{{unit}}</span>
+                    </p>
+                </div>
+                <div class="middle">
+                    <div></div>
+                    <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
+                </div>
+                <div  class="right">
+                    <div  v-if="display_pic" class="product_name">
+                        <p class="text-intro">{{product_name}}</p>
+                    </div>
+                    <div class="quantity_wrapper selected-number">
+                        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+                        <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
+                        <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </li>
 </template>
 <script type="text/javascript">
     $(function(){
         Vue.component('product-select', {
             template:'#product_select_tpl',
             props: {
-                product_id: {type: Number,default: 0,required: true},
+                product_id: {type: Number,default:0,required: true},
+                product_name: {type: String,default: ''},
                 buy_named: {type: String,default: '购买数量'},
-                buy_named_display: {type: Boolean,default: false},
                 step_named: {type: String,default: '起订数量'},
-                step_named_display: {type: Boolean,default: false},
                 quota_named: {type: String,default: '样品购买限额'},
-                quota_named_display: {type: Boolean,default: false},
-                quota_quantity: {type: Number,default: 1},
                 unit: {type: String,default: '盒'},
-                deal_price: {type: Number,default: 0.01},
+                quota_quantity: {type: Number,default: 1},
+                deal_price: {type: Number,required: true},
                 init_quantity: {type: Number,default: 0},
-                step_quantity: {type: Number,default: 1}
+                step_quantity: {type: Number,default: 1},
+                display_quota: {type: Boolean,default: false},
+                display_pic: {type: Boolean,default: true}
             },
             data: function () {
                 return {
@@ -57,7 +96,7 @@
                 },
                 reduce: function () {
                     //如果开启了样品购买限额
-                    if(this.quota_named_display){
+                    if(this.display_quota){
                         if((this.buy_quantity-this.step_quantity)<this.init_quantity){
                             this.buy_quantity = this.init_quantity;
                         }else{
@@ -69,7 +108,7 @@
                 },
                 plus: function () {
                     //如果开启了样品购买限额
-                    if(this.quota_named_display){
+                    if(this.display_quota){
                         if((this.buy_quantity+this.step_quantity)>this.quota_quantity){
                             this.buy_quantity = this.quota_quantity;
                         }else{
@@ -92,14 +131,16 @@
                 buy_quantity: {
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
-                        let param = {
-                            product_id:this.product_id,
-                            buy_quantity:this.buy_quantity,
-                            increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
-                            deal_price:this.deal_price
-                        };
-                        //触发-产品改变-事件
-                        bus.$emit('buy_quantity_change',param);
+                        if(typeof(oldVal) !== "undefined"){
+                            let param = {
+                                product_id:this.product_id,
+                                buy_quantity:this.buy_quantity,
+                                increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
+                                deal_price:this.deal_price
+                            };
+                            //触发-产品改变-事件
+                            bus.$emit('buy_quantity_change',param);
+                        }
                     },
                     deep: false,
                     immediate: true
@@ -112,7 +153,7 @@
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :jump_url="menu.action" :class="menu.class">
+            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1">
@@ -121,15 +162,26 @@
                 </div>
                 <!-- 总金额 -->
                 <div v-else-if="menu.class.indexOf('amount')!==-1">
-                    <span class="total_amount">￥{{total_amount}}</span>
+                    <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
-                    <span class="add_num">{{total_num}}</span>
                     <span class="cart_num"></span>
                 </div>
+                <!-- 加入购物车 -->
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="addCart">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 立即购买 -->
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="buyNow">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 提交订单 -->
+                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" @click="confirmOrder">
+                    <span class="s_i"></span>
+                </div>
                 <!-- 默认 -->
-                <div v-else @click="addCart" ref="addCart">
+                <div v-else>
                     <span class="s_i"></span>
                 </div>
             </a>
@@ -151,7 +203,6 @@
                 data: function () {
                     return {
                         total_amount:0,
-                        total_num:0,
                         menus: unlockingFooterCart.menu,
                         postData:{
                             productList:[]
@@ -160,7 +211,6 @@
                 },methods: {
                     total_amount_init:function (param) {
                         this.total_amount += param.subtotal_amount;
-                       
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },addCart:function(){
@@ -189,6 +239,10 @@
                                 }
                             }
                         });
+                    },buyNow:function(){
+                        console.log('buyNow');
+                    },confirmOrder:function(){
+                        console.log('confirmOrder');
                     },editProductList:function(param){
                         let productInfo = {
                             'product_id':param.product_id,
@@ -218,6 +272,7 @@
                     //监听-产品选择器初始化-事件
                     bus.$on('product_select_init', function(param){
                         _this.total_amount_init(param);
+                        _this.editProductList(param);
                     });
                     //监听-产品改变-事件
                     bus.$on('buy_quantity_change', function(param){

@@ -491,3 +491,43 @@ function async_verify_judge(data){
     }
     return true;
 }
+
+/**获取json格式列表数据
+ */
+function getJsonListDefaultCallBack(data){
+    return data;
+}
+function getJsonList(config,postData){
+    //提交路径
+    config.url = config.url?config.url:action;
+    //要提交的数据
+    postData = postData?postData:{};
+    postData.page = postData.currentPage ? postData.currentPage : 1;
+    postData.pageSize = postData.pageSize ? postData.pageSize:4;
+    //请求结束标志
+    if(config.requestEnd){
+        config.loadTrigger = true;
+        return false;
+    }
+    $.ajax({
+        url: config.url,
+        data: postData,
+        type: 'get',
+        beforeSend: function(){
+            $('.loading').show();
+        },
+        error:function (xhr) {
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(data.length<postData.pageSize){
+                config.requestEnd = true;
+            }
+            config.currentPage ++;
+            config.loadTrigger = true;
+            config.callBack?config.callBack(data):getJsonListDefaultCallBack(data);
+        }
+    });
+}

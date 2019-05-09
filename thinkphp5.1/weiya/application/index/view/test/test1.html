@@ -1,49 +1,43 @@
 {extend name="template/base.html" /}
 {block name="content"}
-<article class="f24">
-	<section class="content_main">
-		<div id="app">
-			<com-1></com-1>
-		</div>
-		<script type="text/x-template" id="com-1">
-			<div>
-				<input type="button" @click="addCount" value="count++">
-				<com-2 v-bind:count="count"></com-2>
-			</div>
-		</script>
-		<script type="text/x-template" id="com-2">
-			<div>
-				count: {{count}}
-			</div>
-		</script>
-	</section>
-</article>
+<div class="frame">
+	<div id="div1"></div>
+	<div id="div2"></div>
+</div>
+<div id="div3"></div>
 {/block}
-{block name="common"}{/block}
-{block name="footer"}{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}
+{/block}
 {block name="suffix-script"}
+<style>
+	.frame {
+		position: relative;
+		margin: 50px;
+		width: 400px;
+		height: 300px;
+		background-color: yellow;
+	}
+	#div1 {
+		position: absolute;
+		width: 100px;
+		height: 50px;
+		top: 3px;
+		background-color: blue;
+	}
+	#div2 {
+		width: 200px;
+		height: 100px;
+		background-color: green;
+	}
+	#div3 {
+		width: 20px;
+		height: 10px;
+		background-color: red;
+	}
+</style>
 <script type="text/javascript">
-	Vue.component('com-1', {
-		template: '#com-1',
-		data: function () {
-			return {
-				count: 0
-			}
-		},
-		methods: {
-			addCount: function () {
-				this.count += 1;
-			}
-		}
-	});
-	Vue.component('com-2', {
-		template: '#com-2',
-		props: {
-			count: 0
-		}
-	});
-	var vm = new Vue({
-		el: '#app'
-	});
 </script>
 {/block}

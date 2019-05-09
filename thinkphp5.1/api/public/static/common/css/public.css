@@ -66,14 +66,6 @@ body{
     background: #f2f2f2 !important;
     border:1px solid #d9d9d9;
 }
-.text-intro{
-    overflow : hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    word-break:break-all;
-}
 .status_icons img{
     max-width:15%;
 }
@@ -308,7 +300,7 @@ i{
 }
 .icp_icon{text-align: center;display: block;padding:0 0 0.15rem 0;font-size:0.20rem;color:#999;}
 .group_cart_nav{height:0.8rem;line-height:0.8rem;position:fixed;left:0;bottom:0;width:100%;display:flex;display:-webkit-flex;}
-.group_cart_nav a{color:#fff;text-align: center;display: block;}
+.group_cart_nav a{color:#333;text-align: center;display: block;}
 .group_cart_nav a.amount{
     color:#333;
 }
@@ -323,9 +315,24 @@ i{
 .bottom_item{background:#fff;}
 .bff6482{background: #ff6482;}
 .bff1d25{background:#ff1d25;}
-.bottom_item:last-child{
+.bottom_item.buy_now,
+.bottom_item.add_cart{
     position:relative;
     background: #FF7BAC;
+    color:#fff;
+}
+.bottom_item:last-child
+.bottom_item:first-child{
+    position:relative;
+   
+}
+.bottom_item .recharge_money{
+    position:relative;
+    background: #0066cc;
+    color:#fff;
+}
+.bottom_item:last-child{
+    border-left:1px solid #fff;
 }
 .bottom_item:last-child a{
     color:#fff;
@@ -430,7 +437,7 @@ price{
 }
 .group_cart_nav a{
     position:relative;
-    color:#fff;
+    color:#333;
     text-align: center;
     display: block;
 }
@@ -439,13 +446,12 @@ price{
     box-sizing: border-box;
 }
 .group_btn30:first-child{
-    padding:0 0 0 0.12rem;
 }
 .group_btn30:first-child div,
 .group_btn30:last-child div{
     display:inline-block;
 }
-.group_btn30:last-child div{
+.group_btn30 div{
     position:absolute;
     left:0;
     top:0;
@@ -1891,7 +1897,14 @@ background-position: 0 -27px;
     background-size:40px auto;
 }
 .weui-flex-item .certify_s_info{background:#fff url(../../common/img/certify_s_info.png) no-repeat center 0;background-size:40px auto;}
-
+.weui-flex-item .base_money{
+    background:#fff url(../../common/img/base_money.png) no-repeat center 0;
+    background-size:40px auto;
+}
+.weui-flex-item.current .base_money{
+    background:#fff url(../../common/img/base_s_money.png) no-repeat center 0;
+    background-size:40px auto;
+}
 .weui-flex-item em{position: absolute;
     background: url(../../common/img/icons/sign-icons.png) repeat-x;
     left: 76%;
@@ -4325,7 +4338,7 @@ select[name="nodeIds"]{
     overflow : hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     word-break:break-all;
 }

@@ -1,8 +1,5 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<style>
-
-</style>
 {/block}
 {block name="content"}
 <article class="f24">
@@ -46,8 +43,7 @@
 								:buy_named="buy_named"
 								:init_quantity="init_quantity"
 								:step_quantity="step_quantity"
-								:buy_named_display="buy_named_display"
-								:step_named_display="step_named_display"
+								:display_pic="display_pic"
 						></product-select>
 					</div>
 				</div>
@@ -88,11 +84,10 @@
 		}
 		param = {
 			'buy_named':'采购数量',
-			'buy_named_display':true,
-			'step_named_display':true,
-			'quota_named_display':true,
-			'init_quantity':productSelectParam.init_quantity,
-			'step_quantity':productSelectParam.step_quantity,
+			'display_quota':true,
+			'display_pic':true,
+			'init_quantity':1,
+			'step_quantity':5,
 			'productList':[
 				{
 					'product_id':1,
