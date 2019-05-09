@@ -36,8 +36,8 @@
             </div>
             <div class="columns_flex l-r-sides">
                 <div  v-if="display_pic" class="left">
-                    <a class="p_img" href="/index/Goods/detail/id/347.html">
-                        <img class="left" src="https://hss.meishangyun.com/uploads/mcs_scheme/1553151958833045.jpg" alt="">
+                    <a class="p_img" :href="'/index/Goods/detail/id/' + product_url">
+                        <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
                     </a>
                 </div>
                 <div  v-else class="left">
@@ -77,6 +77,8 @@
                 step_named: {type: String,default: '起订数量'},
                 quota_named: {type: String,default: '样品购买限额'},
                 unit: {type: String,default: '盒'},
+                thumb_img: {type: String,default: ''},
+                product_url: {type: String,default: ''},
                 quota_quantity: {type: Number,default: 1},
                 deal_price: {type: Number,required: true},
                 init_quantity: {type: Number,default: 0},
