@@ -1,4 +1,7 @@
 <?php
+use think\exception\HttpResponseException;
+use think\Response;
+
 function GetTimeString()
 {
     date_default_timezone_set('Asia/Shanghai');
@@ -137,14 +140,16 @@ function data_auth_sign($data)
  * @param string $extend
  * @return array
  */
-function errorMsg($msg, $extend = '')
+function errorMsg($msg = '',array $data = [], $jsonEncode = false, array $header = [])
 {
-    $return = array(
+    $result = [
         'status' => 0,
-        'info' => $msg
-    );
-    is_array($extend) && ($return = array_merge($return, $extend));
-    return $return;
+        'info'  => $msg,
+        'data' => !$jsonEncode?$data:json_encode($data),
+    ];
+    $response = Response::create($result)
+        ->header($header);
+    throw new HttpResponseException($response);
 }
 
 /**
@@ -153,14 +158,14 @@ function errorMsg($msg, $extend = '')
  * @param string $extend
  * @return array
  */
-function successMsg($msg, $extend = '')
+function successMsg($msg = '',array $data = [], $jsonEncode = false)
 {
-    $return = array(
+    $result = [
         'status' => 1,
-        'info' => $msg
-    );
-    is_array($extend) && ($return = array_merge($return, $extend));
-    return $return;
+        'info'  => $msg,
+        'data' => !$jsonEncode?$data:json_encode($data),
+    ];
+    return $result;
 }
 
 /**
