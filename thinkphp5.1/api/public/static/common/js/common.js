@@ -487,8 +487,11 @@ function async_verify_judge(param){
         }else{
             dialog.error(param.data.info);
         }
+    }else if(param.data.status==1){
+        return true;
+    }else{
+        return true;
     }
-    return true;
 }
 
 /**获取json格式列表数据
