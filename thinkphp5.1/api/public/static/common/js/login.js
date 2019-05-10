@@ -70,10 +70,13 @@ function async_verify(param){
             if(data.status==0){
                 if(data.data.code == '1001'){
                     loginDialog();
-                }
-                if(data.data.code=='1002'){
+                }else if(data.data.code=='1002'){
                     dialog.error(data.data.msg);
+                }else{
+                    dialog.error(data.info);
                 }
+            }else if(data.status==1){
+                dialog.success(data.info);
             }else{
                 loginBackFunctionParam.jump_url = jump_url;
                 if(loginBackFunction && $.isFunction(loginBackFunction) ){
