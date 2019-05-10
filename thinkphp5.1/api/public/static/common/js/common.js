@@ -494,7 +494,7 @@ function async_verify_judge(data){
 /**获取json格式列表数据
  */
 function getJsonListDefaultCallBack(data){
-    return data;
+    return data.data;
 }
 function getJsonList(config,postData){
     //提交路径
