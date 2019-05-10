@@ -12,7 +12,8 @@ class UserBase extends Base{
         $this->user = checkLogin();
         if (!$this->user) {
             if(request()->isAjax()){
-                $this->success('您还未登录平台，请先登录！',url($this->indexUrl),'no_login',0);
+                $this->success('aaa',url($this->indexUrl),'no_login',0);
+                $this->success(config('error_code.error.explain'),url($this->indexUrl),config('error_code.error.code'),0);
             }else{
                 echo $this->fetch('../../api/public/template/login_page.html');
                 exit;
