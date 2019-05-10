@@ -53,6 +53,7 @@ function logoutDialog(){
 }
 //异步验证
 function async_verify(param){
+    console.log(param);
     var jump_url = param.jump_url;
     $.ajax({
         url: jump_url,
@@ -66,6 +67,7 @@ function async_verify(param){
             dialog.error('AJAX错误');
         },
         success: function(data){
+            console.log(data);
             $('.loading').hide();
             if(data.code==1){
                 if(data.data == 'no_login'){
