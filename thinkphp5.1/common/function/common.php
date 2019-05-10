@@ -147,9 +147,7 @@ function errorMsg($msg = '',array $data = [], $jsonEncode = false, array $header
         'info'  => $msg,
         'data' => !$jsonEncode?$data:json_encode($data),
     ];
-    $response = Response::create($result)
-        ->header($header);
-    throw new HttpResponseException($response);
+    exit($result);
 }
 
 /**
