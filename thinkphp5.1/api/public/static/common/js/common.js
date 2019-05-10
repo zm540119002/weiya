@@ -494,6 +494,7 @@ function async_verify_judge(data){
 /**获取json格式列表数据
  */
 function getJsonListDefaultCallBack(data){
+    console.log(data);
     return data.data;
 }
 function getJsonList(config,postData){
