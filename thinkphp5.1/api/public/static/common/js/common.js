@@ -477,18 +477,17 @@ function sum(arr) {
 }
 
 //异步验证判断
-function async_verify_judge(data){
-    if(data.status==0){
+function async_verify_judge(param){
+    // console.log(param);
+    if(param.data.status==0){
         if(data.data.code == '1001'){
+            loginBackFunction = param.obj.async_verify;
             loginDialog();
-        }else if(data.data.code=='1002'){
-            dialog.error(data.data.msg);
+        }else if(param.data.data.code=='1002'){
         }else{
-            dialog.error(data.info);
         }
-    }else if(data.status==1){
-        return data;
     }
+    return true;
 }
 
 /**获取json格式列表数据
