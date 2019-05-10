@@ -172,11 +172,11 @@
                     <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="jump_url">
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="async_verify">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="async_verify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
@@ -222,12 +222,25 @@
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
-                    },async_verify:function(){
+                    },jump_url:function (event) {
+                        let jump_url = $(event.currentTarget).parent().data('jump_url');
+                        location.href = jump_url;
+                    },async_verify:function(event){
                         let _this = this;
-                        let jump_url = $(this.$refs.addCart).parent().data('jump_url');
+                        let jump_url = $(event.currentTarget).parent().data('jump_url');
+                        if(!jump_url){
+                            return false;
+                        }
+                        //异步验证判断
+                        let param = {
+                            'jump_url':jump_url,
+                            'postData':{
+                                'goodsList':_this.postData.productList
+                            }
+                        };
                         $.ajax({
                             url: jump_url,
-                            data: {},
+                            data: param.postData,
                             type: 'post',
                             beforeSend: function(xhr){
                                 $('.loading').show();
@@ -238,11 +251,6 @@
                             },
                             success: function(data){
                                 $('.loading').hide();
-                                //异步验证判断
-                                let param = {
-                                    'jump_url':jump_url,
-                                    'postData':_this.postData
-                                };
                                 if(async_verify_judge(data)){
                                     _this.async_verify_call_back(param);
                                 }
@@ -250,7 +258,7 @@
                         });
                     },addCart:function(){
                         let _this = this;
-                        let jump_url = $(this.$refs.addCart).parent().data('jump_url');
+                        let jump_url = $(event.currentTarget).parent().data('jump_url');
                         $.ajax({
                             url: jump_url,
                             data: {},
@@ -269,6 +277,7 @@
                                     'jump_url':jump_url,
                                     'postData':_this.postData
                                 };
+
                                 _this.add_cart_call_back(param);
                             }
                         });
@@ -278,14 +287,14 @@
                         console.log('confirmOrder');
                     },editProductList:function(param){
                         let productInfo = {
-                            'foreign_id':param.product_id,
+                            'goods_id':param.product_id,
                             'num':param.buy_quantity
                         };
                         //产品是否存在产品列表，默认不存在
                         let existSign = false;
                         for(var i = 0,len = this.postData.productList.length; i < len; i++){
                             //产品已存在产品列表，则修改或删除
-                            if(this.postData.productList[i]['foreign_id'] == param.product_id){
+                            if(this.postData.productList[i]['goods_id'] == param.product_id){
                                 if(param.buy_quantity<=0){
                                     Vue.delete(this.postData.productList,i);
                                 }else{

@@ -487,9 +487,7 @@ function async_verify_judge(data){
             dialog.error(data.info);
         }
     }else if(data.status==1){
-        dialog.success(data.info);
-    }else{
-        return true;
+        return data;
     }
 }
 
