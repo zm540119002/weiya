@@ -61,17 +61,18 @@ trait Jump
     {
         $result = [
             'status' => 1,
-            'msg'  => $msg,
+            'info'  => $msg,
             'data' => !$jsonEncode?$data:json_encode($data),
         ];
         return $result;
     }
 
-    protected function errorMsg(array $msg = [], array $header = [])
+    protected function errorMsg($msg = '',array $data = [], $jsonEncode = false, array $header = [])
     {
         $result = [
             'status' => 0,
-            'data' => $msg,
+            'info'  => $msg,
+            'data' => !$jsonEncode?$data:json_encode($data),
         ];
 
         $type = $this->getResponseType();
