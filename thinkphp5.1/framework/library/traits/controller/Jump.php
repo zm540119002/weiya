@@ -84,7 +84,6 @@ trait Jump
             'info'  => $msg,
             'data' => !$jsonEncode?$data:json_encode($data),
         ];
-
         $type = $this->getResponseType();
         // 把跳转模板的渲染下沉，这样在 response_send 行为里通过getData()获得的数据是一致性的格式
         if ('html' == strtolower($type)) {
