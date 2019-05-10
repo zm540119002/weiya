@@ -140,6 +140,7 @@ $(function(){
         var jump_url = $(this).data('jump_url');
         var data = {};
         data.jump_url = jump_url;
+        console.log(data);
         async_verify(data);
     });
     //显示隐藏密码
