@@ -57,14 +57,24 @@ trait Jump
         throw new HttpResponseException($response);
     }
 
-    protected function successMsg($msg = '',array $data = [], $jsonEncode = false)
+    protected function successMsg($msg = '',array $data = [], $jsonEncode = false, array $header = [])
     {
         $result = [
             'status' => 1,
             'info'  => $msg,
             'data' => !$jsonEncode?$data:json_encode($data),
         ];
-        return $result;
+        $type = $this->getResponseType();
+        // 把跳转模板的渲染下沉，这样在 response_send 行为里通过getData()获得的数据是一致性的格式
+        if ('html' == strtolower($type)) {
+            $type = 'jump';
+        }
+
+        $response = Response::create($result, $type)
+            ->header($header)
+            ->options(['jump_template' => Container::get('config')->get('dispatch_success_tmpl')]);
+
+        throw new HttpResponseException($response);
     }
 
     protected function errorMsg($msg = '',array $data = [], $jsonEncode = false, array $header = [])
