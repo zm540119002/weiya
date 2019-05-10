@@ -74,7 +74,7 @@ class Wallet extends \common\controller\UserBase{
             $amount = input('post.amount/f');
             $payCode= input('post.pay_code/d');
             if( !$amount || !$payCode ){
-                return errorMsg('参数错误');
+                return $this->errorMsg('参数错误');
             }
             //生成充值明细
             $walletDetailSn = generateSN();
@@ -94,7 +94,7 @@ class Wallet extends \common\controller\UserBase{
             $model= new \app\index\model\WalletDetail();
             $res  = $model->isUpdate(false)->save($data);
             if(!$res){
-                return errorMsg('充值失败');
+                return $this->errorMsg('充值失败');
 
             }
             //生成支付表的数据
@@ -110,7 +110,7 @@ class Wallet extends \common\controller\UserBase{
             $result  = $modelPay->isUpdate(false)->save($data);
             if(!$result){
                 $model->rollback();
-                return errorMsg('失败');
+                return $this->errorMsg('失败');
             }
             // 各充值方式的处理
             switch($payCode){
@@ -157,11 +157,11 @@ class Wallet extends \common\controller\UserBase{
         ];
         $orderInfo = $modelOrder->getInfo($config);
         if ($orderInfo['order_status'] > 1) {
-            return errorMsg('订单已处理',['code'=>1]);
+            return $this->errorMsg('订单已处理',['code'=>1]);
         }
         if($this->wallet['amount'] < $orderInfo['actually_amount']){
             //返回状态
-            return errorMsg('余额不足，请先充值',['code'=>2]);
+            return $this->errorMsg('余额不足，请先充值',['code'=>2]);
         }
         $modelOrder ->startTrans();
         $modelWalletDetail = new \app\index\model\WalletDetail();
@@ -171,7 +171,7 @@ class Wallet extends \common\controller\UserBase{
         if(!$res['status'] ){
             $modelOrder->rollback();
             //返回状态
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         $data = [
             'pay_code'=>4,
@@ -183,7 +183,7 @@ class Wallet extends \common\controller\UserBase{
         if(!$res['status']){
             $modelOrder->rollback();
             //返回状态
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         $modelOrder->commit();
         return successMsg('成功');

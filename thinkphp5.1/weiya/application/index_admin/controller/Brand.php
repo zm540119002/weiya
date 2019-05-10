@@ -20,7 +20,7 @@ class Brand extends Base {
      */
     public function getList(){
         if(!request()->isGet()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $model = new \app\index_admin\model\Brand;
         $filed = [
@@ -40,11 +40,11 @@ class Brand extends Base {
      */
     public function getInfo(){
         if(!request()->isGet()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $id = (int)input('get.id');
         if(!$id){
-            return errorMsg('参数错误');
+            return $this->errorMsg('参数错误');
         }
         $model = new \app\index_admin\model\Brand;
         $where = [
@@ -61,11 +61,11 @@ class Brand extends Base {
      */
     public function audit(){
         if(!request()->isPost()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $id = (int)input('post.id');
         if(!$id){
-            return errorMsg('参数错误');
+            return $this->errorMsg('参数错误');
         }
         $model = new \app\index_admin\model\Brand;
         return $model -> audit();

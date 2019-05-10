@@ -61,14 +61,14 @@ class Scene extends Base {
                 $data['update_time'] = time();
                 $result = $model -> allowField(true) -> save($data,$where);
                 if(false === $result){
-                    return errorMsg('失败');
+                    return $this->errorMsg('失败');
                 }
             }else{//新增
                 $data['create_time'] = time();
                 $result = $model -> allowField(true) -> save($data);
                 if(!$result){
                     $model ->rollback();
-                    return errorMsg('失败');
+                    return $this->errorMsg('失败');
                 }
 
             }
@@ -161,11 +161,11 @@ class Scene extends Base {
         $model = new \app\index_admin\model\Scene();
         $id = input('post.id/d');
         if(!input('?post.id') && !$id){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         $rse = $model->where(['id'=>input('post.id/d')])->setField(['shelf_status'=>input('post.shelf_status/d')]);
         if(!$rse){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         return successMsg('成功');
     }
@@ -180,11 +180,11 @@ class Scene extends Base {
         $model = new \app\index_admin\model\Scene();
         $id = input('post.id/d');
         if(!input('?post.id') && !$id){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         $rse = $model->where(['id'=>input('post.id/d')])->setField(['is_selection'=>input('post.is_selection/d')]);
         if(!$rse){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         return successMsg('成功');
     }
@@ -206,12 +206,12 @@ class Scene extends Base {
 
             if(false === $rse){
                 $model->rollback();
-                return errorMsg('失败');
+                return $this->errorMsg('失败');
             }
             $res = $model->allowField(true)->saveAll($data)->toArray();
             if (!count($res)) {
                 $model->rollback();
-                return errorMsg('失败');
+                return $this->errorMsg('失败');
             }
             $model -> commit();
             return successMsg('成功');

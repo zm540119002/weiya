@@ -84,7 +84,7 @@ class Goods extends Base {
                 ];
                 $result = $modelGoods -> allowField(true) -> save($data,$where);
                 if(false === $result){
-                    return errorMsg('失败');
+                    return $this->errorMsg('失败');
                 }
                 $data['id'] = input('post.id/d');
                 $list[] = $data;
@@ -94,7 +94,7 @@ class Goods extends Base {
                 $data['create_time'] = time();
                 $result = $modelGoods -> allowField(true) -> save($data);
                 if(!$result){
-                    return errorMsg('失败');
+                    return $this->errorMsg('失败');
                 }
                 $data['id'] = $modelGoods->getAttr('id');
                 $list[] = $data;
@@ -209,11 +209,11 @@ class Goods extends Base {
         $model = new \app\index_admin\model\Goods();
         $id = input('post.id/d');
         if(!input('?post.id') && !$id){
-             return errorMsg('失败');
+             return $this->errorMsg('失败');
         }
         $rse = $model->where(['id'=>input('post.id/d')])->setField(['shelf_status'=>input('post.shelf_status/d')]);
         if(!$rse){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         return successMsg('成功');
     }
@@ -228,11 +228,11 @@ class Goods extends Base {
         $model = new \app\index_admin\model\Goods();
         $id = input('post.id/d');
         if(!input('?post.id') && !$id){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         $rse = $model->where(['id'=>input('post.id/d')])->setField(['is_selection'=>input('post.is_selection/d')]);
         if(!$rse){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         return successMsg('成功');
     }
@@ -252,12 +252,12 @@ class Goods extends Base {
             $rse = $model -> del($condition,$tag=false);
             if(false === $rse){
                 $model->rollback();
-                return errorMsg('失败');
+                return $this->errorMsg('失败');
             }
             $res = $model->allowField(true)->saveAll($data)->toArray();
             if (!count($res)) {
                 $model->rollback();
-                return errorMsg('失败');
+                return $this->errorMsg('失败');
             }
             $model -> commit();
             return successMsg('成功');
@@ -287,10 +287,10 @@ class Goods extends Base {
      */
     public function getProjectGoods(){
         if(!request()->get()){
-            return errorMsg('参数有误');
+            return $this->errorMsg('参数有误');
         }
         if(!input('?get.projectId') || !input('get.projectId/d')){
-            return errorMsg('参数有误');
+            return $this->errorMsg('参数有误');
         }
         $projectId = input('get.projectId/d');
         $model = new \app\index_admin\model\ProjectGoods();
@@ -315,10 +315,10 @@ class Goods extends Base {
      */
     public function getSceneGoods(){
         if(!request()->get()){
-            return errorMsg('参数有误');
+            return $this->errorMsg('参数有误');
         }
         if(!input('?get.sceneId') || !input('get.sceneId/d')){
-            return errorMsg('参数有误');
+            return $this->errorMsg('参数有误');
         }
         $sceneId = input('get.sceneId/d');
         $model = new \app\index_admin\model\SceneGoods();
@@ -342,7 +342,7 @@ class Goods extends Base {
      */
     public function getRecommendGoods(){
         if(!request()->isGet()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         if(!input('?get.goods_id') || !input('get.goods_id/d')){
             $this ->error('参数有误');
@@ -458,7 +458,7 @@ class Goods extends Base {
                 $model = new \app\index_admin\model\Goods();
                 $res= $model->where(['id'=>$info['id']])->setField(['rq_code_url'=>$newQRCodes]);
                 if(false === $res){
-                    return errorMsg('失败');
+                    return $this->errorMsg('失败');
                 }
                 unlink($uploadPath.$shareQRCodes);
                 if(!empty($oldQRCodes)){
@@ -487,7 +487,7 @@ class Goods extends Base {
         $qrcode = $this->imgInfo($init['qrcode']);
         $RMB_logo = $this->imgInfo($init['RMB_logo']);
         if( !$logoImg || !$goodsImg || !$qrcode){
-            return errorMsg('提供的图片问题');
+            return $this->errorMsg('提供的图片问题');
         }
         $im = imagecreatetruecolor(480, 780);  //图片大小
         $color = imagecolorallocate($im, 0xFF,0xFF,0xFF);
@@ -513,7 +513,7 @@ class Goods extends Base {
         $filename = generateSN(5).'.jpg';
         $file = $dir.$filename;
         if( !imagejpeg($im, $file, 90) ){
-            return errorMsg('合成图片失败');
+            return $this->errorMsg('合成图片失败');
         }
         imagedestroy($im);
         return  successMsg($init['save_path'].'compose/'.$filename);

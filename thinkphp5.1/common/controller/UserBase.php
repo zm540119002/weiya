@@ -41,7 +41,7 @@ class UserBase extends Base{
 //                $userModel = new \common\model\User();
 //                $result = $userModel->isUpdate(true)->save($data);
 //                if( false === $result){
-//                    return errorMsg('添加微信信息失败');
+//                    return $this->errorMsg('添加微信信息失败');
 //                }
 //            }
 //        }
