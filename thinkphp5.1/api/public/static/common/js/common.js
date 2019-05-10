@@ -478,7 +478,7 @@ function sum(arr) {
 
 //异步验证判断
 function async_verify_judge(param){
-    // console.log(param);
+    console.log(param);
     if(param.data.status==0){
         if(param.data.code == '1001'){
             loginBackFunction = param.func;
