@@ -74,7 +74,7 @@ class Wallet extends \common\controller\UserBase{
             $amount = input('post.amount/f');
             $payCode= input('post.pay_code/d');
             if( !$amount || !$payCode ){
-                return errorMsg('参数错误');
+                return $this->errorMsg('参数错误');
             }
             //生成充值明细
             $walletDetailSn = generateSN();
@@ -84,7 +84,7 @@ class Wallet extends \common\controller\UserBase{
                 'amount'=>$amount,
                 'actually_amount'=>$amount, // 还没有其它的业务 暂时先用$amount
                 'create_time'=>time(),
-                'payment_code'=>$payCode,
+                'pay_code'=>$payCode,
             ];
             // 线下汇款凭证
             if( isset($_POST['voucher']) && $_POST['voucher'] ){
@@ -94,8 +94,23 @@ class Wallet extends \common\controller\UserBase{
             $model= new \app\index\model\WalletDetail();
             $res  = $model->isUpdate(false)->save($data);
             if(!$res){
-                return errorMsg('充值失败');
+                return $this->errorMsg('充值失败');
 
+            }
+            //生成支付表的数据
+            $modelPay = new \app\index\model\Pay();
+            //增加
+            $data = [
+                'sn' => $walletDetailSn,
+                'actually_amount' =>$amount,
+                'user_id' => $this->user['id'],
+                'pay_code' => $payCode,
+                'type' => config('custom.pay_type')['rechargePay']['code'],
+            ];
+            $result  = $modelPay->isUpdate(false)->save($data);
+            if(!$result){
+                $model->rollback();
+                return $this->errorMsg('失败');
             }
             // 各充值方式的处理
             switch($payCode){
@@ -108,7 +123,7 @@ class Wallet extends \common\controller\UserBase{
 
                 case config('custom.recharge_code.OfflinePay.code') :
                     // 更新状态
-                    $model->edit(['recharge_status'=>1],['sn'=>$walletDetailSn]);
+                    $result  = $model->isUpdate(false)->save(['sn'=>$walletDetailSn]);
                     return successMsg('成功');
                     break;
             }
@@ -142,11 +157,11 @@ class Wallet extends \common\controller\UserBase{
         ];
         $orderInfo = $modelOrder->getInfo($config);
         if ($orderInfo['order_status'] > 1) {
-            return errorMsg('订单已处理',['code'=>1]);
+            return $this->errorMsg('订单已处理',['code'=>1]);
         }
         if($this->wallet['amount'] < $orderInfo['actually_amount']){
             //返回状态
-            return errorMsg('余额不足，请先充值',['code'=>2]);
+            return $this->errorMsg('余额不足，请先充值',['code'=>2]);
         }
         $modelOrder ->startTrans();
         $modelWalletDetail = new \app\index\model\WalletDetail();
@@ -156,10 +171,10 @@ class Wallet extends \common\controller\UserBase{
         if(!$res['status'] ){
             $modelOrder->rollback();
             //返回状态
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         $data = [
-            'payment_code'=>4,
+            'pay_code'=>4,
             'pay_sn'=> $orderInfo['pay_sn'],
             'payment_time'=> $orderInfo['payment_time'],
             'order_sn'=> $orderInfo['sn'],
@@ -168,7 +183,7 @@ class Wallet extends \common\controller\UserBase{
         if(!$res['status']){
             $modelOrder->rollback();
             //返回状态
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         $modelOrder->commit();
         return successMsg('成功');

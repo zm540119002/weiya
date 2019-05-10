@@ -16,7 +16,7 @@ class User extends \common\controller\UserBaseAdmin{
     public function info(){
         $modelUser = new \common\model\User();
         if(request()->isPost()){
-            return errorMsg('暂未开通');
+            return $this->errorMsg('暂未开通');
         }else{
             $where = [
                 'status' => 0,
@@ -81,7 +81,7 @@ class User extends \common\controller\UserBaseAdmin{
      */
     public function del(){
         if(!request()->isPost()){
-            return errorMsg(config('custom.not_post'));
+            return $this->errorMsg(config('custom.not_post'));
         }
         $modelUser = new \common\model\User();
         return $modelUser->del();

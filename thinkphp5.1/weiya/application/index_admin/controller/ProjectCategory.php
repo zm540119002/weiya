@@ -126,7 +126,7 @@ class ProjectCategory extends Base
                ['id', '=',$id]
             ];
         }else{
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         return $model->del($condition);
     }

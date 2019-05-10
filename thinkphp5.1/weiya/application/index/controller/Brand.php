@@ -48,7 +48,7 @@ class Brand extends \common\controller\UserBase{
                 $result = $model -> isUpdate(false)->save($data,$condition);
                 if( false === $result ){
                     $model ->rollback();
-                    return errorMsg('失败');
+                    return $this->errorMsg('失败');
                 }
                 $config = [
                     'where' => [
@@ -90,7 +90,7 @@ class Brand extends \common\controller\UserBase{
                 $data['create_time'] = time();
                 $result = $model->isUpdate(false)->save($data);
                 if(!$result){
-                    return errorMsg('失败');
+                    return $this->errorMsg('失败');
                 }
                 $id = $model->getAttr('id');
                 $data['id'] = $id;
@@ -109,7 +109,7 @@ class Brand extends \common\controller\UserBase{
      */
    public function setDefault(){
        if(!request()->isAjax()){
-           return errorMsg('请求方式错误');
+           return $this->errorMsg('请求方式错误');
        }
        $id = input('post.id');
        $userId = $this->user['id'];
@@ -124,7 +124,7 @@ class Brand extends \common\controller\UserBase{
        $result = $model -> edit($data,$condition);
        if( !$result['status'] ){
            $model ->rollback();
-           return errorMsg('失败');
+           return $this->errorMsg('失败');
        }
        //修改其他不为默认值
        if($_POST['is_default'] == 1){
@@ -136,7 +136,7 @@ class Brand extends \common\controller\UserBase{
            $result = $model->where($where)->setField('is_default',0);
            if(false === $result){
                $model ->rollback();
-               return errorMsg('失败');
+               return $this->errorMsg('失败');
            }
        }
        $model->commit();
@@ -161,11 +161,11 @@ class Brand extends \common\controller\UserBase{
     //删除
     public function del(){
         if(!request()->isAjax()){
-            return errorMsg(config('custom.not_ajax'));
+            return $this->errorMsg(config('custom.not_ajax'));
         }
         $ids = input('post.ids/a');
         if(empty($ids)){
-            return errorMsg(config('请求参数错误'));
+            return $this->errorMsg(config('请求参数错误'));
         }
         $model = new \app\index\model\Brand();
         $condition = [
@@ -176,7 +176,7 @@ class Brand extends \common\controller\UserBase{
         if($result['status']){
             return successMsg('删除成功');
         }else{
-            return errorMsg('删除失败');
+            return $this->errorMsg('删除失败');
         }
     }
 

@@ -67,16 +67,16 @@ function async_verify(param){
         },
         success: function(data){
             $('.loading').hide();
-            if(data.code==1){
-                if(data.data == 'no_login'){
+            if(data.status==0){
+                if(data.data.code == '1001'){
                     loginDialog();
+                }else if(data.data.code=='1002'){
+                    dialog.error(data.data.msg);
+                }else{
+                    dialog.error(data.info);
                 }
-                if(data.data=='no_empower'){
-                    dialog.error(data.msg);
-                }
-                if(data.data=='no_factory_register'){
-                    location.href = data.url;
-                }
+            }else if(data.status==1){
+                dialog.success(data.info);
             }else{
                 loginBackFunctionParam.jump_url = jump_url;
                 if(loginBackFunction && $.isFunction(loginBackFunction) ){

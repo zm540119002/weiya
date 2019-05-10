@@ -15,11 +15,11 @@ class Collection extends \common\controller\UserBase{
      */
     public function collect(){
         if(!request()->isAjax()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $goodsId = input('post.goods_id/d');
         if(!$goodsId){
-            return errorMsg('参数错误');
+            return $this->errorMsg('参数错误');
         }
         $model = new \app\index\model\Collection();
         $config = [
@@ -44,7 +44,7 @@ class Collection extends \common\controller\UserBase{
         if($result){
             return successMsg('已成功收藏');
         }else{
-            return errorMsg('收藏失败');
+            return $this->errorMsg('收藏失败');
         }
     }
 
@@ -55,7 +55,7 @@ class Collection extends \common\controller\UserBase{
      */
     public function getList(){
         if(!request()->isGet()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $model = new \app\index\model\Collection();
         $config=[
@@ -94,7 +94,7 @@ class Collection extends \common\controller\UserBase{
     //删除
     public function del(){
         if(!request()->isAjax()){
-            return errorMsg(config('custom.not_ajax'));
+            return $this->errorMsg(config('custom.not_ajax'));
         }
         $ids = input('post.ids/a');
         $model = new \app\index\model\Collection();
@@ -106,7 +106,7 @@ class Collection extends \common\controller\UserBase{
         if($result['status']){
             return successMsg('已取消收藏');
         }else{
-            return errorMsg('删除失败');
+            return $this->errorMsg('删除失败');
         }
     }
 }

@@ -20,7 +20,7 @@ class Address extends \common\controller\UserBase {
                 $result = $model->allowField(true)->save($data,$condition);
                 if( false === $result ){
                     $model ->rollback();
-                    return errorMsg('失败');
+                    return $this->errorMsg('失败');
                 }
                 //修改其他地址不为默认值
                 if($_POST['is_default'] == 1){
@@ -32,7 +32,7 @@ class Address extends \common\controller\UserBase {
                     $result = $model->where($where)->setField('is_default',0);
                     if(false === $result){
                         $model ->rollback();
-                        return errorMsg('失败');
+                        return $this->errorMsg('失败');
                     }
                 }
                 $model->commit();
@@ -56,7 +56,7 @@ class Address extends \common\controller\UserBase {
                 $data['user_id'] = $userId;
                 $result = $model->allowField(true)->save($data);
                 if(!$result){
-                    return errorMsg('失败');
+                    return $this->errorMsg('失败');
                 }
                 $addressId = $model->getAttr('id');
                 //修改其他地址不为默认值
@@ -69,7 +69,7 @@ class Address extends \common\controller\UserBase {
                     $result = $model->where($where)->setField('is_default',0);
                     if(false === $result){
                         $model ->rollback();
-                        return errorMsg('失败');
+                        return $this->errorMsg('失败');
                     }
                 }
                 $model->commit();
@@ -125,7 +125,7 @@ class Address extends \common\controller\UserBase {
     //删除地址
     public function del(){
         if(!request()->isAjax()){
-            return errorMsg(config('custom.not_ajax'));
+            return $this->errorMsg(config('custom.not_ajax'));
         }
         $id = input('post.address_id',0,'int');
         $model = new \common\model\Address();
@@ -137,7 +137,7 @@ class Address extends \common\controller\UserBase {
         if($result['status']){
             return successMsg('删除成功');
         }else{
-            return errorMsg('删除失败');
+            return $this->errorMsg('删除失败');
         }
     }
 
