@@ -285,11 +285,11 @@
                         let existSign = false;
                         for(var i = 0,len = this.postData.productList.length; i < len; i++){
                             //产品已存在产品列表，则修改或删除
-                            if(this.postData.productList[i]['product_id'] == param.product_id){
+                            if(this.postData.productList[i]['foreign_id'] == param.product_id){
                                 if(param.buy_quantity<=0){
                                     Vue.delete(this.postData.productList,i);
                                 }else{
-                                    this.postData.productList[i]['buy_quantity'] = param.buy_quantity;
+                                    this.postData.productList[i]['num'] = param.buy_quantity;
                                 }
                                 existSign = true;
                                 break;
