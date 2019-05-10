@@ -73,7 +73,7 @@ function unlockingFooterCartConfig($arr){
  * @return string`'支付方式：0：保留 1 微信 2：支付宝 3：网银 4:钱包',
  */
 function getPaymentCode($num){
-    return $num?config('custom.payment_code')[$num]:'';
+    return $num?config('custom.pay_code')[$num]:'';
 }
 /**获取品牌分类
  * @param $num

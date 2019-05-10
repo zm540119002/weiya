@@ -84,7 +84,7 @@ class Wallet extends \common\controller\UserBase{
                 'amount'=>$amount,
                 'actually_amount'=>$amount, // 还没有其它的业务 暂时先用$amount
                 'create_time'=>time(),
-                'payment_code'=>$payCode,
+                'pay_code'=>$payCode,
             ];
             // 线下汇款凭证
             if( isset($_POST['voucher']) && $_POST['voucher'] ){
@@ -97,6 +97,21 @@ class Wallet extends \common\controller\UserBase{
                 return errorMsg('充值失败');
 
             }
+            //生成支付表的数据
+            $modelPay = new \app\index\model\Pay();
+            //增加
+            $data = [
+                'sn' => $walletDetailSn,
+                'actually_amount' =>$amount,
+                'user_id' => $this->user['id'],
+                'pay_code' => $payCode,
+                'type' => config('custom.pay_type')['rechargePay']['code'],
+            ];
+            $result  = $modelPay->isUpdate(false)->save($data);
+            if(!$result){
+                $model->rollback();
+                return errorMsg('失败');
+            }
             // 各充值方式的处理
             switch($payCode){
                 case config('custom.recharge_code.WeChatPay.code') :
@@ -108,7 +123,7 @@ class Wallet extends \common\controller\UserBase{
 
                 case config('custom.recharge_code.OfflinePay.code') :
                     // 更新状态
-                    $model->edit(['recharge_status'=>1],['sn'=>$walletDetailSn]);
+                    $result  = $model->isUpdate(false)->save(['sn'=>$walletDetailSn]);
                     return successMsg('成功');
                     break;
             }
@@ -159,7 +174,7 @@ class Wallet extends \common\controller\UserBase{
             return errorMsg('失败');
         }
         $data = [
-            'payment_code'=>4,
+            'pay_code'=>4,
             'pay_sn'=> $orderInfo['pay_sn'],
             'payment_time'=> $orderInfo['payment_time'],
             'order_sn'=> $orderInfo['sn'],

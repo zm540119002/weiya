@@ -5,17 +5,27 @@ $(function () {
     $('body').on('click','.forget_wallet_password',function () {
         forgetWalletPasswordDialog()
     });
+
     // 弹出支付方式
     $('body').on('click','.confirm_order',function(){
-        var settlementMethod=$('.settlementMethod').html();
-        layer.open({
-            type: 1
-            ,anim: 'up'
-            ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
-            className:'settlementMethod bankTransferLayer',
-            content: settlementMethod
-        });
+        var _this = $(this);
+        var postData = {};
+        postData = addAddress(postData);
+        postData.order_id = $('.order_id').val();
+        postData.order_sn = $('.order_sn').val();
+        submitOrders(_this,postData);
     });
+    // // 弹出支付方式
+    // $('body').on('click','.confirm_order',function(){
+    //     var settlementMethod=$('.settlementMethod').html();
+    //     layer.open({
+    //         type: 1
+    //         ,anim: 'up'
+    //         ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
+    //         className:'settlementMethod bankTransferLayer',
+    //         content: settlementMethod
+    //     });
+    // });
 
     // 选择支付方式
     $('body').on('click','.settlementMethod .pay_nav li',function(){
@@ -27,14 +37,33 @@ $(function () {
 
 
     // 提交订单带地址
+    // $('body').on('click','.settlement_btn',function () {
+    //
+    //     var postData = {};
+    //     postData = addAddress(postData);
+    //
+    //     _this = $(this);
+    //     _this.addClass("nodisabled");//防止重复提交
+    //     submitOrders(_this,postData);
+    // });
+
+    // 提交订单带地址 立即结算
     $('body').on('click','.settlement_btn',function () {
 
         var postData = {};
-        postData = addAddress(postData);
+        postData.order_id = $('.order_id').val();
+        postData.order_sn = $('.order_sn').val();
+        postData.pay_code = $('.pay_code').val();
 
-        _this = $(this);
-        _this.addClass("nodisabled");//防止重复提交
-        submitOrders(_this,postData);
+        // 钱包支付 加载wallet.js文件
+        if(postData.pay_code==4){
+            walletPayDialog(postData);
+            return false
+
+        }else{
+            _this = $(this);
+            toPay(_this,postData);
+        }
     });
 
     //再次购买
@@ -90,11 +119,45 @@ function addAddress(postData) {
 }
 
 // 提交订单
+// function submitOrders(_this,postData){
+//     postData.order_id = $('.order_id').val();
+//     postData.order_sn = $('.order_sn').val();
+//     postData.pay_code = $('.pay_code').val();
+//     var url = module + 'Order/confirmOrder';
+//     $.ajax({
+//         url: url,
+//         data: postData,
+//         type: 'post',
+//         beforeSend: function(){
+//             $('.loading').show();
+//         },
+//         error:function(){
+//             $('.loading').hide();
+//             dialog.error('AJAX错误');
+//         },
+//         success: function(data){
+//             _this.removeClass("nodisabled");//删除防止重复提交
+//             $('.loading').hide();
+//             if(data.status){
+//                 if(postData.pay_code == 4){
+//                     walletPayCallBack = orderPayment;
+//                     walletPayCallBackParameter = postData;
+//                     walletPayDialog();
+//                     return false;
+//                 }
+//                 location.href = data.info;
+//             }else{
+//                 dialog.error('结算提交失败!');
+//             }
+//         }
+//     });
+// }
+
+// 其它支付方式提交订单
 function submitOrders(_this,postData){
-    postData.order_id = $('.order_id').val();
-    postData.order_sn = $('.order_sn').val();
-    postData.pay_code = $('.pay_code').val();
     var url = module + 'Order/confirmOrder';
+    _this.addClass("nodisabled");//防止重复提交
+    var settlementMethod=$('.settlementMethod').html();
     $.ajax({
         url: url,
         data: postData,
@@ -110,15 +173,44 @@ function submitOrders(_this,postData){
             _this.removeClass("nodisabled");//删除防止重复提交
             $('.loading').hide();
             if(data.status){
-                if(postData.pay_code == 4){
-                    walletPayCallBack = orderPayment;
-                    walletPayCallBackParameter = postData;
-                    walletPayDialog();
-                    return false;
-                }
-                location.href = data.info;
+                layer.open({
+                    type: 1
+                    ,anim: 'up'
+                    ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
+                    className:'settlementMethod bankTransferLayer',
+                    content: settlementMethod
+                });
+
             }else{
-                dialog.error('结算提交失败!');
+                dialog.success(data.info);
+                //dialog.error('结算提交失败!');
+            }
+        }
+    });
+}
+// 去结算
+function toPay(_this,postData){
+    var url = module + 'Order/toPay';
+    _this.addClass("nodisabled");//防止重复提交
+    $.ajax({
+        url: url,
+        data: postData,
+        type: 'post',
+        beforeSend: function(){
+            $('.loading').show();
+        },
+        error:function(){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            _this.removeClass("nodisabled");//删除防止重复提交
+            $('.loading').hide();
+            if(data.status){
+                location.href = data.url;
+            }else{
+                dialog.success(data.info);
+                //dialog.error('结算提交失败!');
             }
         }
     });

@@ -116,7 +116,6 @@ class Order extends \common\controller\UserBase
             $modelOrder ->startTrans();
             $data = input('post.');
             $data['order_status'] = 1;
-            $data['payment_code'] = $data['pay_code'];
             $condition = [
                 ['user_id','=',$this->user['id']],
                 ['id','=',$fatherOrderId],
@@ -159,10 +158,7 @@ class Order extends \common\controller\UserBase
                 }
             }
             $modelOrder -> commit();
-            $orderSn = input('post.order_sn','','string');
-
-            $url = config('custom.pay_gateway').$orderSn;
-            return successMsg($url);
+            return successMsg('成功');
 
         }else{
             $modelOrder = new \app\index\model\Order();
@@ -208,6 +204,80 @@ class Order extends \common\controller\UserBase
         }
 
     }
+    // 去结算
+    public function toPay()
+    {
+        if (!request()->isPost()) {
+            return errorMsg('请求方式错误');
+        }
+        $postData = input('post.');
+        $modelOrder = new \app\index\model\Order();
+        $condition = [
+            'where' => [
+                ['user_id','=',$this->user['id']],
+                ['sn','=',$postData['order_sn']],
+                ['order_status','<',2],
+            ], 'field'=>[
+                'id','sn','actually_amount'
+            ]
+        ];
+        $orderInfo  = $modelOrder->getInfo($condition);
+        //先查找支付表是否有数据
+        $modelPay = new \app\index\model\Pay();
+        $condition = [
+            'where' => [
+                ['user_id','=',$this->user['id']],
+                ['sn','=',$orderInfo['sn']],
+                ['pay_status','=',1],
+                ['type','=',config('custom.pay_type')['orderPay']['code']]
+            ], 'field'=>[
+                'id','sn','actually_amount'
+            ]
+        ];
+        $payInfo  = $modelPay->getInfo($condition);
+        if(empty($payInfo)){
+            //增加
+            $data = [
+                'sn' => $orderInfo['sn'],
+                'actually_amount' =>$orderInfo['actually_amount'],
+                'user_id' => $this->user['id'],
+                'pay_code' => $postData['pay_code'],
+                'type' => config('custom.pay_type')['orderPay']['code'],
+            ];
+            $result  = $modelPay->isUpdate(false)->save($data);
+            if(!$result){
+                $modelPay ->rollback();
+                return errorMsg('失败');
+            }
+
+        }else{
+            //修改
+            $updateData = [
+                'actually_amount' =>$orderInfo['actually_amount'],
+                'pay_code' => $postData['pay_code'],
+            ];
+            $where = [
+                'sn' => $orderInfo['sn'],
+                'user_id' => $this->user['id'],
+            ];
+            $result  = $modelPay->isUpdate(true)->save($updateData,$where);
+            if($result === false){
+                $modelPay ->rollback();
+                return errorMsg('失败');
+            }
+        }
+        // 各支付方式的处理方式 //做到这里
+        switch($postData['pay_code']){
+            // 支付中心处理
+            case config('custom.pay_code.WeChatPay.code') :
+            case config('custom.pay_code.Alipay.code') :
+            case config('custom.pay_code.UnionPay.code') :
+                $url = config('custom.pay_gateway').$orderInfo['sn'];
+                break;
+        }
+        return successMsg( '成功',['url'=>$url]);
+
+    }
 
     //订单管理
     public function manage(){
@@ -230,7 +300,7 @@ class Order extends \common\controller\UserBase
                 ['o.sn', '=', $orderSn],
             ],
             'field'=>[
-                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
+                'o.id','o.pay_sn','o.sn','o.order_status','o.pay_code','o.amount','o.actually_amount','o.remark',
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
                 'o.finished_time',
                 'u.name','u.mobile_phone'
@@ -341,7 +411,7 @@ class Order extends \common\controller\UserBase
                 ['o.user_id', '=', $this->user['id']],
             ],
             'field'=>[
-                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
+                'o.id','o.pay_sn','o.sn','o.order_status','o.pay_code','o.amount','o.actually_amount','o.remark',
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
                 'o.finished_time',
             ],'order'=>[

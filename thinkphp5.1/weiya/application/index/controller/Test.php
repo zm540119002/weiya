@@ -16,8 +16,6 @@ class Test extends \common\controller\Base{
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
 
             $productSelectParam = [
-                'step_quantity' => 5,
-                'init_quantity' => 0,
             ];
             $this->assign('productSelectParam',json_encode($productSelectParam));
             return $this->fetch();
