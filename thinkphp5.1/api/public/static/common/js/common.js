@@ -488,8 +488,11 @@ function async_verify_judge(data){
         if(data.data=='no_factory_register'){
             location.href = data.url;
         }
+    }else if(data.status==0){
+
+    }else{
+        return true;
     }
-    return true;
 }
 
 /**获取json格式列表数据
