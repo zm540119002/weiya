@@ -69,7 +69,7 @@ function async_verify(param){
         success: function(data){
             console.log(data);
             $('.loading').hide();
-            if(data.code==1){
+            if(data.status==0){
                 if(data.data == 'no_login'){
                     loginDialog();
                 }
