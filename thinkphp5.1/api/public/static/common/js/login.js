@@ -70,14 +70,11 @@ function async_verify(param){
             console.log(data);
             $('.loading').hide();
             if(data.status==0){
-                if(data.data == 'no_login'){
+                if(data.data.code == '1001'){
                     loginDialog();
                 }
-                if(data.data=='no_empower'){
-                    dialog.error(data.msg);
-                }
-                if(data.data=='no_factory_register'){
-                    location.href = data.url;
+                if(data.data.code=='1002'){
+                    dialog.error(data.data.msg);
                 }
             }else{
                 loginBackFunctionParam.jump_url = jump_url;

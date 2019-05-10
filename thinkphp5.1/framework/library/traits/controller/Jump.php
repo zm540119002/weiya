@@ -67,12 +67,11 @@ trait Jump
         return $result;
     }
 
-    protected function errorMsg($msg = '',array $data = [], $jsonEncode = false, array $header = [])
+    protected function errorMsg(array $msg = [], array $header = [])
     {
         $result = [
             'status' => 0,
-            'msg'  => $msg,
-            'data' => !$jsonEncode?$data:json_encode($data),
+            'data' => $msg,
         ];
 
         $type = $this->getResponseType();
