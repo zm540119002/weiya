@@ -12,7 +12,7 @@ class UserBase extends Base{
         $this->user = checkLogin();
         if (!$this->user) {
             if(request()->isAjax()){
-                $this->success(config('error_code.no_login.explain'),url($this->indexUrl),config('error_code.no_login.code'),0);
+                $this->errorMsg(config('error_code.no_login.explain'),config('error_code.no_login'));
             }else{
                 echo $this->fetch('../../api/public/template/login_page.html');
                 exit;
