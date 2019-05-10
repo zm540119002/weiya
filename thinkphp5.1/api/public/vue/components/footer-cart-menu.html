@@ -71,19 +71,24 @@
         Vue.component('product-select', {
             template:'#product_select_tpl',
             props: {
-                product_id: {type: Number,default:0,required: true},
+                product_id: {type: [String, Number],default:0,required: true},
                 product_name: {type: String,default: ''},
                 buy_named: {type: String,default: '购买数量'},
                 step_named: {type: String,default: '起订数量'},
                 quota_named: {type: String,default: '样品购买限额'},
                 unit: {type: String,default: '盒'},
-                thumb_img: {type: String,default: ''},
+                product_src: {type: String,default: ''},
                 product_url: {type: String,default: ''},
                 quota_quantity: {type: Number,default: 1},
                 deal_price: {type: Number,required: true},
                 init_quantity: {type: Number,default: 0},
                 step_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
+                productInfo: {type: Array,default:function(){
+                    let arr = [];
+                    arr['eg'] = '默认值示范';
+                    return arr;
+                }},
                 display_pic: {type: Boolean,default: true}
             },
             data: function () {
@@ -171,7 +176,7 @@
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="addCart">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="async_verify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
@@ -198,7 +203,9 @@
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
                 props: {
-                    add_cart_call_back: {type: Function,default: function(param){
+                    async_verify_call_back: {type: Function,default: function(param){
+                        console.log(param);
+                    }},add_cart_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
                 },
@@ -215,7 +222,7 @@
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
-                    },addCart:function(){
+                    },async_verify:function(){
                         let _this = this;
                         let jump_url = $(this.$refs.addCart).parent().data('jump_url');
                         $.ajax({
@@ -237,8 +244,32 @@
                                     'postData':_this.postData
                                 };
                                 if(async_verify_judge(data)){
-                                    _this.add_cart_call_back(param);
+                                    _this.async_verify_call_back(param);
                                 }
+                            }
+                        });
+                    },addCart:function(){
+                        let _this = this;
+                        let jump_url = $(this.$refs.addCart).parent().data('jump_url');
+                        $.ajax({
+                            url: jump_url,
+                            data: {},
+                            type: 'post',
+                            beforeSend: function(xhr){
+                                $('.loading').show();
+                            },
+                            error:function(xhr){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                $('.loading').hide();
+                                //提交
+                                let param = {
+                                    'jump_url':jump_url,
+                                    'postData':_this.postData
+                                };
+                                _this.add_cart_call_back(param);
                             }
                         });
                     },buyNow:function(){
@@ -247,8 +278,8 @@
                         console.log('confirmOrder');
                     },editProductList:function(param){
                         let productInfo = {
-                            'product_id':param.product_id,
-                            'buy_quantity':param.buy_quantity
+                            'foreign_id':param.product_id,
+                            'num':param.buy_quantity
                         };
                         //产品是否存在产品列表，默认不存在
                         let existSign = false;

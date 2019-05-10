@@ -53,7 +53,6 @@ function logoutDialog(){
 }
 //异步验证
 function async_verify(param){
-    console.log(param);
     var jump_url = param.jump_url;
     $.ajax({
         url: jump_url,
@@ -67,7 +66,6 @@ function async_verify(param){
             dialog.error('AJAX错误');
         },
         success: function(data){
-            console.log(data);
             $('.loading').hide();
             if(data.status==0){
                 if(data.data.code == '1001'){
@@ -137,7 +135,6 @@ $(function(){
         var jump_url = $(this).data('jump_url');
         var data = {};
         data.jump_url = jump_url;
-        console.log(data);
         async_verify(data);
     });
     //显示隐藏密码
