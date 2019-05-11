@@ -147,9 +147,6 @@ $(function(){
                     if(loginBackFunction && $.isFunction(loginBackFunction) ){
                         loginBackFunction();
                     }
-                    if(loginSuccessCallBack && $.isFunction(loginSuccessCallBack)){
-                        loginSuccessCallBack();
-                    }
                 }
             });
         }
