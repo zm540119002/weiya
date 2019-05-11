@@ -476,31 +476,6 @@ function sum(arr) {
     }
 }
 
-//异步验证判断
-function async_verify_judge(param){
-    console.log(param);
-    if(param.data.status==0){
-        if(param.data.data.code == '1001'){
-            if(param.func){
-                loginBackFunction = param.func;
-            }else{
-                loginBackFunction = function(){
-                    console.log(param.obj);
-                    param.obj.click();
-                };
-            }
-            loginDialog();
-        }else if(param.data.data.code=='1002'){
-        }else{
-            dialog.error(param.data.info);
-        }
-    }else if(param.data.status==1){
-        return true;
-    }else{
-        return true;
-    }
-}
-
 /**获取json格式列表数据
  */
 function getJsonListDefaultCallBack(data){

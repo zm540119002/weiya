@@ -86,6 +86,24 @@ function async_verify(param){
         }
     });
 }
+//异步验证判断
+function async_verify_judge(param){
+    console.log(param);
+    if(param.data.status==0){
+        if(param.data.data.code == '1001'){
+            console.log(param.func);
+            loginBackFunction = param.func;
+            loginDialog();
+        }else if(param.data.data.code=='1002'){
+        }else{
+            dialog.error(param.data.info);
+        }
+    }else if(param.data.status==1){
+        return true;
+    }else{
+        return true;
+    }
+}
 $(function(){
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
@@ -128,6 +146,9 @@ $(function(){
                     loginBackFunctionParam.jump_url = data.info;
                     if(loginBackFunction && $.isFunction(loginBackFunction) ){
                         loginBackFunction();
+                    }
+                    if(loginSuccessCallBack && $.isFunction(loginSuccessCallBack)){
+                        loginSuccessCallBack();
                     }
                 }
             });
