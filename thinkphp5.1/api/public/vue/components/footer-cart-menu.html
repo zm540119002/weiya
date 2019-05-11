@@ -71,19 +71,24 @@
         Vue.component('product-select', {
             template:'#product_select_tpl',
             props: {
-                product_id: {type: Number,default:0,required: true},
+                product_id: {type: [String, Number],default:0,required: true},
                 product_name: {type: String,default: ''},
                 buy_named: {type: String,default: '购买数量'},
                 step_named: {type: String,default: '起订数量'},
                 quota_named: {type: String,default: '样品购买限额'},
                 unit: {type: String,default: '盒'},
-                thumb_img: {type: String,default: ''},
+                product_src: {type: String,default: ''},
                 product_url: {type: String,default: ''},
                 quota_quantity: {type: Number,default: 1},
                 deal_price: {type: Number,required: true},
                 init_quantity: {type: Number,default: 0},
                 step_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
+                productInfo: {type: Array,default:function(){
+                    let arr = [];
+                    arr['eg'] = '默认值示范';
+                    return arr;
+                }},
                 display_pic: {type: Boolean,default: true}
             },
             data: function () {
@@ -167,11 +172,13 @@
                     <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
-                    <span class="cart_num"></span>
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="jump_url">
+                    <span class="cart_num" v-if="cart_num > 99">99+</span>
+                    <span class="cart_num" v-else-if="cart_num > 1">{{cart_num}}</span>
+                    <span class="cart_num" v-else></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="addCart">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
@@ -198,13 +205,15 @@
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
                 props: {
-                    add_cart_call_back: {type: Function,default: function(param){
+                    cart_init_num: {type: Number,default: 0},
+                    buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
                 },
                 data: function () {
                     return {
                         total_amount:0,
+                        cart_num:this.cart_init_num,
                         menus: unlockingFooterCart.menu,
                         postData:{
                             productList:[]
@@ -215,50 +224,65 @@
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
-                    },addCart:function(){
-                        let _this = this;
-                        let jump_url = $(this.$refs.addCart).parent().data('jump_url');
-                        $.ajax({
-                            url: jump_url,
-                            data: {},
-                            type: 'post',
-                            beforeSend: function(xhr){
-                                $('.loading').show();
-                            },
-                            error:function(xhr){
-                                $('.loading').hide();
-                                dialog.error('AJAX错误');
-                            },
-                            success: function(data){
-                                $('.loading').hide();
-                                //异步验证判断
-                                let param = {
-                                    'jump_url':jump_url,
-                                    'postData':_this.postData
-                                };
-                                if(async_verify_judge(data)){
-                                    _this.add_cart_call_back(param);
+                    },jump_url:function (event) {
+                        let obj = $(event.currentTarget);
+                        let jump_url = obj.parent().data('jump_url');
+                        if(jump_url){
+                            location.href = jump_url;
+                        }
+                    },addCart:function(event){
+                        let obj = $(event.currentTarget);
+                        let jump_url = obj.parent().data('jump_url');
+                        //异步验证
+                        let postData = {
+                            'goodsList':this.postData.productList
+                        };
+                        if(jump_url && postData.goodsList.length){
+                            $.ajax({
+                                url: jump_url,
+                                data: postData,
+                                type: 'post',
+                                beforeSend: function(xhr){
+                                    $('.loading').show();
+                                },
+                                error:function(xhr){
+                                    $('.loading').hide();
+                                    dialog.error('AJAX错误');
+                                },
+                                success: function(data){
+                                    $('.loading').hide();
+                                    //异步验证判断
+                                    let param = {
+                                        data:data,
+                                        func:function(){
+                                            obj.click();
+                                        }
+                                    };
+                                    if(async_verify_judge(param)===true){
+                                        dialog.success('加入购物车成功！');
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }else{
+                            dialog.error('请选择商品！');
+                        }
                     },buyNow:function(){
-                        console.log('buyNow');
                     },confirmOrder:function(){
                         console.log('confirmOrder');
                     },editProductList:function(param){
                         let productInfo = {
-                            'product_id':param.product_id,
-                            'buy_quantity':param.buy_quantity
+                            'goods_id':param.product_id,
+                            'num':param.buy_quantity
                         };
                         //产品是否存在产品列表，默认不存在
                         let existSign = false;
                         for(var i = 0,len = this.postData.productList.length; i < len; i++){
                             //产品已存在产品列表，则修改或删除
-                            if(this.postData.productList[i]['product_id'] == param.product_id){
+                            if(this.postData.productList[i]['goods_id'] == param.product_id){
                                 if(param.buy_quantity<=0){
                                     Vue.delete(this.postData.productList,i);
                                 }else{
-                                    this.postData.productList[i]['buy_quantity'] = param.buy_quantity;
+                                    this.postData.productList[i]['num'] = param.buy_quantity;
                                 }
                                 existSign = true;
                                 break;

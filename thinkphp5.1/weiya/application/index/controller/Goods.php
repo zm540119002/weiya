@@ -56,7 +56,7 @@ class Goods extends \common\controller\Base{
      */
     public function getList(){
         if(!request()->isGet()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $model = new \app\index\model\Goods();
         $config=[
@@ -158,7 +158,7 @@ class Goods extends \common\controller\Base{
      */
     public function getRecommendGoods(){
         if(!request()->isGet()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $goodsId = input('get.goods_id/d');
         //相关推荐商品

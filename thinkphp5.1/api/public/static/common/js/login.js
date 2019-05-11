@@ -53,7 +53,6 @@ function logoutDialog(){
 }
 //异步验证
 function async_verify(param){
-    console.log(param);
     var jump_url = param.jump_url;
     $.ajax({
         url: jump_url,
@@ -67,18 +66,17 @@ function async_verify(param){
             dialog.error('AJAX错误');
         },
         success: function(data){
-            console.log(data);
             $('.loading').hide();
-            if(data.code==1){
-                if(data.data == 'no_login'){
+            if(data.status==0){
+                if(data.data.code == '1001'){
                     loginDialog();
+                }else if(data.data.code=='1002'){
+                    dialog.error(data.data.msg);
+                }else{
+                    dialog.error(data.info);
                 }
-                if(data.data=='no_empower'){
-                    dialog.error(data.msg);
-                }
-                if(data.data=='no_factory_register'){
-                    location.href = data.url;
-                }
+            }else if(data.status==1){
+                dialog.success(data.info);
             }else{
                 loginBackFunctionParam.jump_url = jump_url;
                 if(loginBackFunction && $.isFunction(loginBackFunction) ){
@@ -87,6 +85,23 @@ function async_verify(param){
             }
         }
     });
+}
+//异步验证判断
+function async_verify_judge(param){
+    if(param.data.status==0){
+        if(param.data.data.code == '1001'){
+            loginBackFunction = param.func;
+            loginDialog();
+        }else if(param.data.data.code=='1002'){
+        }else if(param.data.data.code=='1003'){
+        }else{
+            dialog.error(param.data.info);
+        }
+    }else if(param.data.status==1){
+        return true;
+    }else{
+        return true;
+    }
 }
 $(function(){
     //登录-弹窗事件
@@ -140,7 +155,6 @@ $(function(){
         var jump_url = $(this).data('jump_url');
         var data = {};
         data.jump_url = jump_url;
-        console.log(data);
         async_verify(data);
     });
     //显示隐藏密码

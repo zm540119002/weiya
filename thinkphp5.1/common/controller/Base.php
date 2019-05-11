@@ -113,37 +113,37 @@ class Base extends \think\Controller{
 
         if($fileType == 'data:image'){
             if(!getimagesize($fileBase64)){
-                return errorMsg('不是图片文件');
+                return $this->errorMsg('不是图片文件');
             }
         }
 
         if(!$ext){
-            return errorMsg('不支持此文件格式');
+            return $this->errorMsg('不支持此文件格式');
         }
         //文件大小 单位M
         $fileSize = strlen($data)/1024/1024;
         //图片限制大小
         if($fileType == 'data:image'){
             if($fileSize >3){//大于2M
-                return errorMsg('请上传小于2M的图片');
+                return $this->errorMsg('请上传小于2M的图片');
             }
         }
         //视频限制大小
         if($fileType == 'data:video'){
             if($fileSize > 10){//大于10
-                return errorMsg('请上传小于10M的视频');
+                return $this->errorMsg('请上传小于10M的视频');
             }
         }
         //上传公共路径
         $uploadPath = config('upload_dir.upload_path');
         if(!is_dir($uploadPath)){
             if(!mk_dir($uploadPath)){
-                return  errorMsg('创建Uploads目录失败');
+                return  $this->errorMsg('创建Uploads目录失败');
             }
         }
         $uploadPath = realpath($uploadPath);
         if($uploadPath === false){
-            return  errorMsg('获取Uploads实际路径失败');
+            return  $this->errorMsg('获取Uploads实际路径失败');
         }
         $uploadPath = $uploadPath . '/' ;
         //临时相对路径
@@ -152,7 +152,7 @@ class Base extends \think\Controller{
         //存储路径
         $storePath = $uploadPath . $tempRelativePath;
         if(!mk_dir($storePath)){
-            return errorMsg('创建临时目录失败');
+            return $this->errorMsg('创建临时目录失败');
         }
         //文件名
         $fileName = generateSN(5) . $ext;
@@ -161,7 +161,7 @@ class Base extends \think\Controller{
         // 生成文件
         $returnData = file_put_contents($photo, base64_decode($data), true);
         if(false === $returnData){
-            return errorMsg('保存文件失败');
+            return $this->errorMsg('保存文件失败');
         }
         //压缩文件
         if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){

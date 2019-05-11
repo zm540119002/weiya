@@ -67,7 +67,7 @@ class CallBack extends \common\controller\Base
             }
             if ($orderInfo['actually_amount'] * 100 != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
                 //返回状态给微信服务器
-                return errorMsg('回调的金额和订单的金额不符，终止购买');
+                return $this->errorMsg('回调的金额和订单的金额不符，终止购买');
             }
             $res = $modelOrder->orderHandle($data, $orderInfo);
             if ($res['status']) {
@@ -94,7 +94,7 @@ class CallBack extends \common\controller\Base
             }
             if ($info['amount'] * 100 != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
                 //返回状态给微信服务器
-                return errorMsg('回调的金额和订单的金额不符，终止购买');
+                return $this->errorMsg('回调的金额和订单的金额不符，终止购买');
             }
             $res = $modelWalletDetail->rechargeHandle($data,$info);
             if ($res['status']) {
@@ -152,7 +152,7 @@ class CallBack extends \common\controller\Base
            if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
                //返回状态给微信服务器
                echo "fail"; //验证失败
-               return errorMsg('回调的金额和订单的金额不符，终止购买');
+               return $this->errorMsg('回调的金额和订单的金额不符，终止购买');
            }
            $res = $modelOrder->orderHandle($data, $orderInfo);
            if ($res['status']) {
@@ -179,7 +179,7 @@ class CallBack extends \common\controller\Base
            }
            if ($info['amount'] * 100 != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
                //返回状态给微信服务器
-               return errorMsg('回调的金额和订单的金额不符，终止购买');
+               return $this->errorMsg('回调的金额和订单的金额不符，终止购买');
            }
            $res = $modelWalletDetail->rechargeHandle($data,$info);
            if ($res['status']) {
@@ -241,7 +241,7 @@ class CallBack extends \common\controller\Base
             }
             if ($orderInfo['actually_amount'] != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
                 //返回状态给微信服务器
-                return errorMsg('回调的金额和订单的金额不符，终止购买');
+                return $this->errorMsg('回调的金额和订单的金额不符，终止购买');
             }
             $res = $modelOrder->orderHandle($payInfo, $orderInfo);
 
@@ -268,7 +268,7 @@ class CallBack extends \common\controller\Base
             }
             if ($info['amount'] != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
                 //返回状态给微信服务器
-                return errorMsg('回调的金额和订单的金额不符，终止购买');
+                return $this->errorMsg('回调的金额和订单的金额不符，终止购买');
             }
             $res = $modelWalletDetail->rechargeHandle($data,$info);
             if ($res['status']) {
@@ -302,7 +302,7 @@ class CallBack extends \common\controller\Base
 //        if($res === false){
 //            $modelOrder->rollback();
 //            //返回状态给微信服务器
-//            return errorMsg('失败');
+//            return $this->errorMsg('失败');
 //        }
 ////        //根据订单号查询关联的商品
 ////        $modelOrderDetail = new \app\index\model\OrderDetail();
@@ -322,7 +322,7 @@ class CallBack extends \common\controller\Base
 ////        $rse = $modelOrderChild -> createOrderChild($orderDetailList);
 ////        if(!$rse['status']){
 ////            $modelOrder->rollback();
-////            return errorMsg($modelOrder->getLastSql());
+////            return $this->errorMsg($modelOrder->getLastSql());
 ////        }
 //        $modelOrder->commit();//提交事务
 //        //返回状态给微信服务器
@@ -352,7 +352,7 @@ class CallBack extends \common\controller\Base
 //        if($res === false){
 //            $modelWalletDetail->rollback();
 //            //返回状态给微信服务器
-//            return errorMsg('失败');
+//            return $this->errorMsg('失败');
 //        }
 //        $modelWallet = new \app\index\model\Wallet();
 //        $config = [
@@ -370,7 +370,7 @@ class CallBack extends \common\controller\Base
 //            if(!$res){
 //                $modelWallet->rollback();
 //                //返回状态给微信服务器
-//                return errorMsg('失败');
+//                return $this->errorMsg('失败');
 //            }
 //        }else{
 //            $where = [
@@ -380,7 +380,7 @@ class CallBack extends \common\controller\Base
 //            if($res === false){
 //                $modelWallet->rollback();
 //                //返回状态给微信服务器
-//                return errorMsg('失败');
+//                return $this->errorMsg('失败');
 //            }
 //        }
 //

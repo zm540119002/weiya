@@ -11,11 +11,11 @@ class Mine extends \common\controller\Base{
     //修改头像
     public function editAvatar(){
         if(!request()->isPost()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $user = session('user');
         if(empty($user)){
-            return errorMsg('未登录');
+            return $this->errorMsg('未登录');
         }
         $oldAvatar = $user['avatar'];
         $fileBase64 = input('post.fileBase64');
@@ -23,13 +23,13 @@ class Mine extends \common\controller\Base{
 
         $newAvatar = $this ->_uploadSingleFileToTemp($fileBase64,$upload);
         if($newAvatar['status'] == 0 && !$newAvatar){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         $user['avatar'] = $newAvatar;
         $modelUser = new \common\model\User();
         $result = $modelUser->allowField(['avatar'])->save($user, ['id' => $user['id']]);
         if(!$result){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         //删除旧详情图
         delImgFromPaths($oldAvatar,$newAvatar);
@@ -40,7 +40,7 @@ class Mine extends \common\controller\Base{
     //修改名字
     public function editName(){
         if(!request()->isPost()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $modelUser = new \common\model\User();
         $user = session('user');
@@ -48,7 +48,7 @@ class Mine extends \common\controller\Base{
         $user['name'] = $newName;
         $result = $modelUser->allowField(['name'])->save($user, ['id' => $user['id']]);
         if(!$result){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         setSession($user);
         return successMsg('成功',['name'=>$newName]);

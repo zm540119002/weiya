@@ -20,11 +20,11 @@ class Cart extends \common\controller\UserBase{
      */
     public function addCart(){
         if(!request()->isPost()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $goodsList = input('post.goodsList/a');
         if(empty($goodsList)){
-            return errorMsg('没有数据');
+            return $this->errorMsg('没有数据');
         }
         $userId = $this->user['id'];
         $model = new \app\index\model\Cart();
@@ -75,14 +75,14 @@ class Cart extends \common\controller\UserBase{
             $res =  $model->saveAll($addData);
             if (!count($res)) {
                 $model->rollback();
-                return errorMsg('失败');
+                return $this->errorMsg('失败');
             }
         }
         if(!empty($updateData)){
             $res =  $model->saveAll($updateData);
             if (!count($res)) {
                 $model->rollback();
-                return errorMsg('失败');
+                return $this->errorMsg('失败');
             }
         }
         $model -> commit();
@@ -94,7 +94,7 @@ class Cart extends \common\controller\UserBase{
      */
     public function getList(){
         if(!request()->isGet()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $userId = $this->user['id'];
         $model = new \app\index\model\Cart();
@@ -162,14 +162,14 @@ class Cart extends \common\controller\UserBase{
     //修改购物车数量
     public function editCartNum(){
         if(!request()->isPost()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $data = input('post.');
         $data['user_id'] = $this -> user['id'];
         $model = new \app\index\model\Cart();
         $res = $model ->isUpdate(true)-> save($data);
         if(false === $res){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         return successMsg('成功');
     }
@@ -177,7 +177,7 @@ class Cart extends \common\controller\UserBase{
     //删除地址
     public function del(){
         if(!request()->isAjax()){
-            return errorMsg(config('custom.not_ajax'));
+            return $this->errorMsg(config('custom.not_ajax'));
         }
         $ids = input('post.cart_ids/a');
         $model = new \app\index\model\Cart();
@@ -189,7 +189,7 @@ class Cart extends \common\controller\UserBase{
         if($result['status']){
             return successMsg('删除成功');
         }else{
-            return errorMsg('删除失败');
+            return $this->errorMsg('删除失败');
         }
     }
 }

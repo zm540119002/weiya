@@ -6,13 +6,13 @@ class Order extends \common\controller\UserBase
     public function generate()
     {
         if (!request()->isPost()) {
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $modelOrder = new \app\index\model\Order();
         $modelOrderDetail = new \app\index\model\OrderDetail();
         $goodsList = input('post.goodsList/a');
         if (empty($goodsList)) {
-            return errorMsg('请求数据不能为空');
+            return $this->errorMsg('请求数据不能为空');
         }
         $goodsIds = array_column($goodsList,'goods_id');
         $config = [
@@ -67,7 +67,7 @@ class Order extends \common\controller\UserBase
         $res = $modelOrder->allowField(true)->save($data);
         if (!$res) {
             $modelOrder->rollback();
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         $orderId = $modelOrder ->getAttr('id');
         //组装订单明细
@@ -87,7 +87,7 @@ class Order extends \common\controller\UserBase
         $res = $modelOrderDetail->allowField(true)->saveAll($dataDetail)->toArray();
         if (!count($res)) {
             $modelOrder->rollback();
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         $modelOrder->commit();
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
@@ -111,7 +111,7 @@ class Order extends \common\controller\UserBase
             ];
             $orderInfo = $modelOrder -> getInfo($config);
             if($orderInfo['order_status']>1){
-                return errorMsg('此订单已提交过');
+                return $this->errorMsg('此订单已提交过');
             }
             $modelOrder ->startTrans();
             $data = input('post.');
@@ -125,13 +125,13 @@ class Order extends \common\controller\UserBase
 
             if(false === $res){
                 $modelOrder ->rollback();
-                return errorMsg('失败');
+                return $this->errorMsg('失败');
             }
             /*            $modelOrderDetail = new \app\index\model\OrderDetail();
                         $res = $modelOrderDetail -> isUpdate(true)-> saveAll($data['orderDetail']);
                         if (!count($res)) {
                             $modelOrder->rollback();
-                            return errorMsg('失败');
+                            return $this->errorMsg('失败');
                         }*/
             //根据订单号查询关联的购物车的商品 删除
             $modelOrderDetail = new \app\index\model\OrderDetail();
@@ -154,7 +154,7 @@ class Order extends \common\controller\UserBase
                 $result = $model -> del($condition,false);
                 if(!$result['status']){
                     $modelOrder->rollback();
-                    return errorMsg('删除失败');
+                    return $this->errorMsg('删除失败');
                 }
             }
             $modelOrder -> commit();
@@ -208,7 +208,7 @@ class Order extends \common\controller\UserBase
     public function toPay()
     {
         if (!request()->isPost()) {
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $postData = input('post.');
         $modelOrder = new \app\index\model\Order();
@@ -247,7 +247,7 @@ class Order extends \common\controller\UserBase
             $result  = $modelPay->isUpdate(false)->save($data);
             if(!$result){
                 $modelPay ->rollback();
-                return errorMsg('失败');
+                return $this->errorMsg('失败');
             }
 
         }else{
@@ -263,7 +263,7 @@ class Order extends \common\controller\UserBase
             $result  = $modelPay->isUpdate(true)->save($updateData,$where);
             if($result === false){
                 $modelPay ->rollback();
-                return errorMsg('失败');
+                return $this->errorMsg('失败');
             }
         }
         // 各支付方式的处理方式 //做到这里
@@ -378,7 +378,7 @@ class Order extends \common\controller\UserBase
         $model = new \app\index\model\Order();
         $id = input('post.id/d');
         if(!input('?post.id') && !$id){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         $where=[
             ['id','=',$id],
@@ -390,7 +390,7 @@ class Order extends \common\controller\UserBase
         ];
         $rse = $model->where($where)->setField($data);
         if(!$rse){
-            return errorMsg('失败');
+            return $this->errorMsg('失败');
         }
         return successMsg('成功');
     }
@@ -402,7 +402,7 @@ class Order extends \common\controller\UserBase
      */
     public function getList(){
         if(!request()->isGet()){
-            return errorMsg('请求方式错误');
+            return $this->errorMsg('请求方式错误');
         }
         $model = new \app\index\model\Order();
         $config=[
