@@ -481,7 +481,10 @@ function async_verify_judge(param){
     console.log(param);
     if(param.data.status==0){
         if(param.data.data.code == '1001'){
-            loginBackFunction = param.func;
+            // loginBackFunction = param.func;
+            loginBackFunction = function(){
+                param.obj.click();
+            };
             loginDialog();
         }else if(param.data.data.code=='1002'){
         }else{
