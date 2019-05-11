@@ -88,10 +88,8 @@ function async_verify(param){
 }
 //异步验证判断
 function async_verify_judge(param){
-    console.log(param);
     if(param.data.status==0){
         if(param.data.data.code == '1001'){
-            console.log(param.func);
             loginBackFunction = param.func;
             loginDialog();
         }else if(param.data.data.code=='1002'){
