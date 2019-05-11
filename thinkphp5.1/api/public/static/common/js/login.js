@@ -93,6 +93,7 @@ function async_verify_judge(param){
             loginBackFunction = param.func;
             loginDialog();
         }else if(param.data.data.code=='1002'){
+        }else if(param.data.data.code=='1003'){
         }else{
             dialog.error(param.data.info);
         }
