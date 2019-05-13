@@ -6,8 +6,8 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li @click="toggle()" :class="{ currentClass: show, 'current': defaultShow }">登录</li>
-                <li @click="toggle()" :class="{ currentClass: show}">注册/重置密码</li>
+                <li @click="toggle()" :class="{ 'current': show, 'current': defaultShow }">登录</li>
+                <li @click="toggle()" :class="{ 'current': show}">注册/重置密码</li>
             </ul>
             <form class="loginTab current">
                 <div class="login_item">
