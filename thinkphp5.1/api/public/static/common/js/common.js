@@ -476,25 +476,12 @@ function sum(arr) {
     }
 }
 
-//异步验证判断
-function async_verify_judge(data){
-    if(data.status==0){
-        if(data.data.code == '1001'){
-            loginDialog();
-        }else if(data.data.code=='1002'){
-            dialog.error(data.data.msg);
-        }else{
-            dialog.error(data.info);
-        }
-    }else if(data.status==1){
-        return data;
-    }
-}
-
 /**获取json格式列表数据
  */
 function getJsonListDefaultCallBack(data){
-    return data;
+    console.log(11);
+    console.log(data.data.data);
+    return data.data.data;
 }
 function getJsonList(config,postData){
     //提交路径
