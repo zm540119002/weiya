@@ -6,7 +6,7 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li @click="toggle()" :class="currentClass" class="current">登录</li>
+                <li @click="toggle()" :class="currentClass" class="defaultCurrentClass">登录</li>
                 <li @click="toggle()" :class="currentClass">注册/重置密码</li>
             </ul>
             <form class="loginTab current">
@@ -58,11 +58,13 @@
                 return {
                     show:true,
                     currentClass:'',
+                    defaultCurrentClass:'current',
                     postData:{}
                 };
             },
             methods: {
                 toggle:function(){
+                    this.defaultCurrentClass = '';
                     this.show = !this.show;
                     if(this.show){
                         this.currentClass = 'current';
