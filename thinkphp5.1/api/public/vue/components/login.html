@@ -13,10 +13,10 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li @click="toggle" :class="{current:true}">登录</li>
-                <li @click="toggle" :class="{current:false}">注册/重置密码</li>
+                <li class="loginSubmit" @click="toggle" :class="{current:true}">登录</li>
+                <li class="loginSubmit" @click="toggle" :class="{current:false}">注册/重置密码</li>
             </ul>
-            <form class="loginTab" @click="toggle" :class="{show:true}">
+            <form class="loginTab" :class="{show:true}">
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
@@ -30,7 +30,7 @@
                 </div>
                 <a href="javascript:void(0);" class="loginBtn entry-button"  data-method="login">登录</a>
             </form>
-            <form class="loginTab"  @click="toggle"  :class="{show:false}">
+            <form class="loginTab" :class="{show:false}">
                 <div class="error_tipc" ></div>
                 <div class="login_item">
                     <div class="columns_flex">
@@ -68,8 +68,11 @@
             },
             methods: {
                 toggle:function(event){
-                    $(event.currentTarget).addClass("current").siblings().removeClass("current");
-                    $(event.currentTarget).addClass("show").siblings().removeClass("show");
+                    let _this = $(event.currentTarget);
+                    console.log(_this);
+                    console.log(_this.classes);
+                    _this.addClass("current").siblings().removeClass("current");
+//                    $(event.currentTarget).addClass("show").siblings().removeClass("show");
                 }
             },created: function(){
                 console.log($('form.current').length);
