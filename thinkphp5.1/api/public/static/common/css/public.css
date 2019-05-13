@@ -5018,7 +5018,8 @@ ul.message_list{
     padding:0.12rem;
     border:none;
 }
-.wy_list li .p_img{
+.wy_list li .p_img,
+.content_main li .p_img{
     display:block;
     width:45%;
 }
