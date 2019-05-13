@@ -87,6 +87,27 @@
                             $(this).addClass("show").siblings().removeClass("show");
                         }
                     });
+                },submit:function(param){
+                    $.ajax({
+                        url: param.url,
+                        data: param.postData,
+                        type: 'post',
+                        beforeSend: function(xhr){
+                            $('.loading').show();
+                        },
+                        error:function(xhr){
+                            $('.loading').hide();
+                            dialog.error('AJAX错误');
+                        },
+                        success: function(data){
+                            $('.loading').hide();
+                            if(data.status==0){
+                                this.login_failed_call_back(data);
+                            }else if(data.status==1){
+                                this.login_suceed_call_back(data);
+                            }
+                        }
+                    });
                 },login:function(){
                     let content='';
                     if(!register.phoneCheck(this.postData.mobile_phone)){
@@ -100,6 +121,26 @@
                     }
                     console.log(this.postData);
                     let url = domain + 'ucenter/UserCenter/login';
+                    $.ajax({
+                        url: url,
+                        data: this.postData,
+                        type: 'post',
+                        beforeSend: function(xhr){
+                            $('.loading').show();
+                        },
+                        error:function(xhr){
+                            $('.loading').hide();
+                            dialog.error('AJAX错误');
+                        },
+                        success: function(data){
+                            $('.loading').hide();
+                            if(data.status==0){
+                                this.login_failed_call_back(data);
+                            }else if(data.status==1){
+                                this.login_suceed_call_back(data);
+                            }
+                        }
+                    });
                 },register:function(){
                     let content='';
                     if(!register.phoneCheck(this.postData.mobile_phone)){
@@ -117,7 +158,7 @@
                     let url = domain + 'ucenter/UserCenter/register';
                     $.ajax({
                         url: url,
-                        data: {postData:this.postData},
+                        data: this.postData,
                         type: 'post',
                         beforeSend: function(xhr){
                             $('.loading').show();
