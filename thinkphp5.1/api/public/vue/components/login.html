@@ -16,16 +16,11 @@
                 <li @click="toggleCurrent" :class="{current:true}">登录</li>
                 <li @click="toggleCurrent" :class="{current:false}">注册/重置密码</li>
             </ul>
-            <validator name="myForm">
-            <form class="loginTab" :class="{show:true}" novalidate>
+            <form class="loginTab" :class="{show:true}">
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码"
-                               v-model="postData.mobile_phone"  id="zip" v-validate:zip="['required']">
-                        <div>
-                            <span v-if="$myForm.zip.required">Zip code is required.</span>
-                        </div>
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model="postData.mobile_phone">
                     </div>
                 </div>
                 <div class="login_item">
@@ -35,7 +30,6 @@
                 </div>
                 <a href="javascript:void(0);" class="entry-button" @click="login">登录</a>
             </form>
-            </validator>
             <form class="loginTab" :class="{show:false}">
                 <div class="error_tipc" ></div>
                 <div class="login_item">
