@@ -9,7 +9,7 @@
                 <li @click="toggle" :class="{current:true}">登录</li>
                 <li @click="toggle" :class="{current:false}">注册/重置密码</li>
             </ul>
-            <form class="loginTab" @click="toggle" :class="{current:true}">
+            <form class="loginTab" @click="toggle">
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
@@ -23,7 +23,7 @@
                 </div>
                 <a href="javascript:void(0);" class="loginBtn entry-button"  data-method="login">登录</a>
             </form>
-            <form class="loginTab"  @click="toggle" :class="{current:false}">
+            <form class="loginTab"  @click="toggle">
                 <div class="error_tipc" ></div>
                 <div class="login_item">
                     <div class="columns_flex">
