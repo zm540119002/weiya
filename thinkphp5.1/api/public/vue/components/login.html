@@ -68,12 +68,12 @@
             },
             methods: {
                 toggle:function(event){
-                    let _this = $(event.currentTarget);
-                    console.log(_this.attr('class'));
-                    if(_this.hasClass('loginSubmit')){
-                        _this.addClass("current").siblings().removeClass("current");
-                    }else if(_this.hasClass('loginTab')){
-                        _this.addClass("show").siblings().removeClass("show");
+                    let _thisLi = $(event.currentTarget);
+                    let _thisForm = _thisLi.parent().parent().find('form');
+                    if(_thisLi.hasClass('loginSubmit')){
+                        _thisLi.addClass("current").siblings().removeClass("current");
+                    }else if(_thisForm.hasClass('loginTab')){
+                        _thisForm.addClass("show").siblings().removeClass("show");
                     }
                 }
             },created: function(){
