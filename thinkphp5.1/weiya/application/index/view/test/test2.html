@@ -3,7 +3,6 @@
 <article class="f24">
 	<div id="app">
 		<login
-				:add_cart_call_back="add_cart_call_back"
 		></login>
 	</div>
 </article>
@@ -24,6 +23,15 @@
 			data:function(){
 				return param;
 			},methods: {
+			},created: function(){
+				this.subtotal_amount_calculate();
+				let param = {
+					product_id:this.product_id,
+					buy_quantity:this.buy_quantity,
+					subtotal_amount:this.subtotal_amount
+				};
+				//触发-产品选择器初始化-事件
+				bus.$emit('product_select_init',param);
 			}
 		});
 	});
