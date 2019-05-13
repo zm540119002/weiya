@@ -62,18 +62,14 @@
         Vue.component('login', {
             template:'#login_tpl',
             props: {
-                cart_init_num: {type: Number,default: 0},
                 login_succeed_call_back: {type: Function,default: function(param){
-                    console.log(param);
+                    errorTipc('成功');
                 }},login_failed_call_back: {type: Function,default: function(param){
-                    console.log(param);
-                    dialog.error('失败');
+                    errorTipc(param.info);
                 }},register_succeed_call_back: {type: Function,default: function(param){
-                    console.log(param);
-                    dialog.success('成功');
+                    errorTipc('成功');
                 }},register_failed_call_back: {type: Function,default: function(param){
-                    console.log(param);
-                    dialog.error('失败');
+                    errorTipc(param.info);
                 }}
             },
             data: function () {
@@ -108,6 +104,7 @@
                     }
                     console.log(this.postData);
                     let url = domain + 'ucenter/UserCenter/login';
+                    let _this = this;
                     $.ajax({
                         url: url,
                         data: this.postData,
@@ -122,10 +119,9 @@
                         success: function(data){
                             $('.loading').hide();
                             if(data.status==0){
-//                                this.login_failed_call_back(data);
+                                _this.login_failed_call_back(data);
                             }else if(data.status==1){
-                                console.log(this.login_succeed_call_back);
-//                                this.login_succeed_call_back(data);
+                                _this.login_succeed_call_back(data);
                             }
                         }
                     });
@@ -144,6 +140,7 @@
                     }
                     console.log(this.postData);
                     let url = domain + 'ucenter/UserCenter/register';
+                    let _this = this;
                     $.ajax({
                         url: url,
                         data: this.postData,
@@ -158,15 +155,14 @@
                         success: function(data){
                             $('.loading').hide();
                             if(data.status==0){
-                                this.register_failed_call_back(data);
+                                _this.register_failed_call_back(data);
                             }else if(data.status==1){
-                                this.register_succeed_call_back(data);
+                                _this.register_succeed_call_back(data);
                             }
                         }
                     });
                 }
             },created:function(){
-                this.login_succeed_call_back(456);
             }
         });
     });
