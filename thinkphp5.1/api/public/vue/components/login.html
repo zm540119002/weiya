@@ -61,6 +61,13 @@
         //表单切换
         Vue.component('login', {
             template:'#login_tpl',
+            props: {
+                login_succeed_call_back: {type: Function,default: function(param){
+                    dialog.success('成功');
+                }},login_failed_call_back: {type: Function,default: function(param){
+                    dialog.error('失败');
+                }}
+            },
             data: function () {
                 return {
                     postData:{
@@ -81,10 +88,54 @@
                         }
                     });
                 },login:function(){
+                    let content='';
+                    if(!register.phoneCheck(this.postData.mobile_phone)){
+                        content='请输入正确手机号码';
+                    }else if(!register.pswCheck(this.postData.password)){
+                        content = "请输入6-16数字或字母的密码";
+                    }
+                    if(content){
+                        errorTipc(content);
+                        return false;
+                    }
                     console.log(this.postData);
+                    let url = domain + 'ucenter/UserCenter/login';
                 },register:function(){
+                    let content='';
+                    if(!register.phoneCheck(this.postData.mobile_phone)){
+                        content='请输入正确手机号码';
+                    }else if(!register.vfyCheck(this.postData.captcha)){
+                        content = "请输入正确的验证码";
+                    }else if(!register.pswCheck(this.postData.password)){
+                        content = "请输入6-16数字或字母的密码";
+                    }
+                    if(content){
+                        errorTipc(content);
+                        return false;
+                    }
+                    console.log(this.postData);
+                    let url = domain + 'ucenter/UserCenter/register';
+                    $.ajax({
+                        url: url,
+                        data: {postData:this.postData},
+                        type: 'post',
+                        beforeSend: function(xhr){
+                            $('.loading').show();
+                        },
+                        error:function(xhr){
+                            $('.loading').hide();
+                            dialog.error('AJAX错误');
+                        },
+                        success: function(data){
+                            $('.loading').hide();
+                            if(data.status==0){
+                                this.login_failed_call_back(data);
+                            }else if(data.status==1){
+                                this.login_suceed_call_back(data);
+                            }
+                        }
+                    });
                 }
-            },created: function(){
             }
         });
     });
