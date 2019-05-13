@@ -72,6 +72,10 @@
                     _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
                     console.log(_thisLi.index());
                     console.log(_thisLi.parents('.userInfoWrapper').find('form'));
+                    $.each(_thisLi.parents('.userInfoWrapper').find('form'),function(el,index){
+                        console.log(el);
+                        console.log(index);
+                    });
 //                    let _thisForm = _thisLi.parent().parent().find('form');
 //                    console.log(_thisForm);
 //                    _thisForm.length && _thisForm.addClass("show").siblings().removeClass("show");
