@@ -22,9 +22,9 @@
                     <div class="columns_flex">
                         <span>中国(+86)</span>
                         <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码"
-                               v-model="postData.mobile_phone"  v-validate:mobile_phone="['required']">
+                               v-model="postData.mobile_phone"  id="zip" v-validate:zip="['required']">
                         <div>
-                            <span v-if="$myForm.mobile_phone.required">Zip code is required.</span>
+                            <span v-if="$myForm.zip.required">Zip code is required.</span>
                         </div>
                     </div>
                 </div>
