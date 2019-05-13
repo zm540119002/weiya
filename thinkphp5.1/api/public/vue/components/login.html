@@ -70,7 +70,7 @@
                 toggle:function(event){
                     let _this = $(event.currentTarget);
                     console.log(_this);
-                    console.log(_this.classes);
+                    console.log(_this.attr('class'));
                     _this.addClass("current").siblings().removeClass("current");
 //                    $(event.currentTarget).addClass("show").siblings().removeClass("show");
                 }
