@@ -6,7 +6,7 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li @click="toggle()" :class="currentClass">登录</li>
+                <li @click="toggle()" :class="currentClass" class="current">登录</li>
                 <li @click="toggle()" :class="currentClass">注册/重置密码</li>
             </ul>
             <form class="loginTab current">
@@ -72,7 +72,6 @@
                     }
                 }
             },created: function(){
-                this.changeCurrentClassByShow();
                 console.log($('form.current').length);
                 if($('form.current').length){
                     this.postData = $('form.current').serializeObject();
