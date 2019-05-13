@@ -63,13 +63,13 @@
             template:'#login_tpl',
             props: {
                 login_succeed_call_back: {type: Function,default: function(param){
-                    errorTipc('成功');
+                    dialog.error('成功');
                 }},login_failed_call_back: {type: Function,default: function(param){
-                    errorTipc(param.info);
+                    dialog.error(param.info);
                 }},register_succeed_call_back: {type: Function,default: function(param){
-                    errorTipc('成功');
+                    dialog.error('成功');
                 }},register_failed_call_back: {type: Function,default: function(param){
-                    errorTipc(param.info);
+                    dialog.error(param.info);
                 }}
             },
             data: function () {
@@ -99,7 +99,7 @@
                         content = "请输入6-16数字或字母的密码";
                     }
                     if(content){
-                        errorTipc(content);
+                        dialog.error(content);
                         return false;
                     }
                     console.log(this.postData);
@@ -136,7 +136,7 @@
                         content = "请输入6-16数字或字母的密码";
                     }
                     if(content){
-                        errorTipc(content);
+                        dialog.error(content);
                         return false;
                     }
                     console.log(this.postData);
