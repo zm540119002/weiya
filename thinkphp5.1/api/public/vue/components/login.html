@@ -20,12 +20,12 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" name="mobile_phone" v-model="mobile_phone">
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" name="mobile_phone" v-model="postData.mobile_phone">
                     </div>
                 </div>
                 <div class="login_item">
                     <div class="columns_flex">
-                        <input class="input-filed password" type="password" placeholder="密码" name="password" v-model="password">
+                        <input class="input-filed password" type="password" placeholder="密码" name="password" v-model="postData.password">
                     </div>
                 </div>
                 <a href="javascript:void(0);" class="entry-button" @click="login">登录</a>
@@ -35,20 +35,20 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" name="mobile_phone" v-model="mobile_phone">
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" name="mobile_phone" v-model="postData.mobile_phone">
                     </div>
                 </div>
                 <div class="smsLogin login_wrap">
                     <div class="login_item">
                         <div class="columns_flex l-r-sides">
-                            <input type="text" class="tel_code input-filed" placeholder="请输入收到的验证码" name="captcha" v-model="captcha">
+                            <input type="text" class="tel_code input-filed" placeholder="请输入收到的验证码" name="captcha" v-model="postData.captcha">
                             <a href="javascript:void(0);" class="send_sms">获取验证码</a>
                         </div>
                     </div>
                 </div>
                 <div class="login_item">
                     <div class="columns_flex">
-                        <input class="input-filed password" autocomplete="new-password" type="password" placeholder="设置密码" name="password" v-model="password">
+                        <input class="input-filed password" autocomplete="new-password" type="password" placeholder="设置密码" v-model="postData.password">
                     </div>
                 </div>
                 <a href="javascript:void(0);" class="entry-button" @click="register">确定</a>
@@ -81,18 +81,18 @@
                         }
                     });
                 },verify:function(){
-                    let content='';
-                    if(this.postData.mobile_phone && !register.phoneCheck(this.postData.mobile_phone)){
-                        content='请输入正确手机号码';
-                    }else if(this.postData.captcha && !register.vfyCheck(this.postData.captcha)){
-                        content = "请输入正确的验证码";
-                    }else if(this.postData.password && !register.pswCheck(this.postData.password)){
-                        content = "请输入6-16数字或字母的密码";
-                    }
-                    if(content){
-                        errorTipc(content);
-                        return false;
-                    }
+//                    let content='';
+//                    if(this.postData.mobile_phone && !register.phoneCheck(this.postData.mobile_phone)){
+//                        content='请输入正确手机号码';
+//                    }else if(this.postData.captcha && !register.vfyCheck(this.postData.captcha)){
+//                        content = "请输入正确的验证码";
+//                    }else if(this.postData.password && !register.pswCheck(this.postData.password)){
+//                        content = "请输入6-16数字或字母的密码";
+//                    }
+//                    if(content){
+//                        errorTipc(content);
+//                        return false;
+//                    }
                 },login:function(event){
                     console.log(this.postData);
 //                    let _this = $(event.currentTarget);
