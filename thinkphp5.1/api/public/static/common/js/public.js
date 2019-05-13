@@ -692,3 +692,12 @@ function mobileNHide(param){
     str=param.replace(reg,'$1****$2');
     return str;
 }
+
+function isLogin() {
+    var user_id = "{$user_id}";
+    console.log(user_id);
+    if(!user_id){
+        return false;
+    }
+    return true
+}
