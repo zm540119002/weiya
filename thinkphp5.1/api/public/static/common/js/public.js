@@ -693,11 +693,3 @@ function mobileNHide(param){
     return str;
 }
 
-function isLogin() {
-    var user_id = "{$user.id}";
-    console.log(user_id);
-    if(!user_id){
-        return false;
-    }
-    return true
-}
