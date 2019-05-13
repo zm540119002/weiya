@@ -69,9 +69,14 @@
             methods: {
                 toggle:function(event){
                     let _this = $(event.currentTarget);
-                    console.log(_this);
                     console.log(_this.attr('class'));
-                    _this.addClass("current").siblings().removeClass("current");
+                    if(_this.hasClass('loginSubmit')){
+                        _this.toggleClass('current');
+//                        _this.addClass("current").siblings().removeClass("current");
+                    }else if(_this.hasClass('loginTab')){
+                        _this.toggleClass('show');
+//                        _this.addClass("current").siblings().removeClass("current");
+                    }
 //                    $(event.currentTarget).addClass("show").siblings().removeClass("show");
                 }
             },created: function(){
