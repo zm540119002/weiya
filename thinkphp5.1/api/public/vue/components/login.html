@@ -1,3 +1,8 @@
+<style>
+    .show{
+        display: block;
+    }
+</style>
 <!-- 产品选择器 -->
 <template id="login_tpl">
     <section class="userInfoWrapper">
@@ -9,7 +14,7 @@
                 <li @click="toggle" :class="{current:true}">登录</li>
                 <li @click="toggle" :class="{current:false}">注册/重置密码</li>
             </ul>
-            <form class="loginTab" @click="toggle">
+            <form class="loginTab" @click="toggle" :class="{show:true}">
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
@@ -23,7 +28,7 @@
                 </div>
                 <a href="javascript:void(0);" class="loginBtn entry-button"  data-method="login">登录</a>
             </form>
-            <form class="loginTab"  @click="toggle">
+            <form class="loginTab"  @click="toggle"  :class="{show:false}">
                 <div class="error_tipc" ></div>
                 <div class="login_item">
                     <div class="columns_flex">
@@ -62,12 +67,7 @@
             methods: {
                 toggle:function(event){
                     $(event.currentTarget).addClass("current").siblings().removeClass("current");
-                },changeCurrentClass:function(){
-                    if(this.currentShow){
-                        this.currentClass = 'current';
-                    }else{
-                        this.currentClass = '';
-                    }
+                    $(event.currentTarget).addClass("show").siblings().removeClass("show");
                 }
             },created: function(){
                 console.log($('form.current').length);
