@@ -6,8 +6,8 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li @click="toggle()" :class="current">登录</li>
-                <li @click="toggle()" :class="current">注册/重置密码</li>
+                <li @click="toggle()" :class="currentClass">登录</li>
+                <li @click="toggle()" :class="currentClass">注册/重置密码</li>
             </ul>
             <form class="loginTab current">
                 <div class="login_item">
@@ -57,7 +57,7 @@
             data: function () {
                 return {
                     show:true,
-                    current:'',
+                    currentClass:'',
                     postData:{}
                 };
             },
@@ -66,12 +66,13 @@
                     this.show = !this.show;
                 },changeCurrentClassByShow:function(){
                     if(this.show){
-                        this.current = 'current';
+                        this.currentClass = 'current';
                     }else{
-                        this.current = '';
+                        this.currentClass = '';
                     }
                 }
             },created: function(){
+                this.changeCurrentClassByShow();
                 console.log($('form.current').length);
                 if($('form.current').length){
                     this.postData = $('form.current').serializeObject();
