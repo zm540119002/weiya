@@ -102,7 +102,6 @@
                         dialog.error(content);
                         return false;
                     }
-                    console.log(this.postData);
                     let url = domain + 'ucenter/UserCenter/login';
                     let _this = this;
                     $.ajax({
@@ -121,7 +120,6 @@
                             if(data.status==0){
                                 _this.login_failed_call_back(data);
                             }else if(data.status==1){
-                                console.log(111);
                                 _this.login_succeed_call_back(data);
                             }
                         }
@@ -139,7 +137,6 @@
                         dialog.error(content);
                         return false;
                     }
-                    console.log(this.postData);
                     let url = domain + 'ucenter/UserCenter/register';
                     let _this = this;
                     $.ajax({
