@@ -16,7 +16,7 @@
                 <li @click="changeCurrent" :class="{current:true}">登录</li>
                 <li @click="changeCurrent" :class="{current:false}">注册/重置密码</li>
             </ul>
-            <form @click="changeCurrent" :class="{show:true}" class="loginTab">
+            <form class="loginTab" :class="{show:true}">
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
@@ -30,7 +30,7 @@
                 </div>
                 <a href="javascript:void(0);" class="loginBtn entry-button"  data-method="login">登录</a>
             </form>
-            <form @click="changeCurrent" :class="{show:false}" class="loginTab">
+            <form class="loginTab" :class="{show:false}">
                 <div class="error_tipc" ></div>
                 <div class="login_item">
                     <div class="columns_flex">
@@ -68,9 +68,9 @@
             },
             methods: {
                 changeCurrent:function(event){
-                    let _this = $(event.currentTarget);
-                    _this.length && _this.addClass("current").siblings().removeClass("current");
-//                    let _thisForm = _this.parent().parent().find('form');
+                    let _thisLi = $(event.currentTarget);
+                    _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
+//                    let _thisForm = _thisLi.parent().parent().find('form');
 //                    console.log(_thisForm);
 //                    _thisForm.length && _thisForm.addClass("show").siblings().removeClass("show");
                 }
