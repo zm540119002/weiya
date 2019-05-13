@@ -6,7 +6,7 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li @click="toggle()" :class="{ currentClass: show, defaultCurrentClass: defaultShow }">登录</li>
+                <li @click="toggle()" :class="{ currentClass: show, 'current': defaultShow }">登录</li>
                 <li @click="toggle()" :class="{ currentClass: show}">注册/重置密码</li>
             </ul>
             <form class="loginTab current">
@@ -56,10 +56,9 @@
             template:'#login_tpl',
             data: function () {
                 return {
-                    show:false,
+                    show:true,
                     currentClass:'',
                     defaultShow:true,
-                    defaultCurrentClass:'current',
                     postData:{}
                 };
             },
