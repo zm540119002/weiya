@@ -5,7 +5,7 @@
             <img src="api_common_img/ucenter_logo.png" alt="">
         </div>
         <div class="f24 bomb_box">
-            <ul class="loginNav" ref="nav">
+            <ul class="loginNav">
                 <li @click="toggle()" :class="{current:true}">登录</li>
                 <li @click="toggle()" :class="{current:false}">注册/重置密码</li>
             </ul>
@@ -63,9 +63,10 @@
                 };
             },
             methods: {
-                toggle:function(){
+                toggle:function(event){
 //                    this.currentShow = !this.currentShow;
-                    console.log(this.$ref.nav);
+                    console.log(event.currentTarget);
+                    console.log(event.currentTarget.class);
                 },changeCurrentClass:function(){
                     if(this.currentShow){
                         this.currentClass = 'current';
