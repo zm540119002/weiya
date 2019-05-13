@@ -63,8 +63,8 @@
             template:'#login_tpl',
             props: {
                 login_succeed_call_back: {type: Function,default: function(param){
-                    dialog.success('成功');
                     console.log(param);
+                    dialog.success('成功');
                 }},login_failed_call_back: {type: Function,default: function(param){
                     console.log(param);
                     dialog.error('失败');
@@ -122,9 +122,10 @@
                         success: function(data){
                             $('.loading').hide();
                             if(data.status==0){
-                                this.login_failed_call_back(data);
+//                                this.login_failed_call_back(data);
                             }else if(data.status==1){
-                                this.login_succeed_call_back(data);
+                                console.log(this.login_failed_call_back);
+//                                this.login_succeed_call_back(data);
                             }
                         }
                     });
