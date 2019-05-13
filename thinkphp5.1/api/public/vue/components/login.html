@@ -13,8 +13,8 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li class="loginSubmit" @click="toggle" :class="{current:true}">登录</li>
-                <li class="loginSubmit" @click="toggle" :class="{current:false}">注册/重置密码</li>
+                <li @click="toggle" :class="{current:true}">登录</li>
+                <li @click="toggle" :class="{current:false}">注册/重置密码</li>
             </ul>
             <form class="loginTab" :class="{show:true}">
                 <div class="login_item">
@@ -30,7 +30,7 @@
                 </div>
                 <a href="javascript:void(0);" class="loginBtn entry-button"  data-method="login">登录</a>
             </form>
-            <form class="loginTab" :class="{show:false}">
+            <form class="loginTab" :class="{show:true}">
                 <div class="error_tipc" ></div>
                 <div class="login_item">
                     <div class="columns_flex">
