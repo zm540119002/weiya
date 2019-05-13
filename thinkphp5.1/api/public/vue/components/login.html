@@ -56,17 +56,14 @@
             template:'#login_tpl',
             data: function () {
                 return {
-                    currentShow:true,
-                    currentHide:false,
-                    current:'',
                     postData:{}
                 };
             },
             methods: {
                 toggle:function(event){
-//                    this.currentShow = !this.currentShow;
                     console.log(event.currentTarget);
                     console.log(event.currentTarget.class);
+                    $(event.currentTarget).addClass("current").siblings().removeClass("current");
                 },changeCurrentClass:function(){
                     if(this.currentShow){
                         this.currentClass = 'current';
