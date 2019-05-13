@@ -69,12 +69,10 @@
             methods: {
                 toggle:function(event){
                     let _thisLi = $(event.currentTarget);
+                    _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
                     let _thisForm = _thisLi.parent().parent().find('form');
-                    if(_thisLi.hasClass('loginSubmit')){
-                        _thisLi.addClass("current").siblings().removeClass("current");
-                    }else if(_thisForm.hasClass('loginTab')){
-                        _thisForm.addClass("show").siblings().removeClass("show");
-                    }
+                    console.log(_thisForm);
+                    _thisForm.length && _thisForm.addClass("show").siblings().removeClass("show");
                 }
             },created: function(){
                 console.log($('form.current').length);
