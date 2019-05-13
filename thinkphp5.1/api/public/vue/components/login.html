@@ -6,8 +6,8 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li @click="toggle()" :class="{current:true}">登录</li>
-                <li @click="toggle()" :class="{current:false}">注册/重置密码</li>
+                <li @click="toggle" :class="{current:true}">登录</li>
+                <li @click="toggle" :class="{current:false}">注册/重置密码</li>
             </ul>
             <form class="loginTab current">
                 <div class="login_item">
@@ -66,7 +66,6 @@
                 toggle:function(event){
 //                    this.currentShow = !this.currentShow;
                     console.log(event.currentTarget);
-                    console.log(event.currentTarget.class);
                 },changeCurrentClass:function(){
                     if(this.currentShow){
                         this.currentClass = 'current';
