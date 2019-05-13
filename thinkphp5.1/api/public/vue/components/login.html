@@ -28,7 +28,7 @@
                         <input class="input-filed password" type="password" placeholder="密码" name="password">
                     </div>
                 </div>
-                <a href="javascript:void(0);" class="loginBtn entry-button"  data-method="login">登录</a>
+                <a href="javascript:void(0);" class="loginBtn entry-button"  data-method="login" @click="login">登录</a>
             </form>
             <form class="loginTab" :class="{show:false}">
                 <div class="error_tipc" ></div>
@@ -51,7 +51,7 @@
                         <input class="input-filed password" autocomplete="new-password" type="password" placeholder="设置密码" name="password">
                     </div>
                 </div>
-                <a href="javascript:void(0);" class="registerBtn entry-button" data-method="register">确定</a>
+                <a href="javascript:void(0);" class="registerBtn entry-button" data-method="register" @click="register">确定</a>
             </form>
         </div>
     </section>
@@ -76,13 +76,16 @@
                             $(this).addClass("show").siblings().removeClass("show");
                         }
                     });
+                },login:function(event){
+                    let _this = $(event.currentTarget);
+                    let _thisForm = _this.parents('form');
+                    console.log(_thisForm);
+                    if(_thisForm.length){
+                        this.postData = _thisForm.serializeObject();
+                        console.log(this.postData);
+                    }
                 }
             },created: function(){
-                console.log($('form.current').length);
-                if($('form.current').length){
-                    this.postData = $('form.current').serializeObject();
-                    console.log(this.postData);
-                }
             }
         });
     });
