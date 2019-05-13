@@ -6,8 +6,8 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li class="current" @click="toggle(1)" :class="{current:index==current}">登录</li>
-                <li @click="toggle(2)" :class="{current:index==current}">注册/重置密码</li>
+                <li class="current" @click="toggle()" :class="current">登录</li>
+                <li @click="toggle()" :class="current">注册/重置密码</li>
             </ul>
             <form class="loginTab current">
                 <div class="login_item">
@@ -56,13 +56,13 @@
             template:'#login_tpl',
             data: function () {
                 return {
-                    current:0,
+                    current:true,
                     postData:{}
                 };
             },
             methods: {
-                toggle:function(index){
-                    this.current=index;
+                toggle:function(){
+                    this.current = !this.current;
                 }
             },created: function(){
                 this.postData = $('form.current').serializeObject();
