@@ -74,12 +74,11 @@
                     }
                 }
             },created: function(){
-                console.log(this.$el);
                 console.log($('form.current').length);
                 if($('form.current').length){
                     this.postData = $('form.current').serializeObject();
+                    console.log(this.postData);
                 }
-                console.log(this.postData);
             }
         });
     });
