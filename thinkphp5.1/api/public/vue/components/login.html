@@ -9,7 +9,7 @@
                 <li class="current">登录</li>
                 <li >注册/重置密码</li>
             </ul>
-            <form class="loginTab active" ref="formLogin">
+            <form class="loginTab current">
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
@@ -19,12 +19,11 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <input class="input-filed password" type="password" placeholder="密码" name="password">
-                        <a href="javascript:void(0);" class="hidden view-password" ></a>
                     </div>
                 </div>
                 <a href="javascript:void(0);" class="loginBtn entry-button"  data-method="login">登录</a>
             </form>
-            <form class="loginTab hide" ref="formRegister">
+            <form class="loginTab" ref="formRegister">
                 <div class="error_tipc" ></div>
                 <div class="login_item">
                     <div class="columns_flex">
@@ -43,7 +42,6 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <input class="input-filed password" autocomplete="new-password" type="password" placeholder="设置密码" name="password">
-                        <a href="javascript:void(0);" class="hidden view-password" ></a>
                     </div>
                 </div>
                 <a href="javascript:void(0);" class="registerBtn entry-button" data-method="register">确定</a>
@@ -54,7 +52,6 @@
 <script type="text/javascript">
     $(function(){
         //表单切换
-        tab_down('.loginNav li','.loginTab ','click');
         Vue.component('login', {
             template:'#login_tpl',
             data: function () {
@@ -64,7 +61,7 @@
             },
             methods: {
             },created: function(){
-                this.postData = $('form.active').serializeObject();
+                this.postData = $('form.current').serializeObject();
                 console.log(this.postData);
             }
         });
