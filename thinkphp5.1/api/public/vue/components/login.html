@@ -53,6 +53,8 @@
 </template>
 <script type="text/javascript">
     $(function(){
+        //表单切换
+        tab_down('.loginNav li','.loginTab ','click');
         Vue.component('login', {
             template:'#login_tpl',
             data: function () {
@@ -62,7 +64,8 @@
             },
             methods: {
             },created: function(){
-                this.mobile_phone = '18819362618';
+                this.postData = $('form.active').serializeObject();
+                console.log(this.postData);
             }
         });
     });
