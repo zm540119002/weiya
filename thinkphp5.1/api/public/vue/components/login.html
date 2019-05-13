@@ -16,11 +16,16 @@
                 <li @click="toggleCurrent" :class="{current:true}">登录</li>
                 <li @click="toggleCurrent" :class="{current:false}">注册/重置密码</li>
             </ul>
+            <validator name="myForm">
             <form class="loginTab" :class="{show:true}">
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model="postData.mobile_phone">
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码"
+                               v-model="postData.mobile_phone"  v-validate:mobile_phone="['required']">
+                        <div>
+                            <span v-if="$myForm.mobile_phone.required">Zip code is required.</span>
+                        </div>
                     </div>
                 </div>
                 <div class="login_item">
@@ -30,6 +35,7 @@
                 </div>
                 <a href="javascript:void(0);" class="entry-button" @click="login">登录</a>
             </form>
+            </validator>
             <form class="loginTab" :class="{show:false}">
                 <div class="error_tipc" ></div>
                 <div class="login_item">
@@ -80,30 +86,9 @@
                             $(this).addClass("show").siblings().removeClass("show");
                         }
                     });
-                },verify:function(){
-//                    let content='';
-//                    if(this.postData.mobile_phone && !register.phoneCheck(this.postData.mobile_phone)){
-//                        content='请输入正确手机号码';
-//                    }else if(this.postData.captcha && !register.vfyCheck(this.postData.captcha)){
-//                        content = "请输入正确的验证码";
-//                    }else if(this.postData.password && !register.pswCheck(this.postData.password)){
-//                        content = "请输入6-16数字或字母的密码";
-//                    }
-//                    if(content){
-//                        errorTipc(content);
-//                        return false;
-//                    }
-                },login:function(event){
+                },login:function(){
                     console.log(this.postData);
-//                    let _this = $(event.currentTarget);
-//                    let _thisForm = _this.parents('form');
-//                    console.log(_thisForm);
-//                    if(_thisForm.length){
-//                        this.postData = _thisForm.serializeObject();
-//                        console.log(this.postData);
-//                    }
-
-                },register:function(event){
+                },register:function(){
                 }
             },created: function(){
             }
