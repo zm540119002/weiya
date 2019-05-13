@@ -1344,7 +1344,8 @@ background-position: 0 -27px;
     background:#fff;
 }
 /*2018-4-27 重改*/
-.loginTab.hide{
+.loginTab.hide,
+.hide{
     display: none;
 }
 .login_item .columns_flex span{
