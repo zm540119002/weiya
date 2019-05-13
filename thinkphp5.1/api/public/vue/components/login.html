@@ -71,6 +71,7 @@
                     let _thisLi = $(event.currentTarget);
                     _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
                     console.log(_thisLi.index());
+                    console.log(_thisLi.parents('.userInfoWrapper').find('form'));
 //                    let _thisForm = _thisLi.parent().parent().find('form');
 //                    console.log(_thisForm);
 //                    _thisForm.length && _thisForm.addClass("show").siblings().removeClass("show");
