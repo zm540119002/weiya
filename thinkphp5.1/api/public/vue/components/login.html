@@ -6,8 +6,8 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li @click="toggle()" :class="class">登录</li>
-                <li @click="toggle()" :class="class">注册/重置密码</li>
+                <li @click="toggle()" :class="current">登录</li>
+                <li @click="toggle()" :class="current">注册/重置密码</li>
             </ul>
             <form class="loginTab current">
                 <div class="login_item">
@@ -57,7 +57,7 @@
             data: function () {
                 return {
                     show:true,
-                    class:'',
+                    current:'',
                     postData:{}
                 };
             },
@@ -65,9 +65,9 @@
                 toggle:function(){
                     this.show = !this.show;
                     if(this.show){
-                        this.class = 'current';
+                        this.current = 'current';
                     }else{
-                        this.class = '';
+                        this.current = '';
                     }
                 }
             },created: function(){
