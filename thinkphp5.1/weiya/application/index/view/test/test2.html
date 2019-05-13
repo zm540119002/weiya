@@ -23,15 +23,8 @@
 			data:function(){
 				return param;
 			},methods: {
-			},created: function(){
-				this.subtotal_amount_calculate();
-				let param = {
-					product_id:this.product_id,
-					buy_quantity:this.buy_quantity,
-					subtotal_amount:this.subtotal_amount
-				};
-				//触发-产品选择器初始化-事件
-				bus.$emit('product_select_init',param);
+			},created: function(event){
+				console.log(event);
 			}
 		});
 	});
