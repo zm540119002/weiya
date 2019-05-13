@@ -64,6 +64,11 @@
             methods: {
                 toggle:function(){
                     this.show = !this.show;
+                    if(this.show){
+                        this.currentClass = 'current';
+                    }else{
+                        this.currentClass = '';
+                    }
                 },changeCurrentClassByShow:function(){
                     if(this.show){
                         this.currentClass = 'current';
