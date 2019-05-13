@@ -5023,7 +5023,8 @@ ul.message_list{
     display:block;
     width:45%;
 }
-.wy_list .list li img{
+.wy_list .list li img,
+.content_main .list li img{
     width:100%;
 }
 .qrcode_share{
