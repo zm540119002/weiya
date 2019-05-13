@@ -4,6 +4,7 @@
 	<a href="javascript:void(0);" class="test">测试</a>
 	<div id="app">
 		<login
+			:login_succeed_call_back:login_succeed_call_back
 		></login>
 	</div>
 </article>
@@ -27,7 +28,11 @@
 			data:function(){
 				return param;
 			},methods: {
+				login_succeed_call_back:function(){
+
+				}
 			},created: function(event){
+				console.log(event);
 			}
 		});
 	});
