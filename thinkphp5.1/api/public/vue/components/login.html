@@ -64,13 +64,20 @@
             props: {
                 login_succeed_call_back: {type: Function,default: function(param){
                     dialog.success('成功');
+                    console.log(param);
                 }},login_failed_call_back: {type: Function,default: function(param){
+                    console.log(param);
+                    dialog.error('失败');
+                }},register_succeed_call_back: {type: Function,default: function(param){
+                    console.log(param);
+                    dialog.success('成功');
+                }},register_failed_call_back: {type: Function,default: function(param){
+                    console.log(param);
                     dialog.error('失败');
                 }}
             },
             data: function () {
                 return {
-                    login_succeed_call_back:this.login_succeed_call_back,
                     postData:{
                         mobile_phone:'',
                         password:'',
@@ -150,9 +157,9 @@
                         success: function(data){
                             $('.loading').hide();
                             if(data.status==0){
-                                this.login_failed_call_back(data);
+                                this.register_failed_call_back(data);
                             }else if(data.status==1){
-                                this.login_succeed_call_back(data);
+                                this.register_succeed_call_back(data);
                             }
                         }
                     });
