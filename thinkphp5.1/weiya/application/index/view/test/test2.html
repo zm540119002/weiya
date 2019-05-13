@@ -1,9 +1,9 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
+	<a href="javascript:void(0);" class="test">测试</a>
 	<div id="app">
 		<login
-				:add_cart_call_back="add_cart_call_back"
 		></login>
 	</div>
 </article>
@@ -17,6 +17,9 @@
 {block name="suffix-script"}
 <script type="text/javascript">
 	$(function(){
+		$('.test').on('click',function(){
+
+		});
 		let param = {
 		};
 		new Vue({
@@ -24,6 +27,7 @@
 			data:function(){
 				return param;
 			},methods: {
+			},created: function(event){
 			}
 		});
 	});
