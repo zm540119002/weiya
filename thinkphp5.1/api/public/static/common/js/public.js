@@ -694,7 +694,7 @@ function mobileNHide(param){
 }
 
 function isLogin() {
-    var user_id = "{$user_id}";
+    var user_id = "{$user.id}";
     console.log(user_id);
     if(!user_id){
         return false;
