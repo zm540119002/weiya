@@ -62,9 +62,9 @@
         Vue.component('login', {
             template:'#login_tpl',
             props: {
+                cart_init_num: {type: Number,default: 0},
                 login_succeed_call_back: {type: Function,default: function(param){
                     console.log(param);
-                    dialog.success('成功');
                 }},login_failed_call_back: {type: Function,default: function(param){
                     console.log(param);
                     dialog.error('失败');
@@ -165,6 +165,8 @@
                         }
                     });
                 }
+            },created:function(){
+                this.login_succeed_call_back(123);
             }
         });
     });
