@@ -1,6 +1,7 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
+	<a href="javascript:void(0);" class="test">测试</a>
 	<div id="app">
 		<login
 		></login>
@@ -16,16 +17,18 @@
 {block name="suffix-script"}
 <script type="text/javascript">
 	$(function(){
-		let param = {
-		};
-		new Vue({
-			el: '#app',
-			data:function(){
-				return param;
-			},methods: {
-			},created: function(event){
-				console.log(event);
-			}
+		$('.test').on('click',function(){
+			let param = {
+			};
+			new Vue({
+				el: '#app',
+				data:function(){
+					return param;
+				},methods: {
+				},created: function(event){
+					console.log(event);
+				}
+			});
 		});
 	});
 </script>
