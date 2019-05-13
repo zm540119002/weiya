@@ -70,7 +70,6 @@
             },
             data: function () {
                 return {
-                    login_succeed_call_back:this.login_succeed_call_back,
                     postData:{
                         mobile_phone:'',
                         password:'',
@@ -86,27 +85,6 @@
                     $.each(_thisLi.parents('.userInfoWrapper').find('form'),function(index){
                         if(index==_thisIndex){
                             $(this).addClass("show").siblings().removeClass("show");
-                        }
-                    });
-                },submit:function(param){
-                    $.ajax({
-                        url: param.url,
-                        data: param.postData,
-                        type: 'post',
-                        beforeSend: function(xhr){
-                            $('.loading').show();
-                        },
-                        error:function(xhr){
-                            $('.loading').hide();
-                            dialog.error('AJAX错误');
-                        },
-                        success: function(data){
-                            $('.loading').hide();
-                            if(data.status==0){
-                                this.login_failed_call_back(data);
-                            }else if(data.status==1){
-                                this.login_suceed_call_back(data);
-                            }
                         }
                     });
                 },login:function(){
