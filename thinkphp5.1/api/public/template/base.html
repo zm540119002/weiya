@@ -34,7 +34,12 @@
 	</script>
 </head> 
 <body>
-{block name="header"}{/block}
+<section class="header_title separation-line">
+	<a href="javascript:void(0);" class="back_prev_page"></a>
+	{block name="back_prev"}<input type="hidden" value="{:url('Mine/index')}">{/block}
+	<h2 class="f24">{block name="title"}{/block}</h2>
+</section>
+
 <!-- 内容模块 -->
 {block name="content"}{/block}
 <!-- 公共模块-->
