@@ -34,13 +34,12 @@
 	</script>
 </head> 
 <body>
+{block name="header"}{/block}
 <!-- 内容模块 -->
 {block name="content"}{/block}
 <!-- 公共模块-->
 {block name="common"}{/block}
-{block name="login_dialog"}
 {include file="../../api/public/template/login_dialog.html" /}
-{/block}
 <!-- 页脚模块-->
 {block name="footer"}
 <footer class="f24">
