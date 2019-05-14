@@ -1,7 +1,7 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
-	<div id="app">
+	<div id="loginDialogRoot">
 		<login
 		></login>
 	</div>
@@ -18,7 +18,7 @@
 <script type="text/javascript">
 	$(function(){
 		new Vue({
-			el: '#app',
+			el: '#loginDialogRoot',
 			data:function(){
 				return {};
 			},methods: {
