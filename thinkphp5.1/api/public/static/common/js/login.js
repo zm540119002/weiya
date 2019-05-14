@@ -86,23 +86,6 @@ function async_verify(param){
         }
     });
 }
-//异步验证判断
-function async_verify_judge(param){
-    if(param.data.status==0){
-        if(param.data.data.code == '1001'){
-            loginBackFunction = param.func;
-            loginDialog();
-        }else if(param.data.data.code=='1002'){
-        }else if(param.data.data.code=='1003'){
-        }else{
-            dialog.error(param.data.info);
-        }
-    }else if(param.data.status==1){
-        return true;
-    }else{
-        return true;
-    }
-}
 $(function(){
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
