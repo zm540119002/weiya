@@ -3,7 +3,6 @@
 <article class="f24">
 	<div id="app">
 		<login
-				:add_cart_call_back="add_cart_call_back"
 		></login>
 	</div>
 </article>
@@ -24,6 +23,9 @@
 			data:function(){
 				return param;
 			},methods: {
+				login_succeed_call_back:function(){
+					console.log(123);
+				}
 			}
 		});
 	});

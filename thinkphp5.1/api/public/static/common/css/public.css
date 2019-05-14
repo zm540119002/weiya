@@ -1344,7 +1344,8 @@ background-position: 0 -27px;
     background:#fff;
 }
 /*2018-4-27 重改*/
-.loginTab.hide{
+.loginTab.hide,
+.hide{
     display: none;
 }
 .login_item .columns_flex span{
@@ -5018,11 +5019,13 @@ ul.message_list{
     padding:0.12rem;
     border:none;
 }
-.wy_list li .p_img{
+.wy_list li .p_img,
+.content_main li .p_img{
     display:block;
     width:45%;
 }
-.wy_list .list li img{
+.wy_list .list li img,
+.content_main .list li img{
     width:100%;
 }
 .qrcode_share{

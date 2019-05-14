@@ -1,21 +1,166 @@
+<style>
+    .loginTab{
+        display: none;
+    }.show{
+        display: block;
+    }
+</style>
 <!-- 产品选择器 -->
 <template id="login_tpl">
-    {include file="../../api/public/template/login_tpl.html" /}
+    <section class="userInfoWrapper">
+        <div class="ucenter_logo">
+            <img src="api_common_img/ucenter_logo.png" alt="">
+        </div>
+        <div class="f24 bomb_box">
+            <ul class="loginNav">
+                <li @click="toggleCurrent" :class="{current:true}">登录</li>
+                <li @click="toggleCurrent" :class="{current:false}">注册/重置密码</li>
+            </ul>
+            <form class="loginTab" :class="{show:true}">
+                <div class="login_item">
+                    <div class="columns_flex">
+                        <span>中国(+86)</span>
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model="postData.mobile_phone">
+                    </div>
+                </div>
+                <div class="login_item">
+                    <div class="columns_flex">
+                        <input class="input-filed password" type="password" placeholder="密码" v-model="postData.password">
+                    </div>
+                </div>
+                <a href="javascript:void(0);" class="entry-button" @click="login">登录</a>
+            </form>
+            <form class="loginTab" :class="{show:false}">
+                <div class="error_tipc" ></div>
+                <div class="login_item">
+                    <div class="columns_flex">
+                        <span>中国(+86)</span>
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model="postData.mobile_phone">
+                    </div>
+                </div>
+                <div class="smsLogin login_wrap">
+                    <div class="login_item">
+                        <div class="columns_flex l-r-sides">
+                            <input type="text" class="tel_code input-filed" placeholder="请输入收到的验证码" v-model="postData.captcha">
+                            <a href="javascript:void(0);" class="send_sms">获取验证码</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="login_item">
+                    <div class="columns_flex">
+                        <input class="input-filed password" autocomplete="new-password" type="password" placeholder="设置密码" v-model="postData.password">
+                    </div>
+                </div>
+                <a href="javascript:void(0);" class="entry-button" @click="register">确定</a>
+            </form>
+        </div>
+    </section>
 </template>
 <script type="text/javascript">
     $(function(){
+        //表单切换
         Vue.component('login', {
             template:'#login_tpl',
+            props: {
+                login_succeed_call_back: {type: Function,default: function(param){
+                    dialog.success('成功');
+                }},login_failed_call_back: {type: Function,default: function(param){
+                    dialog.error(param.info);
+                }},register_succeed_call_back: {type: Function,default: function(param){
+                    dialog.success('成功');
+                }},register_failed_call_back: {type: Function,default: function(param){
+                    dialog.error(param.info);
+                }}
+            },
             data: function () {
                 return {
-                    postData:{}
+                    postData:{
+                        mobile_phone:'',
+                        password:'',
+                        captcha:''
+                    }
                 };
             },
             methods: {
-                reduce: function () {
+                toggleCurrent:function(event){
+                    let _thisLi = $(event.currentTarget);
+                    _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
+                    let _thisIndex = _thisLi.index();
+                    $.each(_thisLi.parents('.userInfoWrapper').find('form'),function(index){
+                        if(index==_thisIndex){
+                            $(this).addClass("show").siblings().removeClass("show");
+                        }
+                    });
+                },login:function(){
+                    let content='';
+                    if(!register.phoneCheck(this.postData.mobile_phone)){
+                        content='请输入正确手机号码';
+                    }else if(!register.pswCheck(this.postData.password)){
+                        content = "请输入6-16数字或字母的密码";
+                    }
+                    if(content){
+                        dialog.error(content);
+                        return false;
+                    }
+                    let url = domain + 'ucenter/UserCenter/login';
+                    let _this = this;
+                    $.ajax({
+                        url: url,
+                        data: this.postData,
+                        type: 'post',
+                        beforeSend: function(xhr){
+                            $('.loading').show();
+                        },
+                        error:function(xhr){
+                            $('.loading').hide();
+                            dialog.error('AJAX错误');
+                        },
+                        success: function(data){
+                            $('.loading').hide();
+                            if(data.status==0){
+                                _this.login_failed_call_back(data);
+                            }else if(data.status==1){
+                                _this.login_succeed_call_back(data);
+                            }
+                        }
+                    });
+                },register:function(){
+                    let content='';
+                    if(!register.phoneCheck(this.postData.mobile_phone)){
+                        content='请输入正确手机号码';
+                    }else if(!register.vfyCheck(this.postData.captcha)){
+                        content = "请输入正确的验证码";
+                    }else if(!register.pswCheck(this.postData.password)){
+                        content = "请输入6-16数字或字母的密码";
+                    }
+                    if(content){
+                        dialog.error(content);
+                        return false;
+                    }
+                    let url = domain + 'ucenter/UserCenter/register';
+                    let _this = this;
+                    $.ajax({
+                        url: url,
+                        data: this.postData,
+                        type: 'post',
+                        beforeSend: function(xhr){
+                            $('.loading').show();
+                        },
+                        error:function(xhr){
+                            $('.loading').hide();
+                            dialog.error('AJAX错误');
+                        },
+                        success: function(data){
+                            $('.loading').hide();
+                            if(data.status==0){
+                                _this.register_failed_call_back(data);
+                            }else if(data.status==1){
+                                _this.register_succeed_call_back(data);
+                            }
+                        }
+                    });
                 }
-            },created: function(){
-                this.mobile_phone = '18819362618';
+            },created:function(){
             }
         });
     });
