@@ -517,21 +517,3 @@ function getJsonList(config,postData){
         }
     });
 }
-
-//异步验证判断
-function async_verify_judge(param){
-    if(param.data.status==0){
-        if(param.data.data.code == '1001'){
-            loginBackFunction = param.func;
-            loginDialog();
-        }else if(param.data.data.code=='1002'){
-        }else if(param.data.data.code=='1003'){
-        }else{
-            dialog.error(param.data.info);
-        }
-    }else if(param.data.status==1){
-        return true;
-    }else{
-        return true;
-    }
-}
