@@ -317,7 +317,7 @@ i{
 .bff1d25{background:#ff1d25;}
 .bottom_item.buy_now,
 .bottom_item.add_cart,
-.bottom_item.settlement{
+.bottom_item .settlement{
     position:relative;
     background: #FF7BAC;
     color:#fff;
