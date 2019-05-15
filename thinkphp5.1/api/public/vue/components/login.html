@@ -13,8 +13,8 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li @click="toggleCurrent" :class="{current:true}">登录</li>
-                <li @click="toggleCurrent" :class="{current:false}">注册/重置密码</li>
+                <li @click="switchCurrent" :class="{current:true}">登录</li>
+                <li @click="switchCurrent" :class="{current:false}">注册/重置密码</li>
             </ul>
             <form class="loginTab" :class="{show:true}">
                 <div class="login_item">
@@ -82,7 +82,7 @@
                 };
             },
             methods: {
-                toggleCurrent:function(event){
+                switchCurrent:function(event){
                     let _thisLi = $(event.currentTarget);
                     _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
                     let _thisIndex = _thisLi.index();

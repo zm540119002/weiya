@@ -1,31 +1,27 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
-	<div id="app">
+	<div id="loginDialogRoot">
 		<login
 		></login>
 	</div>
 </article>
 {/block}
-{block name="common"}
-	{include file="../../api/public/vue/components/login.html" /}
+{block name="common"}{/block}
+{block name="login_dialog"}
+{include file="../../api/public/vue/components/login.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="css-customize"}
 {/block}
-{block name="suffix-script"}
+{block name="script"}
 <script type="text/javascript">
 	$(function(){
-		let param = {
-		};
 		new Vue({
-			el: '#app',
+			el: '#loginDialogRoot',
 			data:function(){
-				return param;
+				return {};
 			},methods: {
-				login_succeed_call_back:function(){
-					console.log(123);
-				}
 			}
 		});
 	});
