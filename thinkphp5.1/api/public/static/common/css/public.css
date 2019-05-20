@@ -344,8 +344,7 @@ i{
 .amount price{
     font-size:0.30rem;
 }
-.add_cart_icon,
-.add-cart{
+.add_cart_icon{
     width:100%;
     height:100%;
     background-image:url(../../common/img/icons/shopping_cart_icon.png);
@@ -4365,7 +4364,8 @@ select[name="nodeIds"]{
     background: #f2f2f2;
     padding-bottom:1rem;
 }
-.shopping-cart {
+.shopping-cart,
+.add-cart {
     width: 34px;
     height: 25px;
     background-image: url(../../common/img/icons/shopping-cart-icons.png);
