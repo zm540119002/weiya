@@ -3221,6 +3221,9 @@ input[type=text]::-webkit-focus-inner {
     line-height:0.48rem;
     color:#333;
 }
+.selected-number a.add-cart{
+    border:none;
+}
 .count-down-icons{
     display:block;
     width:0.80rem;
