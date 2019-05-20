@@ -344,7 +344,8 @@ i{
 .amount price{
     font-size:0.30rem;
 }
-.add_cart_icon{
+.add_cart_icon,
+.add-cart{
     width:100%;
     height:100%;
     background-image:url(../../common/img/icons/shopping_cart_icon.png);
