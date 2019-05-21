@@ -120,7 +120,7 @@ $(function(){
         }else{
             var url = domain + 'ucenter/UserCenter/' + method;
             $.post(url,postData,function (data) {
-                return false;
+                // return false;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
