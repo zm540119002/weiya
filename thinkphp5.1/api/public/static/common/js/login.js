@@ -69,6 +69,7 @@ function async_verify(param){
             $('.loading').hide();
             if(data.status==0){
                 if(data.data.code == '1001'){
+                    loginBackFunctionParam.jump_url = jump_url;
                     loginDialog();
                 }else if(data.data.code=='1002'){
                     dialog.error(data.data.msg);
@@ -125,7 +126,6 @@ $(function(){
                     return false;
                 }else if(data.status==1){
                     $('.loginLayer').parents('.layui-m-layer').remove();
-                    loginBackFunctionParam.jump_url = data.info;
                     if(loginBackFunction && $.isFunction(loginBackFunction) ){
                         loginBackFunction();
                     }
