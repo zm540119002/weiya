@@ -4368,7 +4368,7 @@ select[name="nodeIds"]{
     padding-bottom:1rem;
 }
 .shopping-cart,
-.add_cart span{
+.add_cart i{
     display:block;
     width: 34px;
     height: 25px;
