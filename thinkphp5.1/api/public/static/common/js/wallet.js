@@ -1,8 +1,94 @@
 //设置钱包支付密码
 $('body').on('click','.set_wallet',function () {
+    var opt ='set_wallet';
     var data = {jump_url:$(this).data('jump_url')};
-    loginBackFunction = forgetWalletPasswordDialog(data);
+    loginBackFunction = forgetWalletPasswordDialog(opt);
     async_verify(data);
+});
+//异步验证
+function async_verify(param){
+    var jump_url = param.jump_url;
+    $.ajax({
+        url: jump_url,
+        data: {},
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(data.status==0){
+                if(data.data.code == '1001'){
+                    loginBackFunctionParam.jump_url = jump_url;
+                    loginDialog();
+                }else if(data.data.code=='1002'){
+                    dialog.error(data.data.msg);
+                }else{
+                    dialog.error(data.info);
+                }
+            }else if(data.status==1){
+                dialog.success(data.info);
+            }
+        }
+    });
+}
+
+//获取验证码
+var timer;
+var requestSign = true;
+$('body').on('click','.send_sms',function(){
+
+    if($(this).attr('disabled')){
+        return false;
+    }
+    var _form = $(this).parents('form');
+    var postData = {};
+    postData.mobile_phone = _form.find('[name=mobile_phone]').val();
+    var userPhone=_form.find('.user_phone').val();
+    if(!requestSign){
+        return false;
+    }
+    var time=60;
+    var content='';
+    if(!register.phoneCheck(userPhone)){
+        content='请输入正确手机号码';
+    }
+    if(content){
+        errorTipc(content);
+        return false;
+    }
+    $('.tel_code').val('');
+    clearInterval(timer);
+    timer=setInterval(CountDown,1000);
+    function CountDown(){
+        _form.find('.send_sms').attr('disabled',true);
+        _form.find('.send_sms').text('重新发送'+time+'s');
+        if(time==0){
+            _form.find('.send_sms').text("获取验证码").removeAttr("disabled");
+            _form.find('.tel_code').val('');
+            clearInterval(timer);
+        }
+        time--;
+    }
+    var send_sms_url = domain + 'ucenter/UserCenter/sendSms';
+    $.post(send_sms_url,postData,function(msg){
+        requestSign = true;
+        if(msg.status == 0){
+            $('.phone').val('').removeAttr("disabled");
+            _form.find('.send_sms').val("获取验证码").removeAttr("disabled");
+            _form.find('.tel_code').val('');
+            clearInterval(timer);
+            errorTipc(msg.info,3000);
+            return false;
+        }else if(msg.status == 1){
+            errorTipc("验证码已发送至手机:"+ postData.mobile_phone +' ，请查看。',3000);
+            return false;
+        }
+    });
 });
 
 function walletPayDialog() {
@@ -155,6 +241,11 @@ function forgetWalletPasswordDialog(opt){
                 if(data.status){
                     //成功后弹出支付密码框
                     if(opt=='set'){
+                        dialog.success(data.info);
+                        layer.closeAll();
+                        return false;
+                    }else if(opt=='set_wallet'){
+                        dialog.success(data.info);
                         layer.closeAll();
                         return false;
                     }else{

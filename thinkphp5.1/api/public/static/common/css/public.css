@@ -3221,7 +3221,7 @@ input[type=text]::-webkit-focus-inner {
     line-height:0.48rem;
     color:#333;
 }
-.selected-number a.add-cart{
+.selected-number a.add_cart{
     border:none;
 }
 .count-down-icons{
@@ -3245,7 +3245,7 @@ input[type=text]::-webkit-focus-inner {
     top: -14px;
     left: 46px;
      display: none; 
-    font-size: 18px;
+    font-size:0.24rem;
     pointer-events: none;
     z-index: 30;
     text-indent: initial;
@@ -4346,7 +4346,7 @@ select[name="nodeIds"]{
     overflow : hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp:2;
     -webkit-box-orient: vertical;
     word-break:break-all;
 }
@@ -4368,7 +4368,8 @@ select[name="nodeIds"]{
     padding-bottom:1rem;
 }
 .shopping-cart,
-.add-cart {
+.add_cart i{
+    display:block;
     width: 34px;
     height: 25px;
     background-image: url(../../common/img/icons/shopping-cart-icons.png);
