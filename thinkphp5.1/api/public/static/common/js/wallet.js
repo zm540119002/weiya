@@ -2,8 +2,45 @@
 $('body').on('click','.set_wallet',function () {
     var data = {jump_url:$(this).data('jump_url')};
     loginBackFunction = forgetWalletPasswordDialog(data);
+
     async_verify(data);
 });
+//异步验证
+function async_verify(param){
+    var jump_url = param.jump_url;
+    $.ajax({
+        url: jump_url,
+        data: {},
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(data.status==0){
+                if(data.data.code == '1001'){
+                    loginBackFunctionParam.jump_url = jump_url;
+                    loginDialog();
+                }else if(data.data.code=='1002'){
+                    dialog.error(data.data.msg);
+                }else{
+                    dialog.error(data.info);
+                }
+            }else if(data.status==1){
+                dialog.success(data.info);
+            }else{
+                loginBackFunctionParam.jump_url = jump_url;
+                if(loginBackFunction && $.isFunction(loginBackFunction) ){
+                    loginBackFunction();
+                }
+            }
+        }
+    });
+}
 
 function walletPayDialog() {
     var content=$('#walletPay').html();
