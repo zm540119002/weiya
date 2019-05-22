@@ -26,7 +26,6 @@
 	<script type="text/javascript" src="api_common_js/jquery/jquery-1.9.1.min.js"></script>
 	<!--前置自定义js-->
 	{block name="pre-script"}{/block}
-	<script type="text/javascript" src="api_common_js/login.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 	<!-- 用于vue组件通信 -->
 	<script type="text/javascript">
@@ -37,6 +36,7 @@
 {block name="header"}{/block}
 <!-- 登录模块 -->
 {block name="login_dialog"}
+	<script type="text/javascript" src="api_common_js/login.js"></script>
 	{include file="../../api/public/template/login_dialog.html" /}
 {/block}
 <!-- 内容模块 -->
