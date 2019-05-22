@@ -241,9 +241,11 @@ function forgetWalletPasswordDialog(opt){
                 if(data.status){
                     //成功后弹出支付密码框
                     if(opt=='set'){
+                        dialog.success(data.info);
                         layer.closeAll();
                         return false;
                     }else if(opt=='set_wallet'){
+                        dialog.success(data.info);
                         layer.closeAll();
                         return false;
                     }else{
