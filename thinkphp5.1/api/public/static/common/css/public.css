@@ -4369,6 +4369,7 @@ select[name="nodeIds"]{
 }
 .shopping-cart,
 .add_cart span{
+    display:block;
     width: 34px;
     height: 25px;
     background-image: url(../../common/img/icons/shopping-cart-icons.png);
