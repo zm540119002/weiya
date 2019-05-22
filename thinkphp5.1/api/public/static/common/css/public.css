@@ -3245,7 +3245,7 @@ input[type=text]::-webkit-focus-inner {
     top: -14px;
     left: 46px;
      display: none; 
-    font-size: 18px;
+    font-size:0.24rem;
     pointer-events: none;
     z-index: 30;
     text-indent: initial;
