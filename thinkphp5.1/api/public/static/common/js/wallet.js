@@ -1,6 +1,6 @@
 //设置钱包支付密码
 $('body').on('click','.set_wallet',function () {
-    var opt = $(this);
+    var opt ='set_wallet';
     var data = {jump_url:$(this).data('jump_url')};
     loginBackFunction = forgetWalletPasswordDialog(opt);
     async_verify(data);
@@ -241,6 +241,9 @@ function forgetWalletPasswordDialog(opt){
                 if(data.status){
                     //成功后弹出支付密码框
                     if(opt=='set'){
+                        layer.closeAll();
+                        return false;
+                    }else if(opt=='set_wallet'){
                         layer.closeAll();
                         return false;
                     }else{
