@@ -4368,7 +4368,7 @@ select[name="nodeIds"]{
     padding-bottom:1rem;
 }
 .shopping-cart,
-.add_cart {
+.add_cart span{
     width: 34px;
     height: 25px;
     background-image: url(../../common/img/icons/shopping-cart-icons.png);
