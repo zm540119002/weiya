@@ -1,8 +1,8 @@
 //设置钱包支付密码
 $('body').on('click','.set_wallet',function () {
+    var opt = $(this);
     var data = {jump_url:$(this).data('jump_url')};
-    loginBackFunction = forgetWalletPasswordDialog(data);
-
+    loginBackFunction = forgetWalletPasswordDialog(opt);
     async_verify(data);
 });
 //异步验证
@@ -32,11 +32,6 @@ function async_verify(param){
                 }
             }else if(data.status==1){
                 dialog.success(data.info);
-            }else{
-                loginBackFunctionParam.jump_url = jump_url;
-                if(loginBackFunction && $.isFunction(loginBackFunction) ){
-                    loginBackFunction();
-                }
             }
         }
     });
