@@ -42,6 +42,60 @@ function async_verify(param){
     });
 }
 
+//获取验证码
+var timer;
+var requestSign = true;
+$('body').on('click','.send_sms',function(){
+
+    if($(this).attr('disabled')){
+        return false;
+    }
+    var _form = $(this).parents('form');
+    var postData = {};
+    postData.mobile_phone = _form.find('[name=mobile_phone]').val();
+    var userPhone=_form.find('.user_phone').val();
+    if(!requestSign){
+        return false;
+    }
+    var time=60;
+    var content='';
+    if(!register.phoneCheck(userPhone)){
+        content='请输入正确手机号码';
+    }
+    if(content){
+        errorTipc(content);
+        return false;
+    }
+    $('.tel_code').val('');
+    clearInterval(timer);
+    timer=setInterval(CountDown,1000);
+    function CountDown(){
+        _form.find('.send_sms').attr('disabled',true);
+        _form.find('.send_sms').text('重新发送'+time+'s');
+        if(time==0){
+            _form.find('.send_sms').text("获取验证码").removeAttr("disabled");
+            _form.find('.tel_code').val('');
+            clearInterval(timer);
+        }
+        time--;
+    }
+    var send_sms_url = domain + 'ucenter/UserCenter/sendSms';
+    $.post(send_sms_url,postData,function(msg){
+        requestSign = true;
+        if(msg.status == 0){
+            $('.phone').val('').removeAttr("disabled");
+            _form.find('.send_sms').val("获取验证码").removeAttr("disabled");
+            _form.find('.tel_code').val('');
+            clearInterval(timer);
+            errorTipc(msg.info,3000);
+            return false;
+        }else if(msg.status == 1){
+            errorTipc("验证码已发送至手机:"+ postData.mobile_phone +' ，请查看。',3000);
+            return false;
+        }
+    });
+});
+
 function walletPayDialog() {
     var content=$('#walletPay').html();
     window.scrollTo(0,0);
