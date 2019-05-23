@@ -2782,7 +2782,9 @@ input[type=text]::-webkit-focus-inner {
     border: 0 none;
     -webkit-box-sizing: content-box;
 }
-
+input.check-all{
+    -webkit-appearance: checkbox;
+}
 .blue .button {
     color: #fff;
     background: #18b4ed;
