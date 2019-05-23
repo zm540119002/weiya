@@ -455,7 +455,8 @@ price{
 .group_btn30:last-child div{
     display:inline-block;
 }
-.group_btn30 div{
+.group_btn30 div,
+.group_btn20 div{
     position:absolute;
     left:0;
     top:0;
