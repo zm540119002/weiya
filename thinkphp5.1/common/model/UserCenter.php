@@ -55,9 +55,10 @@ class UserCenter extends Base {
 	/**注册
 	 */
 	public function register($data){
+		$data['mobile_phone'] = trim($data['mobile_phone']);
 		$data['password'] = trim($data['password']);
 		$saveData['salt'] = create_random_str(10,0);//盐值;
-		$saveData['mobile_phone'] = trim($data['mobile_phone']);
+		$saveData['mobile_phone'] = $data['mobile_phone'];
 		$saveData['password'] = md5($saveData['salt'] . $data['password']);
 		$saveData['captcha'] = trim($data['captcha']);
 		if(!$this->_checkCaptcha($saveData['mobile_phone'],$saveData['captcha'])){
