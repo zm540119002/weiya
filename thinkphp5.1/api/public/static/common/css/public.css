@@ -307,6 +307,9 @@ i{
 .group_cart_nav .total_num{
     color:#ff1d25;
 }
+.group_btn10{width:10%;box-sizing: border-box;}
+.group_btn20{width:20%;box-sizing: border-box;}
+.group_btn25{width:25%;box-sizing: border-box;}
 .group_btn30{width:33.3%;box-sizing: border-box;}
 .group_btn50{width:50%;}
 .group_btn75{width:85%;}
@@ -340,6 +343,9 @@ i{
 }
 .amount{
     color:#E60012;
+}
+.bottom_item .amount{
+    text-align:left;
 }
 .amount price{
     font-size:0.30rem;
@@ -452,12 +458,16 @@ price{
 .group_btn30:last-child div{
     display:inline-block;
 }
-.group_btn30 div{
+.group_btn30 div,
+.group_btn20 div{
     position:absolute;
     left:0;
     top:0;
     width:100%;
     height:100%;
+}
+.group_cart_nav a.group_btn20{
+    color:#333;
 }
 .address_create{
     background: #EC77A3;
@@ -2775,7 +2785,9 @@ input[type=text]::-webkit-focus-inner {
     border: 0 none;
     -webkit-box-sizing: content-box;
 }
-
+input.check-all{
+    -webkit-appearance: checkbox;
+}
 .blue .button {
     color: #fff;
     background: #18b4ed;
@@ -5044,7 +5056,8 @@ ul.message_list{
     background-position:0 -1.85rem;
     vertical-align: -6px;
 }
-.sale_price{
+.sale_price,
+.subtotal_amount span{
     font-size:0.42rem;
 }
 .project_p_item{
