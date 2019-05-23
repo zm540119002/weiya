@@ -344,6 +344,9 @@ i{
 .amount{
     color:#E60012;
 }
+.bottom_item .amount{
+    text-align:left;
+}
 .amount price{
     font-size:0.30rem;
 }
