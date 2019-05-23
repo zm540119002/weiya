@@ -5045,7 +5045,7 @@ ul.message_list{
     vertical-align: -6px;
 }
 .sale_price,
-.subtotal_amount{
+.subtotal_amount span{
     font-size:0.42rem;
 }
 .project_p_item{
