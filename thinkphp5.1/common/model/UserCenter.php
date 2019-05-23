@@ -44,9 +44,6 @@ class UserCenter extends Base {
 		);
 		$user = $this->field($field)->where($where)->find();
 		$user = $user->toArray();
-		if(!count($user)) {
-			return errorMsg('账号不存在,请重新输入！');
-		}
 		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
 			return errorMsg('密码错误,请重新输入！');
 		}
@@ -58,11 +55,10 @@ class UserCenter extends Base {
 	/**注册
 	 */
 	public function register($data){
+		$data['mobile_phone'] = trim($data['mobile_phone']);
 		$data['password'] = trim($data['password']);
-
-		$saveData['name'] = trim($data['name']);
 		$saveData['salt'] = create_random_str(10,0);//盐值;
-		$saveData['mobile_phone'] = trim($data['mobile_phone']);
+		$saveData['mobile_phone'] = $data['mobile_phone'];
 		$saveData['password'] = md5($saveData['salt'] . $data['password']);
 		$saveData['captcha'] = trim($data['captcha']);
 		if(!$this->_checkCaptcha($saveData['mobile_phone'],$saveData['captcha'])){
@@ -82,14 +78,14 @@ class UserCenter extends Base {
 		}elseif ($user['status'] ==2){
 			return errorMsg('账号已删除');
 		}else{//已注册，正常，则修改密码
-			if(!$validateUser->scene('resetPassword')->check($saveData)){
+			if(!$validateUser->scene('resetPassword')->check($data)){
 				return errorMsg($validateUser->getError());
 			}
-			if(!$this->_resetPassword($saveData['mobile_phone'],$saveData['password'])){
+			if(!$this->_resetPassword($saveData['mobile_phone'],$saveData)){
 				return errorMsg('重置密码失败');
 			}
 		}
-		return $this->_login($saveData['mobile_phone'],$saveData['password']);
+		return $this->_login($saveData['mobile_phone'],$data['password']);
 	}
 
 	/**注册
@@ -121,12 +117,16 @@ class UserCenter extends Base {
 
 	/**重置密码
 	 */
-	private function _resetPassword($mobilePhone,$saveData){
+	private function _resetPassword($mobilePhone,$data){
 		$where = array(
 			'mobile_phone' => $mobilePhone,
 		);
-		$saveData['update_time'] = time();
-		$res = $this->isUpdate(true)->where($where)->save($saveData);
+		$saveData = [
+			'salt' => $data['salt'],
+			'password' => $data['password'],
+			'update_time' => time(),
+		];
+		$res = $this->isUpdate(true)->save($saveData,$where);
 		if(false === $res){
 			return false;
 		}
