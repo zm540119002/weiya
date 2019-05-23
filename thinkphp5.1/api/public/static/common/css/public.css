@@ -5044,7 +5044,8 @@ ul.message_list{
     background-position:0 -1.85rem;
     vertical-align: -6px;
 }
-.sale_price{
+.sale_price,
+.subtotal_amount{
     font-size:0.42rem;
 }
 .project_p_item{
