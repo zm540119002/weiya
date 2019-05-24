@@ -3234,7 +3234,7 @@ input.check-all{
     color:#333;
 }
 .selected-number a.add_cart{
-    border:none;
+    /*border:none;*/
 }
 .count-down-icons{
     display:block;
