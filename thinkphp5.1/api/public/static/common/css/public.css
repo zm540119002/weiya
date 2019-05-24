@@ -3233,8 +3233,8 @@ input.check-all{
     line-height:0.48rem;
     color:#333;
 }
-.selected-number a.add_cart{
-    /*border:none;*/
+.selected-number a.add_cart_i{
+    border:none;
 }
 .count-down-icons{
     display:block;
@@ -4380,7 +4380,7 @@ select[name="nodeIds"]{
     padding-bottom:1rem;
 }
 .shopping-cart,
-.add_cart i{
+.add_cart_i i{
     display:block;
     width: 34px;
     height: 25px;
