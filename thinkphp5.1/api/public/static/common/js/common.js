@@ -488,7 +488,7 @@ function getJsonList(config,postData){
     config.url = config.url?config.url:action;
     //要提交的数据
     postData = postData?postData:{};
-    postData.page = config.currentPage ? config.currentPage : 1;
+    postData.page = postData.currentPage ? postData.currentPage : 1;
     postData.pageSize = postData.pageSize ? postData.pageSize:4;
     //请求结束标志
     if(config.requestEnd){
@@ -511,7 +511,7 @@ function getJsonList(config,postData){
             if(data.length<postData.pageSize){
                 config.requestEnd = true;
             }
-            config.currentPage ++;
+            postData.currentPage ++;
             config.loadTrigger = true;
             config.callBack?config.callBack(data):getJsonListDefaultCallBack(data);
         }
