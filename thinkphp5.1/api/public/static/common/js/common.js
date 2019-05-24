@@ -492,9 +492,16 @@ function getJsonList(config,postData){
     postData.pageSize = postData.pageSize ? postData.pageSize:4;
     //请求结束标志
     if(config.requestEnd){
+        $('.ctype-title').remove();
+        config.container.after('<div class="ctype-title"><span class="line"></span><span class="txt f24">已到底部，加载完！</span><span class="line"></span></div>');
         config.loadTrigger = true;
         return false;
     }
+    // //请求结束标志
+    // if(config.requestEnd){
+    //     config.loadTrigger = true;
+    //     return false;
+    // }
     $.ajax({
         url: config.url,
         data: postData,
