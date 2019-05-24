@@ -508,7 +508,7 @@ function getJsonList(config,postData){
         },
         success: function(data){
             $('.loading').hide();
-            if(!data.data){
+            if(!data.data.data){
                 config.requestEnd = true;
             }
             postData.currentPage ++;
