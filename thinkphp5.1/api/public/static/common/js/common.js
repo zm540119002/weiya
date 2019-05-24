@@ -511,7 +511,7 @@ function getJsonList(config,postData){
             if(data.length<postData.pageSize){
                 config.requestEnd = true;
             }
-            config.currentPage ++;
+            postData.currentPage ++;
             config.loadTrigger = true;
             config.callBack?config.callBack(data):getJsonListDefaultCallBack(data);
         }
