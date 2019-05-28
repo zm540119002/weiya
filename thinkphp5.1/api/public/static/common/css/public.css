@@ -5532,7 +5532,20 @@ ul.info_list li{
     border-bottom:1px solid #d9d9d9;
 }
 .menu_nav li.current a{
+    position:relative;
     color:#FF7BAC;
+}
+.menu_nav li.current .num{
+    position: absolute;
+    right: -12px;
+    top: -8px;
+    background: #ff0000;
+    color: #fff;
+    width: 50%;
+    border-radius: 100%;
+    text-align: center;
+    height: 100%;
+    font-style: normal;
 }
 .order_list{
     padding:0.15rem;
