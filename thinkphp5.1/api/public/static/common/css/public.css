@@ -1603,7 +1603,8 @@ background-position: 0 -27px;
 .invite_group_buy.group_buy_end{
     background: #727272;
 }
-.item_checkbox{
+.item_checkbox,
+.check_all{
     border:1px solid #d9d9d9;
     -webkit-appearance:checkbox;
     width:18px;
