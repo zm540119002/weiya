@@ -5541,6 +5541,9 @@ ul.info_list li{
     position:relative;
     color:#FF7BAC;
 }
+.menu_nav li a{
+    position:relative;
+}
 .menu_nav li .num{
     position: absolute;
     right: -12px;
