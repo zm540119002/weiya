@@ -6104,3 +6104,8 @@ div.no_data{
     height: 42px;
     z-index: 999;
 }
+.go-stroll{
+    display: block;
+    text-align: center;
+    color:#0066cc;
+}
