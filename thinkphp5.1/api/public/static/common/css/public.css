@@ -311,7 +311,9 @@ i{
 .group_btn20{width:20%;box-sizing: border-box;}
 .group_btn25{width:25%;box-sizing: border-box;}
 .group_btn30{width:33.3%;box-sizing: border-box;}
+.group_btn33{width:33.3%;box-sizing: border-box;}
 .group_btn50{width:50%;}
+.group_btn70{width:66.6%;}
 .group_btn75{width:85%;}
 .group_btn100{width:100%;}
 .group_cart_nav .bottom_item{border-top:1px solid #d9d9d9;}
@@ -459,7 +461,7 @@ price{
     display:inline-block;
 }
 .group_btn30 div,
-.group_btn20 div{
+.group_btn20 div, #foot_cart_menu .group_cart_nav a div {
     position:absolute;
     left:0;
     top:0;
