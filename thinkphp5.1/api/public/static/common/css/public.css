@@ -322,8 +322,8 @@ i{
 .bottom_item.add_cart,
 .bottom_item .settlement{
     position:relative;
-    background: #FF7BAC;
-    color:#fff;
+    /*background: #FF7BAC;
+    color:#fff;*/
 }
 .bottom_item:last-child
 .bottom_item:first-child{
