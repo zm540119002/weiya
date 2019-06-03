@@ -5628,6 +5628,7 @@ ul.info_list li{
     padding:0 0.15rem 0.15rem;
     border-bottom:1px solid #d9d9d9;
     margin:0 0 0.20rem 0;
+    overflow: hidden;
 }
 .goods_order_item li img{
     max-width:100px;
