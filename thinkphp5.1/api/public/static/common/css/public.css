@@ -307,6 +307,15 @@ i{
 .group_cart_nav .total_num{
     color:#ff1d25;
 }
+.add_cart_icon{
+    width:100%;
+    height:100%;
+    background-image:url(../../common/img/icons/shopping_cart_icon.png);
+    background-repeat: no-repeat;
+    background-size:0.5rem 0.45rem;
+    background-position: center;
+    text-indent: -99999rem;
+}
 .group_btn10{width:10%;box-sizing: border-box;}
 .group_btn20{width:20%;box-sizing: border-box;}
 .group_btn25{width:25%;box-sizing: border-box;}
@@ -352,15 +361,7 @@ i{
 .amount price{
     font-size:0.30rem;
 }
-.add_cart_icon{
-    width:100%;
-    height:100%;
-    background-image:url(../../common/img/icons/shopping_cart_icon.png);
-    background-repeat: no-repeat;
-    background-size:0.5rem 0.45rem;
-    background-position: center;
-    text-indent: -99999rem;
-}
+
 .cart_num {
     position: absolute;
     top: 0.08rem;
