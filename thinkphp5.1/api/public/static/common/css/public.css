@@ -1688,8 +1688,7 @@ background-position: 0 -27px;
 .layui-m-layerchild.addressLayer,
 .layui-m-layerchild.setBrandLayer,
 .layui-m-layerchild.userInfoLayer,
-.layui-m-layerchild.nickInfoLayer,
-.layui-m-layerchild.loginLayer{
+.layui-m-layerchild.nickInfoLayer{
     position:fixed; 
     left:0; 
     top:0; 
