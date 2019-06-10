@@ -338,7 +338,7 @@ function swiper(elemObj){
         }
     });
 }
-//活动倒计时
+//活动倒计时，周五截止
 function countDown(time,id){
     var day_elem = id.find('.day');
     var hour_elem = id.find('.hour');
@@ -369,6 +369,9 @@ function getWeek(i) {
     var now = new Date();
     var nowTime=now.getTime();
     var day=now.getDay();
+    console.log(day);
+    console.log(now);
+    console.log(nowTime);
     var oneDayTime=24*60*60*1000;
     if(day==5){
          //显示周五
