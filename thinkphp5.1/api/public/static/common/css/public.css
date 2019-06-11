@@ -324,7 +324,7 @@ i{
 .group_btn40{width:40%;box-sizing: border-box;}
 .group_btn50{width:50%;}
 .group_btn70{width:70%;}
-.group_btn75{width:85%;}
+.group_btn75{width:75%;}
 .group_btn100{width:100%;}
 .group_cart_nav .bottom_item{border-top:1px solid #d9d9d9;}
 .bottom_item{background:#fff;}
@@ -4845,6 +4845,16 @@ ul.message_list{
 .nickInfoLayer .user_name{
     border:none;
 }
+.flex_item a span.all{
+    background-position:0 -7.93rem;
+}
+.flex_item a span.pur_wallet{
+    background-position:0 -8.52rem;
+}
+.flex_item a span.s_wallet{
+    background-position:0 -9.2rem;
+}
+
 .setBrandLayer .list li.current {
     border: 1px solid #009A3E;
     background-image:url(../../common/img/icons/selected_icon.png);
