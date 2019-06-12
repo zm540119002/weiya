@@ -476,7 +476,8 @@ price{
 .group_cart_nav a.group_btn20{
     color:#333;
 }
-.address_create{
+.address_create,
+.address_save{
     background: #EC77A3;
 }
 .goodsInfoLayer .group_btn30:first-child{
