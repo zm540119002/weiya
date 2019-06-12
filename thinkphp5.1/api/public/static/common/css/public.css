@@ -463,7 +463,10 @@ price{
     display:inline-block;
 }
 .group_btn30 div,
-.group_btn20 div, #foot_cart_menu .group_cart_nav a div {
+.group_btn20 div, 
+#foot_cart_menu .group_cart_nav a div,
+#foot_cart_menu2 .group_cart_nav a div
+{
     position:absolute;
     left:0;
     top:0;
