@@ -5130,6 +5130,7 @@ ul.message_list{
 #item1 .floor_item p{
     line-height:20px;
     color:#575757;
+    overflow:hidden;
 }
 .floor:last-child .floor_item{
     padding:0;
