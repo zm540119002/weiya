@@ -695,4 +695,12 @@ function mobileNHide(param){
     str=param.replace(reg,'$1****$2');
     return str;
 }
+function isMobileSystem() {
+     var ua = window.navigator.userAgent.toLowerCase();
+     if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+         return true;
+     } else {
+         return false;
+ 　   }
+}
 
