@@ -390,7 +390,7 @@ var register={
         }
     },
     vfyCheck:function(vfyStr){
-        var vfy=/^\d{6}$/;
+        var vfy=/^\d{4,6}$/;
         if(vfy.test(vfyStr)){
             return true;
         }else{
