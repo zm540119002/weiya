@@ -476,7 +476,8 @@ price{
 .group_cart_nav a.group_btn20{
     color:#333;
 }
-.address_create{
+.address_create,
+.address_save{
     background: #EC77A3;
 }
 .goodsInfoLayer .group_btn30:first-child{
@@ -5130,6 +5131,7 @@ ul.message_list{
 #item1 .floor_item p{
     line-height:20px;
     color:#575757;
+    overflow:hidden;
 }
 .floor:last-child .floor_item{
     padding:0;
