@@ -1693,7 +1693,7 @@ background-position: 0 -27px;
 .layui-m-layerchild.setBrandLayer,
 .layui-m-layerchild.userInfoLayer,
 .layui-m-layerchild.nickInfoLayer,
-.memberRegTpl.nickInfoLayer{
+.layui-m-layerchild.memberRegTpl{
     position:fixed; 
     left:0; 
     top:0; 
