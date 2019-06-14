@@ -1692,7 +1692,8 @@ background-position: 0 -27px;
 .layui-m-layerchild.addressLayer,
 .layui-m-layerchild.setBrandLayer,
 .layui-m-layerchild.userInfoLayer,
-.layui-m-layerchild.nickInfoLayer{
+.layui-m-layerchild.nickInfoLayer,
+.layui-m-layerchild.memberRegTpl{
     position:fixed; 
     left:0; 
     top:0; 
@@ -5088,7 +5089,8 @@ ul.message_list{
     margin:0 0 0.12rem 0;
 }
 .nav-floor,
-#menu ul{
+#menu ul,
+#activity-menu ul{
     /*position:fixed;
     left:0;
     top:0;*/
@@ -5100,19 +5102,22 @@ ul.message_list{
     border-bottom:1px solid #d9d9d9;
 }
 .nav-floor a,
-#menu ul li{
+#menu ul li,
+#activity-menu ul li{
     width:33.3%;
     text-align:center;
     box-sizing: border-box;
 }
-#menu ul li.active{
+#menu ul li.active,
+#activity-menu ul li.active{
     background: #d9d9d9;
 }
 .nav-floor a.active,
 .detail-nav li.active a{
     color:#ff7bac;
 }
-#menu ul li.active a{
+#menu ul li.active a,
+#activity-menu ul li.active a{
     color:#333;
 }
 .floor{
