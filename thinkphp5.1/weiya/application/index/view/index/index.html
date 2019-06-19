@@ -33,7 +33,7 @@
 			<div>
 				<div class="scroll_news">
 					<a class="news_tit">
-						<img src="api_common_img/wy_logo.png" alt="">
+						<img src="public_img/wy_logo.png" alt="">
 					</a>
 					<div class="news_list_wrapper">
 						<ul class="news_list j_scroll_news">
@@ -58,7 +58,7 @@
 					<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
 						<div class="show-img">
 							{empty name="info.thumb_img"}
-							<img src="api_common_img/default/no_pic_100.jpg" alt="">
+							<img src="public_img/default/no_pic_100.jpg" alt="">
 							{else /}
 							<img src="public_uploads/{$info.thumb_img}" alt="">
 							{/empty}
@@ -80,7 +80,7 @@
 					<li data-id="{$info.id}">
 						<a href="{:url('Project/detail',['id'=>$info.id])}">
 							{empty name="info.thumb_img"}
-							<img src="api_common_img/default/no_pic_1000.jpg" alt="">
+							<img src="public_img/default/no_pic_1000.jpg" alt="">
 							{else /}
 							<img src="public_uploads/{$info.thumb_img}" alt="">
 							{/empty}
