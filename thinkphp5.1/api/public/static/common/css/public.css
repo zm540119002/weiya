@@ -2924,6 +2924,9 @@ input.check-all{
 /*@media (max-width: 720px) {
 	.mask { position: fixed; }
 }*/
+.city_mask{
+    display: block;
+}
 .content-label{
     display: block;
     margin:0 0 10px 0;
