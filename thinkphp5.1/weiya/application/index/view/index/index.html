@@ -7,16 +7,16 @@
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide swiper-slide-active">
-					<img src="public_img/banner/home-banner1.jpg" alt="" class="common_default_img">
+					<img src="api_common_img/banner/home-banner1.jpg" alt="" class="common_default_img">
 				</div>
 				<div class="swiper-slide ">
-					<img src="public_img/banner/home-banner2.jpg" alt="" class="common_default_img">
+					<img src="api_common_img/banner/home-banner2.jpg" alt="" class="common_default_img">
 				</div>
 				<div class="swiper-slide ">
-					<img src="public_img/banner/home-banner3.jpg" alt="" class="common_default_img">
+					<img src="api_common_img/banner/home-banner3.jpg" alt="" class="common_default_img">
 				</div>
 				<div class="swiper-slide ">
-					<img src="public_img/banner/home-banner4.jpg" alt="" class="common_default_img">
+					<img src="api_common_img/banner/home-banner4.jpg" alt="" class="common_default_img">
 				</div>
 			</div>
 			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
@@ -33,7 +33,7 @@
 			<div>
 				<div class="scroll_news">
 					<a class="news_tit">
-						<img src="public_img/wy_logo.png" alt="">
+						<img src="api_common_img/wy_logo.png" alt="">
 					</a>
 					<div class="news_list_wrapper">
 						<ul class="news_list j_scroll_news">
@@ -58,7 +58,7 @@
 					<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
 						<div class="show-img">
 							{empty name="info.thumb_img"}
-							<img src="public_img/default/no_pic_100.jpg" alt="">
+							<img src="api_common_img/default/no_pic_100.jpg" alt="">
 							{else /}
 							<img src="public_uploads/{$info.thumb_img}" alt="">
 							{/empty}
@@ -80,7 +80,7 @@
 					<li data-id="{$info.id}">
 						<a href="{:url('Project/detail',['id'=>$info.id])}">
 							{empty name="info.thumb_img"}
-							<img src="public_img/default/no_pic_1000.jpg" alt="">
+							<img src="api_common_img/default/no_pic_1000.jpg" alt="">
 							{else /}
 							<img src="public_uploads/{$info.thumb_img}" alt="">
 							{/empty}
