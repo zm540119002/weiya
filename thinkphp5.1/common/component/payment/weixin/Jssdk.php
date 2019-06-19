@@ -21,7 +21,7 @@ class Jssdk {
       if ($access_token) {
         $data->expire_time = time() + 7000;
         $data->access_token = $access_token;
-        $this->set_php_file("access_token.php", json_encode($data));
+        $this->set_php_file("access_token.txt", json_encode($data));
       }
     } else {
       $access_token = $data->access_token;
