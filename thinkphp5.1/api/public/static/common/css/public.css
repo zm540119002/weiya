@@ -2924,7 +2924,7 @@ input.check-all{
 /*@media (max-width: 720px) {
 	.mask { position: fixed; }
 }*/
-.express-area-box .city_mask{
+.city_mask{
     display: block;
     position: absolute;
     top: 0; 
