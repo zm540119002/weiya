@@ -2920,6 +2920,9 @@ input.check-all{
 	.express-area-box { position: fixed; left: 0; width: 100%; margin-left: 0; }
 }*/
 /*遮罩层*/
+.area-list li.current{
+    background: #0066cc;
+}
 .mask,#areaMask{ display: none; position: absolute; top: 0; left: 0; z-index:99999998; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); }
 /*@media (max-width: 720px) {
 	.mask { position: fixed; }
