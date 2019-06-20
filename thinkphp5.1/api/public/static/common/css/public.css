@@ -4360,8 +4360,9 @@ select[name="nodeIds"]{
 .goodsInfoLayer .layui-m-layerbtn,
 .loginLayer .layui-m-layerbtn,
 .forgetPasswordLayer .layui-m-layerbtn,
-.brandLayer .layui-m-layerbtn,
-.userInfoLayer .layui-m-layerbtn{
+.brandLayer .layui-m-layerbtn,s
+.userInfoLayer .layui-m-layerbtn,
+.shareqrCodeLayer .layui-m-layerbtn{
     width:0.5rem;
     height:0.5rem;
     line-height:0.5rem;
