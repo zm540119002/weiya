@@ -2959,11 +2959,11 @@ input.check-all{
     position: fixed;
     right: 0;
     top: 0;
-    padding:0.15rem 2%;
+    padding:0.18rem 2%;
     z-index: 100;
     width:96%;
     font-size:0.24rem;
-    background:rgb(0,0,0,0.6);
+    background:rgb(0,0,0,0.35);
 }
 .subscribe_tpl span{
     color:#fff;
