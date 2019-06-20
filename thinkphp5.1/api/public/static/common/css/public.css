@@ -2938,6 +2938,12 @@ input.check-all{
     height: 100%; 
     background-color: rgba(0,0,0,.5);
 }
+.subscribe{
+    position: fixed;
+    right:0;
+    top:0;
+    z-index:100;
+}
 .content-label{
     display: block;
     margin:0 0 10px 0;
