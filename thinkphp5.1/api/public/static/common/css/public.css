@@ -1714,8 +1714,10 @@ background-position: 0 -27px;
     border: none; 
     -webkit-animation-duration: .5s; 
     animation-duration: .5s;
+    background: #C7AA53;
 }
 .layui-m-layerchild.shareqrCodeLayer img{
+    display:block;
     width:40%;
     margin:0 auto;
 }
