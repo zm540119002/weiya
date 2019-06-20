@@ -5735,7 +5735,8 @@ ul.info_list li{
 .addressLayer .layui-m-layerbtn,
 .setBrandLayer .layui-m-layerbtn,
 .projectDetailLayer .layui-m-layerbtn,
-.userInfoLayer .layui-m-layerbtn{
+.userInfoLayer .layui-m-layerbtn,
+.shareqrCodeLayer .layui-m-layerbtn{
     position:fixed;
     left:0;
     bottom:0;
