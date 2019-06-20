@@ -5745,7 +5745,8 @@ ul.info_list li{
     bottom:1rem;
 }*/
 .brandLayer .layui-m-layerbtn,
-.userInfoLayer .layui-m-layerbtn{
+.userInfoLayer .layui-m-layerbtn,
+.shareqrCodeLayer .layui-m-layerbtn{
     /*background-image:url(../../common/img/icons/close_btn.png);*/
     background-repeat:no-repeat;
     background-size: 0.25rem auto;
