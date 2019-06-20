@@ -2955,12 +2955,16 @@ input.check-all{
     height: 100%; 
     background-color: rgba(0,0,0,.5);
 }
-.subscribe{
+.subscribe_tpl{
     position: fixed;
-    right: 0.12rem;
-    top: 0.12rem;
+    right: 0;
+    top: 0;
     z-index: 100;
-    width: 1rem;
+    width: 100%;
+    
+}
+.subscribe_tpl .subscribe{
+    width:1rem;
     text-align: center;
     background: red;
     color: #fff;
