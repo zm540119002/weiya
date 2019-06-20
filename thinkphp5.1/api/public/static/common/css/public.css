@@ -4374,6 +4374,9 @@ select[name="nodeIds"]{
     background-color:transparent;
     border-top:none;
 }
+.shareqrCodeLayer .layui-m-layerbtn{
+    background-image:none;
+}
 .loginLayer .layui-m-layerbtn,
 .forgetPasswordLayer .layui-m-layerbtn,
 .payPasswordLayer .layui-m-layerbtn span[type="0"],
