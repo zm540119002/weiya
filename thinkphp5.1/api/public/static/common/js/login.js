@@ -2,25 +2,25 @@
 function loginDialog(){
     var content=$('.userInfoWrapper').html();
     window.scrollTo(0,0);
-    layer.open({
-        // className:'loginLayer',
-        // type:1,
-        shadeClose:false,
-        content:content,
-        // btn:[''],
-        success:function(indexs,i){
-            tab_down('.loginNav li','.loginTab','click');
-            $('.layui-m-layershade').on('touchmove',function(e){
-                event.preventDefault();
-            });
-            fixedLayer();
-        },
-        yes:function(index){
-            cancleFixedLayer();
-            $('.loginTab').eq(0).show();
-            layer.close(index);
-        }
-    });
+    // layer.open({
+    //     className:'loginLayer',
+    //     type:1,
+    //     shadeClose:false,
+    //     content:content,
+    //     btn:[''],
+    //     success:function(indexs,i){
+    //         tab_down('.loginNav li','.loginTab','click');
+    //         $('.layui-m-layershade').on('touchmove',function(e){
+    //             event.preventDefault();
+    //         });
+    //         fixedLayer();
+    //     },
+    //     yes:function(index){
+    //         cancleFixedLayer();
+    //         $('.loginTab').eq(0).show();
+    //         layer.close(index);
+    //     }
+    // });
 }
 //退出-弹窗触发
 function logoutDialog(){
