@@ -1,6 +1,5 @@
 //登录-弹窗触发
 function loginDialog(){
-    alert(123);
     var content=$('.userInfoWrapper').html();
     window.scrollTo(0,0);
     layer.open({
@@ -8,7 +7,6 @@ function loginDialog(){
         type:1,
         shadeClose:false,
         content:content,
-        btn:[''],
         success:function(indexs,i){
             tab_down('.loginNav li','.loginTab','click');
             $('.layui-m-layershade').on('touchmove',function(e){
