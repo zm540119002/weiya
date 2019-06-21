@@ -3,8 +3,8 @@ function loginDialog(){
     var content=$('.userInfoWrapper').html();
     window.scrollTo(0,0);
     layer.open({
-        className:'loginLayer',
-        type:1,
+        skin:'loginLayer',
+        title:['用户'],
         shadeClose:false,
         content:content,
         success:function(indexs,i){
