@@ -1,6 +1,6 @@
 //登录-弹窗触发
 function loginDialog(){
-    var content=$('.userInfoWrapper').html();
+    //var content=$('.userInfoWrapper').html();
     window.scrollTo(0,0);
     layer.open({
         className:'loginLayer',
