@@ -7,7 +7,7 @@ function loginDialog(){
         type:1,
         shadeClose:false,
         content:content,
-        btn:[''],
+        // btn:[''],
         success:function(indexs,i){
             tab_down('.loginNav li','.loginTab','click');
             $('.layui-m-layershade').on('touchmove',function(e){
