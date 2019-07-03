@@ -519,7 +519,7 @@ var district = 	[
 						["路氹城"]
 					]
 				];
-var expressArea, areaCont, areaList = $("#areaList")
+var expressArea, areaCont, areaList = $("#areaList");
 	// , areaTop = areaList.offset().top;
 
 /*初始化省份*/
