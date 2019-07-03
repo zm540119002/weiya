@@ -80,6 +80,14 @@ function isPosIntNumber(number) {
 }
 
 /**
+ * 对象验证
+ * @returns {boolean}
+ */
+function isObject(value) {
+    return value === Object(value);
+}
+
+/**
  * 正整数或0
  * @returns {boolean}
  */
