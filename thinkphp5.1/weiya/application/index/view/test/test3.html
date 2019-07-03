@@ -13,7 +13,7 @@
 {block name="common"}
 <template id="child-component-tpl">
 	<div>
-		<h4>这个世界不仅有男人和女人aaaaaaa</h4>
+		<h4>这个世界不仅有男人和女人</h4>
 
 		<slot name="girl"></slot>
 		<slot name="boy"></slot>
@@ -27,7 +27,6 @@
 {/block}
 {block name="script"}
 <script type="text/javascript">
-	alert(123);
 	Vue.component('child-component',{
 		template:'#child-component-tpl'
 	});
