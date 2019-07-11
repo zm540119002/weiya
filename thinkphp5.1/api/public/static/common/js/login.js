@@ -5,9 +5,9 @@ function loginDialog(){
     layer.open({
         className:'loginLayer',
         type:1,
+        title:['用户'],
         shadeClose:false,
         content:content,
-        btn:[''],
         success:function(indexs,i){
             tab_down('.loginNav li','.loginTab','click');
             $('.layui-m-layershade').on('touchmove',function(e){

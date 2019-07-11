@@ -307,23 +307,35 @@ i{
 .group_cart_nav .total_num{
     color:#ff1d25;
 }
+.add_cart_icon{
+    width:100%;
+    height:100%;
+    background-image:url(../../common/img/icons/shopping_cart_icon.png);
+    background-repeat: no-repeat;
+    background-size:0.5rem 0.45rem;
+    background-position: center;
+    text-indent: -99999rem;
+}
 .group_btn10{width:10%;box-sizing: border-box;}
 .group_btn20{width:20%;box-sizing: border-box;}
 .group_btn25{width:25%;box-sizing: border-box;}
 .group_btn30{width:33.3%;box-sizing: border-box;}
+.group_btn33{width:33.3%;box-sizing: border-box;}
+.group_btn40{width:40%;box-sizing: border-box;}
 .group_btn50{width:50%;}
-.group_btn75{width:85%;}
+.group_btn70{width:70%;}
+.group_btn75{width:75%;}
 .group_btn100{width:100%;}
 .group_cart_nav .bottom_item{border-top:1px solid #d9d9d9;}
 .bottom_item{background:#fff;}
 .bff6482{background: #ff6482;}
 .bff1d25{background:#ff1d25;}
-.bottom_item.buy_now,
-.bottom_item.add_cart,
+.bottom_item .buy_now,
+.bottom_item .add_cart,
 .bottom_item .settlement{
     position:relative;
-    background: #FF7BAC;
-    color:#fff;
+    /*background: #FF7BAC;
+    color:#fff;*/
 }
 .bottom_item:last-child
 .bottom_item:first-child{
@@ -350,15 +362,7 @@ i{
 .amount price{
     font-size:0.30rem;
 }
-.add_cart_icon{
-    width:100%;
-    height:100%;
-    background-image:url(../../common/img/icons/shopping_cart_icon.png);
-    background-repeat: no-repeat;
-    background-size:0.5rem 0.45rem;
-    background-position: center;
-    text-indent: -99999rem;
-}
+
 .cart_num {
     position: absolute;
     top: 0.08rem;
@@ -449,7 +453,7 @@ price{
     display: block;
 }
 .group_btn30{
-    width:33.3%;
+    width:30%;
     box-sizing: border-box;
 }
 .group_btn30:first-child{
@@ -459,7 +463,10 @@ price{
     display:inline-block;
 }
 .group_btn30 div,
-.group_btn20 div{
+.group_btn20 div, 
+#foot_cart_menu .group_cart_nav a div,
+#foot_cart_menu2 .group_cart_nav a div
+{
     position:absolute;
     left:0;
     top:0;
@@ -469,7 +476,8 @@ price{
 .group_cart_nav a.group_btn20{
     color:#333;
 }
-.address_create{
+.address_create,
+.address_save{
     background: #EC77A3;
 }
 .goodsInfoLayer .group_btn30:first-child{
@@ -1684,7 +1692,8 @@ background-position: 0 -27px;
 .layui-m-layerchild.addressLayer,
 .layui-m-layerchild.setBrandLayer,
 .layui-m-layerchild.userInfoLayer,
-.layui-m-layerchild.nickInfoLayer{
+.layui-m-layerchild.nickInfoLayer,
+.layui-m-layerchild.memberRegTpl{
     position:fixed; 
     left:0; 
     top:0; 
@@ -1694,6 +1703,23 @@ background-position: 0 -27px;
     border: none; 
     -webkit-animation-duration: .5s; 
     animation-duration: .5s;
+}
+.layui-m-layerchild.shareqrCodeLayer{
+    position:fixed; 
+    left:0; 
+    top:0; 
+    bottom:0;
+    width:100%; 
+    height:50%; 
+    border: none; 
+    -webkit-animation-duration: .5s; 
+    animation-duration: .5s;
+    background: #C7AA53;
+}
+.layui-m-layerchild.shareqrCodeLayer img{
+    display:block;
+    width:50%;
+    margin:0 auto;
 }
 .layui-m-layer .setBrandLayer h3,
 .layui-m-layer .userInfoLayer h3{
@@ -2883,9 +2909,15 @@ input.check-all{
 .express-area-box header { position: relative; border-top: 1px solid #e2e2e2; border-bottom: 1px solid #e2e2e2; }
 .express-area-box header h3 { margin: 0 1.675rem; text-align: center; font-size: .24rem; line-height: .8rem; }
 .express-area-box header .back,
-.express-area-box header .close { position: absolute; top: 0; width: .5rem; height: .8rem; }
+.express-area-box header .close,
+.express-area-box header .backUp{ position: absolute; top: 0; width: .5rem; height: .8rem; }
 .express-area-box header .back { 
     display: none; 
+    left: 0; 
+    background: url(../../common/img/icons/back.png) no-repeat center;   
+    background-size:8px auto; 
+}
+.express-area-box header .backUp{ 
     left: 0; 
     background: url(../../common/img/icons/back.png) no-repeat center;   
     background-size:8px auto; 
@@ -2905,10 +2937,45 @@ input.check-all{
 	.express-area-box { position: fixed; left: 0; width: 100%; margin-left: 0; }
 }*/
 /*遮罩层*/
+.area-list li.current{
+    background: #0066cc;
+    color:#fff;
+}
 .mask,#areaMask{ display: none; position: absolute; top: 0; left: 0; z-index:99999998; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); }
 /*@media (max-width: 720px) {
 	.mask { position: fixed; }
 }*/
+.city_mask{
+    display: block;
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    z-index:99999998; 
+    width: 100%;
+    height: 100%; 
+    background-color: rgba(0,0,0,.5);
+}
+.subscribe_tpl{
+    position: fixed;
+    right: 0;
+    top: 0;
+    padding:0.18rem 2%;
+    z-index: 100;
+    width:96%;
+    font-size:0.24rem;
+    background:rgba(0,0,0,0.35);
+}
+.subscribe_tpl span{
+    color:#fff;
+}
+.subscribe_tpl .subscribe{
+    width:1rem;
+    text-align: center;
+    background: red;
+    color: #fff;
+    padding: 0.08rem 0.12rem;
+    border-radius: 0.12rem;
+}
 .content-label{
     display: block;
     margin:0 0 10px 0;
@@ -4294,7 +4361,8 @@ select[name="nodeIds"]{
 .loginLayer .layui-m-layerbtn,
 .forgetPasswordLayer .layui-m-layerbtn,
 .brandLayer .layui-m-layerbtn,
-.userInfoLayer .layui-m-layerbtn{
+.userInfoLayer .layui-m-layerbtn,
+.shareqrCodeLayer .layui-m-layerbtn{
     width:0.5rem;
     height:0.5rem;
     line-height:0.5rem;
@@ -4305,6 +4373,9 @@ select[name="nodeIds"]{
     top:-32px;
     background-color:transparent;
     border-top:none;
+}
+.shareqrCodeLayer .layui-m-layerbtn{
+    background-image:none;
 }
 .loginLayer .layui-m-layerbtn,
 .forgetPasswordLayer .layui-m-layerbtn,
@@ -4841,6 +4912,16 @@ ul.message_list{
 .nickInfoLayer .user_name{
     border:none;
 }
+.flex_item a span.all{
+    background-position:0 -7.93rem;
+}
+.flex_item a span.pur_wallet{
+    background-position:0 -3.7rem;
+}
+.flex_item a span.s_wallet{
+    background-position:0 -4.35rem;
+}
+
 .setBrandLayer .list li.current {
     border: 1px solid #009A3E;
     background-image:url(../../common/img/icons/selected_icon.png);
@@ -5070,7 +5151,8 @@ ul.message_list{
     margin:0 0 0.12rem 0;
 }
 .nav-floor,
-#menu ul{
+#menu ul,
+#activity-menu ul{
     /*position:fixed;
     left:0;
     top:0;*/
@@ -5082,19 +5164,22 @@ ul.message_list{
     border-bottom:1px solid #d9d9d9;
 }
 .nav-floor a,
-#menu ul li{
+#menu ul li,
+#activity-menu ul li{
     width:33.3%;
     text-align:center;
     box-sizing: border-box;
 }
-#menu ul li.active{
+#menu ul li.active,
+#activity-menu ul li.active{
     background: #d9d9d9;
 }
 .nav-floor a.active,
 .detail-nav li.active a{
     color:#ff7bac;
 }
-#menu ul li.active a{
+#menu ul li.active a,
+#activity-menu ul li.active a{
     color:#333;
 }
 .floor{
@@ -5113,6 +5198,7 @@ ul.message_list{
 #item1 .floor_item p{
     line-height:20px;
     color:#575757;
+    overflow:hidden;
 }
 .floor:last-child .floor_item{
     padding:0;
@@ -5541,7 +5627,10 @@ ul.info_list li{
     position:relative;
     color:#FF7BAC;
 }
-.menu_nav li.current .num{
+.menu_nav li a{
+    position:relative;
+}
+.menu_nav li .num{
     position: absolute;
     right: -12px;
     top: -8px;
@@ -5550,7 +5639,7 @@ ul.info_list li{
     width: 50%;
     border-radius: 100%;
     text-align: center;
-    height: 100%;
+ /*   height: 100%;*/
     font-style: normal;
 }
 .order_list{
@@ -5623,6 +5712,7 @@ ul.info_list li{
     padding:0 0.15rem 0.15rem;
     border-bottom:1px solid #d9d9d9;
     margin:0 0 0.20rem 0;
+    overflow: hidden;
 }
 .goods_order_item li img{
     max-width:100px;
@@ -5648,7 +5738,8 @@ ul.info_list li{
 .addressLayer .layui-m-layerbtn,
 .setBrandLayer .layui-m-layerbtn,
 .projectDetailLayer .layui-m-layerbtn,
-.userInfoLayer .layui-m-layerbtn{
+.userInfoLayer .layui-m-layerbtn,
+.shareqrCodeLayer .layui-m-layerbtn{
     position:fixed;
     left:0;
     bottom:0;
@@ -5658,7 +5749,8 @@ ul.info_list li{
     bottom:1rem;
 }*/
 .brandLayer .layui-m-layerbtn,
-.userInfoLayer .layui-m-layerbtn{
+.userInfoLayer .layui-m-layerbtn,
+.shareqrCodeLayer .layui-m-layerbtn{
     /*background-image:url(../../common/img/icons/close_btn.png);*/
     background-repeat:no-repeat;
     background-size: 0.25rem auto;
@@ -6099,4 +6191,9 @@ div.no_data{
     width: 20px;
     height: 42px;
     z-index: 999;
+}
+.go-stroll{
+    display: block;
+    text-align: center;
+    color:#0066cc;
 }
