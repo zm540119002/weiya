@@ -12,24 +12,16 @@ function getToken($data = [],$expTime = 7200)
     $token = array_merge($token,$data);
     $jwt =  \common\component\jwt\JWT::encode($token, $key, "HS256"); //根据参数生成了 token
     return $jwt;
-    return json([
-        "token" => $jwt
-    ]);
 }
 
 
-function check()
+function check($token)
 {
-    $jwt = input("token");  //上一步中返回给用户的token
+    $token = input("token");  //上一步中返回给用户的token
     $key = "huang";  //上一个方法中的 $key 本应该配置在 config文件中的
-    //$info = JWT::decode($jwt, $key, ["HS256"]); //解密jwt
     try {
-        $jwtAuth = json_encode(\common\component\jwt\JWT::decode($jwt, $key, array('HS256')));
+        $jwtAuth = json_encode(\common\component\jwt\JWT::decode($token, $key, array('HS256')));
         $authInfo = json_decode($jwtAuth, true);
-//            $jwtAuth = JWT::decode($jwt, $key, ["HS256"]);
-//            $authInfo = json_decode($jwtAuth, true);
-        p($authInfo);
-        $msg = [];
         if (!empty($authInfo['uid'])) {
             $msg = [
                 'status' => 1001,
