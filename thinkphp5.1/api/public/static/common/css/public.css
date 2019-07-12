@@ -3759,7 +3759,8 @@ input.check-all{
     width:50%;
     float:left;
 }
-.recharge_form input[type="submit"]{
+.recharge_form input[type="submit"],
+.recharge_form input[type="button"]{
     height:100%;
     background: #FF7BAC;
     color:#fff;
