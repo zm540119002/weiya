@@ -24,7 +24,7 @@ export function saveGoodsImageList (goodsId, images, imgDelIds) {
 // post请求
 export function saveUser (data) {
   return request({
-    url: 'index/Test/index',
+    url: 'ucenter/UserCenterApi/login',
     method: 'post',
     data
   })
