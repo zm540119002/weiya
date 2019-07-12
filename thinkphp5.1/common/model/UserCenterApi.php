@@ -16,16 +16,16 @@ class UserCenterApi extends Base {
 		$data['password'] = trim($data['password']);
 		$validateUser = new \common\validate\User();
 		if(!$validateUser->scene('login')->check($data)) {
-			return errorMsg($validateUser->getError());
+			return buildFailed($validateUser->getError());
 		}
 		if($data['mobile_phone'] && $data['password']){//账号密码登录
 			$user = $this->_accountStatusCheck($data['mobile_phone']);
 			if(empty($user)){
-				return errorMsg('账号不存在');
+				return buildFailed('账号不存在');
 			}elseif ($user['status'] ==1){
-				return errorMsg('账号已禁用');
+				return buildFailed('账号已禁用');
 			}elseif ($user['status'] ==2){
-				return errorMsg('账号已删除');
+				return buildFailed('账号已删除');
 			}
 			return $this->_login($data['mobile_phone'],$data['password']);
 		}
@@ -45,11 +45,11 @@ class UserCenterApi extends Base {
 		$user = $this->field($field)->where($where)->find();
 		$user = $user->toArray();
 		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
-			return errorMsg('密码错误,请重新输入！');
+			return buildFailed('密码错误,请重新输入！');
 		}
 		//更新最后登录时间
 		$this->_setLastLoginTimeById($user['id']);
-		return successMsg($this->_setCache($user));
+		return buildSuccess($this->_setCache($user));
 	}
 
 	/**注册
@@ -62,27 +62,27 @@ class UserCenterApi extends Base {
 		$saveData['password'] = md5($saveData['salt'] . $data['password']);
 		$saveData['captcha'] = trim($data['captcha']);
 		if(!$this->_checkCaptcha($saveData['mobile_phone'],$saveData['captcha'])){
-			return errorMsg('验证码错误，请重新获取验证码！');
+			return buildFailed('验证码错误，请重新获取验证码！');
 		}
 		$user = $this->_registerCheck($saveData['mobile_phone']);
 		$validateUser = new \common\validate\User();
 		if(empty($user)){//未注册，则注册账号
 			if(!$validateUser->scene('register')->check($data)) {
-				return errorMsg($validateUser->getError());
+				return buildFailed($validateUser->getError());
 			}
 			if(!$this->_register($saveData)){
-				return errorMsg('注册失败');
+				return buildFailed('注册失败');
 			}
 		}elseif ($user['status'] ==1){
-			return errorMsg('账号已禁用');
+			return buildFailed('账号已禁用');
 		}elseif ($user['status'] ==2){
-			return errorMsg('账号已删除');
+			return buildFailed('账号已删除');
 		}else{//已注册，正常，则修改密码
 			if(!$validateUser->scene('resetPassword')->check($data)){
-				return errorMsg($validateUser->getError());
+				return buildFailed($validateUser->getError());
 			}
 			if(!$this->_resetPassword($saveData['mobile_phone'],$saveData)){
-				return errorMsg('重置密码失败');
+				return buildFailed('重置密码失败');
 			}
 		}
 		return $this->_login($saveData['mobile_phone'],$data['password']);
@@ -159,10 +159,14 @@ class UserCenterApi extends Base {
 	 */
 	public function _setCache($user){
 	    unset($user['password']);
+	    unset($user['salt']);
         $userToken = getToken($user);
         $user['backUrl']  = session('backUrl');
-        cache('Login:' . $userToken['token'], json_encode($userToken));
-        return $userToken;
+        cache('Login:' . $userToken, json_encode($userToken));
+        return [
+            'token' => $userToken,
+            'user' => $user,
+        ];
 	}
 
 	/**检查验证码

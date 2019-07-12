@@ -8,7 +8,8 @@ class UserCenterAPi extends \common\controller\BaseApi{
             $modelUser = new \common\model\UserCenterApi();
             $postData = input('post.');
             $modelUser->login($postData);
-            return $modelUser->login($postData);
+            $token = $modelUser->login($postData);
+            return $token;
         }
     }
     /**后台登录

@@ -172,4 +172,7 @@ class Base extends \think\Controller{
         }
         return $tempRelativePath . $fileName;
     }
+
+
+
 }
