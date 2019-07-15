@@ -204,6 +204,7 @@ export default {
       //   .catch(err => console.log(err)) // 接口调用失败返回的数据
       loginHandle(loginParams).then(res => {
         console.log(res.data)
+        console.log(1)
       })
       // console.log(this.postData)
     },
