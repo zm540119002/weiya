@@ -65,8 +65,7 @@ class UserCenterAPi extends \common\controller\BaseApi{
 
     public function test(){
         $token = input('post.token');
-        print_r($token);exit;
-        cache('Login:' . $token,[1,2,3]);
+        cache('Login:' . $token,12);
         print_r(cache('Login:' . $token));
     }
 }
