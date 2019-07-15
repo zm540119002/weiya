@@ -7,10 +7,7 @@ class UserCenterAPi extends \common\controller\BaseApi{
     public function login(){
         if (request()->isPost()) {
             $modelUser = new \common\model\UserCenterApi();
-            $postData = input('post.');
-            print_r($postData);
-            return buildSuccess($postData);
-            $modelUser->login($postData);
+            $postData = input('post.postData');
             return  $modelUser->login($postData);
         }
     }
@@ -19,7 +16,7 @@ class UserCenterAPi extends \common\controller\BaseApi{
     public function login_admin(){
         if (request()->isPost()) {
             $modelUser = new \common\model\UserCenterApi();
-            $postData = input('post.');
+            $postData = input('post.poa');
             return $modelUser->login($postData);
         }
     }
