@@ -162,13 +162,33 @@ class UserCenterApi extends Base {
 	    unset($user['salt']);
         $userToken = getToken($user);
         $user['backUrl']  = session('backUrl');
-        cache(self::$_cache_key.$userId, $factoryList,config('custom.factory_cache_time'));
         cache('Login:' . $userToken, json_encode($user));
         return [
             'token' => $userToken,
             'user' => $user,
         ];
 	}
+
+    /**设置登录session
+     */
+    public function _setSession($user){
+        unset($user['password']);
+        unset($user['salt']);
+        $userToken = getToken($user);
+        $user = array_merge($user,array('rand' => create_random_str(10, 0),));
+        session($userToken, $user);
+        session('user_sign', data_auth_sign($user));
+        return [
+            'token' => $userToken,
+            'user' => $user,
+        ];
+        return session('backUrl');
+        //返回发起页或平台首页
+        $backUrl = session('backUrl');
+        $pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
+        preg_match ($pattern,$backUrl,$matches);
+        return $backUrl?(is_ssl()?'https://':'http://').$backUrl:url('Index/index');
+    }
 
 	/**检查验证码
 	 */
