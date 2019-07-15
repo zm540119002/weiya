@@ -205,7 +205,7 @@ export default {
       loginHandle(loginParams).then(res => {
         console.log(res.data)
       })
-      console.log(this.postData)
+      // console.log(this.postData)
     },
     registerHandle () {
       console.log(this.postData2)
