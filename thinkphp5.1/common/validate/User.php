@@ -11,7 +11,7 @@ class User extends \think\Validate
 //            'unique' => '\common\model\User',
         ],
         'captcha'  => [
-            'regex' => '/^\d{4}$/',
+            'regex' => '/^\d{6}$/',
         ],
         'name'  => [
             'require', 'max' => 25,
