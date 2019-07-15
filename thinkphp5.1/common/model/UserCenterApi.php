@@ -162,6 +162,7 @@ class UserCenterApi extends Base {
 	    unset($user['salt']);
         $userToken = getToken($user);
         $user['backUrl']  = session('backUrl');
+        cache(self::$_cache_key.$userId, $factoryList,config('custom.factory_cache_time'));
         cache('Login:' . $userToken, json_encode($user));
         return [
             'token' => $userToken,
