@@ -1,5 +1,6 @@
 <?php
 namespace app\ucenter\controller;
+
 class UserCenterAPi extends \common\controller\BaseApi{
     /**登录
      */
@@ -61,5 +62,10 @@ class UserCenterAPi extends \common\controller\BaseApi{
         //设置session
         session('captcha_'.$mobilePhone,$captcha);
         return buildSuccess($response->Message);
+    }
+
+    public function test(){
+        $token = input('post.token');
+        print_r(cache('Login:' . $token));
     }
 }
