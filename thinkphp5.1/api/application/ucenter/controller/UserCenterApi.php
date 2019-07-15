@@ -63,8 +63,4 @@ class UserCenterAPi extends \common\controller\BaseApi{
         return buildSuccess($response->Message);
     }
 
-    public function test(){
-        $token = input('post.token');
-        print_r(cache('Login:' . $token));
-    }
 }
