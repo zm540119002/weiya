@@ -7,7 +7,7 @@ class UserCenterAPi extends \common\controller\BaseApi{
     public function login(){
         if (request()->isPost()) {
             $modelUser = new \common\model\UserCenterApi();
-            $postData = input('post.');
+            $postData = input('post.postData');
             $modelUser->login($postData);
             return  $modelUser->login($postData);
         }
@@ -30,12 +30,15 @@ class UserCenterAPi extends \common\controller\BaseApi{
             return $modelUser->register($postData);
         }
     }
+
     //退出
     public function logout(){
-        session(null);
-        header('Content-type: text/html; charset=utf-8');
-        return successMsg('成功');
-        return redirect('login');
+        if (!request()->isPost()) {
+           return buildFailed('请求方式错误');
+        }
+        $token = input('post.token','');
+        cache('Login:' . $token,null);
+        return buildSuccess([],'退出成功');
     }
     /*发送验证码
      */
