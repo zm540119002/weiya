@@ -8,7 +8,7 @@
         <div class="user">
           <van-icon name="manager-o" />
         </div>
-        <div>注册/登录</div>
+        <div>注册/登录1</div>
       </div>
       <van-grid
         clickable
