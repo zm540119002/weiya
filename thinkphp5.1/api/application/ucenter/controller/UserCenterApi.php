@@ -7,7 +7,7 @@ class UserCenterAPi extends \common\controller\BaseApi{
     public function login(){
         if (request()->isPost()) {
             $modelUser = new \common\model\UserCenterApi();
-            $postData = input('post.postData');
+            $postData = input('post.postData/a');
             print_r($postData);exit;
             return  $modelUser->login($postData);
         }
