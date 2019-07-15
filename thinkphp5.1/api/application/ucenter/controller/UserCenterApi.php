@@ -54,12 +54,12 @@ class UserCenterAPi extends \common\controller\BaseApi{
         $response = \common\lib\Sms::sendSms($config);
         if('OK'!==$response->Code){
             if('BUSINESS_LIMIT_CONTROL'===$response->Code){
-                return $this->errorMsg('同一个手机号码发送短信验证码，支持1条/分钟，5条/小时 ，累计10条/天。');
+                return buildFailed('同一个手机号码发送短信验证码，支持1条/分钟，5条/小时 ，累计10条/天。');
             }
-            return $this->errorMsg($response->Message);
+            return buildFailed($response->Message);
         }
         //设置session
         session('captcha_'.$mobilePhone,$captcha);
-        return successMsg($response->Message);
+        return buildSuccess($response->Message);
     }
 }
