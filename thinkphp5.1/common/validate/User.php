@@ -34,7 +34,7 @@ class User extends \think\Validate
         'name.max' => '姓名超出长度！',
         'nickname.require' => '昵称必须！',
         'nickname.max' => '昵称超出长度！',
-        'captcha.regex' => '密码格式错误！',
+        'captcha.regex' => '验证码格式错误！',
         'password.require' => '密码必须',
     ];
 
