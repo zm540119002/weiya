@@ -124,7 +124,7 @@
           <van-tab title="登录">
             <van-cell-group>
               <van-field
-                v-model="postData.userName"
+                v-model="postData.mobile_phone"
                 placeholder="请输入用户名"
               />
               <van-field
@@ -134,7 +134,7 @@
             </van-cell-group>
             <van-button
               class="btn"
-              @click="loginHandle"
+              @click="login"
               type="info"
             >登录</van-button>
           </van-tab>
@@ -169,7 +169,7 @@
 
 <script>
 import Tabbar from '@/components/supplier/Tabbar.vue'
-import { sendIdentifyingCode, saveGoodsImageList, saveGood } from '@/api/util'
+import { loginHandle } from '@/api/util'
 export default {
   name: 'home',
   components: {
@@ -179,7 +179,7 @@ export default {
     return {
       show: false,
       postData: {
-        userName: '',
+        mobile_phone: '',
         password: ''
       },
       postData2: {
@@ -194,10 +194,17 @@ export default {
     showPopup () {
       this.show = true
     },
-    loginHandle () {
-      // saveGood(this.postData)
+    login () {
+      var loginParams = {
+        mobile_phone: this.postData.mobile_phone,
+        password: this.postData.password
+      }
+      // loginHandle(this.postData)
       //   .then(r => console.log(r)) // 接口调用成功返回的数据
       //   .catch(err => console.log(err)) // 接口调用失败返回的数据
+      loginHandle(loginParams).then(res => {
+        console.log(res.data)
+      })
       console.log(this.postData)
     },
     registerHandle () {
