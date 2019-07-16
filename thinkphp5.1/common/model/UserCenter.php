@@ -1,6 +1,6 @@
 <?php
 namespace common\model;
-
+use think\Cache;
 class UserCenter extends Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'user';
@@ -172,7 +172,6 @@ class UserCenter extends Base {
 	/**检查验证码
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
-		return true;//上线后再验证
 		return session('captcha_' . $mobilePhone) == $captcha ;
 	}
 }
