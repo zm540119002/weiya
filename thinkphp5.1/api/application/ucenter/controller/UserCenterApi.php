@@ -8,16 +8,9 @@ class UserCenterAPi extends \common\controller\BaseApi{
         if (request()->isPost()) {
             $modelUser = new \common\model\UserCenterApi();
             $postData = input('post.');
-            return  $modelUser->login($postData);
-        }
-    }
-    /**后台登录
-     */
-    public function login_admin(){
-        if (request()->isPost()) {
-            $modelUser = new \common\model\UserCenterApi();
-            $postData = input('post.poa');
-            return $modelUser->login($postData);
+            $data = $postData['postData'];
+            print_r($data);exit;
+            return  $modelUser->login($data);
         }
     }
     /**注册
