@@ -941,11 +941,11 @@ function checkLogin(){
     return $user;
 }
 
-function isLogin(){
-    $a = request()->header()['token'];
-    return $a;
-    return $user;
-}
+//function isLogin(){
+//    $a = request()->header()['token'];
+//    return $a;
+//    return $user;
+//}
 
 /**设置登录session
  */
@@ -994,14 +994,14 @@ function getToken($data = [],$expTime = 365*30*24*60*60)
 }
 
 
-function check($token)
+function isLogin()
 {
-    $token = input("token");  //上一步中返回给用户的token
+    $token = request()->header()['token'];
     $key = "huang";  //上一个方法中的 $key 本应该配置在 config文件中的
     try {
         $jwtAuth = json_encode(\common\component\jwt\JWT::decode($token, $key, array('HS256')));
         $authInfo = json_decode($jwtAuth, true);
-        if (!empty($authInfo['uid'])) {
+        if (!empty($authInfo['id'] && !empty($authInfo['mobile_phone']))) {
             $msg = [
                 'status' => 1001,
                 'msg' => 'Token验证通过'
@@ -1012,17 +1012,17 @@ function check($token)
                 'msg' => 'Token验证不通过,用户不存在'
             ];
         }
-        p($msg);
+        return $msg;
     } catch (\common\component\jwt\BeforeValidException $e) {
-        return json_encode([
-            'status' => 1002,
-            'msg' => 'Token无效'
-        ]);
-    } catch (\common\component\jwt\ExpiredException $e) {
-        return json_encode([
+        return [
             'status' => 1003,
+            'msg' => 'Token无效'
+        ];
+    } catch (\common\component\jwt\ExpiredException $e) {
+        return [
+            'status' => 1004,
             'msg' => 'Token过期'
-        ]);
+        ];
     } catch (Exception $e) {
         return $e;
     }
