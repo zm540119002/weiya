@@ -1,6 +1,6 @@
 <?php
 namespace app\api\controller;
-class UserCenterAPi extends \common\controller\UserBaseApi{
+class Address extends \common\controller\UserBaseApi{
     //增加修改地址页面
     public function edit(){
         if(!request()->isPost()){
