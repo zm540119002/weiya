@@ -28,10 +28,7 @@ class UserCenterAPi extends \common\controller\BaseApi{
         if (!request()->isPost()) {
            return buildFailed('请求方式错误');
         }
-        $a = request()->header()['token'];
-        print_r($a);exit;
-        $data = input('post.');
-        $token = $data['data']['token'];
+        $token = request()->header()['token'];
         cache('Login:' . $token,null);
         return buildSuccess([],'退出成功');
     }
