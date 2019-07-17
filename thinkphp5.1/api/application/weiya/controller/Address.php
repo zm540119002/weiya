@@ -133,7 +133,7 @@ class Address extends \common\controller\UserBaseApi{
             ['id','=',$id],
         ];
         $result = $model -> del($condition);
-
+        print_r($result);exit;
         if($result['status']){
             return buildSuccess([],'删除成功');
         }else{
