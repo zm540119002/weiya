@@ -943,6 +943,12 @@ function checkLogin(){
 
 function isLogin(){
     $token = request()->header()['token'];
+    if(empty($token)){
+        return [
+            'status' => -1,
+            'msg' =>'没有登录'
+        ];
+    }
     $key = "huang";  //上一个方法中的 $key 本应该配置在 config文件中的
     try {
         $jwtAuth = json_encode(\common\component\jwt\JWT::decode($token, $key, array('HS256')));

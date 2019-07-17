@@ -2,14 +2,19 @@
 namespace common\controller;
 /**用户信息验证控制器基类
  */
-class UserBaseApi extends Base{
+class UserBaseApi extends BaseApi{
     protected $user = null;
     protected $indexUrl = 'index/Index/index';//首页URL
     
     public function __construct(){
         parent::__construct();
         //判断是否登录
-        $this->user = isLogin();
+        $rst = isLogin();
+        if($rst['status'] == 1){
+            $this->user = $rst['user'];
+        }else{
+            buildFailed($rst['msg']);
+        }
         print_r( $this->user);exit;
 
         //判断是否为微信浏览器
