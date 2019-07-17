@@ -942,6 +942,7 @@ function checkLogin(){
 }
 
 function isLogin(){
+    echo 123;exit;
     $a = request()->header()['token'];
     print_r($a);exit;
 }
