@@ -30,27 +30,28 @@ Vue.use(MintUI)
 
 Vue.config.productionTip = false
 
-// router.beforeEach((to, from, next) => {
-//   var userInfo = window.localStorage.getItem('token') // to.matched.some(m=>m.meta.auth)获取浏览器缓存的用户信息
-//   // if(userInfo){
-//   alert(window.localStorage.isLogin)
-//   if (window.localStorage.isLogin === '1') {
-//     alert(2)
-//     next()
-//   } else {
-//     if (to.path == '/user') {
-//       alert(3)
-//       // Vue.prototype.$message.warning('你还没登录，请先登录再操作')
-//       Vue.prototype.$notify('提示文案')
-//       next()
-//     } else {
-//       next('/user')
-//     }
-//   }
-//   // else{
-//   //     alert('不跑我这里')
-//   // }
-// })
+// 导航守卫
+router.beforeEach((to, from, next) => {
+  let token = localStorage.getItem('mytoken')
+  console.log(token)
+  // 如果已经登录，那我不干涉你，让你随便访问
+  if (token) {
+    next()
+  } else {
+  // 你访问的是忘记密码页面吗?如果是则直接跳转,如果不是,则判断是否访问其他页面
+    if (to.path === '/index') {
+      next()
+    } else {
+      if (to.path !== '/user') {
+        // 如果没有登录，但你访问其他需要登录的页面，那我就让你跳到登录页面去
+        next({ path: '/user' })
+      } else {
+        // 如果没有登录，但你访问的login，那就不干涉你，让你访问
+        next()
+      }
+    }
+  }
+})
 
 new Vue({
   router,

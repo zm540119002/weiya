@@ -206,11 +206,18 @@ export default {
       //   .catch(err => console.log(err)) // 接口调用失败返回的数据
       loginHandle(loginParams).then(res => {
         console.log(res.data)
-        setTimeout(() => {
-          this.$router.replace({
-            path: '/'
-          })
-        }, 1000)
+        console.log(res.data.data.token)
+
+        if (res.data.code === '1') {
+          // 存储token值
+          localStorage.setItem('mytoken', res.data.data.token)
+          // 登录成功跳转
+          setTimeout(() => {
+            this.$router.replace({
+              path: '/'
+            })
+          }, 1000)
+        }
       })
 
       // console.log(this.postData)
