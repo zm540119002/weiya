@@ -7,8 +7,8 @@ class UserCenterAPi extends \common\controller\BaseApi{
     public function login(){
         if (request()->isPost()) {
             $modelUser = new \common\model\UserCenterApi();
-            $postData = input('post.');
-            $data = $postData['postData'];
+            $data = input('post.');
+            $data = $data['data'];
             return  $modelUser->login($data);
         }
     }
@@ -17,8 +17,9 @@ class UserCenterAPi extends \common\controller\BaseApi{
     public function register(){
         if (request()->isPost()) {
             $modelUser = new \common\model\UserCenterApi();
-            $postData = input('post.');
-            return $modelUser->register($postData);
+            $data = input('post.');
+            $data = $data['data'];
+            return $modelUser->register($data);
         }
     }
 
@@ -27,7 +28,8 @@ class UserCenterAPi extends \common\controller\BaseApi{
         if (!request()->isPost()) {
            return buildFailed('请求方式错误');
         }
-        $token = input('post.token','');
+        $data = input('post.');
+        $token = $data['data']['token'];
         cache('Login:' . $token,null);
         return buildSuccess([],'退出成功');
     }
@@ -37,7 +39,8 @@ class UserCenterAPi extends \common\controller\BaseApi{
         if (!(request()->isPost())) {
             return config('custom.not_post');
         }
-        $mobilePhone = input('post.mobile_phone',0);
+        $data = input('post.');
+        $mobilePhone = $data['data']['mobile_phone'];
         $captcha = create_random_str(4);
         $config = array(
             'mobilePhone' => $mobilePhone,
