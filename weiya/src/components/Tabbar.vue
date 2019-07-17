@@ -11,7 +11,7 @@
       </router-link>
       <router-link
         class="mui-tab-item"
-        :to="{name:'about'}"
+        :to="{name:'weiya'}"
         exact
       >
         <span class="mui-icon mui-icon-personadd"></span>
@@ -19,7 +19,7 @@
       </router-link>
       <router-link
         class="mui-tab-item"
-        to="/factory"
+        to="/store"
         exact
       >
         <span class="mui-icon mui-icon-contact"></span>

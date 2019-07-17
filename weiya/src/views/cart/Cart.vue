@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>     
+    <div>
      购物车
      <van-icon name="location-o" />
     </div>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Tabbar from '@/components/supplier/Tabbar.vue'
+import Tabbar from '@/components/Tabbar.vue'
 export default {
   name: 'home',
   components: {
