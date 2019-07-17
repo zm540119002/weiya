@@ -13,7 +13,7 @@ class UserBaseApi extends BaseApi{
         if($rst['status'] == 1){
             $this->user = $rst['user'];
         }else{
-            buildFailed($rst['msg']);
+           return buildFailed($rst['msg']);
         }
         print_r( $this->user);exit;
 
