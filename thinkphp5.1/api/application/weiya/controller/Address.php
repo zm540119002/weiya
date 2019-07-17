@@ -7,7 +7,7 @@ class Address extends \common\controller\UserBaseApi{
             return '请求方式不对';
         }
         $model = new \common\model\Address();
-        $userId = 16;
+        $userId = $this->user['id'];
         $data = input('post.');
         print_r($data);exit;
         if(input('?post.id') && !empty(input('post.id')) ){
