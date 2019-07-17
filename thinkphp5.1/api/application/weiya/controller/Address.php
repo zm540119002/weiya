@@ -10,6 +10,7 @@ class Address extends \common\controller\UserBaseApi{
         $userId = $this->user['id'];
         $data = input('post.');
         $data = $data['data'];
+        print_r($data);exit;
         if($data['id'] ){
             //开启事务
             $model -> startTrans();
