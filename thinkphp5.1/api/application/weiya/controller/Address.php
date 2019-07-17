@@ -14,7 +14,7 @@ class Address extends \common\controller\UserBaseApi{
             //开启事务
             $model -> startTrans();
             //修改
-            $addressId = input('post.id');
+            $addressId = $data['id'];
             $condition = [
                 'status' => 0 ,
                 'id' => $addressId ,
@@ -23,7 +23,7 @@ class Address extends \common\controller\UserBaseApi{
             $id = $model -> edit($data,$condition);
             if( !$id ){
                 $model ->rollback();
-                return buildFailed('失败');
+                return buildFailed();
             }
             //修改其他地址不为默认值
             if($_POST['is_default'] == 1){
@@ -35,7 +35,7 @@ class Address extends \common\controller\UserBaseApi{
                 $result = $model->where($where)->setField('is_default',0);
                 if(false === $result){
                     $model ->rollback();
-                    return buildFailed('失败');
+                    return buildFailed();
                 }
             }
             $model->commit();
@@ -57,24 +57,23 @@ class Address extends \common\controller\UserBaseApi{
             $data['user_id'] = $userId;
             $id = $model->edit($data);
             if(!$id){
-                return buildFailed('失败');
+                return buildFailed();
             }
-            $addressId = $id['id'];
             //修改其他地址不为默认值
             if($_POST['is_default'] == 1){
                 $where = [
                     ['status','=',0],
-                    ['id',"<>",$addressId],
+                    ['id',"<>",$id],
                     ['user_id','=',$userId],
                 ];
                 $result = $model->where($where)->setField('is_default',0);
                 if(false === $result){
                     $model ->rollback();
-                    return buildFailed('失败');
+                    return buildFailed();
                 }
             }
             $model->commit();
-            $data['id'] = $addressId;
+            $data['id'] = $id;
             return buildSuccess($data);
         }
 
