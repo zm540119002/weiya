@@ -123,7 +123,7 @@ class Address extends \common\controller\UserBaseApi{
     //删除地址
     public function del(){
         if(!request()->isPost()){
-            return buildFailed('custom.not_ajax');
+            return buildFailed("请求方式错误");
         }
         $data = input('post.');
         $id = (int)$data['data']['id'];
@@ -133,7 +133,6 @@ class Address extends \common\controller\UserBaseApi{
             ['id','=',$id],
         ];
         $result = $model -> del($condition);
-        print_r($result);exit;
         if($result['status']){
             return buildSuccess([],'删除成功');
         }else{
