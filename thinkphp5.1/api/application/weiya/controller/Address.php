@@ -55,7 +55,6 @@ class Address extends \common\controller\UserBaseApi{
             //开启事务
             $model -> startTrans();
             $data['user_id'] = $userId;
-            print_r($data);exit;
             $id = $model->edit($data);
             if(!$id){
                 return buildFailed();
@@ -75,7 +74,6 @@ class Address extends \common\controller\UserBaseApi{
             }
             $model->commit();
             $data['id'] = $id;
-            print_r($data);exit;
             return buildSuccess($data);
         }
 
