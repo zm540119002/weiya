@@ -943,7 +943,7 @@ function checkLogin(){
 
 function isLogin(){
     $a = request()->header()['token'];
-    return $a;
+    print_r($a);exit;
     return $user;
 }
 
