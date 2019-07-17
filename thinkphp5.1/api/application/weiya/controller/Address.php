@@ -4,14 +4,13 @@ class Address extends \common\controller\UserBaseApi{
     //增加修改地址页面
     public function edit(){
         if(!request()->isPost()){
-            return '请求方式不对';
+            return buildFailed('请求方式不对');
         }
         $model = new \common\model\Address();
         $userId = $this->user['id'];
         $data = input('post.');
         $data = $data['data'];
-        print_r($data);exit;
-        if(input('?post.id') && !empty(input('post.id')) ){
+        if($data['id'] ){
             //开启事务
             $model -> startTrans();
             //修改
@@ -24,7 +23,7 @@ class Address extends \common\controller\UserBaseApi{
             $id = $model -> edit($data,$condition);
             if( !$id ){
                 $model ->rollback();
-                return errorMsg('失败');
+                return buildFailed('失败');
             }
             //修改其他地址不为默认值
             if($_POST['is_default'] == 1){
@@ -36,11 +35,11 @@ class Address extends \common\controller\UserBaseApi{
                 $result = $model->where($where)->setField('is_default',0);
                 if(false === $result){
                     $model ->rollback();
-                    return errorMsg('失败');
+                    return buildFailed('失败');
                 }
             }
             $model->commit();
-            return '修改';
+            return buildSuccess($data);
         }else{
             //增加
             $config = [
@@ -58,7 +57,7 @@ class Address extends \common\controller\UserBaseApi{
             $data['user_id'] = $userId;
             $id = $model->edit($data);
             if(!$id){
-                return errorMsg('失败');
+                return buildFailed('失败');
             }
             $addressId = $id['id'];
             //修改其他地址不为默认值
@@ -71,12 +70,12 @@ class Address extends \common\controller\UserBaseApi{
                 $result = $model->where($where)->setField('is_default',0);
                 if(false === $result){
                     $model ->rollback();
-                    return errorMsg('失败');
+                    return buildFailed('失败');
                 }
             }
             $model->commit();
             $data['id'] = $addressId;
-            return '增加';
+            return buildSuccess($data);
         }
 
 

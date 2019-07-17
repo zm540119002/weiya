@@ -1038,7 +1038,7 @@ function isCheck()
 }
 
 
-function buildSuccess($data, $msg = '操作成功',$code) {
+function buildSuccess($data, $msg = '成功',$code) {
     $code=$code?$code:config('return_code.success');
     $return = [
         'code' => $code,
@@ -1048,7 +1048,7 @@ function buildSuccess($data, $msg = '操作成功',$code) {
     return json_encode($return);
 }
 
-function buildFailed( $msg, $code,$data = []) {
+function buildFailed( $msg = "失败", $code,$data = []) {
     $code=$code?$code:config('return_code.invalid');
     $return = [
         'code' => $code,
