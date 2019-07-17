@@ -971,7 +971,7 @@ function isLogin(){
             'msg' => 'Token过期'
         ];
     } catch (Exception $e) {
-        return $e;
+        return 111;
     }
 
 }
