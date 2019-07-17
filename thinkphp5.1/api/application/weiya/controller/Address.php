@@ -125,7 +125,9 @@ class Address extends \common\controller\UserBaseApi{
         if(!request()->isPost()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $id = input('post.id',0,'int');
+        $data = input('post.');
+        $id = (int)$data['data']['id'];
+//        $id = input('post.id',0,'int');
         $model = new \common\model\Address();
         $condition = [
             ['id','=',$id],
@@ -133,9 +135,9 @@ class Address extends \common\controller\UserBaseApi{
         $result = $model -> del($condition);
 
         if($result['status']){
-            return '删除成功';
+            return buildSuccess('删除成功');
         }else{
-            return '删除失败';
+            return buildFailed('删除失败');
         }
 
     }
