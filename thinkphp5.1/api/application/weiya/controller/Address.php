@@ -8,7 +8,7 @@ class Address extends \common\controller\UserBaseApi{
         }
         $model = new \common\model\Address();
         $userId = 16;
-        $data = input('post.')['data'];
+        $data = input('post.');
         print_r($data);exit;
         if(input('?post.id') && !empty(input('post.id')) ){
             //开启事务
