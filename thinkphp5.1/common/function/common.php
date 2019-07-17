@@ -954,39 +954,6 @@ function setSession($user){
     return $jumpUrl?:url('index/Index/index');
 }
 
-//传递数据以易于阅读的样式格式化后输出
-function p($data){
-    // 定义样式
-    $str='<pre style="display: block;padding: 9.5px;margin: 44px 0 0 0;font-size: 13px;line-height: 1.42857;color: #333;word-break: break-all;word-wrap: break-word;background-color: #F5F5F5;border: 1px solid #CCC;border-radius: 4px;">';
-    // 如果是boolean或者null直接显示文字；否则print
-    if (is_bool($data)) {
-        $show_data=$data ? 'true' : 'false';
-    }elseif (is_null($data)) {
-        $show_data='null';
-    }else{
-        $show_data=print_r($data,true);
-    }
-    $str.=$show_data;
-    $str.='</pre>';
-    echo $str;
-}
-
-
-//function getToken($data = [],$expTime = 365*30*24*60*60)
-//{
-//    $key = "huang";  //这里是自定义的一个随机字串，应该写在config文件中的，解密时也会用，相当    于加密中常用的 盐  salt
-//    $token = [
-//        "iss" => "",  //签发者 可以为空
-//        "aud" => "", //面象的用户，可以为空
-//        "iat" => time(), //签发时间
-//        "nbf" => time(), //在什么时候jwt开始生效  （这里表示生成100秒后才生效）
-//        "exp" => time() + $expTime, //token 过期时间
-//    ];
-//    $token = array_merge($token,$data);
-//    $jwt =  \common\component\jwt\JWT::encode($token, $key, "HS256"); //根据参数生成了 token
-//    return $jwt;
-//}
-
 
 function isLogin()
 {
@@ -1022,6 +989,42 @@ function isLogin()
         return $e;
     }
 }
+
+//传递数据以易于阅读的样式格式化后输出
+function p($data){
+    // 定义样式
+    $str='<pre style="display: block;padding: 9.5px;margin: 44px 0 0 0;font-size: 13px;line-height: 1.42857;color: #333;word-break: break-all;word-wrap: break-word;background-color: #F5F5F5;border: 1px solid #CCC;border-radius: 4px;">';
+    // 如果是boolean或者null直接显示文字；否则print
+    if (is_bool($data)) {
+        $show_data=$data ? 'true' : 'false';
+    }elseif (is_null($data)) {
+        $show_data='null';
+    }else{
+        $show_data=print_r($data,true);
+    }
+    $str.=$show_data;
+    $str.='</pre>';
+    echo $str;
+}
+
+
+function getToken($data = [],$expTime = 365*30*24*60*60)
+{
+    $key = "huang";  //这里是自定义的一个随机字串，应该写在config文件中的，解密时也会用，相当    于加密中常用的 盐  salt
+    $token = [
+        "iss" => "",  //签发者 可以为空
+        "aud" => "", //面象的用户，可以为空
+        "iat" => time(), //签发时间
+        "nbf" => time(), //在什么时候jwt开始生效  （这里表示生成100秒后才生效）
+        "exp" => time() + $expTime, //token 过期时间
+    ];
+    $token = array_merge($token,$data);
+    $jwt =  \common\component\jwt\JWT::encode($token, $key, "HS256"); //根据参数生成了 token
+    return $jwt;
+}
+
+
+
 
 
 function buildSuccess($data, $msg = '操作成功',$code) {
