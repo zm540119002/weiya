@@ -106,7 +106,8 @@ class Address extends \common\controller\UserBaseApi{
             return errorMsg(config('custom.not_ajax'));
         }
         $model = new \common\model\Address();
-        $id = input('get.id',0,'int');
+        $data = input('get.');
+        $id = (int)$data['data']['id'];
         $config = [
             'where'=>[
                 ['status','=',0],
@@ -117,7 +118,7 @@ class Address extends \common\controller\UserBaseApi{
             ]
         ];
         $info = $model -> getInfo($config);
-        return json_encode($info);
+        return buildSuccess($info);
 
     }
     //删除地址
