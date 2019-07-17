@@ -107,6 +107,7 @@ class Address extends \common\controller\UserBaseApi{
         }
         $model = new \common\model\Address();
         $data = input('get.');
+        print_r($data);exit;
         $id = (int)$data['data']['id'];
         print_r($id);exit;
         $config = [
