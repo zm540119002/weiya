@@ -60,7 +60,7 @@ class Address extends \common\controller\UserBaseApi{
                 return buildFailed();
             }
             //修改其他地址不为默认值
-            if($_POST['is_default'] == 1){
+            if($data['is_default'] == 1){
                 $where = [
                     ['status','=',0],
                     ['id',"<>",$id],
@@ -74,6 +74,7 @@ class Address extends \common\controller\UserBaseApi{
             }
             $model->commit();
             $data['id'] = $id;
+            print_r($data);exit;
             return buildSuccess($data);
         }
 
