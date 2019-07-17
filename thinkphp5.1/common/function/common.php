@@ -941,6 +941,12 @@ function checkLogin(){
     return $user;
 }
 
+function isLogin(){
+    $a = request()->header()['token'];
+    return $a;
+    return $user;
+}
+
 /**设置登录session
  */
 function setSession($user){
@@ -952,42 +958,6 @@ function setSession($user){
     $pattern  =  '/index.php\/([A-Z][a-z]*)\//';
     preg_match ($pattern,$jumpUrl,$matches);
     return $jumpUrl?:url('index/Index/index');
-}
-
-
-function isLogin()
-{
-    $token = request()->header()['token'];
-    $key = "huang";  //上一个方法中的 $key 本应该配置在 config文件中的
-    print_r($token);exit;
-    try {
-        $jwtAuth = json_encode(\common\component\jwt\JWT::decode($token, $key, array('HS256')));
-        $authInfo = json_decode($jwtAuth, true);
-        if (!empty($authInfo['id'] && !empty($authInfo['mobile_phone']))) {
-            $msg = [
-                'status' => 1001,
-                'msg' => 'Token验证通过'
-            ];
-        } else {
-            $msg = [
-                'status' => 1002,
-                'msg' => 'Token验证不通过,用户不存在'
-            ];
-        }
-        return $msg;
-    } catch (\common\component\jwt\BeforeValidException $e) {
-        return [
-            'status' => 1003,
-            'msg' => 'Token无效'
-        ];
-    } catch (\common\component\jwt\ExpiredException $e) {
-        return [
-            'status' => 1004,
-            'msg' => 'Token过期'
-        ];
-    } catch (Exception $e) {
-        return $e;
-    }
 }
 
 //传递数据以易于阅读的样式格式化后输出
@@ -1024,7 +994,39 @@ function getToken($data = [],$expTime = 365*30*24*60*60)
 }
 
 
-
+function isCheck()
+{
+    $token = request()->header()['token'];
+    $key = "huang";  //上一个方法中的 $key 本应该配置在 config文件中的
+    try {
+        $jwtAuth = json_encode(\common\component\jwt\JWT::decode($token, $key, array('HS256')));
+        $authInfo = json_decode($jwtAuth, true);
+        if (!empty($authInfo['id'] && !empty($authInfo['mobile_phone']))) {
+            $msg = [
+                'status' => 1001,
+                'msg' => 'Token验证通过'
+            ];
+        } else {
+            $msg = [
+                'status' => 1002,
+                'msg' => 'Token验证不通过,用户不存在'
+            ];
+        }
+        return $msg;
+    } catch (\common\component\jwt\BeforeValidException $e) {
+        return [
+            'status' => 1003,
+            'msg' => 'Token无效'
+        ];
+    } catch (\common\component\jwt\ExpiredException $e) {
+        return [
+            'status' => 1004,
+            'msg' => 'Token过期'
+        ];
+    } catch (Exception $e) {
+        return $e;
+    }
+}
 
 
 function buildSuccess($data, $msg = '操作成功',$code) {
