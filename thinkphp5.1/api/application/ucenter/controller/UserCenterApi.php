@@ -42,7 +42,6 @@ class UserCenterAPi extends \common\controller\BaseApi{
             return config('custom.not_post');
         }
         $data = input('post.');
-        print_r($data);exit;
         $mobilePhone = $data['data']['mobile_phone'];
         $captcha = create_random_str(4);
         $config = array(
