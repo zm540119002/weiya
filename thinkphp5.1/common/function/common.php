@@ -998,6 +998,7 @@ function isLogin()
 {
     $token = request()->header()['token'];
     $key = "huang";  //上一个方法中的 $key 本应该配置在 config文件中的
+    print_r($token);exit;
     try {
         $jwtAuth = json_encode(\common\component\jwt\JWT::decode($token, $key, array('HS256')));
         $authInfo = json_decode($jwtAuth, true);
