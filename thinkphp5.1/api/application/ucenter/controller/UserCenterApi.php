@@ -7,18 +7,9 @@ class UserCenterAPi extends \common\controller\BaseApi{
     public function login(){
         if (request()->isPost()) {
             $modelUser = new \common\model\UserCenterApi();
-            $postData = input('post.');
-            $modelUser->login($postData);
-            return  $modelUser->login($postData);
-        }
-    }
-    /**后台登录
-     */
-    public function login_admin(){
-        if (request()->isPost()) {
-            $modelUser = new \common\model\UserCenterApi();
-            $postData = input('post.');
-            return $modelUser->login($postData);
+            $data = input('post.');
+            $data = $data['data'];
+            return  $modelUser->login($data);
         }
     }
     /**注册
@@ -26,16 +17,21 @@ class UserCenterAPi extends \common\controller\BaseApi{
     public function register(){
         if (request()->isPost()) {
             $modelUser = new \common\model\UserCenterApi();
-            $postData = input('post.');
-            return $modelUser->register($postData);
+            $data = input('post.');
+            $data = $data['data'];
+            return $modelUser->register($data);
         }
     }
+
     //退出
     public function logout(){
-        session(null);
-        header('Content-type: text/html; charset=utf-8');
-        return successMsg('成功');
-        return redirect('login');
+        if (!request()->isPost()) {
+           return buildFailed('请求方式错误');
+        }
+        $data = input('post.');
+        $token = $data['data']['token'];
+        cache('Login:' . $token,null);
+        return buildSuccess([],'退出成功');
     }
     /*发送验证码
      */
@@ -43,7 +39,8 @@ class UserCenterAPi extends \common\controller\BaseApi{
         if (!(request()->isPost())) {
             return config('custom.not_post');
         }
-        $mobilePhone = input('post.mobile_phone',0);
+        $data = input('post.');
+        $mobilePhone = $data['data']['mobile_phone'];
         $captcha = create_random_str(4);
         $config = array(
             'mobilePhone' => $mobilePhone,
