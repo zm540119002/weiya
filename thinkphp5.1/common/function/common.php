@@ -941,6 +941,12 @@ function checkLogin(){
     return $user;
 }
 
+function isLogin(){
+    $a = request()->header()['token'];
+    return $a;
+    return $user;
+}
+
 /**设置登录session
  */
 function setSession($user){
