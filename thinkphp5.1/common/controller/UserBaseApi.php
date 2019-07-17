@@ -13,9 +13,8 @@ class UserBaseApi extends BaseApi{
         if($rst['status'] == 1){
             $this->user = $rst['user'];
         }else{
-           return buildFailed($rst['msg']);
+            echo json_encode($rst);exit;
         }
-        print_r( $this->user);exit;
 
         //判断是否为微信浏览器
 //        if(isWxBrowser() && !request()->isAjax()) {
