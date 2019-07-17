@@ -972,20 +972,20 @@ function p($data){
 }
 
 
-function getToken($data = [],$expTime = 365*30*24*60*60)
-{
-    $key = "huang";  //这里是自定义的一个随机字串，应该写在config文件中的，解密时也会用，相当    于加密中常用的 盐  salt
-    $token = [
-        "iss" => "",  //签发者 可以为空
-        "aud" => "", //面象的用户，可以为空
-        "iat" => time(), //签发时间
-        "nbf" => time(), //在什么时候jwt开始生效  （这里表示生成100秒后才生效）
-        "exp" => time() + $expTime, //token 过期时间
-    ];
-    $token = array_merge($token,$data);
-    $jwt =  \common\component\jwt\JWT::encode($token, $key, "HS256"); //根据参数生成了 token
-    return $jwt;
-}
+//function getToken($data = [],$expTime = 365*30*24*60*60)
+//{
+//    $key = "huang";  //这里是自定义的一个随机字串，应该写在config文件中的，解密时也会用，相当    于加密中常用的 盐  salt
+//    $token = [
+//        "iss" => "",  //签发者 可以为空
+//        "aud" => "", //面象的用户，可以为空
+//        "iat" => time(), //签发时间
+//        "nbf" => time(), //在什么时候jwt开始生效  （这里表示生成100秒后才生效）
+//        "exp" => time() + $expTime, //token 过期时间
+//    ];
+//    $token = array_merge($token,$data);
+//    $jwt =  \common\component\jwt\JWT::encode($token, $key, "HS256"); //根据参数生成了 token
+//    return $jwt;
+//}
 
 
 function isLogin()
