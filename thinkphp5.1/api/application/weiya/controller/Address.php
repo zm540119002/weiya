@@ -130,6 +130,7 @@ class Address extends \common\controller\UserBaseApi{
 //        $id = input('post.id',0,'int');
         $model = new \common\model\Address();
         $condition = [
+            ['user_id','=',$this->user['id']],
             ['id','=',$id],
         ];
         $result = $model -> del($condition);
