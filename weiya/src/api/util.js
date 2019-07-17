@@ -39,10 +39,10 @@ import request from '@/utils/request'
 // }
 
 // 登录请求
-export function loginHandle (postData) {
+export function loginHandle (data) {
   return request({
     url: '/ucenter/UserCenterApi/login',
     method: 'post',
-    data: { postData }
+    data: { data }
   })
 }

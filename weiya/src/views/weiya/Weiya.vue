@@ -3,14 +3,14 @@
     <div>
        从业人员
     </div>
-    
+
     <Tabbar msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Tabbar from '@/components/supplier/Tabbar.vue'
+import Tabbar from '@/components/Tabbar.vue'
 
 export default {
   name: 'home',

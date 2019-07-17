@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="top_img"><img src="../../../static/images/home-banner1.jpg"></div>
+    <div @click="advantage" class="top_img"><img src="../../../static/images/home-banner1.jpg"></div>
     <div class="content">
 
       <!--轮播图-->
@@ -45,28 +45,25 @@
       </div>
 
     </div>
-    <Productcart @hidePanel=hidePanel v-show="panelShow" :panelShow="panelShow" />
+    <Productcard @hidePanel=hidePanel v-show="panelShow" :panelShow="panelShow" />
     <Tabbar/>
   </div>
 </template>
 
 <script>
 // tabbar
-import Tabbar from '@/components/supplier/Tabbar.vue'
+import Tabbar from '@/components/Tabbar.vue'
 // product card
-import Productcard from '@/components/supplier/Productcard.vue'
-// product cart
-import Productcart from '@/components/supplier/Productcart.vue'
+import Productcard from '@/components/Productcard.vue'
 
 import img from '../../../static/images/banner-1.jpg'
 import img0 from '../../../static/images/banner-0.jpg'
 
 export default {
-  name: 'home',
+  name: 'index',
   components: {
     Tabbar,
-    Productcard,
-    Productcart
+    Productcard
   },
   data () {
     return {
@@ -83,6 +80,11 @@ export default {
     //   // console.log(this.$refs.c1)
     //   this.$refs.c1.aa()
     // }
+    advantage () {
+      this.$router.push({
+        name: 'Advantage'
+      })
+    },
     showPanel () {
       this.panelShow = true
     },

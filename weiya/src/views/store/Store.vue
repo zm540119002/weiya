@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>     
+    <div>
      供应商
     </div>
     <Tabbar msg="Welcome to Your Vue.js App" />
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Tabbar from '@/components/supplier/Tabbar.vue'
+import Tabbar from '@/components/Tabbar.vue'
 export default {
   name: 'home',
   components: {

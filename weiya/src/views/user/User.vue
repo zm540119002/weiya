@@ -8,7 +8,7 @@
         <div class="user">
           <van-icon name="manager-o" />
         </div>
-        <div>注册/登录1</div>
+        <div>注册/登录</div>
       </div>
       <van-grid
         clickable
@@ -168,10 +168,10 @@
 </template>
 
 <script>
-import Tabbar from '@/components/supplier/Tabbar.vue'
+import Tabbar from '@/components/Tabbar.vue'
 import { loginHandle } from '@/api/util'
 export default {
-  name: 'home',
+  name: 'user',
   components: {
     Tabbar
   },
@@ -179,8 +179,8 @@ export default {
     return {
       show: false,
       postData: {
-        mobile_phone: '',
-        password: ''
+        mobile_phone: '13679898380',
+        password: '111111'
       },
       postData2: {
         userName: '',
@@ -199,13 +199,20 @@ export default {
         mobile_phone: this.postData.mobile_phone,
         password: this.postData.password
       }
+      // console.log(loginParams)
+      // console.log(this.postData.mobile_phone, this.postData.password)
       // loginHandle(this.postData)
       //   .then(r => console.log(r)) // 接口调用成功返回的数据
       //   .catch(err => console.log(err)) // 接口调用失败返回的数据
       loginHandle(loginParams).then(res => {
         console.log(res.data)
-        console.log(1)
+        setTimeout(() => {
+          this.$router.replace({
+            path: '/'
+          })
+        }, 1000)
       })
+
       // console.log(this.postData)
     },
     registerHandle () {
@@ -266,5 +273,8 @@ export default {
     bottom: 50px;
     font-size: 0.2rem;
     color: #999;
+  }
+  .aa{
+    background: red;
   }
 </style>
