@@ -90,13 +90,13 @@ class Address extends \common\controller\UserBaseApi{
         $config = [
             'where'=>[
                 ['status','=',0],
-                ['user_id','=',16]
+                ['user_id','=',$this->user['id']]
             ],'field' => [
                 'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
             ]
         ];
         $list = $model -> getList($config);
-        return json_encode($list);
+        return buildSuccess($list);
 
     }
     //获取
