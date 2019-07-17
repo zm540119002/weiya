@@ -946,6 +946,7 @@ function isLogin(){
     $key = "huang";  //上一个方法中的 $key 本应该配置在 config文件中的
     $jwtAuth = json_encode(\common\component\jwt\JWT::decode($token, $key, array('HS256')));
     $authInfo = json_decode($jwtAuth, true);
+    return $authInfo;
     if (!empty($authInfo['id'] && !empty($authInfo['mobile_phone']))) {
         $msg = [
             'status' => 1,
