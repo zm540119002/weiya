@@ -106,10 +106,7 @@ class Address extends \common\controller\UserBaseApi{
             return errorMsg(config('custom.not_ajax'));
         }
         $model = new \common\model\Address();
-        $data = request()->get();
-        print_r($data);exit;
-        $id = (int)$data['data']['id'];
-        print_r($id);exit;
+        $id = input('get.id',0,'int');
         $config = [
             'where'=>[
                 ['status','=',0],
