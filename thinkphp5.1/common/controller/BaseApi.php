@@ -36,7 +36,6 @@ class BaseApi extends \think\Controller{
         if(is_string($postData['fileBase64'])){
             if(strpos($postData['fileBase64'],'data:image') !==false || strpos($postData['fileBase64'],'data:video') !== false){
                 $result =  $this ->uploadSingleFileToTemp($postData['fileBase64'],$savePath);
-                print_r($result);exit;
                 if(isset($result['code'])&& $result['code'] == 0){
                     return $result['msg'];
                 }
@@ -143,7 +142,7 @@ class BaseApi extends \think\Controller{
                 return buildFailed('创建Uploads目录失败');
             }
         }
-        $uploadPath = realpath($uploadPath);
+//        $uploadPath = realpath($uploadPath);
         if($uploadPath === false){
             return buildFailed('获取Uploads实际路径失败');
         }
