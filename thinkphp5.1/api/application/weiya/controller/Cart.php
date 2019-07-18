@@ -9,7 +9,7 @@ class Cart extends \common\controller\UserBaseApi{
      */
     public function addCart(){
         if(!request()->isPost()){
-            return buildFailed(config('custom.not_get'));
+            return buildFailed(config('custom.not_post'));
         }
         $goodsList = input('post.');
         $goodsList = $goodsList['data'];
@@ -84,10 +84,10 @@ class Cart extends \common\controller\UserBaseApi{
      */
     public function getList(){
         if(!request()->isGet()){
-            return $this->errorMsg('请求方式错误');
+            return buildFailed(config('custom.not_get'));
         }
         $userId = $this->user['id'];
-        $model = new \app\index\model\Cart();
+        $model = new \app\weiya\model\Cart();
          $config=[
              'where'=>[
                  ['c.user_id','=',$userId],
@@ -108,78 +108,42 @@ class Cart extends \common\controller\UserBaseApi{
              $config['where'][] = ['g.name', 'like', '%' . trim($keyword) . '%'];
          }
          $list = $model -> pageQuery($config);
-        $currentPage = input('get.page/d');
-        $this->assign('currentPage',$currentPage);
-         $this->assign('list',$list);
-         if(isset($_GET['pageType'])){
-             if($_GET['pageType'] == 'index' ){
-                 return $this->fetch('list_tpl');
-             }
-         }
-    }
+         return buildSuccess($list);
 
-    /**详情页
-     */
-    public function detail(){
-        if(request()->isAjax()){
-        }else{
-            $goodsId = intval(input('goods_id'));
-            if(!$goodsId){
-                $this->error('此商品已下架');
-            }
-            $model = new \app\index\model\Cart();
-            $config =[
-                'where' => [
-                    ['g.status', '=', 0],
-                    ['g.shelf_status', '=', 3],
-                    ['g.id', '=', $goodsId],
-                ],
-            ];
-            $info = $model->getInfo($config);
-            if(empty($info)){
-                $this->error('此商品已下架');
-            }
-            $info['main_img'] = explode(',',(string)$info['main_img']);
-            $info['detail_img'] = explode(',',(string)$info['detail_img']);
-            $this->assign('info',$info);
-
-            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
-            $this->assign('unlockingFooterCart', $unlockingFooterCart);
-            return $this->fetch();
-        }
     }
 
     //修改购物车数量
     public function editCartNum(){
         if(!request()->isPost()){
-            return $this->errorMsg('请求方式错误');
+            return buildFailed(config('custom.not_post'));
         }
         $data = input('post.');
         $data['user_id'] = $this -> user['id'];
         $model = new \app\index\model\Cart();
         $res = $model ->isUpdate(true)-> save($data);
         if(false === $res){
-            return $this->errorMsg('失败');
+            return buildFailed();
         }
-        return successMsg('成功');
+        return buildSuccess();
     }
 
-    //删除地址
+    //删除
     public function del(){
-        if(!request()->isAjax()){
-            return $this->errorMsg(config('custom.not_ajax'));
+        if(!request()->isPost()){
+            return buildFailed(config('custom.not_post'));
         }
-        $ids = input('post.cart_ids/a');
-        $model = new \app\index\model\Cart();
+        $data = input('post.');
+        $ids = $data['cart_ids'];
+        $model = new \app\weiya\model\Cart();
         $condition = [
             ['user_id','=',$this->user['id']],
             ['id','in',$ids],
         ];
         $result = $model -> del($condition,true);
         if($result['status']){
-            return successMsg('删除成功');
+            return buildSuccess($data);
         }else{
-            return $this->errorMsg('删除失败');
+            return buildFailed();
         }
     }
 }
