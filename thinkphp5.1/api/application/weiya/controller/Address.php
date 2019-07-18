@@ -84,7 +84,7 @@ class Address extends \common\controller\UserBaseApi{
     public function getList()
     {
         if(!request()->isGet()){
-            return errorMsg(config('custom.not_ajax'));
+            return buildFailed(config('custom.not_ajax'));
         }
         $model = new \common\model\Address();
         $config = [
@@ -103,7 +103,7 @@ class Address extends \common\controller\UserBaseApi{
     public function getInfo()
     {
         if(!request()->isGet()){
-            return errorMsg(config('custom.not_ajax'));
+            return buildFailed(config('custom.not_ajax'));
         }
         $model = new \common\model\Address();
         $id = input('get.id',0,'int');
@@ -137,7 +137,7 @@ class Address extends \common\controller\UserBaseApi{
         if($result['status']){
             return buildSuccess($data['data'],'删除成功');
         }else{
-            return buildFailed('删除失败');
+            return buildFailed($result['info']);
         }
 
     }
