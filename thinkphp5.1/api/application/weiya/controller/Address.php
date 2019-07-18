@@ -127,6 +127,9 @@ class Address extends \common\controller\UserBaseApi{
         }
         $data = input('post.');
         $id = (int)$data['data']['id'];
+        if(!$id){
+            return buildFailed("参数错误");
+        }
 //        $id = input('post.id',0,'int');
         $model = new \common\model\Address();
         $condition = [
