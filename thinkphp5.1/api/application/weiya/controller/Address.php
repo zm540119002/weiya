@@ -130,14 +130,12 @@ class Address extends \common\controller\UserBaseApi{
         if(!$id){
             return buildFailed("参数错误");
         }
-//        $id = input('post.id',0,'int');
         $model = new \common\model\Address();
         $condition = [
             ['user_id','=',$this->user['id']],
             ['id','=',$id],
         ];
         $result = $model -> del($condition);
-        print_r($result);exit;
         if($result['status']){
             return buildSuccess($data['data'],'删除成功');
         }else{
