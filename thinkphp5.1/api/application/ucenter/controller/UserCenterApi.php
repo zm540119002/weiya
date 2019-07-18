@@ -5,28 +5,30 @@ class UserCenterAPi extends \common\controller\BaseApi{
     /**登录
      */
     public function login(){
-        if (request()->isPost()) {
-            $modelUser = new \common\model\UserCenterApi();
-            $data = input('post.');
-            $data = $data['data'];
-            return  $modelUser->login($data);
+        if(!request()->isPost()){
+            return buildFailed(config('custom.not_post'));
         }
+        $modelUser = new \common\model\UserCenterApi();
+        $data = input('post.');
+        $data = $data['data'];
+        return  $modelUser->login($data);
     }
     /**注册
      */
     public function register(){
-        if (request()->isPost()) {
-            $modelUser = new \common\model\UserCenterApi();
-            $data = input('post.');
-            $data = $data['data'];
-            return $modelUser->register($data);
+        if(!request()->isPost()){
+            return buildFailed(config('custom.not_post'));
         }
+        $modelUser = new \common\model\UserCenterApi();
+        $data = input('post.');
+        $data = $data['data'];
+        return $modelUser->register($data);
     }
 
     //退出
     public function logout(){
         if (!request()->isPost()) {
-           return buildFailed('请求方式错误');
+            return buildFailed(config('custom.not_post'));
         }
         $token = request()->header()['token'];
         cache('Login:' . $token,null);

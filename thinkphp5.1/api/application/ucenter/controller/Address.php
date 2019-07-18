@@ -4,7 +4,7 @@ class Address extends \common\controller\UserBaseApi{
     //增加修改地址页面
     public function edit(){
         if(!request()->isPost()){
-            return buildFailed('请求方式不对');
+            return buildFailed(config('custom.not_post'));
         }
         $model = new \common\model\Address();
         $userId = $this->user['id'];
@@ -84,7 +84,7 @@ class Address extends \common\controller\UserBaseApi{
     public function getList()
     {
         if(!request()->isGet()){
-            return buildFailed(config('custom.not_ajax'));
+            return buildFailed(config('custom.not_get'));
         }
         $model = new \common\model\Address();
         $config = [
@@ -103,7 +103,7 @@ class Address extends \common\controller\UserBaseApi{
     public function getInfo()
     {
         if(!request()->isGet()){
-            return buildFailed(config('custom.not_ajax'));
+            return buildFailed(config('custom.not_get'));
         }
         $model = new \common\model\Address();
         $id = input('get.id',0,'int');
