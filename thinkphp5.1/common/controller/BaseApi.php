@@ -142,11 +142,11 @@ class BaseApi extends \think\Controller{
                 return buildFailed('创建Uploads目录失败');
             }
         }
-//        $uploadPath = realpath($uploadPath);
-        if($uploadPath === false){
+        $realpathUploadPath = realpath($uploadPath);
+        if($realpathUploadPath === false){
             return buildFailed('获取Uploads实际路径失败');
         }
-        $uploadPath = $uploadPath . '/' ;
+        $uploadPath = $realpathUploadPath . '/' ;
         //临时相对路径
         $tempRelativePath = $savePath;
 
@@ -172,7 +172,7 @@ class BaseApi extends \think\Controller{
             $image->thumb($imgWidth, $imgHeight,Image::THUMB_SCALING)->save($photo);
         }
         $data = [
-            $tempRelativePath . $fileName
+            $uploadPath . '/' .$tempRelativePath . $fileName
         ];
         return buildSuccess($data);
     }
