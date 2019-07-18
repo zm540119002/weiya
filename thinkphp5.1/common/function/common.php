@@ -942,8 +942,7 @@ function checkLogin(){
 }
 
 function isLogin(){
-    $token = request()->header()['authorization'];
-    print_r($token);exit;
+    $token = request()->header()['token'];
     if(empty($token)){
         return [
             'status' => -1,
