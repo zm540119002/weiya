@@ -114,7 +114,6 @@ class BaseApi extends \think\Controller{
         if($fileType == 'data:image'){
             if(!getimagesize($fileBase64)){
                 return buildFailed('不是图片文件');
-                return $this->errorMsg();
             }
         }
 
@@ -147,12 +146,12 @@ class BaseApi extends \think\Controller{
         if($realpathUploadPath === false){
             return buildFailed('获取Uploads实际路径失败');
         }
-        $uploadPath = $realpathUploadPath . '/' ;
+        $realpathUploadPath = $realpathUploadPath . '/' ;
         //临时相对路径
         $tempRelativePath = $savePath;
 
         //存储路径
-        $storePath = $uploadPath . $tempRelativePath;
+        $storePath = $realpathUploadPath . $tempRelativePath;
         if(!mk_dir($storePath)){
             return buildFailed('创建临时目录失败');
         }
