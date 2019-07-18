@@ -135,7 +135,7 @@ class Address extends \common\controller\UserBaseApi{
         ];
         $result = $model -> del($condition);
         if($result['status']){
-            return buildSuccess($id,'删除成功');
+            return buildSuccess($data['data'],'删除成功');
         }else{
             return buildFailed('删除失败');
         }
