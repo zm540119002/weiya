@@ -34,28 +34,28 @@ class BaseApi extends \think\Controller{
         $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         if(is_string($postData['fileBase64'])){
             if(strpos($postData['fileBase64'],'data:image') !==false || strpos($postData['fileBase64'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64'],$savePath);
-                if(isset($fileName['status'])&& $fileName['status'] == 0){
-                    return $fileName;
+                $result =  $this ->uploadSingleFileToTemp($postData['fileBase64'],$savePath);
+                if(isset($result['code'])&& $result['code'] == 0){
+                    return $result['msg'];
                 }
+                return buildSuccess($result['data']);
             }
-            return successMsg($fileName);
         }
         if(is_array($postData['fileBase64'])){
             $filesNew = [];
             foreach ($postData['fileBase64'] as $k=>$file){
                 //判断是否为base64编码图片
                 if(strpos($file,'data:image') !==false || strpos($file,'data:video') !== false){
-                    $fileName = $this ->_uploadSingleFileToTemp($file,$savePath);
-                    if(isset($fileName['status'])&& $fileName['status'] == 0){
-                        return $fileName;
+                    $result =  $this ->uploadSingleFileToTemp($file['fileSrc'],$savePath);
+                    if(isset($result['code'])&& $result['code'] == 0){
+                        return $result['msg'];
                     }
-                    $filesNew[] = $fileName;
+                    $filesNew[] = $result['data'][0];
                 }else{
                     $filesNew[] = $file;
                 }
             }
-            return successMsg($filesNew);
+            return buildSuccess($filesNew);
         }
     }
     //返回图片临时相对路,上传多张图片带描述
@@ -66,11 +66,11 @@ class BaseApi extends \think\Controller{
         foreach ($files as $k=>$file){
             //判断是否为base64编码图片
             if(strpos($file['fileSrc'],'data:image') !==false || strpos($file['fileSrc'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc'],$savePath);
-                if(isset($fileName['status'])&& $fileName['status'] == 0){
-                    return $fileName;
+                $result =  $this ->uploadSingleFileToTemp($file['fileSrc'],$savePath);
+                if(isset($result['code'])&& $result['code'] == 0){
+                    return $result['msg'];
                 }
-                $filesNew[$k]['fileSrc'] = $fileName;
+                $filesNew[$k]['fileSrc'] = $result['data'];
                 $filesNew[$k]['fileText'] = $file['fileText'];
             }else{
                 $filesNew[$k] = $file;
@@ -85,7 +85,7 @@ class BaseApi extends \think\Controller{
      * @param $savePath 保存路径
      * @return array|string
      */
-    public function _uploadSingleFileToTemp($fileBase64,$savePath){
+    public function uploadSingleFileToTemp($fileBase64,$savePath){
         // 获取图片
         list($type, $data) = explode(',', $fileBase64);
         // 判断文件类型
@@ -111,37 +111,39 @@ class BaseApi extends \think\Controller{
 
         if($fileType == 'data:image'){
             if(!getimagesize($fileBase64)){
-                return $this->errorMsg('不是图片文件');
+                return buildFailed('不是图片文件');
+                return $this->errorMsg();
             }
         }
 
         if(!$ext){
-            return $this->errorMsg('不支持此文件格式');
+            return buildFailed('不支持此文件格式');
         }
         //文件大小 单位M
         $fileSize = strlen($data)/1024/1024;
         //图片限制大小
         if($fileType == 'data:image'){
             if($fileSize >3){//大于2M
-                return $this->errorMsg('请上传小于2M的图片');
+                return buildFailed('请上传小于2M的图片');
             }
         }
         //视频限制大小
         if($fileType == 'data:video'){
             if($fileSize > 10){//大于10
-                return $this->errorMsg('请上传小于10M的视频');
+                return buildFailed('请上传小于10M的视频');
+
             }
         }
         //上传公共路径
         $uploadPath = config('upload_dir.upload_path');
         if(!is_dir($uploadPath)){
             if(!mk_dir($uploadPath)){
-                return  $this->errorMsg('创建Uploads目录失败');
+                return buildFailed('创建Uploads目录失败');
             }
         }
         $uploadPath = realpath($uploadPath);
         if($uploadPath === false){
-            return  $this->errorMsg('获取Uploads实际路径失败');
+            return buildFailed('获取Uploads实际路径失败');
         }
         $uploadPath = $uploadPath . '/' ;
         //临时相对路径
@@ -150,7 +152,7 @@ class BaseApi extends \think\Controller{
         //存储路径
         $storePath = $uploadPath . $tempRelativePath;
         if(!mk_dir($storePath)){
-            return $this->errorMsg('创建临时目录失败');
+            return buildFailed('创建临时目录失败');
         }
         //文件名
         $fileName = generateSN(5) . $ext;
@@ -159,7 +161,7 @@ class BaseApi extends \think\Controller{
         // 生成文件
         $returnData = file_put_contents($photo, base64_decode($data), true);
         if(false === $returnData){
-            return $this->errorMsg('保存文件失败');
+            return buildFailed('保存文件失败');
         }
         //压缩文件
         if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
@@ -168,7 +170,10 @@ class BaseApi extends \think\Controller{
             $image = Image::open($photo);
             $image->thumb($imgWidth, $imgHeight,Image::THUMB_SCALING)->save($photo);
         }
-        return $tempRelativePath . $fileName;
+        $data = [
+            $tempRelativePath . $fileName
+        ];
+        return buildSuccess($data);
     }
 
 
