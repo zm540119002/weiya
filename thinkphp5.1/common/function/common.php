@@ -1038,7 +1038,7 @@ function isCheck()
 }
 
 
-function buildSuccess($data, $msg = '成功',$code) {
+function buildSuccess($data=[], $msg = '成功',$code) {
     $code=$code?$code:config('return_code.success');
     $return = [
         'code' => $code,
