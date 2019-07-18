@@ -35,9 +35,8 @@ class BaseApi extends \think\Controller{
         $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         if(is_string($postData['fileBase64'])){
             if(strpos($postData['fileBase64'],'data:image') !==false || strpos($postData['fileBase64'],'data:video') !== false){
-                $result =  json_decode($this ->uploadSingleFileToTemp($postData['fileBase64'],$savePath));
-                print_r($result->msg);exit;
-                if(isset($result['code'])&& $result['code'] == 0){
+                $result =  json_decode($this ->uploadSingleFileToTemp($postData['fileBase64'],$savePath),true);
+                if(isset($result['code'])&& $result['code'] == -1){
                     return $result['msg'];
                 }
                 return buildSuccess($result['data']);
