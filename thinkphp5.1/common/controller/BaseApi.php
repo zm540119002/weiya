@@ -33,6 +33,7 @@ class BaseApi extends \think\Controller{
         $postData = input('post.');
         $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         if(is_string($postData['fileBase64'])){
+            print_r(123);
             if(strpos($postData['fileBase64'],'data:image') !==false || strpos($postData['fileBase64'],'data:video') !== false){
                 $result =  $this ->uploadSingleFileToTemp($postData['fileBase64'],$savePath);
                 print_r($result);exit;
