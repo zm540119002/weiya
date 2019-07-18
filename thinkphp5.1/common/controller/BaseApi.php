@@ -1,8 +1,6 @@
 <?php
 namespace common\controller;
 use \common\component\image\Image;
-use common\component\jwt\JWT;
-use think\facade\Session;
 /**基于公共基础控制器
  */
 class BaseApi extends \think\Controller{
