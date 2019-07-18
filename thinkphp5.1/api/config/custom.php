@@ -20,6 +20,7 @@ return [
     'not_ajax' => '请用AJAX方式访问！',//不是AJAX
     'not_post' => '请用POST方式访问！',//不是POST
     'not_get' => '请用GET方式访问！',//不是GET
+    'parameter_error' => '参数错误！',//
     'multi_store' => '登录成功，请选择店铺！',
     'no_empower' => '未授权！',//不是GET
 ];

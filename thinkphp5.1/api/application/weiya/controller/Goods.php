@@ -10,9 +10,9 @@ class Goods extends \common\controller\BaseApi{
         }
         $id = intval(input('id'));
         if(!$id){
-            $this->error('此商品已下架');
+            return buildFailed(config('custom.parameter_error'));
         }
-        $model = new \app\index\model\Goods();
+        $model = new \app\weiya\model\Goods();
         $config =[
             'where' => [
                 ['g.status', '=', 0],
@@ -22,55 +22,21 @@ class Goods extends \common\controller\BaseApi{
         ];
         $info = $model->getInfo($config);
         if(empty($info)){
-            $this->error('此商品已下架');
+            return buildFailed('此商品已下架');
         }
         $info['main_img'] = explode(',',(string)$info['main_img']);
         $info['detail_img'] = explode(',',(string)$info['detail_img']);
         $info['tag'] = explode(',',(string)$info['tag']);
-        $this->assign('info',$info);
-
-        $modelComment = new \app\index\model\Comment();
-        $where = [
-            ['status','=',0],
-            ['goods_id','=',$id],
-        ];
-        $averageScore = $modelComment -> where($where)->avg('score');
-        $averageScore = round($averageScore,2);
-        $this ->assign('averageScore',$averageScore);
-        $total = $modelComment -> where($where)->count('user_id');
-        $this ->assign('total',$total);
-
-        //登录判断是否已收藏
-        $user = session('user');
-        if(!empty($user)){
-            $modelCollection = new \app\index\model\Collection();
-            $config = [
-                'where'=>[
-                    ['user_id','=',$user['id']],
-                    ['goods_id','=',$id],
-                    ['status','=',0]
-                ],'field'=>[
-                    'id'
-                ]
-            ];
-            $info = $modelCollection -> getInfo($config);
-            if(count($info)){
-                $this->assign('collected', 1);
-            }
-        }
-
-        $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
-        $this->assign('unlockingFooterCart', $unlockingFooterCart);
-        return $this->fetch();
+        return buildSuccess($info);
     }
     /**
      * 查出产商相关产品 分页查询
      */
     public function getList(){
         if(!request()->isGet()){
-            return $this->errorMsg('请求方式错误');
+            return buildFailed(config('custom.not_get'));
         }
-        $model = new \app\index\model\Goods();
+        $model = new \app\weiya\model\Goods();
         $config=[
             'where'=>[
                 ['g.status', '=', 0],
@@ -95,12 +61,7 @@ class Goods extends \common\controller\BaseApi{
         }
         
         $list = $model -> pageQuery($config);
-        $this->assign('list',$list);
-        if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'index' ){
-                return $this->fetch('list_index_tpl');
-            }
-        }
+        return buildSuccess($list);
     }
 
     //分类相关的商品
