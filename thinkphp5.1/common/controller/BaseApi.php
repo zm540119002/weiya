@@ -31,6 +31,7 @@ class BaseApi extends \think\Controller{
     //返回图片临时相对路径
     public function uploadFileToTemp(){
         $postData = input('post.');
+        print_r($postData);
         $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         if(is_string($postData['fileBase64'])){
             print_r(123);
