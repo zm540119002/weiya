@@ -8,7 +8,7 @@ class Address extends \common\controller\UserBaseApi{
         }
         $model = new \common\model\Address();
         $userId = $this->user['id'];
-        $data = input('post.data');
+        $data = input('post.');
         print_r($data);exit;
         $data = $data['data'];
         if($data['id'] ){
