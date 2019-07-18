@@ -41,6 +41,7 @@ class BaseApi extends \think\Controller{
                 }
                 return buildSuccess($result['data']);
             }
+            print_r(123);exit;
         }
         if(is_array($postData['fileBase64'])){
             $filesNew = [];
