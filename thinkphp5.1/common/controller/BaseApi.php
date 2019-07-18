@@ -43,6 +43,7 @@ class BaseApi extends \think\Controller{
             }
             print_r(123);exit;
         }
+        print_r(123);exit;
         if(is_array($postData['fileBase64'])){
             $filesNew = [];
             foreach ($postData['fileBase64'] as $k=>$file){
