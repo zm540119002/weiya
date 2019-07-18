@@ -36,7 +36,6 @@ class BaseApi extends \think\Controller{
         if(is_string($postData['fileBase64'])){
             if(strpos($postData['fileBase64'],'data:image') !==false || strpos($postData['fileBase64'],'data:video') !== false){
                 $result =  json_decode($this ->uploadSingleFileToTemp($postData['fileBase64'],$savePath));
-                print_r($result);exit;
                 if(isset($result['code'])&& $result['code'] == 0){
                     return $result['msg'];
                 }
