@@ -13,6 +13,7 @@ class Cart extends \common\controller\UserBaseApi{
         }
         $goodsList = input('post.');
         $goodsList = $goodsList['data'];
+        print_r($goodsList);exit;
         if(empty($goodsList)){
             return buildFailed(config('custom.parameter_error'));
         }
