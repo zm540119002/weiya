@@ -43,6 +43,7 @@ class Upload extends \common\controller\BaseApi{
                 $filesNew[$k] = $file;
             }
         }
+        return buildSuccess($filesNew);
         return json_encode($filesNew);
     }
 
