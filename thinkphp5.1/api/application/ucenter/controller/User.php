@@ -1,7 +1,7 @@
 <?php
 namespace app\ucenter\controller;
 
-class UserCenterAPi extends \common\controller\BaseApi{
+class User extends \common\controller\BaseApi{
     /**登录
      */
     public function login(){
