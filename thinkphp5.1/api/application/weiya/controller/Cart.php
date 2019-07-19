@@ -133,7 +133,7 @@ class Cart extends \common\controller\UserBaseApi{
             return buildFailed(config('custom.not_post'));
         }
         $data = input('post.');
-        $ids = $data['cart_ids'];
+        $ids = $data['data']['ids'];
         $model = new \app\weiya\model\Cart();
         $condition = [
             ['user_id','=',$this->user['id']],
