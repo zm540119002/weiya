@@ -6,7 +6,7 @@ class Upload extends \common\controller\BaseApi{
     public function uploadFileToTemp(){
         $postData = input('post.');
         $postData = $postData['data'];
-        $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
+        $savePath = isset($postData['uploadpath']) ? $postData['uploadpath'] : config('upload_dir.temp_path');
         if(!is_array($postData['fileBase64'])){
             return buildFailed('fileBase64必为数组');
         }
@@ -27,9 +27,9 @@ class Upload extends \common\controller\BaseApi{
     }
     //返回图片临时相对路,上传多张图片带描述
     public function uploadFileToTempWithDes(){
-        $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         $postData = input('post.');
         $postData = $postData['data'];
+        $savePath = isset($postData['uploadpath']) ? $postData['uploadpath'] : config('upload_dir.temp_path');
         $filesNew = [];
         if(!is_array($postData['fileBase64'])){
             return buildFailed('fileBase64必为数组');
