@@ -776,7 +776,6 @@ function delImgFromPaths($oldImgPaths,$newImgPaths){
         return errorMsg('目录：'.$uploadPath.'不存在！');
     }
 
-    return $oldImgPaths;
     if(is_string($oldImgPaths) && is_string($newImgPaths)){
         if($oldImgPaths !== $newImgPaths){
             if(!file_exists($uploadPath . $oldImgPaths)){
