@@ -798,6 +798,22 @@ function delImgFromPaths($oldImgPaths,$newImgPaths){
     }
 }
 
+//新增图片对比数据库，删除不同的图片
+function delImgFromPath($oldImgPaths,$newImgPaths){
+    //上传文件公共路径
+    if(is_array($oldImgPaths) && is_array($newImgPaths)){
+        $delImgPaths = array_diff($oldImgPaths,$newImgPaths);
+        foreach ($delImgPaths as $delImgPath) {
+            if(!file_exists($delImgPath)){
+                return errorMsg('旧文件不存在！');
+            }
+            if(!unlink( $delImgPath)){
+                return errorMsg('删除旧文件失败！');
+            }
+        }
+    }
+}
+
 //删除图片
 function delImg($imgPaths){
     //上传文件公共路径
