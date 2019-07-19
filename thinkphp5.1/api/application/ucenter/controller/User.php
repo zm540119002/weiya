@@ -70,7 +70,7 @@ class User extends \common\controller\BaseApi{
         }
         $user = isLogin();
         if($user['status'] == -1){
-            echo json_encode($user);exit;
+            return buildFailed($user['info']);
         }else{
 
         }
