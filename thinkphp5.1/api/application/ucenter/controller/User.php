@@ -92,7 +92,7 @@ class User extends \common\controller\BaseApi{
         }
         //删除旧详情图
 
-        print_r(delImgFromPaths($oldAvatar,$user['avatar']));
+        print_r(delImgFromPath($oldAvatar,$user['avatar']));
         exit;
         return buildSuccess(['token' => getToken($user),'avatar'=>$user['avatar']]);
     }
