@@ -80,19 +80,20 @@ class User extends \common\controller\BaseApi{
         $data = input('post.');
         $fileBase64 = $data['data']['fileBase64'][0];
         $upload = config('upload_dir.user_avatar');
-        $newAvatar = json_decode(uploadSingleFile($fileBase64,$upload),true);
-        if($newAvatar['code'] == -1){
-            return buildFailed($newAvatar['msg']);
+        $result = json_decode(uploadSingleFile($fileBase64,$upload),true);
+        if($result['code'] == -1){
+            return buildFailed($result['msg']);
         }
-        $user['avatar'] = $newAvatar['data'][0];
+        $user['avatar'] = $result['data'][0];
         $modelUser = new \common\model\User();
         $result = $modelUser->allowField(['avatar'])->save($user, ['id' => $user['id']]);
         if(!$result){
             return buildFailed($modelUser->getError());
         }
         //删除旧详情图
-        print_r($oldAvatar);exit;
-        delImgFromPaths($oldAvatar,$newAvatar);
+
+        print_r(delImgFromPaths($oldAvatar,$user['avatar']));
+        exit;
         return buildSuccess(['token' => getToken($user),'avatar'=>$user['avatar']]);
     }
 
