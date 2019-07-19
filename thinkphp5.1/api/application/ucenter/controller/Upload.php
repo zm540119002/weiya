@@ -28,6 +28,7 @@ class Upload extends \common\controller\BaseApi{
     public function uploadMultiFileToTempWithDes(){
         $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         $postData = input('post.');
+        print_r($postData);exit;
         $postData = $postData['data'];
         print_r($postData);exit;
         $filesNew = [];
