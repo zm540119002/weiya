@@ -74,8 +74,8 @@ class User extends \common\controller\BaseApi{
         }
         $oldAvatar = $user['avatar'];
         $data = input('post.');
-        print_r($data);exit;
-        $fileBase64 = $data['data']['fileBase64'];
+
+        $fileBase64 = $data['data']['fileBase64'][0];
         $upload = config('upload_dir.user_avatar');
         $newAvatar = uploadSingleFileToTemp($fileBase64,$upload);
         print_r($newAvatar);exit;
