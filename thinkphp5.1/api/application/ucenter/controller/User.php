@@ -69,6 +69,7 @@ class User extends \common\controller\BaseApi{
             return buildFailed(config('custom.not_post'));
         }
         $user = isLogin();
+        print_r($user);exit;
         if($user['status'] == -1){
             return buildFailed($user['info']);
         }else{
