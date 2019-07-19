@@ -6,6 +6,7 @@ class Upload extends \common\controller\BaseApi{
     public function uploadFileToTemp(){
         $postData = input('post.');
         $postData = $postData['data'];
+        print_r($postData);exit;
         $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         if(is_array($postData['fileBase64'])){
             $filesNew = [];
