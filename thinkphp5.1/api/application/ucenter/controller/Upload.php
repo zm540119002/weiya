@@ -31,6 +31,7 @@ class Upload extends \common\controller\BaseApi{
                 }
             }
 
+            print_r($filesNew);exit;
             return buildSuccess($filesNew);
         }
     }
