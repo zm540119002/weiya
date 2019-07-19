@@ -91,6 +91,7 @@ class User extends \common\controller\BaseApi{
             return buildFailed($modelUser->getError());
         }
         //删除旧详情图
+        print_r($oldAvatar);exit;
         delImgFromPaths($oldAvatar,$newAvatar);
         return buildSuccess(['token' => getToken($user),'avatar'=>$user['avatar']]);
     }
