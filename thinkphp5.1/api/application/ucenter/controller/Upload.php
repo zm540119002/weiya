@@ -30,8 +30,6 @@ class Upload extends \common\controller\BaseApi{
                     $filesNew[] = $file;
                 }
             }
-
-            print_r($filesNew);exit;
             return buildSuccess($filesNew);
         }
     }
