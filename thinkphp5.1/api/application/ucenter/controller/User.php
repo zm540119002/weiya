@@ -64,8 +64,6 @@ class User extends \common\controller\BaseApi{
         return buildSuccess($response->Message);
     }
 
-
-
     //修改头像
     public function editAvatar(){
         if(!request()->isPost()){

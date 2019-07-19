@@ -7,7 +7,7 @@ class Cart extends \common\controller\UserBaseApi{
      * @throws \Exception
      *
      */
-    public function addCart(){
+    public function add(){
         if(!request()->isPost()){
             return buildFailed(config('custom.not_post'));
         }
