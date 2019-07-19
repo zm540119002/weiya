@@ -29,9 +29,9 @@ class Upload extends \common\controller\BaseApi{
         $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         $postData = input('post.');
         $postData = $postData['data'];
-        print_r($postData);exit;
         $filesNew = [];
-        foreach ($files as $k=>$file){
+        foreach ($postData as $k=>$file){
+            print_r($file);exit;
             //判断是否为base64编码图片
             if(strpos($file['fileSrc'],'data:image') !==false || strpos($file['fileSrc'],'data:video') !== false){
                 $result =  json_decode($this ->_uploadSingleFileToTemp($file['fileSrc'],$savePath),true);
