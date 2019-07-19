@@ -80,7 +80,7 @@ class User extends \common\controller\BaseApi{
 
         $fileBase64 = $data['data']['fileBase64'][0];
         $upload = config('upload_dir.user_avatar');
-        $newAvatar = uploadSingleFile($fileBase64,$upload);
+        $newAvatar = json_decode(uploadSingleFile($fileBase64,$upload),true);
         if($newAvatar['code'] == -1){
             return buildFailed($newAvatar['msg']);
         }
