@@ -29,9 +29,8 @@ class Upload extends \common\controller\BaseApi{
         $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         $postData = input('post.');
         $postData = $postData['data'];
-        print_r($postData);
         $filesNew = [];
-        foreach ($postData as $k=>$file){
+        foreach ($postData["fileBase64"] as $k=>$file){
             print_r($file);exit;
             //判断是否为base64编码图片
             if(strpos($file['fileSrc'],'data:image') !==false || strpos($file['fileSrc'],'data:video') !== false){
