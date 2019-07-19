@@ -87,6 +87,7 @@ class User extends \common\controller\BaseApi{
         $user['avatar'] = $newAvatar['data'][0];
         $modelUser = new \common\model\User();
         $result = $modelUser->allowField(['avatar'])->save($user, ['id' => $user['id']]);
+        print_r($result);exit;
         if(!$result){
             return buildFailed($modelUser->getError());
             return $this->errorMsg('失败');
