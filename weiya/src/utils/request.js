@@ -2,7 +2,7 @@ import axios from '../../node_modules/axios'
 import { Message } from '../../node_modules/element-ui'
 
 axios.defaults.timeout = 5000 // 请求超时
-axios.defaults.baseURL = '/'
+axios.defaults.baseURL = 'https://api.worldview.com.cn'
 
 axios.interceptors.request.use(
   config => {
