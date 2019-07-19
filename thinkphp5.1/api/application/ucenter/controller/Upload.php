@@ -21,7 +21,7 @@ class Upload extends \common\controller\BaseApi{
             foreach ($postData['fileBase64'] as $k=>$file){
                 //判断是否为base64编码图片
                 if(strpos($file,'data:image') !==false || strpos($file,'data:video') !== false){
-                    $result =  $this ->_uploadSingleFileToTemp($file,$savePath);
+                    $result =  json_decode($this ->_uploadSingleFileToTemp($file,$savePath),true);
                     if(isset($result['code'])&& $result['code'] == 0){
                         return $result['msg'];
                     }
