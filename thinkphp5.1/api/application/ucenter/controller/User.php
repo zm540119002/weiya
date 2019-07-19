@@ -69,16 +69,15 @@ class User extends \common\controller\BaseApi{
             return buildFailed(config('custom.not_post'));
         }
         $user = isLogin();
-        print_r($user);exit;
-        if($user['status'] == -1){
+        if($user['code'] == -1){
             return buildFailed($user['msg']);
-        }else{
-
         }
         $oldAvatar = $user['avatar'];
-        $fileBase64 = input('post.fileBase64');
+        $data = input('post.');
+        $fileBase64 = $data['data']['fileBase64'];
         $upload = config('upload_dir.user_avatar');
         $newAvatar = uploadSingleFileToTemp($fileBase64,$upload);
+        print_r($newAvatar);exit;
         if($newAvatar['status'] == 0 && !$newAvatar){
             return $this->errorMsg('失败');
         }
