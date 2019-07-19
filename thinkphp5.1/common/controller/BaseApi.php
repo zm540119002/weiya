@@ -10,7 +10,7 @@ class BaseApi extends \think\Controller{
     public function __construct(){
         parent::__construct();
         header('Access-Control-Allow-Origin: *');
-        header("Access-Control-Allow-Headers: token,Origin, X-Requested-With, Content-Type, Accept");
+        header("Access-Control-Allow-Headers: Authorization,token,Origin, X-Requested-With, Content-Type, Accept");
         header('Access-Control-Allow-Methods: POST,GET');
         if(request()->isOptions()){
             exit();
