@@ -34,11 +34,10 @@ class Upload extends \common\controller\BaseApi{
             //判断是否为base64编码图片
             if(strpos($file['fileSrc'],'data:image') !==false || strpos($file['fileSrc'],'data:video') !== false){
                 $result =  json_decode($this ->_uploadSingleFileToTemp($file['fileSrc'],$savePath),true);
-                print_r($result);exit;
                 if(isset($result['code'])&& $result['code'] == 0){
                     return $result['msg'];
                 }
-                $filesNew[$k]['fileSrc'] = $result['data'];
+                $filesNew[$k]['fileSrc'] = $result['data'][0];
                 $filesNew[$k]['fileText'] = $file['fileText'];
             }else{
                 $filesNew[$k] = $file;
