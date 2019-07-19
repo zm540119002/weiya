@@ -73,7 +73,7 @@ class User extends \common\controller\BaseApi{
         }
         $result = isLogin();
         if($result['code'] == -1){
-            return buildFailed($user['msg']);
+            return buildFailed($result['msg']);
         }
         $user = $result['user'];
         $oldAvatar = $user['avatar'];
@@ -86,7 +86,6 @@ class User extends \common\controller\BaseApi{
         }
         $user['avatar'] = $newAvatar['data'][0];
         $modelUser = new \common\model\User();
-        print_r($user);exit;
         $result = $modelUser->allowField(['avatar'])->save($user, ['id' => $user['id']]);
         print_r($result);exit;
         if(!$result){
