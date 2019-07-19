@@ -1,6 +1,8 @@
 <?php
 namespace app\ucenter\controller;
 
+use function Couchbase\passthruEncoder;
+
 class User extends \common\controller\BaseApi{
     /**登录
      */
@@ -78,11 +80,11 @@ class User extends \common\controller\BaseApi{
         $fileBase64 = $data['data']['fileBase64'][0];
         $upload = config('upload_dir.user_avatar');
         $newAvatar = uploadSingleFile($fileBase64,$upload);
-        print_r($newAvatar);exit;
-        if($newAvatar['code'] == 0 && !$newAvatar){
-            return $this->errorMsg('失败');
+        if($newAvatar['code'] == -1){
+            return buildFailed($newAvatar['msg']);
         }
-        $user['avatar'] = $newAvatar;
+        $user['avatar'] = $newAvatar['data'];
+        print_r($user);exit;
         $modelUser = new \common\model\User();
         $result = $modelUser->allowField(['avatar'])->save($user, ['id' => $user['id']]);
         if(!$result){
