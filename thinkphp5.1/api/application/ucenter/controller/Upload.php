@@ -1,7 +1,7 @@
 <?php
-namespace app\weiya\controller;
+namespace app\ucenter\controller;
 
-class Uload extends \common\controller\BaseApi{
+class Upload extends \common\controller\BaseApi{
     //返回图片临时相对路径
     public function uploadFileToTemp(){
         $postData = input('post.');
