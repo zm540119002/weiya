@@ -800,7 +800,6 @@ function delImgFromPaths($oldImgPaths,$newImgPaths){
 
 //新增图片对比数据库，删除不同的图片
 function delImgFromPath($oldImgPaths,$newImgPaths){
-
     if(is_string($oldImgPaths) && is_string($newImgPaths)){
         if($oldImgPaths !== $newImgPaths){
             if(!file_exists(realpath($oldImgPaths))){
