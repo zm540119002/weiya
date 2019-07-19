@@ -72,14 +72,14 @@ export default {
     return {
       // action sheet 选项内容
       data: [{
-        name: '3万定制方案',
-        method: this.getCamera	// 调用methods中的函数
+        name: '3万定制方案'
+        // method: this.getCamera	// 调用methods中的函数
       }, {
-        name: '10万定制方案',
-        method: this.getLibrary	// 调用methods中的函数
+        name: '10万定制方案'
+        // method: this.getLibrary	// 调用methods中的函数
       }, {
-        name: '20+万定制方案',
-        method: this.getLibrary	// 调用methods中的函数
+        name: '20+万定制方案'
+        // method: this.getLibrary	// 调用methods中的函数
       }],
       // action sheet 默认不显示，为false。操作sheetVisible可以控制显示与隐藏
       sheetVisible: false

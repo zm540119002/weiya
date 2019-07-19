@@ -1,36 +1,29 @@
-import axios from 'axios'
-import { Message } from 'element-ui'
+import axios from '../../node_modules/axios'
+import { Message } from '../../node_modules/element-ui'
 
-// import store from '../../node_modules/@/store'
-// import { getStore } from '../../node_modules/@/utils'
+axios.defaults.timeout = 5000 // 请求超时
+axios.defaults.baseURL = '/api/'
 
-// const baseURL = process.env.NODE_ENV === 'development' ? '/apis' : process.env.BASE_API
-const baseURL = 'https://api.worldview.com.cn'
-const service = axios.create({
-  baseURL,
-  timeout: 15 * 1000
-})
-// request拦截器==>对请求参数做处理
-service.interceptors.request.use(
+axios.interceptors.request.use(
   config => {
     // 在发送请求之前做些什么
-    // if (store.state.user.token) {
-    //   // 让每个请求携带token-- ['token']为自定义key
-    //   config.headers.Authorization = getStore('token')
-    //   config.headers.Token = getStore('token')
-    // }
-    // config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'
-    // config.headers['Content-Type'] = 'multipart/form-data'
-    // config.headers['Content-Type'] = 'application/json'
+    // 获取本地存储的token值
+    let mytoken = localStorage.getItem('mytoken')
+    // console.log(mytoken, 'request我是token值')
+    if (mytoken) {
+      // 让每个请求携带token-- ['token']为自定义key
+      config.headers.Authorization = mytoken
+      config.headers.Token = mytoken
+    }
     return config
   },
   error => {
     console.log(error) // for debug
-    Promise.reject(error)
+    return Promise.reject(error)
   }
 )
-// request拦截器==>对响应参数做处理
-service.interceptors.response.use(
+// 拦截响应
+axios.interceptors.response.use(
   response => response,
   error => {
     console.log('err' + error) // for debug
@@ -41,8 +34,4 @@ service.interceptors.response.use(
     return Promise.reject(error)
   }
 )
-
-service.all = axios.all
-service.spread = axios.spread
-
-export default service
+export default axios

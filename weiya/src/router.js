@@ -10,11 +10,13 @@ export default new Router({
     path: '/',
     name: 'index',
     component: Index
+
   },
   {
     path: '/weiya',
     name: 'weiya',
     component: () => import(/* webpackChunkName: "about" */ './views/weiya/Weiya.vue') // 走进维雅
+
   }, {
     path: '/store',
     name: 'Store',
@@ -27,7 +29,13 @@ export default new Router({
   {
     path: '/user',
     name: 'User',
-    component: () => import(/* webpackChunkName: "user" */ './views/user/User.vue') // 个人中心
+    component: () => import(/* webpackChunkName: "user" */ './views/user/User.vue')// 个人中心
+  },
+  {
+    path: '/address',
+    name: 'Address',
+    component: () => import(/* webpackChunkName: "user" */ './views/user/Address.vue'), // 个人中心收货地址
+    meta: { requireAuth: true }
   },
   {
     path: '/advantage',

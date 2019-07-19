@@ -41,8 +41,35 @@ import request from '@/utils/request'
 // 登录请求
 export function loginHandle (data) {
   return request({
-    url: '/ucenter/UserCenterApi/login',
+    url: '/ucenter/User/login',
     method: 'post',
     data: { data }
+  })
+}
+
+// 验证码
+export function sendSmsHandle (data) {
+  return request({
+    url: '/ucenter/User/sendSms',
+    method: 'post',
+    data: { data }
+  })
+}
+
+// 用户注册 修改密码
+export function registerHandle (data) {
+  return request({
+    url: '/ucenter/User/register',
+    method: 'post',
+    data: { data }
+  })
+}
+
+// 退出登录
+export function logoutHandle () {
+  return request({
+    url: '/ucenter/User/logout',
+    method: 'post',
+    data: { }
   })
 }
