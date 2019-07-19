@@ -111,7 +111,7 @@ class User extends \common\controller\BaseApi{
         $modelUser = new \common\model\User();
         $result = $modelUser->allowField(['name'])->save($user, ['id' => $user['id']]);
         if(!$result){
-            return $this->errorMsg('失败');
+            return buildFailed();
         }
         return buildSuccess(['token' => getToken($user),'name'=>$user['name']]);
     }
