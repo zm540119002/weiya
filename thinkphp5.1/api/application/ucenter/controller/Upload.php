@@ -7,15 +7,6 @@ class Upload extends \common\controller\BaseApi{
         $postData = input('post.');
         $postData = $postData['data'];
         $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
-        if(is_string($postData['fileBase64'])){
-            if(strpos($postData['fileBase64'],'data:image') !==false || strpos($postData['fileBase64'],'data:video') !== false){
-                $result =  json_decode($this ->_uploadSingleFileToTemp($postData['fileBase64'],$savePath),true);
-                if(isset($result['code'])&& $result['code'] == -1){
-                    return $result['msg'];
-                }
-                return buildSuccess($result['data']);
-            }
-        }
         if(is_array($postData['fileBase64'])){
             $filesNew = [];
             foreach ($postData['fileBase64'] as $k=>$file){
