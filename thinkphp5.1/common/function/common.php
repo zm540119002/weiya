@@ -801,15 +801,22 @@ function delImgFromPaths($oldImgPaths,$newImgPaths){
 //新增图片对比数据库，删除不同的图片
 function delImgFromPath($oldImgPaths,$newImgPaths){
 
-    //上传文件公共路径
-    if(is_array($oldImgPaths) && is_array($newImgPaths)){
-        return 123;
-        $delImgPaths = array_diff($oldImgPaths,$newImgPaths);
-        foreach ($delImgPaths as $delImgPath) {
-            if(!file_exists($delImgPath)){
+    if(is_string($oldImgPaths) && is_string($newImgPaths)){
+        if($oldImgPaths !== $newImgPaths){
+            if(!file_exists(realpath($oldImgPaths))){
                 return errorMsg('旧文件不存在！');
             }
-            if(!unlink( $delImgPath)){
+            if(!unlink( realpath($oldImgPaths))){
+                return errorMsg('删除旧文件失败！');
+            }
+        }
+    }elseif(is_array($oldImgPaths) && is_array($newImgPaths)){
+        $delImgPaths = array_diff($oldImgPaths,$newImgPaths);
+        foreach ($delImgPaths as $delImgPath) {
+            if(!file_exists( realpath($delImgPath))){
+                return errorMsg('旧文件不存在！');
+            }
+            if(!unlink(realpath($delImgPath))){
                 return errorMsg('删除旧文件失败！');
             }
         }
