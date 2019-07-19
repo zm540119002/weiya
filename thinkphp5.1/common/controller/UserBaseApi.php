@@ -10,7 +10,7 @@ class UserBaseApi extends BaseApi{
         parent::__construct();
         //判断是否登录
         $rst = isLogin();
-        if($rst['status'] == 1){
+        if($rst['code'] == 1){
             $this->user = $rst['user'];
         }else{
             echo json_encode($rst);exit;
