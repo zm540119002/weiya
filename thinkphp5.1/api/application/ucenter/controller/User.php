@@ -59,7 +59,8 @@ class User extends \common\controller\BaseApi{
             return buildFailed($response->Message);
         }
         //设置session
-        session('captcha_'.$mobilePhone,$captcha);
+//        session('captcha_'.$mobilePhone,$captcha);
+        cache('captcha_'.$mobilePhone,$captcha);
         return buildSuccess($response->Message);
     }
 

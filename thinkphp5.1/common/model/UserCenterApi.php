@@ -192,6 +192,6 @@ class UserCenterApi extends Base {
 	/**检查验证码
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
-		return session('captcha_' . $mobilePhone) == $captcha ;
+		return cache('captcha_' . $mobilePhone) == $captcha ;
 	}
 }
