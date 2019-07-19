@@ -5,7 +5,7 @@ export function addressHandle () {
   return request({
     url: '/ucenter/Address/getList',
     method: 'get',
-    headers: { 'Content-Type': 'application/json;charset=utf8' },
+    // headers: { 'Content-Type': 'application/json;charset=utf8' },
     data: { }
   })
 }
