@@ -22,6 +22,7 @@ class Upload extends \common\controller\BaseApi{
                 //判断是否为base64编码图片
                 if(strpos($file,'data:image') !==false || strpos($file,'data:video') !== false){
                     $result =  $this ->_uploadSingleFileToTemp($file,$savePath);
+                    print_r($result);exit;
                     if(isset($result['code'])&& $result['code'] == 0){
                         return $result['msg'];
                     }
@@ -30,6 +31,7 @@ class Upload extends \common\controller\BaseApi{
                     $filesNew[] = $file;
                 }
             }
+
             return buildSuccess($filesNew);
         }
     }
