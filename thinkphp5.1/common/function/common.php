@@ -945,7 +945,7 @@ function isLogin(){
     $token = request()->header()['token'];
     if(empty($token)){
         return [
-            'status' => -1,
+            'code' => -1,
             'msg' =>'没有登录'
         ];
     }
@@ -955,30 +955,30 @@ function isLogin(){
         $authInfo = json_decode($jwtAuth, true);
         if (!empty($authInfo['id'] && !empty($authInfo['mobile_phone']))) {
             $msg = [
-                'status' => 1,
+                'code' => 1,
                 'msg' => 'Token验证通过',
                 'user' => $authInfo
             ];
         } else {
             $msg = [
-                'status' => -1,
+                'code' => -1,
                 'msg' => 'Token验证不通过,用户不存在'
             ];
         }
         return $msg;
     } catch (\common\component\jwt\BeforeValidException $e) {
         return [
-            'status' => -1,
+            'code' => -1,
             'msg' => 'Token无效'
         ];
     } catch (\common\component\jwt\ExpiredException $e) {
         return [
-            'status' => -1,
+            'code' => -1,
             'msg' => 'Token过期'
         ];
     } catch (Exception $e) {
         return [
-            'status' => -1,
+            'code' => -1,
             'msg' => 'Token无效'
         ];
     }

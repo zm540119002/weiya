@@ -71,7 +71,7 @@ class User extends \common\controller\BaseApi{
         $user = isLogin();
         print_r($user);exit;
         if($user['status'] == -1){
-            return buildFailed($user['info']);
+            return buildFailed($user['msg']);
         }else{
 
         }
