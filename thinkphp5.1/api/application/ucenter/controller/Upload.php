@@ -25,7 +25,7 @@ class Upload extends \common\controller\BaseApi{
                     if(isset($result['code'])&& $result['code'] == 0){
                         return $result['msg'];
                     }
-                    $filesNew[] = $result['data'];
+                    $filesNew[] = $result['data'][0];
                 }else{
                     $filesNew[] = $file;
                 }
