@@ -83,7 +83,7 @@ class User extends \common\controller\BaseApi{
         if($newAvatar['code'] == -1){
             return buildFailed($newAvatar['msg']);
         }
-        $user['avatar'] = $newAvatar['data'];
+        $user['avatar'] = $newAvatar['data'][0];
         print_r($user);exit;
         $modelUser = new \common\model\User();
         $result = $modelUser->allowField(['avatar'])->save($user, ['id' => $user['id']]);
