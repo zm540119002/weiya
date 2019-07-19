@@ -77,7 +77,6 @@ class User extends \common\controller\BaseApi{
         }
         $oldAvatar = $user['avatar'];
         $data = input('post.');
-
         $fileBase64 = $data['data']['fileBase64'][0];
         $upload = config('upload_dir.user_avatar');
         $newAvatar = json_decode(uploadSingleFile($fileBase64,$upload),true);
@@ -86,6 +85,7 @@ class User extends \common\controller\BaseApi{
         }
         $user['avatar'] = $newAvatar['data'][0];
         $modelUser = new \common\model\User();
+        print_r($user);exit;
         $result = $modelUser->allowField(['avatar'])->save($user, ['id' => $user['id']]);
         print_r($result);exit;
         if(!$result){
