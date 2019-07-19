@@ -88,7 +88,7 @@ class User extends \common\controller\BaseApi{
         $modelUser = new \common\model\User();
         $result = $modelUser->allowField(['avatar'])->save($user, ['id' => $user['id']]);
         if(!$result){
-            return buildFailed($modelUser->getError());
+            return buildFailed();
         }
         //删除旧详情图
         delImgFromPath($oldAvatar,$user['avatar']);
@@ -98,17 +98,21 @@ class User extends \common\controller\BaseApi{
     //修改名字
     public function editName(){
         if(!request()->isPost()){
-            return $this->errorMsg('请求方式错误');
+            return buildFailed(config('custom.not_post'));
         }
-        $modelUser = new \common\model\User();
-        $user = session('user');
-        $newName = preg_replace('# #','',input('post.name'));
+        $result = isLogin();
+        if($result['code'] == -1){
+            return buildFailed($result['msg']);
+        }
+        $user = $result['user'];
+        $data = input('post.');
+        $newName = preg_replace('# #','',$data['data']['name']);
         $user['name'] = $newName;
+        $modelUser = new \common\model\User();
         $result = $modelUser->allowField(['name'])->save($user, ['id' => $user['id']]);
         if(!$result){
             return $this->errorMsg('失败');
         }
-        setSession($user);
-        return successMsg('成功',['name'=>$newName]);
+        return buildSuccess(['token' => getToken($user),'name'=>$user['name']]);
     }
 }
