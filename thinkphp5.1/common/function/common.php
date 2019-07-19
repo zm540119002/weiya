@@ -800,8 +800,10 @@ function delImgFromPaths($oldImgPaths,$newImgPaths){
 
 //新增图片对比数据库，删除不同的图片
 function delImgFromPath($oldImgPaths,$newImgPaths){
+
     //上传文件公共路径
     if(is_array($oldImgPaths) && is_array($newImgPaths)){
+        return 123;
         $delImgPaths = array_diff($oldImgPaths,$newImgPaths);
         foreach ($delImgPaths as $delImgPath) {
             if(!file_exists($delImgPath)){
