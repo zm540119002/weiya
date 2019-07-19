@@ -71,10 +71,11 @@ class User extends \common\controller\BaseApi{
         if(!request()->isPost()){
             return buildFailed(config('custom.not_post'));
         }
-        $user = isLogin();
-        if($user['code'] == -1){
+        $result = isLogin();
+        if($result['code'] == -1){
             return buildFailed($user['msg']);
         }
+        $user = $result['user'];
         $oldAvatar = $user['avatar'];
         $data = input('post.');
         $fileBase64 = $data['data']['fileBase64'][0];
