@@ -85,8 +85,6 @@ class User extends \common\controller\BaseApi{
             return buildFailed($newAvatar['msg']);
         }
         $user['avatar'] = $newAvatar['data'][0];
-        print_r($newAvatar);
-        print_r($user);exit;
         $modelUser = new \common\model\User();
         $result = $modelUser->allowField(['avatar'])->save($user, ['id' => $user['id']]);
         if(!$result){
@@ -94,7 +92,6 @@ class User extends \common\controller\BaseApi{
         }
         //删除旧详情图
         delImgFromPaths($oldAvatar,$newAvatar);
-        setSession($user);
         return successMsg('成功',['avatar'=>$newAvatar]);
     }
 
