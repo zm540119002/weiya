@@ -3,7 +3,7 @@ namespace app\ucenter\controller;
 
 class Upload extends \common\controller\BaseApi{
     //返回图片临时相对路径
-    public function uploadFileToTemp(){
+    public function uploadFile(){
         $postData = input('post.');
         $postData = $postData['data'];
         $savePath = isset($postData['uploadpath']) ? $postData['uploadpath'] : config('upload_dir.temp_path');
@@ -14,7 +14,7 @@ class Upload extends \common\controller\BaseApi{
         foreach ($postData['fileBase64'] as $k=>$file){
             //判断是否为base64编码图片
             if(strpos($file,'data:image') !==false || strpos($file,'data:video') !== false){
-                $result =  json_decode(uploadSingleFileToTemp($file,$savePath),true);
+                $result =  json_decode(uploadSingleFile($file,$savePath),true);
                 if(isset($result['code'])&& $result['code'] == 0){
                     return $result['msg'];
                 }
@@ -37,7 +37,7 @@ class Upload extends \common\controller\BaseApi{
         foreach ($postData["fileBase64"] as $k=>$file){
             //判断是否为base64编码图片
             if(strpos($file['fileSrc'],'data:image') !==false || strpos($file['fileSrc'],'data:video') !== false){
-                $result =  json_decode(uploadSingleFileToTemp($file['fileSrc'],$savePath),true);
+                $result =  json_decode(uploadSingleFile($file['fileSrc'],$savePath),true);
                 if(isset($result['code'])&& $result['code'] == 0){
                     return $result['msg'];
                 }

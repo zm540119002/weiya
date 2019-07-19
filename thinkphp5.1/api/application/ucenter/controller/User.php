@@ -78,7 +78,6 @@ class User extends \common\controller\BaseApi{
         $fileBase64 = $data['data']['fileBase64'][0];
         $upload = config('upload_dir.user_avatar');
         $newAvatar = uploadSingleFileToTemp($fileBase64,$upload);
-        print_r($newAvatar);exit;
         if($newAvatar['status'] == 0 && !$newAvatar){
             return $this->errorMsg('失败');
         }

@@ -1059,7 +1059,7 @@ function buildFailed( $msg = "失败", $code,$data = []) {
  * @param $savePath 保存路径
  * @return array|string
  */
-function uploadSingleFileToTemp($fileBase64,$savePath){
+function uploadSingleFile($fileBase64,$savePath){
     // 获取图片
     list($type, $data) = explode(',', $fileBase64);
     // 判断文件类型
