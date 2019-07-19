@@ -34,7 +34,7 @@ export default new Router({
   {
     path: '/address',
     name: 'Address',
-    component: () => import(/* webpackChunkName: "user" */ './views/user/Address.vue'), // 个人中心收货地址
+    component: () => import(/* webpackChunkName: "user" */ './views/address/Address.vue'), // 个人中心收货地址
     meta: { requireAuth: true }
   },
   {
