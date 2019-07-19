@@ -1032,12 +1032,6 @@ function getToken($data = [],$expTime = 365*30*24*60*60)
 }
 
 
-function isCheck()
-{
-
-}
-
-
 function buildSuccess($data=[], $msg = '成功',$code) {
     $code=$code?$code:config('return_code.success');
     $return = [
@@ -1058,5 +1052,101 @@ function buildFailed( $msg = "失败", $code,$data = []) {
     return json_encode($return);
 }
 
+
+//上传单个data64位文件
+/**
+ * @param $fileBase64 上传文件的Base64字符源
+ * @param $savePath 保存路径
+ * @return array|string
+ */
+function uploadSingleFileToTemp($fileBase64,$savePath){
+    // 获取图片
+    list($type, $data) = explode(',', $fileBase64);
+    // 判断文件类型
+    list($fileType,$ext) = explode('/', $type);
+    $array = [
+        'data:image/jpg;base64',
+        'data:image/gif;base64',
+        'data:image/png;base64',
+        'data:image/jpeg;base64',
+        'data:video/mp4;base64',
+        'data:video/rm;base64',
+        'data:video/mtv;base64',
+        'data:video/wmv;base64',
+        'data:video/avi;base64',
+        'data:video/3gp;base64',
+        'data:video/flv;base64',
+        'data:video/rmvb;base64',
+    ];
+    if(in_array($type,$array)){
+        $ext = explode(';', $ext);
+        $ext = '.'.$ext[0];
+    }
+
+    if($fileType == 'data:image'){
+        if(!getimagesize($fileBase64)){
+            return buildFailed('不是图片文件');
+        }
+    }
+
+    if(!$ext){
+        return buildFailed('不支持此文件格式');
+    }
+    //文件大小 单位M
+    $fileSize = strlen($data)/1024/1024;
+    //图片限制大小
+    if($fileType == 'data:image'){
+        if($fileSize >3){//大于2M
+            return buildFailed('请上传小于2M的图片');
+        }
+    }
+    //视频限制大小
+    if($fileType == 'data:video'){
+        if($fileSize > 10){//大于10
+            return buildFailed('请上传小于10M的视频');
+
+        }
+    }
+    //上传公共路径
+    $uploadPath = config('upload_dir.upload_path');
+    if(!is_dir($uploadPath)){
+        if(!mk_dir($uploadPath)){
+            return buildFailed('创建Uploads目录失败');
+        }
+    }
+    $realpathUploadPath = realpath($uploadPath);
+    if($realpathUploadPath === false){
+        return buildFailed('获取Uploads实际路径失败');
+    }
+    $realpathUploadPath = $realpathUploadPath . '/' ;
+    //临时相对路径
+    $tempRelativePath = $savePath;
+
+    //存储路径
+    $storePath = $realpathUploadPath . $tempRelativePath;
+    if(!mk_dir($storePath)){
+        return buildFailed('创建临时目录失败');
+    }
+    //文件名
+    $fileName = generateSN(5) . $ext;
+    //带存储路径的文件名
+    $photo = $storePath . $fileName;
+    // 生成文件
+    $returnData = file_put_contents($photo, base64_decode($data), true);
+    if(false === $returnData){
+        return buildFailed('保存文件失败');
+    }
+    //压缩文件
+    if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
+        $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
+        $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
+        $image = Image::open($photo);
+        $image->thumb($imgWidth, $imgHeight,Image::THUMB_SCALING)->save($photo);
+    }
+    $data = [
+        $uploadPath . '/' .$tempRelativePath . $fileName
+    ];
+    return buildSuccess($data);
+}
 
 
