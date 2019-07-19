@@ -92,7 +92,7 @@ class User extends \common\controller\BaseApi{
         }
         //删除旧详情图
         delImgFromPaths($oldAvatar,$newAvatar);
-        return buildFailed($user);
+        return buildSuccess($user);
         return successMsg('成功',['avatar'=>$newAvatar]);
     }
 
