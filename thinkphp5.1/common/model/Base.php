@@ -2,6 +2,29 @@
 namespace common\model;
 
 class Base extends \think\Model {
+
+    /**编辑单条记录
+     */
+    public function edit($data,$where=[]){
+        if($data['id'] || (count($where) && intval($where['id'])) ){//修改
+            if($data['id']){
+                $res = $this->allowField(true)->isUpdate(true)->save($data);
+                $id = $data['id'];
+            }elseif(count($where) && intval($where['id'])){
+                unset($data['id']);
+                $res = $this->allowField(true)->isUpdate(true)->save($data,$where);
+                $id = $where['id'];
+            }
+        }else{//新增
+            unset($data['id']);
+            $res = $this->allowField(true)->isUpdate(false)->save($data);
+            $id = $this->getAttr('id');
+        }
+        if($res === false){
+            return false;
+        }
+        return $id;
+    }
 	/**查询多条数据
 	 */
 	public function getList($config=[]){

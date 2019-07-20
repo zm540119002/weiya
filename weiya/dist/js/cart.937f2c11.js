@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["cart"],{d6fa:function(n,a,e){"use strict";e.r(a);var t=function(){var n=this,a=n.$createElement,e=n._self._c||a;return e("div",[e("div",[n._v("     \n   购物车\n   "),e("van-icon",{attrs:{name:"location-o"}})],1),e("Tabbar",{attrs:{msg:"Welcome to Your Vue.js App"}})],1)},o=[],r=e("7d7f"),c={name:"home",components:{Tabbar:r["a"]}},s=c,i=e("2877"),u=Object(i["a"])(s,t,o,!1,null,"5d191578",null);a["default"]=u.exports}}]);
-//# sourceMappingURL=cart.937f2c11.js.map

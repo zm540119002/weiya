@@ -1,44 +1,46 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/supplier/Home.vue'
+import Index from './views/index/Index.vue'
 Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   linkActiveClass: 'mui-active', // 覆盖默认的路由高亮的 类
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import(/* webpackChunkName: "about" */ './views/supplier/About.vue')
-    },{
-      path: '/factory',
-      name: 'Factory',
-      component: () => import(/* webpackChunkName: "factory" */ './views/supplier/Factory.vue')
-    },{
-      path: '/cart',
-      name: 'Cart',
-      component: () => import(/* webpackChunkName: "cart" */ './views/supplier/Cart.vue')
-    },
-    {
-      path: '/user',
-      name: 'User',
-      component: () => import(/* webpackChunkName: "user" */ './views/user/User.vue')
-    },
-    {
-      path: '/search',
-      name: 'Search',
-      component: () => import(/* webpackChunkName: "search" */ './views/supplier/Search.vue')
-    },
-    {
-      path: '/creatorspace',
-      name: 'Creatorspace',
-      component: () => import(/* webpackChunkName: "search" */ './views/supplier/Creatorspace.vue')
-    }
+  routes: [{
+    path: '/',
+    name: 'index',
+    component: Index
+
+  },
+  {
+    path: '/weiya',
+    name: 'weiya',
+    component: () => import(/* webpackChunkName: "about" */ './views/weiya/Weiya.vue') // 走进维雅
+
+  }, {
+    path: '/store',
+    name: 'Store',
+    component: () => import(/* webpackChunkName: "factory" */ './views/store/Store.vue') // 供应商
+  }, {
+    path: '/cart',
+    name: 'Cart',
+    component: () => import(/* webpackChunkName: "cart" */ './views/cart/Cart.vue') // 购物车
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: () => import(/* webpackChunkName: "user" */ './views/user/User.vue')// 个人中心
+  },
+  {
+    path: '/address',
+    name: 'Address',
+    component: () => import(/* webpackChunkName: "user" */ './views/address/Address.vue'), // 个人中心收货地址
+    meta: { requireAuth: true }
+  },
+  {
+    path: '/advantage',
+    name: 'Advantage',
+    component: () => import(/* webpackChunkName: "user" */ './views/brand/Advantage.vue') // 品牌优势
+  }
   ]
 })

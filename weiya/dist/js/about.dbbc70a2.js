@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["about"],{ca53:function(e,a,n){"use strict";n.r(a);var t=function(){var e=this,a=e.$createElement,n=e._self._c||a;return n("div",{staticClass:"home"},[n("div",[e._v("\n     从业人员\n  ")]),n("Tabbar",{attrs:{msg:"Welcome to Your Vue.js App"}})],1)},o=[],s=n("3d39"),c={name:"home",components:{Tabbar:s["a"]}},r=c,u=n("2877"),l=Object(u["a"])(r,t,o,!1,null,null,null);a["default"]=l.exports}}]);
+//# sourceMappingURL=about.dbbc70a2.js.map

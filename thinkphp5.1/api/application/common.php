@@ -132,4 +132,7 @@ function saveImageFromHttp($url,$savePath) {
             return $savePath.$newFileName.".{$type}";
         }
     }
+
+
+
 }
