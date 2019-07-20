@@ -103,10 +103,6 @@ class Cart extends \common\controller\UserBaseApi{
                  'c.id'=>'desc'
              ],
          ];
-         $keyword = input('get.keyword','');
-         if($keyword) {
-             $config['where'][] = ['g.name', 'like', '%' . trim($keyword) . '%'];
-         }
          $list = $model -> pageQuery($config);
          return buildSuccess($list);
 
